@@ -5,13 +5,14 @@
   "type": "module",
   "description": "Public connector catalog for dsh-mcp-connector",
   "scripts": {
+    "test": "node --test",
     "build": "node scripts/build-registry.mjs",
     "validate": "npm run build && dsh-mcp-connector-probe catalog.json --validate-only",
-    "check": "npm run build && git diff --exit-code -- catalog.json && dsh-mcp-connector-probe catalog.json --validate-only",
+    "check": "npm test && npm run build && git diff --exit-code -- catalog.json && dsh-mcp-connector-probe catalog.json --validate-only",
     "probe": "dsh-mcp-connector-probe catalog.json --allow-partial --output probe-report.json"
   },
   "devDependencies": {
-    "dsh-mcp-connector": "0.2.0",
+    "dsh-mcp-connector": "0.2.2",
     "zod": "^4.4.0"
   },
   "engines": {

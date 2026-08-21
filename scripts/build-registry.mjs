@@ -14,6 +14,10 @@ for (const file of files) {
   if (!descriptor || Array.isArray(descriptor) || typeof descriptor !== 'object') {
     throw new Error(`${file}: connector descriptor must be an object`);
   }
+  const expectedFile = `${String(descriptor.id ?? '')}.json`;
+  if (file !== expectedFile) {
+    throw new Error(`${file}: filename must match connector id (${expectedFile})`);
+  }
   connectors.push(descriptor);
 }
 

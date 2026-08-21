@@ -1,0 +1,62 @@
+name: Connector request
+description: Request a public MCP service to be evaluated for the connector registry
+title: "[Connector]: "
+labels: [connector-request]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Provide public documentation only. **Never paste a Token, API Key, password, Cookie, Client Secret, or private endpoint.**
+  - type: input
+    id: vendor
+    attributes:
+      label: Vendor and service name
+      placeholder: Example Corp · Data MCP
+    validations:
+      required: true
+  - type: input
+    id: homepage
+    attributes:
+      label: Official homepage
+      placeholder: https://example.com/
+    validations:
+      required: true
+  - type: input
+    id: docs
+    attributes:
+      label: Public MCP configuration documentation
+      description: Link to the page that publishes the endpoint and client configuration.
+      placeholder: https://example.com/docs/mcp
+    validations:
+      required: true
+  - type: dropdown
+    id: auth
+    attributes:
+      label: Authentication mode
+      options:
+        - No authentication
+        - Bearer Token
+        - API Key
+        - OAuth 2.0 Authorization Code + PKCE
+        - Unknown / needs evaluation
+    validations:
+      required: true
+  - type: input
+    id: icon
+    attributes:
+      label: Official logo or icon source
+      placeholder: https://example.com/brand/icon.svg
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Main capabilities and example prompts
+      description: Describe public capabilities, account requirements, and 2–4 safe example prompts.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I confirm that this issue contains only public metadata and no credentials or private data.
+          required: true

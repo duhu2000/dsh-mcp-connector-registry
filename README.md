@@ -12,7 +12,9 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 
 ## 上架流程
 
-1. 复制 `connectors/example.sample.json` 为 `connectors/<connector-id>.json`。
+如果您是服务商或社区贡献者，可以直接[发起连接器收录请求](https://github.com/duhu2000/dsh-mcp-connector-registry/issues/new?template=connector-request.yml)，也可以 fork 本仓库并提交 Connector PR。
+
+1. 复制 `connectors/example.sample.json` 为 `connectors/<connector-id>.json`，文件名必须与 `id` 完全一致。
 2. 只提交公开元数据；禁止 Token、API Key、密码、Cookie 和 Client Secret。
 3. 运行 `npm ci --legacy-peer-deps && npm run check`。
 4. 提交 PR，通过 Schema、重复 ID/ServerName、URL 和密钥审计后合并。
@@ -28,4 +30,4 @@ npm run validate
 npm run probe
 ```
 
-完整描述格式见 [`schema/connector.schema.json`](schema/connector.schema.json)，贡献和安全规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md) 与 [`SECURITY.md`](SECURITY.md)。
+完整描述格式见 [`schema/connector.schema.json`](schema/connector.schema.json)，贡献和安全规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md) 与 [`SECURITY.md`](SECURITY.md)。PR 模板会要求提供服务官网、MCP 配置文档、鉴权方式和 Logo 来源，便于维护者核验。
