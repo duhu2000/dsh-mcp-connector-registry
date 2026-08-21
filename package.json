@@ -11,7 +11,8 @@
     "probe": "dsh-mcp-connector-probe catalog.json --allow-partial --output probe-report.json"
   },
   "devDependencies": {
-    "dsh-mcp-connector": "0.2.0"
+    "dsh-mcp-connector": "0.2.0",
+    "zod": "^4.4.0"
   },
   "engines": {
     "node": ">=20"
