@@ -1,0 +1,20 @@
+{
+  "name": "dsh-mcp-connector-registry",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Public connector catalog for dsh-mcp-connector",
+  "scripts": {
+    "build": "node scripts/build-registry.mjs",
+    "validate": "npm run build && dsh-mcp-connector-probe catalog.json --validate-only",
+    "check": "npm run build && git diff --exit-code -- catalog.json && dsh-mcp-connector-probe catalog.json --validate-only",
+    "probe": "dsh-mcp-connector-probe catalog.json --allow-partial --output probe-report.json"
+  },
+  "devDependencies": {
+    "dsh-mcp-connector": "0.2.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
