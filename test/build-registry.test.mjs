@@ -81,6 +81,8 @@ test('QVeris 连接器使用 Hosted MCP 且付费 call 需明确确认', async (
   );
 
   assert.equal(connector.auth.mode, 'bearer');
+  assert.equal(connector.name, 'QVerisMCP');
+  assert.equal(connector.icon, 'https://qveris.ai/logo-color.png');
   assert.equal(connector.servers[0].url, 'https://mcp.qveris.ai/mcp');
   assert.equal(connector.servers[0].transport, 'streamable-http');
   assert.equal(connector.featured, false);
@@ -89,7 +91,8 @@ test('QVeris 连接器使用 Hosted MCP 且付费 call 需明确确认', async (
     connector.toolsSnapshot[0].tools.map((tool) => tool.name),
     ['discover', 'inspect', 'probe', 'call', 'usage_history', 'credits_ledger'],
   );
-  assert.match(connector.description, /call 可能消耗 Credits/);
+  assert.match(connector.description, /call .*可能消耗 Credits/);
+  assert.match(connector.description, /无需启动本地进程/);
   assert.equal(connector.prompts.length, 4);
   assert.ok(connector.prompts.every((prompt) => /(?:不要|未经我确认)/.test(prompt.text)));
 

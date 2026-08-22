@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 | 北大法宝·法律检索 | 法规、法条、司法案例和引用核验 | Bearer Token |
 | Wind·股票数据 | 全球股票档案、行情、技术指标和财务数据 | Bearer Token |
 | 盈米·基金投顾 | 基金检索、组合诊断、资产配置和投资风险分析 | `x-api-key` |
-| QVeris·通用能力网络 | AI 能力发现、参数检查、零成本询价与按需调用 | Bearer Token |
+| QVerisMCP | 10,000+ 实时能力发现、检查、询价与调用 | Bearer Token |
 
 连接器目录只保存公开接入参数；Token 和 API Key 均由用户在 DSH 本机录入。
 

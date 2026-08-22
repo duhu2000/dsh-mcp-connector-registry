@@ -142,19 +142,21 @@
     {
       "schemaVersion": 1,
       "id": "qveris-capability-network",
-      "name": "QVeris·通用能力网络",
+      "name": "QVerisMCP",
       "vendor": "QVeris",
       "category": "通用工具",
-      "summary": "AI 能力发现 / 参数检查 / 零成本询价 / 按需调用",
-      "description": "通过 QVeris 发现和调用第三方 AI/API 能力。discover、inspect 和 probe 用于免费发现、检查参数与零成本询价；call 可能消耗 Credits，且查询内容可能由第三方服务商处理。建议执行付费调用前确认费用，不要提交未获授权的个人信息、商业秘密或敏感业务数据。",
+      "summary": "10,000+ 实时能力发现 / 检查 / 询价 / 调用",
+      "description": "QVeris Hosted MCP 是官方托管的远程 MCP 服务。通过一个 Streamable HTTP 地址和一枚 API Key，即可将智能体接入 QVeris 能力路由网络，无需启动本地进程、安装软件包或逐一配置第三方凭据。discover、inspect 和 probe 可用于发现能力、检查参数和获取报价；call 会执行选定能力并可能消耗 Credits。调用可能路由至外部服务商，执行前请确认费用，不要提交未获授权的个人信息、商业秘密或敏感业务数据。",
       "tags": [
+        "Hosted MCP",
         "能力路由",
         "工具发现",
+        "实时数据",
         "API",
         "AI Agent",
-        "可能收费",
-        "第三方收录"
+        "可能收费"
       ],
+      "icon": "https://qveris.ai/logo-color.png",
       "published": true,
       "featured": false,
       "homepage": "https://qveris.ai/hosted-mcp",
@@ -179,7 +181,7 @@
         "mode": "bearer",
         "credentialName": "QVeris API Key",
         "credentialPlaceholder": "请输入您的 QVeris API Key",
-        "credentialDescription": "用于访问 QVeris Hosted MCP；仅保存在 DSH 本机，不写入公共市场目录。",
+        "credentialDescription": "登录 QVeris 官网创建 API Key，用于访问 Hosted MCP；凭据仅保存在 DSH 本机，不写入公共市场目录。",
         "credentialHelpLabel": "如何获取 QVeris API Key？"
       },
       "servers": [
