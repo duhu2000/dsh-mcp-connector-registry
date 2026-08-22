@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import test from 'node:test';
+import { assessIconResponse } from '../scripts/check-icon-assets.mjs';
 
 const script = resolve('scripts/build-registry.mjs');
 
@@ -101,4 +102,38 @@ test('QVeris 连接器使用 Hosted MCP 且付费 call 需明确确认', async (
 
   const serialized = JSON.stringify(connector);
   assert.doesNotMatch(serialized, /Bearer\s+[A-Za-z0-9._~-]{12,}/i);
+});
+
+test('图标校验拒绝会被 Desktop 拦截的 CORP 响应', () => {
+  const blocked = assessIconResponse({
+    url: 'https://vendor.example/logo.png',
+    status: 200,
+    headers: {
+      'content-type': 'image/png',
+      'cross-origin-resource-policy': 'same-origin',
+    },
+  });
+  assert.equal(blocked.ok, false);
+  assert.match(blocked.errors.join('\n'), /same-origin/);
+
+  const compatible = assessIconResponse({
+    url: 'https://cdn.example/logo.png',
+    status: 200,
+    headers: {
+      'content-type': 'image/png',
+      'cross-origin-resource-policy': 'cross-origin',
+      'access-control-allow-origin': '*',
+    },
+  });
+  assert.equal(compatible.ok, true);
+});
+
+test('图标校验拒绝非图像响应', () => {
+  const report = assessIconResponse({
+    url: 'https://vendor.example/logo.png',
+    status: 200,
+    headers: { 'content-type': 'text/html; charset=utf-8' },
+  });
+  assert.equal(report.ok, false);
+  assert.match(report.errors.join('\n'), /Content-Type/);
 });

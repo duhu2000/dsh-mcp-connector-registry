@@ -8,7 +8,8 @@
     "test": "node --test",
     "build": "node scripts/build-registry.mjs",
     "validate": "npm run build && dsh-mcp-connector-probe catalog.json --validate-only",
-    "check": "npm test && npm run build && git diff --exit-code -- catalog.json && dsh-mcp-connector-probe catalog.json --validate-only",
+    "check": "npm test && npm run build && git diff --exit-code -- catalog.json && dsh-mcp-connector-probe catalog.json --validate-only && npm run assets:check",
+    "assets:check": "node scripts/check-icon-assets.mjs",
     "probe": "dsh-mcp-connector-probe catalog.json --allow-partial --output probe-report.json"
   },
   "devDependencies": {

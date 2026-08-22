@@ -39,6 +39,10 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 npm run build
 npm run validate
 npm run probe
+npm run assets:check
 ```
+
+`assets:check` 会额外验证远程 Logo 的图像类型与
+`Cross-Origin-Resource-Policy`，避免 URL 可访问但在 DSH Desktop 中被浏览器拦截。
 
 完整描述格式见 [`schema/connector.schema.json`](schema/connector.schema.json)，贡献和安全规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md) 与 [`SECURITY.md`](SECURITY.md)。PR 模板会要求提供服务官网、MCP 配置文档、鉴权方式和 Logo 来源，便于维护者核验。
