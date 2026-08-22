@@ -141,6 +141,115 @@
     },
     {
       "schemaVersion": 1,
+      "id": "qveris-capability-network",
+      "name": "QVeris·通用能力网络",
+      "vendor": "QVeris",
+      "category": "通用工具",
+      "summary": "AI 能力发现 / 参数检查 / 零成本询价 / 按需调用",
+      "description": "通过 QVeris 发现和调用第三方 AI/API 能力。discover、inspect 和 probe 用于免费发现、检查参数与零成本询价；call 可能消耗 Credits，且查询内容可能由第三方服务商处理。建议执行付费调用前确认费用，不要提交未获授权的个人信息、商业秘密或敏感业务数据。",
+      "tags": [
+        "能力路由",
+        "工具发现",
+        "API",
+        "AI Agent",
+        "可能收费",
+        "第三方收录"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://qveris.ai/hosted-mcp",
+      "probeStatus": "unverified",
+      "promptVariables": [
+        {
+          "name": "capability",
+          "label": "所需能力",
+          "default": "查询杭州未来 3 天天气",
+          "placeholder": "例如：查询杭州未来 3 天天气",
+          "required": true
+        },
+        {
+          "name": "documentTask",
+          "label": "文档处理任务",
+          "default": "识别中文 PDF 合同并提取当事人、金额和履约期限",
+          "placeholder": "例如：识别 PDF 并提取关键字段",
+          "required": true
+        }
+      ],
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "QVeris API Key",
+        "credentialPlaceholder": "请输入您的 QVeris API Key",
+        "credentialDescription": "用于访问 QVeris Hosted MCP；仅保存在 DSH 本机，不写入公共市场目录。",
+        "credentialHelpLabel": "如何获取 QVeris API Key？"
+      },
+      "servers": [
+        {
+          "serverKey": "capability-network",
+          "url": "https://mcp.qveris.ai/mcp",
+          "serverName": "qveris",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "发现可用能力",
+          "text": "使用 QVeris discover 查找能完成「{{capability}}」的能力，再用 inspect 对比候选工具的参数、成功率和示例；不要执行付费 call。",
+          "server": "capability-network"
+        },
+        {
+          "title": "先验参再询价",
+          "text": "使用 QVeris discover 查找能完成「{{capability}}」的能力，对最合适的候选使用 probe 验证参数并给出零成本报价；未经我确认不要执行付费 call。",
+          "server": "capability-network"
+        },
+        {
+          "title": "比较文档处理工具",
+          "text": "使用 QVeris discover 查找可以「{{documentTask}}」的能力，通过 inspect 比较参数、成功率和示例，输出推荐的 tool_id；不要调用 call。",
+          "server": "capability-network"
+        },
+        {
+          "title": "检查用量与费用",
+          "text": "使用 QVeris usage_history 和 credits_ledger 汇总最近 24 小时的调用成功率、扣费记录和 Credits 余额变化，不要发起新的付费调用。",
+          "server": "capability-network"
+        }
+      ],
+      "toolsSnapshot": [
+        {
+          "serverKey": "capability-network",
+          "serverName": "qveris",
+          "tools": [
+            {
+              "name": "discover",
+              "description": "用自然语言发现可用能力；该操作免费。"
+            },
+            {
+              "name": "inspect",
+              "description": "查看已知候选能力的参数、成功率和示例。"
+            },
+            {
+              "name": "probe",
+              "description": "在不执行能力、不消耗 Credits 的情况下验证参数并获取报价。"
+            },
+            {
+              "name": "call",
+              "description": "执行通过 discover 选定的能力；可能消耗 Credits。"
+            },
+            {
+              "name": "usage_history",
+              "description": "查询调用成功、失败和扣费状态的用量审计记录。"
+            },
+            {
+              "name": "credits_ledger",
+              "description": "查询 Credits 增减原因、汇总和账本明细。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "wind-stock-data",
       "name": "Wind·股票数据",
       "vendor": "Wind 万得",
