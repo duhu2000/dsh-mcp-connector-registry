@@ -55,3 +55,22 @@ test('build-registry rejects a filename that differs from connector id', async (
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /filename must match connector id \(actual-id\.json\)/);
 });
+
+test('盈米连接器使用公开 x-api-key 接入参数且不包含凭据', async () => {
+  const connector = JSON.parse(
+    await readFile(resolve('connectors/yingmi-wealth-management.json'), 'utf8'),
+  );
+
+  assert.equal(connector.auth.mode, 'api-key');
+  assert.equal(connector.auth.apiKeyHeader, 'x-api-key');
+  assert.equal(connector.servers[0].url, 'https://stargate.yingmi.com/mcp/v2');
+  assert.deepEqual(connector.servers[0].headers, {
+    Accept: 'application/json, text/event-stream',
+  });
+  assert.equal(connector.prompts.length, 4);
+  assert.equal(connector.toolsSnapshot[0].tools.length, 69);
+
+  const serialized = JSON.stringify(connector);
+  assert.doesNotMatch(serialized, /x-api-key\s*[:=]\s*(?!Header)/i);
+  assert.doesNotMatch(serialized, /Bearer\s+[A-Za-z0-9._~-]{12,}/i);
+});

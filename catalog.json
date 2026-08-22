@@ -208,6 +208,383 @@
           "server": "stock-data"
         }
       ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "yingmi-wealth-management",
+      "name": "盈米·基金投顾",
+      "vendor": "盈米基金 / 且慢",
+      "icon": "https://avatars.githubusercontent.com/u/150328721",
+      "category": "金融数据",
+      "summary": "基金检索 / 组合诊断 / 资产配置 / 投资风险分析",
+      "description": "接入盈米 MCP 的基金数据、组合诊断、资产配置、业绩归因、财经资讯与投顾分析能力。需在盈米 AI 开放平台申请 MCP API Key，具体服务权限以用户账号开通范围为准；输出仅供参考，不构成投资建议。",
+      "tags": [
+        "基金",
+        "投顾",
+        "资产配置",
+        "组合诊断",
+        "财经资讯",
+        "第三方收录"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://qieman.com/mcp",
+      "probeStatus": "unverified",
+      "promptVariables": [
+        {
+          "name": "portfolio",
+          "label": "基金组合",
+          "default": "易方达蓝筹精选（005827）、兴全合润（163406）、中欧时代先锋（001938）",
+          "placeholder": "例如：基金名称或代码，多只用顿号分隔",
+          "required": true
+        },
+        {
+          "name": "fund",
+          "label": "基金名称或代码",
+          "default": "华夏债券 A（001001）",
+          "placeholder": "例如：华夏债券 A（001001）",
+          "required": true
+        },
+        {
+          "name": "amount",
+          "label": "可投资金额",
+          "default": "100 万元",
+          "placeholder": "例如：100 万元",
+          "required": true
+        },
+        {
+          "name": "riskLevel",
+          "label": "风险偏好",
+          "default": "中等",
+          "placeholder": "例如：保守、中等或较高",
+          "required": true
+        }
+      ],
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "x-api-key",
+        "credentialName": "盈米 MCP API Key",
+        "credentialPlaceholder": "请输入您的盈米 MCP API Key",
+        "credentialDescription": "用于访问盈米 MCP；仅保存在 DSH 本机，不写入公共市场目录。",
+        "credentialHelpLabel": "如何申请盈米 MCP API Key？"
+      },
+      "servers": [
+        {
+          "serverKey": "wealth-management",
+          "url": "https://stargate.yingmi.com/mcp/v2",
+          "serverName": "yingmi_wealth_management",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "基金组合风险诊断",
+          "text": "用盈米 MCP 诊断以下基金组合的波动率、最大回撤、相关性和集中度，并说明主要风险：{{portfolio}}",
+          "server": "wealth-management"
+        },
+        {
+          "title": "基金详情与风险",
+          "text": "用盈米 MCP 查询 {{fund}} 的基本信息、历史业绩、风险指标、费率和交易规则",
+          "server": "wealth-management"
+        },
+        {
+          "title": "基金持仓与归因",
+          "text": "用盈米 MCP 分析 {{fund}} 的资产大类、行业和重仓配置，并说明收益来源与主要风险",
+          "server": "wealth-management"
+        },
+        {
+          "title": "资产配置参考",
+          "text": "用盈米 MCP 为可投资金额 {{amount}}、风险偏好 {{riskLevel}} 的用户生成资产配置参考，说明配置逻辑、风险和适用边界",
+          "server": "wealth-management"
+        }
+      ],
+      "toolsSnapshot": [
+        {
+          "serverKey": "wealth-management",
+          "serverName": "yingmi_wealth_management",
+          "tools": [
+            {
+              "name": "AnalyzeAssetLiability",
+              "description": "分析资产、负债与净资产结构。"
+            },
+            {
+              "name": "AnalyzeCashFlow",
+              "description": "分析收支与现金流健康度。"
+            },
+            {
+              "name": "AnalyzeFamilyMembers",
+              "description": "结合家庭成员与生命周期分析财务需求。"
+            },
+            {
+              "name": "AnalyzeFinancialIndicators",
+              "description": "评估关键财务指标的合理性与潜在风险。"
+            },
+            {
+              "name": "AnalyzeIncomeExpense",
+              "description": "分析收入、支出的结构和占比。"
+            },
+            {
+              "name": "AnalyzeFundRisk",
+              "description": "分析基金波动率、最大回撤、夏普比率等风险指标。"
+            },
+            {
+              "name": "AnalyzePortfolioRisk",
+              "description": "评估基金组合的整体风险。"
+            },
+            {
+              "name": "DiagnoseFundPortfolio",
+              "description": "诊断基金持仓结构、相关性与历史表现。"
+            },
+            {
+              "name": "GetAssetAllocation",
+              "description": "分析基金组合的资产大类配置。"
+            },
+            {
+              "name": "GetFundAssetClassAnalysis",
+              "description": "穿透分析基金的资产大类构成。"
+            },
+            {
+              "name": "GetFundsBackTest",
+              "description": "对基金组合进行历史数据回测。"
+            },
+            {
+              "name": "GetFundsCorrelation",
+              "description": "分析多只基金间的相关性。"
+            },
+            {
+              "name": "MonteCarloSimulate",
+              "description": "通过蒙特卡洛模拟评估未来收益区间。"
+            },
+            {
+              "name": "BatchGetFundNavHistory",
+              "description": "批量查询基金历史净值。"
+            },
+            {
+              "name": "BatchGetFundsDetail",
+              "description": "批量查询基金详细信息。"
+            },
+            {
+              "name": "GetBatchFundPerformance",
+              "description": "批量查询基金业绩表现。"
+            },
+            {
+              "name": "GetFundDiagnosis",
+              "description": "查询基金的综合诊断结果。"
+            },
+            {
+              "name": "SearchFunds",
+              "description": "按名称、条件或关键词搜索基金。"
+            },
+            {
+              "name": "GetPopularFund",
+              "description": "查询市场热门基金。"
+            },
+            {
+              "name": "GuessFundCode",
+              "description": "根据基金名称或模糊信息匹配基金代码。"
+            },
+            {
+              "name": "fund-sector-preference",
+              "description": "分析基金的板块偏好。"
+            },
+            {
+              "name": "fund-equity-position",
+              "description": "分析基金的权益仓位偏好。"
+            },
+            {
+              "name": "fund-recovery-ability",
+              "description": "评估基金回撤后的修复能力。"
+            },
+            {
+              "name": "getFundTurnoverRate",
+              "description": "查询基金换手率与调仓频率。"
+            },
+            {
+              "name": "getFundIndustryPreference",
+              "description": "分析基金的行业偏好。"
+            },
+            {
+              "name": "getFundIndustryAllocation",
+              "description": "查询基金行业配置比例。"
+            },
+            {
+              "name": "getFundIndustryConcentration",
+              "description": "分析基金的行业持仓集中度。"
+            },
+            {
+              "name": "getQdFundAreaAllocation",
+              "description": "查询 QDII 基金的地区配置。"
+            },
+            {
+              "name": "getBondFundCreditRatingLevel",
+              "description": "查询债券基金持仓的信用评级分布。"
+            },
+            {
+              "name": "getBondAllocationByFundCode",
+              "description": "按基金代码查询债券券种配置。"
+            },
+            {
+              "name": "getStockAllocationAndMetricsByFundCode",
+              "description": "查询基金重仓股与估值指标。"
+            },
+            {
+              "name": "getFundIndustryReturns",
+              "description": "查询基金持仓行业的收益表现。"
+            },
+            {
+              "name": "getFundBrinsonIndicator",
+              "description": "查询基金的 Brinson 业绩归因指标。"
+            },
+            {
+              "name": "getMarketTimingIndicator",
+              "description": "评估基金的权益仓位择时能力。"
+            },
+            {
+              "name": "getFundCampisiIndicator",
+              "description": "查询债券基金的 Campisi 业绩归因指标。"
+            },
+            {
+              "name": "getBondIndicator",
+              "description": "查询债基杠杆、久期和集中度等风险指标。"
+            },
+            {
+              "name": "getFundDiveCount",
+              "description": "查询债券基金净值异动情况。"
+            },
+            {
+              "name": "filterBondFundByCreditRating",
+              "description": "按信用评级条件筛选债券基金。"
+            },
+            {
+              "name": "filterBondFundByBondType",
+              "description": "按券种风格筛选债券基金。"
+            },
+            {
+              "name": "filterStockFundByStockTurnover",
+              "description": "按股票换手率条件筛选基金。"
+            },
+            {
+              "name": "getBondFundWithAlertRecord",
+              "description": "查询发生净值异动记录的债券基金。"
+            },
+            {
+              "name": "getFundBenchmarkInfo",
+              "description": "查询基金合同约定的业绩比较基准。"
+            },
+            {
+              "name": "BatchGetFundTradeRules",
+              "description": "批量查询基金交易规则。"
+            },
+            {
+              "name": "BatchGetFundTradeLimit",
+              "description": "批量查询基金申购、赎回等交易限制。"
+            },
+            {
+              "name": "BatchGetFundsSplitHistory",
+              "description": "批量查询基金拆分历史。"
+            },
+            {
+              "name": "BatchGetFundsDividendRecord",
+              "description": "批量查询基金分红记录。"
+            },
+            {
+              "name": "GetStrategyDetails",
+              "description": "查询投顾策略详情。"
+            },
+            {
+              "name": "GetStrategyBenchmark",
+              "description": "查询投顾策略的业绩比较基准。"
+            },
+            {
+              "name": "GetStrategyAssetClassAnalysis",
+              "description": "分析投顾策略的资产大类分布。"
+            },
+            {
+              "name": "BatchGetStrategiesComposition",
+              "description": "批量查询投顾策略持仓。"
+            },
+            {
+              "name": "BatchGetPoTradeComposition",
+              "description": "批量查询投顾策略的交易成分。"
+            },
+            {
+              "name": "StrategySearchByKeyword",
+              "description": "按关键词搜索投顾策略。"
+            },
+            {
+              "name": "BatchGetStrategyRiskInfo",
+              "description": "批量查询投顾策略的风险匹配信息。"
+            },
+            {
+              "name": "GetStrategyRiskInfo",
+              "description": "查询单个投顾策略的风险信息。"
+            },
+            {
+              "name": "GetFundRelatedStrategies",
+              "description": "按重仓基金查询相关投顾策略。"
+            },
+            {
+              "name": "SearchFinancialNews",
+              "description": "搜索财经资讯。"
+            },
+            {
+              "name": "SearchManagerViewpoint",
+              "description": "搜索基金经理观点。"
+            },
+            {
+              "name": "searchRealtimeAiAnalysis",
+              "description": "搜索实时财经资讯的 AI 解读。"
+            },
+            {
+              "name": "SearchHotTopic",
+              "description": "查询热点财经话题。"
+            },
+            {
+              "name": "searchInvestAdvisorContent",
+              "description": "搜索投资顾问内容。"
+            },
+            {
+              "name": "GetAssetAllocationPlan",
+              "description": "生成资产配置方案。"
+            },
+            {
+              "name": "GetCompositeModel",
+              "description": "查询或生成基金投资方案。"
+            },
+            {
+              "name": "AnalyzeInvestmentPerformance",
+              "description": "分析投资方案的业绩表现。"
+            },
+            {
+              "name": "GetPortfolioNavHistory",
+              "description": "查询投资组合的历史净值。"
+            },
+            {
+              "name": "GetLatestQuotations",
+              "description": "查询市场温度与最新行情概览。"
+            },
+            {
+              "name": "RenderEchart",
+              "description": "将分析数据渲染为 ECharts 图表。"
+            },
+            {
+              "name": "RenderHtmlToPdf",
+              "description": "将 HTML 内容渲染为 PDF 报告。"
+            },
+            {
+              "name": "GetCurrentTime",
+              "description": "获取当前时间。"
+            },
+            {
+              "name": "GetTxnDayRange",
+              "description": "查询交易日范围。"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -10,6 +10,16 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 
 插件会把远程目录与内置目录合并；断网或远程目录不可用时，继续使用本地内置目录。
 
+## 当前公共连接器
+
+| 连接器 | 主要能力 | 鉴权 |
+|---|---|---|
+| 北大法宝·法律检索 | 法规、法条、司法案例和引用核验 | Bearer Token |
+| Wind·股票数据 | 全球股票档案、行情、技术指标和财务数据 | Bearer Token |
+| 盈米·基金投顾 | 基金检索、组合诊断、资产配置和投资风险分析 | `x-api-key` |
+
+连接器目录只保存公开接入参数；Token 和 API Key 均由用户在 DSH 本机录入。
+
 ## 上架流程
 
 如果您是服务商或社区贡献者，可以直接[发起连接器收录请求](https://github.com/duhu2000/dsh-mcp-connector-registry/issues/new?template=connector-request.yml)，也可以 fork 本仓库并提交 Connector PR。
