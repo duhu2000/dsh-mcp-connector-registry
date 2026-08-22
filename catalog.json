@@ -145,8 +145,8 @@
       "name": "QVerisMCP",
       "vendor": "QVeris",
       "category": "通用工具",
-      "summary": "10,000+ 实时能力发现 / 检查 / 询价 / 调用",
-      "description": "QVeris Hosted MCP 是官方托管的远程 MCP 服务。通过一个 Streamable HTTP 地址和一枚 API Key，即可将智能体接入 QVeris 能力路由网络，无需启动本地进程、安装软件包或逐一配置第三方凭据。discover、inspect 和 probe 可用于发现能力、检查参数和获取报价；call 会执行选定能力并可能消耗 Credits。调用可能路由至外部服务商，执行前请确认费用，不要提交未获授权的个人信息、商业秘密或敏感业务数据。",
+      "summary": "10,000+ 实时能力发现 / 检查 / 审计 / 调用",
+      "description": "QVeris Hosted MCP 是官方托管的远程 MCP 服务。通过一个 Streamable HTTP 地址和一枚 API Key，即可将智能体接入 QVeris 能力路由网络，无需启动本地进程、安装软件包或逐一配置第三方凭据。discover 和 inspect 用于发现能力与检查参数，usage_history 和 credits_ledger 用于审计用量与 Credits 变化；call 会执行选定能力并可能消耗 Credits。调用可能路由至外部服务商，执行前请确认费用，不要提交未获授权的个人信息、商业秘密或敏感业务数据。",
       "tags": [
         "Hosted MCP",
         "能力路由",
@@ -198,12 +198,12 @@
       "prompts": [
         {
           "title": "发现可用能力",
-          "text": "使用 QVeris discover 查找能完成「{{capability}}」的能力，再用 inspect 对比候选工具的参数、成功率和示例；不要执行付费 call。",
+          "text": "使用 QVeris discover 查找能完成「{{capability}}」的能力，再用 inspect 对比候选工具的参数、成功率和示例；只输出建议和待确认项，不要执行付费 call。",
           "server": "capability-network"
         },
         {
-          "title": "先验参再询价",
-          "text": "使用 QVeris discover 查找能完成「{{capability}}」的能力，对最合适的候选使用 probe 验证参数并给出零成本报价；未经我确认不要执行付费 call。",
+          "title": "先检查再确认",
+          "text": "使用 QVeris discover 查找能完成「{{capability}}」的能力，对最合适的候选使用 inspect 核对参数、成功率和示例，列出执行前需要我确认的内容；未经我确认不要执行付费 call。",
           "server": "capability-network"
         },
         {
@@ -231,10 +231,6 @@
               "description": "查看已知候选能力的参数、成功率和示例。"
             },
             {
-              "name": "probe",
-              "description": "在不执行能力、不消耗 Credits 的情况下验证参数并获取报价。"
-            },
-            {
               "name": "call",
               "description": "执行通过 discover 选定的能力；可能消耗 Credits。"
             },
@@ -245,6 +241,18 @@
             {
               "name": "credits_ledger",
               "description": "查询 Credits 增减原因、汇总和账本明细。"
+            },
+            {
+              "name": "search_tools",
+              "description": "discover 的兼容别名（官方已标记为 deprecated）。"
+            },
+            {
+              "name": "get_tools_by_ids",
+              "description": "inspect 的兼容别名（官方已标记为 deprecated）。"
+            },
+            {
+              "name": "execute_tool",
+              "description": "call 的兼容别名（官方已标记为 deprecated，可能消耗 Credits）。"
             }
           ]
         }
