@@ -7,7 +7,7 @@
   "summary": "10,000+ 实时能力发现 / 检查 / 询价 / 调用",
   "description": "QVeris Hosted MCP 是官方托管的远程 MCP 服务。通过一个 Streamable HTTP 地址和一枚 API Key，即可将智能体接入 QVeris 能力路由网络，无需启动本地进程、安装软件包或逐一配置第三方凭据。discover、inspect 和 probe 可用于发现能力、检查参数和获取报价；call 会执行选定能力并可能消耗 Credits。调用可能路由至外部服务商，执行前请确认费用，不要提交未获授权的个人信息、商业秘密或敏感业务数据。",
   "tags": ["Hosted MCP", "能力路由", "工具发现", "实时数据", "API", "AI Agent", "可能收费"],
-  "icon": "https://qveris.ai/logo-color.png",
+  "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/assets/qveris-logo.png",
   "published": true,
   "featured": false,
   "homepage": "https://qveris.ai/hosted-mcp",
