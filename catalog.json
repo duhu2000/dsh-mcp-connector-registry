@@ -7,7 +7,7 @@
       "name": "八爪鱼·云采集",
       "vendor": "八爪鱼 Bazhuayu",
       "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/assets/bazhuayu-logo.png",
-      "category": "数据采集",
+      "category": "效率工具",
       "summary": "模板搜索 / 云任务 / 进度查询 / 结构化数据导出",
       "description": "用自然语言调用八爪鱼云采集：搜索预置采集模板，预检参数，启动、查询或停止云任务，并预览或导出结构化数据。使用 OAuth 2.1 + PKCE 登录八爪鱼账户，无需手动复制 API Key；云采集、数据中心和导出能力以账户实际版本、配额及官方服务规则为准。",
       "tags": [
@@ -269,7 +269,7 @@
       "id": "qveris-capability-network",
       "name": "QVerisMCP",
       "vendor": "QVeris",
-      "category": "通用工具",
+      "category": "其他",
       "summary": "10,000+ 实时能力发现 / 检查 / 审计 / 调用",
       "description": "QVeris Hosted MCP 是官方托管的远程 MCP 服务。通过一个 Streamable HTTP 地址和一枚 API Key，即可将智能体接入 QVeris 能力路由网络，无需启动本地进程、安装软件包或逐一配置第三方凭据。discover 和 inspect 用于发现能力与检查参数，usage_history 和 credits_ledger 用于审计用量与 Credits 变化；call 会执行选定能力并可能消耗 Credits。调用可能路由至外部服务商，执行前请确认费用，不要提交未获授权的个人信息、商业秘密或敏感业务数据。",
       "tags": [
@@ -459,7 +459,7 @@
       "name": "盈米·基金投顾",
       "vendor": "盈米基金 / 且慢",
       "icon": "https://avatars.githubusercontent.com/u/150328721",
-      "category": "金融数据",
+      "category": "金融投资",
       "summary": "基金检索 / 组合诊断 / 资产配置 / 投资风险分析",
       "description": "接入盈米 MCP 的基金数据、组合诊断、资产配置、业绩归因、财经资讯与投顾分析能力。需在盈米 AI 开放平台申请 MCP API Key，具体服务权限以用户账号开通范围为准；输出仅供参考，不构成投资建议。",
       "tags": [

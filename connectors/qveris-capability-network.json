@@ -3,7 +3,7 @@
   "id": "qveris-capability-network",
   "name": "QVerisMCP",
   "vendor": "QVeris",
-  "category": "通用工具",
+  "category": "其他",
   "summary": "10,000+ 实时能力发现 / 检查 / 审计 / 调用",
   "description": "QVeris Hosted MCP 是官方托管的远程 MCP 服务。通过一个 Streamable HTTP 地址和一枚 API Key，即可将智能体接入 QVeris 能力路由网络，无需启动本地进程、安装软件包或逐一配置第三方凭据。discover 和 inspect 用于发现能力与检查参数，usage_history 和 credits_ledger 用于审计用量与 Credits 变化；call 会执行选定能力并可能消耗 Credits。调用可能路由至外部服务商，执行前请确认费用，不要提交未获授权的个人信息、商业秘密或敏感业务数据。",
   "tags": ["Hosted MCP", "能力路由", "工具发现", "实时数据", "API", "AI Agent", "可能收费"],
