@@ -118,7 +118,9 @@ test('八爪鱼连接器使用标准 OAuth PKCE 与公开 DCR 元数据', async 
   assert.equal(connector.servers[0].serverName, 'bazhuayu');
   assert.equal(connector.featured, false);
   assert.equal(connector.prompts.length, 5);
-  assert.equal(connector.toolsSnapshot[0].tools.length, 10);
+  assert.equal(connector.toolsSnapshot[0].tools.length, 12);
+  assert.ok(connector.toolsSnapshot[0].tools.some((tool) => tool.name === 'get_task_status'));
+  assert.ok(connector.toolsSnapshot[0].tools.some((tool) => tool.name === 'describe_ecommerce_dataset'));
   assert.match(connector.description, /OAuth 2\.1 \+ PKCE/);
   assert.match(connector.prompts[0].text, /启动.*确认/);
   assert.match(connector.prompts[4].text, /停止.*确认/);

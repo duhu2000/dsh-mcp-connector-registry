@@ -87,6 +87,10 @@
               "description": "按任务 ID 启动或停止云采集任务。"
             },
             {
+              "name": "get_task_status",
+              "description": "按任务 ID 查询云采集任务状态、批次号和已采集行数。"
+            },
+            {
               "name": "execute_task",
               "description": "预检模板参数，或创建并启动模板云采集任务。"
             },
@@ -113,6 +117,10 @@
             {
               "name": "query_collected_reviews",
               "description": "查询已采集的 Temu 或 TikTok Shop 商品评论。"
+            },
+            {
+              "name": "describe_ecommerce_dataset",
+              "description": "查看电商采集数据集的可用字段及稳定 itemIds 字段映射。"
             }
           ]
         }
