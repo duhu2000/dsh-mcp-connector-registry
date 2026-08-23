@@ -105,6 +105,29 @@ test('QVeris 连接器使用 Hosted MCP 且付费 call 需明确确认', async (
   assert.doesNotMatch(serialized, /Bearer\s+[A-Za-z0-9._~-]{12,}/i);
 });
 
+test('八爪鱼连接器使用标准 OAuth PKCE 与公开 DCR 元数据', async () => {
+  const connector = JSON.parse(
+    await readFile(resolve('connectors/bazhuayu-cloud-collection.json'), 'utf8'),
+  );
+
+  assert.equal(connector.auth.mode, 'oauth2-pkce');
+  assert.equal(connector.auth.issuer, 'https://identity.bazhuayu.com');
+  assert.equal(connector.auth.scope, 'openid profile offline_access');
+  assert.equal(connector.auth.tokenEndpointAuthMethod, 'none');
+  assert.equal(connector.servers[0].url, 'https://mcp.bazhuayu.com/');
+  assert.equal(connector.servers[0].serverName, 'bazhuayu');
+  assert.equal(connector.featured, false);
+  assert.equal(connector.prompts.length, 5);
+  assert.equal(connector.toolsSnapshot[0].tools.length, 10);
+  assert.match(connector.description, /OAuth 2\.1 \+ PKCE/);
+  assert.match(connector.prompts[0].text, /启动.*确认/);
+  assert.match(connector.prompts[4].text, /停止.*确认/);
+
+  const serialized = JSON.stringify(connector);
+  assert.doesNotMatch(serialized, /client_secret/i);
+  assert.doesNotMatch(serialized, /Bearer\s+[A-Za-z0-9._~-]{12,}/i);
+});
+
 test('图标校验拒绝会被 Desktop 拦截的 CORP 响应', () => {
   const blocked = assessIconResponse({
     url: 'https://vendor.example/logo.png',

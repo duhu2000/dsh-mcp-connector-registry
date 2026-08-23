@@ -3,6 +3,123 @@
   "connectors": [
     {
       "schemaVersion": 1,
+      "id": "bazhuayu-cloud-collection",
+      "name": "八爪鱼·云采集",
+      "vendor": "八爪鱼 Bazhuayu",
+      "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/assets/bazhuayu-logo.png",
+      "category": "数据采集",
+      "summary": "模板搜索 / 云任务 / 进度查询 / 结构化数据导出",
+      "description": "用自然语言调用八爪鱼云采集：搜索预置采集模板，预检参数，启动、查询或停止云任务，并预览或导出结构化数据。使用 OAuth 2.1 + PKCE 登录八爪鱼账户，无需手动复制 API Key；云采集、数据中心和导出能力以账户实际版本、配额及官方服务规则为准。",
+      "tags": [
+        "网页数据",
+        "云采集",
+        "数据导出",
+        "电商数据",
+        "OAuth",
+        "PKCE",
+        "第三方收录"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://www.bazhuayu.com/docs/zh/mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://identity.bazhuayu.com",
+        "scope": "openid profile offline_access",
+        "clientName": "DeepSeek Harness - 八爪鱼 MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "cloud-collection",
+          "url": "https://mcp.bazhuayu.com/",
+          "serverName": "bazhuayu",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "采集电商搜索结果",
+          "text": "帮我采集亚马逊无线耳机搜索结果前 3 页；先搜索合适的八爪鱼模板并预检参数，启动云采集任务前让我确认",
+          "server": "cloud-collection"
+        },
+        {
+          "title": "搜索采集模板",
+          "text": "搜索适合抓取电商商品详情的八爪鱼云采集模板，比较输入字段、输出字段和数据源选项",
+          "server": "cloud-collection"
+        },
+        {
+          "title": "查看最近任务进度",
+          "text": "查看我最近创建的八爪鱼采集任务和当前进度，不要启动或停止任务",
+          "server": "cloud-collection"
+        },
+        {
+          "title": "预览与导出数据",
+          "text": "查询我最近完成的八爪鱼采集任务，预览第一页结构化数据，并列出可用导出方式",
+          "server": "cloud-collection"
+        },
+        {
+          "title": "管理运行中任务",
+          "text": "查找我当前正在运行的八爪鱼采集任务并列出任务名称、任务 ID 和状态；如需停止，必须先让我确认",
+          "server": "cloud-collection"
+        }
+      ],
+      "toolsSnapshot": [
+        {
+          "serverKey": "cloud-collection",
+          "serverName": "bazhuayu",
+          "tools": [
+            {
+              "name": "search_templates",
+              "description": "搜索预置采集模板，并查看输入字段、输出字段和数据源选项。"
+            },
+            {
+              "name": "search_tasks",
+              "description": "列出并搜索当前账户下的已有采集任务。"
+            },
+            {
+              "name": "start_or_stop_task",
+              "description": "按任务 ID 启动或停止云采集任务。"
+            },
+            {
+              "name": "execute_task",
+              "description": "预检模板参数，或创建并启动模板云采集任务。"
+            },
+            {
+              "name": "export_data",
+              "description": "查询采集与导出进度，预览数据并取得下载地址。"
+            },
+            {
+              "name": "redeem_coupon_code",
+              "description": "兑换促销或资源优惠码。"
+            },
+            {
+              "name": "search_platform_content",
+              "description": "按关键词、时间与域名搜索数据中心的网页、图片和视频内容。"
+            },
+            {
+              "name": "list_platforms",
+              "description": "查看数据中心当前支持的平台与域名。"
+            },
+            {
+              "name": "ecommerce_data_task",
+              "description": "提交 Temu 或 TikTok Shop 商品与评论采集任务。"
+            },
+            {
+              "name": "query_collected_reviews",
+              "description": "查询已采集的 Temu 或 TikTok Shop 商品评论。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "pkulaw-legal",
       "name": "北大法宝·法律检索",
       "vendor": "北大法宝 PKULaw",
