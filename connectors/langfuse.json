@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "langfuse",
+  "name": "Langfuse",
+  "vendor": "社区连接器",
+  "icon": "🔭",
+  "category": "开发工具",
+  "summary": "LLM 追踪 / 会话 / Prompt / 可观测性分析",
+  "description": "通过社区 langfuse-mcp npm 包启动本地 stdio Server，以只读方式查询 Langfuse 追踪、会话与 Prompt 数据。需填写 Langfuse Public Key、Secret Key 和对应区域或自托管实例的 Base URL。",
+  "tags": ["Langfuse", "LLM", "可观测性", "Tracing", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/hugoles/langfuse-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "Public Key、Secret Key 与 Base URL 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+    "credentialHelpLabel": "查看 Langfuse MCP 项目说明",
+    "credentialFields": [
+      {
+        "key": "publicKey",
+        "label": "Langfuse Public Key",
+        "placeholder": "pk-lf-...",
+        "required": true,
+        "secret": false
+      },
+      {
+        "key": "secretKey",
+        "label": "Langfuse Secret Key",
+        "placeholder": "sk-lf-...",
+        "required": true,
+        "secret": true
+      },
+      {
+        "key": "baseUrl",
+        "label": "Langfuse Base URL",
+        "placeholder": "https://cloud.langfuse.com",
+        "description": "请填写密钥所属区域或自托管实例地址。",
+        "required": true,
+        "secret": false
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "langfuse",
+      "serverName": "langfuse",
+      "command": "npx",
+      "args": ["-y", "langfuse-mcp@latest"],
+      "credentialBindings": {
+        "LANGFUSE_PUBLIC_KEY": "publicKey",
+        "LANGFUSE_SECRET_KEY": "secretKey",
+        "LANGFUSE_BASE_URL": "baseUrl"
+      },
+      "transport": "stdio"
+    }
+  ]
+}

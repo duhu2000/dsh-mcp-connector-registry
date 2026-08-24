@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "amap",
+  "name": "高德地图",
+  "vendor": "高德开放平台",
+  "icon": "🗺️",
+  "category": "效率工具",
+  "summary": "地点搜索 / 地理编码 / 路线规划 / 天气查询",
+  "description": "通过 @amap/amap-maps-mcp-server npm 包启动本地 stdio Server，调用高德开放平台 Web 服务完成地点搜索、地理编码、路线规划和天气查询。需填写高德 Web 服务 API Key；调用配额以高德账号为准。",
+  "tags": ["高德地图", "地图", "路线规划", "POI", "stdio"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://lbs.amap.com/api/webservice/create-project-and-key",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "API Key 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+    "credentialHelpLabel": "查看高德 Web 服务 Key 申请说明",
+    "credentialFields": [
+      {
+        "key": "apiKey",
+        "label": "高德 Web 服务 API Key",
+        "placeholder": "请输入 API Key",
+        "required": true,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "amap",
+      "serverName": "amap",
+      "command": "npx",
+      "args": ["-y", "@amap/amap-maps-mcp-server"],
+      "credentialBindings": {
+        "AMAP_MAPS_API_KEY": "apiKey"
+      },
+      "transport": "stdio"
+    }
+  ]
+}

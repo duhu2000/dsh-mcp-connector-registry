@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "dingtalk",
+  "name": "钉钉",
+  "vendor": "钉钉",
+  "icon": "🪽",
+  "category": "办公协作",
+  "summary": "通讯录 / 日历 / 会议 / 待办 / 协同办公",
+  "description": "通过 dingtalk-mcp npm 包启动本地 stdio Server，访问钉钉开放平台的通讯录、日历等能力。需要在钉钉开放平台创建应用并填写 Client ID 与 Client Secret；能力范围和授权由应用权限配置决定。",
+  "tags": ["钉钉", "通讯录", "日历", "办公协作", "stdio"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://open.dingtalk.com/document/ai-dev/dingtalk-server-api-mcp-overview",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "应用凭据仅保存在 DSH 本机，并作为本地进程环境变量注入。",
+    "credentialHelpLabel": "查看钉钉 MCP 官方说明",
+    "credentialFields": [
+      {
+        "key": "clientId",
+        "label": "Client ID",
+        "placeholder": "请输入钉钉应用 Client ID",
+        "required": true,
+        "secret": false
+      },
+      {
+        "key": "clientSecret",
+        "label": "Client Secret",
+        "placeholder": "请输入钉钉应用 Client Secret",
+        "required": true,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "dingtalk",
+      "serverName": "dingtalk",
+      "command": "npx",
+      "args": ["-y", "dingtalk-mcp@latest"],
+      "env": {
+        "ACTIVE_PROFILES": "dingtalk-contacts,dingtalk-calendar"
+      },
+      "credentialBindings": {
+        "DINGTALK_Client_ID": "clientId",
+        "DINGTALK_Client_Secret": "clientSecret"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看近期日程",
+      "text": "使用钉钉 MCP 查看我近期的日程安排并汇总冲突；不要创建、修改或删除日程",
+      "server": "dingtalk"
+    }
+  ]
+}

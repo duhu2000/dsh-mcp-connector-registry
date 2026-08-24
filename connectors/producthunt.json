@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "producthunt",
+  "name": "Product Hunt",
+  "vendor": "社区连接器",
+  "icon": "🚀",
+  "category": "调研分析",
+  "summary": "产品发现 / 搜索 / 榜单 / GraphQL 数据分析",
+  "description": "通过社区 @yilin-jing/producthunt-mcp npm 包启动本地 stdio Server，调用 Product Hunt GraphQL API 搜索和分析产品、主题与榜单。需填写 Product Hunt Developer Token；接口能力与限流以 Product Hunt 为准。",
+  "tags": ["Product Hunt", "产品调研", "榜单", "GraphQL", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/Jing-yilin/producthunt-mcp-server",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialDescription": "Access Token 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+    "credentialHelpLabel": "查看 Product Hunt MCP 项目说明",
+    "credentialFields": [
+      {
+        "key": "accessToken",
+        "label": "Product Hunt Access Token",
+        "placeholder": "请输入 Developer Token",
+        "required": true,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "producthunt",
+      "serverName": "producthunt",
+      "command": "npx",
+      "args": ["-y", "@yilin-jing/producthunt-mcp"],
+      "credentialBindings": {
+        "PRODUCTHUNT_ACCESS_TOKEN": "accessToken"
+      },
+      "transport": "stdio"
+    }
+  ]
+}

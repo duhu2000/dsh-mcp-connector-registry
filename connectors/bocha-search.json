@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "bocha-search",
+  "name": "博查搜索",
+  "vendor": "社区连接器",
+  "icon": "🔎",
+  "category": "调研分析",
+  "summary": "网页搜索 / AI 搜索 / 内容检索",
+  "description": "通过社区 @humansean/mcp-bocha npm 包启动本地 stdio Server，调用博查 AI 开放平台搜索接口获取网页检索结果。需填写 BOCHA API Key；该适配包由社区维护，不代表博查官方 MCP。",
+  "tags": ["博查", "网页搜索", "AI 搜索", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/intounknown/mcp-bocha",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "API Key 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+    "credentialHelpLabel": "查看社区博查 MCP 项目说明",
+    "credentialFields": [
+      {
+        "key": "apiKey",
+        "label": "BOCHA API Key",
+        "placeholder": "请输入 BOCHA API Key",
+        "required": true,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "bocha-search",
+      "serverName": "bocha-search",
+      "command": "npx",
+      "args": ["-y", "@humansean/mcp-bocha"],
+      "credentialBindings": {
+        "BOCHA_API_KEY": "apiKey"
+      },
+      "transport": "stdio"
+    }
+  ]
+}

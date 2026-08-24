@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "tushare",
+  "name": "TuShare",
+  "vendor": "TuShare 社区",
+  "icon": "📊",
+  "category": "金融投资",
+  "summary": "A 股 / 指数 / 基金 / 财务 / 宏观数据",
+  "description": "通过社区 @tushare/mcp npm 包启动本地 stdio Server，调用 TuShare Pro 数据接口查询股票、指数、基金、财务与宏观数据。需填写 TuShare Token；数据权限、频率和积分要求以 TuShare 账号为准，不构成投资建议。",
+  "tags": ["TuShare", "A股", "基金", "财务数据", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/kshern/tushare-ts",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "TuShare Token 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+    "credentialHelpLabel": "查看 TuShare MCP 项目说明",
+    "credentialFields": [
+      {
+        "key": "token",
+        "label": "TuShare Token",
+        "placeholder": "请输入 TuShare Token",
+        "required": true,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "tushare",
+      "serverName": "tushare",
+      "command": "npx",
+      "args": ["-y", "@tushare/mcp", "--stdio"],
+      "credentialBindings": {
+        "TUSHARE_TOKEN": "token"
+      },
+      "transport": "stdio"
+    }
+  ]
+}

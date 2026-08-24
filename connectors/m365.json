@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "m365",
+  "name": "Microsoft 365",
+  "vendor": "社区连接器",
+  "icon": "🪟",
+  "category": "办公协作",
+  "summary": "Outlook 邮件 / 日历 / Teams / OneDrive / SharePoint",
+  "description": "通过社区 m365-mcp npm 包启动本地 stdio Server，使用 Microsoft Graph 访问 Microsoft 365 邮件、日历、Teams、OneDrive 与 SharePoint。需提供 Entra 应用 Client ID，可选指定 Tenant ID；首次使用通过设备代码完成用户授权，Token 由本地连接器缓存。",
+  "tags": ["Microsoft 365", "Outlook", "Teams", "OneDrive", "Graph", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/debian777/m365-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "Client ID 与 Tenant ID 仅保存在 DSH 本机；Microsoft Access Token 不进入 Registry。",
+    "credentialHelpLabel": "查看 Microsoft 365 MCP 配置说明",
+    "credentialFields": [
+      {
+        "key": "clientId",
+        "label": "Microsoft Entra Client ID",
+        "placeholder": "请输入应用 Client ID",
+        "required": true,
+        "secret": false
+      },
+      {
+        "key": "tenantId",
+        "label": "Tenant ID（可选）",
+        "placeholder": "留空则使用 common",
+        "required": false,
+        "secret": false
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "m365",
+      "serverName": "m365",
+      "command": "npx",
+      "args": ["-y", "m365-mcp@latest"],
+      "credentialBindings": {
+        "M365_CLIENT_ID": "clientId",
+        "M365_TENANT_ID": "tenantId"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "汇总今日办公待办",
+      "text": "使用 Microsoft 365 MCP 汇总我今天的日历、未读重要邮件和 Teams 待办；不要发送消息或修改数据",
+      "server": "m365"
+    }
+  ]
+}

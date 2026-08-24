@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "temporal",
+  "name": "Temporal",
+  "vendor": "Temporal Technologies",
+  "icon": "⏱️",
+  "category": "开发工具",
+  "summary": "Temporal 文档检索 / 工作流开发知识",
+  "description": "接入 Temporal 官方文档使用的 Kapa 托管 MCP Server，检索 Temporal SDK、工作流、活动与运维文档。该卡片提供知识检索，不直接连接或操作用户的 Temporal 集群。",
+  "tags": ["Temporal", "工作流", "文档检索", "Kapa", "官方文档"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://docs.temporal.io/with-ai",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://mcp.kapa.ai/auth/public",
+    "scope": "openid",
+    "clientName": "DeepSeek Harness - Temporal Docs MCP",
+    "tokenEndpointAuthMethod": "client_secret_post",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "temporal-docs",
+      "url": "https://temporal.mcp.kapa.ai",
+      "serverName": "temporal-docs",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询 Temporal 最佳实践",
+      "text": "使用 Temporal MCP 根据官方文档说明这个工作流设计问题，并给出相关文档依据",
+      "server": "temporal-docs"
+    }
+  ]
+}

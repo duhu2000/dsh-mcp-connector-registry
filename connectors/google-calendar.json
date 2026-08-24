@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "google-calendar",
+  "name": "Google 日历",
+  "vendor": "社区连接器",
+  "icon": "📅",
+  "category": "办公协作",
+  "summary": "日历事件 / 空闲时间 / 会议安排 / 日程搜索",
+  "description": "通过社区 @cocal/google-calendar-mcp npm 包启动本地 stdio Server，读取和管理 Google Calendar 日程。需先在 Google Cloud 创建 Desktop OAuth 凭据，并填写本机凭据 JSON 文件路径；首次连接会在浏览器完成 Google 授权。",
+  "tags": ["Google Calendar", "日历", "会议", "OAuth", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/nspady/google-calendar-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "只保存本机 OAuth 凭据文件路径；文件内容与 Google Token 不进入 Registry。",
+    "credentialHelpLabel": "查看 Google Calendar MCP 配置说明",
+    "credentialFields": [
+      {
+        "key": "credentialsPath",
+        "label": "OAuth 凭据 JSON 路径",
+        "placeholder": "/absolute/path/to/gcp-oauth.keys.json",
+        "description": "请输入本机绝对路径，不要粘贴 JSON 内容。",
+        "required": true,
+        "secret": false
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "google-calendar",
+      "serverName": "google-calendar",
+      "command": "npx",
+      "args": ["-y", "@cocal/google-calendar-mcp"],
+      "credentialBindings": {
+        "GOOGLE_OAUTH_CREDENTIALS": "credentialsPath"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看日程冲突",
+      "text": "使用 Google Calendar MCP 查看我未来七天的日程和冲突；不要创建、修改或删除事件",
+      "server": "google-calendar"
+    }
+  ]
+}
