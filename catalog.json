@@ -40,6 +40,56 @@
     },
     {
       "schemaVersion": 1,
+      "id": "amap",
+      "name": "高德地图",
+      "vendor": "高德开放平台",
+      "icon": "🗺️",
+      "category": "效率工具",
+      "summary": "地点搜索 / 地理编码 / 路线规划 / 天气查询",
+      "description": "通过 @amap/amap-maps-mcp-server npm 包启动本地 stdio Server，调用高德开放平台 Web 服务完成地点搜索、地理编码、路线规划和天气查询。需填写高德 Web 服务 API Key；调用配额以高德账号为准。",
+      "tags": [
+        "高德地图",
+        "地图",
+        "路线规划",
+        "POI",
+        "stdio"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://lbs.amap.com/api/webservice/create-project-and-key",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "API Key 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+        "credentialHelpLabel": "查看高德 Web 服务 Key 申请说明",
+        "credentialFields": [
+          {
+            "key": "apiKey",
+            "label": "高德 Web 服务 API Key",
+            "placeholder": "请输入 API Key",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "amap",
+          "serverName": "amap",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@amap/amap-maps-mcp-server"
+          ],
+          "credentialBindings": {
+            "AMAP_MAPS_API_KEY": "apiKey"
+          },
+          "transport": "stdio"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "bazhuayu-cloud-collection",
       "name": "八爪鱼·云采集",
       "vendor": "八爪鱼 Bazhuayu",
@@ -160,6 +210,56 @@
               "description": "查看电商采集数据集的可用字段及稳定 itemIds 字段映射。"
             }
           ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "bocha-search",
+      "name": "博查搜索",
+      "vendor": "社区连接器",
+      "icon": "🔎",
+      "category": "调研分析",
+      "summary": "网页搜索 / AI 搜索 / 内容检索",
+      "description": "通过社区 @humansean/mcp-bocha npm 包启动本地 stdio Server，调用博查 AI 开放平台搜索接口获取网页检索结果。需填写 BOCHA API Key；该适配包由社区维护，不代表博查官方 MCP。",
+      "tags": [
+        "博查",
+        "网页搜索",
+        "AI 搜索",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/intounknown/mcp-bocha",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "API Key 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+        "credentialHelpLabel": "查看社区博查 MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "apiKey",
+            "label": "BOCHA API Key",
+            "placeholder": "请输入 BOCHA API Key",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "bocha-search",
+          "serverName": "bocha-search",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@humansean/mcp-bocha"
+          ],
+          "credentialBindings": {
+            "BOCHA_API_KEY": "apiKey"
+          },
+          "transport": "stdio"
         }
       ]
     },
@@ -333,6 +433,121 @@
     },
     {
       "schemaVersion": 1,
+      "id": "dingtalk",
+      "name": "钉钉",
+      "vendor": "钉钉",
+      "icon": "🪽",
+      "category": "办公协作",
+      "summary": "通讯录 / 日历 / 会议 / 待办 / 协同办公",
+      "description": "通过 dingtalk-mcp npm 包启动本地 stdio Server，访问钉钉开放平台的通讯录、日历等能力。需要在钉钉开放平台创建应用并填写 Client ID 与 Client Secret；能力范围和授权由应用权限配置决定。",
+      "tags": [
+        "钉钉",
+        "通讯录",
+        "日历",
+        "办公协作",
+        "stdio"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://open.dingtalk.com/document/ai-dev/dingtalk-server-api-mcp-overview",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "应用凭据仅保存在 DSH 本机，并作为本地进程环境变量注入。",
+        "credentialHelpLabel": "查看钉钉 MCP 官方说明",
+        "credentialFields": [
+          {
+            "key": "clientId",
+            "label": "Client ID",
+            "placeholder": "请输入钉钉应用 Client ID",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "clientSecret",
+            "label": "Client Secret",
+            "placeholder": "请输入钉钉应用 Client Secret",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "dingtalk",
+          "serverName": "dingtalk",
+          "command": "npx",
+          "args": [
+            "-y",
+            "dingtalk-mcp@latest"
+          ],
+          "env": {
+            "ACTIVE_PROFILES": "dingtalk-contacts,dingtalk-calendar"
+          },
+          "credentialBindings": {
+            "DINGTALK_Client_ID": "clientId",
+            "DINGTALK_Client_Secret": "clientSecret"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看近期日程",
+          "text": "使用钉钉 MCP 查看我近期的日程安排并汇总冲突；不要创建、修改或删除日程",
+          "server": "dingtalk"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "figma",
+      "name": "Figma",
+      "vendor": "Figma",
+      "icon": "🎨",
+      "category": "设计创意",
+      "summary": "设计稿上下文 / 组件 / 变量 / 设计转代码",
+      "description": "接入 Figma 官方远程 MCP Server，让开发工具读取用户有权访问的设计文件上下文、组件和变量，用于设计理解与代码生成。使用 OAuth 2.1 + PKCE 授权，能力范围以 Figma 官方服务与文件权限为准。",
+      "tags": [
+        "Figma",
+        "设计稿",
+        "组件",
+        "设计转代码",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://developers.figma.com/docs/figma-mcp-server/remote-server-installation/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://api.figma.com",
+        "scope": "mcp:connect",
+        "clientName": "DeepSeek Harness - Figma MCP",
+        "tokenEndpointAuthMethod": "client_secret_basic",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "figma",
+          "url": "https://mcp.figma.com/mcp",
+          "serverName": "figma",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "读取设计上下文",
+          "text": "使用 Figma MCP 读取我指定设计节点的布局、组件和变量，并先总结实现建议；不要修改设计文件",
+          "server": "figma"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "gitee",
       "name": "Gitee",
       "vendor": "Gitee",
@@ -424,6 +639,112 @@
     },
     {
       "schemaVersion": 1,
+      "id": "gitlab",
+      "name": "GitLab",
+      "vendor": "GitLab",
+      "icon": "🦊",
+      "category": "开发工具",
+      "summary": "代码仓库 / Merge Request / Issue / CI/CD",
+      "description": "接入 GitLab 官方远程 MCP Server，查询和管理项目、Issue、Merge Request、流水线等资源。使用 GitLab OAuth 2.1 + PKCE 授权，实际能力受用户权限与实例策略限制。",
+      "tags": [
+        "GitLab",
+        "代码仓库",
+        "Merge Request",
+        "CI/CD",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://docs.gitlab.com/user/model_context_protocol/mcp_server/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://gitlab.com",
+        "scope": "mcp",
+        "clientName": "DeepSeek Harness - GitLab MCP",
+        "tokenEndpointAuthMethod": "client_secret_basic",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "gitlab",
+          "url": "https://gitlab.com/api/v4/mcp",
+          "serverName": "gitlab",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看项目待办",
+          "text": "使用 GitLab MCP 汇总我可访问项目中的待处理 Issue、Merge Request 和失败流水线；不要执行写操作",
+          "server": "gitlab"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "google-calendar",
+      "name": "Google 日历",
+      "vendor": "社区连接器",
+      "icon": "📅",
+      "category": "办公协作",
+      "summary": "日历事件 / 空闲时间 / 会议安排 / 日程搜索",
+      "description": "通过社区 @cocal/google-calendar-mcp npm 包启动本地 stdio Server，读取和管理 Google Calendar 日程。需先在 Google Cloud 创建 Desktop OAuth 凭据，并填写本机凭据 JSON 文件路径；首次连接会在浏览器完成 Google 授权。",
+      "tags": [
+        "Google Calendar",
+        "日历",
+        "会议",
+        "OAuth",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/nspady/google-calendar-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "只保存本机 OAuth 凭据文件路径；文件内容与 Google Token 不进入 Registry。",
+        "credentialHelpLabel": "查看 Google Calendar MCP 配置说明",
+        "credentialFields": [
+          {
+            "key": "credentialsPath",
+            "label": "OAuth 凭据 JSON 路径",
+            "placeholder": "/absolute/path/to/gcp-oauth.keys.json",
+            "description": "请输入本机绝对路径，不要粘贴 JSON 内容。",
+            "required": true,
+            "secret": false
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "google-calendar",
+          "serverName": "google-calendar",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@cocal/google-calendar-mcp"
+          ],
+          "credentialBindings": {
+            "GOOGLE_OAUTH_CREDENTIALS": "credentialsPath"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看日程冲突",
+          "text": "使用 Google Calendar MCP 查看我未来七天的日程和冲突；不要创建、修改或删除事件",
+          "server": "google-calendar"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "google-maps",
       "name": "Google 地图（HasData）",
       "vendor": "HasData 社区网关",
@@ -505,6 +826,74 @@
     },
     {
       "schemaVersion": 1,
+      "id": "langfuse",
+      "name": "Langfuse",
+      "vendor": "社区连接器",
+      "icon": "🔭",
+      "category": "开发工具",
+      "summary": "LLM 追踪 / 会话 / Prompt / 可观测性分析",
+      "description": "通过社区 langfuse-mcp npm 包启动本地 stdio Server，以只读方式查询 Langfuse 追踪、会话与 Prompt 数据。需填写 Langfuse Public Key、Secret Key 和对应区域或自托管实例的 Base URL。",
+      "tags": [
+        "Langfuse",
+        "LLM",
+        "可观测性",
+        "Tracing",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/hugoles/langfuse-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "Public Key、Secret Key 与 Base URL 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+        "credentialHelpLabel": "查看 Langfuse MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "publicKey",
+            "label": "Langfuse Public Key",
+            "placeholder": "pk-lf-...",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "secretKey",
+            "label": "Langfuse Secret Key",
+            "placeholder": "sk-lf-...",
+            "required": true,
+            "secret": true
+          },
+          {
+            "key": "baseUrl",
+            "label": "Langfuse Base URL",
+            "placeholder": "https://cloud.langfuse.com",
+            "description": "请填写密钥所属区域或自托管实例地址。",
+            "required": true,
+            "secret": false
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "langfuse",
+          "serverName": "langfuse",
+          "command": "npx",
+          "args": [
+            "-y",
+            "langfuse-mcp@latest"
+          ],
+          "credentialBindings": {
+            "LANGFUSE_PUBLIC_KEY": "publicKey",
+            "LANGFUSE_SECRET_KEY": "secretKey",
+            "LANGFUSE_BASE_URL": "baseUrl"
+          },
+          "transport": "stdio"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "linear",
       "name": "Linear",
       "vendor": "Linear",
@@ -546,6 +935,73 @@
     },
     {
       "schemaVersion": 1,
+      "id": "m365",
+      "name": "Microsoft 365",
+      "vendor": "社区连接器",
+      "icon": "🪟",
+      "category": "办公协作",
+      "summary": "Outlook 邮件 / 日历 / Teams / OneDrive / SharePoint",
+      "description": "通过社区 m365-mcp npm 包启动本地 stdio Server，使用 Microsoft Graph 访问 Microsoft 365 邮件、日历、Teams、OneDrive 与 SharePoint。需提供 Entra 应用 Client ID，可选指定 Tenant ID；首次使用通过设备代码完成用户授权，Token 由本地连接器缓存。",
+      "tags": [
+        "Microsoft 365",
+        "Outlook",
+        "Teams",
+        "OneDrive",
+        "Graph",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/debian777/m365-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "Client ID 与 Tenant ID 仅保存在 DSH 本机；Microsoft Access Token 不进入 Registry。",
+        "credentialHelpLabel": "查看 Microsoft 365 MCP 配置说明",
+        "credentialFields": [
+          {
+            "key": "clientId",
+            "label": "Microsoft Entra Client ID",
+            "placeholder": "请输入应用 Client ID",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "tenantId",
+            "label": "Tenant ID（可选）",
+            "placeholder": "留空则使用 common",
+            "required": false,
+            "secret": false
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "m365",
+          "serverName": "m365",
+          "command": "npx",
+          "args": [
+            "-y",
+            "m365-mcp@latest"
+          ],
+          "credentialBindings": {
+            "M365_CLIENT_ID": "clientId",
+            "M365_TENANT_ID": "tenantId"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "汇总今日办公待办",
+          "text": "使用 Microsoft 365 MCP 汇总我今天的日历、未读重要邮件和 Teams 待办；不要发送消息或修改数据",
+          "server": "m365"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "mediakit",
       "name": "MediaKit CLI",
       "vendor": "Agent Utility 社区",
@@ -579,6 +1035,120 @@
             "@agentutility/mcp-mediakit"
           ],
           "transport": "stdio"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "mixpanel",
+      "name": "Mixpanel",
+      "vendor": "社区连接器",
+      "icon": "📉",
+      "category": "调研分析",
+      "summary": "产品分析 / 事件数据 / 留存 / 用户行为查询",
+      "description": "通过社区 mixpanel-mcp npm 包启动本地 stdio Server，查询 Mixpanel 项目中的事件与产品分析数据。需填写 Mixpanel Service Account、Service Secret 和 Project ID；建议使用只读、最小权限账号。",
+      "tags": [
+        "Mixpanel",
+        "产品分析",
+        "事件数据",
+        "留存",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/mrfentmen/mixpanel-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "Service Account、Service Secret 和 Project ID 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+        "credentialHelpLabel": "查看 Mixpanel MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "serviceAccount",
+            "label": "Mixpanel Service Account",
+            "placeholder": "请输入 Service Account 用户名",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "serviceSecret",
+            "label": "Mixpanel Service Secret",
+            "placeholder": "请输入只读 Service Secret",
+            "required": true,
+            "secret": true
+          },
+          {
+            "key": "projectId",
+            "label": "Mixpanel Project ID",
+            "placeholder": "请输入 Project ID",
+            "required": true,
+            "secret": false
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "mixpanel",
+          "serverName": "mixpanel",
+          "command": "npx",
+          "args": [
+            "-y",
+            "mixpanel-mcp@latest"
+          ],
+          "credentialBindings": {
+            "MIXPANEL_SERVICE_ACCOUNT": "serviceAccount",
+            "MIXPANEL_SERVICE_SECRET": "serviceSecret",
+            "MIXPANEL_PROJECT_ID": "projectId"
+          },
+          "transport": "stdio"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "neon",
+      "name": "Neon",
+      "vendor": "Neon",
+      "icon": "🐘",
+      "category": "开发工具",
+      "summary": "Serverless Postgres / 项目 / 分支 / 数据库管理",
+      "description": "接入 Neon 官方远程 MCP Server，管理 Neon 项目、Postgres 分支与数据库资源。使用 OAuth 2.1 + PKCE 授权；数据库变更可能影响线上数据，执行写操作前应明确确认目标与范围。",
+      "tags": [
+        "Neon",
+        "Postgres",
+        "数据库",
+        "Serverless",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://neon.com/docs/ai/neon-mcp-server",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://mcp.neon.tech",
+        "scope": "read write",
+        "clientName": "DeepSeek Harness - Neon MCP",
+        "tokenEndpointAuthMethod": "client_secret_post",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "neon",
+          "url": "https://mcp.neon.tech/mcp",
+          "serverName": "neon",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看数据库资源",
+          "text": "使用 Neon MCP 列出我的项目、分支和数据库概况；不要创建、删除或修改资源",
+          "server": "neon"
         }
       ]
     },
@@ -771,6 +1341,57 @@
           "title": "法律引用核验",
           "text": "用北大法宝 MCP 核验 {{citation}} 是否准确，并说明当前效力状态",
           "server": "citation-validator"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "producthunt",
+      "name": "Product Hunt",
+      "vendor": "社区连接器",
+      "icon": "🚀",
+      "category": "调研分析",
+      "summary": "产品发现 / 搜索 / 榜单 / GraphQL 数据分析",
+      "description": "通过社区 @yilin-jing/producthunt-mcp npm 包启动本地 stdio Server，调用 Product Hunt GraphQL API 搜索和分析产品、主题与榜单。需填写 Product Hunt Developer Token；接口能力与限流以 Product Hunt 为准。",
+      "tags": [
+        "Product Hunt",
+        "产品调研",
+        "榜单",
+        "GraphQL",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/Jing-yilin/producthunt-mcp-server",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialDescription": "Access Token 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+        "credentialHelpLabel": "查看 Product Hunt MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "accessToken",
+            "label": "Product Hunt Access Token",
+            "placeholder": "请输入 Developer Token",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "producthunt",
+          "serverName": "producthunt",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@yilin-jing/producthunt-mcp"
+          ],
+          "credentialBindings": {
+            "PRODUCTHUNT_ACCESS_TOKEN": "accessToken"
+          },
+          "transport": "stdio"
         }
       ]
     },
@@ -1066,6 +1687,52 @@
     },
     {
       "schemaVersion": 1,
+      "id": "slack",
+      "name": "Slack",
+      "vendor": "Slack",
+      "icon": "💬",
+      "category": "办公协作",
+      "summary": "频道 / 消息 / 线程 / 工作区协作",
+      "description": "接入 Slack 官方远程 MCP Server，访问授权工作区中的频道、消息和线程。当前目录使用手动 Bearer 模式：需填写由兼容 Slack MCP OAuth 流程取得的 Access Token，普通 Bot/User Token 不保证兼容；发送消息等写操作前应明确确认。",
+      "tags": [
+        "Slack",
+        "消息",
+        "频道",
+        "协作",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://docs.slack.dev/ai/slack-mcp-server",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "Slack MCP Access Token",
+        "credentialPlaceholder": "请输入 Slack MCP OAuth Access Token",
+        "credentialDescription": "Token 仅保存在 DSH 本机；普通 xoxb/xoxp Token 不保证可用于官方远程 MCP。",
+        "credentialHelpLabel": "查看 Slack MCP Server 官方说明"
+      },
+      "servers": [
+        {
+          "serverKey": "slack",
+          "url": "https://mcp.slack.com/mcp",
+          "serverName": "slack",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "汇总频道讨论",
+          "text": "使用 Slack MCP 汇总我指定频道最近的关键讨论和待办；不要发送消息或执行其他写操作",
+          "server": "slack"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "supabase",
       "name": "Supabase",
       "vendor": "Supabase",
@@ -1160,6 +1827,53 @@
     },
     {
       "schemaVersion": 1,
+      "id": "temporal",
+      "name": "Temporal",
+      "vendor": "Temporal Technologies",
+      "icon": "⏱️",
+      "category": "开发工具",
+      "summary": "Temporal 文档检索 / 工作流开发知识",
+      "description": "接入 Temporal 官方文档使用的 Kapa 托管 MCP Server，检索 Temporal SDK、工作流、活动与运维文档。该卡片提供知识检索，不直接连接或操作用户的 Temporal 集群。",
+      "tags": [
+        "Temporal",
+        "工作流",
+        "文档检索",
+        "Kapa",
+        "官方文档"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://docs.temporal.io/with-ai",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://mcp.kapa.ai/auth/public",
+        "scope": "openid",
+        "clientName": "DeepSeek Harness - Temporal Docs MCP",
+        "tokenEndpointAuthMethod": "client_secret_post",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "temporal-docs",
+          "url": "https://temporal.mcp.kapa.ai",
+          "serverName": "temporal-docs",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询 Temporal 最佳实践",
+          "text": "使用 Temporal MCP 根据官方文档说明这个工作流设计问题，并给出相关文档依据",
+          "server": "temporal-docs"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "todoist",
       "name": "Todoist",
       "vendor": "Doist",
@@ -1196,6 +1910,105 @@
           "headers": {
             "Accept": "application/json, text/event-stream"
           }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "tushare",
+      "name": "TuShare",
+      "vendor": "TuShare 社区",
+      "icon": "📊",
+      "category": "金融投资",
+      "summary": "A 股 / 指数 / 基金 / 财务 / 宏观数据",
+      "description": "通过社区 @tushare/mcp npm 包启动本地 stdio Server，调用 TuShare Pro 数据接口查询股票、指数、基金、财务与宏观数据。需填写 TuShare Token；数据权限、频率和积分要求以 TuShare 账号为准，不构成投资建议。",
+      "tags": [
+        "TuShare",
+        "A股",
+        "基金",
+        "财务数据",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/kshern/tushare-ts",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "TuShare Token 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+        "credentialHelpLabel": "查看 TuShare MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "token",
+            "label": "TuShare Token",
+            "placeholder": "请输入 TuShare Token",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "tushare",
+          "serverName": "tushare",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@tushare/mcp",
+            "--stdio"
+          ],
+          "credentialBindings": {
+            "TUSHARE_TOKEN": "token"
+          },
+          "transport": "stdio"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "vercel",
+      "name": "Vercel",
+      "vendor": "Vercel",
+      "icon": "▲",
+      "category": "开发工具",
+      "summary": "项目 / 部署 / 日志 / Serverless 应用管理",
+      "description": "接入 Vercel 官方远程 MCP Server，查询 Vercel 项目、部署状态、日志和团队资源。使用 OAuth 2.1 + PKCE 授权；部分账号或团队可能需要在 Vercel 授权页批准客户端。",
+      "tags": [
+        "Vercel",
+        "部署",
+        "Serverless",
+        "日志",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://vercel.com/docs/agent-resources/vercel-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://vercel.com",
+        "scope": "openid",
+        "clientName": "DeepSeek Harness - Vercel MCP",
+        "tokenEndpointAuthMethod": "client_secret_post",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "vercel",
+          "url": "https://mcp.vercel.com",
+          "serverName": "vercel",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检查最近部署",
+          "text": "使用 Vercel MCP 查看我最近的部署、状态和错误摘要；不要重新部署或修改项目设置",
+          "server": "vercel"
         }
       ]
     },
