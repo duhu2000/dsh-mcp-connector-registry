@@ -1844,6 +1844,58 @@
     },
     {
       "schemaVersion": 1,
+      "id": "patsnap",
+      "name": "智慧芽专利与文献",
+      "vendor": "PatSnap / 智慧芽",
+      "icon": "🔬",
+      "category": "调研分析",
+      "summary": "全球专利 / 科学文献 / 研发情报检索",
+      "description": "接入智慧芽官方远程 MCP 服务，检索和分析全球专利、科学文献与研发情报。需使用智慧芽 MCP Key，实际可用数据、工具与调用额度以账户订阅为准；检索结果仅用于信息参考，不构成法律意见。",
+      "tags": [
+        "智慧芽",
+        "PatSnap",
+        "专利",
+        "科学文献",
+        "研发情报",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://open.patsnap.com/devportal/guides/mcp-quickstart",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "PatSnap MCP Key",
+        "credentialPlaceholder": "请输入智慧芽 MCP Key",
+        "credentialDescription": "用于访问智慧芽 MCP 的个人密钥；仅保存在 DSH 本机。",
+        "credentialHelpLabel": "查看智慧芽 MCP 快速入门"
+      },
+      "servers": [
+        {
+          "serverKey": "patsnap",
+          "serverName": "patsnap",
+          "url": "https://connect.patsnap.com/1458a4/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检索专利技术",
+          "text": "使用智慧芽 MCP 检索我指定技术主题的相关专利，列出申请人、公开时间、关键权利要求和来源链接；不要将结果表述为法律意见",
+          "server": "patsnap"
+        },
+        {
+          "title": "调研科学文献",
+          "text": "使用智慧芽 MCP 检索我指定主题的科学文献，按时间和相关性整理研究方向、主要结论与来源链接",
+          "server": "patsnap"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "pixso",
       "name": "Pixso",
       "vendor": "Pixso",
@@ -2821,6 +2873,58 @@
     },
     {
       "schemaVersion": 1,
+      "id": "tencent-docs",
+      "name": "腾讯文档",
+      "vendor": "腾讯",
+      "icon": "📄",
+      "category": "办公协作",
+      "summary": "文档创建 / 内容查询与编辑 / 在线协作",
+      "description": "接入腾讯文档官方远程 MCP 服务，可查询、创建和编辑在线文档。需在腾讯文档 MCP 授权页获取 Token，并通过 Authorization 请求头传入原始 Token；未经用户确认不得创建、编辑、分享文档或变更权限。",
+      "tags": [
+        "腾讯文档",
+        "在线文档",
+        "协作",
+        "办公",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://developer.cloud.tencent.com/mcp/server/11803",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "Authorization",
+        "credentialName": "腾讯文档 MCP Token",
+        "credentialPlaceholder": "请输入腾讯文档 MCP Token",
+        "credentialDescription": "按官方要求将原始 Token 写入 Authorization 请求头；Token 仅保存在 DSH 本机。",
+        "credentialHelpLabel": "前往腾讯文档 MCP 授权页"
+      },
+      "servers": [
+        {
+          "serverKey": "tencent-docs",
+          "serverName": "tencent-docs",
+          "url": "https://docs.qq.com/openapi/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查找文档资料",
+          "text": "使用腾讯文档 MCP 查找与当前主题相关的文档并汇总要点；只读查询，不要编辑、分享文档或修改权限",
+          "server": "tencent-docs"
+        },
+        {
+          "title": "整理文档修改建议",
+          "text": "读取我指定的腾讯文档并给出修改建议；未经我确认，不要创建、编辑、分享文档或变更权限",
+          "server": "tencent-docs"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "todoist",
       "name": "Todoist",
       "vendor": "Doist",
@@ -3192,6 +3296,58 @@
           "title": "法律专题检索",
           "text": "围绕目标法律问题检索相关法规与案例，列明来源、日期和效力状态，不替代专业法律意见",
           "server": "wolterskluwer"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "wps-docs",
+      "name": "WPS 云文档",
+      "vendor": "金山办公",
+      "icon": "🗂️",
+      "category": "办公协作",
+      "summary": "云文档搜索 / 内容读取 / 评论与权限管理",
+      "description": "接入 WPS 开放平台官方云文档 MCP 服务，可搜索和读取云文档，并在授权范围内操作评论、分享和权限。需使用 WPS 开放平台 access token，并开通相应委托权限；未经用户确认不得创建、编辑、分享文档或变更权限。",
+      "tags": [
+        "WPS",
+        "金山办公",
+        "云文档",
+        "协作",
+        "办公",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://open.wps.cn/documents/app-integration-dev/mcp-server/tools/mcp_kso-yundoc",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "WPS Access Token",
+        "credentialPlaceholder": "请输入 WPS 开放平台 access token",
+        "credentialDescription": "用于访问 WPS 云文档 MCP；请仅申请必要的委托权限，令牌仅保存在 DSH 本机。",
+        "credentialHelpLabel": "查看 WPS MCP 接入指南"
+      },
+      "servers": [
+        {
+          "serverKey": "wps-docs",
+          "serverName": "wps-yundoc",
+          "url": "https://openapi.wps.cn/mcp/v2/kso-yundoc/message",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "搜索云文档",
+          "text": "使用 WPS 云文档 MCP 搜索与当前主题相关的文件并汇总要点；只读查询，不要修改评论、分享状态或权限",
+          "server": "wps-docs"
+        },
+        {
+          "title": "检查文档权限",
+          "text": "使用 WPS 云文档 MCP 查看我指定文件的元信息和当前权限；未经我确认，不要新增、删除或修改任何权限",
+          "server": "wps-docs"
         }
       ]
     },
