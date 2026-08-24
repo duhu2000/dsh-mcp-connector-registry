@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "mixpanel",
+  "name": "Mixpanel",
+  "vendor": "社区连接器",
+  "icon": "📉",
+  "category": "调研分析",
+  "summary": "产品分析 / 事件数据 / 留存 / 用户行为查询",
+  "description": "通过社区 mixpanel-mcp npm 包启动本地 stdio Server，查询 Mixpanel 项目中的事件与产品分析数据。需填写 Mixpanel Service Account、Service Secret 和 Project ID；建议使用只读、最小权限账号。",
+  "tags": ["Mixpanel", "产品分析", "事件数据", "留存", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/mrfentmen/mixpanel-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "Service Account、Service Secret 和 Project ID 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+    "credentialHelpLabel": "查看 Mixpanel MCP 项目说明",
+    "credentialFields": [
+      {
+        "key": "serviceAccount",
+        "label": "Mixpanel Service Account",
+        "placeholder": "请输入 Service Account 用户名",
+        "required": true,
+        "secret": false
+      },
+      {
+        "key": "serviceSecret",
+        "label": "Mixpanel Service Secret",
+        "placeholder": "请输入只读 Service Secret",
+        "required": true,
+        "secret": true
+      },
+      {
+        "key": "projectId",
+        "label": "Mixpanel Project ID",
+        "placeholder": "请输入 Project ID",
+        "required": true,
+        "secret": false
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "mixpanel",
+      "serverName": "mixpanel",
+      "command": "npx",
+      "args": ["-y", "mixpanel-mcp@latest"],
+      "credentialBindings": {
+        "MIXPANEL_SERVICE_ACCOUNT": "serviceAccount",
+        "MIXPANEL_SERVICE_SECRET": "serviceSecret",
+        "MIXPANEL_PROJECT_ID": "projectId"
+      },
+      "transport": "stdio"
+    }
+  ]
+}

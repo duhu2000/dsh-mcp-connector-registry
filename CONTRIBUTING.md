@@ -23,12 +23,14 @@
 | `auth.mode` | 目录中填写 | 用户侧行为 |
 |---|---|---|
 | `none` | 公共 MCP URL | 直接执行 MCP initialize 验证 |
-| `bearer` | 凭据名称、说明和帮助链接，不填写 Token | 用户在 DSH 本机录入 Bearer Token |
-| `api-key` | Header 名、凭据说明和帮助链接，不填写 Key | 用户在 DSH 本机录入 API Key |
-| `oauth2-pkce` | 公开 issuer、scope 和客户端名称 | 客户端发现 OAuth 元数据并执行 PKCE |
+| `bearer` | HTTP 卡片填写凭据说明；stdio 卡片用 `credentialFields` + `credentialBindings` 声明本机环境变量映射，不填写 Token | 用户在 DSH 本机录入 Bearer Token |
+| `api-key` | HTTP 卡片填写 Header 名与凭据说明；stdio 卡片用 `credentialFields` + `credentialBindings` 声明本机环境变量映射，不填写 Key | 用户在 DSH 本机录入 API Key 或应用凭据 |
+| `oauth2-pkce` | 公开 issuer、scope、客户端名称及服务端支持的 `tokenEndpointAuthMethod` | 客户端发现 OAuth 元数据并执行 PKCE |
 
 OAuth 卡片必须提供可验证的 Protected Resource Metadata 和 Authorization Server
-Metadata。若服务只支持固定 Client Secret 或非标准网页登录，不应标注为 OAuth 一键授权。
+Metadata。DCR 如果签发 Client Secret，可声明 `client_secret_post` 或
+`client_secret_basic`；密钥与 Token 一样只存于 DSH 本机。若服务只支持固定 Client Secret
+或非标准网页登录，不应标注为 OAuth 一键授权。
 
 ## Connector PR checklist
 
@@ -36,6 +38,7 @@ Metadata。若服务只支持固定 Client Secret 或非标准网页登录，不
 - 公网 MCP、官网、帮助页和图标全部使用 HTTPS。
 - 目录不包含 Token、API Key、密码、Cookie、Client Secret 或带值的鉴权 Header。
 - Bearer/API Key 卡片只声明凭据表单；真实值仅保存在用户 DSH 本机。
+- stdio 的 `credentialBindings` 只能引用 `credentialFields`，且不得和公开 `env` 重复。
 - `featured` 保持 `false`；精选状态由维护者根据稳定性和用户反馈管理。
 - Prompt 使用通用示例，不包含真实客户、个人信息或受限数据。
 - 使用第三方名称和 Logo 时，在 PR 中提供官网来源。

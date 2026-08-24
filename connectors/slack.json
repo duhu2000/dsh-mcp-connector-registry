@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "slack",
+  "name": "Slack",
+  "vendor": "Slack",
+  "icon": "💬",
+  "category": "办公协作",
+  "summary": "频道 / 消息 / 线程 / 工作区协作",
+  "description": "接入 Slack 官方远程 MCP Server，访问授权工作区中的频道、消息和线程。当前目录使用手动 Bearer 模式：需填写由兼容 Slack MCP OAuth 流程取得的 Access Token，普通 Bot/User Token 不保证兼容；发送消息等写操作前应明确确认。",
+  "tags": ["Slack", "消息", "频道", "协作", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://docs.slack.dev/ai/slack-mcp-server",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "Slack MCP Access Token",
+    "credentialPlaceholder": "请输入 Slack MCP OAuth Access Token",
+    "credentialDescription": "Token 仅保存在 DSH 本机；普通 xoxb/xoxp Token 不保证可用于官方远程 MCP。",
+    "credentialHelpLabel": "查看 Slack MCP Server 官方说明"
+  },
+  "servers": [
+    {
+      "serverKey": "slack",
+      "url": "https://mcp.slack.com/mcp",
+      "serverName": "slack",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "汇总频道讨论",
+      "text": "使用 Slack MCP 汇总我指定频道最近的关键讨论和待办；不要发送消息或执行其他写操作",
+      "server": "slack"
+    }
+  ]
+}

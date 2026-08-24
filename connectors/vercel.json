@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "vercel",
+  "name": "Vercel",
+  "vendor": "Vercel",
+  "icon": "▲",
+  "category": "开发工具",
+  "summary": "项目 / 部署 / 日志 / Serverless 应用管理",
+  "description": "接入 Vercel 官方远程 MCP Server，查询 Vercel 项目、部署状态、日志和团队资源。使用 OAuth 2.1 + PKCE 授权；部分账号或团队可能需要在 Vercel 授权页批准客户端。",
+  "tags": ["Vercel", "部署", "Serverless", "日志", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://vercel.com/docs/agent-resources/vercel-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://vercel.com",
+    "scope": "openid",
+    "clientName": "DeepSeek Harness - Vercel MCP",
+    "tokenEndpointAuthMethod": "client_secret_post",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "vercel",
+      "url": "https://mcp.vercel.com",
+      "serverName": "vercel",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检查最近部署",
+      "text": "使用 Vercel MCP 查看我最近的部署、状态和错误摘要；不要重新部署或修改项目设置",
+      "server": "vercel"
+    }
+  ]
+}

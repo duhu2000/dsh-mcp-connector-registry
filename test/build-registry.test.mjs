@@ -101,6 +101,57 @@ test('新增官方推荐连接器固定使用已核验的远程 MCP 配置', asy
   assert.equal(tavily.servers[0].url, 'https://mcp.tavily.com/mcp');
 });
 
+test('第二批连接器覆盖远程 OAuth 与多字段 stdio 凭据映射', async () => {
+  const readConnector = async (id) => JSON.parse(
+    await readFile(resolve('connectors', `${id}.json`), 'utf8'),
+  );
+  const batchIds = [
+    'amap', 'bocha-search', 'dingtalk', 'figma', 'gitlab',
+    'google-calendar', 'langfuse', 'm365', 'mixpanel', 'neon',
+    'producthunt', 'slack', 'temporal', 'tushare', 'vercel',
+  ];
+  const batch = await Promise.all(batchIds.map(readConnector));
+  const byId = Object.fromEntries(batch.map((connector) => [connector.id, connector]));
+
+  assert.ok(batch.every((connector) => connector.published === true));
+  assert.ok(batch.every((connector) => connector.featured === false));
+  assert.ok(batch.every((connector) => connector.probeStatus === 'unverified'));
+
+  assert.equal(byId.gitlab.servers[0].url, 'https://gitlab.com/api/v4/mcp');
+  assert.equal(byId.gitlab.auth.tokenEndpointAuthMethod, 'client_secret_basic');
+  assert.equal(byId.neon.servers[0].url, 'https://mcp.neon.tech/mcp');
+  assert.equal(byId.neon.auth.tokenEndpointAuthMethod, 'client_secret_post');
+  assert.equal(byId.figma.auth.scope, 'mcp:connect');
+  assert.equal(byId.temporal.servers[0].serverName, 'temporal-docs');
+
+  assert.deepEqual(
+    byId.dingtalk.auth.credentialFields.map((field) => field.key),
+    ['clientId', 'clientSecret'],
+  );
+  assert.deepEqual(byId.dingtalk.servers[0].credentialBindings, {
+    DINGTALK_Client_ID: 'clientId',
+    DINGTALK_Client_Secret: 'clientSecret',
+  });
+  assert.deepEqual(byId.langfuse.servers[0].credentialBindings, {
+    LANGFUSE_PUBLIC_KEY: 'publicKey',
+    LANGFUSE_SECRET_KEY: 'secretKey',
+    LANGFUSE_BASE_URL: 'baseUrl',
+  });
+  assert.deepEqual(byId.mixpanel.servers[0].credentialBindings, {
+    MIXPANEL_SERVICE_ACCOUNT: 'serviceAccount',
+    MIXPANEL_SERVICE_SECRET: 'serviceSecret',
+    MIXPANEL_PROJECT_ID: 'projectId',
+  });
+  assert.deepEqual(byId.m365.servers[0].credentialBindings, {
+    M365_CLIENT_ID: 'clientId',
+    M365_TENANT_ID: 'tenantId',
+  });
+
+  const serialized = JSON.stringify(batch);
+  assert.doesNotMatch(serialized, /Bearer\s+[A-Za-z0-9._~-]{12,}/i);
+  assert.doesNotMatch(serialized, /(?:api[_-]?key|token|secret)\s*[=:]\s*[A-Za-z0-9._~-]{16,}/i);
+});
+
 test('盈米连接器使用公开 x-api-key 接入参数且不包含凭据', async () => {
   const connector = JSON.parse(
     await readFile(resolve('connectors/yingmi-wealth-management.json'), 'utf8'),

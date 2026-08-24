@@ -186,6 +186,7 @@ CI 通过后，由维护者复核官网、MCP 文档、鉴权、品牌来源、�
 | `headers` | 否 | 只放公开协议 Header；禁止带值的 `Authorization`、Token 或 Key。 |
 | `command` | stdio 必填 | 官方本地启动命令。 |
 | `args` / `env` / `cwd` | 否 | stdio 公开默认参数；禁止任何真实凭据或本机专属绝对路径。 |
+| `credentialBindings` | 凭据型 stdio 必填 | 把环境变量名映射到 `auth.credentialFields[].key`；只声明映射，不填写真实值。 |
 
 ## 6. 9 个标准分类
 
@@ -232,6 +233,33 @@ CI 通过后，由维护者复核官网、MCP 文档、鉴权、品牌来源、�
 
 stdio 进程由 `dsh-mcp-client` 管理，插件只透传公开的 `command`、`args`、`env` 和 `cwd`。Registry CI 和健康探针不得执行本地 stdio 命令；维护者会核验命令是否来自服务商官方公开包。
 
+需要一个或多个本机凭据时，使用 `auth.credentialFields` 声明表单字段，再通过 `servers[].credentialBindings` 绑定到进程环境变量。不要把真实值写进 `servers[].env`，也不要把密钥拼进 `args`：
+
+```json
+{
+  "auth": {
+    "mode": "api-key",
+    "credentialFields": [
+      { "key": "appId", "label": "App ID", "required": true, "secret": false },
+      { "key": "appSecret", "label": "App Secret", "required": true, "secret": true }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "vendor-service",
+      "command": "npx",
+      "args": ["-y", "@vendor/mcp-server"],
+      "credentialBindings": {
+        "VENDOR_APP_ID": "appId",
+        "VENDOR_APP_SECRET": "appSecret"
+      },
+      "transport": "stdio"
+    }
+  ]
+}
+```
+
 ## 8. 4 种鉴权模式
 
 | `auth.mode` | 适用场景 | Descriptor 中填写 | 用户侧行为 |
@@ -239,7 +267,7 @@ stdio 进程由 `dsh-mcp-client` 管理，插件只透传公开的 `command`、`
 | `none` | 无需凭据的公开服务 | `{ "mode": "none" }` | 直接做 MCP 连通性检查。 |
 | `bearer` | 用户自行获取 Bearer Token | 凭据名称、占位、说明和帮助链接；不填 Token。 | 在 DSH 本机录入并验证。 |
 | `api-key` | 指定 Header 的 API Key | `apiKeyHeader` + 凭据说明；不填 Key。 | 在 DSH 本机录入并验证。 |
-| `oauth2-pkce` | 标准 OAuth 2.1/PKCE | 公开 issuer、scope、客户端名称和 `tokenEndpointAuthMethod: none`。 | 浏览器完成一键授权。 |
+| `oauth2-pkce` | 标准 OAuth 2.1/PKCE | 公开 issuer、scope、客户端名称和服务端支持的 `tokenEndpointAuthMethod`。 | 浏览器完成一键授权。 |
 
 ### `none`
 
@@ -283,6 +311,8 @@ stdio 进程由 `dsh-mcp-client` 管理，插件只透传公开的 `command`、`
   "tokenEndpointAuthMethod": "none"
 }
 ```
+
+动态客户端注册如果签发 Client Secret，可按服务端公开元数据填写 `client_secret_post` 或 `client_secret_basic`。Client Secret 与 Token 一样只保存在用户 DSH 本机，不进入 Registry、状态输出或日志。
 
 OAuth 卡片必须发布可验证的 Protected Resource Metadata 与 Authorization Server Metadata，并支持 PKCE。只支持固定 Client Secret、非标准网页登录或无法完成 PKCE 的服务，不应标成 OAuth 一键授权，应使用 `bearer` 或 `api-key`。
 

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "neon",
+  "name": "Neon",
+  "vendor": "Neon",
+  "icon": "🐘",
+  "category": "开发工具",
+  "summary": "Serverless Postgres / 项目 / 分支 / 数据库管理",
+  "description": "接入 Neon 官方远程 MCP Server，管理 Neon 项目、Postgres 分支与数据库资源。使用 OAuth 2.1 + PKCE 授权；数据库变更可能影响线上数据，执行写操作前应明确确认目标与范围。",
+  "tags": ["Neon", "Postgres", "数据库", "Serverless", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://neon.com/docs/ai/neon-mcp-server",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://mcp.neon.tech",
+    "scope": "read write",
+    "clientName": "DeepSeek Harness - Neon MCP",
+    "tokenEndpointAuthMethod": "client_secret_post",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "neon",
+      "url": "https://mcp.neon.tech/mcp",
+      "serverName": "neon",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看数据库资源",
+      "text": "使用 Neon MCP 列出我的项目、分支和数据库概况；不要创建、删除或修改资源",
+      "server": "neon"
+    }
+  ]
+}

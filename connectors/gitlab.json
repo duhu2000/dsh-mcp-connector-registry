@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "gitlab",
+  "name": "GitLab",
+  "vendor": "GitLab",
+  "icon": "🦊",
+  "category": "开发工具",
+  "summary": "代码仓库 / Merge Request / Issue / CI/CD",
+  "description": "接入 GitLab 官方远程 MCP Server，查询和管理项目、Issue、Merge Request、流水线等资源。使用 GitLab OAuth 2.1 + PKCE 授权，实际能力受用户权限与实例策略限制。",
+  "tags": ["GitLab", "代码仓库", "Merge Request", "CI/CD", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://docs.gitlab.com/user/model_context_protocol/mcp_server/",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://gitlab.com",
+    "scope": "mcp",
+    "clientName": "DeepSeek Harness - GitLab MCP",
+    "tokenEndpointAuthMethod": "client_secret_basic",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "gitlab",
+      "url": "https://gitlab.com/api/v4/mcp",
+      "serverName": "gitlab",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看项目待办",
+      "text": "使用 GitLab MCP 汇总我可访问项目中的待处理 Issue、Merge Request 和失败流水线；不要执行写操作",
+      "server": "gitlab"
+    }
+  ]
+}
