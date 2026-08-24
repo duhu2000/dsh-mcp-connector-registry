@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "notion",
+  "name": "Notion",
+  "vendor": "Notion",
+  "icon": "📝",
+  "category": "办公协作",
+  "summary": "工作区搜索 / 页面读取与创建 / 数据库协作",
+  "description": "接入 Notion 官方托管 MCP Server，通过 OAuth 授权访问用户选择的 Notion 工作区，可搜索、读取、创建和更新页面及数据库内容。权限范围与当前 Notion 用户及工作区授权一致。",
+  "tags": ["Notion", "知识库", "文档", "数据库", "协作", "OAuth", "官方 MCP"],
+  "published": true,
+  "featured": true,
+  "homepage": "https://developers.notion.com/guides/mcp/get-started-with-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://mcp.notion.com",
+    "scope": "default",
+    "clientName": "DeepSeek Harness - Notion MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "notion",
+      "url": "https://mcp.notion.com/mcp",
+      "serverName": "notion",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "搜索工作区资料",
+      "text": "使用 Notion MCP 搜索工作区中与当前主题相关的页面，汇总关键结论并附页面标题",
+      "server": "notion"
+    },
+    {
+      "title": "整理项目进展",
+      "text": "使用 Notion MCP 读取当前项目页面和数据库，整理进展、风险与待办；不要修改页面",
+      "server": "notion"
+    }
+  ]
+}

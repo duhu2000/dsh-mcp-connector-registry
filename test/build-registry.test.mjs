@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -57,6 +57,47 @@ test('build-registry rejects a filename that differs from connector id', async (
   assert.match(result.stderr, /filename must match connector id \(actual-id\.json\)/);
 });
 
+test('已上架连接器均进入推荐位且使用标准分类', async () => {
+  const files = (await readdir(resolve('connectors')))
+    .filter((file) => file.endsWith('.json') && !file.endsWith('.sample.json'));
+  const connectors = await Promise.all(files.map(async (file) => JSON.parse(
+    await readFile(resolve('connectors', file), 'utf8'),
+  )));
+  const standardCategories = new Set([
+    '企业数据', '金融投资', '法律合规', '开发工具', '办公协作',
+    '调研分析', '设计创意', '效率工具', '其他',
+  ]);
+
+  assert.ok(connectors.length >= 9);
+  assert.ok(connectors.every((connector) => connector.published === true));
+  assert.ok(connectors.every((connector) => connector.featured === true));
+  assert.ok(connectors.every((connector) => standardCategories.has(connector.category)));
+});
+
+test('新增官方推荐连接器固定使用已核验的远程 MCP 配置', async () => {
+  const readConnector = async (id) => JSON.parse(
+    await readFile(resolve('connectors', `${id}.json`), 'utf8'),
+  );
+  const [github, cloudflare, notion, tavily] = await Promise.all([
+    readConnector('github'),
+    readConnector('cloudflare-api'),
+    readConnector('notion'),
+    readConnector('tavily-search'),
+  ]);
+
+  assert.equal(github.auth.mode, 'bearer');
+  assert.equal(github.servers[0].url, 'https://api.githubcopilot.com/mcp/');
+  assert.equal(cloudflare.auth.issuer, 'https://mcp.cloudflare.com');
+  assert.equal(cloudflare.auth.tokenEndpointAuthMethod, 'none');
+  assert.equal(cloudflare.servers[0].url, 'https://mcp.cloudflare.com/mcp');
+  assert.equal(notion.auth.issuer, 'https://mcp.notion.com');
+  assert.equal(notion.auth.scope, 'default');
+  assert.equal(notion.servers[0].url, 'https://mcp.notion.com/mcp');
+  assert.equal(tavily.auth.issuer, 'https://mcp.tavily.com/');
+  assert.equal(tavily.auth.scope, 'openid offline_access');
+  assert.equal(tavily.servers[0].url, 'https://mcp.tavily.com/mcp');
+});
+
 test('盈米连接器使用公开 x-api-key 接入参数且不包含凭据', async () => {
   const connector = JSON.parse(
     await readFile(resolve('connectors/yingmi-wealth-management.json'), 'utf8'),
@@ -89,7 +130,7 @@ test('QVeris 连接器使用 Hosted MCP 且付费 call 需明确确认', async (
   );
   assert.equal(connector.servers[0].url, 'https://mcp.qveris.ai/mcp');
   assert.equal(connector.servers[0].transport, 'streamable-http');
-  assert.equal(connector.featured, false);
+  assert.equal(connector.featured, true);
   assert.equal(connector.toolsSnapshot[0].tools.length, 8);
   assert.deepEqual(
     connector.toolsSnapshot[0].tools.map((tool) => tool.name),
@@ -116,7 +157,7 @@ test('八爪鱼连接器使用标准 OAuth PKCE 与公开 DCR 元数据', async 
   assert.equal(connector.auth.tokenEndpointAuthMethod, 'none');
   assert.equal(connector.servers[0].url, 'https://mcp.bazhuayu.com/');
   assert.equal(connector.servers[0].serverName, 'bazhuayu');
-  assert.equal(connector.featured, false);
+  assert.equal(connector.featured, true);
   assert.equal(connector.prompts.length, 5);
   assert.equal(connector.toolsSnapshot[0].tools.length, 12);
   assert.ok(connector.toolsSnapshot[0].tools.some((tool) => tool.name === 'get_task_status'));

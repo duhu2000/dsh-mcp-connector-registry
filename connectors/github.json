@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "github",
+  "name": "GitHub",
+  "vendor": "GitHub",
+  "icon": "🐙",
+  "category": "开发工具",
+  "summary": "代码仓库 / Issue / Pull Request / Actions 协作",
+  "description": "接入 GitHub 官方远程 MCP Server，查询和管理仓库、Issue、Pull Request、Actions 等 GitHub 资源。需提供具备适当最小权限的 GitHub Personal Access Token；实际可用工具和数据范围受 Token 权限及组织策略限制。",
+  "tags": ["GitHub", "代码仓库", "Issue", "Pull Request", "Actions", "官方 MCP"],
+  "published": true,
+  "featured": true,
+  "homepage": "https://github.com/github/github-mcp-server",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "GitHub Personal Access Token",
+    "credentialPlaceholder": "请输入最小权限的 GitHub PAT",
+    "credentialDescription": "Token 仅保存在 DSH 本机；建议使用 fine-grained PAT 并仅授权所需仓库和权限。",
+    "credentialHelpLabel": "查看 GitHub MCP Server 官方说明"
+  },
+  "servers": [
+    {
+      "serverKey": "github",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "serverName": "github",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看仓库概况",
+      "text": "使用 GitHub MCP 查看我最近活跃的仓库，并汇总未关闭 Issue 与 Pull Request",
+      "server": "github"
+    },
+    {
+      "title": "检查 Pull Request",
+      "text": "使用 GitHub MCP 查看当前仓库最近的 Pull Request、检查状态和待处理评审；不要执行合并或写操作",
+      "server": "github"
+    }
+  ]
+}

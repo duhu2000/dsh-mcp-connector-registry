@@ -20,7 +20,7 @@
         "第三方收录"
       ],
       "published": true,
-      "featured": false,
+      "featured": true,
       "homepage": "https://www.bazhuayu.com/docs/zh/mcp",
       "probeStatus": "unverified",
       "auth": {
@@ -128,11 +128,171 @@
     },
     {
       "schemaVersion": 1,
+      "id": "cloudflare-api",
+      "name": "Cloudflare",
+      "vendor": "Cloudflare",
+      "icon": "☁️",
+      "category": "开发工具",
+      "summary": "DNS / Workers / R2 / Zero Trust / Cloudflare API",
+      "description": "接入 Cloudflare 官方托管的 API MCP Server，通过 OAuth 选择授权范围后，以 search 和 execute 工具访问 Cloudflare API。执行修改配置、部署或删除操作前应由用户明确确认。",
+      "tags": [
+        "Cloudflare",
+        "Workers",
+        "DNS",
+        "R2",
+        "Zero Trust",
+        "OAuth",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": true,
+      "homepage": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://mcp.cloudflare.com",
+        "scope": "",
+        "clientName": "DeepSeek Harness - Cloudflare MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "cloudflare-api",
+          "url": "https://mcp.cloudflare.com/mcp",
+          "serverName": "cloudflare-api",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检查 Cloudflare 配置",
+          "text": "使用 Cloudflare MCP 只读检查我的账户、站点和 Workers 配置，列出需要关注的问题；不要执行修改",
+          "server": "cloudflare-api"
+        },
+        {
+          "title": "分析 DNS 与安全设置",
+          "text": "使用 Cloudflare MCP 检查指定站点的 DNS、安全与性能配置并提出建议；任何变更必须先让我确认",
+          "server": "cloudflare-api"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "github",
+      "name": "GitHub",
+      "vendor": "GitHub",
+      "icon": "🐙",
+      "category": "开发工具",
+      "summary": "代码仓库 / Issue / Pull Request / Actions 协作",
+      "description": "接入 GitHub 官方远程 MCP Server，查询和管理仓库、Issue、Pull Request、Actions 等 GitHub 资源。需提供具备适当最小权限的 GitHub Personal Access Token；实际可用工具和数据范围受 Token 权限及组织策略限制。",
+      "tags": [
+        "GitHub",
+        "代码仓库",
+        "Issue",
+        "Pull Request",
+        "Actions",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": true,
+      "homepage": "https://github.com/github/github-mcp-server",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "GitHub Personal Access Token",
+        "credentialPlaceholder": "请输入最小权限的 GitHub PAT",
+        "credentialDescription": "Token 仅保存在 DSH 本机；建议使用 fine-grained PAT 并仅授权所需仓库和权限。",
+        "credentialHelpLabel": "查看 GitHub MCP Server 官方说明"
+      },
+      "servers": [
+        {
+          "serverKey": "github",
+          "url": "https://api.githubcopilot.com/mcp/",
+          "serverName": "github",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看仓库概况",
+          "text": "使用 GitHub MCP 查看我最近活跃的仓库，并汇总未关闭 Issue 与 Pull Request",
+          "server": "github"
+        },
+        {
+          "title": "检查 Pull Request",
+          "text": "使用 GitHub MCP 查看当前仓库最近的 Pull Request、检查状态和待处理评审；不要执行合并或写操作",
+          "server": "github"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "notion",
+      "name": "Notion",
+      "vendor": "Notion",
+      "icon": "📝",
+      "category": "办公协作",
+      "summary": "工作区搜索 / 页面读取与创建 / 数据库协作",
+      "description": "接入 Notion 官方托管 MCP Server，通过 OAuth 授权访问用户选择的 Notion 工作区，可搜索、读取、创建和更新页面及数据库内容。权限范围与当前 Notion 用户及工作区授权一致。",
+      "tags": [
+        "Notion",
+        "知识库",
+        "文档",
+        "数据库",
+        "协作",
+        "OAuth",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": true,
+      "homepage": "https://developers.notion.com/guides/mcp/get-started-with-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://mcp.notion.com",
+        "scope": "default",
+        "clientName": "DeepSeek Harness - Notion MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "notion",
+          "url": "https://mcp.notion.com/mcp",
+          "serverName": "notion",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "搜索工作区资料",
+          "text": "使用 Notion MCP 搜索工作区中与当前主题相关的页面，汇总关键结论并附页面标题",
+          "server": "notion"
+        },
+        {
+          "title": "整理项目进展",
+          "text": "使用 Notion MCP 读取当前项目页面和数据库，整理进展、风险与待办；不要修改页面",
+          "server": "notion"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "pkulaw-legal",
       "name": "北大法宝·法律检索",
       "vendor": "北大法宝 PKULaw",
       "icon": "/mcp-connector/ui/assets/pkulaw-logo.png",
-      "category": "法律数据",
+      "category": "法律合规",
       "summary": "法规 / 法条 / 司法案例检索与引用核验",
       "description": "接入北大法宝法律法规、司法案例、法条识别与引用核验能力。需使用北大法宝 Access Token，相关服务可能需要单独开通或购买。",
       "tags": [
@@ -143,7 +303,7 @@
         "第三方收录"
       ],
       "published": true,
-      "featured": false,
+      "featured": true,
       "homepage": "https://mcp.pkulaw.com/",
       "probeStatus": "unverified",
       "promptVariables": [
@@ -283,7 +443,7 @@
       ],
       "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/assets/qveris-logo.png",
       "published": true,
-      "featured": false,
+      "featured": true,
       "homepage": "https://qveris.ai/hosted-mcp",
       "probeStatus": "unverified",
       "promptVariables": [
@@ -385,11 +545,65 @@
     },
     {
       "schemaVersion": 1,
+      "id": "tavily-search",
+      "name": "Tavily",
+      "vendor": "Tavily",
+      "icon": "🔎",
+      "category": "调研分析",
+      "summary": "实时网页搜索 / 内容提取 / 站点地图 / 网页抓取",
+      "description": "接入 Tavily 官方远程 MCP Server，通过 OAuth 使用实时搜索、网页内容提取、站点地图和抓取能力。使用量和可用能力受 Tavily 账户套餐及配额限制。",
+      "tags": [
+        "Tavily",
+        "搜索",
+        "调研",
+        "网页提取",
+        "抓取",
+        "OAuth",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": true,
+      "homepage": "https://github.com/tavily-ai/tavily-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://mcp.tavily.com/",
+        "scope": "openid offline_access",
+        "clientName": "DeepSeek Harness - Tavily MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "tavily-search",
+          "url": "https://mcp.tavily.com/mcp",
+          "serverName": "tavily-search",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "调研最新动态",
+          "text": "使用 Tavily MCP 搜索当前主题的最新动态，优先采用官方网站和一手资料，并列出来源链接",
+          "server": "tavily-search"
+        },
+        {
+          "title": "提取网页要点",
+          "text": "使用 Tavily MCP 提取我提供网页的正文和关键事实，区分原文信息与推断",
+          "server": "tavily-search"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "wind-stock-data",
       "name": "Wind·股票数据",
       "vendor": "Wind 万得",
       "icon": "/mcp-connector/ui/assets/wind-logo.png",
-      "category": "金融数据",
+      "category": "金融投资",
       "summary": "全球股票档案 / 行情 / 技术指标 / 财务与公司事件",
       "description": "接入万得股票数据服务，覆盖公司档案、股本与股东、行情报价、技术指标、基本面财务、公司事件及风险波动性数据。需使用 Wind Key，服务权限以万得账户实际开通范围为准。",
       "tags": [
@@ -400,7 +614,7 @@
         "第三方收录"
       ],
       "published": true,
-      "featured": false,
+      "featured": true,
       "homepage": "https://aifinmarket.wind.com.cn/#/market?tab=mcps&detailType=mcp&detailId=wind_stock_data-0",
       "probeStatus": "unverified",
       "promptVariables": [
@@ -471,7 +685,7 @@
         "第三方收录"
       ],
       "published": true,
-      "featured": false,
+      "featured": true,
       "homepage": "https://qieman.com/mcp",
       "probeStatus": "unverified",
       "promptVariables": [

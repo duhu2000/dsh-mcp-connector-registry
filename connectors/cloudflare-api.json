@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "cloudflare-api",
+  "name": "Cloudflare",
+  "vendor": "Cloudflare",
+  "icon": "☁️",
+  "category": "开发工具",
+  "summary": "DNS / Workers / R2 / Zero Trust / Cloudflare API",
+  "description": "接入 Cloudflare 官方托管的 API MCP Server，通过 OAuth 选择授权范围后，以 search 和 execute 工具访问 Cloudflare API。执行修改配置、部署或删除操作前应由用户明确确认。",
+  "tags": ["Cloudflare", "Workers", "DNS", "R2", "Zero Trust", "OAuth", "官方 MCP"],
+  "published": true,
+  "featured": true,
+  "homepage": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://mcp.cloudflare.com",
+    "scope": "",
+    "clientName": "DeepSeek Harness - Cloudflare MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "cloudflare-api",
+      "url": "https://mcp.cloudflare.com/mcp",
+      "serverName": "cloudflare-api",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检查 Cloudflare 配置",
+      "text": "使用 Cloudflare MCP 只读检查我的账户、站点和 Workers 配置，列出需要关注的问题；不要执行修改",
+      "server": "cloudflare-api"
+    },
+    {
+      "title": "分析 DNS 与安全设置",
+      "text": "使用 Cloudflare MCP 检查指定站点的 DNS、安全与性能配置并提出建议；任何变更必须先让我确认",
+      "server": "cloudflare-api"
+    }
+  ]
+}

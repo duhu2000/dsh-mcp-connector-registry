@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "tavily-search",
+  "name": "Tavily",
+  "vendor": "Tavily",
+  "icon": "🔎",
+  "category": "调研分析",
+  "summary": "实时网页搜索 / 内容提取 / 站点地图 / 网页抓取",
+  "description": "接入 Tavily 官方远程 MCP Server，通过 OAuth 使用实时搜索、网页内容提取、站点地图和抓取能力。使用量和可用能力受 Tavily 账户套餐及配额限制。",
+  "tags": ["Tavily", "搜索", "调研", "网页提取", "抓取", "OAuth", "官方 MCP"],
+  "published": true,
+  "featured": true,
+  "homepage": "https://github.com/tavily-ai/tavily-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://mcp.tavily.com/",
+    "scope": "openid offline_access",
+    "clientName": "DeepSeek Harness - Tavily MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "tavily-search",
+      "url": "https://mcp.tavily.com/mcp",
+      "serverName": "tavily-search",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "调研最新动态",
+      "text": "使用 Tavily MCP 搜索当前主题的最新动态，优先采用官方网站和一手资料，并列出来源链接",
+      "server": "tavily-search"
+    },
+    {
+      "title": "提取网页要点",
+      "text": "使用 Tavily MCP 提取我提供网页的正文和关键事实，区分原文信息与推断",
+      "server": "tavily-search"
+    }
+  ]
+}

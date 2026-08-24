@@ -9,7 +9,7 @@
   "description": "接入盈米 MCP 的基金数据、组合诊断、资产配置、业绩归因、财经资讯与投顾分析能力。需在盈米 AI 开放平台申请 MCP API Key，具体服务权限以用户账号开通范围为准；输出仅供参考，不构成投资建议。",
   "tags": ["基金", "投顾", "资产配置", "组合诊断", "财经资讯", "第三方收录"],
   "published": true,
-  "featured": false,
+  "featured": true,
   "homepage": "https://qieman.com/mcp",
   "probeStatus": "unverified",
   "promptVariables": [

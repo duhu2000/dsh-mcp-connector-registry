@@ -9,7 +9,7 @@
   "description": "用自然语言调用八爪鱼云采集：搜索预置采集模板，预检参数，启动、查询或停止云任务，并预览或导出结构化数据。使用 OAuth 2.1 + PKCE 登录八爪鱼账户，无需手动复制 API Key；云采集、数据中心和导出能力以账户实际版本、配额及官方服务规则为准。",
   "tags": ["网页数据", "云采集", "数据导出", "电商数据", "OAuth", "PKCE", "第三方收录"],
   "published": true,
-  "featured": false,
+  "featured": true,
   "homepage": "https://www.bazhuayu.com/docs/zh/mcp",
   "probeStatus": "unverified",
   "auth": {
