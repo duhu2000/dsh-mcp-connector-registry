@@ -26,11 +26,13 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 
 如果您是服务商或社区贡献者，可以直接[发起连接器收录请求](https://github.com/duhu2000/dsh-mcp-connector-registry/issues/new?template=connector-request.yml)，也可以 fork 本仓库并提交 Connector PR。
 
+首次上架建议先阅读完整的[连接器上架指南](docs/ONBOARDING.md)，其中包含 Descriptor 模板、字段说明、分类、鉴权模式和安全检查清单。
+
 1. 复制 `connectors/example.sample.json` 为 `connectors/<connector-id>.json`，文件名必须与 `id` 完全一致。
 2. 只提交公开元数据；禁止 Token、API Key、密码、Cookie 和 Client Secret。
-3. 运行 `npm ci --legacy-peer-deps && npm run check`。
+3. 运行 `npm ci --legacy-peer-deps`，再执行 `npm test && npm run validate && npm run assets:check`。
 4. 提交 PR，通过 Schema、重复 ID/ServerName、URL 和密钥审计后合并。
-5. `main/catalog.json` 是唯一公开产物；每周健康巡检会生成探针报告 artifact。
+5. 不要手动修改或提交 `catalog.json`；合并到 `main` 后，CI 会自动重建并提交公开产物。每周健康巡检会生成探针报告 artifact。
 
 `featured` 由维护者管理。第三方收录不代表服务商官方背书，实际权限、费用和可用性以服务商为准。
 

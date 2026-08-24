@@ -9,8 +9,10 @@
 2. 复制 `connectors/example.sample.json` 为 `connectors/<connector-id>.json`。
 3. 文件名必须与描述中的 `id` 完全一致；一个文件只包含一个 ConnectorDescriptor。
 4. 只提交公开元数据和公开 URL，不提交任何真实凭据。
-5. 运行 `npm ci --legacy-peer-deps && npm run check`。
+5. 运行 `npm ci --legacy-peer-deps`，再依次执行 `npm test && npm run validate && npm run assets:check`。
 6. 提交 PR，并完整填写自动生成的 Connector PR checklist。
+
+完整字段说明、示例和常见问题见 [`docs/ONBOARDING.md`](docs/ONBOARDING.md)。请只提交连接器源文件和相关公开资源，不要手动修改或提交 `catalog.json`；PR 合并到 `main` 后，CI 会自动重建目录产物。
 
 如果暂时不熟悉 Descriptor，也可以使用
 [Connector request](https://github.com/duhu2000/dsh-mcp-connector-registry/issues/new?template=connector-request.yml)
@@ -37,10 +39,11 @@ Metadata。若服务只支持固定 Client Secret 或非标准网页登录，不
 - `featured` 保持 `false`；精选状态由维护者根据稳定性和用户反馈管理。
 - Prompt 使用通用示例，不包含真实客户、个人信息或受限数据。
 - 使用第三方名称和 Logo 时，在 PR 中提供官网来源。
-- 已在本地运行 `npm ci --legacy-peer-deps && npm run check`。
+- 已在本地运行 `npm ci --legacy-peer-deps` 和 `npm test && npm run validate && npm run assets:check`。
 
 CI 使用已发布的 `dsh-mcp-connector` 校验器检查 Schema、重复 Connector ID、重复
-ServerName、URL 与潜在密钥，并验证 `catalog.json` 为确定性构建结果。需要凭据的服务不会
+ServerName、URL 与潜在密钥。合并到 `main` 后，独立 CI job 会重建 `catalog.json`，仅在产物
+发生变化时由 `github-actions[bot]` 自动提交。需要凭据的服务不会
 在公共 CI 中获得真实 Key，因此健康探针可能保持 `unverified`；这不会降低凭据安全要求。
 
 ## 审核与维护
