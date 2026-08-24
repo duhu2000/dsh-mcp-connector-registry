@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "wecom",
+  "name": "企业微信（社区）",
+  "vendor": "社区连接器",
+  "icon": "💬",
+  "category": "办公协作",
+  "summary": "通讯录 / 客户联系 / 消息与企业协作",
+  "description": "通过社区 @qwang007/wecom-mcp npm 包启动本地 stdio Server，调用企业微信通讯录、客户联系和消息等接口。需填写企业 ID、应用 Secret 与管理员 UserID，并按企业微信要求配置可信 IP；工具包含写操作，发送消息或修改数据前必须确认。",
+  "tags": ["企业微信", "WeCom", "通讯录", "客户联系", "消息", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://www.npmjs.com/package/@qwang007/wecom-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "企业微信参数仅保存在 DSH 本机，并注入本地 MCP 进程；服务端还可能要求将出口 IP 加入可信列表。",
+    "credentialHelpLabel": "查看企业微信 MCP 包说明",
+    "credentialFields": [
+      { "key": "corpId", "label": "企业 ID", "placeholder": "请输入 Corp ID", "required": true, "secret": false },
+      { "key": "corpSecret", "label": "应用 Secret", "placeholder": "请输入应用 Secret", "required": true, "secret": true },
+      { "key": "adminUserId", "label": "管理员 UserID", "placeholder": "请输入管理员 UserID", "required": true, "secret": false }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "wecom",
+      "serverName": "wecom-community",
+      "command": "npx",
+      "args": ["-y", "@qwang007/wecom-mcp"],
+      "credentialBindings": {
+        "WECOM_CORP_ID": "corpId",
+        "WECOM_CORP_SECRET": "corpSecret",
+        "WECOM_ADMIN_USERID": "adminUserId"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询企业通讯录",
+      "text": "只读查询企业微信通讯录中与目标部门相关的公开工作信息；未经我确认不要发消息、添加客户或修改任何数据",
+      "server": "wecom"
+    }
+  ]
+}

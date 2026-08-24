@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "polardb",
+  "name": "PolarDB-X",
+  "vendor": "阿里云",
+  "icon": "🗄️",
+  "category": "开发工具",
+  "summary": "数据库连接 / SQL 查询 / 元数据分析",
+  "description": "通过阿里云 PolarDB-X MCP Server 的 polardbx-mcp npm 包启动本地 stdio 服务，连接 PolarDB-X 数据库并执行查询及元数据分析。请优先使用只读、最小权限账号；SQL 可能读取或修改业务数据，执行写入、DDL 或大范围查询前必须确认。",
+  "tags": ["PolarDB-X", "数据库", "SQL", "阿里云", "stdio"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/aliyun/alibabacloud-polardbx-mcp-server",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "数据库连接参数仅保存在 DSH 本机，并注入本地 MCP 进程；建议创建专用只读账号。",
+    "credentialHelpLabel": "查看 PolarDB-X MCP 项目说明",
+    "credentialFields": [
+      { "key": "host", "label": "数据库地址", "placeholder": "例如数据库内网或公网地址", "required": true, "secret": false },
+      { "key": "port", "label": "端口", "placeholder": "例如 3306", "required": true, "secret": false },
+      { "key": "username", "label": "用户名", "placeholder": "建议填写只读账号", "required": true, "secret": false },
+      { "key": "password", "label": "密码", "placeholder": "请输入数据库密码", "required": true, "secret": true },
+      { "key": "database", "label": "数据库名", "placeholder": "请输入数据库名称", "required": true, "secret": false }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "polardb",
+      "serverName": "polardbx",
+      "command": "npx",
+      "args": ["-y", "polardbx-mcp"],
+      "credentialBindings": {
+        "POLARDB_X_HOST": "host",
+        "POLARDB_X_PORT": "port",
+        "POLARDB_X_USER": "username",
+        "POLARDB_X_PASSWORD": "password",
+        "POLARDB_X_DATABASE": "database"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "只读分析数据库",
+      "text": "先查看目标数据库的表结构，再生成并解释只读 SELECT 查询；未经我确认不要执行写入、删除或 DDL",
+      "server": "polardb"
+    }
+  ]
+}

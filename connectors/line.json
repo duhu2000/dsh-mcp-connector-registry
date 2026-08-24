@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "line",
+  "name": "LINE Messaging API",
+  "vendor": "LINE",
+  "icon": "🟢",
+  "category": "办公协作",
+  "summary": "消息发送 / 广播 / 用户互动",
+  "description": "通过 LINE 官方 @line/line-bot-mcp-server npm 包启动本地 stdio Server，调用 LINE Messaging API 向用户或群组发送消息。需提供 Channel Access Token，可选预设目标用户 ID；发送和广播会直接影响外部用户，执行前必须明确确认。",
+  "tags": ["LINE", "Messaging API", "消息", "Bot", "官方 MCP", "stdio"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/line/line-bot-mcp-server",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialDescription": "Channel Access Token 仅保存在 DSH 本机，并注入 LINE 官方 MCP 进程。",
+    "credentialHelpLabel": "查看 LINE Bot MCP 官方说明",
+    "credentialFields": [
+      { "key": "channelAccessToken", "label": "Channel Access Token", "placeholder": "请输入 Channel Access Token", "required": true, "secret": true },
+      { "key": "destinationUserId", "label": "默认目标 User ID（可选）", "placeholder": "可选：请输入目标用户 ID", "required": false, "secret": false }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "line",
+      "serverName": "line-bot",
+      "command": "npx",
+      "args": ["-y", "@line/line-bot-mcp-server"],
+      "env": { "NPM_CONFIG_IGNORE_SCRIPTS": "true" },
+      "credentialBindings": {
+        "CHANNEL_ACCESS_TOKEN": "channelAccessToken",
+        "DESTINATION_USER_ID": "destinationUserId"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "起草 LINE 消息",
+      "text": "只起草一条 LINE 消息并显示目标和完整内容；未经我确认不要发送或广播",
+      "server": "line"
+    }
+  ]
+}

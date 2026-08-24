@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "pixso",
+  "name": "Pixso",
+  "vendor": "Pixso",
+  "icon": "🎨",
+  "category": "设计创意",
+  "summary": "设计稿读取 / 节点信息 / 设计上下文",
+  "description": "接入 Pixso 官方远程 MCP 服务，读取设计文件、节点信息和设计上下文。需在 Pixso 获取个人访问令牌并通过 Token 请求头授权；令牌权限和文件访问范围以账号为准，本连接器不自动修改设计稿。",
+  "tags": ["Pixso", "设计稿", "UI设计", "设计上下文", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://pre.pixso.cn/developer/zh/mcp/remote-mcp.html",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "Token",
+    "credentialName": "Pixso Personal Access Token",
+    "credentialPlaceholder": "请输入 Pixso 个人访问令牌",
+    "credentialDescription": "个人访问令牌仅保存在 DSH 本机；请仅授权所需设计文件。",
+    "credentialHelpLabel": "查看 Pixso Remote MCP 官方说明"
+  },
+  "servers": [
+    {
+      "serverKey": "pixso",
+      "serverName": "pixso",
+      "url": "https://pixso.cn/mcp",
+      "transport": "streamable-http",
+      "headers": { "Accept": "application/json, text/event-stream" }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "分析设计节点",
+      "text": "读取我指定的 Pixso 设计文件或节点，汇总布局、颜色、字体和组件信息，并列出来源节点",
+      "server": "pixso"
+    }
+  ]
+}

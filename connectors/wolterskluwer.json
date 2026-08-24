@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "wolterskluwer",
+  "name": "威科先行",
+  "vendor": "Wolters Kluwer",
+  "icon": "📚",
+  "category": "法律合规",
+  "summary": "法规 / 案例 / 法律检索 / 专业内容",
+  "description": "接入威科先行官方远程 MCP 服务，检索法规、案例和专业法律内容。需使用威科账号对应的访问令牌；可用工具、数据范围、并发和额度受订阅权限限制，结果不能替代专业法律意见。",
+  "tags": ["威科先行", "法规", "案例", "法律检索", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://mcp.wkinfo.com.cn/",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "威科先行访问令牌",
+    "credentialPlaceholder": "请输入威科先行访问令牌",
+    "credentialDescription": "令牌仅保存在 DSH 本机；权限和额度以威科账号为准。",
+    "credentialHelpLabel": "查看威科先行 MCP 说明"
+  },
+  "servers": [
+    {
+      "serverKey": "wolterskluwer",
+      "serverName": "wolterskluwer-integrated",
+      "url": "https://mcp.wkinfo.com.cn/mcp-servers/integrated/",
+      "transport": "streamable-http",
+      "headers": { "Accept": "application/json, text/event-stream" }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "法律专题检索",
+      "text": "围绕目标法律问题检索相关法规与案例，列明来源、日期和效力状态，不替代专业法律意见",
+      "server": "wolterskluwer"
+    }
+  ]
+}

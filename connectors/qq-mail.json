@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "qq-mail",
+  "name": "QQ 邮箱（社区）",
+  "vendor": "社区连接器",
+  "icon": "✉️",
+  "category": "办公协作",
+  "summary": "邮件搜索 / 阅读 / 起草 / SMTP 发送",
+  "description": "通过社区 email-smtp-imap-mcp npm 包启动本地 stdio Server，使用 QQ 邮箱 IMAP/SMTP 搜索、读取和发送邮件。请填写邮箱地址及客户端授权码而非 QQ 密码；发送、移动或删除邮件前必须明确确认。",
+  "tags": ["QQ邮箱", "IMAP", "SMTP", "邮件", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/samihalawa/email-smtp-imap-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "邮箱地址和客户端授权码仅保存在 DSH 本机，并注入本地 MCP 进程；不要填写 QQ 密码。",
+    "credentialHelpLabel": "查看通用邮件 MCP 项目说明",
+    "credentialFields": [
+      { "key": "email", "label": "QQ 邮箱地址", "placeholder": "例如 user@qq.com", "required": true, "secret": false },
+      { "key": "authCode", "label": "客户端授权码", "placeholder": "请输入 IMAP/SMTP 客户端授权码", "required": true, "secret": true }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "qq-mail",
+      "serverName": "qq-mail-community",
+      "command": "npx",
+      "args": ["-y", "email-smtp-imap-mcp"],
+      "env": {
+        "SMTP_HOST": "smtp.qq.com",
+        "SMTP_PORT": "465",
+        "SMTP_SECURE": "true",
+        "IMAP_HOST": "imap.qq.com",
+        "IMAP_PORT": "993",
+        "IMAP_SECURE": "true"
+      },
+      "credentialBindings": {
+        "SMTP_USER": "email",
+        "SMTP_PASS": "authCode",
+        "IMAP_USER": "email",
+        "IMAP_PASS": "authCode"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "整理未读邮件",
+      "text": "只读取并汇总最近的未读邮件，按发件人和主题分组；未经我确认不要发送、移动或删除邮件",
+      "server": "qq-mail"
+    }
+  ]
+}
