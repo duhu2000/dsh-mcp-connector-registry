@@ -12,22 +12,13 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 
 ## 当前公共连接器
 
-根目录 `catalog.json` 当前由 10 个 Connector 源文件确定性生成：
+`connectors/*.json` 是 Connector 源文件，根目录 `catalog.json` 是 CI 在每次合并后自动重建的公开清单和数量权威来源。请直接查看 [`catalog.json`](catalog.json)，或在仓库根目录运行以下只读命令获取实时数量及分类分布，避免 README 手写列表随批量上架而失效：
 
-| 连接器 | 分类 | 鉴权 |
-|---|---|---|
-| 八爪鱼·云采集 | 效率工具 | OAuth 2.1 + PKCE |
-| Cloudflare | 开发工具 | OAuth 2.1 + PKCE |
-| GitHub | 开发工具 | Bearer Token |
-| Notion | 办公协作 | OAuth 2.1 + PKCE |
-| 北大法宝·法律检索 | 法律合规 | Bearer Token |
-| QVerisMCP | 其他 | Bearer Token |
-| Seedream（图片生成） | 设计创意 | Bearer Token |
-| Tavily | 调研分析 | OAuth 2.1 + PKCE |
-| Wind·股票数据 | 金融投资 | Bearer Token |
-| 盈米·基金投顾 | 金融投资 | `x-api-key` |
+```bash
+node -e "const {connectors}=require('./catalog.json'); console.log('总数:', connectors.length); console.table(connectors.reduce((n,x)=>(n[x.category]=(n[x.category]||0)+1,n),{}))"
+```
 
-连接器目录只保存公开接入参数；OAuth 授权结果、Token 和 API Key 均只保存在用户的 DSH 本机。
+插件还会把公共 Registry 与随 npm 包分发的内置目录按 `id` 合并，因此 DSH 市场页显示的去重后卡片数可能高于本仓库的 Connector 数量。连接器目录只保存公开接入参数；OAuth 授权结果、Token 和 API Key 均只保存在用户的 DSH 本机。
 
 ## 上架流程
 
