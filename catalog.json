@@ -501,6 +501,122 @@
     },
     {
       "schemaVersion": 1,
+      "id": "eastmoney-mcp",
+      "name": "东方财富量化（社区）",
+      "vendor": "社区连接器",
+      "icon": "💹",
+      "category": "金融投资",
+      "summary": "A 股行情 / K 线 / 技术指标 / 量化筛选",
+      "description": "通过社区 eastmoney-quant-mcp npm 包启动本地 stdio Server，基于东方财富公开接口查询 A 股行情、K 线、技术指标和板块数据。该连接器并非东方财富官方产品；首次全量初始化会下载数据并写入本地 SQLite，可能耗时约 10 分钟。数据时效和可用性受公开接口影响，仅供研究参考，不构成投资建议。",
+      "tags": [
+        "东方财富",
+        "A股",
+        "行情",
+        "K线",
+        "量化筛选",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/lalal-zzz/eastmoney-quant-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "eastmoney",
+          "serverName": "eastmoney-community",
+          "command": "npx",
+          "args": [
+            "-y",
+            "eastmoney-quant-mcp"
+          ],
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看股票行情",
+          "text": "查询目标 A 股的最新可用行情和近期 K 线，明确标注数据时间与不确定性，不提供投资建议",
+          "server": "eastmoney"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "feishu",
+      "name": "飞书开放平台",
+      "vendor": "飞书",
+      "icon": "🐦",
+      "category": "办公协作",
+      "summary": "消息 / 文档 / 多维表格 / 通讯录协作",
+      "description": "通过飞书开放平台官方 @larksuiteoapi/lark-mcp npm 包启动本地 stdio Server，调用消息、文档、多维表格和通讯录等开放 API。需创建飞书应用并填写 App ID 与 App Secret；能力范围受应用权限和租户授权限制，发送消息或修改数据前请确认。",
+      "tags": [
+        "飞书",
+        "Lark",
+        "文档",
+        "多维表格",
+        "消息",
+        "官方 MCP",
+        "stdio"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/larksuite/lark-openapi-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "应用凭据仅保存在 DSH 本机，并注入飞书官方 MCP 进程；请只开通必要权限。",
+        "credentialHelpLabel": "查看飞书开放平台 MCP 说明",
+        "credentialFields": [
+          {
+            "key": "appId",
+            "label": "App ID",
+            "placeholder": "请输入飞书应用 App ID",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "appSecret",
+            "label": "App Secret",
+            "placeholder": "请输入飞书应用 App Secret",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "feishu",
+          "serverName": "feishu-openapi",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@larksuiteoapi/lark-mcp",
+            "mcp"
+          ],
+          "env": {
+            "LARK_DOMAIN": "https://open.feishu.cn"
+          },
+          "credentialBindings": {
+            "APP_ID": "appId",
+            "APP_SECRET": "appSecret"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查找飞书资料",
+          "text": "只读检索与主题相关的飞书文档和多维表格并汇总来源；未经我确认不要发送消息或修改数据",
+          "server": "feishu"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "figma",
       "name": "Figma",
       "vendor": "Figma",
@@ -543,6 +659,110 @@
           "title": "读取设计上下文",
           "text": "使用 Figma MCP 读取我指定设计节点的布局、组件和变量，并先总结实现建议；不要修改设计文件",
           "server": "figma"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "financial-modeling",
+      "name": "Excel 财务建模助手（社区）",
+      "vendor": "社区连接器",
+      "icon": "📗",
+      "category": "金融投资",
+      "summary": "Excel 读取 / 写入 / 公式 / 表格建模",
+      "description": "通过社区 @negokaz/excel-mcp-server npm 包启动本地 stdio Server，读取和修改本地 Excel 工作簿，可辅助财务模型整理。它是通用 Excel 文件工具，不提供金融数据或投资结论；写入前请备份文件，并确认目标路径和修改范围。",
+      "tags": [
+        "Excel",
+        "财务建模",
+        "工作簿",
+        "公式",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/negokaz/excel-mcp-server",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "financial-modeling",
+          "serverName": "excel-mcp-server",
+          "command": "npx",
+          "args": [
+            "--yes",
+            "@negokaz/excel-mcp-server"
+          ],
+          "env": {
+            "EXCEL_MCP_PAGING_CELLS_LIMIT": "4000"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检查财务工作簿",
+          "text": "只读取指定 Excel 工作簿并梳理工作表、关键公式和缺失项；未经我确认不要写入或覆盖文件",
+          "server": "financial-modeling"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gangtise",
+      "name": "Gangtise",
+      "vendor": "Gangtise",
+      "icon": "📈",
+      "category": "金融投资",
+      "summary": "机构调研 / 专家纪要 / 行业与公司研究",
+      "description": "通过 Gangtise 提供的 gangtise-mcp npm 包启动本地 stdio Server，检索机构调研、专家纪要和行业研究内容。需使用 Gangtise 访问令牌；数据权限和可能产生的费用以账号为准，调用付费能力前请先确认，不构成投资建议。",
+      "tags": [
+        "Gangtise",
+        "机构调研",
+        "专家纪要",
+        "行业研究",
+        "stdio"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/gangtiser/gangtise-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialDescription": "访问令牌仅保存在 DSH 本机，并注入本地 MCP 进程。",
+        "credentialHelpLabel": "查看 Gangtise MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "token",
+            "label": "Gangtise Token",
+            "placeholder": "请输入访问令牌",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "gangtise",
+          "serverName": "gangtise",
+          "command": "npx",
+          "args": [
+            "-y",
+            "gangtise-mcp@latest"
+          ],
+          "credentialBindings": {
+            "GANGTISE_TOKEN": "token"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检索机构调研",
+          "text": "检索与目标公司相关的近期机构调研和专家纪要，先列出候选内容与费用信息；未经我确认不要调用付费能力",
+          "server": "gangtise"
         }
       ]
     },
@@ -786,6 +1006,153 @@
     },
     {
       "schemaVersion": 1,
+      "id": "huayu-legal",
+      "name": "元典法律数据",
+      "vendor": "华宇元典",
+      "icon": "⚖️",
+      "category": "法律合规",
+      "summary": "法规 / 案例 / 企业 / 证券法律数据",
+      "description": "接入华宇元典开放平台的官方远程 MCP 服务，分别查询法律法规、司法案例、企业和证券法律数据。需提供开放平台访问令牌；实际数据范围、额度和时效以账号权限为准，查询结果不能替代专业法律意见。",
+      "tags": [
+        "元典",
+        "法规",
+        "案例",
+        "企业法律",
+        "证券法律",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://open.chineselaw.com/mcp-config/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "元典开放平台访问令牌",
+        "credentialPlaceholder": "请输入开放平台访问令牌",
+        "credentialDescription": "令牌仅保存在 DSH 本机；请仅授权所需数据能力。",
+        "credentialHelpLabel": "查看元典 MCP 配置说明"
+      },
+      "servers": [
+        {
+          "serverKey": "law",
+          "serverName": "yuandian-law",
+          "url": "https://open.chineselaw.com/mcp/law/stream",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        },
+        {
+          "serverKey": "case",
+          "serverName": "yuandian-case",
+          "url": "https://open.chineselaw.com/mcp/case/stream",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        },
+        {
+          "serverKey": "company",
+          "serverName": "yuandian-company",
+          "url": "https://open.chineselaw.com/mcp/company/stream",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        },
+        {
+          "serverKey": "securities",
+          "serverName": "yuandian-securities",
+          "url": "https://open.chineselaw.com/mcp/securities/stream",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检索法规与案例",
+          "text": "先检索与问题相关的现行法规，再查找相近案例；标注来源、发布日期和效力状态，不替代律师意见"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "jenkins",
+      "name": "Jenkins",
+      "vendor": "社区连接器",
+      "icon": "🤵",
+      "category": "开发工具",
+      "summary": "任务状态 / 构建日志 / 流水线与作业管理",
+      "description": "通过社区 @kud/mcp-jenkins npm 包启动本地 stdio Server，访问 Jenkins 作业、构建、日志和队列。部分工具可触发构建、修改或删除作业并执行管理操作；请使用最小权限 API Token，任何写入、触发、删除或重启操作前必须明确确认。",
+      "tags": [
+        "Jenkins",
+        "CI/CD",
+        "构建",
+        "流水线",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://kud.github.io/mcp-jenkins",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "Jenkins 连接参数仅保存在 DSH 本机，并注入本地 MCP 进程；建议使用专用最小权限账号。",
+        "credentialHelpLabel": "查看 Jenkins MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "serverUrl",
+            "label": "Jenkins URL",
+            "placeholder": "例如 https://jenkins.example.com",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "username",
+            "label": "用户名",
+            "placeholder": "请输入 Jenkins 用户名",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "apiToken",
+            "label": "API Token",
+            "placeholder": "请输入 Jenkins API Token",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "jenkins",
+          "serverName": "jenkins",
+          "command": "npx",
+          "args": [
+            "--yes",
+            "@kud/mcp-jenkins@latest"
+          ],
+          "credentialBindings": {
+            "MCP_JENKINS_URL": "serverUrl",
+            "MCP_JENKINS_USER": "username",
+            "MCP_JENKINS_API_TOKEN": "apiToken"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检查失败构建",
+          "text": "只读取最近失败的 Jenkins 构建和日志并分析原因；未经我确认不要触发构建、修改作业、删除资源或重启 Jenkins",
+          "server": "jenkins"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "kling",
       "name": "可灵 AI（AceDataCloud）",
       "vendor": "AceDataCloud 社区网关",
@@ -894,6 +1261,75 @@
     },
     {
       "schemaVersion": 1,
+      "id": "line",
+      "name": "LINE Messaging API",
+      "vendor": "LINE",
+      "icon": "🟢",
+      "category": "办公协作",
+      "summary": "消息发送 / 广播 / 用户互动",
+      "description": "通过 LINE 官方 @line/line-bot-mcp-server npm 包启动本地 stdio Server，调用 LINE Messaging API 向用户或群组发送消息。需提供 Channel Access Token，可选预设目标用户 ID；发送和广播会直接影响外部用户，执行前必须明确确认。",
+      "tags": [
+        "LINE",
+        "Messaging API",
+        "消息",
+        "Bot",
+        "官方 MCP",
+        "stdio"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/line/line-bot-mcp-server",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialDescription": "Channel Access Token 仅保存在 DSH 本机，并注入 LINE 官方 MCP 进程。",
+        "credentialHelpLabel": "查看 LINE Bot MCP 官方说明",
+        "credentialFields": [
+          {
+            "key": "channelAccessToken",
+            "label": "Channel Access Token",
+            "placeholder": "请输入 Channel Access Token",
+            "required": true,
+            "secret": true
+          },
+          {
+            "key": "destinationUserId",
+            "label": "默认目标 User ID（可选）",
+            "placeholder": "可选：请输入目标用户 ID",
+            "required": false,
+            "secret": false
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "line",
+          "serverName": "line-bot",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@line/line-bot-mcp-server"
+          ],
+          "env": {
+            "NPM_CONFIG_IGNORE_SCRIPTS": "true"
+          },
+          "credentialBindings": {
+            "CHANNEL_ACCESS_TOKEN": "channelAccessToken",
+            "DESTINATION_USER_ID": "destinationUserId"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "起草 LINE 消息",
+          "text": "只起草一条 LINE 消息并显示目标和完整内容；未经我确认不要发送或广播",
+          "server": "line"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "linear",
       "name": "Linear",
       "vendor": "Linear",
@@ -997,6 +1433,67 @@
           "title": "汇总今日办公待办",
           "text": "使用 Microsoft 365 MCP 汇总我今天的日历、未读重要邮件和 Teams 待办；不要发送消息或修改数据",
           "server": "m365"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "mastergo",
+      "name": "MasterGo Magic MCP",
+      "vendor": "MasterGo",
+      "icon": "🪄",
+      "category": "设计创意",
+      "summary": "设计稿解析 / 设计系统 / 代码生成辅助",
+      "description": "通过 MasterGo 团队提供的 @mastergo/magic-mcp npm 包启动本地 stdio Server，读取团队项目中的设计稿和设计系统上下文，辅助生成前端代码。需 MasterGo 团队版或更高版本及 MCP Token；文件访问范围受团队权限限制。",
+      "tags": [
+        "MasterGo",
+        "Magic MCP",
+        "设计稿",
+        "设计系统",
+        "代码生成",
+        "stdio"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/mastergo-design/mastergo-magic-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialDescription": "MasterGo MCP Token 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+        "credentialHelpLabel": "查看 MasterGo Magic MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "token",
+            "label": "MasterGo MCP Token",
+            "placeholder": "请输入团队项目 MCP Token",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "mastergo",
+          "serverName": "mastergo-magic",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@mastergo/magic-mcp"
+          ],
+          "env": {
+            "API_BASE_URL": "https://mastergo.com"
+          },
+          "credentialBindings": {
+            "MG_MCP_TOKEN": "token"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "解析设计稿",
+          "text": "读取指定 MasterGo 设计稿并整理页面结构、组件、设计变量和实现注意点，不修改原设计文件",
+          "server": "mastergo"
         }
       ]
     },
@@ -1154,6 +1651,83 @@
     },
     {
       "schemaVersion": 1,
+      "id": "netease-mail",
+      "name": "网易邮箱（社区）",
+      "vendor": "社区连接器",
+      "icon": "📮",
+      "category": "办公协作",
+      "summary": "邮件搜索 / 阅读 / 起草 / SMTP 发送",
+      "description": "通过社区 email-smtp-imap-mcp npm 包启动本地 stdio Server，使用网易邮箱 IMAP/SMTP 搜索、读取和发送邮件。请填写邮箱地址及客户端授权码而非登录密码；发送、移动或删除邮件前必须明确确认。",
+      "tags": [
+        "网易邮箱",
+        "163邮箱",
+        "IMAP",
+        "SMTP",
+        "邮件",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/samihalawa/email-smtp-imap-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "邮箱地址和客户端授权码仅保存在 DSH 本机，并注入本地 MCP 进程；不要填写邮箱登录密码。",
+        "credentialHelpLabel": "查看通用邮件 MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "email",
+            "label": "邮箱地址",
+            "placeholder": "例如 user@163.com",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "authCode",
+            "label": "客户端授权码",
+            "placeholder": "请输入 IMAP/SMTP 客户端授权码",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "netease-mail",
+          "serverName": "netease-mail-community",
+          "command": "npx",
+          "args": [
+            "-y",
+            "email-smtp-imap-mcp"
+          ],
+          "env": {
+            "SMTP_HOST": "smtp.163.com",
+            "SMTP_PORT": "465",
+            "SMTP_SECURE": "true",
+            "IMAP_HOST": "imap.163.com",
+            "IMAP_PORT": "993",
+            "IMAP_SECURE": "true"
+          },
+          "credentialBindings": {
+            "SMTP_USER": "email",
+            "SMTP_PASS": "authCode",
+            "IMAP_USER": "email",
+            "IMAP_PASS": "authCode"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "整理未读邮件",
+          "text": "只读取并汇总最近的未读邮件，按发件人和主题分组；未经我确认不要发送、移动或删除邮件",
+          "server": "netease-mail"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "notion",
       "name": "Notion",
       "vendor": "Notion",
@@ -1203,6 +1777,115 @@
           "title": "整理项目进展",
           "text": "使用 Notion MCP 读取当前项目页面和数据库，整理进展、风险与待办；不要修改页面",
           "server": "notion"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "obsidian",
+      "name": "Obsidian（只读）",
+      "vendor": "社区连接器",
+      "icon": "💎",
+      "category": "办公协作",
+      "summary": "本地知识库搜索 / 笔记读取 / 链接分析",
+      "description": "通过社区 @istrejo/obsidian-mcp npm 包启动本地 stdio Server，在只读模式下搜索和分析指定 Obsidian Vault。无需远程鉴权，但需填写本地知识库绝对路径；默认关闭写入能力，仍请避免向不可信会话暴露敏感笔记。",
+      "tags": [
+        "Obsidian",
+        "知识库",
+        "笔记",
+        "本地文件",
+        "只读",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/istrejo/obsidian-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "这里仅收集本地 Vault 路径，不是远程凭据；路径配置会注入本地 MCP 进程。",
+        "credentialHelpLabel": "查看 Obsidian MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "vaultPath",
+            "label": "Vault 绝对路径",
+            "placeholder": "例如 /Users/name/Documents/MyVault",
+            "required": true,
+            "secret": false
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "obsidian",
+          "serverName": "obsidian-readonly",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@istrejo/obsidian-mcp"
+          ],
+          "env": {
+            "OBSIDIAN_READ_ONLY": "true"
+          },
+          "credentialBindings": {
+            "OBSIDIAN_VAULT_PATH": "vaultPath"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检索本地笔记",
+          "text": "只读检索 Obsidian 中与主题相关的笔记并列出文件来源；不要修改、创建或删除笔记",
+          "server": "obsidian"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "pixso",
+      "name": "Pixso",
+      "vendor": "Pixso",
+      "icon": "🎨",
+      "category": "设计创意",
+      "summary": "设计稿读取 / 节点信息 / 设计上下文",
+      "description": "接入 Pixso 官方远程 MCP 服务，读取设计文件、节点信息和设计上下文。需在 Pixso 获取个人访问令牌并通过 Token 请求头授权；令牌权限和文件访问范围以账号为准，本连接器不自动修改设计稿。",
+      "tags": [
+        "Pixso",
+        "设计稿",
+        "UI设计",
+        "设计上下文",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://pre.pixso.cn/developer/zh/mcp/remote-mcp.html",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "Token",
+        "credentialName": "Pixso Personal Access Token",
+        "credentialPlaceholder": "请输入 Pixso 个人访问令牌",
+        "credentialDescription": "个人访问令牌仅保存在 DSH 本机；请仅授权所需设计文件。",
+        "credentialHelpLabel": "查看 Pixso Remote MCP 官方说明"
+      },
+      "servers": [
+        {
+          "serverKey": "pixso",
+          "serverName": "pixso",
+          "url": "https://pixso.cn/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "分析设计节点",
+          "text": "读取我指定的 Pixso 设计文件或节点，汇总布局、颜色、字体和组件信息，并列出来源节点",
+          "server": "pixso"
         }
       ]
     },
@@ -1346,6 +2029,95 @@
     },
     {
       "schemaVersion": 1,
+      "id": "polardb",
+      "name": "PolarDB-X",
+      "vendor": "阿里云",
+      "icon": "🗄️",
+      "category": "开发工具",
+      "summary": "数据库连接 / SQL 查询 / 元数据分析",
+      "description": "通过阿里云 PolarDB-X MCP Server 的 polardbx-mcp npm 包启动本地 stdio 服务，连接 PolarDB-X 数据库并执行查询及元数据分析。请优先使用只读、最小权限账号；SQL 可能读取或修改业务数据，执行写入、DDL 或大范围查询前必须确认。",
+      "tags": [
+        "PolarDB-X",
+        "数据库",
+        "SQL",
+        "阿里云",
+        "stdio"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/aliyun/alibabacloud-polardbx-mcp-server",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "数据库连接参数仅保存在 DSH 本机，并注入本地 MCP 进程；建议创建专用只读账号。",
+        "credentialHelpLabel": "查看 PolarDB-X MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "host",
+            "label": "数据库地址",
+            "placeholder": "例如数据库内网或公网地址",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "port",
+            "label": "端口",
+            "placeholder": "例如 3306",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "username",
+            "label": "用户名",
+            "placeholder": "建议填写只读账号",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "password",
+            "label": "密码",
+            "placeholder": "请输入数据库密码",
+            "required": true,
+            "secret": true
+          },
+          {
+            "key": "database",
+            "label": "数据库名",
+            "placeholder": "请输入数据库名称",
+            "required": true,
+            "secret": false
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "polardb",
+          "serverName": "polardbx",
+          "command": "npx",
+          "args": [
+            "-y",
+            "polardbx-mcp"
+          ],
+          "credentialBindings": {
+            "POLARDB_X_HOST": "host",
+            "POLARDB_X_PORT": "port",
+            "POLARDB_X_USER": "username",
+            "POLARDB_X_PASSWORD": "password",
+            "POLARDB_X_DATABASE": "database"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "只读分析数据库",
+          "text": "先查看目标数据库的表结构，再生成并解释只读 SELECT 查询；未经我确认不要执行写入、删除或 DDL",
+          "server": "polardb"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "producthunt",
       "name": "Product Hunt",
       "vendor": "社区连接器",
@@ -1392,6 +2164,131 @@
             "PRODUCTHUNT_ACCESS_TOKEN": "accessToken"
           },
           "transport": "stdio"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "qingliu",
+      "name": "轻流",
+      "vendor": "轻流",
+      "icon": "🧩",
+      "category": "效率工具",
+      "summary": "无代码应用 / 表单 / 数据与流程协作",
+      "description": "通过轻流 @qingflow-tech/qingflow-app-user-mcp npm 包启动本地 stdio Server，访问无代码应用、表单、数据和流程。首次运行可能下载本地 Python 运行环境并耗时较长；登录和令牌切换由服务内置工具完成，提交表单或修改数据前请确认。",
+      "tags": [
+        "轻流",
+        "无代码",
+        "表单",
+        "流程",
+        "应用数据",
+        "stdio"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://qingclawskills.qingflow.com/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "qingliu",
+          "serverName": "qingflow-app-user",
+          "command": "npx",
+          "args": [
+            "-y",
+            "-p",
+            "@qingflow-tech/qingflow-app-user-mcp@latest",
+            "qingflow-app-user-mcp"
+          ],
+          "env": {
+            "QINGFLOW_MCP_DEFAULT_BASE_URL": "https://qingflow.com/api"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看轻流应用",
+          "text": "先完成轻流登录并只读列出我可访问的应用和表单；未经我确认不要提交表单、推进流程或修改数据",
+          "server": "qingliu"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "qq-mail",
+      "name": "QQ 邮箱（社区）",
+      "vendor": "社区连接器",
+      "icon": "✉️",
+      "category": "办公协作",
+      "summary": "邮件搜索 / 阅读 / 起草 / SMTP 发送",
+      "description": "通过社区 email-smtp-imap-mcp npm 包启动本地 stdio Server，使用 QQ 邮箱 IMAP/SMTP 搜索、读取和发送邮件。请填写邮箱地址及客户端授权码而非 QQ 密码；发送、移动或删除邮件前必须明确确认。",
+      "tags": [
+        "QQ邮箱",
+        "IMAP",
+        "SMTP",
+        "邮件",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/samihalawa/email-smtp-imap-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "邮箱地址和客户端授权码仅保存在 DSH 本机，并注入本地 MCP 进程；不要填写 QQ 密码。",
+        "credentialHelpLabel": "查看通用邮件 MCP 项目说明",
+        "credentialFields": [
+          {
+            "key": "email",
+            "label": "QQ 邮箱地址",
+            "placeholder": "例如 user@qq.com",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "authCode",
+            "label": "客户端授权码",
+            "placeholder": "请输入 IMAP/SMTP 客户端授权码",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "qq-mail",
+          "serverName": "qq-mail-community",
+          "command": "npx",
+          "args": [
+            "-y",
+            "email-smtp-imap-mcp"
+          ],
+          "env": {
+            "SMTP_HOST": "smtp.qq.com",
+            "SMTP_PORT": "465",
+            "SMTP_SECURE": "true",
+            "IMAP_HOST": "imap.qq.com",
+            "IMAP_PORT": "993",
+            "IMAP_SECURE": "true"
+          },
+          "credentialBindings": {
+            "SMTP_USER": "email",
+            "SMTP_PASS": "authCode",
+            "IMAP_USER": "email",
+            "IMAP_PASS": "authCode"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "整理未读邮件",
+          "text": "只读取并汇总最近的未读邮件，按发件人和主题分组；未经我确认不要发送、移动或删除邮件",
+          "server": "qq-mail"
         }
       ]
     },
@@ -1733,6 +2630,56 @@
     },
     {
       "schemaVersion": 1,
+      "id": "stock-analysis",
+      "name": "Stock SDK 股票分析",
+      "vendor": "Stock SDK 社区",
+      "icon": "🧮",
+      "category": "金融投资",
+      "summary": "A 股 / 港股 / 美股 / 基金综合分析",
+      "description": "通过社区 stock-sdk npm 包启动本地 stdio Server，查询 A 股、港股、美股及基金的行情和分析数据，无需 API Key。数据源和能力可能随项目版本变化，仅供研究参考，不构成投资建议。",
+      "tags": [
+        "股票分析",
+        "A股",
+        "港股",
+        "美股",
+        "基金",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/chengzuopeng/stock-sdk",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "stock-analysis",
+          "serverName": "stock-sdk",
+          "command": "npx",
+          "args": [
+            "-y",
+            "stock-sdk",
+            "mcp"
+          ],
+          "env": {
+            "STOCK_SDK_MCP_TOOLS": "core",
+            "STOCK_SDK_MCP_PROMPTS": "core"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "生成股票研究摘要",
+          "text": "汇总目标证券的最新可用行情与基础分析，列明数据时间和不确定性，不提供买卖建议",
+          "server": "stock-analysis"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "supabase",
       "name": "Supabase",
       "vendor": "Supabase",
@@ -1915,6 +2862,51 @@
     },
     {
       "schemaVersion": 1,
+      "id": "tongdaxin-mcp",
+      "name": "通达信行情（社区）",
+      "vendor": "社区连接器",
+      "icon": "📉",
+      "category": "金融投资",
+      "summary": "A 股行情 / 分时 / K 线 / 市场数据",
+      "description": "通过社区 tdx-mcp Python 包启动本地 stdio Server，连接公开行情服务器查询 A 股行情、分时与 K 线数据。该连接器并非通达信官方产品，仅适合个人学习和研究；可用性受公共行情源影响，不构成投资建议。",
+      "tags": [
+        "通达信",
+        "A股",
+        "行情",
+        "K线",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://pypi.org/project/tdx-mcp/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "tongdaxin",
+          "serverName": "tongdaxin-community",
+          "command": "uvx",
+          "args": [
+            "--from",
+            "tdx-mcp",
+            "tdx-mcp"
+          ],
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询市场行情",
+          "text": "查询目标证券的最新可用行情和近期走势，标注数据来源与时间，不提供投资建议",
+          "server": "tongdaxin"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "tushare",
       "name": "TuShare",
       "vendor": "TuShare 社区",
@@ -2014,6 +3006,81 @@
     },
     {
       "schemaVersion": 1,
+      "id": "wecom",
+      "name": "企业微信（社区）",
+      "vendor": "社区连接器",
+      "icon": "💬",
+      "category": "办公协作",
+      "summary": "通讯录 / 客户联系 / 消息与企业协作",
+      "description": "通过社区 @qwang007/wecom-mcp npm 包启动本地 stdio Server，调用企业微信通讯录、客户联系和消息等接口。需填写企业 ID、应用 Secret 与管理员 UserID，并按企业微信要求配置可信 IP；工具包含写操作，发送消息或修改数据前必须确认。",
+      "tags": [
+        "企业微信",
+        "WeCom",
+        "通讯录",
+        "客户联系",
+        "消息",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://www.npmjs.com/package/@qwang007/wecom-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "企业微信参数仅保存在 DSH 本机，并注入本地 MCP 进程；服务端还可能要求将出口 IP 加入可信列表。",
+        "credentialHelpLabel": "查看企业微信 MCP 包说明",
+        "credentialFields": [
+          {
+            "key": "corpId",
+            "label": "企业 ID",
+            "placeholder": "请输入 Corp ID",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "corpSecret",
+            "label": "应用 Secret",
+            "placeholder": "请输入应用 Secret",
+            "required": true,
+            "secret": true
+          },
+          {
+            "key": "adminUserId",
+            "label": "管理员 UserID",
+            "placeholder": "请输入管理员 UserID",
+            "required": true,
+            "secret": false
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "wecom",
+          "serverName": "wecom-community",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@qwang007/wecom-mcp"
+          ],
+          "credentialBindings": {
+            "WECOM_CORP_ID": "corpId",
+            "WECOM_CORP_SECRET": "corpSecret",
+            "WECOM_ADMIN_USERID": "adminUserId"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询企业通讯录",
+          "text": "只读查询企业微信通讯录中与目标部门相关的公开工作信息；未经我确认不要发消息、添加客户或修改任何数据",
+          "server": "wecom"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "wind-stock-data",
       "name": "Wind·股票数据",
       "vendor": "Wind 万得",
@@ -2079,6 +3146,52 @@
           "title": "核心财务指标",
           "text": "用 Wind 股票数据 MCP 查询 {{stock}} 最新报告期的营业收入、净利润、ROE 和现金流",
           "server": "stock-data"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "wolterskluwer",
+      "name": "威科先行",
+      "vendor": "Wolters Kluwer",
+      "icon": "📚",
+      "category": "法律合规",
+      "summary": "法规 / 案例 / 法律检索 / 专业内容",
+      "description": "接入威科先行官方远程 MCP 服务，检索法规、案例和专业法律内容。需使用威科账号对应的访问令牌；可用工具、数据范围、并发和额度受订阅权限限制，结果不能替代专业法律意见。",
+      "tags": [
+        "威科先行",
+        "法规",
+        "案例",
+        "法律检索",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://mcp.wkinfo.com.cn/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "威科先行访问令牌",
+        "credentialPlaceholder": "请输入威科先行访问令牌",
+        "credentialDescription": "令牌仅保存在 DSH 本机；权限和额度以威科账号为准。",
+        "credentialHelpLabel": "查看威科先行 MCP 说明"
+      },
+      "servers": [
+        {
+          "serverKey": "wolterskluwer",
+          "serverName": "wolterskluwer-integrated",
+          "url": "https://mcp.wkinfo.com.cn/mcp-servers/integrated/",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "法律专题检索",
+          "text": "围绕目标法律问题检索相关法规与案例，列明来源、日期和效力状态，不替代专业法律意见",
+          "server": "wolterskluwer"
         }
       ]
     },
