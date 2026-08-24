@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "seedance",
+  "name": "Seedance 视频生成（AceDataCloud）",
+  "vendor": "AceDataCloud 社区网关",
+  "icon": "🎬",
+  "category": "设计创意",
+  "summary": "文生视频 / 图生视频 / 任务进度 / 模型与规格查询",
+  "description": "通过 AceDataCloud 托管的社区 MCP Server 调用字节 Seedance 视频模型，支持文本或参考图生成视频及任务查询，不是字节官方连接器。生成会产生费用，提交任务前应向用户展示模型、规格和预计成本并取得确认。",
+  "tags": ["Seedance", "视频生成", "AceDataCloud", "Bearer", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/AceDataCloud/SeedanceMCP",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "AceDataCloud API Token",
+    "credentialPlaceholder": "请输入 AceDataCloud API Token",
+    "credentialDescription": "Token 仅保存在 DSH 本机；视频生成通常会产生费用。",
+    "credentialHelpLabel": "获取 AceDataCloud API Token"
+  },
+  "servers": [
+    {
+      "serverKey": "seedance",
+      "serverName": "seedance",
+      "url": "https://seedance.mcp.acedata.cloud/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ]
+}

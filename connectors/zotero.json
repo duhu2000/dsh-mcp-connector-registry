@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "zotero",
+  "name": "Zotero",
+  "vendor": "Zotero MCP 社区",
+  "icon": "📚",
+  "category": "办公协作",
+  "summary": "文献库搜索 / 元数据 / 笔记 / 引文与全文读取",
+  "description": "通过 zotero-mcp-server Python 包启动本地 stdio Server，以只读方式访问 Zotero 桌面端文献库。需要本机安装 uv/uvx、Zotero 7+ 并开启本地 API；本卡片不配置 Web API 密钥和写入能力。",
+  "tags": ["Zotero", "文献管理", "引用", "学术研究", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/54yyyu/zotero-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "zotero",
+      "serverName": "zotero",
+      "command": "uvx",
+      "args": ["zotero-mcp-server", "serve"],
+      "env": {
+        "ZOTERO_LOCAL": "true"
+      },
+      "transport": "stdio"
+    }
+  ]
+}

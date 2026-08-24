@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "context7",
+  "name": "Context7",
+  "vendor": "Upstash",
+  "icon": "📚",
+  "category": "开发工具",
+  "summary": "最新版本库文档 / 代码示例 / API 查询",
+  "description": "接入 Upstash Context7 官方远程 MCP Server，按库和版本获取最新文档与代码示例。公开端点可免密使用；登录后的 API Key 仅用于提高额度，本卡片不保存或要求真实密钥。",
+  "tags": ["Context7", "Upstash", "开发文档", "代码示例", "免密", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/upstash/context7",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "context7",
+      "serverName": "context7",
+      "url": "https://mcp.context7.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "akshare",
+  "name": "AKShare",
+  "vendor": "AKShare 社区",
+  "icon": "📈",
+  "category": "金融投资",
+  "summary": "股票 / 基金 / 期货 / 债券 / 宏观公开数据",
+  "description": "通过公开的 akshare-one-mcp Python 包启动本地 stdio Server，查询 AKShare 聚合的中国市场与宏观公开数据。需要本机安装 uv/uvx；数据来源、频率和可用性受上游公开接口变化影响，不构成投资建议。",
+  "tags": ["AKShare", "股票", "基金", "宏观", "Python", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/zwldarren/akshare-one-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "akshare",
+      "serverName": "akshare",
+      "command": "uvx",
+      "args": ["akshare-one-mcp"],
+      "transport": "stdio"
+    }
+  ]
+}
