@@ -3,6 +3,43 @@
   "connectors": [
     {
       "schemaVersion": 1,
+      "id": "akshare",
+      "name": "AKShare",
+      "vendor": "AKShare 社区",
+      "icon": "📈",
+      "category": "金融投资",
+      "summary": "股票 / 基金 / 期货 / 债券 / 宏观公开数据",
+      "description": "通过公开的 akshare-one-mcp Python 包启动本地 stdio Server，查询 AKShare 聚合的中国市场与宏观公开数据。需要本机安装 uv/uvx；数据来源、频率和可用性受上游公开接口变化影响，不构成投资建议。",
+      "tags": [
+        "AKShare",
+        "股票",
+        "基金",
+        "宏观",
+        "Python",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/zwldarren/akshare-one-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "akshare",
+          "serverName": "akshare",
+          "command": "uvx",
+          "args": [
+            "akshare-one-mcp"
+          ],
+          "transport": "stdio"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "bazhuayu-cloud-collection",
       "name": "八爪鱼·云采集",
       "vendor": "八爪鱼 Bazhuayu",
@@ -128,6 +165,84 @@
     },
     {
       "schemaVersion": 1,
+      "id": "canva",
+      "name": "Canva 可画",
+      "vendor": "Canva",
+      "icon": "🎨",
+      "category": "设计创意",
+      "summary": "设计搜索 / 内容读取 / 设计与素材管理",
+      "description": "接入 Canva 官方远程 MCP Server，通过 OAuth 访问当前用户有权限的设计、素材和品牌内容，并调用 Canva 的设计能力。每位用户需单独授权，创建或修改内容前应确认。",
+      "tags": [
+        "Canva",
+        "可画",
+        "设计",
+        "素材",
+        "OAuth",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://www.canva.dev/docs/mcp/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://mcp.canva.com",
+        "scope": "",
+        "clientName": "DeepSeek Harness - Canva MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "canva",
+          "serverName": "canva",
+          "url": "https://mcp.canva.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chrome-devtools",
+      "name": "Chrome DevTools",
+      "vendor": "Google Chrome",
+      "icon": "🌐",
+      "category": "开发工具",
+      "summary": "浏览器调试 / 网络分析 / 性能追踪 / 自动化",
+      "description": "通过官方 chrome-devtools-mcp npm 包启动本地 stdio Server，调试 Chrome 页面、分析网络与控制台、记录性能 Trace 并执行浏览器自动化。需要本机已安装当前版 Chrome；连接器可读取和操作浏览器内容。",
+      "tags": [
+        "Chrome",
+        "DevTools",
+        "浏览器调试",
+        "性能",
+        "stdio",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "chrome-devtools",
+          "serverName": "chrome-devtools",
+          "command": "npx",
+          "args": [
+            "-y",
+            "chrome-devtools-mcp@latest"
+          ],
+          "transport": "stdio"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "cloudflare-api",
       "name": "Cloudflare",
       "vendor": "Cloudflare",
@@ -182,6 +297,81 @@
     },
     {
       "schemaVersion": 1,
+      "id": "context7",
+      "name": "Context7",
+      "vendor": "Upstash",
+      "icon": "📚",
+      "category": "开发工具",
+      "summary": "最新版本库文档 / 代码示例 / API 查询",
+      "description": "接入 Upstash Context7 官方远程 MCP Server，按库和版本获取最新文档与代码示例。公开端点可免密使用；登录后的 API Key 仅用于提高额度，本卡片不保存或要求真实密钥。",
+      "tags": [
+        "Context7",
+        "Upstash",
+        "开发文档",
+        "代码示例",
+        "免密",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/upstash/context7",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "context7",
+          "serverName": "context7",
+          "url": "https://mcp.context7.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gitee",
+      "name": "Gitee",
+      "vendor": "Gitee",
+      "icon": "🟠",
+      "category": "开发工具",
+      "summary": "代码仓库 / Issue / Pull Request / 通知协作",
+      "description": "接入 Gitee 官方远程 MCP Server，查询和管理仓库、Issue、Pull Request 与通知。需提供最小权限的 Gitee Personal Access Token；创建、更新或合并等写操作应先由用户确认。",
+      "tags": [
+        "Gitee",
+        "代码仓库",
+        "Issue",
+        "Pull Request",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://help.gitee.com/ai-productivity/mcp-server",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "Gitee Personal Access Token",
+        "credentialPlaceholder": "请输入最小权限的 Gitee PAT",
+        "credentialDescription": "Token 仅保存在 DSH 本机；请只授予所需仓库和操作权限。",
+        "credentialHelpLabel": "查看 Gitee MCP Server 官方说明"
+      },
+      "servers": [
+        {
+          "serverKey": "gitee",
+          "serverName": "gitee",
+          "url": "https://api.gitee.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "github",
       "name": "GitHub",
       "vendor": "GitHub",
@@ -229,6 +419,166 @@
           "title": "检查 Pull Request",
           "text": "使用 GitHub MCP 查看当前仓库最近的 Pull Request、检查状态和待处理评审；不要执行合并或写操作",
           "server": "github"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "google-maps",
+      "name": "Google 地图（HasData）",
+      "vendor": "HasData 社区网关",
+      "icon": "🗺️",
+      "category": "调研分析",
+      "summary": "地点搜索 / 评论 / 图片 / 商户与周边信息",
+      "description": "通过 HasData 社区托管的 Google Maps MCP Server 查询地点、商户、评论、图片和周边信息，不是 Google 官方服务。需要 HasData API Key；实际数据范围、费用和使用条款以 HasData 为准。",
+      "tags": [
+        "Google Maps",
+        "HasData",
+        "地点",
+        "商户",
+        "评论",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/HasData/google-maps-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "x-api-key",
+        "credentialName": "HasData API Key",
+        "credentialPlaceholder": "请输入 HasData API Key",
+        "credentialDescription": "API Key 仅保存在 DSH 本机；免费试用和调用费用以 HasData 为准。",
+        "credentialHelpLabel": "查看 HasData Google Maps MCP"
+      },
+      "servers": [
+        {
+          "serverKey": "google-maps",
+          "serverName": "google-maps",
+          "url": "https://mcp.hasdata.com/api/mcp?apis=google_maps",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "kling",
+      "name": "可灵 AI（AceDataCloud）",
+      "vendor": "AceDataCloud 社区网关",
+      "icon": "🎞️",
+      "category": "设计创意",
+      "summary": "文生视频 / 图生视频 / 任务进度与结果查询",
+      "description": "通过 AceDataCloud 托管的社区 MCP Server 调用可灵 AI 视频生成能力，不是快手或可灵官方连接器。生成任务可能产生费用，提交前应向用户展示模型、参数和预计成本并取得确认。",
+      "tags": [
+        "可灵",
+        "Kling",
+        "视频生成",
+        "AceDataCloud",
+        "Bearer",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/AceDataCloud/KlingMCP",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "AceDataCloud API Token",
+        "credentialPlaceholder": "请输入 AceDataCloud API Token",
+        "credentialDescription": "Token 仅保存在 DSH 本机；视频生成通常会产生费用。",
+        "credentialHelpLabel": "获取 AceDataCloud API Token"
+      },
+      "servers": [
+        {
+          "serverKey": "kling",
+          "serverName": "kling",
+          "url": "https://kling.mcp.acedata.cloud/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "linear",
+      "name": "Linear",
+      "vendor": "Linear",
+      "icon": "◈",
+      "category": "办公协作",
+      "summary": "Issue / 项目 / 团队 / 评论管理",
+      "description": "接入 Linear 官方远程 MCP Server，通过 OAuth 查找、创建和更新 Issue、项目及评论。默认端点包含写能力；如需严格只读，可在自定义配置中使用官方 readonly 端点。",
+      "tags": [
+        "Linear",
+        "Issue",
+        "项目管理",
+        "团队协作",
+        "OAuth",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://linear.app/docs/mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://mcp.linear.app",
+        "scope": "read write",
+        "clientName": "DeepSeek Harness - Linear MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "linear",
+          "serverName": "linear",
+          "url": "https://mcp.linear.app/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "mediakit",
+      "name": "MediaKit CLI",
+      "vendor": "Agent Utility 社区",
+      "icon": "🎛️",
+      "category": "设计创意",
+      "summary": "音频 / 视频 / 图像处理与媒体工作流",
+      "description": "通过官方 MCP Registry 已登记的 @agentutility/mcp-mediakit npm 包启动本地 stdio Server，提供音频、视频和图像处理工具。服务采用 x402 按次支付，工具调用可能产生 USDC 费用；执行付费处理前必须由用户确认。",
+      "tags": [
+        "MediaKit",
+        "音频",
+        "视频",
+        "图像",
+        "x402",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/rooz21/x402/tree/main/packages/mcp-mediakit",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "mediakit",
+          "serverName": "mediakit",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@agentutility/mcp-mediakit"
+          ],
+          "transport": "stdio"
         }
       ]
     },
@@ -545,6 +895,85 @@
     },
     {
       "schemaVersion": 1,
+      "id": "render",
+      "name": "Render",
+      "vendor": "Render",
+      "icon": "🟢",
+      "category": "开发工具",
+      "summary": "服务部署 / 日志 / 指标 / 数据库管理",
+      "description": "接入 Render 官方托管 MCP Server，使用 Render API Key 管理服务、部署、日志、指标和数据库。服务支持修改环境变量和触发部署等高影响操作，执行前应由用户明确确认。",
+      "tags": [
+        "Render",
+        "部署",
+        "日志",
+        "监控",
+        "API Key",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://render.com/docs/mcp-server",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "Render API Key",
+        "credentialPlaceholder": "请输入 Render API Key",
+        "credentialDescription": "API Key 仅保存在 DSH 本机；建议单独创建并定期轮换。",
+        "credentialHelpLabel": "查看 Render MCP Server 官方说明"
+      },
+      "servers": [
+        {
+          "serverKey": "render",
+          "serverName": "render",
+          "url": "https://mcp.render.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "seedance",
+      "name": "Seedance 视频生成（AceDataCloud）",
+      "vendor": "AceDataCloud 社区网关",
+      "icon": "🎬",
+      "category": "设计创意",
+      "summary": "文生视频 / 图生视频 / 任务进度 / 模型与规格查询",
+      "description": "通过 AceDataCloud 托管的社区 MCP Server 调用字节 Seedance 视频模型，支持文本或参考图生成视频及任务查询，不是字节官方连接器。生成会产生费用，提交任务前应向用户展示模型、规格和预计成本并取得确认。",
+      "tags": [
+        "Seedance",
+        "视频生成",
+        "AceDataCloud",
+        "Bearer",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/AceDataCloud/SeedanceMCP",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "AceDataCloud API Token",
+        "credentialPlaceholder": "请输入 AceDataCloud API Token",
+        "credentialDescription": "Token 仅保存在 DSH 本机；视频生成通常会产生费用。",
+        "credentialHelpLabel": "获取 AceDataCloud API Token"
+      },
+      "servers": [
+        {
+          "serverKey": "seedance",
+          "serverName": "seedance",
+          "url": "https://seedance.mcp.acedata.cloud/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "seedream-image-generation",
       "name": "Seedream（图片生成）",
       "vendor": "Ace Data Cloud",
@@ -591,6 +1020,87 @@
           "title": "生成已确认的图片",
           "text": "使用 Seedream MCP 按我已确认的提示词、模型和尺寸生成图片；如参数或计费条件仍不明确，先询问我，不要直接执行",
           "server": "seedream"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "sentry",
+      "name": "Sentry",
+      "vendor": "Sentry",
+      "icon": "🔺",
+      "category": "开发工具",
+      "summary": "Issue / 事件 / Trace / 性能与生产问题分析",
+      "description": "接入 Sentry 官方远程 MCP Server，通过 OAuth 查看和分析组织、项目、Issue、事件与 Trace。部分搜索能力可能调用 Sentry 的 AI 服务；修改或处理 Issue 前应由用户确认。",
+      "tags": [
+        "Sentry",
+        "错误追踪",
+        "可观测性",
+        "性能",
+        "OAuth",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/getsentry/sentry-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://mcp.sentry.dev",
+        "scope": "",
+        "clientName": "DeepSeek Harness - Sentry MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "sentry",
+          "serverName": "sentry",
+          "url": "https://mcp.sentry.dev/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "supabase",
+      "name": "Supabase",
+      "vendor": "Supabase",
+      "icon": "⚡",
+      "category": "开发工具",
+      "summary": "项目 / Postgres / 边缘函数 / 分支管理",
+      "description": "接入 Supabase 官方托管 MCP Server，使用 Personal Access Token 管理项目、数据库、调试信息、边缘函数与开发分支。官方建议仅用于开发和测试环境，不应连接生产数据或个人敏感信息。",
+      "tags": [
+        "Supabase",
+        "Postgres",
+        "数据库",
+        "Edge Functions",
+        "PAT",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://supabase.com/docs/guides/ai-tools/mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "Supabase Personal Access Token",
+        "credentialPlaceholder": "请输入 Supabase PAT",
+        "credentialDescription": "Token 仅保存在 DSH 本机；请使用专门创建的最小权限 Token，且不要连接生产项目。",
+        "credentialHelpLabel": "查看 Supabase MCP 官方鉴权说明"
+      },
+      "servers": [
+        {
+          "serverKey": "supabase",
+          "serverName": "supabase",
+          "url": "https://mcp.supabase.com/mcp?features=docs%2Caccount%2Cdatabase%2Cdebugging%2Cdevelopment%2Cfunctions%2Cbranching",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
         }
       ]
     },
@@ -645,6 +1155,47 @@
           "title": "提取网页要点",
           "text": "使用 Tavily MCP 提取我提供网页的正文和关键事实，区分原文信息与推断",
           "server": "tavily-search"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "todoist",
+      "name": "Todoist",
+      "vendor": "Doist",
+      "icon": "✅",
+      "category": "办公协作",
+      "summary": "任务 / 项目 / 日程与工作流管理",
+      "description": "接入 Todoist 官方托管 MCP Server，通过 OAuth 读取、创建和更新任务及项目。该连接器包含写操作，新增、修改、完成或删除任务前应由用户确认。",
+      "tags": [
+        "Todoist",
+        "任务管理",
+        "项目",
+        "日程",
+        "OAuth",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://developer.todoist.com/api/v1/#todoist-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://api.todoist.com",
+        "scope": "data:read_write",
+        "clientName": "DeepSeek Harness - Todoist MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "todoist",
+          "serverName": "todoist",
+          "url": "https://ai.todoist.net/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
         }
       ]
     },
@@ -1092,6 +1643,46 @@
               "description": "查询交易日范围。"
             }
           ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "zotero",
+      "name": "Zotero",
+      "vendor": "Zotero MCP 社区",
+      "icon": "📚",
+      "category": "办公协作",
+      "summary": "文献库搜索 / 元数据 / 笔记 / 引文与全文读取",
+      "description": "通过 zotero-mcp-server Python 包启动本地 stdio Server，以只读方式访问 Zotero 桌面端文献库。需要本机安装 uv/uvx、Zotero 7+ 并开启本地 API；本卡片不配置 Web API 密钥和写入能力。",
+      "tags": [
+        "Zotero",
+        "文献管理",
+        "引用",
+        "学术研究",
+        "stdio",
+        "社区 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/54yyyu/zotero-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "zotero",
+          "serverName": "zotero",
+          "command": "uvx",
+          "args": [
+            "zotero-mcp-server",
+            "serve"
+          ],
+          "env": {
+            "ZOTERO_LOCAL": "true"
+          },
+          "transport": "stdio"
         }
       ]
     }
