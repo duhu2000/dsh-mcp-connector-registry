@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "patsnap",
+  "name": "智慧芽专利与文献",
+  "vendor": "PatSnap / 智慧芽",
+  "icon": "🔬",
+  "category": "调研分析",
+  "summary": "全球专利 / 科学文献 / 研发情报检索",
+  "description": "接入智慧芽官方远程 MCP 服务，检索和分析全球专利、科学文献与研发情报。需使用智慧芽 MCP Key，实际可用数据、工具与调用额度以账户订阅为准；检索结果仅用于信息参考，不构成法律意见。",
+  "tags": ["智慧芽", "PatSnap", "专利", "科学文献", "研发情报", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://open.patsnap.com/devportal/guides/mcp-quickstart",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "PatSnap MCP Key",
+    "credentialPlaceholder": "请输入智慧芽 MCP Key",
+    "credentialDescription": "用于访问智慧芽 MCP 的个人密钥；仅保存在 DSH 本机。",
+    "credentialHelpLabel": "查看智慧芽 MCP 快速入门"
+  },
+  "servers": [
+    {
+      "serverKey": "patsnap",
+      "serverName": "patsnap",
+      "url": "https://connect.patsnap.com/1458a4/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检索专利技术",
+      "text": "使用智慧芽 MCP 检索我指定技术主题的相关专利，列出申请人、公开时间、关键权利要求和来源链接；不要将结果表述为法律意见",
+      "server": "patsnap"
+    },
+    {
+      "title": "调研科学文献",
+      "text": "使用智慧芽 MCP 检索我指定主题的科学文献，按时间和相关性整理研究方向、主要结论与来源链接",
+      "server": "patsnap"
+    }
+  ]
+}

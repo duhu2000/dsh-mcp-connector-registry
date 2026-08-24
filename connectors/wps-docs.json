@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "wps-docs",
+  "name": "WPS 云文档",
+  "vendor": "金山办公",
+  "icon": "🗂️",
+  "category": "办公协作",
+  "summary": "云文档搜索 / 内容读取 / 评论与权限管理",
+  "description": "接入 WPS 开放平台官方云文档 MCP 服务，可搜索和读取云文档，并在授权范围内操作评论、分享和权限。需使用 WPS 开放平台 access token，并开通相应委托权限；未经用户确认不得创建、编辑、分享文档或变更权限。",
+  "tags": ["WPS", "金山办公", "云文档", "协作", "办公", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://open.wps.cn/documents/app-integration-dev/mcp-server/tools/mcp_kso-yundoc",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "WPS Access Token",
+    "credentialPlaceholder": "请输入 WPS 开放平台 access token",
+    "credentialDescription": "用于访问 WPS 云文档 MCP；请仅申请必要的委托权限，令牌仅保存在 DSH 本机。",
+    "credentialHelpLabel": "查看 WPS MCP 接入指南"
+  },
+  "servers": [
+    {
+      "serverKey": "wps-docs",
+      "serverName": "wps-yundoc",
+      "url": "https://openapi.wps.cn/mcp/v2/kso-yundoc/message",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "搜索云文档",
+      "text": "使用 WPS 云文档 MCP 搜索与当前主题相关的文件并汇总要点；只读查询，不要修改评论、分享状态或权限",
+      "server": "wps-docs"
+    },
+    {
+      "title": "检查文档权限",
+      "text": "使用 WPS 云文档 MCP 查看我指定文件的元信息和当前权限；未经我确认，不要新增、删除或修改任何权限",
+      "server": "wps-docs"
+    }
+  ]
+}

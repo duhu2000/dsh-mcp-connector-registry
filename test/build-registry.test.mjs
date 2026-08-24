@@ -187,6 +187,37 @@ test('第三批连接器使用可配置传输且不携带真实凭据', async ()
   assert.doesNotMatch(serialized, /(?:api[_-]?key|token|secret)\s*[=:]\s*[A-Za-z0-9._~-]{16,}/i);
 });
 
+test('第四批收尾连接器使用官方固定端点并使市场达到验收数量', async () => {
+  const readConnector = async (id) => JSON.parse(
+    await readFile(resolve('connectors', `${id}.json`), 'utf8'),
+  );
+  const allFiles = (await readdir(resolve('connectors')))
+    .filter((file) => file.endsWith('.json') && !file.endsWith('.sample.json'));
+  const batchIds = ['patsnap', 'tencent-docs', 'wps-docs'];
+  const batch = await Promise.all(batchIds.map(readConnector));
+  const byId = Object.fromEntries(batch.map((connector) => [connector.id, connector]));
+
+  assert.ok(allFiles.length >= 60);
+  assert.ok(batch.every((connector) => connector.published === true));
+  assert.ok(batch.every((connector) => connector.featured === false));
+  assert.ok(batch.every((connector) => connector.probeStatus === 'unverified'));
+
+  assert.equal(byId.patsnap.auth.mode, 'bearer');
+  assert.equal(byId.patsnap.servers[0].url, 'https://connect.patsnap.com/1458a4/mcp');
+  assert.equal(byId['tencent-docs'].auth.mode, 'api-key');
+  assert.equal(byId['tencent-docs'].auth.apiKeyHeader, 'Authorization');
+  assert.equal(byId['tencent-docs'].servers[0].url, 'https://docs.qq.com/openapi/mcp');
+  assert.equal(byId['wps-docs'].auth.mode, 'bearer');
+  assert.equal(
+    byId['wps-docs'].servers[0].url,
+    'https://openapi.wps.cn/mcp/v2/kso-yundoc/message',
+  );
+
+  const serialized = JSON.stringify(batch);
+  assert.doesNotMatch(serialized, /Bearer\s+[A-Za-z0-9._~-]{12,}/i);
+  assert.doesNotMatch(serialized, /(?:api[_-]?key|token|secret)\s*[=:]\s*[A-Za-z0-9._~-]{16,}/i);
+});
+
 test('盈米连接器使用公开 x-api-key 接入参数且不包含凭据', async () => {
   const connector = JSON.parse(
     await readFile(resolve('connectors/yingmi-wealth-management.json'), 'utf8'),
