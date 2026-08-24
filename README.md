@@ -62,3 +62,5 @@ npm run assets:check
 `Cross-Origin-Resource-Policy`，避免 URL 可访问但在 DSH Desktop 中被浏览器拦截。
 
 完整描述格式见 [`schema/connector.schema.json`](schema/connector.schema.json)，贡献和安全规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md) 与 [`SECURITY.md`](SECURITY.md)。PR 模板会要求提供服务官网、MCP 配置文档、鉴权方式和 Logo 来源，便于维护者核验。
+
+暂不满足公开端点、鉴权或来源核验要求的候选，统一记录在[延期连接器与复核队列](docs/DEFERRED-CONNECTORS.md)，不通过猜测 URL 或放宽密钥边界凑数量。
