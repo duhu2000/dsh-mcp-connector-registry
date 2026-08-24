@@ -57,7 +57,7 @@ test('build-registry rejects a filename that differs from connector id', async (
   assert.match(result.stderr, /filename must match connector id \(actual-id\.json\)/);
 });
 
-test('已上架连接器均进入推荐位且使用标准分类', async () => {
+test('已上架连接器均使用标准分类且推荐位仅保留关联连接器', async () => {
   const files = (await readdir(resolve('connectors')))
     .filter((file) => file.endsWith('.json') && !file.endsWith('.sample.json'));
   const connectors = await Promise.all(files.map(async (file) => JSON.parse(
@@ -68,10 +68,13 @@ test('已上架连接器均进入推荐位且使用标准分类', async () => {
     '调研分析', '设计创意', '效率工具', '其他',
   ]);
 
-  assert.ok(connectors.length >= 9);
+  assert.ok(connectors.length >= 10);
   assert.ok(connectors.every((connector) => connector.published === true));
-  assert.ok(connectors.every((connector) => connector.featured === true));
   assert.ok(connectors.every((connector) => standardCategories.has(connector.category)));
+  assert.deepEqual(
+    connectors.filter((connector) => connector.featured).map((connector) => connector.id).sort(),
+    ['pkulaw-legal', 'wind-stock-data'],
+  );
 });
 
 test('新增官方推荐连接器固定使用已核验的远程 MCP 配置', async () => {
@@ -130,7 +133,7 @@ test('QVeris 连接器使用 Hosted MCP 且付费 call 需明确确认', async (
   );
   assert.equal(connector.servers[0].url, 'https://mcp.qveris.ai/mcp');
   assert.equal(connector.servers[0].transport, 'streamable-http');
-  assert.equal(connector.featured, true);
+  assert.equal(connector.featured, false);
   assert.equal(connector.toolsSnapshot[0].tools.length, 8);
   assert.deepEqual(
     connector.toolsSnapshot[0].tools.map((tool) => tool.name),
@@ -157,7 +160,7 @@ test('八爪鱼连接器使用标准 OAuth PKCE 与公开 DCR 元数据', async 
   assert.equal(connector.auth.tokenEndpointAuthMethod, 'none');
   assert.equal(connector.servers[0].url, 'https://mcp.bazhuayu.com/');
   assert.equal(connector.servers[0].serverName, 'bazhuayu');
-  assert.equal(connector.featured, true);
+  assert.equal(connector.featured, false);
   assert.equal(connector.prompts.length, 5);
   assert.equal(connector.toolsSnapshot[0].tools.length, 12);
   assert.ok(connector.toolsSnapshot[0].tools.some((tool) => tool.name === 'get_task_status'));
@@ -168,6 +171,24 @@ test('八爪鱼连接器使用标准 OAuth PKCE 与公开 DCR 元数据', async 
 
   const serialized = JSON.stringify(connector);
   assert.doesNotMatch(serialized, /client_secret/i);
+  assert.doesNotMatch(serialized, /Bearer\s+[A-Za-z0-9._~-]{12,}/i);
+});
+
+test('Seedream 设计创意连接器使用第三方 Hosted MCP 且生成前要求确认', async () => {
+  const connector = JSON.parse(
+    await readFile(resolve('connectors/seedream-image-generation.json'), 'utf8'),
+  );
+
+  assert.equal(connector.vendor, 'Ace Data Cloud');
+  assert.equal(connector.category, '设计创意');
+  assert.equal(connector.featured, false);
+  assert.equal(connector.auth.mode, 'bearer');
+  assert.equal(connector.servers[0].url, 'https://seedream.mcp.acedata.cloud/mcp');
+  assert.equal(connector.servers[0].transport, 'streamable-http');
+  assert.match(connector.description, /第三方/);
+  assert.ok(connector.prompts.every((prompt) => /(?:确认|不要生成)/.test(prompt.text)));
+
+  const serialized = JSON.stringify(connector);
   assert.doesNotMatch(serialized, /Bearer\s+[A-Za-z0-9._~-]{12,}/i);
 });
 

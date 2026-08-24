@@ -9,7 +9,7 @@
   "tags": ["Hosted MCP", "能力路由", "工具发现", "实时数据", "API", "AI Agent", "可能收费"],
   "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/assets/qveris-logo.png",
   "published": true,
-  "featured": true,
+  "featured": false,
   "homepage": "https://qveris.ai/hosted-mcp",
   "probeStatus": "unverified",
   "promptVariables": [

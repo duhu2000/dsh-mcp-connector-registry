@@ -9,7 +9,7 @@
   "description": "接入 Cloudflare 官方托管的 API MCP Server，通过 OAuth 选择授权范围后，以 search 和 execute 工具访问 Cloudflare API。执行修改配置、部署或删除操作前应由用户明确确认。",
   "tags": ["Cloudflare", "Workers", "DNS", "R2", "Zero Trust", "OAuth", "官方 MCP"],
   "published": true,
-  "featured": true,
+  "featured": false,
   "homepage": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
   "probeStatus": "unverified",
   "auth": {

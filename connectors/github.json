@@ -9,7 +9,7 @@
   "description": "接入 GitHub 官方远程 MCP Server，查询和管理仓库、Issue、Pull Request、Actions 等 GitHub 资源。需提供具备适当最小权限的 GitHub Personal Access Token；实际可用工具和数据范围受 Token 权限及组织策略限制。",
   "tags": ["GitHub", "代码仓库", "Issue", "Pull Request", "Actions", "官方 MCP"],
   "published": true,
-  "featured": true,
+  "featured": false,
   "homepage": "https://github.com/github/github-mcp-server",
   "probeStatus": "unverified",
   "auth": {

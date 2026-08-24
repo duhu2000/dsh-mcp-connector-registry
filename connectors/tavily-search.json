@@ -9,7 +9,7 @@
   "description": "接入 Tavily 官方远程 MCP Server，通过 OAuth 使用实时搜索、网页内容提取、站点地图和抓取能力。使用量和可用能力受 Tavily 账户套餐及配额限制。",
   "tags": ["Tavily", "搜索", "调研", "网页提取", "抓取", "OAuth", "官方 MCP"],
   "published": true,
-  "featured": true,
+  "featured": false,
   "homepage": "https://github.com/tavily-ai/tavily-mcp",
   "probeStatus": "unverified",
   "auth": {

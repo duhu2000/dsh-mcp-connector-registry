@@ -20,7 +20,7 @@
         "第三方收录"
       ],
       "published": true,
-      "featured": true,
+      "featured": false,
       "homepage": "https://www.bazhuayu.com/docs/zh/mcp",
       "probeStatus": "unverified",
       "auth": {
@@ -145,7 +145,7 @@
         "官方 MCP"
       ],
       "published": true,
-      "featured": true,
+      "featured": false,
       "homepage": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
       "probeStatus": "unverified",
       "auth": {
@@ -198,7 +198,7 @@
         "官方 MCP"
       ],
       "published": true,
-      "featured": true,
+      "featured": false,
       "homepage": "https://github.com/github/github-mcp-server",
       "probeStatus": "unverified",
       "auth": {
@@ -251,7 +251,7 @@
         "官方 MCP"
       ],
       "published": true,
-      "featured": true,
+      "featured": false,
       "homepage": "https://developers.notion.com/guides/mcp/get-started-with-mcp",
       "probeStatus": "unverified",
       "auth": {
@@ -443,7 +443,7 @@
       ],
       "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/assets/qveris-logo.png",
       "published": true,
-      "featured": true,
+      "featured": false,
       "homepage": "https://qveris.ai/hosted-mcp",
       "probeStatus": "unverified",
       "promptVariables": [
@@ -545,6 +545,57 @@
     },
     {
       "schemaVersion": 1,
+      "id": "seedream-image-generation",
+      "name": "Seedream（图片生成）",
+      "vendor": "Ace Data Cloud",
+      "icon": "🏞️",
+      "category": "设计创意",
+      "summary": "文生图 / 图片编辑 / 多尺寸生成 / 任务查询",
+      "description": "接入 Ace Data Cloud 托管的 Seedream MCP Server，使用 ByteDance Seedream 模型完成文生图和图片编辑。该服务由第三方提供，需使用 Ace Data Cloud API Token；生成任务可能产生费用，执行前应确认模型、尺寸和计费条件。",
+      "tags": [
+        "Seedream",
+        "图片生成",
+        "图片编辑",
+        "设计创意",
+        "第三方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/AceDataCloud/SeedreamMCP",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "Ace Data Cloud API Token",
+        "credentialPlaceholder": "请输入 Ace Data Cloud API Token",
+        "credentialDescription": "Token 仅保存在 DSH 本机；图片生成可能产生费用，请使用最小额度并先确认参数。",
+        "credentialHelpLabel": "查看 SeedreamMCP 服务说明"
+      },
+      "servers": [
+        {
+          "serverKey": "seedream",
+          "url": "https://seedream.mcp.acedata.cloud/mcp",
+          "serverName": "seedream",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "规划图片生成参数",
+          "text": "使用 Seedream MCP 根据我的需求列出建议的提示词、模型、尺寸和预计任务步骤；不要生成图片，等我确认后再执行",
+          "server": "seedream"
+        },
+        {
+          "title": "生成已确认的图片",
+          "text": "使用 Seedream MCP 按我已确认的提示词、模型和尺寸生成图片；如参数或计费条件仍不明确，先询问我，不要直接执行",
+          "server": "seedream"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "tavily-search",
       "name": "Tavily",
       "vendor": "Tavily",
@@ -562,7 +613,7 @@
         "官方 MCP"
       ],
       "published": true,
-      "featured": true,
+      "featured": false,
       "homepage": "https://github.com/tavily-ai/tavily-mcp",
       "probeStatus": "unverified",
       "auth": {
@@ -685,7 +736,7 @@
         "第三方收录"
       ],
       "published": true,
-      "featured": true,
+      "featured": false,
       "homepage": "https://qieman.com/mcp",
       "probeStatus": "unverified",
       "promptVariables": [

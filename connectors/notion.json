@@ -9,7 +9,7 @@
   "description": "接入 Notion 官方托管 MCP Server，通过 OAuth 授权访问用户选择的 Notion 工作区，可搜索、读取、创建和更新页面及数据库内容。权限范围与当前 Notion 用户及工作区授权一致。",
   "tags": ["Notion", "知识库", "文档", "数据库", "协作", "OAuth", "官方 MCP"],
   "published": true,
-  "featured": true,
+  "featured": false,
   "homepage": "https://developers.notion.com/guides/mcp/get-started-with-mcp",
   "probeStatus": "unverified",
   "auth": {
