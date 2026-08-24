@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "sentry",
+  "name": "Sentry",
+  "vendor": "Sentry",
+  "icon": "🔺",
+  "category": "开发工具",
+  "summary": "Issue / 事件 / Trace / 性能与生产问题分析",
+  "description": "接入 Sentry 官方远程 MCP Server，通过 OAuth 查看和分析组织、项目、Issue、事件与 Trace。部分搜索能力可能调用 Sentry 的 AI 服务；修改或处理 Issue 前应由用户确认。",
+  "tags": ["Sentry", "错误追踪", "可观测性", "性能", "OAuth", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/getsentry/sentry-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://mcp.sentry.dev",
+    "scope": "",
+    "clientName": "DeepSeek Harness - Sentry MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "sentry",
+      "serverName": "sentry",
+      "url": "https://mcp.sentry.dev/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ]
+}

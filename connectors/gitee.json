@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "gitee",
+  "name": "Gitee",
+  "vendor": "Gitee",
+  "icon": "🟠",
+  "category": "开发工具",
+  "summary": "代码仓库 / Issue / Pull Request / 通知协作",
+  "description": "接入 Gitee 官方远程 MCP Server，查询和管理仓库、Issue、Pull Request 与通知。需提供最小权限的 Gitee Personal Access Token；创建、更新或合并等写操作应先由用户确认。",
+  "tags": ["Gitee", "代码仓库", "Issue", "Pull Request", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://help.gitee.com/ai-productivity/mcp-server",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "Gitee Personal Access Token",
+    "credentialPlaceholder": "请输入最小权限的 Gitee PAT",
+    "credentialDescription": "Token 仅保存在 DSH 本机；请只授予所需仓库和操作权限。",
+    "credentialHelpLabel": "查看 Gitee MCP Server 官方说明"
+  },
+  "servers": [
+    {
+      "serverKey": "gitee",
+      "serverName": "gitee",
+      "url": "https://api.gitee.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ]
+}

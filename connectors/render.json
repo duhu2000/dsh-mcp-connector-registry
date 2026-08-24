@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "render",
+  "name": "Render",
+  "vendor": "Render",
+  "icon": "🟢",
+  "category": "开发工具",
+  "summary": "服务部署 / 日志 / 指标 / 数据库管理",
+  "description": "接入 Render 官方托管 MCP Server，使用 Render API Key 管理服务、部署、日志、指标和数据库。服务支持修改环境变量和触发部署等高影响操作，执行前应由用户明确确认。",
+  "tags": ["Render", "部署", "日志", "监控", "API Key", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://render.com/docs/mcp-server",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "Render API Key",
+    "credentialPlaceholder": "请输入 Render API Key",
+    "credentialDescription": "API Key 仅保存在 DSH 本机；建议单独创建并定期轮换。",
+    "credentialHelpLabel": "查看 Render MCP Server 官方说明"
+  },
+  "servers": [
+    {
+      "serverKey": "render",
+      "serverName": "render",
+      "url": "https://mcp.render.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "canva",
+  "name": "Canva 可画",
+  "vendor": "Canva",
+  "icon": "🎨",
+  "category": "设计创意",
+  "summary": "设计搜索 / 内容读取 / 设计与素材管理",
+  "description": "接入 Canva 官方远程 MCP Server，通过 OAuth 访问当前用户有权限的设计、素材和品牌内容，并调用 Canva 的设计能力。每位用户需单独授权，创建或修改内容前应确认。",
+  "tags": ["Canva", "可画", "设计", "素材", "OAuth", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://www.canva.dev/docs/mcp/",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://mcp.canva.com",
+    "scope": "",
+    "clientName": "DeepSeek Harness - Canva MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "canva",
+      "serverName": "canva",
+      "url": "https://mcp.canva.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ]
+}

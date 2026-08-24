@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "google-maps",
+  "name": "Google 地图（HasData）",
+  "vendor": "HasData 社区网关",
+  "icon": "🗺️",
+  "category": "调研分析",
+  "summary": "地点搜索 / 评论 / 图片 / 商户与周边信息",
+  "description": "通过 HasData 社区托管的 Google Maps MCP Server 查询地点、商户、评论、图片和周边信息，不是 Google 官方服务。需要 HasData API Key；实际数据范围、费用和使用条款以 HasData 为准。",
+  "tags": ["Google Maps", "HasData", "地点", "商户", "评论", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/HasData/google-maps-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "x-api-key",
+    "credentialName": "HasData API Key",
+    "credentialPlaceholder": "请输入 HasData API Key",
+    "credentialDescription": "API Key 仅保存在 DSH 本机；免费试用和调用费用以 HasData 为准。",
+    "credentialHelpLabel": "查看 HasData Google Maps MCP"
+  },
+  "servers": [
+    {
+      "serverKey": "google-maps",
+      "serverName": "google-maps",
+      "url": "https://mcp.hasdata.com/api/mcp?apis=google_maps",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ]
+}

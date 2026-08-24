@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "chrome-devtools",
+  "name": "Chrome DevTools",
+  "vendor": "Google Chrome",
+  "icon": "🌐",
+  "category": "开发工具",
+  "summary": "浏览器调试 / 网络分析 / 性能追踪 / 自动化",
+  "description": "通过官方 chrome-devtools-mcp npm 包启动本地 stdio Server，调试 Chrome 页面、分析网络与控制台、记录性能 Trace 并执行浏览器自动化。需要本机已安装当前版 Chrome；连接器可读取和操作浏览器内容。",
+  "tags": ["Chrome", "DevTools", "浏览器调试", "性能", "stdio", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "chrome-devtools",
+      "serverName": "chrome-devtools",
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"],
+      "transport": "stdio"
+    }
+  ]
+}

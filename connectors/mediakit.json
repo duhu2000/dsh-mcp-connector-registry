@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "mediakit",
+  "name": "MediaKit CLI",
+  "vendor": "Agent Utility 社区",
+  "icon": "🎛️",
+  "category": "设计创意",
+  "summary": "音频 / 视频 / 图像处理与媒体工作流",
+  "description": "通过官方 MCP Registry 已登记的 @agentutility/mcp-mediakit npm 包启动本地 stdio Server，提供音频、视频和图像处理工具。服务采用 x402 按次支付，工具调用可能产生 USDC 费用；执行付费处理前必须由用户确认。",
+  "tags": ["MediaKit", "音频", "视频", "图像", "x402", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/rooz21/x402/tree/main/packages/mcp-mediakit",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "mediakit",
+      "serverName": "mediakit",
+      "command": "npx",
+      "args": ["-y", "@agentutility/mcp-mediakit"],
+      "transport": "stdio"
+    }
+  ]
+}

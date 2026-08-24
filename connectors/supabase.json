@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "supabase",
+  "name": "Supabase",
+  "vendor": "Supabase",
+  "icon": "⚡",
+  "category": "开发工具",
+  "summary": "项目 / Postgres / 边缘函数 / 分支管理",
+  "description": "接入 Supabase 官方托管 MCP Server，使用 Personal Access Token 管理项目、数据库、调试信息、边缘函数与开发分支。官方建议仅用于开发和测试环境，不应连接生产数据或个人敏感信息。",
+  "tags": ["Supabase", "Postgres", "数据库", "Edge Functions", "PAT", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://supabase.com/docs/guides/ai-tools/mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "Supabase Personal Access Token",
+    "credentialPlaceholder": "请输入 Supabase PAT",
+    "credentialDescription": "Token 仅保存在 DSH 本机；请使用专门创建的最小权限 Token，且不要连接生产项目。",
+    "credentialHelpLabel": "查看 Supabase MCP 官方鉴权说明"
+  },
+  "servers": [
+    {
+      "serverKey": "supabase",
+      "serverName": "supabase",
+      "url": "https://mcp.supabase.com/mcp?features=docs%2Caccount%2Cdatabase%2Cdebugging%2Cdevelopment%2Cfunctions%2Cbranching",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ]
+}

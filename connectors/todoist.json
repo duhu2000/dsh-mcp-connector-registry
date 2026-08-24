@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "todoist",
+  "name": "Todoist",
+  "vendor": "Doist",
+  "icon": "✅",
+  "category": "办公协作",
+  "summary": "任务 / 项目 / 日程与工作流管理",
+  "description": "接入 Todoist 官方托管 MCP Server，通过 OAuth 读取、创建和更新任务及项目。该连接器包含写操作，新增、修改、完成或删除任务前应由用户确认。",
+  "tags": ["Todoist", "任务管理", "项目", "日程", "OAuth", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://developer.todoist.com/api/v1/#todoist-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://api.todoist.com",
+    "scope": "data:read_write",
+    "clientName": "DeepSeek Harness - Todoist MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "todoist",
+      "serverName": "todoist",
+      "url": "https://ai.todoist.net/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ]
+}

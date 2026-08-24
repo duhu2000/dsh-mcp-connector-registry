@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "kling",
+  "name": "可灵 AI（AceDataCloud）",
+  "vendor": "AceDataCloud 社区网关",
+  "icon": "🎞️",
+  "category": "设计创意",
+  "summary": "文生视频 / 图生视频 / 任务进度与结果查询",
+  "description": "通过 AceDataCloud 托管的社区 MCP Server 调用可灵 AI 视频生成能力，不是快手或可灵官方连接器。生成任务可能产生费用，提交前应向用户展示模型、参数和预计成本并取得确认。",
+  "tags": ["可灵", "Kling", "视频生成", "AceDataCloud", "Bearer", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/AceDataCloud/KlingMCP",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "AceDataCloud API Token",
+    "credentialPlaceholder": "请输入 AceDataCloud API Token",
+    "credentialDescription": "Token 仅保存在 DSH 本机；视频生成通常会产生费用。",
+    "credentialHelpLabel": "获取 AceDataCloud API Token"
+  },
+  "servers": [
+    {
+      "serverKey": "kling",
+      "serverName": "kling",
+      "url": "https://kling.mcp.acedata.cloud/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ]
+}
