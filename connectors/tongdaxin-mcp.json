@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "tongdaxin-mcp",
+  "name": "通达信行情（社区）",
+  "vendor": "社区连接器",
+  "icon": "📉",
+  "category": "金融投资",
+  "summary": "A 股行情 / 分时 / K 线 / 市场数据",
+  "description": "通过社区 tdx-mcp Python 包启动本地 stdio Server，连接公开行情服务器查询 A 股行情、分时与 K 线数据。该连接器并非通达信官方产品，仅适合个人学习和研究；可用性受公共行情源影响，不构成投资建议。",
+  "tags": ["通达信", "A股", "行情", "K线", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://pypi.org/project/tdx-mcp/",
+  "probeStatus": "unverified",
+  "auth": { "mode": "none" },
+  "servers": [
+    {
+      "serverKey": "tongdaxin",
+      "serverName": "tongdaxin-community",
+      "command": "uvx",
+      "args": ["--from", "tdx-mcp", "tdx-mcp"],
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询市场行情",
+      "text": "查询目标证券的最新可用行情和近期走势，标注数据来源与时间，不提供投资建议",
+      "server": "tongdaxin"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "jenkins",
+  "name": "Jenkins",
+  "vendor": "社区连接器",
+  "icon": "🤵",
+  "category": "开发工具",
+  "summary": "任务状态 / 构建日志 / 流水线与作业管理",
+  "description": "通过社区 @kud/mcp-jenkins npm 包启动本地 stdio Server，访问 Jenkins 作业、构建、日志和队列。部分工具可触发构建、修改或删除作业并执行管理操作；请使用最小权限 API Token，任何写入、触发、删除或重启操作前必须明确确认。",
+  "tags": ["Jenkins", "CI/CD", "构建", "流水线", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://kud.github.io/mcp-jenkins",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "Jenkins 连接参数仅保存在 DSH 本机，并注入本地 MCP 进程；建议使用专用最小权限账号。",
+    "credentialHelpLabel": "查看 Jenkins MCP 项目说明",
+    "credentialFields": [
+      { "key": "serverUrl", "label": "Jenkins URL", "placeholder": "例如 https://jenkins.example.com", "required": true, "secret": false },
+      { "key": "username", "label": "用户名", "placeholder": "请输入 Jenkins 用户名", "required": true, "secret": false },
+      { "key": "apiToken", "label": "API Token", "placeholder": "请输入 Jenkins API Token", "required": true, "secret": true }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "jenkins",
+      "serverName": "jenkins",
+      "command": "npx",
+      "args": ["--yes", "@kud/mcp-jenkins@latest"],
+      "credentialBindings": {
+        "MCP_JENKINS_URL": "serverUrl",
+        "MCP_JENKINS_USER": "username",
+        "MCP_JENKINS_API_TOKEN": "apiToken"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检查失败构建",
+      "text": "只读取最近失败的 Jenkins 构建和日志并分析原因；未经我确认不要触发构建、修改作业、删除资源或重启 Jenkins",
+      "server": "jenkins"
+    }
+  ]
+}

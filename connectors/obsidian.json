@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "obsidian",
+  "name": "Obsidian（只读）",
+  "vendor": "社区连接器",
+  "icon": "💎",
+  "category": "办公协作",
+  "summary": "本地知识库搜索 / 笔记读取 / 链接分析",
+  "description": "通过社区 @istrejo/obsidian-mcp npm 包启动本地 stdio Server，在只读模式下搜索和分析指定 Obsidian Vault。无需远程鉴权，但需填写本地知识库绝对路径；默认关闭写入能力，仍请避免向不可信会话暴露敏感笔记。",
+  "tags": ["Obsidian", "知识库", "笔记", "本地文件", "只读", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/istrejo/obsidian-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "这里仅收集本地 Vault 路径，不是远程凭据；路径配置会注入本地 MCP 进程。",
+    "credentialHelpLabel": "查看 Obsidian MCP 项目说明",
+    "credentialFields": [
+      { "key": "vaultPath", "label": "Vault 绝对路径", "placeholder": "例如 /Users/name/Documents/MyVault", "required": true, "secret": false }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "obsidian",
+      "serverName": "obsidian-readonly",
+      "command": "npx",
+      "args": ["-y", "@istrejo/obsidian-mcp"],
+      "env": { "OBSIDIAN_READ_ONLY": "true" },
+      "credentialBindings": { "OBSIDIAN_VAULT_PATH": "vaultPath" },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检索本地笔记",
+      "text": "只读检索 Obsidian 中与主题相关的笔记并列出文件来源；不要修改、创建或删除笔记",
+      "server": "obsidian"
+    }
+  ]
+}

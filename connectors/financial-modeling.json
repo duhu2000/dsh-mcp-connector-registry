@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "financial-modeling",
+  "name": "Excel 财务建模助手（社区）",
+  "vendor": "社区连接器",
+  "icon": "📗",
+  "category": "金融投资",
+  "summary": "Excel 读取 / 写入 / 公式 / 表格建模",
+  "description": "通过社区 @negokaz/excel-mcp-server npm 包启动本地 stdio Server，读取和修改本地 Excel 工作簿，可辅助财务模型整理。它是通用 Excel 文件工具，不提供金融数据或投资结论；写入前请备份文件，并确认目标路径和修改范围。",
+  "tags": ["Excel", "财务建模", "工作簿", "公式", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/negokaz/excel-mcp-server",
+  "probeStatus": "unverified",
+  "auth": { "mode": "none" },
+  "servers": [
+    {
+      "serverKey": "financial-modeling",
+      "serverName": "excel-mcp-server",
+      "command": "npx",
+      "args": ["--yes", "@negokaz/excel-mcp-server"],
+      "env": {
+        "EXCEL_MCP_PAGING_CELLS_LIMIT": "4000"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检查财务工作簿",
+      "text": "只读取指定 Excel 工作簿并梳理工作表、关键公式和缺失项；未经我确认不要写入或覆盖文件",
+      "server": "financial-modeling"
+    }
+  ]
+}

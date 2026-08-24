@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "qingliu",
+  "name": "轻流",
+  "vendor": "轻流",
+  "icon": "🧩",
+  "category": "效率工具",
+  "summary": "无代码应用 / 表单 / 数据与流程协作",
+  "description": "通过轻流 @qingflow-tech/qingflow-app-user-mcp npm 包启动本地 stdio Server，访问无代码应用、表单、数据和流程。首次运行可能下载本地 Python 运行环境并耗时较长；登录和令牌切换由服务内置工具完成，提交表单或修改数据前请确认。",
+  "tags": ["轻流", "无代码", "表单", "流程", "应用数据", "stdio"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://qingclawskills.qingflow.com/",
+  "probeStatus": "unverified",
+  "auth": { "mode": "none" },
+  "servers": [
+    {
+      "serverKey": "qingliu",
+      "serverName": "qingflow-app-user",
+      "command": "npx",
+      "args": ["-y", "-p", "@qingflow-tech/qingflow-app-user-mcp@latest", "qingflow-app-user-mcp"],
+      "env": { "QINGFLOW_MCP_DEFAULT_BASE_URL": "https://qingflow.com/api" },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看轻流应用",
+      "text": "先完成轻流登录并只读列出我可访问的应用和表单；未经我确认不要提交表单、推进流程或修改数据",
+      "server": "qingliu"
+    }
+  ]
+}

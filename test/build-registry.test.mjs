@@ -152,6 +152,41 @@ test('第二批连接器覆盖远程 OAuth 与多字段 stdio 凭据映射', asy
   assert.doesNotMatch(serialized, /(?:api[_-]?key|token|secret)\s*[=:]\s*[A-Za-z0-9._~-]{16,}/i);
 });
 
+test('第三批连接器使用可配置传输且不携带真实凭据', async () => {
+  const readConnector = async (id) => JSON.parse(
+    await readFile(resolve('connectors', `${id}.json`), 'utf8'),
+  );
+  const batchIds = [
+    'eastmoney-mcp', 'feishu', 'financial-modeling', 'gangtise', 'huayu-legal',
+    'jenkins', 'line', 'mastergo', 'netease-mail', 'obsidian', 'pixso',
+    'polardb', 'qingliu', 'qq-mail', 'stock-analysis', 'tongdaxin-mcp',
+    'wecom', 'wolterskluwer',
+  ];
+  const batch = await Promise.all(batchIds.map(readConnector));
+  const byId = Object.fromEntries(batch.map((connector) => [connector.id, connector]));
+
+  assert.equal(batch.length, 18);
+  assert.ok(batch.every((connector) => connector.published === true));
+  assert.ok(batch.every((connector) => connector.featured === false));
+  assert.ok(batch.every((connector) => connector.probeStatus === 'unverified'));
+
+  assert.equal(byId.pixso.auth.apiKeyHeader, 'Token');
+  assert.equal(byId.pixso.servers[0].url, 'https://pixso.cn/mcp');
+  assert.equal(byId['huayu-legal'].servers.length, 4);
+  assert.equal(byId.wolterskluwer.servers[0].url, 'https://mcp.wkinfo.com.cn/mcp-servers/integrated/');
+  assert.deepEqual(byId.feishu.servers[0].credentialBindings, {
+    APP_ID: 'appId',
+    APP_SECRET: 'appSecret',
+  });
+  assert.equal(byId.obsidian.servers[0].env.OBSIDIAN_READ_ONLY, 'true');
+  assert.equal(byId['netease-mail'].servers[0].env.SMTP_HOST, 'smtp.163.com');
+  assert.equal(byId['qq-mail'].servers[0].env.SMTP_HOST, 'smtp.qq.com');
+
+  const serialized = JSON.stringify(batch);
+  assert.doesNotMatch(serialized, /Bearer\s+[A-Za-z0-9._~-]{12,}/i);
+  assert.doesNotMatch(serialized, /(?:api[_-]?key|token|secret)\s*[=:]\s*[A-Za-z0-9._~-]{16,}/i);
+});
+
 test('盈米连接器使用公开 x-api-key 接入参数且不包含凭据', async () => {
   const connector = JSON.parse(
     await readFile(resolve('connectors/yingmi-wealth-management.json'), 'utf8'),

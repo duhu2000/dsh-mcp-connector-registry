@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "huayu-legal",
+  "name": "元典法律数据",
+  "vendor": "华宇元典",
+  "icon": "⚖️",
+  "category": "法律合规",
+  "summary": "法规 / 案例 / 企业 / 证券法律数据",
+  "description": "接入华宇元典开放平台的官方远程 MCP 服务，分别查询法律法规、司法案例、企业和证券法律数据。需提供开放平台访问令牌；实际数据范围、额度和时效以账号权限为准，查询结果不能替代专业法律意见。",
+  "tags": ["元典", "法规", "案例", "企业法律", "证券法律", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://open.chineselaw.com/mcp-config/",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "元典开放平台访问令牌",
+    "credentialPlaceholder": "请输入开放平台访问令牌",
+    "credentialDescription": "令牌仅保存在 DSH 本机；请仅授权所需数据能力。",
+    "credentialHelpLabel": "查看元典 MCP 配置说明"
+  },
+  "servers": [
+    {
+      "serverKey": "law",
+      "serverName": "yuandian-law",
+      "url": "https://open.chineselaw.com/mcp/law/stream",
+      "transport": "streamable-http",
+      "headers": { "Accept": "application/json, text/event-stream" }
+    },
+    {
+      "serverKey": "case",
+      "serverName": "yuandian-case",
+      "url": "https://open.chineselaw.com/mcp/case/stream",
+      "transport": "streamable-http",
+      "headers": { "Accept": "application/json, text/event-stream" }
+    },
+    {
+      "serverKey": "company",
+      "serverName": "yuandian-company",
+      "url": "https://open.chineselaw.com/mcp/company/stream",
+      "transport": "streamable-http",
+      "headers": { "Accept": "application/json, text/event-stream" }
+    },
+    {
+      "serverKey": "securities",
+      "serverName": "yuandian-securities",
+      "url": "https://open.chineselaw.com/mcp/securities/stream",
+      "transport": "streamable-http",
+      "headers": { "Accept": "application/json, text/event-stream" }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检索法规与案例",
+      "text": "先检索与问题相关的现行法规，再查找相近案例；标注来源、发布日期和效力状态，不替代律师意见"
+    }
+  ]
+}

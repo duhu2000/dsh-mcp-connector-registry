@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "gangtise",
+  "name": "Gangtise",
+  "vendor": "Gangtise",
+  "icon": "📈",
+  "category": "金融投资",
+  "summary": "机构调研 / 专家纪要 / 行业与公司研究",
+  "description": "通过 Gangtise 提供的 gangtise-mcp npm 包启动本地 stdio Server，检索机构调研、专家纪要和行业研究内容。需使用 Gangtise 访问令牌；数据权限和可能产生的费用以账号为准，调用付费能力前请先确认，不构成投资建议。",
+  "tags": ["Gangtise", "机构调研", "专家纪要", "行业研究", "stdio"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/gangtiser/gangtise-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialDescription": "访问令牌仅保存在 DSH 本机，并注入本地 MCP 进程。",
+    "credentialHelpLabel": "查看 Gangtise MCP 项目说明",
+    "credentialFields": [
+      {
+        "key": "token",
+        "label": "Gangtise Token",
+        "placeholder": "请输入访问令牌",
+        "required": true,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "gangtise",
+      "serverName": "gangtise",
+      "command": "npx",
+      "args": ["-y", "gangtise-mcp@latest"],
+      "credentialBindings": {
+        "GANGTISE_TOKEN": "token"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检索机构调研",
+      "text": "检索与目标公司相关的近期机构调研和专家纪要，先列出候选内容与费用信息；未经我确认不要调用付费能力",
+      "server": "gangtise"
+    }
+  ]
+}

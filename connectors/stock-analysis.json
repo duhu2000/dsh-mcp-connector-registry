@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "stock-analysis",
+  "name": "Stock SDK 股票分析",
+  "vendor": "Stock SDK 社区",
+  "icon": "🧮",
+  "category": "金融投资",
+  "summary": "A 股 / 港股 / 美股 / 基金综合分析",
+  "description": "通过社区 stock-sdk npm 包启动本地 stdio Server，查询 A 股、港股、美股及基金的行情和分析数据，无需 API Key。数据源和能力可能随项目版本变化，仅供研究参考，不构成投资建议。",
+  "tags": ["股票分析", "A股", "港股", "美股", "基金", "stdio", "社区 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/chengzuopeng/stock-sdk",
+  "probeStatus": "unverified",
+  "auth": { "mode": "none" },
+  "servers": [
+    {
+      "serverKey": "stock-analysis",
+      "serverName": "stock-sdk",
+      "command": "npx",
+      "args": ["-y", "stock-sdk", "mcp"],
+      "env": {
+        "STOCK_SDK_MCP_TOOLS": "core",
+        "STOCK_SDK_MCP_PROMPTS": "core"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "生成股票研究摘要",
+      "text": "汇总目标证券的最新可用行情与基础分析，列明数据时间和不确定性，不提供买卖建议",
+      "server": "stock-analysis"
+    }
+  ]
+}

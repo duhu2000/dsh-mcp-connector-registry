@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "mastergo",
+  "name": "MasterGo Magic MCP",
+  "vendor": "MasterGo",
+  "icon": "🪄",
+  "category": "设计创意",
+  "summary": "设计稿解析 / 设计系统 / 代码生成辅助",
+  "description": "通过 MasterGo 团队提供的 @mastergo/magic-mcp npm 包启动本地 stdio Server，读取团队项目中的设计稿和设计系统上下文，辅助生成前端代码。需 MasterGo 团队版或更高版本及 MCP Token；文件访问范围受团队权限限制。",
+  "tags": ["MasterGo", "Magic MCP", "设计稿", "设计系统", "代码生成", "stdio"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/mastergo-design/mastergo-magic-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialDescription": "MasterGo MCP Token 仅保存在 DSH 本机，并注入本地 MCP 进程。",
+    "credentialHelpLabel": "查看 MasterGo Magic MCP 项目说明",
+    "credentialFields": [
+      { "key": "token", "label": "MasterGo MCP Token", "placeholder": "请输入团队项目 MCP Token", "required": true, "secret": true }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "mastergo",
+      "serverName": "mastergo-magic",
+      "command": "npx",
+      "args": ["-y", "@mastergo/magic-mcp"],
+      "env": { "API_BASE_URL": "https://mastergo.com" },
+      "credentialBindings": { "MG_MCP_TOKEN": "token" },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "解析设计稿",
+      "text": "读取指定 MasterGo 设计稿并整理页面结构、组件、设计变量和实现注意点，不修改原设计文件",
+      "server": "mastergo"
+    }
+  ]
+}

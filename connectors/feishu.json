@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "feishu",
+  "name": "飞书开放平台",
+  "vendor": "飞书",
+  "icon": "🐦",
+  "category": "办公协作",
+  "summary": "消息 / 文档 / 多维表格 / 通讯录协作",
+  "description": "通过飞书开放平台官方 @larksuiteoapi/lark-mcp npm 包启动本地 stdio Server，调用消息、文档、多维表格和通讯录等开放 API。需创建飞书应用并填写 App ID 与 App Secret；能力范围受应用权限和租户授权限制，发送消息或修改数据前请确认。",
+  "tags": ["飞书", "Lark", "文档", "多维表格", "消息", "官方 MCP", "stdio"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/larksuite/lark-openapi-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "应用凭据仅保存在 DSH 本机，并注入飞书官方 MCP 进程；请只开通必要权限。",
+    "credentialHelpLabel": "查看飞书开放平台 MCP 说明",
+    "credentialFields": [
+      { "key": "appId", "label": "App ID", "placeholder": "请输入飞书应用 App ID", "required": true, "secret": false },
+      { "key": "appSecret", "label": "App Secret", "placeholder": "请输入飞书应用 App Secret", "required": true, "secret": true }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "feishu",
+      "serverName": "feishu-openapi",
+      "command": "npx",
+      "args": ["-y", "@larksuiteoapi/lark-mcp", "mcp"],
+      "env": {
+        "LARK_DOMAIN": "https://open.feishu.cn"
+      },
+      "credentialBindings": {
+        "APP_ID": "appId",
+        "APP_SECRET": "appSecret"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查找飞书资料",
+      "text": "只读检索与主题相关的飞书文档和多维表格并汇总来源；未经我确认不要发送消息或修改数据",
+      "server": "feishu"
+    }
+  ]
+}
