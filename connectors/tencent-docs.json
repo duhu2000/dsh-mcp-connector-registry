@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "tencent-docs",
+  "name": "腾讯文档",
+  "vendor": "腾讯",
+  "icon": "📄",
+  "category": "办公协作",
+  "summary": "文档创建 / 内容查询与编辑 / 在线协作",
+  "description": "接入腾讯文档官方远程 MCP 服务，可查询、创建和编辑在线文档。需在腾讯文档 MCP 授权页获取 Token，并通过 Authorization 请求头传入原始 Token；未经用户确认不得创建、编辑、分享文档或变更权限。",
+  "tags": ["腾讯文档", "在线文档", "协作", "办公", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://developer.cloud.tencent.com/mcp/server/11803",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "Authorization",
+    "credentialName": "腾讯文档 MCP Token",
+    "credentialPlaceholder": "请输入腾讯文档 MCP Token",
+    "credentialDescription": "按官方要求将原始 Token 写入 Authorization 请求头；Token 仅保存在 DSH 本机。",
+    "credentialHelpLabel": "前往腾讯文档 MCP 授权页"
+  },
+  "servers": [
+    {
+      "serverKey": "tencent-docs",
+      "serverName": "tencent-docs",
+      "url": "https://docs.qq.com/openapi/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查找文档资料",
+      "text": "使用腾讯文档 MCP 查找与当前主题相关的文档并汇总要点；只读查询，不要编辑、分享文档或修改权限",
+      "server": "tencent-docs"
+    },
+    {
+      "title": "整理文档修改建议",
+      "text": "读取我指定的腾讯文档并给出修改建议；未经我确认，不要创建、编辑、分享文档或变更权限",
+      "server": "tencent-docs"
+    }
+  ]
+}
