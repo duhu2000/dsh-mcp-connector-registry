@@ -12,13 +12,20 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 
 ## 当前公共连接器
 
-| 连接器 | 主要能力 | 鉴权 |
+根目录 `catalog.json` 当前由 10 个 Connector 源文件确定性生成：
+
+| 连接器 | 分类 | 鉴权 |
 |---|---|---|
-| 八爪鱼·云采集 | 采集模板、云任务、进度查询和结构化数据导出 | OAuth 2.1 + PKCE |
-| 北大法宝·法律检索 | 法规、法条、司法案例和引用核验 | Bearer Token |
-| Wind·股票数据 | 全球股票档案、行情、技术指标和财务数据 | Bearer Token |
-| 盈米·基金投顾 | 基金检索、组合诊断、资产配置和投资风险分析 | `x-api-key` |
-| QVerisMCP | 10,000+ 实时能力发现、检查、询价与调用 | Bearer Token |
+| 八爪鱼·云采集 | 效率工具 | OAuth 2.1 + PKCE |
+| Cloudflare | 开发工具 | OAuth 2.1 + PKCE |
+| GitHub | 开发工具 | Bearer Token |
+| Notion | 办公协作 | OAuth 2.1 + PKCE |
+| 北大法宝·法律检索 | 法律合规 | Bearer Token |
+| QVerisMCP | 其他 | Bearer Token |
+| Seedream（图片生成） | 设计创意 | Bearer Token |
+| Tavily | 调研分析 | OAuth 2.1 + PKCE |
+| Wind·股票数据 | 金融投资 | Bearer Token |
+| 盈米·基金投顾 | 金融投资 | `x-api-key` |
 
 连接器目录只保存公开接入参数；OAuth 授权结果、Token 和 API Key 均只保存在用户的 DSH 本机。
 
@@ -26,7 +33,20 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 
 如果您是服务商或社区贡献者，可以直接[发起连接器收录请求](https://github.com/duhu2000/dsh-mcp-connector-registry/issues/new?template=connector-request.yml)，也可以 fork 本仓库并提交 Connector PR。
 
-首次上架建议先阅读完整的[连接器上架指南](docs/ONBOARDING.md)，其中包含 Descriptor 模板、字段说明、分类、鉴权模式和安全检查清单。
+首次上架请先阅读完整的[第三方连接器上架指南](docs/ONBOARDING.md)，其中包含上架前准备、两条路径、6 步操作、完整 Descriptor 模板、字段表、9 分类、4 种鉴权、Checklist 和 10 条 FAQ。
+
+```mermaid
+flowchart LR
+  A[准备公开资料] --> B{能维护 Descriptor?}
+  B -->|能| C[Fork 并提交 Connector PR]
+  B -->|不能| D[提交 Connector request issue]
+  D --> E[维护者评估并代建]
+  C --> F[CI 校验与维护者审核]
+  E --> F
+  F --> G[合并到 main]
+  G --> H[CI 自动重建 catalog.json]
+  H --> I[用户刷新市场]
+```
 
 1. 复制 `connectors/example.sample.json` 为 `connectors/<connector-id>.json`，文件名必须与 `id` 完全一致。
 2. 只提交公开元数据；禁止 Token、API Key、密码、Cookie 和 Client Secret。
@@ -35,6 +55,8 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 5. 不要手动修改或提交 `catalog.json`；合并到 `main` 后，CI 会自动重建并提交公开产物。每周健康巡检会生成探针报告 artifact。
 
 `featured` 由维护者管理。第三方收录不代表服务商官方背书，实际权限、费用和可用性以服务商为准。
+
+普通用户的安装、升级、分类浏览、连接与故障排查请看插件仓库的[MCP连接器用户手册](https://github.com/duhu2000/dsh-mcp-connector/blob/main/docs/USER-GUIDE.md)。Registry README 不放产品 UI 截图：上架流程图更稳定，真实产品界面统一由插件仓库维护，避免两处截图随版本演进失同步。
 
 ## 维护命令
 
