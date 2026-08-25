@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "cloudbase",
+  "name": "腾讯云 CloudBase",
+  "vendor": "腾讯云开发",
+  "icon": "☁️",
+  "category": "开发工具",
+  "summary": "云开发环境 / 数据库 / 云函数 / 存储与部署",
+  "description": "通过腾讯云开发官方 @cloudbase/cloudbase-mcp npm 包启动本地 stdio Server，使用本地登录管理 CloudBase 环境、数据库、鉴权、云函数、Cloud Run、对象存储和静态托管。当前官方要求 Node.js 18.15+；首次使用应通过 MCP 登录并选择正确站点、地域和环境，不把 SecretId、SecretKey 或 env_id 拼入 Descriptor URL。该连接器具备本地文件读取、资源创建修改删除与部署能力，可能产生云资源费用；任何写入、删除、发布、部署或权限变更前必须确认账号、环境、地域、资源和计费影响。",
+  "tags": ["腾讯云", "CloudBase", "云开发", "数据库", "云函数", "stdio", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/TencentCloudBase/CloudBase-AI-Toolkit",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "cloudbase",
+      "serverName": "cloudbase",
+      "command": "npx",
+      "args": ["-y", "@cloudbase/cloudbase-mcp@latest"],
+      "transport": "stdio"
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "cloudGoal",
+      "label": "云开发目标",
+      "placeholder": "例如：检查测试环境的数据库、函数和静态托管状态",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看 CloudBase 环境",
+      "text": "如果尚未登录，先让我在 CloudBase 官方登录流程中完成授权；随后只读列出可访问环境并完成“{{cloudGoal}}”的现状检查，不要创建、修改、删除、发布或部署任何资源",
+      "server": "cloudbase"
+    },
+    {
+      "title": "预审 CloudBase 变更",
+      "text": "针对“{{cloudGoal}}”拟定 CloudBase 操作计划，列出账号站点、地域、环境 ID、拟调用工具、资源变化、权限和预计费用；停在任何数据库写入、资源创建删除、权限修改、上传、发布或部署之前等待我逐项明确确认",
+      "server": "cloudbase"
+    }
+  ]
+}

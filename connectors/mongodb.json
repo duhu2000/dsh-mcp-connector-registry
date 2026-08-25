@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "mongodb",
+  "name": "MongoDB",
+  "vendor": "MongoDB",
+  "icon": "🍃",
+  "category": "开发工具",
+  "summary": "数据库查询 / Atlas 资源 / Schema 分析 / 只读模式",
+  "description": "通过 MongoDB 官方 mongodb-mcp-server npm 包启动本地 stdio Server，连接 MongoDB 数据库或使用 Atlas Service Account 查询 Atlas 资源。连接器固定启用 --readOnly，只注册读取、连接和元数据工具，不提供创建、更新或删除工具；数据库账号和 Atlas Service Account 仍应遵循最小权限原则。当前官方版本建议使用 Node.js 22.13+，连接字符串或 Atlas Client ID/Secret 仅通过环境变量注入。",
+  "tags": ["MongoDB", "MongoDB Atlas", "数据库", "只读", "stdio", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/mongodb-js/mongodb-mcp-server",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "可填写 MongoDB 连接字符串，或同时填写 Atlas Service Account Client ID 与 Client Secret；凭据仅保存在 DSH 本机并注入只读 MCP 进程。",
+    "credentialHelpLabel": "查看 MongoDB MCP 安全配置",
+    "credentialFields": [
+      {
+        "key": "connectionString",
+        "label": "MongoDB 连接字符串（可选）",
+        "placeholder": "mongodb+srv://...",
+        "description": "用于直接连接 MongoDB；建议使用专用只读数据库账号。",
+        "required": false,
+        "secret": true
+      },
+      {
+        "key": "atlasClientId",
+        "label": "Atlas Service Account Client ID（可选）",
+        "placeholder": "请输入 Atlas Client ID",
+        "description": "使用 Atlas 管理能力时需与 Client Secret 同时填写。",
+        "required": false,
+        "secret": false
+      },
+      {
+        "key": "atlasClientSecret",
+        "label": "Atlas Service Account Client Secret（可选）",
+        "placeholder": "请输入 Atlas Client Secret",
+        "description": "使用 Atlas 管理能力时需与 Client ID 同时填写。",
+        "required": false,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "mongodb",
+      "serverName": "mongodb",
+      "command": "npx",
+      "args": ["-y", "mongodb-mcp-server@latest", "--readOnly"],
+      "credentialBindings": {
+        "MDB_MCP_CONNECTION_STRING": "connectionString",
+        "MDB_MCP_API_CLIENT_ID": "atlasClientId",
+        "MDB_MCP_API_CLIENT_SECRET": "atlasClientSecret"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "databaseGoal",
+      "label": "分析目标",
+      "placeholder": "例如：梳理订单库的集合结构与最近一周数据分布",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "只读分析 MongoDB",
+      "text": "使用 MongoDB MCP 完成“{{databaseGoal}}”：先列出数据库、集合、索引与字段结构，再执行范围受限的只读查询；说明查询条件、数量上限和结论，不要尝试创建、更新或删除数据及 Atlas 资源",
+      "server": "mongodb"
+    }
+  ]
+}

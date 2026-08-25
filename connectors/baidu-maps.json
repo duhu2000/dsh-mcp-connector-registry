@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "baidu-maps",
+  "name": "百度地图",
+  "vendor": "百度地图开放平台",
+  "icon": "🧭",
+  "category": "效率工具",
+  "summary": "地理编码 / 地点搜索 / 路线规划 / 天气与交通",
+  "description": "通过百度地图官方 @baidumap/mcp-server-baidu-map npm 包启动本地 stdio Server，提供地理编码、逆地理编码、POI 搜索、地点详情、路线规划、天气、IP 定位和实时交通查询。服务端 AK 仅通过 BAIDU_MAP_API_KEY 环境变量注入，不使用把 AK 放入 URL Query 的远程方案。调用范围、配额和高级能力以百度地图开放平台账号权限为准；地址、坐标、路线和 IP 等位置数据会发送至百度地图服务，请避免提交无关的个人敏感位置。",
+  "tags": ["百度地图", "地图", "地理编码", "POI", "路线规划", "stdio", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/baidu-maps/mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "百度地图服务端 AK 仅保存在 DSH 本机，并以 BAIDU_MAP_API_KEY 注入官方 MCP 进程。",
+    "credentialHelpLabel": "获取百度地图服务端 AK",
+    "credentialFields": [
+      {
+        "key": "apiKey",
+        "label": "百度地图服务端 AK",
+        "placeholder": "请输入百度地图服务端 AK",
+        "description": "请在百度地图开放平台创建服务器端应用，并按需开通 MCP 能力。",
+        "required": true,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "baidu-maps",
+      "serverName": "baidu-map",
+      "command": "npx",
+      "args": ["-y", "@baidumap/mcp-server-baidu-map"],
+      "credentialBindings": {
+        "BAIDU_MAP_API_KEY": "apiKey"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "mapRequest",
+      "label": "地图查询需求",
+      "placeholder": "例如：规划上海虹桥站到外滩的公共交通路线并查看天气",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询地点与路线",
+      "text": "使用百度地图 MCP 完成“{{mapRequest}}”，说明查询时间、地点范围、交通方式和数据来源；只发送完成任务所需的位置数据，不要推断或暴露无关的个人住址、精确轨迹或其他敏感位置",
+      "server": "baidu-maps"
+    }
+  ]
+}
