@@ -11,7 +11,7 @@
   "published": true,
   "featured": false,
   "homepage": "https://worldbank.github.io/data360-mcp/",
-  "probeStatus": "unverified",
+  "probeStatus": "pass",
   "auth": {
     "mode": "none"
   },

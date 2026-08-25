@@ -11,7 +11,7 @@
   "published": true,
   "featured": false,
   "homepage": "https://github.com/MiniMax-AI/MiniMax-MCP",
-  "probeStatus": "unverified",
+  "probeStatus": "partial",
   "auth": {
     "mode": "api-key",
     "credentialDescription": "MiniMax API Key 和对应区域 API Host 仅保存在 DSH 本机并注入官方 MCP 进程；生成任务可能产生费用。",

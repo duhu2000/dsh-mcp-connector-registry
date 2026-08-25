@@ -11,7 +11,7 @@
   "published": true,
   "featured": false,
   "homepage": "https://developers.google.com/analytics/devguides/MCP",
-  "probeStatus": "unverified",
+  "probeStatus": "partial",
   "auth": {
     "mode": "api-key",
     "credentialDescription": "请先按 Google 官方文档配置只读 ADC。DSH 仅保存并注入本机凭据文件路径和 Google Cloud Project ID，不读取或上传凭据 JSON 内容。",

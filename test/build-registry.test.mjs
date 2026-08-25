@@ -235,7 +235,17 @@ test('第六批精选连接器覆盖官方远程 MCP 与安全 stdio 本机配�
   assert.equal(batch.length, 6);
   assert.ok(batch.every((connector) => connector.published === true));
   assert.ok(batch.every((connector) => connector.featured === false));
-  assert.ok(batch.every((connector) => connector.probeStatus === 'unverified'));
+  assert.deepEqual(
+    Object.fromEntries(batch.map((connector) => [connector.id, connector.probeStatus])),
+    {
+      drawio: 'pass',
+      'google-analytics': 'partial',
+      'minimax-mcp': 'partial',
+      'rcsb-pdb': 'pass',
+      similarweb: 'partial',
+      'world-bank-data360': 'pass',
+    },
+  );
 
   assert.equal(byId.similarweb.auth.mode, 'api-key');
   assert.equal(byId.similarweb.auth.apiKeyHeader, 'api-key');
