@@ -12,7 +12,7 @@
 5. 运行 `npm ci --legacy-peer-deps`，再依次执行 `npm test && npm run validate && npm run assets:check`。
 6. 提交 PR，并完整填写自动生成的 Connector PR checklist。
 
-完整字段说明、示例和常见问题见 [`docs/ONBOARDING.md`](docs/ONBOARDING.md)。请只提交连接器源文件和相关公开资源，不要手动修改或提交 `catalog.json`；PR 合并到 `main` 后，CI 会自动重建目录产物。
+完整字段说明、示例和常见问题见 [`docs/ONBOARDING.md`](docs/ONBOARDING.md)。请只提交连接器源文件和相关公开资源，不要手动修改或提交 `catalog.json`、`catalog-stats.json` 或 README 数量区块；PR 合并到 `main` 后，CI 会自动重建目录与产品统计。
 
 如果暂时不熟悉 Descriptor，也可以使用
 [Connector request](https://github.com/duhu2000/dsh-mcp-connector-registry/issues/new?template=connector-request.yml)
@@ -45,8 +45,9 @@ Metadata。DCR 如果签发 Client Secret，可声明 `client_secret_post` 或
 - 已在本地运行 `npm ci --legacy-peer-deps` 和 `npm test && npm run validate && npm run assets:check`。
 
 CI 使用已发布的 `dsh-mcp-connector` 校验器检查 Schema、重复 Connector ID、重复
-ServerName、URL 与潜在密钥。合并到 `main` 后，独立 CI job 会重建 `catalog.json`，仅在产物
-发生变化时由 `github-actions[bot]` 自动提交。需要凭据的服务不会
+ServerName、URL 与潜在密钥。合并到 `main` 后，独立 CI job 会重建 `catalog.json`、
+`catalog-stats.json` 和 README 数量区块，仅在产物发生变化时由 `github-actions[bot]` 自动提交；随后 `purge-cdn` job 清理 jsDelivr 分支缓存，
+并以完整 SHA-256 校验 CDN 内容与 `main` 产物一致。需要凭据的服务不会
 在公共 CI 中获得真实 Key，因此健康探针可能保持 `unverified`；这不会降低凭据安全要求。
 
 ## 审核与维护

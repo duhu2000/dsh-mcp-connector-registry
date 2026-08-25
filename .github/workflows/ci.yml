@@ -26,6 +26,8 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: validate
     runs-on: ubuntu-latest
+    outputs:
+      catalog_changed: ${{ steps.rebuild.outputs.catalog_changed }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -35,13 +37,36 @@ jobs:
       - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
       - run: npm run build
       - name: Commit rebuilt catalog
+        id: rebuild
         run: |
-          if git diff --quiet -- catalog.json; then
-            echo "catalog.json is already current"
+          if git diff --quiet -- catalog.json catalog-stats.json README.md; then
+            echo "catalog products are already current"
+            echo "catalog_changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add catalog.json
-          git commit -m "chore: rebuild catalog.json [skip ci]"
+          git add catalog.json catalog-stats.json README.md
+          git commit -m "chore: rebuild catalog products [skip ci]"
           git push
+          echo "catalog_changed=true" >> "$GITHUB_OUTPUT"
+
+  purge-cdn:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      needs['rebuild-catalog'].outputs.catalog_changed == 'true'
+    needs: rebuild-catalog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Purge and verify jsDelivr catalog
+        env:
+          JSDELIVR_VERIFY_ATTEMPTS: 6
+          JSDELIVR_VERIFY_DELAY_MS: 2000
+        run: node scripts/purge-jsdelivr-cache.mjs catalog.json
