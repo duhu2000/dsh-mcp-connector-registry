@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "cnb",
+  "name": "CNB",
+  "vendor": "腾讯云 CNB",
+  "icon": "🧱",
+  "category": "开发工具",
+  "summary": "组织与仓库 / Issue 与合并请求 / 构建与工作空间",
+  "description": "通过 CNB 官方 @cnbcool/mcp-server npm 包启动本地 stdio Server，访问 CNB 组织、仓库、Issue、合并请求、流水线、云原生构建、工作空间和知识库。当前包要求 Node.js 18+。Access Token 仅通过 API_TOKEN 环境变量注入，应设置到期时间并只授予任务所需的最小范围；该 Server 可以创建仓库和 Issue、更新或合并 PR、启动或停止构建、删除构建日志和工作空间，执行任何外部写入、合并、构建或删除前必须明确确认目标与影响。",
+  "tags": ["CNB", "代码仓库", "Issue", "Pull Request", "CI", "stdio", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://cnb.cool/cnb/tools/cnb-mcp-server/-/blob/main/README.md",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "CNB Access Token 仅保存在 DSH 本机，并以 API_TOKEN 注入官方 MCP 进程。请设置有效期并遵循最小权限原则。",
+    "credentialHelpLabel": "创建 CNB Access Token",
+    "credentialFields": [
+      {
+        "key": "apiToken",
+        "label": "CNB Access Token",
+        "placeholder": "请输入 CNB Access Token",
+        "description": "建议只授予目标组织、仓库和操作所需权限，并设置合理到期时间。",
+        "required": true,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "cnb",
+      "serverName": "cnb",
+      "command": "npx",
+      "args": ["-y", "-p", "@cnbcool/mcp-server", "cnb-mcp-stdio"],
+      "env": {
+        "API_BASE_URL": "https://api.cnb.cool"
+      },
+      "credentialBindings": {
+        "API_TOKEN": "apiToken"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "repository",
+      "label": "CNB 仓库",
+      "placeholder": "组织/仓库",
+      "required": true
+    },
+    {
+      "name": "cnbGoal",
+      "label": "操作目标",
+      "placeholder": "例如：检查最近一次构建失败原因",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "只读检查 CNB 仓库",
+      "text": "只读查看 CNB 仓库 {{repository}} 的仓库信息、Issue、合并请求和构建状态，完成“{{cnbGoal}}”并附来源；不要创建或更新 Issue/评论/PR，不要合并、启动或停止构建，也不要删除日志或工作空间",
+      "server": "cnb"
+    },
+    {
+      "title": "预审 CNB 写操作",
+      "text": "针对 CNB 仓库 {{repository}} 的“{{cnbGoal}}”列出拟调用工具、Token 权限、分支或构建目标、将公开发送的内容和不可逆影响；停在创建、更新、评论、合并、启动、停止或删除之前等待我明确确认",
+      "server": "cnb"
+    }
+  ]
+}

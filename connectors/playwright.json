@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "playwright",
+  "name": "Playwright",
+  "vendor": "Microsoft",
+  "icon": "🎭",
+  "category": "开发工具",
+  "summary": "浏览器自动化 / 页面检查 / 交互测试 / 可访问性快照",
+  "description": "通过 Microsoft 官方 @playwright/mcp npm 包启动本地 stdio Server，使用结构化可访问性快照检查网页并执行浏览器自动化。当前包要求 Node.js 18+。连接器可以读取页面内容、点击、输入、上传文件并提交表单；登录、发送、发布、购买、授权、删除或其他会产生外部影响的操作必须在执行前明确确认，并避免把敏感数据交给不受信任页面。",
+  "tags": ["Playwright", "浏览器自动化", "网页测试", "可访问性", "stdio", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/microsoft/playwright-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "playwright",
+      "serverName": "playwright",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "transport": "stdio"
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "targetUrl",
+      "label": "目标网址",
+      "placeholder": "https://example.com",
+      "required": true
+    },
+    {
+      "name": "goal",
+      "label": "测试目标",
+      "placeholder": "例如：检查登录页的表单与错误提示",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "只读检查网页",
+      "text": "使用 Playwright 打开 {{targetUrl}}，只读取页面结构、链接、表单和错误信息并完成“{{goal}}”的检查；不要登录、提交表单、上传或下载文件、购买、发布、授权或删除任何内容",
+      "server": "playwright"
+    },
+    {
+      "title": "预演浏览器操作",
+      "text": "为在 {{targetUrl}} 完成“{{goal}}”制定操作步骤，标出将发送的数据、账号权限和外部副作用；可以执行无副作用的检查，但必须停在最终提交、发送、发布、购买、授权或删除之前等待我明确确认",
+      "server": "playwright"
+    }
+  ]
+}

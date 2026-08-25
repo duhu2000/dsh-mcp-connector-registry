@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "postgresql",
+  "name": "PostgreSQL",
+  "vendor": "Microsoft",
+  "icon": "🐘",
+  "category": "开发工具",
+  "summary": "连接档案 / SQL 查询 / Schema 分析 / 数据库管理",
+  "description": "通过 Microsoft 官方 @microsoft/postgres-mcp npm 包启动本地 stdio Server，管理连接档案并查询 PostgreSQL。当前 npm 包为 RC 版本且要求 Node.js 22+。官方首选把连接档案保存在本机配置、密码保存在 OS keyring，并同时为档案设置 access_mode=ro、为数据库账号授予只读最小权限；仅在无 keyring 的隔离环境中使用可选连接字符串。该 Server 是数据库网关而非授权策略引擎，任何写入、DDL、导入或大范围查询都必须先确认目标档案、SQL 和影响范围。",
+  "tags": ["PostgreSQL", "数据库", "SQL", "OS Keyring", "stdio", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/microsoft/postgres-mcp/blob/main/USAGE.md",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "推荐预先使用官方 CLI 创建连接档案并把密码存入 OS keyring。下方连接字符串仅作为无 keyring 环境的可选回退，并只保存在 DSH 本机后注入环境变量。",
+    "credentialHelpLabel": "查看 PostgreSQL MCP 连接与安全指南",
+    "credentialFields": [
+      {
+        "key": "connectionString",
+        "label": "PostgreSQL 连接字符串（可选回退）",
+        "placeholder": "请粘贴 libpq URI 或 key=value 连接信息",
+        "description": "交互式桌面环境优先使用 OS keyring；如填写，请使用专用只读账号。",
+        "required": false,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "postgresql",
+      "serverName": "postgresql",
+      "command": "npx",
+      "args": ["-y", "@microsoft/postgres-mcp", "run"],
+      "credentialBindings": {
+        "PGSQL_MCP_CONNECTION_STRING": "connectionString"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "profileName",
+      "label": "连接档案名称",
+      "placeholder": "default",
+      "required": true,
+      "default": "default"
+    },
+    {
+      "name": "analysisGoal",
+      "label": "分析目标",
+      "placeholder": "例如：分析订单表结构和最近一周订单量",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "连接只读档案",
+      "text": "列出 PostgreSQL 连接档案并连接 {{profileName}}；先确认该档案 access_mode=ro 且数据库角色为专用只读账号，只查看连接信息和 Schema，不要创建、修改或删除档案、数据或数据库对象",
+      "server": "postgresql"
+    },
+    {
+      "title": "只读分析 PostgreSQL",
+      "text": "使用档案 {{profileName}} 完成“{{analysisGoal}}”：先检查表结构，再使用单条、范围受限的只读查询并解释 SQL；未经我确认不要执行 INSERT、UPDATE、DELETE、DDL、COPY 导入或其他写操作",
+      "server": "postgresql"
+    }
+  ]
+}
