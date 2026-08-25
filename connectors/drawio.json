@@ -11,7 +11,7 @@
   "published": true,
   "featured": false,
   "homepage": "https://www.drawio.com/docs/manual/generate/drawio-mcp-server/",
-  "probeStatus": "unverified",
+  "probeStatus": "pass",
   "auth": {
     "mode": "none"
   },

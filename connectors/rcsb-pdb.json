@@ -11,7 +11,7 @@
   "published": true,
   "featured": false,
   "homepage": "https://github.com/rcsb/rcsb-mcp",
-  "probeStatus": "unverified",
+  "probeStatus": "pass",
   "auth": {
     "mode": "none"
   },
