@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "bundledUniqueConnectorIds": [
+    "qcc-company",
+    "qcc-legal",
+    "qcc-tender",
+    "qcc-document"
+  ],
+  "featuredConnectorIds": [
+    "qcc-company",
+    "qcc-legal",
+    "qcc-tender",
+    "qcc-document",
+    "pkulaw-legal",
+    "wind-stock-data"
+  ],
+  "categories": [
+    "企业数据",
+    "金融投资",
+    "法律合规",
+    "开发工具",
+    "办公协作",
+    "调研分析",
+    "设计创意",
+    "效率工具",
+    "其他"
+  ]
+}

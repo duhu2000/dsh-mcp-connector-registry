@@ -73,10 +73,10 @@ npm test && npm run validate && npm run assets:check
 ```
 
 - `npm test` 检查构建逻辑、分类和连接器约束。
-- `npm run validate` 确定性重建 `catalog.json`，并执行 Schema、重复 ID/ServerName、URL 与潜在密钥审计。
+- `npm run validate` 确定性重建 `catalog.json`、`catalog-stats.json` 和 README 数量区块，并执行 Schema、重复 ID/ServerName、URL 与潜在密钥审计。
 - `npm run assets:check` 检查远程 Logo 的图片类型和浏览器跨域兼容性。
 
-本地验证会产生 `catalog.json` 差异，这是正常现象；不要手动修改或提交 `catalog.json`。合并后 CI 会自动重建。
+本地验证可能产生 `catalog.json`、`catalog-stats.json` 或 README 数量区块差异，这是正常现象；不要手动修改或提交 `catalog.json`、`catalog-stats.json` 或 README 数量区块。合并后 CI 会自动重建。
 
 ### 第 5 步：提交 Connector PR
 
@@ -94,7 +94,7 @@ CI 通过后，由维护者复核官网、MCP 文档、鉴权、品牌来源、�
 
 1. `validate` job 再次执行测试、Descriptor 校验和图片检查；
 2. `rebuild-catalog` job 运行确定性构建；
-3. 如果 `catalog.json` 有变化，`github-actions[bot]` 自动提交 `chore: rebuild catalog.json [skip ci]` 并推送；
+3. 如果目录或产品统计有变化，`github-actions[bot]` 自动提交 `chore: rebuild catalog products [skip ci]` 并推送 `catalog.json`、`catalog-stats.json` 与 README 数量区块；
 4. `purge-cdn` job 自动清理 jsDelivr 的 `@main/catalog.json` 缓存，并重试验证 CDN 内容与 `main` 产物的完整 SHA-256 一致；
 5. 用户在 MCP连接器市场点击“刷新”即可看到新卡片，无需人工清理 CDN、重装插件或重启 DSH。
 
@@ -329,7 +329,7 @@ OAuth 卡片必须发布可验证的 Protected Resource Metadata 与 Authorizati
 - [ ] 第三方名称和 Logo 已获得使用权，并在 PR 提供官方来源。
 - [ ] stdio 命令来自官方公开包，且不要求 Registry 探针执行本地命令。
 - [ ] 已运行 `npm ci --legacy-peer-deps` 和 `npm test && npm run validate && npm run assets:check`。
-- [ ] 只提交 Connector 源文件和必要图片，不手动提交 `catalog.json`、`node_modules`、日志或本机配置。
+- [ ] 只提交 Connector 源文件和必要图片，不手动提交 `catalog.json`、`catalog-stats.json`、README 数量区块、`node_modules`、日志或本机配置。
 
 ## 10. 常见问题（FAQ）
 
@@ -343,7 +343,7 @@ Registry 不收上架费。服务本身的订阅、调用费用和权限以服�
 
 ### 3. 合并后多久出现在市场？
 
-合并到 `main` 后 CI 会自动重建并提交 `catalog.json`，随后自动清理和校验 jsDelivr 缓存，通常为分钟级。用户只需在 MCP连接器市场点击“刷新”。
+合并到 `main` 后 CI 会自动重建并提交目录、权威数量统计和 Registry 产品介绍，随后自动清理和校验 jsDelivr 缓存，通常为分钟级。插件仓库每小时读取权威统计并同步 GitHub/npm 产品介绍所用的数量区块与实时徽标；用户只需在 MCP连接器市场点击“刷新”。
 
 ### 4. 服务地址、鉴权方式或品牌信息变化怎么办？
 

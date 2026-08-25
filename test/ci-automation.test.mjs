@@ -15,8 +15,9 @@ test('CI 分离校验与 main 合并后的 catalog 自动重建', () => {
   assert.match(workflow, /rebuild-catalog:/);
   assert.match(workflow, /if: github\.event_name == 'push' && github\.ref == 'refs\/heads\/main'/);
   assert.match(workflow, /needs: validate/);
-  assert.match(workflow, /git diff --quiet -- catalog\.json/);
-  assert.match(workflow, /chore: rebuild catalog\.json \[skip ci\]/);
+  assert.match(workflow, /git diff --quiet -- catalog\.json catalog-stats\.json README\.md/);
+  assert.match(workflow, /chore: rebuild catalog products \[skip ci\]/);
+  assert.match(workflow, /git add catalog\.json catalog-stats\.json README\.md/);
   assert.match(workflow, /git push/);
   assert.match(workflow, /outputs:\s*[\s\S]*?catalog_changed:/);
   assert.match(workflow, /purge-cdn:/);
