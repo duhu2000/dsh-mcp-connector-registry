@@ -397,6 +397,67 @@
     },
     {
       "schemaVersion": 1,
+      "id": "consensus",
+      "name": "Consensus",
+      "vendor": "Consensus",
+      "icon": "🔬",
+      "category": "调研分析",
+      "summary": "同行评审论文检索 / 证据梳理 / 引用来源",
+      "description": "接入 Consensus 官方远程 MCP Server，在超过 2 亿篇同行评审研究论文中检索证据、查看论文信息并生成带来源的研究梳理。通过 OAuth 2.1 + PKCE 授权；免费、付费与企业账户的可用工具、检索额度和速率限制以 Consensus 当前套餐为准，检索结果不能替代对原论文和专业意见的核查。",
+      "tags": [
+        "Consensus",
+        "学术研究",
+        "论文检索",
+        "循证研究",
+        "OAuth",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://docs.consensus.app/docs/mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://consensus.app",
+        "scope": "search",
+        "clientName": "DeepSeek Harness - Consensus MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "consensus",
+          "serverName": "consensus",
+          "url": "https://mcp.consensus.app/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "researchQuestion",
+          "label": "研究问题",
+          "placeholder": "例如：规律运动是否能改善成人抑郁症状？",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检索研究证据",
+          "text": "使用 Consensus MCP 检索与“{{researchQuestion}}”相关的同行评审论文，优先系统综述、Meta 分析和随机对照试验；按证据类型归纳结论、局限与分歧，并附论文链接",
+          "server": "consensus"
+        },
+        {
+          "title": "核对研究结论",
+          "text": "使用 Consensus MCP 查找支持和反驳“{{researchQuestion}}”的研究，区分论文原始结论与你的推断，并说明样本、研究设计和发表时间",
+          "server": "consensus"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "context7",
       "name": "Context7",
       "vendor": "Upstash",
@@ -541,6 +602,58 @@
           "title": "查看股票行情",
           "text": "查询目标 A 股的最新可用行情和近期 K 线，明确标注数据时间与不确定性，不提供投资建议",
           "server": "eastmoney"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "edgeone-pages",
+      "name": "腾讯云 EdgeOne Pages",
+      "vendor": "腾讯云 EdgeOne",
+      "icon": "🌐",
+      "category": "开发工具",
+      "summary": "HTML 内容部署 / 即时公开预览链接",
+      "description": "接入腾讯云 EdgeOne Pages 官方免登录远程 MCP，将 HTML 或文本内容部署为即时生效的公开访问页面。该远程入口只提供轻量内容分享，不包含本地 fullstack MCP 的完整项目能力。部署会把提交内容写入云端并生成公开链接；不得包含密钥、个人信息或未获授权的内容，调用部署工具前必须展示待发布范围并取得明确确认。",
+      "tags": [
+        "腾讯云",
+        "EdgeOne",
+        "Pages",
+        "HTML",
+        "部署",
+        "公开链接",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://edgeone.cloud.tencent.com/pages/document/173172415568367616",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "edgeone-pages",
+          "serverName": "edgeone-pages",
+          "url": "https://mcp-on-edge.edgeone.site/mcp-server",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "contentSummary",
+          "label": "拟发布内容概述",
+          "placeholder": "例如：不含用户数据的产品演示静态页",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "预审公开部署",
+          "text": "准备通过 EdgeOne Pages 发布“{{contentSummary}}”。先检查待发布 HTML 是否含密钥、个人信息、内部地址或未授权素材，说明公开链接的影响并等待我明确确认；不要立即部署",
+          "server": "edgeone-pages"
         }
       ]
     },
@@ -2505,6 +2618,79 @@
     },
     {
       "schemaVersion": 1,
+      "id": "replicate",
+      "name": "Replicate",
+      "vendor": "Replicate",
+      "icon": "🧬",
+      "category": "设计创意",
+      "summary": "AI 模型发现 / 对比 / 预测运行 / 结果查询",
+      "description": "通过 Replicate 官方 replicate-mcp npm 包启动本地 stdio Server，发现和比较模型、查询模型元数据并调用 Replicate HTTP API。API Token 仅通过环境变量注入本地进程。创建预测、训练或部署等操作可能产生费用并处理用户提供的数据；调用前必须确认模型、输入、预计费用和数据边界，删除或修改资源前必须再次确认。",
+      "tags": [
+        "Replicate",
+        "AI 模型",
+        "图片生成",
+        "视频生成",
+        "模型推理",
+        "stdio",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://replicate.com/docs/reference/mcp/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialDescription": "Replicate API Token 仅保存在 DSH 本机，并以 REPLICATE_API_TOKEN 注入官方 MCP 进程。",
+        "credentialHelpLabel": "获取 Replicate API Token",
+        "credentialFields": [
+          {
+            "key": "apiToken",
+            "label": "Replicate API Token",
+            "placeholder": "请输入 Replicate API Token",
+            "description": "建议使用用途单一、可轮换的 Token，并定期检查调用费用。",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "replicate",
+          "serverName": "replicate",
+          "command": "npx",
+          "args": [
+            "-y",
+            "replicate-mcp@latest"
+          ],
+          "credentialBindings": {
+            "REPLICATE_API_TOKEN": "apiToken"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "modelNeed",
+          "label": "模型需求",
+          "placeholder": "例如：寻找适合商品图放大的模型",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "发现并比较模型",
+          "text": "使用 Replicate MCP 搜索满足“{{modelNeed}}”的模型，比较输入要求、输出类型、维护状态和定价信息；不要创建预测、训练或部署",
+          "server": "replicate"
+        },
+        {
+          "title": "预审模型调用",
+          "text": "为“{{modelNeed}}”设计一次 Replicate 模型调用，列出模型、完整输入、数据处理边界和预计费用；等待我明确确认后再创建预测",
+          "server": "replicate"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "seedance",
       "name": "Seedance 视频生成（AceDataCloud）",
       "vendor": "AceDataCloud 社区网关",
@@ -2727,6 +2913,64 @@
           "title": "生成股票研究摘要",
           "text": "汇总目标证券的最新可用行情与基础分析，列明数据时间和不确定性，不提供买卖建议",
           "server": "stock-analysis"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "stripe",
+      "name": "Stripe",
+      "vendor": "Stripe",
+      "icon": "💳",
+      "category": "效率工具",
+      "summary": "支付数据 / 客户与订阅 / 退款 / Stripe API",
+      "description": "接入 Stripe 官方远程 MCP Server，使用 Stripe 官方支持的 Restricted API Key 作为 Bearer Token，查询账户、客户、支付、发票、订阅和分析数据，并按 Key 权限调用 Stripe API。该服务处于 Public Preview，部分工具可以创建退款或通过 POST、PATCH、PUT、DELETE 修改支付与业务数据；执行任何写入、删除、退款或资金相关操作前必须确认账户、沙盒或生产环境、金额和影响范围，并遵循最小权限原则。",
+      "tags": [
+        "Stripe",
+        "支付",
+        "订阅",
+        "发票",
+        "退款",
+        "Restricted API Key",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://docs.stripe.com/mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "Stripe Restricted API Key",
+        "credentialPlaceholder": "请输入最小权限的 Restricted API Key",
+        "credentialDescription": "Restricted API Key 仅保存在 DSH 本机并作为 Bearer Token 发送；建议先在 Stripe 沙盒使用，并只授予任务所需权限。",
+        "credentialHelpLabel": "创建 Restricted API Key"
+      },
+      "servers": [
+        {
+          "serverKey": "stripe",
+          "serverName": "stripe",
+          "url": "https://mcp.stripe.com",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看账户概况",
+          "text": "使用 Stripe MCP 只读查看当前授权账户及环境、余额、近期支付和失败交易概况；不要创建、更新、删除或退款任何对象",
+          "server": "stripe"
+        },
+        {
+          "title": "分析订阅与收入",
+          "text": "使用 Stripe MCP 只读分析订阅、发票和收入趋势，说明时间范围与数据口径；不要修改客户、订阅、价格或发票",
+          "server": "stripe"
+        },
+        {
+          "title": "预审写操作",
+          "text": "根据我的目标列出拟调用的 Stripe 写入接口、账户环境、参数、金额和不可逆影响，等待我逐项明确确认；不要执行写入、退款、删除或资金操作",
+          "server": "stripe"
         }
       ]
     },
@@ -3250,6 +3494,62 @@
           "title": "核心财务指标",
           "text": "用 Wind 股票数据 MCP 查询 {{stock}} 最新报告期的营业收入、净利润、ROE 和现金流",
           "server": "stock-data"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "wolfram",
+      "name": "Wolfram",
+      "vendor": "Wolfram Research",
+      "icon": "🧮",
+      "category": "调研分析",
+      "summary": "可计算知识 / Wolfram|Alpha / 符号与数值计算",
+      "description": "接入 Wolfram 官方 Cloud MCP，以自然语言查询 Wolfram|Alpha 和 Wolfram 知识库，或在无状态 Wolfram Language 内核中执行符号与数值计算。官方公开端点当前无需单独配置凭据；可用范围和资源限制以 Wolfram 服务为准。WolframLanguageEvaluator 能执行通用代码并访问开放世界信息，对来源不明、耗时或影响难以判断的表达式应先展示代码并取得确认。",
+      "tags": [
+        "Wolfram",
+        "Wolfram Alpha",
+        "数学",
+        "科学计算",
+        "知识计算",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://www.wolfram.com/artificial-intelligence/mcp/cloud/wolfram-mcp-cloud/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "wolfram",
+          "serverName": "wolfram",
+          "url": "https://agenttools.wolfram.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "question",
+          "label": "计算或知识问题",
+          "placeholder": "例如：计算 400 千米高度卫星的轨道周期",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询可计算知识",
+          "text": "使用 WolframContext 和 WolframAlpha 回答“{{question}}”，列出关键假设、单位、计算步骤和结果来源；不要调用 WolframLanguageEvaluator",
+          "server": "wolfram"
+        },
+        {
+          "title": "预审 Wolfram Language 计算",
+          "text": "为“{{question}}”拟定要交给 WolframLanguageEvaluator 的 Wolfram Language 代码，解释它会访问的数据和预计计算量；先展示代码并等待我明确确认，不要立即执行",
+          "server": "wolfram"
         }
       ]
     },
