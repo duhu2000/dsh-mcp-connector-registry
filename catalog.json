@@ -790,7 +790,7 @@
       "published": true,
       "featured": false,
       "homepage": "https://www.drawio.com/docs/manual/generate/drawio-mcp-server/",
-      "probeStatus": "unverified",
+      "probeStatus": "pass",
       "auth": {
         "mode": "none"
       },
@@ -1305,7 +1305,7 @@
       "published": true,
       "featured": false,
       "homepage": "https://developers.google.com/analytics/devguides/MCP",
-      "probeStatus": "unverified",
+      "probeStatus": "partial",
       "auth": {
         "mode": "api-key",
         "credentialDescription": "请先按 Google 官方文档配置只读 ADC。DSH 仅保存并注入本机凭据文件路径和 Google Cloud Project ID，不读取或上传凭据 JSON 内容。",
@@ -2021,7 +2021,7 @@
       "published": true,
       "featured": false,
       "homepage": "https://github.com/MiniMax-AI/MiniMax-MCP",
-      "probeStatus": "unverified",
+      "probeStatus": "partial",
       "auth": {
         "mode": "api-key",
         "credentialDescription": "MiniMax API Key 和对应区域 API Host 仅保存在 DSH 本机并注入官方 MCP 进程；生成任务可能产生费用。",
@@ -3268,7 +3268,7 @@
       "published": true,
       "featured": false,
       "homepage": "https://github.com/rcsb/rcsb-mcp",
-      "probeStatus": "unverified",
+      "probeStatus": "pass",
       "auth": {
         "mode": "none"
       },
@@ -3568,7 +3568,7 @@
       "published": true,
       "featured": false,
       "homepage": "https://developers.similarweb.com/docs/cursor-mcp-integration",
-      "probeStatus": "unverified",
+      "probeStatus": "partial",
       "auth": {
         "mode": "api-key",
         "apiKeyHeader": "api-key",
@@ -4414,7 +4414,7 @@
       "published": true,
       "featured": false,
       "homepage": "https://worldbank.github.io/data360-mcp/",
-      "probeStatus": "unverified",
+      "probeStatus": "pass",
       "auth": {
         "mode": "none"
       },
