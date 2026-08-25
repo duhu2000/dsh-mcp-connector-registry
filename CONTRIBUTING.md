@@ -46,7 +46,8 @@ Metadata。DCR 如果签发 Client Secret，可声明 `client_secret_post` 或
 
 CI 使用已发布的 `dsh-mcp-connector` 校验器检查 Schema、重复 Connector ID、重复
 ServerName、URL 与潜在密钥。合并到 `main` 后，独立 CI job 会重建 `catalog.json`，仅在产物
-发生变化时由 `github-actions[bot]` 自动提交。需要凭据的服务不会
+发生变化时由 `github-actions[bot]` 自动提交；随后 `purge-cdn` job 清理 jsDelivr 分支缓存，
+并以完整 SHA-256 校验 CDN 内容与 `main` 产物一致。需要凭据的服务不会
 在公共 CI 中获得真实 Key，因此健康探针可能保持 `unverified`；这不会降低凭据安全要求。
 
 ## 审核与维护

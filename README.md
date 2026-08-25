@@ -36,14 +36,15 @@ flowchart LR
   E --> F
   F --> G[合并到 main]
   G --> H[CI 自动重建 catalog.json]
-  H --> I[用户刷新市场]
+  H --> J[CI 自动清理并校验 jsDelivr]
+  J --> I[用户刷新市场]
 ```
 
 1. 复制 `connectors/example.sample.json` 为 `connectors/<connector-id>.json`，文件名必须与 `id` 完全一致。
 2. 只提交公开元数据；禁止 Token、API Key、密码、Cookie 和 Client Secret。
 3. 运行 `npm ci --legacy-peer-deps`，再执行 `npm test && npm run validate && npm run assets:check`。
 4. 提交 PR，通过 Schema、重复 ID/ServerName、URL 和密钥审计后合并。
-5. 不要手动修改或提交 `catalog.json`；合并到 `main` 后，CI 会自动重建并提交公开产物。每周健康巡检会生成探针报告 artifact。
+5. 不要手动修改或提交 `catalog.json`；合并到 `main` 后，CI 会自动重建并提交公开产物，再自动清理并校验 jsDelivr 缓存。每周健康巡检会生成探针报告 artifact。
 
 `featured` 由维护者管理。第三方收录不代表服务商官方背书，实际权限、费用和可用性以服务商为准。
 
@@ -56,10 +57,12 @@ npm run build
 npm run validate
 npm run probe
 npm run assets:check
+npm run cdn:purge
 ```
 
 `assets:check` 会额外验证远程 Logo 的图像类型与
 `Cross-Origin-Resource-Policy`，避免 URL 可访问但在 DSH Desktop 中被浏览器拦截。
+`cdn:purge` 会清理公共 `@main/catalog.json` 缓存并按完整 SHA-256 验证 CDN 内容，供维护者应急重跑；正常发布由 CI 自动执行，不需要贡献者或用户手工调用。
 
 完整描述格式见 [`schema/connector.schema.json`](schema/connector.schema.json)，贡献和安全规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md) 与 [`SECURITY.md`](SECURITY.md)。PR 模板会要求提供服务官网、MCP 配置文档、鉴权方式和 Logo 来源，便于维护者核验。
 

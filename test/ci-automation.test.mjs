@@ -18,8 +18,22 @@ test('CI 分离校验与 main 合并后的 catalog 自动重建', () => {
   assert.match(workflow, /git diff --quiet -- catalog\.json/);
   assert.match(workflow, /chore: rebuild catalog\.json \[skip ci\]/);
   assert.match(workflow, /git push/);
+  assert.match(workflow, /outputs:\s*[\s\S]*?catalog_changed:/);
+  assert.match(workflow, /purge-cdn:/);
+  assert.match(workflow, /needs: rebuild-catalog/);
+  assert.match(workflow, /needs\['rebuild-catalog'\]\.outputs\.catalog_changed == 'true'/);
+  assert.match(workflow, /ref: main/);
+  assert.match(workflow, /node scripts\/purge-jsdelivr-cache\.mjs catalog\.json/);
   assert.doesNotMatch(workflow, /npm run check/);
   assert.doesNotMatch(workflow, /git diff --exit-code/);
+});
+
+test('main 目录变化后自动清理并验证 jsDelivr 缓存', () => {
+  assert.match(workflow, /JSDELIVR_VERIFY_ATTEMPTS: 6/);
+  assert.match(workflow, /JSDELIVR_VERIFY_DELAY_MS: 2000/);
+  assert.match(readme, /自动清理并校验 jsDelivr/);
+  assert.match(contributing, /完整 SHA-256/);
+  assert.match(onboarding, /purge-cdn/);
 });
 
 test('贡献文档使用独立校验命令并说明 catalog 由 CI 生成', () => {

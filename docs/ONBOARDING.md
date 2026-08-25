@@ -95,7 +95,8 @@ CI 通过后，由维护者复核官网、MCP 文档、鉴权、品牌来源、�
 1. `validate` job 再次执行测试、Descriptor 校验和图片检查；
 2. `rebuild-catalog` job 运行确定性构建；
 3. 如果 `catalog.json` 有变化，`github-actions[bot]` 自动提交 `chore: rebuild catalog.json [skip ci]` 并推送；
-4. 用户在 MCP连接器市场点击“刷新”即可看到新卡片。
+4. `purge-cdn` job 自动清理 jsDelivr 的 `@main/catalog.json` 缓存，并重试验证 CDN 内容与 `main` 产物的完整 SHA-256 一致；
+5. 用户在 MCP连接器市场点击“刷新”即可看到新卡片，无需人工清理 CDN、重装插件或重启 DSH。
 
 ## 4. 完整 Descriptor 模板
 
@@ -342,7 +343,7 @@ Registry 不收上架费。服务本身的订阅、调用费用和权限以服�
 
 ### 3. 合并后多久出现在市场？
 
-合并到 `main` 后 CI 会自动重建并提交 `catalog.json`，通常为分钟级。用户需要在 MCP连接器市场点击“刷新”。
+合并到 `main` 后 CI 会自动重建并提交 `catalog.json`，随后自动清理和校验 jsDelivr 缓存，通常为分钟级。用户只需在 MCP连接器市场点击“刷新”。
 
 ### 4. 服务地址、鉴权方式或品牌信息变化怎么办？
 
