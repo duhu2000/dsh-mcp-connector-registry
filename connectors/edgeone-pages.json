@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "edgeone-pages",
+  "name": "腾讯云 EdgeOne Pages",
+  "vendor": "腾讯云 EdgeOne",
+  "icon": "🌐",
+  "category": "开发工具",
+  "summary": "HTML 内容部署 / 即时公开预览链接",
+  "description": "接入腾讯云 EdgeOne Pages 官方免登录远程 MCP，将 HTML 或文本内容部署为即时生效的公开访问页面。该远程入口只提供轻量内容分享，不包含本地 fullstack MCP 的完整项目能力。部署会把提交内容写入云端并生成公开链接；不得包含密钥、个人信息或未获授权的内容，调用部署工具前必须展示待发布范围并取得明确确认。",
+  "tags": ["腾讯云", "EdgeOne", "Pages", "HTML", "部署", "公开链接", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://edgeone.cloud.tencent.com/pages/document/173172415568367616",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "edgeone-pages",
+      "serverName": "edgeone-pages",
+      "url": "https://mcp-on-edge.edgeone.site/mcp-server",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "contentSummary",
+      "label": "拟发布内容概述",
+      "placeholder": "例如：不含用户数据的产品演示静态页",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "预审公开部署",
+      "text": "准备通过 EdgeOne Pages 发布“{{contentSummary}}”。先检查待发布 HTML 是否含密钥、个人信息、内部地址或未授权素材，说明公开链接的影响并等待我明确确认；不要立即部署",
+      "server": "edgeone-pages"
+    }
+  ]
+}

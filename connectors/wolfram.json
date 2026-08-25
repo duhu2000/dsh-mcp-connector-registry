@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "wolfram",
+  "name": "Wolfram",
+  "vendor": "Wolfram Research",
+  "icon": "🧮",
+  "category": "调研分析",
+  "summary": "可计算知识 / Wolfram|Alpha / 符号与数值计算",
+  "description": "接入 Wolfram 官方 Cloud MCP，以自然语言查询 Wolfram|Alpha 和 Wolfram 知识库，或在无状态 Wolfram Language 内核中执行符号与数值计算。官方公开端点当前无需单独配置凭据；可用范围和资源限制以 Wolfram 服务为准。WolframLanguageEvaluator 能执行通用代码并访问开放世界信息，对来源不明、耗时或影响难以判断的表达式应先展示代码并取得确认。",
+  "tags": ["Wolfram", "Wolfram Alpha", "数学", "科学计算", "知识计算", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://www.wolfram.com/artificial-intelligence/mcp/cloud/wolfram-mcp-cloud/",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "wolfram",
+      "serverName": "wolfram",
+      "url": "https://agenttools.wolfram.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "question",
+      "label": "计算或知识问题",
+      "placeholder": "例如：计算 400 千米高度卫星的轨道周期",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询可计算知识",
+      "text": "使用 WolframContext 和 WolframAlpha 回答“{{question}}”，列出关键假设、单位、计算步骤和结果来源；不要调用 WolframLanguageEvaluator",
+      "server": "wolfram"
+    },
+    {
+      "title": "预审 Wolfram Language 计算",
+      "text": "为“{{question}}”拟定要交给 WolframLanguageEvaluator 的 Wolfram Language 代码，解释它会访问的数据和预计计算量；先展示代码并等待我明确确认，不要立即执行",
+      "server": "wolfram"
+    }
+  ]
+}

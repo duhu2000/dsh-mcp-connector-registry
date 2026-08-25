@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "replicate",
+  "name": "Replicate",
+  "vendor": "Replicate",
+  "icon": "🧬",
+  "category": "设计创意",
+  "summary": "AI 模型发现 / 对比 / 预测运行 / 结果查询",
+  "description": "通过 Replicate 官方 replicate-mcp npm 包启动本地 stdio Server，发现和比较模型、查询模型元数据并调用 Replicate HTTP API。API Token 仅通过环境变量注入本地进程。创建预测、训练或部署等操作可能产生费用并处理用户提供的数据；调用前必须确认模型、输入、预计费用和数据边界，删除或修改资源前必须再次确认。",
+  "tags": ["Replicate", "AI 模型", "图片生成", "视频生成", "模型推理", "stdio", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://replicate.com/docs/reference/mcp/",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialDescription": "Replicate API Token 仅保存在 DSH 本机，并以 REPLICATE_API_TOKEN 注入官方 MCP 进程。",
+    "credentialHelpLabel": "获取 Replicate API Token",
+    "credentialFields": [
+      {
+        "key": "apiToken",
+        "label": "Replicate API Token",
+        "placeholder": "请输入 Replicate API Token",
+        "description": "建议使用用途单一、可轮换的 Token，并定期检查调用费用。",
+        "required": true,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "replicate",
+      "serverName": "replicate",
+      "command": "npx",
+      "args": ["-y", "replicate-mcp@latest"],
+      "credentialBindings": {
+        "REPLICATE_API_TOKEN": "apiToken"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "modelNeed",
+      "label": "模型需求",
+      "placeholder": "例如：寻找适合商品图放大的模型",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "发现并比较模型",
+      "text": "使用 Replicate MCP 搜索满足“{{modelNeed}}”的模型，比较输入要求、输出类型、维护状态和定价信息；不要创建预测、训练或部署",
+      "server": "replicate"
+    },
+    {
+      "title": "预审模型调用",
+      "text": "为“{{modelNeed}}”设计一次 Replicate 模型调用，列出模型、完整输入、数据处理边界和预计费用；等待我明确确认后再创建预测",
+      "server": "replicate"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "stripe",
+  "name": "Stripe",
+  "vendor": "Stripe",
+  "icon": "💳",
+  "category": "效率工具",
+  "summary": "支付数据 / 客户与订阅 / 退款 / Stripe API",
+  "description": "接入 Stripe 官方远程 MCP Server，使用 Stripe 官方支持的 Restricted API Key 作为 Bearer Token，查询账户、客户、支付、发票、订阅和分析数据，并按 Key 权限调用 Stripe API。该服务处于 Public Preview，部分工具可以创建退款或通过 POST、PATCH、PUT、DELETE 修改支付与业务数据；执行任何写入、删除、退款或资金相关操作前必须确认账户、沙盒或生产环境、金额和影响范围，并遵循最小权限原则。",
+  "tags": ["Stripe", "支付", "订阅", "发票", "退款", "Restricted API Key", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://docs.stripe.com/mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "Stripe Restricted API Key",
+    "credentialPlaceholder": "请输入最小权限的 Restricted API Key",
+    "credentialDescription": "Restricted API Key 仅保存在 DSH 本机并作为 Bearer Token 发送；建议先在 Stripe 沙盒使用，并只授予任务所需权限。",
+    "credentialHelpLabel": "创建 Restricted API Key"
+  },
+  "servers": [
+    {
+      "serverKey": "stripe",
+      "serverName": "stripe",
+      "url": "https://mcp.stripe.com",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看账户概况",
+      "text": "使用 Stripe MCP 只读查看当前授权账户及环境、余额、近期支付和失败交易概况；不要创建、更新、删除或退款任何对象",
+      "server": "stripe"
+    },
+    {
+      "title": "分析订阅与收入",
+      "text": "使用 Stripe MCP 只读分析订阅、发票和收入趋势，说明时间范围与数据口径；不要修改客户、订阅、价格或发票",
+      "server": "stripe"
+    },
+    {
+      "title": "预审写操作",
+      "text": "根据我的目标列出拟调用的 Stripe 写入接口、账户环境、参数、金额和不可逆影响，等待我逐项明确确认；不要执行写入、退款、删除或资金操作",
+      "server": "stripe"
+    }
+  ]
+}
