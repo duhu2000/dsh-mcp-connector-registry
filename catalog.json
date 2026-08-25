@@ -772,6 +772,62 @@
     },
     {
       "schemaVersion": 1,
+      "id": "drawio",
+      "name": "draw.io",
+      "vendor": "JGraph / draw.io",
+      "icon": "📐",
+      "category": "设计创意",
+      "summary": "流程图 / 架构图 / Mermaid / draw.io XML",
+      "description": "接入 draw.io 官方 Hosted MCP Apps Server，根据 draw.io XML 或 Mermaid 创建可编辑图表，并支持搜索图形库。该端点无需鉴权，但用户输入会发送至 draw.io 托管服务；不要提交未脱敏的内部架构、密钥、个人信息或受限业务数据。服务主要面向支持 MCP Apps 的 Host；在当前 Host 不支持 MCP Apps 内嵌渲染时，工具仍可连接，但可能只返回 XML、资源或文本而不显示交互式预览。",
+      "tags": [
+        "draw.io",
+        "流程图",
+        "架构图",
+        "Mermaid",
+        "MCP Apps",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://www.drawio.com/docs/manual/generate/drawio-mcp-server/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "drawio",
+          "serverName": "drawio",
+          "url": "https://mcp.draw.io/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "diagramGoal",
+          "label": "图表目标",
+          "placeholder": "例如：绘制订单履约系统的脱敏时序图",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "规划图表结构",
+          "text": "为“{{diagramGoal}}”先拟定节点、关系、分组、方向和图形方案，检查是否含内部密钥、个人信息或未脱敏架构；只输出结构草案并等待我确认，不要立即创建图表",
+          "server": "drawio"
+        },
+        {
+          "title": "创建已确认的图表",
+          "text": "根据我已确认且完成脱敏的“{{diagramGoal}}”创建 draw.io 图表；优先使用 Mermaid，复杂图形再使用 draw.io XML，并说明当前 Host 若不支持 MCP Apps 可能只能返回 XML、资源或文本",
+          "server": "drawio"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "eastmoney-mcp",
       "name": "东方财富量化（社区）",
       "vendor": "社区连接器",
@@ -1224,6 +1280,92 @@
           "title": "查看项目待办",
           "text": "使用 GitLab MCP 汇总我可访问项目中的待处理 Issue、Merge Request 和失败流水线；不要执行写操作",
           "server": "gitlab"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "google-analytics",
+      "name": "Google Analytics",
+      "vendor": "Google Analytics",
+      "icon": "📊",
+      "category": "调研分析",
+      "summary": "GA4 属性 / 报表 / 实时数据 / 漏斗与转化分析",
+      "description": "通过 Google Analytics 官方 analytics-mcp Python 包启动本地 stdio Server，只读查询账号与 GA4 属性、配置、标准报表、实时数据、漏斗和转化。使用前需安装 pipx，在 Google Cloud 启用 Analytics Admin API 与 Data API，并预先配置包含 analytics.readonly scope 的 Application Default Credentials。Descriptor 只保存用户填写的本机凭据文件路径和 Project ID，不包含凭据 JSON 内容；进程会读取该本机文件并访问 Google API，用户仍应确认账号权限、属性范围和数据治理要求。",
+      "tags": [
+        "Google Analytics",
+        "GA4",
+        "网站分析",
+        "实时报表",
+        "漏斗",
+        "转化",
+        "stdio",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://developers.google.com/analytics/devguides/MCP",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "请先按 Google 官方文档配置只读 ADC。DSH 仅保存并注入本机凭据文件路径和 Google Cloud Project ID，不读取或上传凭据 JSON 内容。",
+        "credentialHelpLabel": "查看 Google Analytics MCP 配置指南",
+        "credentialFields": [
+          {
+            "key": "credentialsPath",
+            "label": "ADC 凭据 JSON 本机路径",
+            "placeholder": "请输入 gcloud 输出的本机凭据文件路径",
+            "description": "该字段是本机路径而不是凭据内容；请勿粘贴 JSON、Client Secret 或 Token。",
+            "required": true,
+            "secret": false
+          },
+          {
+            "key": "projectId",
+            "label": "Google Cloud Project ID",
+            "placeholder": "请输入启用 Analytics API 的 Project ID",
+            "description": "Project ID 不是密钥，但应与 ADC 和已启用 API 的项目一致。",
+            "required": true,
+            "secret": false
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "google-analytics",
+          "serverName": "google-analytics",
+          "command": "pipx",
+          "args": [
+            "run",
+            "analytics-mcp"
+          ],
+          "env": {
+            "GRPC_DNS_RESOLVER": "native"
+          },
+          "credentialBindings": {
+            "GOOGLE_APPLICATION_CREDENTIALS": "credentialsPath",
+            "GOOGLE_PROJECT_ID": "projectId"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "analysisGoal",
+          "label": "分析目标",
+          "placeholder": "例如：分析指定 GA4 属性过去 90 天的热门事件与转化趋势",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "核对账号与属性",
+          "text": "使用 Google Analytics MCP 只读列出当前 ADC 可访问的账号和 GA4 属性，确认目标属性与时区；不要输出凭据路径、凭据内容、Token 或无关账号数据",
+          "server": "google-analytics"
+        },
+        {
+          "title": "分析 GA4 数据",
+          "text": "使用 Google Analytics MCP 只读完成“{{analysisGoal}}”：先确认目标属性、日期范围、维度、指标、过滤条件和阈值，再运行范围受限的报表；说明抽样、阈值和数据治理限制，不要尝试修改 Analytics 配置",
+          "server": "google-analytics"
         }
       ]
     },
@@ -1855,6 +1997,96 @@
             "@agentutility/mcp-mediakit"
           ],
           "transport": "stdio"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "minimax-mcp",
+      "name": "MiniMax MCP",
+      "vendor": "MiniMax AI",
+      "icon": "🎬",
+      "category": "设计创意",
+      "summary": "语音合成 / 声音克隆 / 图片与视频生成",
+      "description": "通过 MiniMax 官方 minimax-mcp Python 包启动本地 stdio Server，提供语音合成、声音列表与克隆、图片生成、视频生成和任务查询。运行要求 Python 3.10+ 与 uv/uvx；API Key 必须与中国大陆或全球 API Host 匹配。生成与声音克隆可能产生费用并处理用户提供的文本、音频、图片或视频；执行前必须确认模型、参数、费用、内容权利和数据外发范围，声音克隆还必须确认已取得声音主体的合法授权。",
+      "tags": [
+        "MiniMax",
+        "语音合成",
+        "声音克隆",
+        "图片生成",
+        "视频生成",
+        "stdio",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/MiniMax-AI/MiniMax-MCP",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "MiniMax API Key 和对应区域 API Host 仅保存在 DSH 本机并注入官方 MCP 进程；生成任务可能产生费用。",
+        "credentialHelpLabel": "查看 MiniMax MCP 区域与密钥配置",
+        "credentialFields": [
+          {
+            "key": "apiKey",
+            "label": "MiniMax API Key",
+            "placeholder": "请输入 MiniMax API Key",
+            "description": "请使用与所选 API Host 同区域的 Key。",
+            "required": true,
+            "secret": true
+          },
+          {
+            "key": "apiHost",
+            "label": "MiniMax API Host",
+            "placeholder": "https://api.minimaxi.com 或 https://api.minimax.io",
+            "description": "中国大陆使用 https://api.minimaxi.com；全球使用 https://api.minimax.io。",
+            "required": true,
+            "secret": false
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "minimax",
+          "serverName": "minimax",
+          "command": "uvx",
+          "args": [
+            "minimax-mcp",
+            "-y"
+          ],
+          "env": {
+            "MINIMAX_API_RESOURCE_MODE": "url"
+          },
+          "credentialBindings": {
+            "MINIMAX_API_KEY": "apiKey",
+            "MINIMAX_API_HOST": "apiHost"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "creativeGoal",
+          "label": "创作目标",
+          "placeholder": "例如：生成一张用于内部评审的产品概念图",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "规划生成任务",
+          "text": "为“{{creativeGoal}}”先列出建议工具、模型、提示词、输入数据、输出规格和可能费用，检查版权、肖像、声音授权及敏感数据风险；等待我明确确认，不要立即生成或克隆声音",
+          "server": "minimax"
+        },
+        {
+          "title": "执行已确认的生成",
+          "text": "按我已确认的模型、提示词、输入、规格和费用范围完成“{{creativeGoal}}”；若参数、计费或数据权利仍不明确，先询问我，不要启动生成任务",
+          "server": "minimax"
+        },
+        {
+          "title": "预审声音克隆",
+          "text": "针对“{{creativeGoal}}”只检查声音样本来源、主体授权、用途、保存方式和预计费用，并列出拟调用参数；没有我对合法授权和费用的明确确认，不要调用 voice_clone",
+          "server": "minimax"
         }
       ]
     },
@@ -3017,6 +3249,63 @@
     },
     {
       "schemaVersion": 1,
+      "id": "rcsb-pdb",
+      "name": "RCSB PDB",
+      "vendor": "RCSB Protein Data Bank",
+      "icon": "🧬",
+      "category": "调研分析",
+      "summary": "蛋白质结构 / 序列 / 配体 / 注释与交叉引用",
+      "description": "通过 RCSB 官方 rcsb-mcp Python 包启动本地 stdio Server，查询 Protein Data Bank 的结构、序列、化学组分、功能注释以及 PDB、UniProt、NCBI 之间的交叉引用。公开数据查询无需 API Key；运行要求 Python 3.10+ 与 uv/uvx。工具面向公共科学数据，但用户提供的序列、SMILES 或研究条件会发送至 RCSB API，未公开或受限制的研究数据应先脱敏并确认可外发。",
+      "tags": [
+        "RCSB PDB",
+        "蛋白质结构",
+        "生物信息",
+        "序列",
+        "配体",
+        "stdio",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/rcsb/rcsb-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "rcsb-pdb",
+          "serverName": "rcsb-pdb",
+          "command": "uvx",
+          "args": [
+            "rcsb-mcp"
+          ],
+          "transport": "stdio"
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "researchQuestion",
+          "label": "结构生物学问题",
+          "placeholder": "例如：查找高分辨率的人血红蛋白结构并比较主要配体",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检索 PDB 结构",
+          "text": "使用 RCSB PDB MCP 回答“{{researchQuestion}}”：先选择文本、属性、序列、化学或结构检索方式，再获取必要条目和注释；列出 PDB ID、筛选条件、分辨率和数据来源，不要上传未公开或无权外发的序列与研究数据",
+          "server": "rcsb-pdb"
+        },
+        {
+          "title": "核对结构与数据库映射",
+          "text": "针对“{{researchQuestion}}”核对 PDB、UniProt、NCBI 和功能注释之间的映射，区分实验结构、预测或派生结论，并保留可复核的条目 ID",
+          "server": "rcsb-pdb"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "render",
       "name": "Render",
       "vendor": "Render",
@@ -3256,6 +3545,73 @@
           "headers": {
             "Accept": "application/json, text/event-stream"
           }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "similarweb",
+      "name": "Similarweb",
+      "vendor": "Similarweb",
+      "icon": "📈",
+      "category": "调研分析",
+      "summary": "网站流量 / 竞品对标 / 渠道与受众分析",
+      "description": "接入 Similarweb 官方远程 MCP Server，使用具备 API 权限的 Similarweb API Key 查询网站流量、渠道、受众、关键词和竞品指标。可用数据范围取决于账号套餐，调用会消耗 API credits；分析前应确认域名、时间范围、地域和指标口径，避免把内部未公开域名、客户名单或其他无关敏感信息提交给服务商。",
+      "tags": [
+        "Similarweb",
+        "网站分析",
+        "竞品分析",
+        "流量",
+        "数字营销",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://developers.similarweb.com/docs/cursor-mcp-integration",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "api-key",
+        "credentialName": "Similarweb API Key",
+        "credentialPlaceholder": "请输入具备所需 API 权限的 Similarweb API Key",
+        "credentialDescription": "API Key 仅保存在 DSH 本机，并通过 api-key Header 发送至 Similarweb 官方 MCP；调用可能消耗 API credits。",
+        "credentialHelpLabel": "查看 Similarweb MCP 接入指南"
+      },
+      "servers": [
+        {
+          "serverKey": "similarweb",
+          "serverName": "similarweb",
+          "url": "https://mcp.similarweb.com",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "primaryDomain",
+          "label": "目标域名",
+          "placeholder": "例如：example.com",
+          "required": true
+        },
+        {
+          "name": "analysisGoal",
+          "label": "分析目标",
+          "placeholder": "例如：对比近 6 个月流量趋势、渠道结构与主要关键词",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "分析网站与竞品",
+          "text": "使用 Similarweb MCP 对 {{primaryDomain}} 完成“{{analysisGoal}}”；先确认可用指标、地域、设备和时间口径，再执行范围受限的查询，列出 API credits 使用边界和数据限制，不要提交无关的内部域名、客户名单或个人数据",
+          "server": "similarweb"
+        },
+        {
+          "title": "预估查询成本",
+          "text": "针对 {{primaryDomain}} 的“{{analysisGoal}}”，先列出拟调用的 Similarweb 工具、指标、时间范围和可能消耗的 API credits，等待我确认后再查询",
+          "server": "similarweb"
         }
       ]
     },
@@ -4035,6 +4391,62 @@
           "title": "法律专题检索",
           "text": "围绕目标法律问题检索相关法规与案例，列明来源、日期和效力状态，不替代专业法律意见",
           "server": "wolterskluwer"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "world-bank-data360",
+      "name": "世界银行 Data360",
+      "vendor": "World Bank Group",
+      "icon": "🌍",
+      "category": "调研分析",
+      "summary": "发展指标 / 国家对比 / 时间序列 / 元数据与图表",
+      "description": "接入世界银行官方 Data360 公共 MCP 端点，免密查询贫困、增长、性别、气候、健康等发展指标及其定义、来源、覆盖范围和时间序列。服务以 Data360 为权威数据源并支持国家排名、对比和 Vega-Lite 图表规格；应先检索指标和覆盖范围，不猜测 database_id 或 indicator_id，并在结论中保留定义、方法和已知限制。",
+      "tags": [
+        "世界银行",
+        "Data360",
+        "发展数据",
+        "宏观指标",
+        "国家对比",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://worldbank.github.io/data360-mcp/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "data360",
+          "serverName": "world-bank-data360",
+          "url": "https://maimcpext.worldbank.org/ext/data360/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "researchQuestion",
+          "label": "研究问题",
+          "placeholder": "例如：比较东南亚主要经济体过去十年的人均 GDP 与贫困率变化",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检索发展指标",
+          "text": "使用世界银行 Data360 MCP 回答“{{researchQuestion}}”：先检索候选数据库与指标，核对国家和年份覆盖，再获取数据；列出指标定义、来源、单位、方法限制和缺失值，不要猜测 database_id 或 indicator_id",
+          "server": "data360"
+        },
+        {
+          "title": "生成可核验图表方案",
+          "text": "围绕“{{researchQuestion}}”先选择 1 至 4 个有覆盖的数据指标，核对可用年份和分组，再生成图表规格；同时给出数据表口径、来源链接和图表可能造成的比较偏差",
+          "server": "data360"
         }
       ]
     },
