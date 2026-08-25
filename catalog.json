@@ -90,6 +90,74 @@
     },
     {
       "schemaVersion": 1,
+      "id": "baidu-maps",
+      "name": "百度地图",
+      "vendor": "百度地图开放平台",
+      "icon": "🧭",
+      "category": "效率工具",
+      "summary": "地理编码 / 地点搜索 / 路线规划 / 天气与交通",
+      "description": "通过百度地图官方 @baidumap/mcp-server-baidu-map npm 包启动本地 stdio Server，提供地理编码、逆地理编码、POI 搜索、地点详情、路线规划、天气、IP 定位和实时交通查询。服务端 AK 仅通过 BAIDU_MAP_API_KEY 环境变量注入，不使用把 AK 放入 URL Query 的远程方案。调用范围、配额和高级能力以百度地图开放平台账号权限为准；地址、坐标、路线和 IP 等位置数据会发送至百度地图服务，请避免提交无关的个人敏感位置。",
+      "tags": [
+        "百度地图",
+        "地图",
+        "地理编码",
+        "POI",
+        "路线规划",
+        "stdio",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/baidu-maps/mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "百度地图服务端 AK 仅保存在 DSH 本机，并以 BAIDU_MAP_API_KEY 注入官方 MCP 进程。",
+        "credentialHelpLabel": "获取百度地图服务端 AK",
+        "credentialFields": [
+          {
+            "key": "apiKey",
+            "label": "百度地图服务端 AK",
+            "placeholder": "请输入百度地图服务端 AK",
+            "description": "请在百度地图开放平台创建服务器端应用，并按需开通 MCP 能力。",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "baidu-maps",
+          "serverName": "baidu-map",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@baidumap/mcp-server-baidu-map"
+          ],
+          "credentialBindings": {
+            "BAIDU_MAP_API_KEY": "apiKey"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "mapRequest",
+          "label": "地图查询需求",
+          "placeholder": "例如：规划上海虹桥站到外滩的公共交通路线并查看天气",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询地点与路线",
+          "text": "使用百度地图 MCP 完成“{{mapRequest}}”，说明查询时间、地点范围、交通方式和数据来源；只发送完成任务所需的位置数据，不要推断或暴露无关的个人住址、精确轨迹或其他敏感位置",
+          "server": "baidu-maps"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "bazhuayu-cloud-collection",
       "name": "八爪鱼·云采集",
       "vendor": "八爪鱼 Bazhuayu",
@@ -343,6 +411,64 @@
     },
     {
       "schemaVersion": 1,
+      "id": "cloudbase",
+      "name": "腾讯云 CloudBase",
+      "vendor": "腾讯云开发",
+      "icon": "☁️",
+      "category": "开发工具",
+      "summary": "云开发环境 / 数据库 / 云函数 / 存储与部署",
+      "description": "通过腾讯云开发官方 @cloudbase/cloudbase-mcp npm 包启动本地 stdio Server，使用本地登录管理 CloudBase 环境、数据库、鉴权、云函数、Cloud Run、对象存储和静态托管。当前官方要求 Node.js 18.15+；首次使用应通过 MCP 登录并选择正确站点、地域和环境，不把 SecretId、SecretKey 或 env_id 拼入 Descriptor URL。该连接器具备本地文件读取、资源创建修改删除与部署能力，可能产生云资源费用；任何写入、删除、发布、部署或权限变更前必须确认账号、环境、地域、资源和计费影响。",
+      "tags": [
+        "腾讯云",
+        "CloudBase",
+        "云开发",
+        "数据库",
+        "云函数",
+        "stdio",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/TencentCloudBase/CloudBase-AI-Toolkit",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "cloudbase",
+          "serverName": "cloudbase",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@cloudbase/cloudbase-mcp@latest"
+          ],
+          "transport": "stdio"
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "cloudGoal",
+          "label": "云开发目标",
+          "placeholder": "例如：检查测试环境的数据库、函数和静态托管状态",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看 CloudBase 环境",
+          "text": "如果尚未登录，先让我在 CloudBase 官方登录流程中完成授权；随后只读列出可访问环境并完成“{{cloudGoal}}”的现状检查，不要创建、修改、删除、发布或部署任何资源",
+          "server": "cloudbase"
+        },
+        {
+          "title": "预审 CloudBase 变更",
+          "text": "针对“{{cloudGoal}}”拟定 CloudBase 操作计划，列出账号站点、地域、环境 ID、拟调用工具、资源变化、权限和预计费用；停在任何数据库写入、资源创建删除、权限修改、上传、发布或部署之前等待我逐项明确确认",
+          "server": "cloudbase"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "cloudflare-api",
       "name": "Cloudflare",
       "vendor": "Cloudflare",
@@ -392,6 +518,90 @@
           "title": "分析 DNS 与安全设置",
           "text": "使用 Cloudflare MCP 检查指定站点的 DNS、安全与性能配置并提出建议；任何变更必须先让我确认",
           "server": "cloudflare-api"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "cnb",
+      "name": "CNB",
+      "vendor": "腾讯云 CNB",
+      "icon": "🧱",
+      "category": "开发工具",
+      "summary": "组织与仓库 / Issue 与合并请求 / 构建与工作空间",
+      "description": "通过 CNB 官方 @cnbcool/mcp-server npm 包启动本地 stdio Server，访问 CNB 组织、仓库、Issue、合并请求、流水线、云原生构建、工作空间和知识库。当前包要求 Node.js 18+。Access Token 仅通过 API_TOKEN 环境变量注入，应设置到期时间并只授予任务所需的最小范围；该 Server 可以创建仓库和 Issue、更新或合并 PR、启动或停止构建、删除构建日志和工作空间，执行任何外部写入、合并、构建或删除前必须明确确认目标与影响。",
+      "tags": [
+        "CNB",
+        "代码仓库",
+        "Issue",
+        "Pull Request",
+        "CI",
+        "stdio",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://cnb.cool/cnb/tools/cnb-mcp-server/-/blob/main/README.md",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "CNB Access Token 仅保存在 DSH 本机，并以 API_TOKEN 注入官方 MCP 进程。请设置有效期并遵循最小权限原则。",
+        "credentialHelpLabel": "创建 CNB Access Token",
+        "credentialFields": [
+          {
+            "key": "apiToken",
+            "label": "CNB Access Token",
+            "placeholder": "请输入 CNB Access Token",
+            "description": "建议只授予目标组织、仓库和操作所需权限，并设置合理到期时间。",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "cnb",
+          "serverName": "cnb",
+          "command": "npx",
+          "args": [
+            "-y",
+            "-p",
+            "@cnbcool/mcp-server",
+            "cnb-mcp-stdio"
+          ],
+          "env": {
+            "API_BASE_URL": "https://api.cnb.cool"
+          },
+          "credentialBindings": {
+            "API_TOKEN": "apiToken"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "repository",
+          "label": "CNB 仓库",
+          "placeholder": "组织/仓库",
+          "required": true
+        },
+        {
+          "name": "cnbGoal",
+          "label": "操作目标",
+          "placeholder": "例如：检查最近一次构建失败原因",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "只读检查 CNB 仓库",
+          "text": "只读查看 CNB 仓库 {{repository}} 的仓库信息、Issue、合并请求和构建状态，完成“{{cnbGoal}}”并附来源；不要创建或更新 Issue/评论/PR，不要合并、启动或停止构建，也不要删除日志或工作空间",
+          "server": "cnb"
+        },
+        {
+          "title": "预审 CNB 写操作",
+          "text": "针对 CNB 仓库 {{repository}} 的“{{cnbGoal}}”列出拟调用工具、Token 权限、分支或构建目标、将公开发送的内容和不可逆影响；停在创建、更新、评论、合并、启动、停止或删除之前等待我明确确认",
+          "server": "cnb"
         }
       ]
     },
@@ -1717,6 +1927,92 @@
     },
     {
       "schemaVersion": 1,
+      "id": "mongodb",
+      "name": "MongoDB",
+      "vendor": "MongoDB",
+      "icon": "🍃",
+      "category": "开发工具",
+      "summary": "数据库查询 / Atlas 资源 / Schema 分析 / 只读模式",
+      "description": "通过 MongoDB 官方 mongodb-mcp-server npm 包启动本地 stdio Server，连接 MongoDB 数据库或使用 Atlas Service Account 查询 Atlas 资源。连接器固定启用 --readOnly，只注册读取、连接和元数据工具，不提供创建、更新或删除工具；数据库账号和 Atlas Service Account 仍应遵循最小权限原则。当前官方版本建议使用 Node.js 22.13+，连接字符串或 Atlas Client ID/Secret 仅通过环境变量注入。",
+      "tags": [
+        "MongoDB",
+        "MongoDB Atlas",
+        "数据库",
+        "只读",
+        "stdio",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/mongodb-js/mongodb-mcp-server",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "可填写 MongoDB 连接字符串，或同时填写 Atlas Service Account Client ID 与 Client Secret；凭据仅保存在 DSH 本机并注入只读 MCP 进程。",
+        "credentialHelpLabel": "查看 MongoDB MCP 安全配置",
+        "credentialFields": [
+          {
+            "key": "connectionString",
+            "label": "MongoDB 连接字符串（可选）",
+            "placeholder": "mongodb+srv://...",
+            "description": "用于直接连接 MongoDB；建议使用专用只读数据库账号。",
+            "required": false,
+            "secret": true
+          },
+          {
+            "key": "atlasClientId",
+            "label": "Atlas Service Account Client ID（可选）",
+            "placeholder": "请输入 Atlas Client ID",
+            "description": "使用 Atlas 管理能力时需与 Client Secret 同时填写。",
+            "required": false,
+            "secret": false
+          },
+          {
+            "key": "atlasClientSecret",
+            "label": "Atlas Service Account Client Secret（可选）",
+            "placeholder": "请输入 Atlas Client Secret",
+            "description": "使用 Atlas 管理能力时需与 Client ID 同时填写。",
+            "required": false,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "mongodb",
+          "serverName": "mongodb",
+          "command": "npx",
+          "args": [
+            "-y",
+            "mongodb-mcp-server@latest",
+            "--readOnly"
+          ],
+          "credentialBindings": {
+            "MDB_MCP_CONNECTION_STRING": "connectionString",
+            "MDB_MCP_API_CLIENT_ID": "atlasClientId",
+            "MDB_MCP_API_CLIENT_SECRET": "atlasClientSecret"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "databaseGoal",
+          "label": "分析目标",
+          "placeholder": "例如：梳理订单库的集合结构与最近一周数据分布",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "只读分析 MongoDB",
+          "text": "使用 MongoDB MCP 完成“{{databaseGoal}}”：先列出数据库、集合、索引与字段结构，再执行范围受限的只读查询；说明查询条件、数量上限和结论，不要尝试创建、更新或删除数据及 Atlas 资源",
+          "server": "mongodb"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "neon",
       "name": "Neon",
       "vendor": "Neon",
@@ -2194,6 +2490,69 @@
     },
     {
       "schemaVersion": 1,
+      "id": "playwright",
+      "name": "Playwright",
+      "vendor": "Microsoft",
+      "icon": "🎭",
+      "category": "开发工具",
+      "summary": "浏览器自动化 / 页面检查 / 交互测试 / 可访问性快照",
+      "description": "通过 Microsoft 官方 @playwright/mcp npm 包启动本地 stdio Server，使用结构化可访问性快照检查网页并执行浏览器自动化。当前包要求 Node.js 18+。连接器可以读取页面内容、点击、输入、上传文件并提交表单；登录、发送、发布、购买、授权、删除或其他会产生外部影响的操作必须在执行前明确确认，并避免把敏感数据交给不受信任页面。",
+      "tags": [
+        "Playwright",
+        "浏览器自动化",
+        "网页测试",
+        "可访问性",
+        "stdio",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/microsoft/playwright-mcp",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "playwright",
+          "serverName": "playwright",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@playwright/mcp@latest"
+          ],
+          "transport": "stdio"
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "targetUrl",
+          "label": "目标网址",
+          "placeholder": "https://example.com",
+          "required": true
+        },
+        {
+          "name": "goal",
+          "label": "测试目标",
+          "placeholder": "例如：检查登录页的表单与错误提示",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "只读检查网页",
+          "text": "使用 Playwright 打开 {{targetUrl}}，只读取页面结构、链接、表单和错误信息并完成“{{goal}}”的检查；不要登录、提交表单、上传或下载文件、购买、发布、授权或删除任何内容",
+          "server": "playwright"
+        },
+        {
+          "title": "预演浏览器操作",
+          "text": "为在 {{targetUrl}} 完成“{{goal}}”制定操作步骤，标出将发送的数据、账号权限和外部副作用；可以执行无副作用的检查，但必须停在最终提交、发送、发布、购买、授权或删除之前等待我明确确认",
+          "server": "playwright"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "polardb",
       "name": "PolarDB-X",
       "vendor": "阿里云",
@@ -2278,6 +2637,86 @@
           "title": "只读分析数据库",
           "text": "先查看目标数据库的表结构，再生成并解释只读 SELECT 查询；未经我确认不要执行写入、删除或 DDL",
           "server": "polardb"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "postgresql",
+      "name": "PostgreSQL",
+      "vendor": "Microsoft",
+      "icon": "🐘",
+      "category": "开发工具",
+      "summary": "连接档案 / SQL 查询 / Schema 分析 / 数据库管理",
+      "description": "通过 Microsoft 官方 @microsoft/postgres-mcp npm 包启动本地 stdio Server，管理连接档案并查询 PostgreSQL。当前 npm 包为 RC 版本且要求 Node.js 22+。官方首选把连接档案保存在本机配置、密码保存在 OS keyring，并同时为档案设置 access_mode=ro、为数据库账号授予只读最小权限；仅在无 keyring 的隔离环境中使用可选连接字符串。该 Server 是数据库网关而非授权策略引擎，任何写入、DDL、导入或大范围查询都必须先确认目标档案、SQL 和影响范围。",
+      "tags": [
+        "PostgreSQL",
+        "数据库",
+        "SQL",
+        "OS Keyring",
+        "stdio",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/microsoft/postgres-mcp/blob/main/USAGE.md",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "api-key",
+        "credentialDescription": "推荐预先使用官方 CLI 创建连接档案并把密码存入 OS keyring。下方连接字符串仅作为无 keyring 环境的可选回退，并只保存在 DSH 本机后注入环境变量。",
+        "credentialHelpLabel": "查看 PostgreSQL MCP 连接与安全指南",
+        "credentialFields": [
+          {
+            "key": "connectionString",
+            "label": "PostgreSQL 连接字符串（可选回退）",
+            "placeholder": "请粘贴 libpq URI 或 key=value 连接信息",
+            "description": "交互式桌面环境优先使用 OS keyring；如填写，请使用专用只读账号。",
+            "required": false,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "postgresql",
+          "serverName": "postgresql",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@microsoft/postgres-mcp",
+            "run"
+          ],
+          "credentialBindings": {
+            "PGSQL_MCP_CONNECTION_STRING": "connectionString"
+          },
+          "transport": "stdio"
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "profileName",
+          "label": "连接档案名称",
+          "placeholder": "default",
+          "required": true,
+          "default": "default"
+        },
+        {
+          "name": "analysisGoal",
+          "label": "分析目标",
+          "placeholder": "例如：分析订单表结构和最近一周订单量",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "连接只读档案",
+          "text": "列出 PostgreSQL 连接档案并连接 {{profileName}}；先确认该档案 access_mode=ro 且数据库角色为专用只读账号，只查看连接信息和 Schema，不要创建、修改或删除档案、数据或数据库对象",
+          "server": "postgresql"
+        },
+        {
+          "title": "只读分析 PostgreSQL",
+          "text": "使用档案 {{profileName}} 完成“{{analysisGoal}}”：先检查表结构，再使用单条、范围受限的只读查询并解释 SQL；未经我确认不要执行 INSERT、UPDATE、DELETE、DDL、COPY 导入或其他写操作",
+          "server": "postgresql"
         }
       ]
     },
