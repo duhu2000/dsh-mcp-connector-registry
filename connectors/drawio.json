@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "drawio",
+  "name": "draw.io",
+  "vendor": "JGraph / draw.io",
+  "icon": "📐",
+  "category": "设计创意",
+  "summary": "流程图 / 架构图 / Mermaid / draw.io XML",
+  "description": "接入 draw.io 官方 Hosted MCP Apps Server，根据 draw.io XML 或 Mermaid 创建可编辑图表，并支持搜索图形库。该端点无需鉴权，但用户输入会发送至 draw.io 托管服务；不要提交未脱敏的内部架构、密钥、个人信息或受限业务数据。服务主要面向支持 MCP Apps 的 Host；在当前 Host 不支持 MCP Apps 内嵌渲染时，工具仍可连接，但可能只返回 XML、资源或文本而不显示交互式预览。",
+  "tags": ["draw.io", "流程图", "架构图", "Mermaid", "MCP Apps", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://www.drawio.com/docs/manual/generate/drawio-mcp-server/",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "drawio",
+      "serverName": "drawio",
+      "url": "https://mcp.draw.io/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "diagramGoal",
+      "label": "图表目标",
+      "placeholder": "例如：绘制订单履约系统的脱敏时序图",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "规划图表结构",
+      "text": "为“{{diagramGoal}}”先拟定节点、关系、分组、方向和图形方案，检查是否含内部密钥、个人信息或未脱敏架构；只输出结构草案并等待我确认，不要立即创建图表",
+      "server": "drawio"
+    },
+    {
+      "title": "创建已确认的图表",
+      "text": "根据我已确认且完成脱敏的“{{diagramGoal}}”创建 draw.io 图表；优先使用 Mermaid，复杂图形再使用 draw.io XML，并说明当前 Host 若不支持 MCP Apps 可能只能返回 XML、资源或文本",
+      "server": "drawio"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "world-bank-data360",
+  "name": "世界银行 Data360",
+  "vendor": "World Bank Group",
+  "icon": "🌍",
+  "category": "调研分析",
+  "summary": "发展指标 / 国家对比 / 时间序列 / 元数据与图表",
+  "description": "接入世界银行官方 Data360 公共 MCP 端点，免密查询贫困、增长、性别、气候、健康等发展指标及其定义、来源、覆盖范围和时间序列。服务以 Data360 为权威数据源并支持国家排名、对比和 Vega-Lite 图表规格；应先检索指标和覆盖范围，不猜测 database_id 或 indicator_id，并在结论中保留定义、方法和已知限制。",
+  "tags": ["世界银行", "Data360", "发展数据", "宏观指标", "国家对比", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://worldbank.github.io/data360-mcp/",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "data360",
+      "serverName": "world-bank-data360",
+      "url": "https://maimcpext.worldbank.org/ext/data360/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "researchQuestion",
+      "label": "研究问题",
+      "placeholder": "例如：比较东南亚主要经济体过去十年的人均 GDP 与贫困率变化",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检索发展指标",
+      "text": "使用世界银行 Data360 MCP 回答“{{researchQuestion}}”：先检索候选数据库与指标，核对国家和年份覆盖，再获取数据；列出指标定义、来源、单位、方法限制和缺失值，不要猜测 database_id 或 indicator_id",
+      "server": "data360"
+    },
+    {
+      "title": "生成可核验图表方案",
+      "text": "围绕“{{researchQuestion}}”先选择 1 至 4 个有覆盖的数据指标，核对可用年份和分组，再生成图表规格；同时给出数据表口径、来源链接和图表可能造成的比较偏差",
+      "server": "data360"
+    }
+  ]
+}

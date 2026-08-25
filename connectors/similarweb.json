@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "similarweb",
+  "name": "Similarweb",
+  "vendor": "Similarweb",
+  "icon": "📈",
+  "category": "调研分析",
+  "summary": "网站流量 / 竞品对标 / 渠道与受众分析",
+  "description": "接入 Similarweb 官方远程 MCP Server，使用具备 API 权限的 Similarweb API Key 查询网站流量、渠道、受众、关键词和竞品指标。可用数据范围取决于账号套餐，调用会消耗 API credits；分析前应确认域名、时间范围、地域和指标口径，避免把内部未公开域名、客户名单或其他无关敏感信息提交给服务商。",
+  "tags": ["Similarweb", "网站分析", "竞品分析", "流量", "数字营销", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://developers.similarweb.com/docs/cursor-mcp-integration",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "api-key",
+    "credentialName": "Similarweb API Key",
+    "credentialPlaceholder": "请输入具备所需 API 权限的 Similarweb API Key",
+    "credentialDescription": "API Key 仅保存在 DSH 本机，并通过 api-key Header 发送至 Similarweb 官方 MCP；调用可能消耗 API credits。",
+    "credentialHelpLabel": "查看 Similarweb MCP 接入指南"
+  },
+  "servers": [
+    {
+      "serverKey": "similarweb",
+      "serverName": "similarweb",
+      "url": "https://mcp.similarweb.com",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "primaryDomain",
+      "label": "目标域名",
+      "placeholder": "例如：example.com",
+      "required": true
+    },
+    {
+      "name": "analysisGoal",
+      "label": "分析目标",
+      "placeholder": "例如：对比近 6 个月流量趋势、渠道结构与主要关键词",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "分析网站与竞品",
+      "text": "使用 Similarweb MCP 对 {{primaryDomain}} 完成“{{analysisGoal}}”；先确认可用指标、地域、设备和时间口径，再执行范围受限的查询，列出 API credits 使用边界和数据限制，不要提交无关的内部域名、客户名单或个人数据",
+      "server": "similarweb"
+    },
+    {
+      "title": "预估查询成本",
+      "text": "针对 {{primaryDomain}} 的“{{analysisGoal}}”，先列出拟调用的 Similarweb 工具、指标、时间范围和可能消耗的 API credits，等待我确认后再查询",
+      "server": "similarweb"
+    }
+  ]
+}

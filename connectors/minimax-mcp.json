@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "id": "minimax-mcp",
+  "name": "MiniMax MCP",
+  "vendor": "MiniMax AI",
+  "icon": "🎬",
+  "category": "设计创意",
+  "summary": "语音合成 / 声音克隆 / 图片与视频生成",
+  "description": "通过 MiniMax 官方 minimax-mcp Python 包启动本地 stdio Server，提供语音合成、声音列表与克隆、图片生成、视频生成和任务查询。运行要求 Python 3.10+ 与 uv/uvx；API Key 必须与中国大陆或全球 API Host 匹配。生成与声音克隆可能产生费用并处理用户提供的文本、音频、图片或视频；执行前必须确认模型、参数、费用、内容权利和数据外发范围，声音克隆还必须确认已取得声音主体的合法授权。",
+  "tags": ["MiniMax", "语音合成", "声音克隆", "图片生成", "视频生成", "stdio", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/MiniMax-AI/MiniMax-MCP",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "MiniMax API Key 和对应区域 API Host 仅保存在 DSH 本机并注入官方 MCP 进程；生成任务可能产生费用。",
+    "credentialHelpLabel": "查看 MiniMax MCP 区域与密钥配置",
+    "credentialFields": [
+      {
+        "key": "apiKey",
+        "label": "MiniMax API Key",
+        "placeholder": "请输入 MiniMax API Key",
+        "description": "请使用与所选 API Host 同区域的 Key。",
+        "required": true,
+        "secret": true
+      },
+      {
+        "key": "apiHost",
+        "label": "MiniMax API Host",
+        "placeholder": "https://api.minimaxi.com 或 https://api.minimax.io",
+        "description": "中国大陆使用 https://api.minimaxi.com；全球使用 https://api.minimax.io。",
+        "required": true,
+        "secret": false
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "minimax",
+      "serverName": "minimax",
+      "command": "uvx",
+      "args": ["minimax-mcp", "-y"],
+      "env": {
+        "MINIMAX_API_RESOURCE_MODE": "url"
+      },
+      "credentialBindings": {
+        "MINIMAX_API_KEY": "apiKey",
+        "MINIMAX_API_HOST": "apiHost"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "creativeGoal",
+      "label": "创作目标",
+      "placeholder": "例如：生成一张用于内部评审的产品概念图",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "规划生成任务",
+      "text": "为“{{creativeGoal}}”先列出建议工具、模型、提示词、输入数据、输出规格和可能费用，检查版权、肖像、声音授权及敏感数据风险；等待我明确确认，不要立即生成或克隆声音",
+      "server": "minimax"
+    },
+    {
+      "title": "执行已确认的生成",
+      "text": "按我已确认的模型、提示词、输入、规格和费用范围完成“{{creativeGoal}}”；若参数、计费或数据权利仍不明确，先询问我，不要启动生成任务",
+      "server": "minimax"
+    },
+    {
+      "title": "预审声音克隆",
+      "text": "针对“{{creativeGoal}}”只检查声音样本来源、主体授权、用途、保存方式和预计费用，并列出拟调用参数；没有我对合法授权和费用的明确确认，不要调用 voice_clone",
+      "server": "minimax"
+    }
+  ]
+}
