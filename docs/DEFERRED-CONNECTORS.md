@@ -3,7 +3,7 @@
 本清单记录对标市场中暂未安全上架的候选，以及已上架但仍需复核的健康项。它不是收录承诺，
 也不保留 `id`；服务商或贡献者仍应按 [`ONBOARDING.md`](ONBOARDING.md) 提交可验证资料。
 
-更新时间：2026-08-24。
+更新时间：2026-08-25。
 
 ## 上架门槛
 
@@ -27,6 +27,8 @@
 | `tencent-meeting` | 当前方案依赖额外 Token Header、版本 Header 或本地代理，通用描述不完整 | 官方固定端点和完整鉴权/版本协商说明 |
 | `sealos` | 已确认 SDK/平台资料，未确认公开 MCP Server | 官方 MCP 端点或受维护的开源 Server |
 | `coderabbit` | 未确认可供第三方客户端使用的公开 MCP Server | 官方 MCP 配置文档和可探针端点 |
+| `google-workspace` | Gmail、Drive、Docs、Sheets、Slides、Calendar、Chat、People 等官方 MCP 需要用户提供固定 OAuth Client ID/Secret；当前插件仅支持 DCR，无法完成该授权流程 | 插件先支持“静态 OAuth Client ID/Secret + PKCE”、本机安全存储和完整回归测试 |
+| `blender` | 官方 MCP 会在 Blender 中无防护执行 LLM 生成的 Python 代码，现有市场交互不足以表达任意代码执行风险 | 完成显式风险确认、命令预览、隔离环境与安装流程验收后单独评估 |
 | `fayan-legal`、`mozun-trademark`、`ths-legal`、`mingbai-lawyer` | 未核验到可公开接入的官方 MCP 端点 | 服务商提交官方端点、鉴权和 Logo 来源 |
 
 ## 等待权威接入资料
@@ -37,6 +39,7 @@
 - 金融投资：`ths-ifind`、`hsjy-mcp`、`morningstar`、`jinmen-research`、`tongzhou-research`
 - 办公协作：`weiyun`、`baidu-netdisk`、`jinshuju`、`tencent-survey`
 - 调研分析：`jiushuyun-bi`、`ctrip`、`sorftime`、`jike-spatial`
+- 科学数据：`materials-project`、`oqmd`、`chembl`、`uniprot`、`pubchem`、`pubmed-pmc`、`sec`、`imf`、`arxiv`（当前主要为社区封装或缺少稳定官方 MCP 发布）
 - 设计创意：`picset-ai`、`jirui-video`
 - 效率工具：`xiaoshouyi`、`fxiaoke`、`xiaobangbang`、`moka-hr`、`beisen-hr`、
   `chuanyun`、`seeyon`、`jiandaoyun`、`xinzhi`

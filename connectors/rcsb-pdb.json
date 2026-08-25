@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "rcsb-pdb",
+  "name": "RCSB PDB",
+  "vendor": "RCSB Protein Data Bank",
+  "icon": "🧬",
+  "category": "调研分析",
+  "summary": "蛋白质结构 / 序列 / 配体 / 注释与交叉引用",
+  "description": "通过 RCSB 官方 rcsb-mcp Python 包启动本地 stdio Server，查询 Protein Data Bank 的结构、序列、化学组分、功能注释以及 PDB、UniProt、NCBI 之间的交叉引用。公开数据查询无需 API Key；运行要求 Python 3.10+ 与 uv/uvx。工具面向公共科学数据，但用户提供的序列、SMILES 或研究条件会发送至 RCSB API，未公开或受限制的研究数据应先脱敏并确认可外发。",
+  "tags": ["RCSB PDB", "蛋白质结构", "生物信息", "序列", "配体", "stdio", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/rcsb/rcsb-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "rcsb-pdb",
+      "serverName": "rcsb-pdb",
+      "command": "uvx",
+      "args": ["rcsb-mcp"],
+      "transport": "stdio"
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "researchQuestion",
+      "label": "结构生物学问题",
+      "placeholder": "例如：查找高分辨率的人血红蛋白结构并比较主要配体",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检索 PDB 结构",
+      "text": "使用 RCSB PDB MCP 回答“{{researchQuestion}}”：先选择文本、属性、序列、化学或结构检索方式，再获取必要条目和注释；列出 PDB ID、筛选条件、分辨率和数据来源，不要上传未公开或无权外发的序列与研究数据",
+      "server": "rcsb-pdb"
+    },
+    {
+      "title": "核对结构与数据库映射",
+      "text": "针对“{{researchQuestion}}”核对 PDB、UniProt、NCBI 和功能注释之间的映射，区分实验结构、预测或派生结论，并保留可复核的条目 ID",
+      "server": "rcsb-pdb"
+    }
+  ]
+}

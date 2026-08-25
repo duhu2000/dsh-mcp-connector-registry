@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "google-analytics",
+  "name": "Google Analytics",
+  "vendor": "Google Analytics",
+  "icon": "📊",
+  "category": "调研分析",
+  "summary": "GA4 属性 / 报表 / 实时数据 / 漏斗与转化分析",
+  "description": "通过 Google Analytics 官方 analytics-mcp Python 包启动本地 stdio Server，只读查询账号与 GA4 属性、配置、标准报表、实时数据、漏斗和转化。使用前需安装 pipx，在 Google Cloud 启用 Analytics Admin API 与 Data API，并预先配置包含 analytics.readonly scope 的 Application Default Credentials。Descriptor 只保存用户填写的本机凭据文件路径和 Project ID，不包含凭据 JSON 内容；进程会读取该本机文件并访问 Google API，用户仍应确认账号权限、属性范围和数据治理要求。",
+  "tags": ["Google Analytics", "GA4", "网站分析", "实时报表", "漏斗", "转化", "stdio", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://developers.google.com/analytics/devguides/MCP",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "请先按 Google 官方文档配置只读 ADC。DSH 仅保存并注入本机凭据文件路径和 Google Cloud Project ID，不读取或上传凭据 JSON 内容。",
+    "credentialHelpLabel": "查看 Google Analytics MCP 配置指南",
+    "credentialFields": [
+      {
+        "key": "credentialsPath",
+        "label": "ADC 凭据 JSON 本机路径",
+        "placeholder": "请输入 gcloud 输出的本机凭据文件路径",
+        "description": "该字段是本机路径而不是凭据内容；请勿粘贴 JSON、Client Secret 或 Token。",
+        "required": true,
+        "secret": false
+      },
+      {
+        "key": "projectId",
+        "label": "Google Cloud Project ID",
+        "placeholder": "请输入启用 Analytics API 的 Project ID",
+        "description": "Project ID 不是密钥，但应与 ADC 和已启用 API 的项目一致。",
+        "required": true,
+        "secret": false
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "google-analytics",
+      "serverName": "google-analytics",
+      "command": "pipx",
+      "args": ["run", "analytics-mcp"],
+      "env": {
+        "GRPC_DNS_RESOLVER": "native"
+      },
+      "credentialBindings": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "credentialsPath",
+        "GOOGLE_PROJECT_ID": "projectId"
+      },
+      "transport": "stdio"
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "analysisGoal",
+      "label": "分析目标",
+      "placeholder": "例如：分析指定 GA4 属性过去 90 天的热门事件与转化趋势",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "核对账号与属性",
+      "text": "使用 Google Analytics MCP 只读列出当前 ADC 可访问的账号和 GA4 属性，确认目标属性与时区；不要输出凭据路径、凭据内容、Token 或无关账号数据",
+      "server": "google-analytics"
+    },
+    {
+      "title": "分析 GA4 数据",
+      "text": "使用 Google Analytics MCP 只读完成“{{analysisGoal}}”：先确认目标属性、日期范围、维度、指标、过滤条件和阈值，再运行范围受限的报表；说明抽样、阈值和数据治理限制，不要尝试修改 Analytics 配置",
+      "server": "google-analytics"
+    }
+  ]
+}

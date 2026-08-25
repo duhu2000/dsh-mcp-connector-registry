@@ -218,6 +218,61 @@ test('第四批收尾连接器使用官方固定端点并使市场达到验收�
   assert.doesNotMatch(serialized, /(?:api[_-]?key|token|secret)\s*[=:]\s*[A-Za-z0-9._~-]{16,}/i);
 });
 
+test('第六批精选连接器覆盖官方远程 MCP 与安全 stdio 本机配置', async () => {
+  const readConnector = async (id) => JSON.parse(
+    await readFile(resolve('connectors', `${id}.json`), 'utf8'),
+  );
+  const allFiles = (await readdir(resolve('connectors')))
+    .filter((file) => file.endsWith('.json') && !file.endsWith('.sample.json'));
+  const batchIds = [
+    'drawio', 'google-analytics', 'minimax-mcp',
+    'rcsb-pdb', 'similarweb', 'world-bank-data360',
+  ];
+  const batch = await Promise.all(batchIds.map(readConnector));
+  const byId = Object.fromEntries(batch.map((connector) => [connector.id, connector]));
+
+  assert.ok(allFiles.length >= 78);
+  assert.equal(batch.length, 6);
+  assert.ok(batch.every((connector) => connector.published === true));
+  assert.ok(batch.every((connector) => connector.featured === false));
+  assert.ok(batch.every((connector) => connector.probeStatus === 'unverified'));
+
+  assert.equal(byId.similarweb.auth.mode, 'api-key');
+  assert.equal(byId.similarweb.auth.apiKeyHeader, 'api-key');
+  assert.equal(byId.similarweb.servers[0].url, 'https://mcp.similarweb.com');
+  assert.equal(byId['world-bank-data360'].auth.mode, 'none');
+  assert.equal(
+    byId['world-bank-data360'].servers[0].url,
+    'https://maimcpext.worldbank.org/ext/data360/mcp',
+  );
+  assert.equal(byId.drawio.servers[0].url, 'https://mcp.draw.io/mcp');
+  assert.match(byId.drawio.description, /MCP Apps/);
+
+  assert.equal(byId['rcsb-pdb'].servers[0].command, 'uvx');
+  assert.deepEqual(byId['rcsb-pdb'].servers[0].args, ['rcsb-mcp']);
+  assert.deepEqual(byId['minimax-mcp'].servers[0].args, ['minimax-mcp', '-y']);
+  assert.deepEqual(byId['minimax-mcp'].servers[0].credentialBindings, {
+    MINIMAX_API_KEY: 'apiKey',
+    MINIMAX_API_HOST: 'apiHost',
+  });
+  assert.equal(byId['minimax-mcp'].servers[0].env.MINIMAX_API_RESOURCE_MODE, 'url');
+
+  assert.equal(byId['google-analytics'].servers[0].command, 'pipx');
+  assert.deepEqual(byId['google-analytics'].servers[0].args, ['run', 'analytics-mcp']);
+  assert.deepEqual(byId['google-analytics'].servers[0].credentialBindings, {
+    GOOGLE_APPLICATION_CREDENTIALS: 'credentialsPath',
+    GOOGLE_PROJECT_ID: 'projectId',
+  });
+  assert.equal(byId['google-analytics'].servers[0].env.GRPC_DNS_RESOLVER, 'native');
+  assert.ok(byId['google-analytics'].auth.credentialFields.every((field) => field.secret === false));
+  assert.match(byId['google-analytics'].description, /analytics\.readonly/);
+
+  const serialized = JSON.stringify(batch);
+  assert.doesNotMatch(serialized, /Bearer\s+[A-Za-z0-9._~-]{12,}/i);
+  assert.doesNotMatch(serialized, /(?:api[_-]?key|token|secret)\s*[=:]\s*[A-Za-z0-9._~-]{16,}/i);
+  assert.doesNotMatch(serialized, /-----BEGIN (?:PRIVATE KEY|CERTIFICATE)-----/);
+});
+
 test('盈米连接器使用公开 x-api-key 接入参数且不包含凭据', async () => {
   const connector = JSON.parse(
     await readFile(resolve('connectors/yingmi-wealth-management.json'), 'utf8'),
