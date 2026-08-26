@@ -31,7 +31,10 @@
       "command": "npx",
       "args": ["-y", "chinese-almanac-mcp"],
       "serverName": "chinese-almanac-mcp",
-      "transport": "stdio"
+      "transport": "stdio",
+      "credentialBindings": {
+        "TUNGSHING_API_KEY": "TUNGSHING_API_KEY"
+      }
     }
   ]
 }
