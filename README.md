@@ -13,7 +13,7 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 ## 当前公共连接器
 
 <!-- catalog-stats:start -->
-截至 2026-08-25，公共 Registry 已发布 78 条连接器描述；与随包的 4 张企查查卡片合并去重后，市场页可浏览 82 张卡片，覆盖企业数据、金融投资、法律合规、开发工具、办公协作、调研分析、设计创意、效率工具、其他 9 类。推荐位严格保留 4 张企查查卡片、北大法宝和 Wind，共 6 张；其他连接器按业务分类展示。Registry 可独立持续更新，实际数量以客户端刷新后的市场页签徽标和 [catalog-stats.json](catalog-stats.json) 为准。
+截至 2026-08-27，公共 Registry 已发布 79 条连接器描述；与随包的 4 张企查查卡片合并去重后，市场页可浏览 83 张卡片，覆盖企业数据、金融投资、法律合规、开发工具、办公协作、调研分析、设计创意、效率工具、其他 9 类。推荐位严格保留 4 张企查查卡片、北大法宝和 Wind，共 6 张；其他连接器按业务分类展示。Registry 可独立持续更新，实际数量以客户端刷新后的市场页签徽标和 [catalog-stats.json](catalog-stats.json) 为准。
 <!-- catalog-stats:end -->
 
 `connectors/*.json` 是 Connector 源文件，根目录 `catalog.json` 是 CI 在每次合并后自动重建的公开清单和数量权威来源。请直接查看 [`catalog.json`](catalog.json)，或在仓库根目录运行以下只读命令获取实时数量及分类分布，避免 README 手写列表随批量上架而失效：
