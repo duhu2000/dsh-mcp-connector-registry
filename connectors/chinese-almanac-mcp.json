@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "chinese-almanac-mcp",
+  "name": "中华通胜 · 黄历择日 MCP",
+  "vendor": "FUJIA / yonlandwu",
+  "icon": "https://cdn.jsdelivr.net/gh/yonlandwu/chinese-almanac-mcp@main/assets/icon.svg",
+  "category": "效率工具",
+  "summary": "开源中华通胜（黄历）MCP Server：每日宜忌、择日、干支八字、节气查询，适配 DeepSeek Harness 等任意 MCP 客户端。",
+  "description": "chinese-almanac-mcp 是一个开源的中华通胜 / 黄历 MCP Server，提供每日宜忌、冲煞、吉神方位、干支纪年、二十四节气、农历日期等查询工具；可选配置 TUNGSHING_API_KEY 环境变量可解锁更精细的通胜宜忌数据，留空则使用内置轻量黄历数据库，无需联网即可运行。适用于 DeepSeek Harness、Claude Desktop、Cursor 等任意支持 MCP 的客户端。",
+  "tags": ["黄历", "通胜", "择日", "中国历法", "八字"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/yonlandwu/chinese-almanac-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialFields": [
+      {
+        "key": "TUNGSHING_API_KEY",
+        "label": "通胜 API Key（可选）",
+        "placeholder": "TUNGSHING_API_KEY",
+        "description": "选填。配置后解锁通胜宜忌精细数据；留空则使用内置黄历数据库。",
+        "required": false,
+        "secret": true
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "command": "npx",
+      "args": ["-y", "chinese-almanac-mcp"],
+      "serverName": "chinese-almanac-mcp",
+      "transport": "stdio",
+      "credentialBindings": {
+        "TUNGSHING_API_KEY": "TUNGSHING_API_KEY"
+      }
+    }
+  ]
+}
