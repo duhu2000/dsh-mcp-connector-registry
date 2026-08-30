@@ -1,0 +1,42 @@
+{
+  "servers": [
+    {
+      "server": {
+        "name": "com.example/market-data",
+        "title": "Example Market Data",
+        "description": "Financial market data, company analytics, and public statistics.",
+        "version": "1.2.3",
+        "websiteUrl": "https://data.example.com/docs?tracking=fixture",
+        "repository": {
+          "url": "https://github.com/example/market-data?tab=readme",
+          "source": "github",
+          "id": "123"
+        },
+        "remotes": [
+          {
+            "type": "streamable-http",
+            "url": "https://data.example.com/mcp",
+            "headers": [
+              {
+                "name": "Authorization",
+                "isRequired": true,
+                "isSecret": true
+              }
+            ]
+          }
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "publishedAt": "2026-08-20T00:00:00.000Z",
+          "updatedAt": "2026-08-29T00:00:00.000Z",
+          "isLatest": true
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "count": 1
+  }
+}

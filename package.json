@@ -11,10 +11,14 @@
     "check": "npm test && npm run build && git diff --exit-code -- catalog.json catalog-stats.json README.md && dsh-mcp-connector-probe catalog.json --validate-only && npm run assets:check",
     "assets:check": "node scripts/check-icon-assets.mjs",
     "cdn:purge": "node scripts/purge-jsdelivr-cache.mjs catalog.json",
-    "probe": "dsh-mcp-connector-probe catalog.json --allow-partial --output probe-report.json"
+    "probe": "dsh-mcp-connector-probe catalog.json --allow-partial --output probe-report.json",
+    "health:trend": "node scripts/update-health-state.mjs",
+    "candidates:discover": "node scripts/discover-candidates.mjs",
+    "candidates:monthly": "node scripts/build-monthly-batch.mjs",
+    "candidates:accept": "node scripts/run-runtime-acceptance.mjs"
   },
   "devDependencies": {
-    "dsh-mcp-connector": "^0.2.18",
+    "dsh-mcp-connector": "^0.2.29",
     "zod": "^4.4.0"
   },
   "engines": {

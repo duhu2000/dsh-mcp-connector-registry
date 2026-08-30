@@ -16,6 +16,7 @@
 - [ ] `featured` is `false`; I understand featured placement is maintained separately.
 - [ ] Prompts contain no personal information, customer data, or restricted content.
 - [ ] I provided official sources for the MCP endpoint, authentication method, and logo.
+- [ ] A maintainer added `candidates/records/<connector-id>.json` with approved human review and a redacted real runtime acceptance report.
 - [ ] I ran `npm ci --legacy-peer-deps && npm run check` locally.
 
 ## Notes for reviewers

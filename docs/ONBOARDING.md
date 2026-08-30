@@ -76,6 +76,21 @@ npm test && npm run validate && npm run assets:check
 - `npm run validate` 确定性重建 `catalog.json`、`catalog-stats.json` 和 README 数量区块，并执行 Schema、重复 ID/ServerName、URL 与潜在密钥审计。
 - `npm run assets:check` 检查远程 Logo 的图片类型和浏览器跨域兼容性。
 
+维护者复核无鉴权 Hosted MCP 时，可运行只读验收器：
+
+```bash
+npm run candidates:accept -- \
+  --url https://mcp.example.com/mcp \
+  --tool safe_read_tool \
+  --args '{"query":"public test data"}' \
+  --output candidate-output/runtime-acceptance.md
+```
+
+验收器要求该工具在 `tools/list` 中明确声明 `readOnlyHint: true` 且不得声明破坏性；
+它只保存服务版本、工具数量、结果状态和响应 SHA-256，不保存原始工具结果、会话标识或凭据。
+若工具结果出现疑似 Token/API Key，验收失败且报告只记录风险类型。需要鉴权的服务使用独立、
+最小权限测试账号人工验收，凭据不得作为 CLI 参数或写入报告。
+
 本地验证可能产生 `catalog.json`、`catalog-stats.json` 或 README 数量区块差异，这是正常现象；不要手动修改或提交 `catalog.json`、`catalog-stats.json` 或 README 数量区块。合并后 CI 会自动重建。
 
 ### 第 5 步：提交 Connector PR
@@ -86,11 +101,11 @@ git commit -m "Add <connector-id>"
 git push origin add-my-connector
 ```
 
-向 `duhu2000/dsh-mcp-connector-registry:main` 发起 Pull Request，并完整填写 PR checklist。通常只提交 Connector 源文件；确需仓库托管图标时，再提交 `assets/<connector-id>.*`。
+向 `duhu2000/dsh-mcp-connector-registry:main` 发起 Pull Request，并完整填写 PR checklist。新增 Connector 还需要维护者补充 `candidates/records/<connector-id>.json`：核验 Official Registry/厂商资料、鉴权、许可证或服务条款，记录人工批准，并链接不含凭据、个人数据或客户数据的真实运行验收报告。确需仓库托管图标时，再提交 `assets/<connector-id>.*`。
 
 ### 第 6 步：等待 CI、审核与自动发布
 
-CI 通过后，由维护者复核官网、MCP 文档、鉴权、品牌来源、公开可达性和交互安全性。PR 合并到 `main` 后：
+CI 先验证新增描述符已具备上述人工审核与真实运行验收记录。全部检查通过后，由维护者复核官网、MCP 文档、鉴权、品牌来源、公开可达性和交互安全性。PR 合并到 `main` 后：
 
 1. `validate` job 再次执行测试、Descriptor 校验和图片检查；
 2. `rebuild-catalog` job 运行确定性构建；
@@ -328,6 +343,7 @@ OAuth 卡片必须发布可验证的 Protected Resource Metadata 与 Authorizati
 - [ ] 服务说明写明重要权限、费用、数据范围和副作用。
 - [ ] 第三方名称和 Logo 已获得使用权，并在 PR 提供官方来源。
 - [ ] stdio 命令来自官方公开包，且不要求 Registry 探针执行本地命令。
+- [ ] 维护者已提交同 ID 候选记录，完成官方证据、许可证/服务条款、人工批准和真实运行验收；记录不含凭据或个人数据。
 - [ ] 已运行 `npm ci --legacy-peer-deps` 和 `npm test && npm run validate && npm run assets:check`。
 - [ ] 只提交 Connector 源文件和必要图片，不手动提交 `catalog.json`、`catalog-stats.json`、README 数量区块、`node_modules`、日志或本机配置。
 

@@ -13,12 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
       - run: npm test
+      - name: Require human review and real runtime acceptance for new connectors
+        if: github.event_name == 'pull_request'
+        run: node scripts/check-new-connectors.mjs --base '${{ github.event.pull_request.base.sha }}'
       - run: npm run validate
       - run: npm run assets:check
 

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "ibge-br-public-data",
+  "name": "IBGE 巴西公共统计",
+  "vendor": "Sidney Bissoli（独立社区项目）",
+  "icon": "🇧🇷",
+  "category": "调研分析",
+  "summary": "人口普查 / 行政区划 / 经济社会指标 / 地理边界",
+  "description": "连接巴西地理与统计研究所（IBGE）公开数据接口，查询巴西州、市等行政区划，以及人口普查、GDP、通胀、就业、收入、健康、产业分类和地理边界数据。支持跨地区比较、历史趋势和统计排名，结果附带数据来源、统计期、获取时间及引用信息，适合拉美市场研究、宏观分析、城市选址和公共政策研究。本连接器由社区独立维护，并非 IBGE 官方产品。",
+  "tags": ["巴西", "IBGE", "人口普查", "行政区划", "经济指标", "地理数据", "公共数据"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://ibge.sidneybissoli.com/",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788086541010,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "ibge-br-public-data",
+      "url": "https://ibge.sidneybissoli.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "researchQuestion",
+      "label": "研究问题",
+      "placeholder": "例如：比较圣保罗州主要城市近十年人口和人均 GDP 变化",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询巴西统计数据",
+      "text": "使用 IBGE 公共数据回答“{{researchQuestion}}”：先核对行政区划代码、指标定义、统计表和可用年份，再获取数据；保留来源链接、统计期、单位、获取时间和引用信息，不猜测缺失值",
+      "server": "main"
+    },
+    {
+      "title": "比较地区与趋势",
+      "text": "围绕“{{researchQuestion}}”选择口径一致的 IBGE 指标，比较相关州或城市并说明时间趋势；列出指标定义、覆盖范围、缺失数据和比较限制",
+      "server": "main"
+    }
+  ]
+}
