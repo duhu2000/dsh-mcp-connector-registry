@@ -93,16 +93,14 @@
       "market gap 9/10: Brazilian public statistics are not duplicated in the current catalog",
       "documentation 5/5: publisher documentation covers data sources, tools, provenance, and legal regime"
     ],
-    "gates": [
-      "Human source review approval and runtime report publication are required before promotion to candidates/records."
-    ]
+    "gates": []
   },
   "review": {
-    "decision": "pending",
+    "decision": "approved",
     "proposedConnectorId": "ibge-br-public-data",
-    "reviewedAt": null,
-    "reviewedBy": null,
-    "notes": "中文卡片、来源、鉴权、许可证和运行预检材料已准备；等待维护者人工批准。"
+    "reviewedAt": "2026-08-30T12:24:28Z",
+    "reviewedBy": "DuHu",
+    "notes": "维护者已复核 Official Registry 身份、社区项目定位、IBGE 数据来源、无鉴权边界、许可证与脱敏运行预检，批准以独立社区 Connector 上架。"
   },
   "runtimeAcceptance": {
     "status": "pass",

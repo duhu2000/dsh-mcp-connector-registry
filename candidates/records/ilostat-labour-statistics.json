@@ -93,16 +93,14 @@
       "market gap 9/10: global labour statistics are not duplicated in the current catalog",
       "documentation 5/5: publisher documentation covers tools, ILOSTAT source, provenance, licensing, and non-affiliation"
     ],
-    "gates": [
-      "Human source review approval and runtime report publication are required before promotion to candidates/records."
-    ]
+    "gates": []
   },
   "review": {
-    "decision": "pending",
+    "decision": "approved",
     "proposedConnectorId": "ilostat-labour-statistics",
-    "reviewedAt": null,
-    "reviewedBy": null,
-    "notes": "中文卡片、来源、鉴权、许可证和运行预检材料已准备；等待维护者人工批准。"
+    "reviewedAt": "2026-08-30T12:24:28Z",
+    "reviewedBy": "DuHu",
+    "notes": "维护者已复核 Official Registry 身份、ILOSTAT 官方数据来源、非 ILO 官方项目声明、无鉴权边界、许可证与脱敏运行预检，批准上架。"
   },
   "runtimeAcceptance": {
     "status": "pass",
