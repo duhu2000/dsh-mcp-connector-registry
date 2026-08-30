@@ -283,6 +283,31 @@ test('第六批精选连接器覆盖官方远程 MCP 与安全 stdio 本机配�
   assert.doesNotMatch(serialized, /-----BEGIN (?:PRIVATE KEY|CERTIFICATE)-----/);
 });
 
+test('首批公共数据卡片提供无需填参的差异化示例', async () => {
+  const readConnector = async (id) => JSON.parse(
+    await readFile(resolve('connectors', `${id}.json`), 'utf8'),
+  );
+  const [ibge, senate, ilostat] = await Promise.all([
+    readConnector('ibge-br-public-data'),
+    readConnector('brazil-senate-open-data'),
+    readConnector('ilostat-labour-statistics'),
+  ]);
+
+  for (const connector of [ibge, senate, ilostat]) {
+    assert.equal(connector.promptVariables, undefined);
+    assert.equal(connector.prompts.length, 2);
+    assert.equal(new Set(connector.prompts.map((prompt) => prompt.text)).size, 2);
+    assert.ok(connector.prompts.every((prompt) => !/\{\{?\s*[A-Za-z]/.test(prompt.text)));
+  }
+
+  assert.match(ibge.prompts[0].text, /贝洛奥里藏特.*2022/);
+  assert.match(ibge.prompts[1].text, /圣保罗.*里约热内卢.*人均 GDP/);
+  assert.match(senate.prompts[0].text, /PEC 45\/2019.*立法进程/);
+  assert.match(senate.prompts[1].text, /2024.*CEAPS.*支出/);
+  assert.match(ilostat.prompts[0].text, /巴西.*2019.*失业率.*劳动参与率/);
+  assert.match(ilostat.prompts[1].text, /印度尼西亚.*马来西亚.*青年失业率/);
+});
+
 test('盈米连接器使用公开 x-api-key 接入参数且不包含凭据', async () => {
   const connector = JSON.parse(
     await readFile(resolve('connectors/yingmi-wealth-management.json'), 'utf8'),
