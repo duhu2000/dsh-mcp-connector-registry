@@ -76,6 +76,21 @@ npm test && npm run validate && npm run assets:check
 - `npm run validate` 确定性重建 `catalog.json`、`catalog-stats.json` 和 README 数量区块，并执行 Schema、重复 ID/ServerName、URL 与潜在密钥审计。
 - `npm run assets:check` 检查远程 Logo 的图片类型和浏览器跨域兼容性。
 
+维护者复核无鉴权 Hosted MCP 时，可运行只读验收器：
+
+```bash
+npm run candidates:accept -- \
+  --url https://mcp.example.com/mcp \
+  --tool safe_read_tool \
+  --args '{"query":"public test data"}' \
+  --output candidate-output/runtime-acceptance.md
+```
+
+验收器要求该工具在 `tools/list` 中明确声明 `readOnlyHint: true` 且不得声明破坏性；
+它只保存服务版本、工具数量、结果状态和响应 SHA-256，不保存原始工具结果、会话标识或凭据。
+若工具结果出现疑似 Token/API Key，验收失败且报告只记录风险类型。需要鉴权的服务使用独立、
+最小权限测试账号人工验收，凭据不得作为 CLI 参数或写入报告。
+
 本地验证可能产生 `catalog.json`、`catalog-stats.json` 或 README 数量区块差异，这是正常现象；不要手动修改或提交 `catalog.json`、`catalog-stats.json` 或 README 数量区块。合并后 CI 会自动重建。
 
 ### 第 5 步：提交 Connector PR

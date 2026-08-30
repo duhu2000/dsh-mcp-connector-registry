@@ -3,7 +3,7 @@ import { request as httpsRequest } from 'node:https';
 import { isIP } from 'node:net';
 import { canonicalPublicUrl, sanitizeText, scoreCandidate } from './candidate-model.mjs';
 
-function isPrivateAddress(address) {
+export function isPrivateAddress(address) {
   if (!address) return true;
   if (address.includes(':')) {
     const value = address.toLowerCase();
@@ -22,7 +22,7 @@ function isPrivateAddress(address) {
     || octets[0] >= 224;
 }
 
-async function publicAddresses(hostname, lookupImpl) {
+export async function publicAddresses(hostname, lookupImpl) {
   if (isIP(hostname)) return [];
   const addresses = await lookupImpl(hostname, { all: true, verbatim: true });
   if (!Array.isArray(addresses) || addresses.length === 0) return [];
@@ -42,11 +42,12 @@ function responseAdapter(status, headers) {
   };
 }
 
-function pinnedHttpsPost(targetUrl, addresses, {
+export function pinnedHttpsPost(targetUrl, addresses, {
   timeoutMs,
   headers,
   body,
   limit = 65_536,
+  stopOnRecognized = true,
   requestImpl = httpsRequest,
 }) {
   const selected = addresses[0];
@@ -78,7 +79,7 @@ function pinnedHttpsPost(targetUrl, addresses, {
         bytes += value.length;
         const text = Buffer.concat(chunks).toString('utf8');
         const recognized = /"jsonrpc"\s*:\s*"2\.0"/.test(text) && /"(?:result|error)"\s*:/.test(text);
-        if (bytes >= limit || recognized) {
+        if (bytes >= limit || (stopOnRecognized && recognized)) {
           finish({ response: responseAdapter(response.statusCode ?? 0, response.headers), body: text });
           response.destroy();
         }

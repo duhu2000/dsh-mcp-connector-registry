@@ -208,6 +208,18 @@ test('explainable score is the exact sum of bounded dimensions and gates duplica
   assert.equal(notData.score.band, 'not-data');
 });
 
+test('app deployment platforms are not classified as data services from an incidental database keyword', () => {
+  const platform = normalizeOfficialServer(officialEntry({
+    name: 'dev.example/app-platform',
+    title: 'App Platform',
+    description: 'Deploy a multi-user web app from your agent: hosting, auth, database, and permissions.',
+  }), { retrievedAt: NOW });
+  assert.equal(platform.classification.isDataService, false);
+  assert.deepEqual(platform.classification.matchedKeywords, ['database']);
+  scoreCandidate(platform);
+  assert.equal(platform.score.band, 'not-data');
+});
+
 test('generated candidate contains every Candidate JSON Schema root field', async () => {
   const schema = JSON.parse(await readFile(resolve('schema/candidate.schema.json'), 'utf8'));
   const candidate = scoreCandidate(dedupeCandidate(

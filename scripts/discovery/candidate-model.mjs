@@ -14,6 +14,11 @@ const DATA_DOMAINS = Object.freeze({
   web: ['web data', 'web search', 'search data', 'web intelligence', 'scraping', 'crawl'],
 });
 
+const NON_DATA_PLATFORM_PATTERNS = Object.freeze([
+  'deploy a multi-user web app',
+  'deploy web apps from your agent',
+]);
+
 function uniqueSorted(values) {
   return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b));
 }
@@ -140,8 +145,9 @@ export function classifyDataService(server) {
     if (matches.length > 0) domains.push(domain);
     matchedKeywords.push(...matches);
   }
+  const excludedAsPlatform = NON_DATA_PLATFORM_PATTERNS.some((pattern) => text.includes(pattern));
   return {
-    isDataService: domains.length > 0,
+    isDataService: domains.length > 0 && !excludedAsPlatform,
     domains: uniqueSorted(domains),
     matchedKeywords: uniqueSorted(matchedKeywords),
   };
