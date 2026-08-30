@@ -112,4 +112,3 @@ jobs:
               body,
             });
             core.info(`monthly issue ${result.action}: #${result.issueNumber}`);
-

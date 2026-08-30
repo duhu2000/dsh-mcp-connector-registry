@@ -32,7 +32,6 @@ test('monthly review batch is bounded to 5-10 and excludes unsafe or duplicate c
   assert.deepEqual(selected.map((item) => item.registryName), Array.from({ length: 10 }, (_, index) => `com.example/data-${index}`));
   assert.throws(() => selectMonthlyBatch(candidates, { size: 4 }), /5 to 10/);
 });
-
 test('monthly report blocks rather than weakening gates when fewer than five qualify', () => {
   const report = { generatedAt: '2026-08-30T00:00:00.000Z' };
   const body = renderMonthlyBatch(report, [candidate(1)], { size: 10 });
@@ -86,4 +85,3 @@ test('discovery workflow only emits artifacts and idempotent issues', async () =
   assert.match(workflow, /dsh-data-mcp-discovery-monthly/);
   assert.doesNotMatch(workflow, /git push|pulls\.create|connectors\//);
 });
-

@@ -15,7 +15,6 @@ export function selectMonthlyBatch(candidates, { size = 10 } = {}) {
     .sort((a, b) => b.score.total - a.score.total || a.registryName.localeCompare(b.registryName))
     .slice(0, size);
 }
-
 function cell(value) {
   return String(value ?? '').replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
 }
@@ -74,4 +73,3 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     process.exitCode = 1;
   });
 }
-

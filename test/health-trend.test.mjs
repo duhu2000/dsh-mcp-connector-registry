@@ -29,7 +29,6 @@ test('health trend opens investigation at two failures and only flags manual rev
   assert.equal(recovered.connectors.example.consecutiveFailures, 0);
   assert.equal(recovered.summary.investigationCount, 0);
 });
-
 function fakeGithub(existing = []) {
   const calls = { create: [], update: [] };
   return {
@@ -72,4 +71,3 @@ test('health workflow persists state and cannot automatically delist', async () 
   assert.match(workflow, /continue-on-error: true/);
   assert.doesNotMatch(workflow, /git push|rm .*connectors|connectors\//);
 });
-
