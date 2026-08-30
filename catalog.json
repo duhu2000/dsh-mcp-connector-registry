@@ -333,6 +333,65 @@
     },
     {
       "schemaVersion": 1,
+      "id": "brazil-senate-open-data",
+      "name": "巴西参议院开放数据",
+      "vendor": "Sidney Bissoli（独立社区项目）",
+      "icon": "🏛️",
+      "category": "法律合规",
+      "summary": "法案进程 / 表决与委员会 / 议员活动 / 采购预算",
+      "description": "连接巴西联邦参议院立法、行政及 e-Cidadania 公民参与开放数据，查询参议员、法案、审议进度、表决结果、委员会、全体会议、总统否决、演讲和逐字记录等立法信息，以及议员费用、住房补贴、人员薪酬、政府采购和预算执行等行政数据。适合巴西政策追踪、立法研究、公共财政分析和政府关系调研。工具结果主要使用葡萄牙语，并附带官方数据来源。本连接器由社区独立维护，并非巴西参议院官方产品。",
+      "tags": [
+        "巴西",
+        "参议院",
+        "立法",
+        "法案",
+        "表决",
+        "公共财政",
+        "政府采购",
+        "开放数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://senado.sidneybissoli.com/",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788086730905,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "brazil-senate-open-data",
+          "url": "https://senado.sidneybissoli.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "researchQuestion",
+          "label": "研究问题",
+          "placeholder": "例如：追踪某项法案的审议进度、委员会意见和最近表决",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "追踪法案与审议进度",
+          "text": "使用巴西参议院开放数据回答“{{researchQuestion}}”：先定位法案或议题，再核对审议阶段、委员会、表决和更新时间；用中文总结，并保留葡萄牙语原始名称、官方来源和数据时间",
+          "server": "main"
+        },
+        {
+          "title": "分析议员活动或公共支出",
+          "text": "围绕“{{researchQuestion}}”查询相关议员、表决、费用、采购或预算数据；说明查询范围、币种、期间、缺失项和口径限制，不把相关性描述为违法或不当行为证据",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "canva",
       "name": "Canva 可画",
       "vendor": "Canva",
@@ -1588,6 +1647,123 @@
         {
           "title": "检索法规与案例",
           "text": "先检索与问题相关的现行法规，再查找相近案例；标注来源、发布日期和效力状态，不替代律师意见"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ibge-br-public-data",
+      "name": "IBGE 巴西公共统计",
+      "vendor": "Sidney Bissoli（独立社区项目）",
+      "icon": "🇧🇷",
+      "category": "调研分析",
+      "summary": "人口普查 / 行政区划 / 经济社会指标 / 地理边界",
+      "description": "连接巴西地理与统计研究所（IBGE）公开数据接口，查询巴西州、市等行政区划，以及人口普查、GDP、通胀、就业、收入、健康、产业分类和地理边界数据。支持跨地区比较、历史趋势和统计排名，结果附带数据来源、统计期、获取时间及引用信息，适合拉美市场研究、宏观分析、城市选址和公共政策研究。本连接器由社区独立维护，并非 IBGE 官方产品。",
+      "tags": [
+        "巴西",
+        "IBGE",
+        "人口普查",
+        "行政区划",
+        "经济指标",
+        "地理数据",
+        "公共数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://ibge.sidneybissoli.com/",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788086541010,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "ibge-br-public-data",
+          "url": "https://ibge.sidneybissoli.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "researchQuestion",
+          "label": "研究问题",
+          "placeholder": "例如：比较圣保罗州主要城市近十年人口和人均 GDP 变化",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询巴西统计数据",
+          "text": "使用 IBGE 公共数据回答“{{researchQuestion}}”：先核对行政区划代码、指标定义、统计表和可用年份，再获取数据；保留来源链接、统计期、单位、获取时间和引用信息，不猜测缺失值",
+          "server": "main"
+        },
+        {
+          "title": "比较地区与趋势",
+          "text": "围绕“{{researchQuestion}}”选择口径一致的 IBGE 指标，比较相关州或城市并说明时间趋势；列出指标定义、覆盖范围、缺失数据和比较限制",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ilostat-labour-statistics",
+      "name": "ILOSTAT 全球劳工统计",
+      "vendor": "Sidney Bissoli（独立社区项目）",
+      "icon": "🌐",
+      "category": "调研分析",
+      "summary": "就业 / 失业 / 工资工时 / 劳动参与率 / 跨国比较",
+      "description": "连接国际劳工组织 ILOSTAT 官方统计接口，提供全球各国家和地区的就业、失业、劳动参与率、工资、工时、非正规就业、青年就业及生产率等劳工指标。支持按国家、年份、性别、年龄等维度筛选和比较，每次查询均返回数据来源、统计版本、获取时间、许可证和标准引用信息，适合国际人力成本比较、就业市场研究、ESG 分析和公共政策评估。本连接器是独立社区项目，与国际劳工组织不存在隶属或官方背书关系。",
+      "tags": [
+        "ILO",
+        "ILOSTAT",
+        "劳工统计",
+        "就业",
+        "失业",
+        "工资",
+        "ESG",
+        "公共数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://ilo.sidneybissoli.com/",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788086566446,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "ilostat-labour-statistics",
+          "url": "https://ilo.sidneybissoli.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "researchQuestion",
+          "label": "研究问题",
+          "placeholder": "例如：比较东南亚主要经济体近十年的青年失业率",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检索劳工指标",
+          "text": "使用 ILOSTAT 回答“{{researchQuestion}}”：先检索匹配的指标与元数据，再核对国家、年份、性别和年龄等维度后查询；保留单位、数据版本、来源、许可证和标准引用",
+          "server": "main"
+        },
+        {
+          "title": "开展跨国劳动力比较",
+          "text": "围绕“{{researchQuestion}}”选用口径一致且覆盖充分的 ILOSTAT 指标进行跨国或时间序列比较；明确指标定义、估算口径、缺失值和不可直接比较之处",
+          "server": "main"
         }
       ]
     },
