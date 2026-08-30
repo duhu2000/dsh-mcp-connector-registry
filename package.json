@@ -12,7 +12,9 @@
     "assets:check": "node scripts/check-icon-assets.mjs",
     "cdn:purge": "node scripts/purge-jsdelivr-cache.mjs catalog.json",
     "probe": "dsh-mcp-connector-probe catalog.json --allow-partial --output probe-report.json",
-    "candidates:discover": "node scripts/discover-candidates.mjs"
+    "health:trend": "node scripts/update-health-state.mjs",
+    "candidates:discover": "node scripts/discover-candidates.mjs",
+    "candidates:monthly": "node scripts/build-monthly-batch.mjs"
   },
   "devDependencies": {
     "dsh-mcp-connector": "^0.2.29",

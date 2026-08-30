@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { OFFICIAL_REGISTRY_API } from './discovery/candidate-model.mjs';
+import { probeCandidates } from './discovery/public-probe.mjs';
 import {
   collectOfficialRegistry,
   discoverOfficialCandidates,
@@ -10,7 +11,10 @@ import {
 } from './discovery/official-registry.mjs';
 
 function parseArgs(argv) {
-  const options = { output: 'candidate-output', limit: 100, maxPages: 1000, requestTimeoutMs: 20_000 };
+  const options = {
+    output: 'candidate-output', limit: 100, maxPages: 1000, requestTimeoutMs: 20_000,
+    maxAttempts: 3, maxProbes: 25, minProbeScore: 65,
+  };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
     if (arg === '--output') options.output = argv[++index];
@@ -19,13 +23,20 @@ function parseArgs(argv) {
     else if (arg === '--limit') options.limit = Number(argv[++index]);
     else if (arg === '--max-pages') options.maxPages = Number(argv[++index]);
     else if (arg === '--request-timeout-ms') options.requestTimeoutMs = Number(argv[++index]);
+    else if (arg === '--max-attempts') options.maxAttempts = Number(argv[++index]);
     else if (arg === '--api-base') options.apiBase = argv[++index];
+    else if (arg === '--probe') options.probe = true;
+    else if (arg === '--max-probes') options.maxProbes = Number(argv[++index]);
+    else if (arg === '--min-probe-score') options.minProbeScore = Number(argv[++index]);
     else throw new Error(`Unknown argument: ${arg}`);
   }
   if (!options.output) throw new Error('--output must not be empty');
-  if (!Number.isInteger(options.limit) || options.limit < 1 || options.limit > 500) throw new Error('--limit must be an integer from 1 to 500');
+  if (!Number.isInteger(options.limit) || options.limit < 1 || options.limit > 100) throw new Error('--limit must be an integer from 1 to 100');
   if (!Number.isInteger(options.maxPages) || options.maxPages < 1 || options.maxPages > 1000) throw new Error('--max-pages must be an integer from 1 to 1000');
   if (!Number.isInteger(options.requestTimeoutMs) || options.requestTimeoutMs < 1000 || options.requestTimeoutMs > 120_000) throw new Error('--request-timeout-ms must be an integer from 1000 to 120000');
+  if (!Number.isInteger(options.maxAttempts) || options.maxAttempts < 1 || options.maxAttempts > 10) throw new Error('--max-attempts must be an integer from 1 to 10');
+  if (!Number.isInteger(options.maxProbes) || options.maxProbes < 1 || options.maxProbes > 100) throw new Error('--max-probes must be an integer from 1 to 100');
+  if (!Number.isInteger(options.minProbeScore) || options.minProbeScore < 0 || options.minProbeScore > 100) throw new Error('--min-probe-score must be an integer from 0 to 100');
   return options;
 }
 
@@ -90,13 +101,25 @@ async function main() {
       limit: options.limit,
       maxPages: options.maxPages,
       requestTimeoutMs: options.requestTimeoutMs,
-      onPage: ({ page, count, total }) => console.log(`candidate discovery: page ${page} fetched (${count} records; ${total} total)`),
+      maxAttempts: options.maxAttempts,
+      onPage: ({ page, count, total, nextCursor }) => {
+        if (page === 1 || page % 10 === 0 || !nextCursor) console.log(`candidate discovery: page ${page} fetched (${count} records; ${total} total)`);
+      },
     });
     entries = result.records;
     pages = result.pages;
   }
   const connectors = await loadConnectorCatalog(resolve('catalog.json'));
   const discovery = await discoverOfficialCandidates({ entries, connectors, retrievedAt: generatedAt, apiBase });
+  if (options.probe) {
+    await probeCandidates(discovery.candidates, {
+      maxProbes: options.maxProbes,
+      minScore: options.minProbeScore,
+      checkedAt: generatedAt,
+      onProbe: ({ index, total, candidate }) => console.log(`candidate probe: ${index}/${total} ${candidate.registryName} -> ${candidate.probe.status}`),
+    });
+    discovery.candidates.sort((a, b) => b.score.total - a.score.total || a.registryName.localeCompare(b.registryName));
+  }
   const dataCandidates = discovery.candidates.filter((candidate) => candidate.classification.isDataService);
   const report = {
     schemaVersion: 1,
@@ -108,6 +131,10 @@ async function main() {
       dataCandidates: dataCandidates.length,
       rejected: discovery.rejected.length,
       scoreDistribution: scoreDistribution(discovery.candidates),
+      probeDistribution: discovery.candidates.reduce((counts, candidate) => {
+        counts[candidate.probe.status] = (counts[candidate.probe.status] ?? 0) + 1;
+        return counts;
+      }, {}),
     },
     candidates: dataCandidates,
     rejected: discovery.rejected,

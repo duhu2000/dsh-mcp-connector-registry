@@ -1,0 +1,115 @@
+name: Data MCP discovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Discovery mode
+        required: true
+        default: daily
+        type: choice
+        options: [daily, monthly]
+  schedule:
+    - cron: '23 2 * * *'
+    - cron: '41 3 1 * *'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  daily:
+    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'daily' || github.event_name == 'schedule' && github.event.schedule == '23 2 * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: Set incremental window
+        id: window
+        run: node -e "require('node:fs').appendFileSync(process.env.GITHUB_OUTPUT, 'since=' + new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString() + '\n')"
+      - name: Discover and probe public candidates
+        run: >-
+          npm run candidates:discover --
+          --updated-since '${{ steps.window.outputs.since }}'
+          --output candidate-output
+          --probe --max-probes 25 --min-probe-score 65
+      - run: npm test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: daily-data-mcp-candidates
+          path: candidate-output/
+          retention-days: 30
+      - name: Create or update the single discovery issue
+        uses: actions/github-script@v7
+        env:
+          ISSUE_BODY_PATH: candidate-output/candidate-report.md
+        with:
+          script: |
+            const fs = require('node:fs');
+            const path = require('node:path');
+            const { pathToFileURL } = require('node:url');
+            const helperUrl = pathToFileURL(path.join(process.env.GITHUB_WORKSPACE, 'scripts/discovery/github-issue.mjs')).href;
+            const { upsertDiscoveryIssue } = await import(helperUrl);
+            const body = fs.readFileSync(process.env.ISSUE_BODY_PATH, 'utf8');
+            const result = await upsertDiscoveryIssue({
+              github,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '[Discovery] Data MCP candidate watchlist',
+              marker: '<!-- dsh-data-mcp-discovery-daily -->',
+              body,
+            });
+            core.info(`discovery issue ${result.action}: #${result.issueNumber}`);
+
+  monthly:
+    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'monthly' || github.event_name == 'schedule' && github.event.schedule == '41 3 1 * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - name: Full discovery and bounded public probe
+        run: >-
+          npm run candidates:discover --
+          --output candidate-output
+          --probe --max-probes 50 --min-probe-score 65
+      - run: npm run candidates:monthly -- --input candidate-output/candidate-report.json --output candidate-output/monthly-batch.md --size 10
+      - run: npm test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: monthly-data-mcp-review-batch
+          path: candidate-output/
+          retention-days: 90
+      - name: Create or update the single monthly review issue
+        uses: actions/github-script@v7
+        env:
+          ISSUE_BODY_PATH: candidate-output/monthly-batch.md
+        with:
+          script: |
+            const fs = require('node:fs');
+            const path = require('node:path');
+            const { pathToFileURL } = require('node:url');
+            const helperUrl = pathToFileURL(path.join(process.env.GITHUB_WORKSPACE, 'scripts/discovery/github-issue.mjs')).href;
+            const { upsertDiscoveryIssue } = await import(helperUrl);
+            const body = fs.readFileSync(process.env.ISSUE_BODY_PATH, 'utf8');
+            const result = await upsertDiscoveryIssue({
+              github,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '[Discovery] Monthly data MCP review batch',
+              marker: '<!-- dsh-data-mcp-discovery-monthly -->',
+              body,
+            });
+            core.info(`monthly issue ${result.action}: #${result.issueNumber}`);
+

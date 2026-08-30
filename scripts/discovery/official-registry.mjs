@@ -14,15 +14,58 @@ function requireRegistryPage(payload) {
   return payload;
 }
 
+function wait(delayMs) {
+  return new Promise((resolve) => setTimeout(resolve, delayMs));
+}
+
+async function fetchRegistryPage(url, {
+  fetchImpl,
+  requestTimeoutMs,
+  maxAttempts,
+  retryBaseMs,
+}) {
+  let lastError;
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const response = await fetchImpl(url, {
+        headers: { Accept: 'application/json', 'User-Agent': 'dsh-mcp-connector-registry-discovery/1' },
+        redirect: 'error',
+        signal: AbortSignal.timeout(requestTimeoutMs),
+      });
+      if (response.ok) return requireRegistryPage(await response.json());
+      if (response.status !== 429 && response.status < 500) {
+        throw new Error(`Official Registry request failed with HTTP ${response.status}`);
+      }
+      lastError = new Error(`Official Registry request failed with retryable HTTP ${response.status}`);
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(String(error));
+      if (/HTTP 4\d\d/.test(lastError.message) && !/HTTP 429/.test(lastError.message)) throw lastError;
+    }
+    if (attempt < maxAttempts) await wait(retryBaseMs * (2 ** (attempt - 1)));
+  }
+  throw new Error(`Official Registry request failed after ${maxAttempts} attempt(s): ${lastError?.message ?? 'unknown error'}`);
+}
+
 export async function collectOfficialRegistry({
   apiBase = OFFICIAL_REGISTRY_API,
   updatedSince,
   limit = 100,
   maxPages = 1000,
   requestTimeoutMs = 20_000,
+  maxAttempts = 3,
+  retryBaseMs = 250,
   onPage = () => {},
   fetchImpl = fetch,
 } = {}) {
+  if (!Number.isInteger(limit) || limit < 1 || limit > 100) {
+    throw new Error('limit must be an integer from 1 to 100');
+  }
+  if (!Number.isInteger(requestTimeoutMs) || requestTimeoutMs < 100 || requestTimeoutMs > 120_000) {
+    throw new Error('requestTimeoutMs must be an integer from 100 to 120000');
+  }
+  if (!Number.isInteger(maxAttempts) || maxAttempts < 1 || maxAttempts > 10) {
+    throw new Error('maxAttempts must be an integer from 1 to 10');
+  }
   const records = [];
   const seenCursors = new Set();
   let cursor;
@@ -37,20 +80,19 @@ export async function collectOfficialRegistry({
       url.searchParams.set('include_deleted', 'true');
     }
     if (cursor) url.searchParams.set('cursor', cursor);
-    const response = await fetchImpl(url, {
-      headers: { Accept: 'application/json', 'User-Agent': 'dsh-mcp-connector-registry-discovery/1' },
-      redirect: 'error',
-      signal: AbortSignal.timeout(requestTimeoutMs),
+    const payload = await fetchRegistryPage(url, {
+      fetchImpl,
+      requestTimeoutMs,
+      maxAttempts,
+      retryBaseMs,
     });
-    if (!response.ok) throw new Error(`Official Registry request failed with HTTP ${response.status}`);
-    const payload = requireRegistryPage(await response.json());
     records.push(...payload.servers);
     pages += 1;
-    onPage({ page: pages, count: payload.servers.length, total: records.length });
     const nextCursor = payload.metadata?.nextCursor || null;
     if (nextCursor && seenCursors.has(nextCursor)) throw new Error(`Official Registry repeated pagination cursor ${nextCursor}`);
     if (nextCursor) seenCursors.add(nextCursor);
     cursor = nextCursor;
+    onPage({ page: pages, count: payload.servers.length, total: records.length, nextCursor: cursor });
   } while (cursor);
   return { records, pages };
 }

@@ -60,7 +60,7 @@ export function canonicalPublicUrl(value, { stripQuery = false } = {}) {
 }
 
 function normalizeRepository(repository) {
-  const url = canonicalPublicUrl(repository?.url);
+  const url = canonicalPublicUrl(repository?.url, { stripQuery: true });
   if (!url) return null;
   return {
     url,
@@ -166,7 +166,7 @@ export function normalizeOfficialServer(entry, { retrievedAt = new Date().toISOS
   const officialMeta = entry?._meta?.['io.modelcontextprotocol.registry/official'] ?? {};
   const status = ['active', 'deprecated', 'deleted'].includes(officialMeta.status) ? officialMeta.status : 'unknown';
   const repository = normalizeRepository(server.repository);
-  const websiteUrl = canonicalPublicUrl(server.websiteUrl);
+  const websiteUrl = canonicalPublicUrl(server.websiteUrl, { stripQuery: true });
   const transports = normalizeTransports(server);
   if (transports.length === 0) throw new Error(`${registryName} has no safely normalizable transport`);
   const detailUrl = `${apiBase.replace(/\/$/, '')}/v0.1/servers/${encodeURIComponent(registryName)}/versions/${encodeURIComponent(version)}`;
@@ -211,7 +211,7 @@ export function normalizeOfficialServer(entry, { retrievedAt = new Date().toISOS
     probe: { status: 'not-run', checkedAt: null, targetUrl: null, httpStatus: null, reason: 'Public probe has not run.' },
     dedupe: { level: 'none', strong: [], weak: [] },
     score: { total: 0, band: 'defer', dimensions: { authority: 0, accessibility: 0, maintenanceSecurity: 0, runtime: 0, marketGap: 0, documentation: 0 }, reasons: [], gates: [] },
-    review: { decision: 'pending', reviewedAt: null, reviewedBy: null, notes: '' },
+    review: { decision: 'pending', proposedConnectorId: null, reviewedAt: null, reviewedBy: null, notes: '' },
     runtimeAcceptance: { status: 'not-run', checkedAt: null, reviewedBy: null, reportUrl: null, notes: '' },
     evidence,
   };
@@ -315,6 +315,10 @@ export function scoreCandidate(candidate) {
   const dimensions = { authority, accessibility, maintenanceSecurity, runtime, marketGap, documentation };
   const total = Object.values(dimensions).reduce((sum, value) => sum + value, 0);
   const gates = [];
+  const publicProbeReady = candidate.probe.status === 'pass' || candidate.probe.status === 'partial';
+  const evidenceReady = candidate.authentication.mode !== 'unknown'
+    && candidate.license.status !== 'unknown'
+    && Boolean(candidate.officialLinks.websiteUrl || candidate.officialLinks.repository);
   let band;
   if (!candidate.classification.isDataService) {
     band = 'not-data';
@@ -325,13 +329,19 @@ export function scoreCandidate(candidate) {
   } else if (candidate.source.status !== 'active') {
     band = 'defer';
     gates.push(`Official Registry status is ${candidate.source.status}.`);
-  } else if (total >= 80) {
+  } else if (candidate.probe.status === 'fail') {
+    band = 'defer';
+    gates.push('The latest public probe failed; investigate manually. One failure never delists an existing connector.');
+  } else if (total >= 80 && publicProbeReady && evidenceReady) {
     band = 'selected';
   } else if (total >= 65) {
     band = 'watchlist';
   } else {
     band = 'defer';
   }
+  if (total >= 80 && !publicProbeReady) gates.push('Public probe must pass or be partially reachable before selection.');
+  if (total >= 80 && candidate.authentication.mode === 'unknown') gates.push('Authentication mode requires official-document verification before selection.');
+  if (total >= 80 && candidate.license.status === 'unknown') gates.push('License or service-terms applicability requires official verification before selection.');
   if (band === 'selected' || band === 'watchlist') gates.push('Human source review and real runtime acceptance are still required before a descriptor PR.');
   candidate.score = {
     total,

@@ -1,5 +1,9 @@
 node_modules/
 probe-report.json
+health-state.json
+health-issue.md
+previous-health-state.zip
+previous-health/
 candidate-output/
 .DS_Store
 npm-debug.log*

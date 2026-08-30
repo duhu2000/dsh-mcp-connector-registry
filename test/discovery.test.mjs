@@ -3,6 +3,8 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { EventEmitter } from 'node:events';
+import { PassThrough } from 'node:stream';
 import test from 'node:test';
 import {
   buildConnectorIndex,
@@ -15,6 +17,10 @@ import {
   collectOfficialRegistry,
   discoverOfficialCandidates,
 } from '../scripts/discovery/official-registry.mjs';
+import {
+  probeCandidate,
+  probeRemoteUrl,
+} from '../scripts/discovery/public-probe.mjs';
 
 const NOW = '2026-08-30T00:00:00.000Z';
 
@@ -74,8 +80,8 @@ test('Official Registry collector follows opaque cursors and supports incrementa
   assert.equal(result.pages, 2);
   assert.equal(result.records.length, 2);
   assert.deepEqual(progress, [
-    { page: 1, count: 1, total: 1 },
-    { page: 2, count: 1, total: 2 },
+    { page: 1, count: 1, total: 1, nextCursor: 'opaque:one' },
+    { page: 2, count: 1, total: 2, nextCursor: null },
   ]);
   const first = new URL(calls[0].url);
   const second = new URL(calls[1].url);
@@ -88,15 +94,50 @@ test('Official Registry collector follows opaque cursors and supports incrementa
   assert.doesNotMatch(JSON.stringify(calls), /Authorization|token/i);
 });
 
+test('Official Registry collector retries transient failures and preserves bounded progress', async () => {
+  let attempts = 0;
+  const progress = [];
+  const result = await collectOfficialRegistry({
+    maxAttempts: 2,
+    retryBaseMs: 0,
+    onPage: (value) => progress.push(value),
+    fetchImpl: async () => {
+      attempts += 1;
+      if (attempts === 1) return new Response('{}', { status: 503 });
+      return new Response(JSON.stringify({ servers: [officialEntry()], metadata: {} }), { status: 200 });
+    },
+  });
+  assert.equal(attempts, 2);
+  assert.equal(result.records.length, 1);
+  assert.deepEqual(progress, [{ page: 1, count: 1, total: 1, nextCursor: null }]);
+});
+
+test('Official Registry collector rejects unsupported page sizes before network access', async () => {
+  let called = false;
+  await assert.rejects(
+    collectOfficialRegistry({ limit: 101, fetchImpl: async () => { called = true; } }),
+    /limit must be an integer from 1 to 100/,
+  );
+  assert.equal(called, false);
+});
+
 test('normalization copies only allowlisted public evidence and never copies header values or arbitrary metadata', () => {
   const candidate = normalizeOfficialServer(officialEntry({
     description: 'Market data maintained by person@example.com',
     url: 'https://data.example.com/mcp?api_key=must-not-survive#fragment',
+    websiteUrl: 'https://data.example.com/docs?token=website-value-must-not-survive',
+    repository: {
+      url: 'https://github.com/example/market-data?secret=repository-value-must-not-survive',
+      source: 'github',
+      id: '123',
+    },
   }), { retrievedAt: NOW });
   const serialized = JSON.stringify(candidate);
 
   assert.equal(candidate.registryName, 'com.example/market-data');
   assert.equal(candidate.transports[0].url, 'https://data.example.com/mcp');
+  assert.equal(candidate.officialLinks.websiteUrl, 'https://data.example.com/docs');
+  assert.equal(candidate.officialLinks.repository.url, 'https://github.com/example/market-data');
   assert.equal(candidate.authentication.mode, 'bearer');
   assert.deepEqual(candidate.authentication.requiredHeaders, [{ name: 'Authorization', required: true, secret: true }]);
   assert.match(candidate.description, /\[redacted-email\]/);
@@ -104,6 +145,22 @@ test('normalization copies only allowlisted public evidence and never copies hea
   assert.equal(candidate.license.status, 'unknown');
   assert.equal(candidate.probe.status, 'not-run');
   assert.equal(candidate.runtimeAcceptance.status, 'not-run');
+});
+
+test('selection stays gated until probe, authentication, and license evidence are ready', () => {
+  const candidate = dedupeCandidate(
+    normalizeOfficialServer(officialEntry(), { retrievedAt: NOW }),
+    buildConnectorIndex([]),
+  );
+  candidate.probe.status = 'pass';
+  candidate.license = { status: 'declared', spdxId: 'MIT', evidenceUrl: 'https://example.com/license' };
+  scoreCandidate(candidate);
+  assert.equal(candidate.score.band, 'selected');
+
+  candidate.authentication.mode = 'unknown';
+  scoreCandidate(candidate);
+  assert.equal(candidate.score.band, 'watchlist');
+  assert.ok(candidate.score.gates.some((gate) => /Authentication mode/.test(gate)));
 });
 
 test('strong duplicate uses exact stable identity while host/name similarity remains a non-suppressing weak hint', () => {
@@ -184,4 +241,88 @@ test('offline discovery CLI writes review-only report and candidate records dete
   assert.equal(report.candidates[0].registryName, 'com.example/market-data');
   assert.match(markdown, /only recommends candidates/i);
   assert.doesNotMatch(JSON.stringify(report), /must-not-be-copied|secret-is-not-copied/);
+});
+
+test('public probe sends only a bounded credential-free MCP initialize request', async () => {
+  let observed;
+  const result = await probeRemoteUrl('https://data.example.com/mcp', {
+    checkedAt: NOW,
+    lookupImpl: async () => [{ address: '93.184.216.34', family: 4 }],
+    fetchImpl: async (url, options) => {
+      observed = { url, options };
+      return new Response(JSON.stringify({ jsonrpc: '2.0', id: 1, result: { protocolVersion: '2025-06-18' } }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      });
+    },
+  });
+  assert.equal(result.status, 'pass');
+  assert.equal(observed.options.method, 'POST');
+  assert.equal(observed.options.redirect, 'manual');
+  assert.equal(JSON.parse(observed.options.body).method, 'initialize');
+  assert.equal(observed.options.headers.Authorization, undefined);
+  assert.equal(observed.options.headers.Cookie, undefined);
+});
+
+test('default public probe pins the HTTPS connection to the audited public DNS address', async () => {
+  let connectedAddress;
+  const requestImpl = (_url, options, callback) => {
+    const request = new EventEmitter();
+    request.end = () => {
+      options.lookup('data.example.com', { all: false }, (error, address, family) => {
+        assert.ifError(error);
+        connectedAddress = { address, family };
+      });
+      const response = new PassThrough();
+      response.statusCode = 200;
+      response.headers = { 'content-type': 'application/json' };
+      callback(response);
+      response.end(JSON.stringify({ jsonrpc: '2.0', id: 1, result: { protocolVersion: '2025-06-18' } }));
+    };
+    request.destroy = (error) => { if (error) request.emit('error', error); };
+    return request;
+  };
+  const result = await probeRemoteUrl('https://data.example.com/mcp', {
+    checkedAt: NOW,
+    lookupImpl: async () => [{ address: '93.184.216.34', family: 4 }],
+    requestImpl,
+  });
+  assert.equal(result.status, 'pass');
+  assert.deepEqual(connectedAddress, { address: '93.184.216.34', family: 4 });
+});
+
+test('public probe blocks private DNS and treats authentication challenges as partial reachability', async () => {
+  let fetchCalled = false;
+  const blocked = await probeRemoteUrl('https://internal.example.com/mcp', {
+    checkedAt: NOW,
+    lookupImpl: async () => [{ address: '10.0.0.5', family: 4 }],
+    fetchImpl: async () => { fetchCalled = true; return new Response('', { status: 200 }); },
+  });
+  assert.equal(blocked.status, 'fail');
+  assert.equal(fetchCalled, false);
+  assert.match(blocked.reason, /public addresses/);
+
+  const authRequired = await probeRemoteUrl('https://data.example.com/mcp', {
+    checkedAt: NOW,
+    lookupImpl: async () => [{ address: '93.184.216.34', family: 4 }],
+    fetchImpl: async () => new Response('', { status: 401 }),
+  });
+  assert.equal(authRequired.status, 'partial');
+  assert.equal(authRequired.httpStatus, 401);
+});
+
+test('a failed public probe defers a candidate but never changes catalog state', async () => {
+  const candidate = scoreCandidate(dedupeCandidate(
+    normalizeOfficialServer(officialEntry(), { retrievedAt: NOW }),
+    buildConnectorIndex([]),
+  ));
+  await probeCandidate(candidate, {
+    checkedAt: NOW,
+    lookupImpl: async () => [{ address: '93.184.216.34', family: 4 }],
+    fetchImpl: async () => new Response('upstream error', { status: 503 }),
+  });
+  assert.equal(candidate.probe.status, 'fail');
+  assert.equal(candidate.score.band, 'defer');
+  assert.ok(candidate.score.gates.some((gate) => /never delists/.test(gate)));
+  assert.ok(candidate.evidence.some((item) => item.type === 'probe'));
 });

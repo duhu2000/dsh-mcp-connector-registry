@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: read
+  actions: read
+  issues: write
 
 jobs:
   probe:
@@ -18,9 +20,85 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
-      - run: npm run probe
+      - name: Download the previous health state artifact
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('node:fs');
+            const runs = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'health.yml',
+              status: 'completed',
+              per_page: 10,
+            });
+            for (const run of runs.data.workflow_runs) {
+              if (run.id === context.runId) continue;
+              const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: run.id,
+              });
+              const artifact = artifacts.data.artifacts.find((item) => item.name === 'registry-probe-report' && !item.expired);
+              if (!artifact) continue;
+              const archive = await github.rest.actions.downloadArtifact({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                artifact_id: artifact.id,
+                archive_format: 'zip',
+              });
+              fs.writeFileSync('previous-health-state.zip', Buffer.from(archive.data));
+              break;
+            }
+      - name: Extract previous health state when available
+        run: |
+          mkdir -p previous-health
+          if [ -f previous-health-state.zip ]; then
+            unzip -q previous-health-state.zip -d previous-health
+          fi
+      - name: Probe public registry
+        id: probe
+        continue-on-error: true
+        run: npm run probe
+      - name: Update consecutive-failure state
+        if: always()
+        run: >-
+          node scripts/update-health-state.mjs
+          --report probe-report.json
+          --previous previous-health/health-state.json
+          --output health-state.json
+          --issue-body health-issue.md
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: registry-probe-report
-          path: probe-report.json
+          retention-days: 90
+          path: |
+            probe-report.json
+            health-state.json
+            health-issue.md
+      - name: Synchronize the threshold investigation issue
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('node:fs');
+            const path = require('node:path');
+            const { pathToFileURL } = require('node:url');
+            const state = JSON.parse(fs.readFileSync('health-state.json', 'utf8'));
+            const body = fs.readFileSync('health-issue.md', 'utf8');
+            const helperUrl = pathToFileURL(path.join(process.env.GITHUB_WORKSPACE, 'scripts/discovery/github-issue.mjs')).href;
+            const { syncThresholdIssue } = await import(helperUrl);
+            const result = await syncThresholdIssue({
+              github,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '[Health] Registry connectors need investigation',
+              marker: '<!-- dsh-registry-health-threshold -->',
+              body,
+              active: state.summary.investigationCount > 0,
+            });
+            core.info(`health issue ${result.action}${result.issueNumber ? `: #${result.issueNumber}` : ''}`);
+      - name: Preserve probe failure after publishing trend evidence
+        if: steps.probe.outcome == 'failure'
+        run: exit 1

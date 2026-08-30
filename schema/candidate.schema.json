@@ -201,9 +201,10 @@
     "review": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["decision", "reviewedAt", "reviewedBy", "notes"],
+      "required": ["decision", "proposedConnectorId", "reviewedAt", "reviewedBy", "notes"],
       "properties": {
         "decision": { "enum": ["pending", "approved", "watchlist", "rejected"] },
+        "proposedConnectorId": { "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9_-]*$" },
         "reviewedAt": { "type": ["string", "null"], "format": "date-time" },
         "reviewedBy": { "type": ["string", "null"] },
         "notes": { "type": "string" }

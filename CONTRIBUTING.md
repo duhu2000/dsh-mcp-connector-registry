@@ -43,6 +43,7 @@ Metadata。DCR 如果签发 Client Secret，可声明 `client_secret_post` 或
 - Prompt 使用通用示例，不包含真实客户、个人信息或受限数据。
 - 使用第三方名称和 Logo 时，在 PR 中提供官网来源。
 - 已在本地运行 `npm ci --legacy-peer-deps` 和 `npm test && npm run validate && npm run assets:check`。
+- 新增 Connector 必须同时提交 `candidates/records/<connector-id>.json`；维护者在核验官方资料、许可证/服务条款和鉴权后填写人工批准，并链接不含凭据或个人数据的真实运行验收报告。未完成该记录时 CI 会阻断描述符 PR。
 
 CI 使用已发布的 `dsh-mcp-connector` 校验器检查 Schema、重复 Connector ID、重复
 ServerName、URL 与潜在密钥。合并到 `main` 后，独立 CI job 会重建 `catalog.json`、
