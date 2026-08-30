@@ -1,4 +1,5 @@
 node_modules/
 probe-report.json
+candidate-output/
 .DS_Store
 npm-debug.log*

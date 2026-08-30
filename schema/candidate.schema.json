@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/duhu2000/dsh-mcp-connector-registry/schema/candidate.schema.json",
+  "title": "DSH MCP Connector discovery candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "registryName",
+    "title",
+    "description",
+    "version",
+    "classification",
+    "source",
+    "officialLinks",
+    "transports",
+    "authentication",
+    "license",
+    "maintenance",
+    "probe",
+    "dedupe",
+    "score",
+    "review",
+    "runtimeAcceptance",
+    "evidence"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "registryName": { "type": "string", "minLength": 3, "maxLength": 200 },
+    "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "description": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "version": { "type": "string", "minLength": 1, "maxLength": 255 },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["isDataService", "domains", "matchedKeywords"],
+      "properties": {
+        "isDataService": { "type": "boolean" },
+        "domains": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+        "matchedKeywords": { "type": "array", "uniqueItems": true, "items": { "type": "string" } }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "apiUrl", "detailUrl", "status", "publishedAt", "updatedAt", "retrievedAt"],
+      "properties": {
+        "kind": { "const": "official-mcp-registry" },
+        "apiUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "detailUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "status": { "enum": ["active", "deprecated", "deleted", "unknown"] },
+        "publishedAt": { "type": ["string", "null"], "format": "date-time" },
+        "updatedAt": { "type": ["string", "null"], "format": "date-time" },
+        "retrievedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "officialLinks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["websiteUrl", "repository"],
+      "properties": {
+        "websiteUrl": { "type": ["string", "null"], "format": "uri" },
+        "repository": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["url", "source", "id", "subfolder"],
+              "properties": {
+                "url": { "type": "string", "format": "uri" },
+                "source": { "type": "string" },
+                "id": { "type": ["string", "null"] },
+                "subfolder": { "type": ["string", "null"] }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "transports": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "type", "url", "package"],
+        "properties": {
+          "kind": { "enum": ["remote", "package"] },
+          "type": { "type": "string", "minLength": 1 },
+          "url": { "type": ["string", "null"], "format": "uri" },
+          "package": {
+            "anyOf": [
+              { "type": "null" },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["registryType", "identifier", "version"],
+                "properties": {
+                  "registryType": { "type": "string" },
+                  "identifier": { "type": "string" },
+                  "version": { "type": ["string", "null"] }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "authentication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "requiredHeaders", "reason"],
+      "properties": {
+        "mode": { "enum": ["none", "bearer", "api-key", "oauth2", "unknown"] },
+        "requiredHeaders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "required", "secret"],
+            "properties": {
+              "name": { "type": "string" },
+              "required": { "type": "boolean" },
+              "secret": { "type": "boolean" }
+            }
+          }
+        },
+        "reason": { "type": "string" }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "spdxId", "evidenceUrl"],
+      "properties": {
+        "status": { "enum": ["declared", "not-applicable", "unknown"] },
+        "spdxId": { "type": ["string", "null"] },
+        "evidenceUrl": { "type": ["string", "null"], "format": "uri" }
+      }
+    },
+    "maintenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registryStatus", "registryUpdatedAt", "ageDays", "repositoryActivity"],
+      "properties": {
+        "registryStatus": { "enum": ["active", "deprecated", "deleted", "unknown"] },
+        "registryUpdatedAt": { "type": ["string", "null"], "format": "date-time" },
+        "ageDays": { "type": ["integer", "null"], "minimum": 0 },
+        "repositoryActivity": { "enum": ["active", "stale", "unknown"] }
+      }
+    },
+    "probe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "checkedAt", "targetUrl", "httpStatus", "reason"],
+      "properties": {
+        "status": { "enum": ["not-run", "pass", "partial", "fail"] },
+        "checkedAt": { "type": ["string", "null"], "format": "date-time" },
+        "targetUrl": { "type": ["string", "null"], "format": "uri" },
+        "httpStatus": { "type": ["integer", "null"], "minimum": 100, "maximum": 599 },
+        "reason": { "type": "string" }
+      }
+    },
+    "dedupe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "strong", "weak"],
+      "properties": {
+        "level": { "enum": ["none", "weak", "strong"] },
+        "strong": { "$ref": "#/$defs/dedupeMatches" },
+        "weak": { "$ref": "#/$defs/dedupeMatches" }
+      }
+    },
+    "score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "band", "dimensions", "reasons", "gates"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "band": { "enum": ["selected", "watchlist", "defer", "duplicate", "not-data"] },
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["authority", "accessibility", "maintenanceSecurity", "runtime", "marketGap", "documentation"],
+          "properties": {
+            "authority": { "type": "integer", "minimum": 0, "maximum": 25 },
+            "accessibility": { "type": "integer", "minimum": 0, "maximum": 25 },
+            "maintenanceSecurity": { "type": "integer", "minimum": 0, "maximum": 20 },
+            "runtime": { "type": "integer", "minimum": 0, "maximum": 15 },
+            "marketGap": { "type": "integer", "minimum": 0, "maximum": 10 },
+            "documentation": { "type": "integer", "minimum": 0, "maximum": 5 }
+          }
+        },
+        "reasons": { "type": "array", "items": { "type": "string" } },
+        "gates": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "reviewedAt", "reviewedBy", "notes"],
+      "properties": {
+        "decision": { "enum": ["pending", "approved", "watchlist", "rejected"] },
+        "reviewedAt": { "type": ["string", "null"], "format": "date-time" },
+        "reviewedBy": { "type": ["string", "null"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "runtimeAcceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "checkedAt", "reviewedBy", "reportUrl", "notes"],
+      "properties": {
+        "status": { "enum": ["not-run", "pass", "fail"] },
+        "checkedAt": { "type": ["string", "null"], "format": "date-time" },
+        "reviewedBy": { "type": ["string", "null"] },
+        "reportUrl": { "type": ["string", "null"], "format": "uri" },
+        "notes": { "type": "string" }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "url", "collectedAt", "summary"],
+        "properties": {
+          "type": { "enum": ["official-registry", "official-website", "official-repository", "license", "probe", "runtime-acceptance"] },
+          "url": { "type": "string", "format": "uri" },
+          "collectedAt": { "type": "string", "format": "date-time" },
+          "summary": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "dedupeMatches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "connectorIds", "reason"],
+        "properties": {
+          "key": { "type": "string" },
+          "connectorIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" } },
+          "reason": { "type": "string" }
+        }
+      }
+    }
+  }
+}
