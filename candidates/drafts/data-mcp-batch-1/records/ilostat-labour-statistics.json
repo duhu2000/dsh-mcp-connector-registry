@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "id": "ilostat-labour-statistics",
+  "registryName": "io.github.SidneyBissoli/ilo-mcp-server",
+  "title": "ILO Labour Statistics (ILOSTAT)",
+  "description": "ILO labour statistics (ILOSTAT) with full provenance: source, vintage, license. 4 tools.",
+  "version": "0.3.2",
+  "classification": {
+    "isDataService": true,
+    "domains": ["public"],
+    "matchedKeywords": ["statistics"]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.SidneyBissoli%2Filo-mcp-server/versions/0.3.2",
+    "status": "active",
+    "publishedAt": "2026-08-29T23:16:59.537456Z",
+    "updatedAt": "2026-08-29T23:16:59.537456Z",
+    "retrievedAt": "2026-08-30T10:43:51.462Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://ilo.sidneybissoli.com/",
+    "repository": {
+      "url": "https://github.com/SidneyBissoli/ilo-mcp-server",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "ilo-mcp-server",
+        "version": "0.3.2"
+      }
+    },
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://ilo.sidneybissoli.com/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "Publisher documentation states no account or API key is required, and live preflight completed without credentials."
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "MIT",
+    "evidenceUrl": "https://github.com/SidneyBissoli/ilo-mcp-server/blob/main/LICENSE.md"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-08-29T23:16:59.537456Z",
+    "ageDays": 0,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-08-30T10:43:51.462Z",
+    "targetUrl": "https://ilo.sidneybissoli.com/mcp",
+    "httpStatus": 200,
+    "reason": "MCP initialize returned a JSON-RPC or event-stream response."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 97,
+    "band": "selected",
+    "dimensions": {
+      "authority": 23,
+      "accessibility": 25,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 9,
+      "documentation": 5
+    },
+    "reasons": [
+      "authority 23/25: Official Registry plus publisher links and namespace evidence",
+      "accessibility 25/25: one public HTTPS remote and one version-pinned npm package; auth none",
+      "maintenance/security 20/20: active current version, public repository, and declared license",
+      "runtime 15/15: public probe pass",
+      "market gap 9/10: global labour statistics are not duplicated in the current catalog",
+      "documentation 5/5: publisher documentation covers tools, ILOSTAT source, provenance, licensing, and non-affiliation"
+    ],
+    "gates": [
+      "Human source review approval and runtime report publication are required before promotion to candidates/records."
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "ilostat-labour-statistics",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "中文卡片、来源、鉴权、许可证和运行预检材料已准备；等待维护者人工批准。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-08-30T10:42:46.446Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-1/ilostat-labour-statistics.md",
+    "notes": "No-auth live preflight passed initialize, tools/list, and ilo_search_indicators. The report omits raw responses, session IDs, and credentials; human source approval remains pending."
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.SidneyBissoli%2Filo-mcp-server/versions/0.3.2",
+      "collectedAt": "2026-08-30T10:43:51.462Z",
+      "summary": "Official Registry status active; version 0.3.2."
+    },
+    {
+      "type": "official-website",
+      "url": "https://ilo.sidneybissoli.com/",
+      "collectedAt": "2026-08-30T10:43:51.462Z",
+      "summary": "Publisher-provided hosted service website."
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/SidneyBissoli/ilo-mcp-server",
+      "collectedAt": "2026-08-30T10:43:51.462Z",
+      "summary": "Publisher repository documents a public no-key community client of the official ILOSTAT SDMX API and explicitly disclaims ILO affiliation or endorsement."
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/SidneyBissoli/ilo-mcp-server/blob/main/LICENSE.md",
+      "collectedAt": "2026-08-30T10:43:51.462Z",
+      "summary": "Connector source code declares the MIT License; repository documentation identifies ILOSTAT data and metadata as CC BY 4.0."
+    },
+    {
+      "type": "probe",
+      "url": "https://ilo.sidneybissoli.com/mcp",
+      "collectedAt": "2026-08-30T10:43:51.462Z",
+      "summary": "Public no-auth MCP initialize probe passed with HTTP 200."
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-1/ilostat-labour-statistics.md",
+      "collectedAt": "2026-08-30T10:42:46.446Z",
+      "summary": "Automated safe preflight passed one explicitly read-only tool call without retaining response content."
+    }
+  ]
+}

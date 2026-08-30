@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "brazil-senate-open-data",
+  "name": "巴西参议院开放数据",
+  "vendor": "Sidney Bissoli（独立社区项目）",
+  "icon": "🏛️",
+  "category": "法律合规",
+  "summary": "法案进程 / 表决与委员会 / 议员活动 / 采购预算",
+  "description": "连接巴西联邦参议院立法、行政及 e-Cidadania 公民参与开放数据，查询参议员、法案、审议进度、表决结果、委员会、全体会议、总统否决、演讲和逐字记录等立法信息，以及议员费用、住房补贴、人员薪酬、政府采购和预算执行等行政数据。适合巴西政策追踪、立法研究、公共财政分析和政府关系调研。工具结果主要使用葡萄牙语，并附带官方数据来源。本连接器由社区独立维护，并非巴西参议院官方产品。",
+  "tags": ["巴西", "参议院", "立法", "法案", "表决", "公共财政", "政府采购", "开放数据"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://senado.sidneybissoli.com/",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788086730905,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "brazil-senate-open-data",
+      "url": "https://senado.sidneybissoli.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "researchQuestion",
+      "label": "研究问题",
+      "placeholder": "例如：追踪某项法案的审议进度、委员会意见和最近表决",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "追踪法案与审议进度",
+      "text": "使用巴西参议院开放数据回答“{{researchQuestion}}”：先定位法案或议题，再核对审议阶段、委员会、表决和更新时间；用中文总结，并保留葡萄牙语原始名称、官方来源和数据时间",
+      "server": "main"
+    },
+    {
+      "title": "分析议员活动或公共支出",
+      "text": "围绕“{{researchQuestion}}”查询相关议员、表决、费用、采购或预算数据；说明查询范围、币种、期间、缺失项和口径限制，不把相关性描述为违法或不当行为证据",
+      "server": "main"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "ilostat-labour-statistics",
+  "name": "ILOSTAT 全球劳工统计",
+  "vendor": "Sidney Bissoli（独立社区项目）",
+  "icon": "🌐",
+  "category": "调研分析",
+  "summary": "就业 / 失业 / 工资工时 / 劳动参与率 / 跨国比较",
+  "description": "连接国际劳工组织 ILOSTAT 官方统计接口，提供全球各国家和地区的就业、失业、劳动参与率、工资、工时、非正规就业、青年就业及生产率等劳工指标。支持按国家、年份、性别、年龄等维度筛选和比较，每次查询均返回数据来源、统计版本、获取时间、许可证和标准引用信息，适合国际人力成本比较、就业市场研究、ESG 分析和公共政策评估。本连接器是独立社区项目，与国际劳工组织不存在隶属或官方背书关系。",
+  "tags": ["ILO", "ILOSTAT", "劳工统计", "就业", "失业", "工资", "ESG", "公共数据"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://ilo.sidneybissoli.com/",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788086566446,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "ilostat-labour-statistics",
+      "url": "https://ilo.sidneybissoli.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "researchQuestion",
+      "label": "研究问题",
+      "placeholder": "例如：比较东南亚主要经济体近十年的青年失业率",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检索劳工指标",
+      "text": "使用 ILOSTAT 回答“{{researchQuestion}}”：先检索匹配的指标与元数据，再核对国家、年份、性别和年龄等维度后查询；保留单位、数据版本、来源、许可证和标准引用",
+      "server": "main"
+    },
+    {
+      "title": "开展跨国劳动力比较",
+      "text": "围绕“{{researchQuestion}}”选用口径一致且覆盖充分的 ILOSTAT 指标进行跨国或时间序列比较；明确指标定义、估算口径、缺失值和不可直接比较之处",
+      "server": "main"
+    }
+  ]
+}

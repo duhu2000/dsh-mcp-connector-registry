@@ -35,3 +35,7 @@ The probe resolves only public DNS addresses, pins the HTTPS connection to an au
 The scheduled workflow uses a fixed marker to create or update one daily watchlist issue and one monthly review-batch issue. Repeated runs do not create new issues, and the workflow has no path that writes `connectors/`, opens a descriptor PR, merges, publishes, or delists.
 
 `candidate-output/` is ignored. A maintainer may copy a reviewed candidate to `candidates/records/<connector-id>.json` only after adding official license/authentication evidence and completing the review fields. A future descriptor PR must still pass real runtime acceptance and human review.
+
+需要协作复核的上架包可暂存在 `candidates/drafts/<batch>/`。草案目录不参与目录构建或新增
+Connector CI 门禁；其中的 `review.decision` 必须保持 `pending`，直至真实维护者完成来源审核。
+批准后才可将描述符和记录分别迁入 `connectors/` 与 `candidates/records/`。
