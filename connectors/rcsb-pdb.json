@@ -24,23 +24,15 @@
       "transport": "stdio"
     }
   ],
-  "promptVariables": [
-    {
-      "name": "researchQuestion",
-      "label": "结构生物学问题",
-      "placeholder": "例如：查找高分辨率的人血红蛋白结构并比较主要配体",
-      "required": true
-    }
-  ],
   "prompts": [
     {
-      "title": "检索 PDB 结构",
-      "text": "使用 RCSB PDB MCP 回答“{{researchQuestion}}”：先选择文本、属性、序列、化学或结构检索方式，再获取必要条目和注释；列出 PDB ID、筛选条件、分辨率和数据来源，不要上传未公开或无权外发的序列与研究数据",
+      "title": "查找人血红蛋白高分辨率结构",
+      "text": "使用 RCSB PDB MCP 查找人血红蛋白与氧结合的高分辨率实验结构：筛选物种为 Homo sapiens、实验方法为 X 射线晶体学或冷冻电镜且分辨率数值不高于 2.5 Å 的条目，列出 PDB ID、实验方法、分辨率、主要配体、发布日期和数据来源，并说明筛选条件与条目间差异",
       "server": "rcsb-pdb"
     },
     {
-      "title": "核对结构与数据库映射",
-      "text": "针对“{{researchQuestion}}”核对 PDB、UniProt、NCBI 和功能注释之间的映射，区分实验结构、预测或派生结论，并保留可复核的条目 ID",
+      "title": "核对 TP53 结构覆盖",
+      "text": "使用 RCSB PDB MCP 核对人 TP53 蛋白（UniProt P04637）的实验结构覆盖：列出代表性 PDB 条目、覆盖的氨基酸区间、实验方法、分辨率、配体或结合伙伴，并核对 PDB、UniProt、NCBI 和功能注释映射；区分实验结构与预测或派生结论，保留可复核的条目 ID 和来源链接",
       "server": "rcsb-pdb"
     }
   ]

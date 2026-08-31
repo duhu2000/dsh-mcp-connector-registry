@@ -308,6 +308,31 @@ test('首批公共数据卡片提供无需填参的差异化示例', async () =>
   assert.match(ilostat.prompts[1].text, /印度尼西亚.*马来西亚.*青年失业率/);
 });
 
+test('研究类卡片提供无需填写研究问题的可直接发送示例', async () => {
+  const readConnector = async (id) => JSON.parse(
+    await readFile(resolve('connectors', `${id}.json`), 'utf8'),
+  );
+  const [data360, consensus, rcsb] = await Promise.all([
+    readConnector('world-bank-data360'),
+    readConnector('consensus'),
+    readConnector('rcsb-pdb'),
+  ]);
+
+  for (const connector of [data360, consensus, rcsb]) {
+    assert.equal(connector.promptVariables, undefined);
+    assert.equal(connector.prompts.length, 2);
+    assert.equal(new Set(connector.prompts.map((prompt) => prompt.text)).size, 2);
+    assert.ok(connector.prompts.every((prompt) => !/\{\{?\s*[A-Za-z]/.test(prompt.text)));
+  }
+
+  assert.match(data360.prompts[0].text, /印度尼西亚.*马来西亚.*人均 GDP.*贫困/);
+  assert.match(data360.prompts[1].text, /巴西.*印度.*女性劳动参与率.*Vega-Lite/);
+  assert.match(consensus.prompts[0].text, /四天工作制.*员工生产率.*同行评审/);
+  assert.match(consensus.prompts[1].text, /支持和反驳.*远程办公.*创新表现/);
+  assert.match(rcsb.prompts[0].text, /人血红蛋白.*2\.5 Å.*PDB ID/);
+  assert.match(rcsb.prompts[1].text, /TP53.*P04637.*实验结构/);
+});
+
 test('盈米连接器使用公开 x-api-key 接入参数且不包含凭据', async () => {
   const connector = JSON.parse(
     await readFile(resolve('connectors/yingmi-wealth-management.json'), 'utf8'),
