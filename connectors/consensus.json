@@ -31,23 +31,15 @@
       }
     }
   ],
-  "promptVariables": [
-    {
-      "name": "researchQuestion",
-      "label": "研究问题",
-      "placeholder": "例如：规律运动是否能改善成人抑郁症状？",
-      "required": true
-    }
-  ],
   "prompts": [
     {
-      "title": "检索研究证据",
-      "text": "使用 Consensus MCP 检索与“{{researchQuestion}}”相关的同行评审论文，优先系统综述、Meta 分析和随机对照试验；按证据类型归纳结论、局限与分歧，并附论文链接",
+      "title": "评估四天工作制证据",
+      "text": "使用 Consensus MCP 检索“每周四天工作制能否在不降低组织产出的情况下改善员工生产率、幸福感和离职率”的同行评审研究：优先系统综述、Meta 分析、随机或准实验研究，按证据类型归纳结论、样本、观察期、局限与分歧，并附论文链接",
       "server": "consensus"
     },
     {
-      "title": "核对研究结论",
-      "text": "使用 Consensus MCP 查找支持和反驳“{{researchQuestion}}”的研究，区分论文原始结论与你的推断，并说明样本、研究设计和发表时间",
+      "title": "核验远程办公与创新",
+      "text": "使用 Consensus MCP 查找支持和反驳“长期远程办公会降低知识工作团队创新表现”的同行评审研究：分别列出支持、反对和结论不确定的证据，说明样本行业、远程办公强度、创新指标、研究设计和发表时间，并严格区分论文原始结论与你的推断",
       "server": "consensus"
     }
   ]
