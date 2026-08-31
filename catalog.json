@@ -283,6 +283,56 @@
     },
     {
       "schemaVersion": 1,
+      "id": "bls-us-labour-statistics",
+      "name": "BLS 美国劳工统计",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "🇺🇸",
+      "category": "调研分析",
+      "summary": "CPI / 就业失业 / 工资工时 / JOLTS",
+      "description": "连接美国劳工统计局公开数据接口，查询 CPI、就业、失业、工资、工时、生产率和 JOLTS 职位空缺等时间序列。支持先检索并核对 BLS Series ID，再获取最新值或历史趋势；结果应保留调查项目、单位、年份和发布日期。公开托管端点免密，自托管注册 Key 仅用于提高上游配额。本连接器由 cyanheads 独立社区维护，并非 BLS 官方产品。",
+      "tags": [
+        "BLS",
+        "美国",
+        "劳工统计",
+        "CPI",
+        "就业",
+        "工资",
+        "JOLTS"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/bls-labor-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788155234865,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "bls-us-labour-statistics",
+          "url": "https://bls-labor.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询美国 CPI-U 变化",
+          "text": "查询美国 CPI-U 全部项目指数 2015—2025 年年度变化，并列出 BLS 系列 ID、单位和最新发布日期。",
+          "server": "main"
+        },
+        {
+          "title": "比较失业率与职位空缺率",
+          "text": "比较美国 2020—2025 年失业率与职位空缺率趋势，先确认对应 BLS 系列，再说明不可直接比较的口径差异。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "bocha-search",
       "name": "博查搜索",
       "vendor": "社区连接器",
@@ -1025,6 +1075,106 @@
     },
     {
       "schemaVersion": 1,
+      "id": "eur-lex-eu-law",
+      "name": "EUR-Lex 欧盟法律开放数据",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "🇪🇺",
+      "category": "调研分析",
+      "summary": "欧盟立法 / CJEU 判例 / 条约 / CELEX 与 EuroVoc",
+      "description": "连接 EUR-Lex 与 CELLAR 开放数据，检索欧盟法规、指令、决定、条约、提案和 CJEU 判例，按 CELEX 获取文档并查看修订、引用及 EuroVoc 主题关系。结果应区分文种、语言、是否现行和版本时点，仅用于研究和信息检索，不替代官方文本核验或法律意见。本连接器由 cyanheads 独立社区维护，并非欧盟机构官方产品。",
+      "tags": [
+        "EUR-Lex",
+        "欧盟法律",
+        "CJEU",
+        "CELEX",
+        "判例",
+        "法规",
+        "法律研究"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/eur-lex-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788155234866,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "eur-lex-eu-law",
+          "url": "https://eur-lex.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检索人工智能相关法规",
+          "text": "检索标题包含 artificial intelligence 的欧盟法规，返回最新 10 条的 CELEX、日期、文种和是否现行。",
+          "server": "main"
+        },
+        {
+          "title": "追踪人工智能法案关系",
+          "text": "查询《人工智能法案》相关文件及其修订、引用和被引用关系，区分正式法案、提案与判例。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "faostat-food-agriculture",
+      "name": "FAOSTAT 全球粮农统计",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "🌾",
+      "category": "调研分析",
+      "summary": "农产品产量 / 单产贸易 / 食品农业 / FAOSTAT",
+      "description": "通过本地数据镜像查询联合国粮农组织 FAOSTAT 的全球食品与农业统计，覆盖作物、畜牧、贸易、投入、价格和农业排放等领域。支持解析国家、商品和指标代码，按年份比较并说明单位、数据状态和缺失项；使用前应关注镜像更新时间。适合农业市场、粮食安全和供应链研究。本连接器由 cyanheads 独立社区维护，并非 FAO 官方产品。",
+      "tags": [
+        "FAO",
+        "FAOSTAT",
+        "农业",
+        "粮食安全",
+        "农产品",
+        "贸易",
+        "公共数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/faostat-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788155234865,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "faostat-food-agriculture",
+          "url": "https://faostat.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "比较三国大豆产量",
+          "text": "比较中国、巴西和美国 2010—2023 年大豆产量与单产变化，注明 FAOSTAT 领域、单位和数据状态。",
+          "server": "main"
+        },
+        {
+          "title": "比较东南亚棕榈油出口",
+          "text": "查询印度尼西亚、马来西亚和泰国 2015—2023 年棕榈油出口量，列出国家、年份、数值和缺失项。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "feishu",
       "name": "飞书开放平台",
       "vendor": "飞书",
@@ -1739,6 +1889,56 @@
         {
           "title": "比较东南亚青年失业率",
           "text": "比较印度尼西亚、马来西亚、菲律宾、泰国和越南 2015 年至最新可用年份的青年失业率（15–24 岁、男女合计）：使用口径一致的 ILOSTAT 指标生成按国家的年度趋势表并总结变化；标明缺失年份、序列中断、模型估算与不可直接比较之处，附单位、数据版本、获取时间和 ILO 来源引用",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "imf-macroeconomic-statistics",
+      "name": "IMF 全球宏观经济统计",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "🏦",
+      "category": "调研分析",
+      "summary": "WEO / 国际收支 / CPI / 汇率 / 190 国宏观数据",
+      "description": "连接 IMF SDMX 3.0 数据接口，发现和查询 WEO、国际收支、消费者价格、汇率等宏观经济数据流，覆盖约 190 个国家和地区。支持国家、指标和时间序列比较，并保留数据流、维度、频率、单位及缺失值说明，适合国别研究、宏观分析和跨境市场判断。本连接器由 cyanheads 独立社区维护，并非 IMF 官方产品。",
+      "tags": [
+        "IMF",
+        "宏观经济",
+        "WEO",
+        "国际收支",
+        "CPI",
+        "汇率",
+        "SDMX"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/imf-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788155234865,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "imf-macroeconomic-statistics",
+          "url": "https://imf.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "比较三国 CPI 变化",
+          "text": "比较美国、中国和印度 2015—2025 年消费者价格指数变化，列出 IMF 数据流、指标代码和频率。",
+          "server": "main"
+        },
+        {
+          "title": "比较拉美经常账户",
+          "text": "查询巴西、墨西哥和智利 2018—2025 年经常账户余额占 GDP 比重，并标注估算值与缺失值。",
           "server": "main"
         }
       ]
@@ -2570,6 +2770,56 @@
     },
     {
       "schemaVersion": 1,
+      "id": "noaa-climate-data",
+      "name": "NOAA 历史气候与灾害数据",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "🌦️",
+      "category": "调研分析",
+      "summary": "气候站点 / 历史观测 / 风暴事件 / 灾害损失",
+      "description": "连接 NOAA/NCEI 气候数据，查询 CDO 数据集、指标、地区、气象站和历史观测，并检索风暴事件及十亿美元天气灾害。结果应说明数据集、站点、时间范围、单位、未报告值和数据限制；公开托管端点无需用户令牌，自托管 CDO 查询需配置 NOAA Token。适合气候风险、选址和灾害研究。本连接器由 cyanheads 独立社区维护，并非 NOAA 官方产品。",
+      "tags": [
+        "NOAA",
+        "NCEI",
+        "气候",
+        "历史天气",
+        "风暴事件",
+        "灾害损失",
+        "地理数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/noaa-climate-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788155234865,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "noaa-climate-data",
+          "url": "https://noaa-climate.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "了解 NOAA 气候数据集",
+          "text": "列出 NOAA CDO 可用的主要历史气候数据集，说明时间覆盖、常见温度和降水指标以及查询限制。",
+          "server": "main"
+        },
+        {
+          "title": "查询华盛顿州风暴事件",
+          "text": "查询 2020 年美国华盛顿州的风暴事件类型、伤亡和财产损失，注明 NCEI 数据来源与未报告值。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "notion",
       "name": "Notion",
       "vendor": "Notion",
@@ -2619,6 +2869,56 @@
           "title": "整理项目进展",
           "text": "使用 Notion MCP 读取当前项目页面和数据库，整理进展、风险与待办；不要修改页面",
           "server": "notion"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "nws-us-weather",
+      "name": "NWS 美国实时天气",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "⛈️",
+      "category": "调研分析",
+      "summary": "美国天气预报 / 实时警报 / 观测站 / 预报讨论",
+      "description": "连接美国国家气象局 NWS 公共 API，查询美国本土、阿拉斯加、夏威夷及部分属地的未来天气预报、当前观测、气象站、实时警报和预报员讨论。结果应保留更新时间、当地时区、警报有效期和覆盖区域；重大天气安全决策仍应以 NWS 官方渠道为准。本连接器由 cyanheads 独立社区维护，并非 NWS 官方产品。",
+      "tags": [
+        "NWS",
+        "美国天气",
+        "天气预报",
+        "气象警报",
+        "观测站",
+        "实时数据",
+        "公共数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/nws-weather-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788155234866,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "nws-us-weather",
+          "url": "https://nws.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询西雅图七天天气",
+          "text": "查询西雅图坐标 47.6062, -122.3321 的未来 7 天天气预报，并列出当地时区、温度、风向和降水描述。",
+          "server": "main"
+        },
+        {
+          "title": "查询加州严重天气警报",
+          "text": "查询加利福尼亚州当前生效的 Severe 或 Extreme 天气警报，返回事件、紧急程度、有效期和受影响区域。",
+          "server": "main"
         }
       ]
     },
@@ -2681,6 +2981,106 @@
           "title": "检索本地笔记",
           "text": "只读检索 Obsidian 中与主题相关的笔记并列出文件来源；不要修改、创建或删除笔记",
           "server": "obsidian"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "oecd-public-statistics",
+      "name": "OECD 全球公共统计",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "📊",
+      "category": "调研分析",
+      "summary": "跨国经济 / 教育就业 / 环境社会 / OECD SDMX",
+      "description": "连接 OECD Data Explorer 的 SDMX 统计数据，发现并查询 1,500 多个经济、教育、就业、环境和社会数据集，支持跨国家、指标与年份比较，并保留数据流、指标、单位、统计期和缺失值信息。适合宏观研究、国际市场比较和公共政策分析。本连接器由 cyanheads 独立社区维护，并非 OECD 官方产品。",
+      "tags": [
+        "OECD",
+        "公共统计",
+        "宏观经济",
+        "跨国比较",
+        "SDMX",
+        "教育就业",
+        "公共数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/oecd-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788155234852,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "oecd-public-statistics",
+          "url": "https://oecd.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "比较欧洲三国 GDP 增速",
+          "text": "比较德国、法国和意大利 2015—2024 年实际 GDP 增速，并注明 OECD 数据集、单位和统计期。",
+          "server": "main"
+        },
+        {
+          "title": "比较三国青年失业率",
+          "text": "查找 OECD 中青年失业率相关数据集，比较日本、韩国和加拿大 2018—2024 年趋势，并说明缺失年份。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "openstreetmap-geospatial-data",
+      "name": "OpenStreetMap 全球地理数据",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "🗺️",
+      "category": "调研分析",
+      "summary": "地点搜索 / 反向地理编码 / POI / Overpass 空间查询",
+      "description": "连接 OpenStreetMap 公共数据服务，执行地点搜索、反向地理编码、OSM 对象查询，以及按坐标、半径或边界框检索 POI 和地图要素。结果应保留 OSM 对象 ID、坐标和数据署名，并遵守 ODbL、Nominatim 与 Overpass 公共实例使用政策；不提供路线规划。本连接器由 cyanheads 独立社区维护，并非 OpenStreetMap Foundation 官方产品。",
+      "tags": [
+        "OpenStreetMap",
+        "OSM",
+        "地理编码",
+        "POI",
+        "Overpass",
+        "地图数据",
+        "空间查询"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/openstreetmap-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788155234866,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "openstreetmap-geospatial-data",
+          "url": "https://openstreetmap.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "反向解析天安门坐标",
+          "text": "反向解析坐标 39.9042, 116.4074，返回地点名称、行政层级、OSM 对象类型和数据署名。",
+          "server": "main"
+        },
+        {
+          "title": "查找人民广场附近医院",
+          "text": "查找上海人民广场 1 公里内的医院，按距离列出名称、坐标和 OSM 对象 ID，最多返回 20 条。",
+          "server": "main"
         }
       ]
     },
@@ -4298,6 +4698,56 @@
             "TUSHARE_TOKEN": "token"
           },
           "transport": "stdio"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "uniprot-protein-data",
+      "name": "UniProt 蛋白质数据",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "🧬",
+      "category": "调研分析",
+      "summary": "蛋白检索 / 审校条目 / ID 映射 / 序列与蛋白组",
+      "description": "连接 UniProt REST 数据接口，检索 UniProtKB 蛋白，获取审校条目、功能、基因、物种、亚细胞定位和序列，并支持 ID 映射、蛋白组和分类信息查询。结果应保留 accession、审校状态和证据边界，适合生命科学文献准备、生物信息检索和靶点初筛；不用于医疗诊断。本连接器由 cyanheads 独立社区维护，并非 UniProt 官方产品。",
+      "tags": [
+        "UniProt",
+        "蛋白质",
+        "生物信息",
+        "序列",
+        "基因",
+        "生命科学",
+        "科研数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/uniprot-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788155234865,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "uniprot-protein-data",
+          "url": "https://uniprot.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看血红蛋白条目",
+          "text": "获取 UniProt 条目 P69905，汇总蛋白名称、基因、物种、功能、亚细胞定位和审校状态，并保留 accession。",
+          "server": "main"
+        },
+        {
+          "title": "检索 BRCA1 相关蛋白",
+          "text": "检索人类中与 BRCA1 相互作用相关的已审校蛋白，返回 accession、蛋白名称和证据摘要。",
+          "server": "main"
         }
       ]
     },
