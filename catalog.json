@@ -795,23 +795,15 @@
           }
         }
       ],
-      "promptVariables": [
-        {
-          "name": "researchQuestion",
-          "label": "研究问题",
-          "placeholder": "例如：规律运动是否能改善成人抑郁症状？",
-          "required": true
-        }
-      ],
       "prompts": [
         {
-          "title": "检索研究证据",
-          "text": "使用 Consensus MCP 检索与“{{researchQuestion}}”相关的同行评审论文，优先系统综述、Meta 分析和随机对照试验；按证据类型归纳结论、局限与分歧，并附论文链接",
+          "title": "评估四天工作制证据",
+          "text": "使用 Consensus MCP 检索“每周四天工作制能否在不降低组织产出的情况下改善员工生产率、幸福感和离职率”的同行评审研究：优先系统综述、Meta 分析、随机或准实验研究，按证据类型归纳结论、样本、观察期、局限与分歧，并附论文链接",
           "server": "consensus"
         },
         {
-          "title": "核对研究结论",
-          "text": "使用 Consensus MCP 查找支持和反驳“{{researchQuestion}}”的研究，区分论文原始结论与你的推断，并说明样本、研究设计和发表时间",
+          "title": "核验远程办公与创新",
+          "text": "使用 Consensus MCP 查找支持和反驳“长期远程办公会降低知识工作团队创新表现”的同行评审研究：分别列出支持、反对和结论不确定的证据，说明样本行业、远程办公强度、创新指标、研究设计和发表时间，并严格区分论文原始结论与你的推断",
           "server": "consensus"
         }
       ]
@@ -3884,23 +3876,15 @@
           "transport": "stdio"
         }
       ],
-      "promptVariables": [
-        {
-          "name": "researchQuestion",
-          "label": "结构生物学问题",
-          "placeholder": "例如：查找高分辨率的人血红蛋白结构并比较主要配体",
-          "required": true
-        }
-      ],
       "prompts": [
         {
-          "title": "检索 PDB 结构",
-          "text": "使用 RCSB PDB MCP 回答“{{researchQuestion}}”：先选择文本、属性、序列、化学或结构检索方式，再获取必要条目和注释；列出 PDB ID、筛选条件、分辨率和数据来源，不要上传未公开或无权外发的序列与研究数据",
+          "title": "查找人血红蛋白高分辨率结构",
+          "text": "使用 RCSB PDB MCP 查找人血红蛋白与氧结合的高分辨率实验结构：筛选物种为 Homo sapiens、实验方法为 X 射线晶体学或冷冻电镜且分辨率数值不高于 2.5 Å 的条目，列出 PDB ID、实验方法、分辨率、主要配体、发布日期和数据来源，并说明筛选条件与条目间差异",
           "server": "rcsb-pdb"
         },
         {
-          "title": "核对结构与数据库映射",
-          "text": "针对“{{researchQuestion}}”核对 PDB、UniProt、NCBI 和功能注释之间的映射，区分实验结构、预测或派生结论，并保留可复核的条目 ID",
+          "title": "核对 TP53 结构覆盖",
+          "text": "使用 RCSB PDB MCP 核对人 TP53 蛋白（UniProt P04637）的实验结构覆盖：列出代表性 PDB 条目、覆盖的氨基酸区间、实验方法、分辨率、配体或结合伙伴，并核对 PDB、UniProt、NCBI 和功能注释映射；区分实验结构与预测或派生结论，保留可复核的条目 ID 和来源链接",
           "server": "rcsb-pdb"
         }
       ]
@@ -5080,23 +5064,15 @@
           }
         }
       ],
-      "promptVariables": [
-        {
-          "name": "researchQuestion",
-          "label": "研究问题",
-          "placeholder": "例如：比较东南亚主要经济体过去十年的人均 GDP 与贫困率变化",
-          "required": true
-        }
-      ],
       "prompts": [
         {
-          "title": "检索发展指标",
-          "text": "使用世界银行 Data360 MCP 回答“{{researchQuestion}}”：先检索候选数据库与指标，核对国家和年份覆盖，再获取数据；列出指标定义、来源、单位、方法限制和缺失值，不要猜测 database_id 或 indicator_id",
+          "title": "比较东南亚增长与贫困",
+          "text": "比较印度尼西亚、马来西亚、菲律宾、泰国和越南 2014 年至最新可用年份的人均 GDP 与国际贫困线以下贫困人口比例变化：使用世界银行 Data360 MCP 先检索口径一致的候选数据库和指标，核对国家与年份覆盖后再获取数据；生成年度对比表并总结趋势，列出指标定义、来源、单位、方法限制和缺失值，不要猜测 database_id 或 indicator_id",
           "server": "data360"
         },
         {
-          "title": "生成可核验图表方案",
-          "text": "围绕“{{researchQuestion}}”先选择 1 至 4 个有覆盖的数据指标，核对可用年份和分组，再生成图表规格；同时给出数据表口径、来源链接和图表可能造成的比较偏差",
+          "title": "绘制新兴经济体女性就业图",
+          "text": "比较巴西、印度、印度尼西亚、墨西哥和南非 2010 年至最新可用年份的女性劳动参与率与女性失业率：使用世界银行 Data360 MCP 先选择有完整覆盖且口径一致的指标，核对可用年份和年龄分组，再生成 Vega-Lite 趋势图规格；同时给出数据表、指标定义、单位、来源链接、缺失年份和图表可能造成的比较偏差",
           "server": "data360"
         }
       ]
