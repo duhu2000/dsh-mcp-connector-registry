@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "uniprot-protein-data",
+  "name": "UniProt 蛋白质数据",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🧬",
+  "category": "调研分析",
+  "summary": "蛋白检索 / 审校条目 / ID 映射 / 序列与蛋白组",
+  "description": "连接 UniProt REST 数据接口，检索 UniProtKB 蛋白，获取审校条目、功能、基因、物种、亚细胞定位和序列，并支持 ID 映射、蛋白组和分类信息查询。结果应保留 accession、审校状态和证据边界，适合生命科学文献准备、生物信息检索和靶点初筛；不用于医疗诊断。本连接器由 cyanheads 独立社区维护，并非 UniProt 官方产品。",
+  "tags": [
+    "UniProt",
+    "蛋白质",
+    "生物信息",
+    "序列",
+    "基因",
+    "生命科学",
+    "科研数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/uniprot-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788155234865,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "uniprot-protein-data",
+      "url": "https://uniprot.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看血红蛋白条目",
+      "text": "获取 UniProt 条目 P69905，汇总蛋白名称、基因、物种、功能、亚细胞定位和审校状态，并保留 accession。",
+      "server": "main"
+    },
+    {
+      "title": "检索 BRCA1 相关蛋白",
+      "text": "检索人类中与 BRCA1 相互作用相关的已审校蛋白，返回 accession、蛋白名称和证据摘要。",
+      "server": "main"
+    }
+  ]
+}

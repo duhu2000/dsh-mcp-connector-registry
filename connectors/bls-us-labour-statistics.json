@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "bls-us-labour-statistics",
+  "name": "BLS 美国劳工统计",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🇺🇸",
+  "category": "调研分析",
+  "summary": "CPI / 就业失业 / 工资工时 / JOLTS",
+  "description": "连接美国劳工统计局公开数据接口，查询 CPI、就业、失业、工资、工时、生产率和 JOLTS 职位空缺等时间序列。支持先检索并核对 BLS Series ID，再获取最新值或历史趋势；结果应保留调查项目、单位、年份和发布日期。公开托管端点免密，自托管注册 Key 仅用于提高上游配额。本连接器由 cyanheads 独立社区维护，并非 BLS 官方产品。",
+  "tags": [
+    "BLS",
+    "美国",
+    "劳工统计",
+    "CPI",
+    "就业",
+    "工资",
+    "JOLTS"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/bls-labor-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788155234865,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "bls-us-labour-statistics",
+      "url": "https://bls-labor.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询美国 CPI-U 变化",
+      "text": "查询美国 CPI-U 全部项目指数 2015—2025 年年度变化，并列出 BLS 系列 ID、单位和最新发布日期。",
+      "server": "main"
+    },
+    {
+      "title": "比较失业率与职位空缺率",
+      "text": "比较美国 2020—2025 年失业率与职位空缺率趋势，先确认对应 BLS 系列，再说明不可直接比较的口径差异。",
+      "server": "main"
+    }
+  ]
+}

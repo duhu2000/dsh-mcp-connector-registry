@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "nws-us-weather",
+  "name": "NWS 美国实时天气",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "⛈️",
+  "category": "调研分析",
+  "summary": "美国天气预报 / 实时警报 / 观测站 / 预报讨论",
+  "description": "连接美国国家气象局 NWS 公共 API，查询美国本土、阿拉斯加、夏威夷及部分属地的未来天气预报、当前观测、气象站、实时警报和预报员讨论。结果应保留更新时间、当地时区、警报有效期和覆盖区域；重大天气安全决策仍应以 NWS 官方渠道为准。本连接器由 cyanheads 独立社区维护，并非 NWS 官方产品。",
+  "tags": [
+    "NWS",
+    "美国天气",
+    "天气预报",
+    "气象警报",
+    "观测站",
+    "实时数据",
+    "公共数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/nws-weather-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788155234866,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "nws-us-weather",
+      "url": "https://nws.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询西雅图七天天气",
+      "text": "查询西雅图坐标 47.6062, -122.3321 的未来 7 天天气预报，并列出当地时区、温度、风向和降水描述。",
+      "server": "main"
+    },
+    {
+      "title": "查询加州严重天气警报",
+      "text": "查询加利福尼亚州当前生效的 Severe 或 Extreme 天气警报，返回事件、紧急程度、有效期和受影响区域。",
+      "server": "main"
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "id": "imf-macroeconomic-statistics",
+  "registryName": "io.github.cyanheads/imf-mcp-server",
+  "title": "imf-mcp-server",
+  "description": "Query IMF SDMX 3.0 macroeconomic dataflows — WEO, BOP, CPI, exchange rates, 190 countries.",
+  "version": "0.3.1",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "finance",
+      "public",
+      "research"
+    ],
+    "matchedKeywords": [
+      "economic data"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Fimf-mcp-server/versions/0.3.1",
+    "status": "active",
+    "publishedAt": "2026-08-31T05:16:30.027079Z",
+    "updatedAt": "2026-08-31T05:16:30.027079Z",
+    "retrievedAt": "2026-08-31T05:39:33.291Z"
+  },
+  "officialLinks": {
+    "websiteUrl": null,
+    "repository": {
+      "url": "https://github.com/cyanheads/imf-mcp-server",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/imf-mcp-server",
+        "version": "0.3.1"
+      }
+    },
+    {
+      "kind": "package",
+      "type": "streamable-http",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/imf-mcp-server",
+        "version": "0.3.1"
+      }
+    },
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://imf.caseyjhand.com/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "维护者文档说明公开托管端点及 IMF SDMX API 均无需用户 API Key；无凭据运行预检已通过。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "Apache-2.0",
+    "evidenceUrl": "https://github.com/cyanheads/imf-mcp-server/blob/main/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-08-31T05:16:30.027079Z",
+    "ageDays": 0,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-08-31T05:47:14.865Z",
+    "targetUrl": "https://imf.caseyjhand.com/mcp",
+    "httpStatus": 200,
+    "reason": "MCP initialize returned a JSON-RPC or event-stream response."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 94,
+    "band": "selected",
+    "dimensions": {
+      "authority": 20,
+      "accessibility": 25,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 4
+    },
+    "reasons": [
+      "authority 20/25: Official Registry plus publisher links and namespace evidence",
+      "accessibility 25/25: 1 remote and 2 package transport(s); auth none",
+      "maintenance/security 20/20: status active; registry age 0 day(s); license declared",
+      "runtime 15/15: public probe pass",
+      "market gap 10/10: domains finance, public, research; dedupe none",
+      "documentation 4/5: publisher-provided description and links"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "imf-macroeconomic-statistics",
+    "reviewedAt": "2026-08-31T06:44:43Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已逐项复核 Official Registry 身份、社区独立维护边界、公开端点、鉴权、服务端许可证、上游数据条款提示和脱敏运行报告，批准迁入正式记录并生成 Connector 卡片。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-08-31T05:50:19.673Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-2/imf-macroeconomic-statistics.md",
+    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 imf_list_databases；未保存原始响应、会话标识或凭据。维护者 DuHu 已完成来源审核。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Fimf-mcp-server/versions/0.3.1",
+      "collectedAt": "2026-08-31T05:39:33.291Z",
+      "summary": "Official Registry status active; version 0.3.1."
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/cyanheads/imf-mcp-server",
+      "collectedAt": "2026-08-31T05:39:33.291Z",
+      "summary": "社区维护仓库记录 5 个只读工具，可发现并查询 IMF SDMX 3.0 宏观经济数据流。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://data.imf.org/en/Resource-Pages/IMF-API",
+      "collectedAt": "2026-08-31T05:52:00.000Z",
+      "summary": "IMF Data API 页面是 WEO、BOP、CPI、汇率等上游官方数据接口说明；数据使用条款需在上架前单独复核。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/cyanheads/imf-mcp-server/blob/main/LICENSE",
+      "collectedAt": "2026-08-31T05:52:00.000Z",
+      "summary": "io.github.cyanheads/imf-mcp-server 源代码声明 Apache-2.0；上游数据授权、署名与使用条款仍需在人工批准时单独复核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://imf.caseyjhand.com/mcp",
+      "collectedAt": "2026-08-31T05:47:14.865Z",
+      "summary": "公开无用户凭据的 MCP initialize 探测通过，HTTP 200。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-2/imf-macroeconomic-statistics.md",
+      "collectedAt": "2026-08-31T05:50:19.673Z",
+      "summary": "自动脱敏预检通过 imf_list_databases 只读调用；原始响应正文未落盘。"
+    }
+  ]
+}

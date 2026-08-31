@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "id": "uniprot-protein-data",
+  "registryName": "io.github.cyanheads/uniprot-mcp-server",
+  "title": "uniprot-mcp-server",
+  "description": "Protein research over UniProtKB — search by function, fetch curated records, map IDs, proteomes.",
+  "version": "0.2.3",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "research",
+      "science"
+    ],
+    "matchedKeywords": [
+      "protein",
+      "research"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Funiprot-mcp-server/versions/0.2.3",
+    "status": "active",
+    "publishedAt": "2026-08-30T22:09:28.192347Z",
+    "updatedAt": "2026-08-30T22:09:28.192347Z",
+    "retrievedAt": "2026-08-31T05:39:33.291Z"
+  },
+  "officialLinks": {
+    "websiteUrl": null,
+    "repository": {
+      "url": "https://github.com/cyanheads/uniprot-mcp-server",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/uniprot-mcp-server",
+        "version": "0.2.3"
+      }
+    },
+    {
+      "kind": "package",
+      "type": "streamable-http",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/uniprot-mcp-server",
+        "version": "0.2.3"
+      }
+    },
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://uniprot.caseyjhand.com/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "维护者文档说明 UniProt REST API 和公开托管端点无需用户 API Key；单条蛋白记录的无凭据预检已通过。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "Apache-2.0",
+    "evidenceUrl": "https://github.com/cyanheads/uniprot-mcp-server/blob/main/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-08-30T22:09:28.192347Z",
+    "ageDays": 0,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-08-31T05:47:14.865Z",
+    "targetUrl": "https://uniprot.caseyjhand.com/mcp",
+    "httpStatus": 200,
+    "reason": "MCP initialize returned a JSON-RPC or event-stream response."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 94,
+    "band": "selected",
+    "dimensions": {
+      "authority": 20,
+      "accessibility": 25,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 4
+    },
+    "reasons": [
+      "authority 20/25: Official Registry plus publisher links and namespace evidence",
+      "accessibility 25/25: 1 remote and 2 package transport(s); auth none",
+      "maintenance/security 20/20: status active; registry age 0 day(s); license declared",
+      "runtime 15/15: public probe pass",
+      "market gap 10/10: domains research, science; dedupe none",
+      "documentation 4/5: publisher-provided description and links"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "uniprot-protein-data",
+    "reviewedAt": "2026-08-31T06:44:43Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已逐项复核 Official Registry 身份、社区独立维护边界、公开端点、鉴权、服务端许可证、上游数据条款提示和脱敏运行报告，批准迁入正式记录并生成 Connector 卡片。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-08-31T05:50:23.931Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-2/uniprot-protein-data.md",
+    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 uniprot_get_entry；未保存原始响应、会话标识或凭据。维护者 DuHu 已完成来源审核。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Funiprot-mcp-server/versions/0.2.3",
+      "collectedAt": "2026-08-31T05:39:33.291Z",
+      "summary": "Official Registry status active; version 0.2.3."
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/cyanheads/uniprot-mcp-server",
+      "collectedAt": "2026-08-31T05:39:33.291Z",
+      "summary": "社区维护仓库记录 6 个只读工具，支持 UniProtKB 检索、条目获取、ID 映射、蛋白组和序列查询。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://www.uniprot.org/help/api",
+      "collectedAt": "2026-08-31T05:52:00.000Z",
+      "summary": "UniProt REST API 帮助页是蛋白数据的上游官方接口说明；数据库内容许可和署名要求需与服务端 Apache-2.0 分开复核。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/cyanheads/uniprot-mcp-server/blob/main/LICENSE",
+      "collectedAt": "2026-08-31T05:52:00.000Z",
+      "summary": "io.github.cyanheads/uniprot-mcp-server 源代码声明 Apache-2.0；上游数据授权、署名与使用条款仍需在人工批准时单独复核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://uniprot.caseyjhand.com/mcp",
+      "collectedAt": "2026-08-31T05:47:14.865Z",
+      "summary": "公开无用户凭据的 MCP initialize 探测通过，HTTP 200。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-2/uniprot-protein-data.md",
+      "collectedAt": "2026-08-31T05:50:23.931Z",
+      "summary": "自动脱敏预检通过 uniprot_get_entry 只读调用；原始响应正文未落盘。"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "imf-macroeconomic-statistics",
+  "name": "IMF 全球宏观经济统计",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🏦",
+  "category": "调研分析",
+  "summary": "WEO / 国际收支 / CPI / 汇率 / 190 国宏观数据",
+  "description": "连接 IMF SDMX 3.0 数据接口，发现和查询 WEO、国际收支、消费者价格、汇率等宏观经济数据流，覆盖约 190 个国家和地区。支持国家、指标和时间序列比较，并保留数据流、维度、频率、单位及缺失值说明，适合国别研究、宏观分析和跨境市场判断。本连接器由 cyanheads 独立社区维护，并非 IMF 官方产品。",
+  "tags": [
+    "IMF",
+    "宏观经济",
+    "WEO",
+    "国际收支",
+    "CPI",
+    "汇率",
+    "SDMX"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/imf-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788155234865,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "imf-macroeconomic-statistics",
+      "url": "https://imf.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "比较三国 CPI 变化",
+      "text": "比较美国、中国和印度 2015—2025 年消费者价格指数变化，列出 IMF 数据流、指标代码和频率。",
+      "server": "main"
+    },
+    {
+      "title": "比较拉美经常账户",
+      "text": "查询巴西、墨西哥和智利 2018—2025 年经常账户余额占 GDP 比重，并标注估算值与缺失值。",
+      "server": "main"
+    }
+  ]
+}

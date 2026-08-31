@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "eur-lex-eu-law",
+  "name": "EUR-Lex 欧盟法律开放数据",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🇪🇺",
+  "category": "调研分析",
+  "summary": "欧盟立法 / CJEU 判例 / 条约 / CELEX 与 EuroVoc",
+  "description": "连接 EUR-Lex 与 CELLAR 开放数据，检索欧盟法规、指令、决定、条约、提案和 CJEU 判例，按 CELEX 获取文档并查看修订、引用及 EuroVoc 主题关系。结果应区分文种、语言、是否现行和版本时点，仅用于研究和信息检索，不替代官方文本核验或法律意见。本连接器由 cyanheads 独立社区维护，并非欧盟机构官方产品。",
+  "tags": [
+    "EUR-Lex",
+    "欧盟法律",
+    "CJEU",
+    "CELEX",
+    "判例",
+    "法规",
+    "法律研究"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/eur-lex-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788155234866,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "eur-lex-eu-law",
+      "url": "https://eur-lex.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检索人工智能相关法规",
+      "text": "检索标题包含 artificial intelligence 的欧盟法规，返回最新 10 条的 CELEX、日期、文种和是否现行。",
+      "server": "main"
+    },
+    {
+      "title": "追踪人工智能法案关系",
+      "text": "查询《人工智能法案》相关文件及其修订、引用和被引用关系，区分正式法案、提案与判例。",
+      "server": "main"
+    }
+  ]
+}

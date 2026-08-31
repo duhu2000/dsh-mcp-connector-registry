@@ -30,6 +30,31 @@ npm run candidates:discover -- --output candidate-output --probe --max-probes 25
 npm run candidates:monthly -- --input candidate-output/candidate-report.json --output candidate-output/monthly-batch.md --size 10
 ```
 
+Turn a maintainer-curated manifest into reproducible `pending` draft records after official-document review and runtime preflight:
+
+```bash
+npm run candidates:curate -- \
+  --input candidate-output/candidate-report.json \
+  --manifest candidates/drafts/<batch>/manifest.json \
+  --output candidates/drafts/<batch>
+```
+
+The manifest may add official authentication, software-license, upstream-data and runtime-acceptance evidence. The command refuses duplicate registry names, missing source candidates, non-`pass` probes or runtime records, and any result that does not reach the `selected` score band. It always resets human review to `pending`; it cannot approve a candidate or write `connectors/`.
+
+After a real maintainer has approved every candidate, promote the batch with an explicit reviewer and UTC timestamp:
+
+```bash
+npm run candidates:promote -- \
+  --manifest candidates/drafts/<batch>/manifest.json \
+  --drafts candidates/drafts/<batch> \
+  --records candidates/records \
+  --connectors connectors \
+  --reviewer <maintainer-name> \
+  --reviewed-at <ISO-8601-UTC>
+```
+
+Promotion refuses unselected or non-pending drafts, failed runtime acceptance, endpoint drift, prompt placeholders, incomplete card metadata, and descriptions that omit the independent-community/non-official boundary. It writes formal records and descriptors but never commits, pushes, opens a PR, or merges.
+
 The probe resolves only public DNS addresses, pins the HTTPS connection to an audited address, refuses redirects, never sends authorization headers, caps response bytes and time, and never executes stdio packages. A single failed probe only defers a new candidate for investigation; it never modifies or removes an existing connector.
 
 The scheduled workflow uses a fixed marker to create or update one daily watchlist issue and one monthly review-batch issue. Repeated runs do not create new issues, and the workflow has no path that writes `connectors/`, opens a descriptor PR, merges, publishes, or delists.

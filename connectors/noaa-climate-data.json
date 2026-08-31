@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "noaa-climate-data",
+  "name": "NOAA 历史气候与灾害数据",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🌦️",
+  "category": "调研分析",
+  "summary": "气候站点 / 历史观测 / 风暴事件 / 灾害损失",
+  "description": "连接 NOAA/NCEI 气候数据，查询 CDO 数据集、指标、地区、气象站和历史观测，并检索风暴事件及十亿美元天气灾害。结果应说明数据集、站点、时间范围、单位、未报告值和数据限制；公开托管端点无需用户令牌，自托管 CDO 查询需配置 NOAA Token。适合气候风险、选址和灾害研究。本连接器由 cyanheads 独立社区维护，并非 NOAA 官方产品。",
+  "tags": [
+    "NOAA",
+    "NCEI",
+    "气候",
+    "历史天气",
+    "风暴事件",
+    "灾害损失",
+    "地理数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/noaa-climate-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788155234865,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "noaa-climate-data",
+      "url": "https://noaa-climate.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "了解 NOAA 气候数据集",
+      "text": "列出 NOAA CDO 可用的主要历史气候数据集，说明时间覆盖、常见温度和降水指标以及查询限制。",
+      "server": "main"
+    },
+    {
+      "title": "查询华盛顿州风暴事件",
+      "text": "查询 2020 年美国华盛顿州的风暴事件类型、伤亡和财产损失，注明 NCEI 数据来源与未报告值。",
+      "server": "main"
+    }
+  ]
+}

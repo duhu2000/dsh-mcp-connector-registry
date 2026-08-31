@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "oecd-public-statistics",
+  "name": "OECD 全球公共统计",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "📊",
+  "category": "调研分析",
+  "summary": "跨国经济 / 教育就业 / 环境社会 / OECD SDMX",
+  "description": "连接 OECD Data Explorer 的 SDMX 统计数据，发现并查询 1,500 多个经济、教育、就业、环境和社会数据集，支持跨国家、指标与年份比较，并保留数据流、指标、单位、统计期和缺失值信息。适合宏观研究、国际市场比较和公共政策分析。本连接器由 cyanheads 独立社区维护，并非 OECD 官方产品。",
+  "tags": [
+    "OECD",
+    "公共统计",
+    "宏观经济",
+    "跨国比较",
+    "SDMX",
+    "教育就业",
+    "公共数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/oecd-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788155234852,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "oecd-public-statistics",
+      "url": "https://oecd.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "比较欧洲三国 GDP 增速",
+      "text": "比较德国、法国和意大利 2015—2024 年实际 GDP 增速，并注明 OECD 数据集、单位和统计期。",
+      "server": "main"
+    },
+    {
+      "title": "比较三国青年失业率",
+      "text": "查找 OECD 中青年失业率相关数据集，比较日本、韩国和加拿大 2018—2024 年趋势，并说明缺失年份。",
+      "server": "main"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "faostat-food-agriculture",
+  "name": "FAOSTAT 全球粮农统计",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🌾",
+  "category": "调研分析",
+  "summary": "农产品产量 / 单产贸易 / 食品农业 / FAOSTAT",
+  "description": "通过本地数据镜像查询联合国粮农组织 FAOSTAT 的全球食品与农业统计，覆盖作物、畜牧、贸易、投入、价格和农业排放等领域。支持解析国家、商品和指标代码，按年份比较并说明单位、数据状态和缺失项；使用前应关注镜像更新时间。适合农业市场、粮食安全和供应链研究。本连接器由 cyanheads 独立社区维护，并非 FAO 官方产品。",
+  "tags": [
+    "FAO",
+    "FAOSTAT",
+    "农业",
+    "粮食安全",
+    "农产品",
+    "贸易",
+    "公共数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/faostat-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788155234865,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "faostat-food-agriculture",
+      "url": "https://faostat.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "比较三国大豆产量",
+      "text": "比较中国、巴西和美国 2010—2023 年大豆产量与单产变化，注明 FAOSTAT 领域、单位和数据状态。",
+      "server": "main"
+    },
+    {
+      "title": "比较东南亚棕榈油出口",
+      "text": "查询印度尼西亚、马来西亚和泰国 2015—2023 年棕榈油出口量，列出国家、年份、数值和缺失项。",
+      "server": "main"
+    }
+  ]
+}
