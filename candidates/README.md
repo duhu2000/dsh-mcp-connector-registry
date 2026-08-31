@@ -35,11 +35,25 @@ Turn a maintainer-curated manifest into reproducible `pending` draft records aft
 ```bash
 npm run candidates:curate -- \
   --input candidate-output/candidate-report.json \
-  --manifest candidates/drafts/data-mcp-batch-2/manifest.json \
-  --output candidates/drafts/data-mcp-batch-2
+  --manifest candidates/drafts/<batch>/manifest.json \
+  --output candidates/drafts/<batch>
 ```
 
 The manifest may add official authentication, software-license, upstream-data and runtime-acceptance evidence. The command refuses duplicate registry names, missing source candidates, non-`pass` probes or runtime records, and any result that does not reach the `selected` score band. It always resets human review to `pending`; it cannot approve a candidate or write `connectors/`.
+
+After a real maintainer has approved every candidate, promote the batch with an explicit reviewer and UTC timestamp:
+
+```bash
+npm run candidates:promote -- \
+  --manifest candidates/drafts/<batch>/manifest.json \
+  --drafts candidates/drafts/<batch> \
+  --records candidates/records \
+  --connectors connectors \
+  --reviewer <maintainer-name> \
+  --reviewed-at <ISO-8601-UTC>
+```
+
+Promotion refuses unselected or non-pending drafts, failed runtime acceptance, endpoint drift, prompt placeholders, incomplete card metadata, and descriptions that omit the independent-community/non-official boundary. It writes formal records and descriptors but never commits, pushes, opens a PR, or merges.
 
 The probe resolves only public DNS addresses, pins the HTTPS connection to an audited address, refuses redirects, never sends authorization headers, caps response bytes and time, and never executes stdio packages. A single failed probe only defers a new candidate for investigation; it never modifies or removes an existing connector.
 

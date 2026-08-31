@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "openstreetmap-geospatial-data",
+  "name": "OpenStreetMap 全球地理数据",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🗺️",
+  "category": "调研分析",
+  "summary": "地点搜索 / 反向地理编码 / POI / Overpass 空间查询",
+  "description": "连接 OpenStreetMap 公共数据服务，执行地点搜索、反向地理编码、OSM 对象查询，以及按坐标、半径或边界框检索 POI 和地图要素。结果应保留 OSM 对象 ID、坐标和数据署名，并遵守 ODbL、Nominatim 与 Overpass 公共实例使用政策；不提供路线规划。本连接器由 cyanheads 独立社区维护，并非 OpenStreetMap Foundation 官方产品。",
+  "tags": [
+    "OpenStreetMap",
+    "OSM",
+    "地理编码",
+    "POI",
+    "Overpass",
+    "地图数据",
+    "空间查询"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/openstreetmap-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788155234866,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "openstreetmap-geospatial-data",
+      "url": "https://openstreetmap.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "反向解析天安门坐标",
+      "text": "反向解析坐标 39.9042, 116.4074，返回地点名称、行政层级、OSM 对象类型和数据署名。",
+      "server": "main"
+    },
+    {
+      "title": "查找人民广场附近医院",
+      "text": "查找上海人民广场 1 公里内的医院，按距离列出名称、坐标和 OSM 对象 ID，最多返回 20 条。",
+      "server": "main"
+    }
+  ]
+}

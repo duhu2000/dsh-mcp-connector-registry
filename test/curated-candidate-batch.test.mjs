@@ -3,6 +3,19 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { normalizeOfficialServer, scoreCandidate } from '../scripts/discovery/candidate-model.mjs';
 import { prepareCuratedCandidate, renderBatchSummary } from '../scripts/prepare-curated-candidate-batch.mjs';
+import { buildConnectorDescriptor } from '../scripts/promote-curated-candidate-batch.mjs';
+
+const BATCH_TWO_IDS = [
+  'bls-us-labour-statistics',
+  'eur-lex-eu-law',
+  'faostat-food-agriculture',
+  'imf-macroeconomic-statistics',
+  'noaa-climate-data',
+  'nws-us-weather',
+  'oecd-public-statistics',
+  'openstreetmap-geospatial-data',
+  'uniprot-protein-data',
+];
 
 async function fixtureCandidate() {
   const fixture = JSON.parse(await readFile(new URL('./fixtures/official-registry.json', import.meta.url), 'utf8'));
@@ -73,4 +86,31 @@ test('curated batch summary requires two ready-to-use prompts', async () => {
   assert.match(renderBatchSummary(manifest, [candidate]), /示例市场数据/);
   assert.match(renderBatchSummary(manifest, [candidate]), /查询示例市场的最新公开指标/);
   assert.throws(() => renderBatchSummary({ ...manifest, candidates: [{ ...item, starterPromptsZh: ['only one'] }] }, [candidate]), /exactly two/);
+});
+
+test('approved batch two records match ready-to-use Connector cards', async () => {
+  for (const id of BATCH_TWO_IDS) {
+    const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
+    const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
+    assert.equal(record.review.decision, 'approved');
+    assert.equal(record.review.reviewedBy, 'DuHu');
+    assert.equal(record.runtimeAcceptance.status, 'pass');
+    assert.equal(descriptor.id, id);
+    assert.equal(descriptor.auth.mode, 'none');
+    assert.equal(descriptor.prompts.length, 2);
+    assert.equal('promptVariables' in descriptor, false);
+    assert.equal(descriptor.prompts.some((prompt) => /\{\{[^}]+\}\}/.test(prompt.text)), false);
+    assert.match(descriptor.description, /独立社区/);
+    assert.match(descriptor.description, /(?:并非|非).{0,40}官方/);
+  }
+});
+
+test('Connector generation refuses a placeholder prompt', async () => {
+  const record = JSON.parse(await readFile(new URL('../candidates/records/oecd-public-statistics.json', import.meta.url), 'utf8'));
+  const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-2.manifest.json', import.meta.url), 'utf8'));
+  const item = manifest.candidates.find((candidate) => candidate.id === record.id);
+  assert.throws(() => buildConnectorDescriptor(record, {
+    ...item,
+    starterPromptsZh: ['查询 {{researchQuestion}}', item.starterPromptsZh[1]],
+  }), /without template placeholders/);
 });

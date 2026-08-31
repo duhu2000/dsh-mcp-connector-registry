@@ -3,11 +3,23 @@
   "generatedAt": "2026-08-31T05:52:00.000Z",
   "sourceSnapshot": "2026-08-31T05:39:33.291Z",
   "repositoryBaseUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry",
+  "approval": {
+    "decision": "approved",
+    "reviewedAt": "2026-08-31T06:44:43Z",
+    "reviewedBy": "DuHu",
+    "count": 9
+  },
   "candidates": [
     {
       "registryName": "io.github.cyanheads/oecd-mcp-server",
       "id": "oecd-public-statistics",
       "proposedTitleZh": "OECD 全球公共统计",
+      "vendorZh": "cyanheads（独立社区项目）",
+      "icon": "📊",
+      "cardSummaryZh": "跨国经济 / 教育就业 / 环境社会 / OECD SDMX",
+      "cardDescriptionZh": "连接 OECD Data Explorer 的 SDMX 统计数据，发现并查询 1,500 多个经济、教育、就业、环境和社会数据集，支持跨国家、指标与年份比较，并保留数据流、指标、单位、统计期和缺失值信息。适合宏观研究、国际市场比较和公共政策分析。本连接器由 cyanheads 独立社区维护，并非 OECD 官方产品。",
+      "tagsZh": ["OECD", "公共统计", "宏观经济", "跨国比较", "SDMX", "教育就业", "公共数据"],
+      "promptTitlesZh": ["比较欧洲三国 GDP 增速", "比较三国青年失业率"],
       "starterPromptsZh": [
         "比较德国、法国和意大利 2015—2024 年实际 GDP 增速，并注明 OECD 数据集、单位和统计期。",
         "查找 OECD 中青年失业率相关数据集，比较日本、韩国和加拿大 2018—2024 年趋势，并说明缺失年份。"
@@ -32,6 +44,12 @@
       "registryName": "io.github.cyanheads/imf-mcp-server",
       "id": "imf-macroeconomic-statistics",
       "proposedTitleZh": "IMF 全球宏观经济统计",
+      "vendorZh": "cyanheads（独立社区项目）",
+      "icon": "🏦",
+      "cardSummaryZh": "WEO / 国际收支 / CPI / 汇率 / 190 国宏观数据",
+      "cardDescriptionZh": "连接 IMF SDMX 3.0 数据接口，发现和查询 WEO、国际收支、消费者价格、汇率等宏观经济数据流，覆盖约 190 个国家和地区。支持国家、指标和时间序列比较，并保留数据流、维度、频率、单位及缺失值说明，适合国别研究、宏观分析和跨境市场判断。本连接器由 cyanheads 独立社区维护，并非 IMF 官方产品。",
+      "tagsZh": ["IMF", "宏观经济", "WEO", "国际收支", "CPI", "汇率", "SDMX"],
+      "promptTitlesZh": ["比较三国 CPI 变化", "比较拉美经常账户"],
       "starterPromptsZh": [
         "比较美国、中国和印度 2015—2025 年消费者价格指数变化，列出 IMF 数据流、指标代码和频率。",
         "查询巴西、墨西哥和智利 2018—2025 年经常账户余额占 GDP 比重，并标注估算值与缺失值。"
@@ -56,6 +74,12 @@
       "registryName": "io.github.cyanheads/faostat-mcp-server",
       "id": "faostat-food-agriculture",
       "proposedTitleZh": "FAOSTAT 全球粮农统计",
+      "vendorZh": "cyanheads（独立社区项目）",
+      "icon": "🌾",
+      "cardSummaryZh": "农产品产量 / 单产贸易 / 食品农业 / FAOSTAT",
+      "cardDescriptionZh": "通过本地数据镜像查询联合国粮农组织 FAOSTAT 的全球食品与农业统计，覆盖作物、畜牧、贸易、投入、价格和农业排放等领域。支持解析国家、商品和指标代码，按年份比较并说明单位、数据状态和缺失项；使用前应关注镜像更新时间。适合农业市场、粮食安全和供应链研究。本连接器由 cyanheads 独立社区维护，并非 FAO 官方产品。",
+      "tagsZh": ["FAO", "FAOSTAT", "农业", "粮食安全", "农产品", "贸易", "公共数据"],
+      "promptTitlesZh": ["比较三国大豆产量", "比较东南亚棕榈油出口"],
       "starterPromptsZh": [
         "比较中国、巴西和美国 2010—2023 年大豆产量与单产变化，注明 FAOSTAT 领域、单位和数据状态。",
         "查询印度尼西亚、马来西亚和泰国 2015—2023 年棕榈油出口量，列出国家、年份、数值和缺失项。"
@@ -80,6 +104,12 @@
       "registryName": "io.github.cyanheads/bls-labor-mcp-server",
       "id": "bls-us-labour-statistics",
       "proposedTitleZh": "BLS 美国劳工统计",
+      "vendorZh": "cyanheads（独立社区项目）",
+      "icon": "🇺🇸",
+      "cardSummaryZh": "CPI / 就业失业 / 工资工时 / JOLTS",
+      "cardDescriptionZh": "连接美国劳工统计局公开数据接口，查询 CPI、就业、失业、工资、工时、生产率和 JOLTS 职位空缺等时间序列。支持先检索并核对 BLS Series ID，再获取最新值或历史趋势；结果应保留调查项目、单位、年份和发布日期。公开托管端点免密，自托管注册 Key 仅用于提高上游配额。本连接器由 cyanheads 独立社区维护，并非 BLS 官方产品。",
+      "tagsZh": ["BLS", "美国", "劳工统计", "CPI", "就业", "工资", "JOLTS"],
+      "promptTitlesZh": ["查询美国 CPI-U 变化", "比较失业率与职位空缺率"],
       "starterPromptsZh": [
         "查询美国 CPI-U 全部项目指数 2015—2025 年年度变化，并列出 BLS 系列 ID、单位和最新发布日期。",
         "比较美国 2020—2025 年失业率与职位空缺率趋势，先确认对应 BLS 系列，再说明不可直接比较的口径差异。"
@@ -104,6 +134,12 @@
       "registryName": "io.github.cyanheads/noaa-climate-mcp-server",
       "id": "noaa-climate-data",
       "proposedTitleZh": "NOAA 历史气候与灾害数据",
+      "vendorZh": "cyanheads（独立社区项目）",
+      "icon": "🌦️",
+      "cardSummaryZh": "气候站点 / 历史观测 / 风暴事件 / 灾害损失",
+      "cardDescriptionZh": "连接 NOAA/NCEI 气候数据，查询 CDO 数据集、指标、地区、气象站和历史观测，并检索风暴事件及十亿美元天气灾害。结果应说明数据集、站点、时间范围、单位、未报告值和数据限制；公开托管端点无需用户令牌，自托管 CDO 查询需配置 NOAA Token。适合气候风险、选址和灾害研究。本连接器由 cyanheads 独立社区维护，并非 NOAA 官方产品。",
+      "tagsZh": ["NOAA", "NCEI", "气候", "历史天气", "风暴事件", "灾害损失", "地理数据"],
+      "promptTitlesZh": ["了解 NOAA 气候数据集", "查询华盛顿州风暴事件"],
       "starterPromptsZh": [
         "列出 NOAA CDO 可用的主要历史气候数据集，说明时间覆盖、常见温度和降水指标以及查询限制。",
         "查询 2020 年美国华盛顿州的风暴事件类型、伤亡和财产损失，注明 NCEI 数据来源与未报告值。"
@@ -128,6 +164,12 @@
       "registryName": "io.github.cyanheads/uniprot-mcp-server",
       "id": "uniprot-protein-data",
       "proposedTitleZh": "UniProt 蛋白质数据",
+      "vendorZh": "cyanheads（独立社区项目）",
+      "icon": "🧬",
+      "cardSummaryZh": "蛋白检索 / 审校条目 / ID 映射 / 序列与蛋白组",
+      "cardDescriptionZh": "连接 UniProt REST 数据接口，检索 UniProtKB 蛋白，获取审校条目、功能、基因、物种、亚细胞定位和序列，并支持 ID 映射、蛋白组和分类信息查询。结果应保留 accession、审校状态和证据边界，适合生命科学文献准备、生物信息检索和靶点初筛；不用于医疗诊断。本连接器由 cyanheads 独立社区维护，并非 UniProt 官方产品。",
+      "tagsZh": ["UniProt", "蛋白质", "生物信息", "序列", "基因", "生命科学", "科研数据"],
+      "promptTitlesZh": ["查看血红蛋白条目", "检索 BRCA1 相关蛋白"],
       "starterPromptsZh": [
         "获取 UniProt 条目 P69905，汇总蛋白名称、基因、物种、功能、亚细胞定位和审校状态，并保留 accession。",
         "检索人类中与 BRCA1 相互作用相关的已审校蛋白，返回 accession、蛋白名称和证据摘要。"
@@ -152,6 +194,12 @@
       "registryName": "io.github.cyanheads/eur-lex-mcp-server",
       "id": "eur-lex-eu-law",
       "proposedTitleZh": "EUR-Lex 欧盟法律开放数据",
+      "vendorZh": "cyanheads（独立社区项目）",
+      "icon": "🇪🇺",
+      "cardSummaryZh": "欧盟立法 / CJEU 判例 / 条约 / CELEX 与 EuroVoc",
+      "cardDescriptionZh": "连接 EUR-Lex 与 CELLAR 开放数据，检索欧盟法规、指令、决定、条约、提案和 CJEU 判例，按 CELEX 获取文档并查看修订、引用及 EuroVoc 主题关系。结果应区分文种、语言、是否现行和版本时点，仅用于研究和信息检索，不替代官方文本核验或法律意见。本连接器由 cyanheads 独立社区维护，并非欧盟机构官方产品。",
+      "tagsZh": ["EUR-Lex", "欧盟法律", "CJEU", "CELEX", "判例", "法规", "法律研究"],
+      "promptTitlesZh": ["检索人工智能相关法规", "追踪人工智能法案关系"],
       "starterPromptsZh": [
         "检索标题包含 artificial intelligence 的欧盟法规，返回最新 10 条的 CELEX、日期、文种和是否现行。",
         "查询《人工智能法案》相关文件及其修订、引用和被引用关系，区分正式法案、提案与判例。"
@@ -176,6 +224,12 @@
       "registryName": "io.github.cyanheads/openstreetmap-mcp-server",
       "id": "openstreetmap-geospatial-data",
       "proposedTitleZh": "OpenStreetMap 全球地理数据",
+      "vendorZh": "cyanheads（独立社区项目）",
+      "icon": "🗺️",
+      "cardSummaryZh": "地点搜索 / 反向地理编码 / POI / Overpass 空间查询",
+      "cardDescriptionZh": "连接 OpenStreetMap 公共数据服务，执行地点搜索、反向地理编码、OSM 对象查询，以及按坐标、半径或边界框检索 POI 和地图要素。结果应保留 OSM 对象 ID、坐标和数据署名，并遵守 ODbL、Nominatim 与 Overpass 公共实例使用政策；不提供路线规划。本连接器由 cyanheads 独立社区维护，并非 OpenStreetMap Foundation 官方产品。",
+      "tagsZh": ["OpenStreetMap", "OSM", "地理编码", "POI", "Overpass", "地图数据", "空间查询"],
+      "promptTitlesZh": ["反向解析天安门坐标", "查找人民广场附近医院"],
       "starterPromptsZh": [
         "反向解析坐标 39.9042, 116.4074，返回地点名称、行政层级、OSM 对象类型和数据署名。",
         "查找上海人民广场 1 公里内的医院，按距离列出名称、坐标和 OSM 对象 ID，最多返回 20 条。"
@@ -200,6 +254,12 @@
       "registryName": "io.github.cyanheads/nws-weather-mcp-server",
       "id": "nws-us-weather",
       "proposedTitleZh": "NWS 美国实时天气",
+      "vendorZh": "cyanheads（独立社区项目）",
+      "icon": "⛈️",
+      "cardSummaryZh": "美国天气预报 / 实时警报 / 观测站 / 预报讨论",
+      "cardDescriptionZh": "连接美国国家气象局 NWS 公共 API，查询美国本土、阿拉斯加、夏威夷及部分属地的未来天气预报、当前观测、气象站、实时警报和预报员讨论。结果应保留更新时间、当地时区、警报有效期和覆盖区域；重大天气安全决策仍应以 NWS 官方渠道为准。本连接器由 cyanheads 独立社区维护，并非 NWS 官方产品。",
+      "tagsZh": ["NWS", "美国天气", "天气预报", "气象警报", "观测站", "实时数据", "公共数据"],
+      "promptTitlesZh": ["查询西雅图七天天气", "查询加州严重天气警报"],
       "starterPromptsZh": [
         "查询西雅图坐标 47.6062, -122.3321 的未来 7 天天气预报，并列出当地时区、温度、风向和降水描述。",
         "查询加利福尼亚州当前生效的 Severe 或 Extreme 天气警报，返回事件、紧急程度、有效期和受影响区域。"
