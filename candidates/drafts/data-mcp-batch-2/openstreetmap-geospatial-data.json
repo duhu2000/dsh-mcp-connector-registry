@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "id": "openstreetmap-geospatial-data",
+  "registryName": "io.github.cyanheads/openstreetmap-mcp-server",
+  "title": "openstreetmap-mcp-server",
+  "description": "Geocode, reverse geocode, and run Overpass spatial queries on OpenStreetMap data.",
+  "version": "0.4.2",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "geospatial",
+      "public"
+    ],
+    "matchedKeywords": [
+      "map data"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Fopenstreetmap-mcp-server/versions/0.4.2",
+    "status": "active",
+    "publishedAt": "2026-08-25T07:32:31.261873Z",
+    "updatedAt": "2026-08-25T07:32:31.261873Z",
+    "retrievedAt": "2026-08-31T05:39:33.291Z"
+  },
+  "officialLinks": {
+    "websiteUrl": null,
+    "repository": {
+      "url": "https://github.com/cyanheads/openstreetmap-mcp-server",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/openstreetmap-mcp-server",
+        "version": "0.4.2"
+      }
+    },
+    {
+      "kind": "package",
+      "type": "streamable-http",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/openstreetmap-mcp-server",
+        "version": "0.4.2"
+      }
+    },
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://openstreetmap.caseyjhand.com/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "公开托管端点及其公共 Nominatim/Overpass 查询不要求用户 API Key；反向地理编码的无凭据预检已通过。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "Apache-2.0",
+    "evidenceUrl": "https://github.com/cyanheads/openstreetmap-mcp-server/blob/main/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-08-25T07:32:31.261873Z",
+    "ageDays": 5,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-08-31T05:47:14.866Z",
+    "targetUrl": "https://openstreetmap.caseyjhand.com/mcp",
+    "httpStatus": 200,
+    "reason": "MCP initialize returned a JSON-RPC or event-stream response."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 94,
+    "band": "selected",
+    "dimensions": {
+      "authority": 20,
+      "accessibility": 25,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 4
+    },
+    "reasons": [
+      "authority 20/25: Official Registry plus publisher links and namespace evidence",
+      "accessibility 25/25: 1 remote and 2 package transport(s); auth none",
+      "maintenance/security 20/20: status active; registry age 5 day(s); license declared",
+      "runtime 15/15: public probe pass",
+      "market gap 10/10: domains geospatial, public; dedupe none",
+      "documentation 4/5: publisher-provided description and links"
+    ],
+    "gates": [
+      "Human source and service-terms review is still required before a descriptor PR."
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "openstreetmap-geospatial-data",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "自动证据补全和脱敏运行预检已通过；仍待真实维护者复核社区项目身份、ODbL 署名、Nominatim/Overpass 使用政策与长期运维后批准。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-08-31T05:50:18.411Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-2/openstreetmap-geospatial-data.md",
+    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 openstreetmap_reverse_geocode；未保存原始响应、会话标识或凭据。人工来源批准仍为待办。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Fopenstreetmap-mcp-server/versions/0.4.2",
+      "collectedAt": "2026-08-31T05:39:33.291Z",
+      "summary": "Official Registry status active; version 0.4.2."
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/cyanheads/openstreetmap-mcp-server",
+      "collectedAt": "2026-08-31T05:39:33.291Z",
+      "summary": "社区维护仓库记录 6 个只读工具，支持 OpenStreetMap 地理编码、反向地理编码和 Overpass 空间查询。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://www.openstreetmap.org/copyright",
+      "collectedAt": "2026-08-31T05:52:00.000Z",
+      "summary": "OpenStreetMap 版权与许可页说明上游 ODbL 数据和署名要求；公共实例使用政策、限流及批量查询边界仍需复核。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/cyanheads/openstreetmap-mcp-server/blob/main/LICENSE",
+      "collectedAt": "2026-08-31T05:52:00.000Z",
+      "summary": "io.github.cyanheads/openstreetmap-mcp-server 源代码声明 Apache-2.0；上游数据授权、署名与使用条款仍需在人工批准时单独复核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://openstreetmap.caseyjhand.com/mcp",
+      "collectedAt": "2026-08-31T05:47:14.866Z",
+      "summary": "公开无用户凭据的 MCP initialize 探测通过，HTTP 200。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-2/openstreetmap-geospatial-data.md",
+      "collectedAt": "2026-08-31T05:50:18.411Z",
+      "summary": "自动脱敏预检通过 openstreetmap_reverse_geocode 只读调用；原始响应正文未落盘。"
+    }
+  ]
+}
