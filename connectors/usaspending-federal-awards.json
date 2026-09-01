@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "usaspending-federal-awards",
+  "name": "USAspending 美国联邦支出",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "💵",
+  "category": "调研分析",
+  "summary": "联邦合同 / 拨款贷款 / 受款方 / 支出分析",
+  "description": "连接 USAspending.gov 官方公开接口，检索美国联邦合同、拨款、直接付款和贷款等 award，查询机构、受款方、联邦账户、地域和时间趋势。结果应保留 award ID、金额口径、行动日期、财政年度和筛选条件，不把 award 金额等同于实际现金支付。本连接器由 cyanheads 独立社区维护，并非 USAspending.gov 官方产品。",
+  "tags": [
+    "USAspending",
+    "美国联邦支出",
+    "政府合同",
+    "拨款",
+    "受款方",
+    "公共财政"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/usaspending-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788269920772,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "usaspending-federal-awards",
+      "url": "https://usaspending.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "分析联邦 AI 合同",
+      "text": "查询 2024 财年美国联邦政府包含 artificial intelligence 的合同 award，按授予机构和受款方汇总金额，列出 award ID、行动日期、金额口径和筛选条件。",
+      "server": "main"
+    },
+    {
+      "title": "比较灾害援助支出",
+      "text": "比较 FEMA 在 2021—2025 财年的灾害相关支出，按州和受款方汇总，并区分 award 金额、obligation 与实际支付口径。",
+      "server": "main"
+    }
+  ]
+}

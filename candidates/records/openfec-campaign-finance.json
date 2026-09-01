@@ -109,23 +109,21 @@
       "market gap 10/10: domains finance, public, research; dedupe none",
       "documentation 4/5: publisher-provided description and links"
     ],
-    "gates": [
-      "Human source and service-terms review is still required before a descriptor PR."
-    ]
+    "gates": []
   },
   "review": {
-    "decision": "pending",
+    "decision": "approved",
     "proposedConnectorId": "openfec-campaign-finance",
-    "reviewedAt": null,
-    "reviewedBy": null,
-    "notes": "自动证据补全和脱敏运行预检已通过；仍待真实维护者复核社区项目身份、FEC 个人捐款人信息使用限制、法律边界与长期运维后批准。"
+    "reviewedAt": "2026-09-01T14:07:05Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已逐项复核 Official Registry 身份、社区独立维护边界、公开端点、鉴权、服务端许可证、上游数据条款提示和脱敏运行报告，批准迁入正式记录并生成 Connector 卡片。"
   },
   "runtimeAcceptance": {
     "status": "pass",
     "checkedAt": "2026-09-01T13:38:41.692Z",
     "reviewedBy": "codex-preflight",
     "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-3/openfec-campaign-finance.md",
-    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 openfec_lookup_calendar；未保存原始响应、会话标识或凭据。人工来源批准仍为待办。"
+    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 openfec_lookup_calendar；未保存原始响应、会话标识或凭据。维护者 DuHu 已完成来源审核。"
   },
   "evidence": [
     {

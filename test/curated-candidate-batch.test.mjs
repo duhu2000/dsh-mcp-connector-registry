@@ -118,20 +118,30 @@ test('approved batch two records match ready-to-use Connector cards', async () =
   }
 });
 
-test('pending batch three keeps human approval gated and prompts ready to send', async () => {
-  const manifest = JSON.parse(await readFile(new URL('../candidates/drafts/data-mcp-batch-3/manifest.json', import.meta.url), 'utf8'));
+test('approved batch three records match ready-to-use Connector cards', async () => {
+  const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-3.manifest.json', import.meta.url), 'utf8'));
+  assert.equal(manifest.approval.decision, 'approved');
+  assert.equal(manifest.approval.reviewedBy, 'DuHu');
   assert.equal(manifest.candidates.length, BATCH_THREE_IDS.length);
   for (const id of BATCH_THREE_IDS) {
     const item = manifest.candidates.find((candidate) => candidate.id === id);
-    const draft = JSON.parse(await readFile(new URL(`../candidates/drafts/data-mcp-batch-3/${id}.json`, import.meta.url), 'utf8'));
+    const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
+    const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
     assert.ok(item, `${id} is present in the review manifest`);
-    assert.equal(draft.review.decision, 'pending');
-    assert.equal(draft.review.reviewedBy, null);
-    assert.equal(draft.probe.status, 'pass');
-    assert.equal(draft.runtimeAcceptance.status, 'pass');
-    assert.equal(draft.score.band, 'selected');
+    assert.equal(record.review.decision, 'approved');
+    assert.equal(record.review.reviewedBy, 'DuHu');
+    assert.equal(record.probe.status, 'pass');
+    assert.equal(record.runtimeAcceptance.status, 'pass');
+    assert.equal(record.score.band, 'selected');
+    assert.equal(descriptor.id, id);
+    assert.equal(descriptor.auth.mode, 'none');
+    assert.equal(descriptor.prompts.length, 2);
+    assert.equal('promptVariables' in descriptor, false);
     assert.equal(item.starterPromptsZh.length, 2);
     assert.equal(item.starterPromptsZh.some((prompt) => /\{\{|研究问题|请填写/.test(prompt)), false);
+    assert.equal(descriptor.prompts.some((prompt) => /\{\{|研究问题|请填写/.test(prompt.text)), false);
+    assert.match(descriptor.description, /独立社区/);
+    assert.match(descriptor.description, /(?:并非|非).{0,40}官方/);
   }
 });
 
