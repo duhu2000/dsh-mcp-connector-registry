@@ -1389,6 +1389,55 @@
     },
     {
       "schemaVersion": 1,
+      "id": "gbif-global-biodiversity",
+      "name": "GBIF 全球生物多样性",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "🦋",
+      "category": "调研分析",
+      "summary": "物种分类 / 出现记录 / 数据集 / 全球生物多样性",
+      "description": "连接 GBIF 全球生物多样性开放数据，匹配物种学名，检索物种分类、出现记录、数据集和发布机构，并按国家、年份、坐标和记录类型筛选。结果应保留 taxonKey、数据集、许可、发布机构和引用信息；不同数据集可能采用 CC0、CC BY 或 CC BY-NC，使用前需逐项核对。本连接器由 cyanheads 独立社区维护，并非 GBIF 官方产品。",
+      "tags": [
+        "GBIF",
+        "生物多样性",
+        "物种",
+        "生态研究",
+        "地理数据",
+        "开放数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/gbif-biodiversity-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788269920772,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "gbif-global-biodiversity",
+          "url": "https://gbif-biodiversity.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "比较大熊猫出现记录",
+          "text": "匹配大熊猫的 GBIF 标准物种名称，并比较 2010—2025 年中国四川、陕西和甘肃的出现记录数量；注明 taxonKey、记录类型、数据集许可和缺失限制。",
+          "server": "main"
+        },
+        {
+          "title": "查找珊瑚礁数据集",
+          "text": "检索与印度洋珊瑚礁相关的 GBIF 数据集，列出发布机构、时间覆盖、地理范围、记录数量和许可，并给出规范引用方式。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "gitee",
       "name": "Gitee",
       "vendor": "Gitee",
@@ -3028,6 +3077,104 @@
     },
     {
       "schemaVersion": 1,
+      "id": "openalex-research-catalog",
+      "name": "OpenAlex 全球学术研究",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "📚",
+      "category": "调研分析",
+      "summary": "论文 / 作者机构 / 主题趋势 / 引用网络",
+      "description": "连接 OpenAlex 全球开放学术目录，检索论文、作者、机构、主题、来源和出版商，分析年度趋势与引用关系。结果应保留 OpenAlex ID、筛选条件、覆盖年份和引用口径，并区分目录元数据、开放获取状态与论文全文；OpenAlex 数据按 CC0 发布。本连接器由 cyanheads 独立社区维护，并非 OpenAlex 官方产品。",
+      "tags": [
+        "OpenAlex",
+        "学术研究",
+        "论文",
+        "引用分析",
+        "科研机构",
+        "开放数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/openalex-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788269920888,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "openalex-research-catalog",
+          "url": "https://openalex.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "分析生成式 AI 法律研究",
+          "text": "检索 2020—2026 年生成式人工智能与法律服务相关研究，按年份统计论文数和被引次数，列出高影响论文、OpenAlex ID、开放获取状态及检索条件。",
+          "server": "main"
+        },
+        {
+          "title": "比较碳捕集科研产出",
+          "text": "比较中国、美国和欧盟机构 2015—2025 年碳捕集与封存研究产出，列出主要机构、年度论文数、被引次数和主题口径，并说明覆盖限制。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "openfec-campaign-finance",
+      "name": "OpenFEC 美国竞选资金",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "🗳️",
+      "category": "调研分析",
+      "summary": "候选人委员会 / 收支申报 / 独立支出 / 选举日历",
+      "description": "连接美国联邦选举委员会 OpenFEC 公共数据，查询候选人、委员会、申报、捐款、支出、选举和法律文件。结果应保留候选人或委员会 ID、选举周期、报告状态和更新时间；个人捐款人姓名与地址不得用于商业目的或募集捐款，也不能把公开申报直接描述为违法证据。本连接器由 cyanheads 独立社区维护，并非 FEC 官方产品。",
+      "tags": [
+        "OpenFEC",
+        "美国选举",
+        "竞选资金",
+        "候选人",
+        "委员会",
+        "公共数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/openfec-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788269921692,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "openfec-campaign-finance",
+          "url": "https://openfec.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "汇总候选人委员会收支",
+          "text": "汇总 2024 选举周期美国总统候选人主要委员会的收入、支出和期末现金，列出委员会 ID、报告期、修订状态和数据更新时间。",
+          "server": "main"
+        },
+        {
+          "title": "比较委员会独立支出",
+          "text": "比较 2024 选举周期支持或反对两位总统候选人的独立支出，按委员会汇总金额并保留申报来源；不要展示个人捐款人地址，也不要推断违法行为。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "openstreetmap-geospatial-data",
       "name": "OpenStreetMap 全球地理数据",
       "vendor": "cyanheads（独立社区项目）",
@@ -4004,6 +4151,55 @@
     },
     {
       "schemaVersion": 1,
+      "id": "sec-edgar-company-filings",
+      "name": "SEC EDGAR 美国公司披露",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "🏢",
+      "category": "调研分析",
+      "summary": "上市公司申报 / XBRL 财务 / 重大事件 / 持股披露",
+      "description": "连接美国证券交易委员会 EDGAR 公开数据，检索公司与申报文件，查询 XBRL 财务事实、重大事件、内部人交易、机构持仓和受益所有权披露。结果应保留 CIK、accession number、表单类型、申报日期、taxonomy、单位和报告期，并遵守 SEC 公平访问与频率限制；申报数据不等同于审计结论或投资建议。本连接器由 cyanheads 独立社区维护，并非 SEC 官方产品。",
+      "tags": [
+        "SEC",
+        "EDGAR",
+        "上市公司",
+        "公司披露",
+        "XBRL",
+        "财务研究"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/secedgar-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788270004857,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "sec-edgar-company-filings",
+          "url": "https://secedgar.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "比较科技公司年度财务",
+          "text": "比较 Apple、Microsoft 和 Alphabet 最近四个完整财年的收入、净利润与经营现金流，列出 CIK、XBRL concept、单位、报告期和对应 10-K accession number。",
+          "server": "main"
+        },
+        {
+          "title": "追踪公司重大事件",
+          "text": "查询 Tesla 2025 年以来的 8-K 重大事件申报，按日期列出事项摘要、accession number 和原始文件链接，并区分公司披露与分析判断。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "seedance",
       "name": "Seedance 视频生成（AceDataCloud）",
       "vendor": "AceDataCloud 社区网关",
@@ -4731,6 +4927,104 @@
         {
           "title": "检索 BRCA1 相关蛋白",
           "text": "检索人类中与 BRCA1 相互作用相关的已审校蛋白，返回 accession、蛋白名称和证据摘要。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "us-treasury-fiscaldata",
+      "name": "美国财政部 FiscalData",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "🏛️",
+      "category": "调研分析",
+      "summary": "美国国债 / 利率汇率 / 财政收支 / 官方财政数据",
+      "description": "连接美国财政部 FiscalData 开放接口，发现并查询国债、利率、汇率、收入、支出和其他财政数据集，支持字段筛选、排序和时间序列分析。结果应保留数据集、字段定义、单位、记录日期和更新时间，并区分财政年度与自然年度。本连接器由 cyanheads 独立社区维护，并非美国财政部官方产品。",
+      "tags": [
+        "美国财政部",
+        "FiscalData",
+        "国债",
+        "财政收支",
+        "利率",
+        "开放数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/treasury-fiscaldata-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788269921743,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "us-treasury-fiscaldata",
+          "url": "https://treasury-fiscaldata.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "分析美国国债变化",
+          "text": "查询美国 2015—2025 年每年末未偿公共债务总额，计算年度增速，并注明 FiscalData 数据集、字段、单位、记录日期和更新时间。",
+          "server": "main"
+        },
+        {
+          "title": "比较联邦收支缺口",
+          "text": "比较美国 2020—2025 财年联邦收入、支出与差额，列出数值、单位和来源字段，并说明财政年度口径与数据修订限制。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "usaspending-federal-awards",
+      "name": "USAspending 美国联邦支出",
+      "vendor": "cyanheads（独立社区项目）",
+      "icon": "💵",
+      "category": "调研分析",
+      "summary": "联邦合同 / 拨款贷款 / 受款方 / 支出分析",
+      "description": "连接 USAspending.gov 官方公开接口，检索美国联邦合同、拨款、直接付款和贷款等 award，查询机构、受款方、联邦账户、地域和时间趋势。结果应保留 award ID、金额口径、行动日期、财政年度和筛选条件，不把 award 金额等同于实际现金支付。本连接器由 cyanheads 独立社区维护，并非 USAspending.gov 官方产品。",
+      "tags": [
+        "USAspending",
+        "美国联邦支出",
+        "政府合同",
+        "拨款",
+        "受款方",
+        "公共财政"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/cyanheads/usaspending-mcp-server",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788269920772,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "usaspending-federal-awards",
+          "url": "https://usaspending.caseyjhand.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "分析联邦 AI 合同",
+          "text": "查询 2024 财年美国联邦政府包含 artificial intelligence 的合同 award，按授予机构和受款方汇总金额，列出 award ID、行动日期、金额口径和筛选条件。",
+          "server": "main"
+        },
+        {
+          "title": "比较灾害援助支出",
+          "text": "比较 FEMA 在 2021—2025 财年的灾害相关支出，按州和受款方汇总，并区分 award 金额、obligation 与实际支付口径。",
           "server": "main"
         }
       ]
