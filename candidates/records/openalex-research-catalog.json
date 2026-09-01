@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "id": "openalex-research-catalog",
+  "registryName": "io.github.cyanheads/openalex-mcp-server",
+  "title": "openalex-mcp-server",
+  "description": "Access the OpenAlex academic research catalog — 270M+ publications.",
+  "version": "0.7.9",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "research"
+    ],
+    "matchedKeywords": [
+      "research"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Fopenalex-mcp-server/versions/0.7.9",
+    "status": "active",
+    "publishedAt": "2026-08-22T13:55:08.969898Z",
+    "updatedAt": "2026-08-22T13:55:08.969898Z",
+    "retrievedAt": "2026-09-01T08:53:58.917Z"
+  },
+  "officialLinks": {
+    "websiteUrl": null,
+    "repository": {
+      "url": "https://github.com/cyanheads/openalex-mcp-server",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/openalex-mcp-server",
+        "version": "0.7.9"
+      }
+    },
+    {
+      "kind": "package",
+      "type": "streamable-http",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/openalex-mcp-server",
+        "version": "0.7.9"
+      }
+    },
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://openalex.caseyjhand.com/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "Official Registry 提供公开托管端点且未声明凭据请求头；无用户凭据的 initialize、tools/list 与 openalex_resolve_name 只读调用均已通过。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "Apache-2.0",
+    "evidenceUrl": "https://github.com/cyanheads/openalex-mcp-server/blob/main/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-08-22T13:55:08.969898Z",
+    "ageDays": 9,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-09-01T13:38:40.888Z",
+    "targetUrl": "https://openalex.caseyjhand.com/mcp",
+    "httpStatus": 200,
+    "reason": "MCP initialize returned a JSON-RPC or event-stream response."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 93,
+    "band": "selected",
+    "dimensions": {
+      "authority": 20,
+      "accessibility": 25,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 9,
+      "documentation": 4
+    },
+    "reasons": [
+      "authority 20/25: Official Registry plus publisher links and namespace evidence",
+      "accessibility 25/25: 1 remote and 2 package transport(s); auth none",
+      "maintenance/security 20/20: status active; registry age 9 day(s); license declared",
+      "runtime 15/15: public probe pass",
+      "market gap 9/10: domains research; dedupe none",
+      "documentation 4/5: publisher-provided description and links"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "openalex-research-catalog",
+    "reviewedAt": "2026-09-01T14:07:05Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已逐项复核 Official Registry 身份、社区独立维护边界、公开端点、鉴权、服务端许可证、上游数据条款提示和脱敏运行报告，批准迁入正式记录并生成 Connector 卡片。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-09-01T13:38:40.888Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-3/openalex-research-catalog.md",
+    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 openalex_resolve_name；未保存原始响应、会话标识或凭据。维护者 DuHu 已完成来源审核。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Fopenalex-mcp-server/versions/0.7.9",
+      "collectedAt": "2026-09-01T08:53:58.917Z",
+      "summary": "Official Registry status active; version 0.7.9."
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/cyanheads/openalex-mcp-server",
+      "collectedAt": "2026-09-01T08:53:58.917Z",
+      "summary": "社区维护仓库提供 5 个显式只读工具和公开托管端点，可解析学术实体、检索目录、分析趋势与引用网络。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://help.openalex.org/access/pricing/",
+      "collectedAt": "2026-09-01T13:42:53Z",
+      "summary": "OpenAlex 官方说明将其数据作为公共产品并以 CC0 发布；研究结论仍需披露检索筛选、覆盖差异和引用口径。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/cyanheads/openalex-mcp-server/blob/main/LICENSE",
+      "collectedAt": "2026-09-01T13:42:53Z",
+      "summary": "io.github.cyanheads/openalex-mcp-server 源代码声明 Apache-2.0；上游数据授权、署名与使用条款仍需在人工批准时单独复核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://openalex.caseyjhand.com/mcp",
+      "collectedAt": "2026-09-01T13:38:40.888Z",
+      "summary": "公开无用户凭据的 MCP initialize 探测通过，HTTP 200。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-3/openalex-research-catalog.md",
+      "collectedAt": "2026-09-01T13:38:40.888Z",
+      "summary": "自动脱敏预检通过 openalex_resolve_name 只读调用；原始响应正文未落盘。"
+    }
+  ]
+}

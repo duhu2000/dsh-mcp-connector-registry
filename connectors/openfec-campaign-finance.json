@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "openfec-campaign-finance",
+  "name": "OpenFEC 美国竞选资金",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🗳️",
+  "category": "调研分析",
+  "summary": "候选人委员会 / 收支申报 / 独立支出 / 选举日历",
+  "description": "连接美国联邦选举委员会 OpenFEC 公共数据，查询候选人、委员会、申报、捐款、支出、选举和法律文件。结果应保留候选人或委员会 ID、选举周期、报告状态和更新时间；个人捐款人姓名与地址不得用于商业目的或募集捐款，也不能把公开申报直接描述为违法证据。本连接器由 cyanheads 独立社区维护，并非 FEC 官方产品。",
+  "tags": [
+    "OpenFEC",
+    "美国选举",
+    "竞选资金",
+    "候选人",
+    "委员会",
+    "公共数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/openfec-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788269921692,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "openfec-campaign-finance",
+      "url": "https://openfec.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "汇总候选人委员会收支",
+      "text": "汇总 2024 选举周期美国总统候选人主要委员会的收入、支出和期末现金，列出委员会 ID、报告期、修订状态和数据更新时间。",
+      "server": "main"
+    },
+    {
+      "title": "比较委员会独立支出",
+      "text": "比较 2024 选举周期支持或反对两位总统候选人的独立支出，按委员会汇总金额并保留申报来源；不要展示个人捐款人地址，也不要推断违法行为。",
+      "server": "main"
+    }
+  ]
+}

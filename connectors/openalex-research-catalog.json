@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "openalex-research-catalog",
+  "name": "OpenAlex 全球学术研究",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "📚",
+  "category": "调研分析",
+  "summary": "论文 / 作者机构 / 主题趋势 / 引用网络",
+  "description": "连接 OpenAlex 全球开放学术目录，检索论文、作者、机构、主题、来源和出版商，分析年度趋势与引用关系。结果应保留 OpenAlex ID、筛选条件、覆盖年份和引用口径，并区分目录元数据、开放获取状态与论文全文；OpenAlex 数据按 CC0 发布。本连接器由 cyanheads 独立社区维护，并非 OpenAlex 官方产品。",
+  "tags": [
+    "OpenAlex",
+    "学术研究",
+    "论文",
+    "引用分析",
+    "科研机构",
+    "开放数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/openalex-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788269920888,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "openalex-research-catalog",
+      "url": "https://openalex.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "分析生成式 AI 法律研究",
+      "text": "检索 2020—2026 年生成式人工智能与法律服务相关研究，按年份统计论文数和被引次数，列出高影响论文、OpenAlex ID、开放获取状态及检索条件。",
+      "server": "main"
+    },
+    {
+      "title": "比较碳捕集科研产出",
+      "text": "比较中国、美国和欧盟机构 2015—2025 年碳捕集与封存研究产出，列出主要机构、年度论文数、被引次数和主题口径，并说明覆盖限制。",
+      "server": "main"
+    }
+  ]
+}

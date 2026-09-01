@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "gbif-global-biodiversity",
+  "name": "GBIF 全球生物多样性",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🦋",
+  "category": "调研分析",
+  "summary": "物种分类 / 出现记录 / 数据集 / 全球生物多样性",
+  "description": "连接 GBIF 全球生物多样性开放数据，匹配物种学名，检索物种分类、出现记录、数据集和发布机构，并按国家、年份、坐标和记录类型筛选。结果应保留 taxonKey、数据集、许可、发布机构和引用信息；不同数据集可能采用 CC0、CC BY 或 CC BY-NC，使用前需逐项核对。本连接器由 cyanheads 独立社区维护，并非 GBIF 官方产品。",
+  "tags": [
+    "GBIF",
+    "生物多样性",
+    "物种",
+    "生态研究",
+    "地理数据",
+    "开放数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/gbif-biodiversity-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788269920772,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "gbif-global-biodiversity",
+      "url": "https://gbif-biodiversity.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "比较大熊猫出现记录",
+      "text": "匹配大熊猫的 GBIF 标准物种名称，并比较 2010—2025 年中国四川、陕西和甘肃的出现记录数量；注明 taxonKey、记录类型、数据集许可和缺失限制。",
+      "server": "main"
+    },
+    {
+      "title": "查找珊瑚礁数据集",
+      "text": "检索与印度洋珊瑚礁相关的 GBIF 数据集，列出发布机构、时间覆盖、地理范围、记录数量和许可，并给出规范引用方式。",
+      "server": "main"
+    }
+  ]
+}

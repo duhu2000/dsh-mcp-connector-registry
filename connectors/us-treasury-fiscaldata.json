@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "us-treasury-fiscaldata",
+  "name": "美国财政部 FiscalData",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🏛️",
+  "category": "调研分析",
+  "summary": "美国国债 / 利率汇率 / 财政收支 / 官方财政数据",
+  "description": "连接美国财政部 FiscalData 开放接口，发现并查询国债、利率、汇率、收入、支出和其他财政数据集，支持字段筛选、排序和时间序列分析。结果应保留数据集、字段定义、单位、记录日期和更新时间，并区分财政年度与自然年度。本连接器由 cyanheads 独立社区维护，并非美国财政部官方产品。",
+  "tags": [
+    "美国财政部",
+    "FiscalData",
+    "国债",
+    "财政收支",
+    "利率",
+    "开放数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/treasury-fiscaldata-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788269921743,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "us-treasury-fiscaldata",
+      "url": "https://treasury-fiscaldata.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "分析美国国债变化",
+      "text": "查询美国 2015—2025 年每年末未偿公共债务总额，计算年度增速，并注明 FiscalData 数据集、字段、单位、记录日期和更新时间。",
+      "server": "main"
+    },
+    {
+      "title": "比较联邦收支缺口",
+      "text": "比较美国 2020—2025 财年联邦收入、支出与差额，列出数值、单位和来源字段，并说明财政年度口径与数据修订限制。",
+      "server": "main"
+    }
+  ]
+}

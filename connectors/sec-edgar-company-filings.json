@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "sec-edgar-company-filings",
+  "name": "SEC EDGAR 美国公司披露",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🏢",
+  "category": "调研分析",
+  "summary": "上市公司申报 / XBRL 财务 / 重大事件 / 持股披露",
+  "description": "连接美国证券交易委员会 EDGAR 公开数据，检索公司与申报文件，查询 XBRL 财务事实、重大事件、内部人交易、机构持仓和受益所有权披露。结果应保留 CIK、accession number、表单类型、申报日期、taxonomy、单位和报告期，并遵守 SEC 公平访问与频率限制；申报数据不等同于审计结论或投资建议。本连接器由 cyanheads 独立社区维护，并非 SEC 官方产品。",
+  "tags": [
+    "SEC",
+    "EDGAR",
+    "上市公司",
+    "公司披露",
+    "XBRL",
+    "财务研究"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/secedgar-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788270004857,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "sec-edgar-company-filings",
+      "url": "https://secedgar.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "比较科技公司年度财务",
+      "text": "比较 Apple、Microsoft 和 Alphabet 最近四个完整财年的收入、净利润与经营现金流，列出 CIK、XBRL concept、单位、报告期和对应 10-K accession number。",
+      "server": "main"
+    },
+    {
+      "title": "追踪公司重大事件",
+      "text": "查询 Tesla 2025 年以来的 8-K 重大事件申报，按日期列出事项摘要、accession number 和原始文件链接，并区分公司披露与分析判断。",
+      "server": "main"
+    }
+  ]
+}

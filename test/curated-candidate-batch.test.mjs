@@ -17,6 +17,15 @@ const BATCH_TWO_IDS = [
   'uniprot-protein-data',
 ];
 
+const BATCH_THREE_IDS = [
+  'gbif-global-biodiversity',
+  'openalex-research-catalog',
+  'openfec-campaign-finance',
+  'sec-edgar-company-filings',
+  'us-treasury-fiscaldata',
+  'usaspending-federal-awards',
+];
+
 async function fixtureCandidate() {
   const fixture = JSON.parse(await readFile(new URL('./fixtures/official-registry.json', import.meta.url), 'utf8'));
   return scoreCandidate(normalizeOfficialServer(fixture.servers[0], { retrievedAt: '2026-08-31T00:00:00.000Z' }));
@@ -25,6 +34,7 @@ async function fixtureCandidate() {
 function manifestItem() {
   return {
     id: 'example-market-data',
+    vendorZh: 'Example 数据团队',
     endpoint: 'https://data.example.com/mcp',
     domains: ['finance', 'public'],
     authenticationReason: 'Official hosted endpoint passed without user credentials.',
@@ -83,8 +93,11 @@ test('curated batch summary requires two ready-to-use prompts', async () => {
     sourceSnapshot: '2026-08-31T00:00:00.000Z',
     candidates: [item],
   };
-  assert.match(renderBatchSummary(manifest, [candidate]), /示例市场数据/);
-  assert.match(renderBatchSummary(manifest, [candidate]), /查询示例市场的最新公开指标/);
+  const summary = renderBatchSummary(manifest, [candidate]);
+  assert.match(summary, /示例市场数据/);
+  assert.match(summary, /查询示例市场的最新公开指标/);
+  assert.match(summary, /本批 1 个 MCP 涉及 1 个维护主体（Example 数据团队）/);
+  assert.doesNotMatch(summary, /9 个 MCP/);
   assert.throws(() => renderBatchSummary({ ...manifest, candidates: [{ ...item, starterPromptsZh: ['only one'] }] }, [candidate]), /exactly two/);
 });
 
@@ -100,6 +113,33 @@ test('approved batch two records match ready-to-use Connector cards', async () =
     assert.equal(descriptor.prompts.length, 2);
     assert.equal('promptVariables' in descriptor, false);
     assert.equal(descriptor.prompts.some((prompt) => /\{\{[^}]+\}\}/.test(prompt.text)), false);
+    assert.match(descriptor.description, /独立社区/);
+    assert.match(descriptor.description, /(?:并非|非).{0,40}官方/);
+  }
+});
+
+test('approved batch three records match ready-to-use Connector cards', async () => {
+  const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-3.manifest.json', import.meta.url), 'utf8'));
+  assert.equal(manifest.approval.decision, 'approved');
+  assert.equal(manifest.approval.reviewedBy, 'DuHu');
+  assert.equal(manifest.candidates.length, BATCH_THREE_IDS.length);
+  for (const id of BATCH_THREE_IDS) {
+    const item = manifest.candidates.find((candidate) => candidate.id === id);
+    const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
+    const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
+    assert.ok(item, `${id} is present in the review manifest`);
+    assert.equal(record.review.decision, 'approved');
+    assert.equal(record.review.reviewedBy, 'DuHu');
+    assert.equal(record.probe.status, 'pass');
+    assert.equal(record.runtimeAcceptance.status, 'pass');
+    assert.equal(record.score.band, 'selected');
+    assert.equal(descriptor.id, id);
+    assert.equal(descriptor.auth.mode, 'none');
+    assert.equal(descriptor.prompts.length, 2);
+    assert.equal('promptVariables' in descriptor, false);
+    assert.equal(item.starterPromptsZh.length, 2);
+    assert.equal(item.starterPromptsZh.some((prompt) => /\{\{|研究问题|请填写/.test(prompt)), false);
+    assert.equal(descriptor.prompts.some((prompt) => /\{\{|研究问题|请填写/.test(prompt.text)), false);
     assert.match(descriptor.description, /独立社区/);
     assert.match(descriptor.description, /(?:并非|非).{0,40}官方/);
   }
