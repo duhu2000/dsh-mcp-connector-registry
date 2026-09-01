@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "id": "gbif-global-biodiversity",
+  "registryName": "io.github.cyanheads/gbif-biodiversity-mcp-server",
+  "title": "gbif-biodiversity-mcp-server",
+  "description": "Search GBIF species taxonomy, occurrence records, datasets, and publishers.",
+  "version": "0.7.3",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "research",
+      "science"
+    ],
+    "matchedKeywords": [
+      "dataset"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Fgbif-biodiversity-mcp-server/versions/0.7.3",
+    "status": "active",
+    "publishedAt": "2026-08-25T08:14:49.691985Z",
+    "updatedAt": "2026-08-25T08:14:49.691985Z",
+    "retrievedAt": "2026-09-01T08:53:58.917Z"
+  },
+  "officialLinks": {
+    "websiteUrl": null,
+    "repository": {
+      "url": "https://github.com/cyanheads/gbif-biodiversity-mcp-server",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/gbif-biodiversity-mcp-server",
+        "version": "0.7.3"
+      }
+    },
+    {
+      "kind": "package",
+      "type": "streamable-http",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/gbif-biodiversity-mcp-server",
+        "version": "0.7.3"
+      }
+    },
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://gbif-biodiversity.caseyjhand.com/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "Official Registry 提供公开托管端点且未声明凭据请求头；无用户凭据的 initialize、tools/list 与 gbif_match_species 只读调用均已通过。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "Apache-2.0",
+    "evidenceUrl": "https://github.com/cyanheads/gbif-biodiversity-mcp-server/blob/main/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-08-25T08:14:49.691985Z",
+    "ageDays": 7,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-09-01T13:38:40.772Z",
+    "targetUrl": "https://gbif-biodiversity.caseyjhand.com/mcp",
+    "httpStatus": 200,
+    "reason": "MCP initialize returned a JSON-RPC or event-stream response."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 94,
+    "band": "selected",
+    "dimensions": {
+      "authority": 20,
+      "accessibility": 25,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 4
+    },
+    "reasons": [
+      "authority 20/25: Official Registry plus publisher links and namespace evidence",
+      "accessibility 25/25: 1 remote and 2 package transport(s); auth none",
+      "maintenance/security 20/20: status active; registry age 7 day(s); license declared",
+      "runtime 15/15: public probe pass",
+      "market gap 10/10: domains research, science; dedupe none",
+      "documentation 4/5: publisher-provided description and links"
+    ],
+    "gates": [
+      "Human source and service-terms review is still required before a descriptor PR."
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "gbif-global-biodiversity",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "自动证据补全和脱敏运行预检已通过；仍待真实维护者复核社区项目身份、GBIF 数据集分级许可、引用要求与长期运维后批准。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-09-01T13:38:40.772Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-3/gbif-global-biodiversity.md",
+    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 gbif_match_species；未保存原始响应、会话标识或凭据。人工来源批准仍为待办。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Fgbif-biodiversity-mcp-server/versions/0.7.3",
+      "collectedAt": "2026-09-01T08:53:58.917Z",
+      "summary": "Official Registry status active; version 0.7.3."
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/cyanheads/gbif-biodiversity-mcp-server",
+      "collectedAt": "2026-09-01T08:53:58.917Z",
+      "summary": "社区维护仓库提供 13 个显式只读工具和公开托管端点，可查询 GBIF 分类、出现记录、数据集和发布机构。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://www.gbif.org/terms/data-user",
+      "collectedAt": "2026-09-01T13:42:53Z",
+      "summary": "GBIF 数据使用条款要求用户遵守各数据集许可、保留发布者信息并按 GBIF 指引引用；不同数据集的许可边界必须逐项核对。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/cyanheads/gbif-biodiversity-mcp-server/blob/main/LICENSE",
+      "collectedAt": "2026-09-01T13:42:53Z",
+      "summary": "io.github.cyanheads/gbif-biodiversity-mcp-server 源代码声明 Apache-2.0；上游数据授权、署名与使用条款仍需在人工批准时单独复核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://gbif-biodiversity.caseyjhand.com/mcp",
+      "collectedAt": "2026-09-01T13:38:40.772Z",
+      "summary": "公开无用户凭据的 MCP initialize 探测通过，HTTP 200。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-3/gbif-global-biodiversity.md",
+      "collectedAt": "2026-09-01T13:38:40.772Z",
+      "summary": "自动脱敏预检通过 gbif_match_species 只读调用；原始响应正文未落盘。"
+    }
+  ]
+}

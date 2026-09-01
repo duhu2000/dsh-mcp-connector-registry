@@ -103,6 +103,9 @@ export function prepareCuratedCandidate(sourceCandidate, item, { repositoryBaseU
 }
 
 export function renderBatchSummary(manifest, candidates) {
+  const maintainers = [...new Set(manifest.candidates
+    .map((item) => requiredString(item.vendorZh, `${item.id ?? item.registryName} vendorZh`)))]
+    .sort();
   const lines = [
     `# ${manifest.title}`,
     '',
@@ -133,7 +136,7 @@ export function renderBatchSummary(manifest, candidates) {
     '',
     '## 批次风险与后续门槛',
     '',
-    '- 9 个 MCP 均由同一社区维护者 `cyanheads` 发布；虽然数据来自 OECD、IMF、FAO、BLS、NOAA、UniProt、欧盟、OpenStreetMap 和 NWS，仍需评估维护者集中度与长期可用性。',
+    `- 本批 ${candidates.length} 个 MCP 涉及 ${maintainers.length} 个维护主体（${maintainers.join('、')}）；仍需逐项评估维护者集中度、官方或社区身份与长期可用性。`,
     '- Apache-2.0 仅证明 MCP 服务端源代码许可；每个上游数据集的授权、署名、使用政策、频率限制与商用边界必须分别复核。',
     '- 卡片必须明确“社区独立维护、非数据机构官方产品”，不得把 Official MCP Registry 收录误写成数据机构官方背书。',
     '- 维护者完成来源和条款审核后，才能填写 `approved`、迁入 `candidates/records/` 并另行准备 Connector 描述符 PR。',

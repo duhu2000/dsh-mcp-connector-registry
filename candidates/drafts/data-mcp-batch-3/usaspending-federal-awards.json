@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "id": "usaspending-federal-awards",
+  "registryName": "io.github.cyanheads/usaspending-mcp-server",
+  "title": "usaspending-mcp-server",
+  "description": "Access US federal award, recipient, agency, and spending analytics data from USAspending.gov.",
+  "version": "0.4.2",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "business",
+      "finance",
+      "public"
+    ],
+    "matchedKeywords": [
+      "analytics"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Fusaspending-mcp-server/versions/0.4.2",
+    "status": "active",
+    "publishedAt": "2026-08-25T02:39:37.417603Z",
+    "updatedAt": "2026-08-25T02:39:37.417603Z",
+    "retrievedAt": "2026-09-01T08:53:58.917Z"
+  },
+  "officialLinks": {
+    "websiteUrl": null,
+    "repository": {
+      "url": "https://github.com/cyanheads/usaspending-mcp-server",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/usaspending-mcp-server",
+        "version": "0.4.2"
+      }
+    },
+    {
+      "kind": "package",
+      "type": "streamable-http",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/usaspending-mcp-server",
+        "version": "0.4.2"
+      }
+    },
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://usaspending.caseyjhand.com/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "Official Registry 提供公开托管端点且未声明凭据请求头；无用户凭据的 initialize、tools/list 与 usaspending_list_agencies 只读调用均已通过。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "Apache-2.0",
+    "evidenceUrl": "https://github.com/cyanheads/usaspending-mcp-server/blob/main/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-08-25T02:39:37.417603Z",
+    "ageDays": 7,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-09-01T13:38:40.772Z",
+    "targetUrl": "https://usaspending.caseyjhand.com/mcp",
+    "httpStatus": 200,
+    "reason": "MCP initialize returned a JSON-RPC or event-stream response."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 94,
+    "band": "selected",
+    "dimensions": {
+      "authority": 20,
+      "accessibility": 25,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 4
+    },
+    "reasons": [
+      "authority 20/25: Official Registry plus publisher links and namespace evidence",
+      "accessibility 25/25: 1 remote and 2 package transport(s); auth none",
+      "maintenance/security 20/20: status active; registry age 7 day(s); license declared",
+      "runtime 15/15: public probe pass",
+      "market gap 10/10: domains business, finance, public; dedupe none",
+      "documentation 4/5: publisher-provided description and links"
+    ],
+    "gates": [
+      "Human source and service-terms review is still required before a descriptor PR."
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "usaspending-federal-awards",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "自动证据补全和脱敏运行预检已通过；仍待真实维护者复核社区项目身份、USAspending 数据字段口径、引用说明与长期运维后批准。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-09-01T13:38:40.772Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-3/usaspending-federal-awards.md",
+    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 usaspending_list_agencies；未保存原始响应、会话标识或凭据。人工来源批准仍为待办。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Fusaspending-mcp-server/versions/0.4.2",
+      "collectedAt": "2026-09-01T08:53:58.917Z",
+      "summary": "Official Registry status active; version 0.4.2."
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/cyanheads/usaspending-mcp-server",
+      "collectedAt": "2026-09-01T08:53:58.917Z",
+      "summary": "社区维护仓库提供 18 个显式只读工具和公开托管端点，可查询美国联邦 award、受款方、机构、账户和支出分析。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://api.usaspending.gov/",
+      "collectedAt": "2026-09-01T13:42:53Z",
+      "summary": "USAspending API 是美国政府公开联邦支出数据的官方接口；不同金额字段、行动日期和财政年度含义必须在结论中保留。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/cyanheads/usaspending-mcp-server/blob/main/LICENSE",
+      "collectedAt": "2026-09-01T13:42:53Z",
+      "summary": "io.github.cyanheads/usaspending-mcp-server 源代码声明 Apache-2.0；上游数据授权、署名与使用条款仍需在人工批准时单独复核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://usaspending.caseyjhand.com/mcp",
+      "collectedAt": "2026-09-01T13:38:40.772Z",
+      "summary": "公开无用户凭据的 MCP initialize 探测通过，HTTP 200。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-3/usaspending-federal-awards.md",
+      "collectedAt": "2026-09-01T13:38:40.772Z",
+      "summary": "自动脱敏预检通过 usaspending_list_agencies 只读调用；原始响应正文未落盘。"
+    }
+  ]
+}
