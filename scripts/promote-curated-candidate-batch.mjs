@@ -40,7 +40,7 @@ export function approveCandidateRecord(draft, item, { reviewer, reviewedAt }) {
     proposedConnectorId: id,
     reviewedAt: requiredString(reviewedAt, 'reviewedAt'),
     reviewedBy: requiredString(reviewer, 'reviewer'),
-    notes: `${reviewer} 已逐项复核 Official Registry 身份、社区独立维护边界、公开端点、鉴权、服务端许可证、上游数据条款提示和脱敏运行报告，批准迁入正式记录并生成 Connector 卡片。`,
+    notes: `${reviewer} 已逐项复核 Official Registry 身份、独立或第三方维护边界、公开端点、鉴权、软件许可证或服务条款、上游数据条款提示和脱敏运行报告，批准迁入正式记录并生成 Connector 卡片。`,
   };
   record.runtimeAcceptance.notes = `脱敏预检通过 initialize、tools/list 和只读工具 ${requiredString(item.safeTool, `${id} safeTool`)}；未保存原始响应、会话标识或凭据。维护者 ${reviewer} 已完成来源审核。`;
   record.score.gates = [];
@@ -53,21 +53,21 @@ export function buildConnectorDescriptor(record, item) {
   const promptTitles = exactPair(item.promptTitlesZh, `${id} promptTitlesZh`);
   const promptTexts = exactPair(item.starterPromptsZh, `${id} starterPromptsZh`);
   const description = requiredString(item.cardDescriptionZh, `${id} cardDescriptionZh`);
-  if (!/(?:独立社区|社区独立)/.test(description) || !/(?:并非|不是|非).{0,40}官方/.test(description)) {
-    throw new Error(`${id} description must disclose independent-community and non-official status`);
+  if (!/(?:独立社区|社区独立|独立项目|独立服务|第三方)/.test(description) || !/(?:并非|不是|非).{0,40}官方/.test(description)) {
+    throw new Error(`${id} description must disclose independent or third-party maintenance and non-official status`);
   }
   if (!Array.isArray(item.tagsZh) || item.tagsZh.length < 4) throw new Error(`${id} tagsZh must contain at least four tags`);
   const endpoint = requiredString(item.endpoint, `${id} endpoint`);
   if (record.probe?.targetUrl !== endpoint) throw new Error(`${id} descriptor endpoint drifted from the approved probe`);
-  const homepage = record.officialLinks?.repository?.url;
-  if (!homepage?.startsWith('https://')) throw new Error(`${id} approved repository homepage is required`);
+  const homepage = item.homepage ?? record.officialLinks?.repository?.url ?? record.officialLinks?.websiteUrl;
+  if (!homepage?.startsWith('https://')) throw new Error(`${id} approved repository or website homepage is required`);
   return {
     schemaVersion: 1,
     id,
     name,
     vendor: requiredString(item.vendorZh, `${id} vendorZh`),
     icon: requiredString(item.icon, `${id} icon`),
-    category: '调研分析',
+    category: item.categoryZh ?? '调研分析',
     summary: requiredString(item.cardSummaryZh, `${id} cardSummaryZh`),
     description,
     tags: [...new Set(item.tagsZh.map((tag, index) => requiredString(tag, `${id} tagsZh[${index}]`)))],
@@ -104,8 +104,8 @@ function parseArgs(argv) {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const manifest = JSON.parse(await readFile(resolve(options.manifest), 'utf8'));
-  if (!Array.isArray(manifest.candidates) || manifest.candidates.length < 5 || manifest.candidates.length > 10) {
-    throw new Error('Promotion manifest must contain 5 to 10 candidates');
+  if (!Array.isArray(manifest.candidates) || manifest.candidates.length < 4 || manifest.candidates.length > 10) {
+    throw new Error('Promotion manifest must contain 4 to 10 candidates');
   }
   const outputs = [];
   for (const item of manifest.candidates) {

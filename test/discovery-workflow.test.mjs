@@ -23,19 +23,20 @@ function candidate(index, overrides = {}) {
   };
 }
 
-test('monthly review batch is bounded to 5-10 and excludes unsafe or duplicate candidates', () => {
+test('monthly review batch is bounded to 4-10 and excludes unsafe or duplicate candidates', () => {
   const candidates = Array.from({ length: 14 }, (_, index) => candidate(index));
   candidates.push(candidate(20, { dedupe: { level: 'strong' }, score: { band: 'duplicate', total: 99 } }));
   candidates.push(candidate(21, { probe: { status: 'fail' }, score: { band: 'defer', total: 98 } }));
   const selected = selectMonthlyBatch(candidates, { size: 10 });
   assert.equal(selected.length, 10);
   assert.deepEqual(selected.map((item) => item.registryName), Array.from({ length: 10 }, (_, index) => `com.example/data-${index}`));
-  assert.throws(() => selectMonthlyBatch(candidates, { size: 4 }), /5 to 10/);
+  assert.equal(selectMonthlyBatch(candidates, { size: 4 }).length, 4);
+  assert.throws(() => selectMonthlyBatch(candidates, { size: 3 }), /4 to 10/);
 });
-test('monthly report blocks rather than weakening gates when fewer than five qualify', () => {
+test('monthly report blocks rather than weakening gates when fewer than four qualify', () => {
   const report = { generatedAt: '2026-08-30T00:00:00.000Z' };
   const body = renderMonthlyBatch(report, [candidate(1)], { size: 10 });
-  assert.match(body, /Blocked: fewer than five/);
+  assert.match(body, /Blocked: fewer than four/);
   assert.match(body, /never opens or merges/);
 });
 

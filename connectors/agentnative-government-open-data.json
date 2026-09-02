@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "agentnative-government-open-data",
+  "name": "AgentNative 政府公共数据",
+  "vendor": "CaziMedia AgentNative（独立服务）",
+  "icon": "🏛️",
+  "category": "调研分析",
+  "summary": "政府数据目录 / 联邦公报 / 官方来源 / 样例与聚合",
+  "description": "连接 CaziMedia AgentNative 的政府公共数据服务，发现联邦、州和城市层级的官方数据来源与数据集，并查询带来源、更新时间和聚合口径的公开样例；当前可直接体验美国 Federal Register 等数据。免密层提供有限样例，扩大查询、筛选和物化可能收费；请求数据物化、能力开通或付费访问属于外部操作，执行前必须取得用户明确确认。本连接器由 CaziMedia AgentNative 独立服务维护，并非任何政府机构官方产品。",
+  "tags": [
+    "AgentNative",
+    "政府数据",
+    "公共数据",
+    "Federal Register",
+    "数据目录",
+    "官方来源"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://cazimedia.com/agentnative",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788323285118,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "agentnative-government-open-data",
+      "url": "https://agentnative.cazimedia.com/mcp/government-data",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "盘点可用政府数据源",
+      "text": "列出 AgentNative 当前可查询的官方政府数据来源，按联邦、州和城市层级整理覆盖领域、来源机构、更新时间和免费样例限制；不要发起数据物化、能力申请或付费访问。",
+      "server": "main"
+    },
+    {
+      "title": "查询美国联邦公报",
+      "text": "查询最近 30 天美国 Federal Register 的公开记录，按文件类型和发布机构汇总，并列出原始来源、发布日期、摘要覆盖和查询限制；不要发起任何付费或写入操作。",
+      "server": "main"
+    }
+  ]
+}

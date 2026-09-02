@@ -26,6 +26,13 @@ const BATCH_THREE_IDS = [
   'usaspending-federal-awards',
 ];
 
+const BATCH_FOUR_IDS = [
+  'agentnative-government-open-data',
+  'california-proposition-65',
+  'noodle-biomedical-literature',
+  'starwell-world-statistics',
+];
+
 async function fixtureCandidate() {
   const fixture = JSON.parse(await readFile(new URL('./fixtures/official-registry.json', import.meta.url), 'utf8'));
   return scoreCandidate(normalizeOfficialServer(fixture.servers[0], { retrievedAt: '2026-08-31T00:00:00.000Z' }));
@@ -79,6 +86,27 @@ test('curated candidate rejects unpassed evidence and endpoint drift', async () 
     repositoryBaseUrl: 'https://github.com/example/registry',
     generatedAt: '2026-08-31T02:00:00.000Z',
   }), /endpoint must match/);
+});
+
+test('curated candidate supports service terms when no source repository is published', async () => {
+  const source = await fixtureCandidate();
+  source.officialLinks.repository = null;
+  source.officialLinks.websiteUrl = 'https://data.example.com';
+  source.evidence = source.evidence.filter((item) => item.type !== 'official-repository');
+  const item = {
+    ...manifestItem(),
+    licenseStatus: 'not-applicable',
+    softwareLicenseSpdx: null,
+    licenseUrl: 'https://data.example.com/terms',
+    repositorySummary: null,
+  };
+  const candidate = prepareCuratedCandidate(source, item, {
+    repositoryBaseUrl: 'https://github.com/example/registry',
+    generatedAt: '2026-08-31T02:00:00.000Z',
+  });
+  assert.equal(candidate.license.status, 'not-applicable');
+  assert.equal(candidate.license.spdxId, null);
+  assert.equal(candidate.license.evidenceUrl, 'https://data.example.com/terms');
 });
 
 test('curated batch summary requires two ready-to-use prompts', async () => {
@@ -145,6 +173,37 @@ test('approved batch three records match ready-to-use Connector cards', async ()
   }
 });
 
+test('approved batch four records support four-item batches and service terms', async () => {
+  const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-4.manifest.json', import.meta.url), 'utf8'));
+  assert.equal(manifest.approval.decision, 'approved');
+  assert.equal(manifest.approval.reviewedBy, 'DuHu');
+  assert.equal(manifest.candidates.length, 4);
+  for (const id of BATCH_FOUR_IDS) {
+    const item = manifest.candidates.find((candidate) => candidate.id === id);
+    const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
+    const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
+    assert.ok(item, `${id} is present in the review manifest`);
+    assert.equal(record.review.decision, 'approved');
+    assert.equal(record.review.reviewedBy, 'DuHu');
+    assert.equal(record.probe.status, 'pass');
+    assert.equal(record.runtimeAcceptance.status, 'pass');
+    assert.equal(record.score.band, 'selected');
+    assert.equal(descriptor.id, id);
+    assert.equal(descriptor.category, item.categoryZh);
+    assert.equal(descriptor.auth.mode, 'none');
+    assert.equal(descriptor.prompts.length, 2);
+    assert.equal('promptVariables' in descriptor, false);
+    assert.equal(item.starterPromptsZh.some((prompt) => /\{\{|研究问题|请填写/.test(prompt)), false);
+    assert.equal(descriptor.prompts.some((prompt) => /\{\{|研究问题|请填写/.test(prompt.text)), false);
+    assert.match(descriptor.description, /(?:独立社区|社区独立|独立项目|独立服务|第三方)/);
+    assert.match(descriptor.description, /(?:并非|不是|非).{0,40}官方/);
+  }
+  const agentnative = JSON.parse(await readFile(new URL('../candidates/records/agentnative-government-open-data.json', import.meta.url), 'utf8'));
+  assert.equal(agentnative.license.status, 'not-applicable');
+  assert.equal(agentnative.license.spdxId, null);
+  assert.match(agentnative.license.evidenceUrl, /terms/);
+});
+
 test('Connector generation refuses a placeholder prompt', async () => {
   const record = JSON.parse(await readFile(new URL('../candidates/records/oecd-public-statistics.json', import.meta.url), 'utf8'));
   const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-2.manifest.json', import.meta.url), 'utf8'));
@@ -153,4 +212,19 @@ test('Connector generation refuses a placeholder prompt', async () => {
     ...item,
     starterPromptsZh: ['查询 {{researchQuestion}}', item.starterPromptsZh[1]],
   }), /without template placeholders/);
+});
+
+test('Connector generation accepts a reviewed website-only third-party service and category', async () => {
+  const record = JSON.parse(await readFile(new URL('../candidates/records/oecd-public-statistics.json', import.meta.url), 'utf8'));
+  record.officialLinks.repository = null;
+  record.officialLinks.websiteUrl = 'https://data.example.com';
+  const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-2.manifest.json', import.meta.url), 'utf8'));
+  const item = manifest.candidates.find((candidate) => candidate.id === record.id);
+  const descriptor = buildConnectorDescriptor(record, {
+    ...item,
+    categoryZh: '法律合规',
+    cardDescriptionZh: '连接公开数据完成合规研究。本连接器由 Example 独立服务维护，并非数据机构官方产品。',
+  });
+  assert.equal(descriptor.homepage, 'https://data.example.com');
+  assert.equal(descriptor.category, '法律合规');
 });

@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "id": "noodle-biomedical-literature",
+  "registryName": "io.github.helena-bioinformatics/noodle",
+  "title": "Noodle Biomedical Literature Discovery MCP",
+  "description": "Search biomedical papers, inspect publication records, and traverse citation or semantic graphs.",
+  "version": "0.2.1",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "research",
+      "science"
+    ],
+    "matchedKeywords": [
+      "biomedical",
+      "citation",
+      "literature",
+      "paper"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.helena-bioinformatics%2Fnoodle/versions/0.2.1",
+    "status": "active",
+    "publishedAt": "2026-08-30T13:40:10.82743Z",
+    "updatedAt": "2026-08-30T13:40:10.82743Z",
+    "retrievedAt": "2026-09-02T04:28:05.118Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://noodle.helena.bio/",
+    "repository": {
+      "url": "https://github.com/helena-bioinformatics/noodle-mcp",
+      "source": "github",
+      "id": "1350901429",
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://api.helena.bio/noodle/v1/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "Official Registry 与项目文档声明公共端点不需要账户或 API Key；无用户凭据的 initialize、tools/list 与 get_corpus_summary 显式只读调用均已通过。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "Apache-2.0",
+    "evidenceUrl": "https://github.com/helena-bioinformatics/noodle-mcp/blob/main/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-08-30T13:40:10.82743Z",
+    "ageDays": 2,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-09-02T04:28:05.118Z",
+    "targetUrl": "https://api.helena.bio/noodle/v1/mcp",
+    "httpStatus": 200,
+    "reason": "MCP initialize returned a JSON-RPC or event-stream response."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 94,
+    "band": "selected",
+    "dimensions": {
+      "authority": 23,
+      "accessibility": 21,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 5
+    },
+    "reasons": [
+      "authority 23/25: Official Registry plus publisher links and namespace evidence",
+      "accessibility 21/25: 1 remote and 0 package transport(s); auth none",
+      "maintenance/security 20/20: status active; registry age 2 day(s); license declared",
+      "runtime 15/15: public probe pass",
+      "market gap 10/10: domains research, science; dedupe none",
+      "documentation 5/5: publisher-provided description and links"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "noodle-biomedical-literature",
+    "reviewedAt": "2026-09-02T04:29:34Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已逐项复核 Official Registry 身份、独立或第三方维护边界、公开端点、鉴权、软件许可证或服务条款、上游数据条款提示和脱敏运行报告，批准迁入正式记录并生成 Connector 卡片。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-09-02T04:24:44.667Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-4/noodle-biomedical-literature.md",
+    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 get_corpus_summary；未保存原始响应、会话标识或凭据。维护者 DuHu 已完成来源审核。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.helena-bioinformatics%2Fnoodle/versions/0.2.1",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "Official Registry status active; version 0.2.1."
+    },
+    {
+      "type": "official-website",
+      "url": "https://noodle.helena.bio/",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "Publisher-provided website URL from Official Registry."
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/helena-bioinformatics/noodle-mcp",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "Helena Bioinformatics 公开仓库提供 7 个只读文献发现工具、公共 Streamable HTTP 端点以及隐私、安全和方法说明。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://noodle.helena.bio/methodology",
+      "collectedAt": "2026-09-02T04:29:34Z",
+      "summary": "Noodle 方法页面说明其公共语料、来源、覆盖和更新方法；结果用于文献发现与专业复核，不得替代临床诊断或治疗判断。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/helena-bioinformatics/noodle-mcp/blob/main/LICENSE",
+      "collectedAt": "2026-09-02T04:29:34Z",
+      "summary": "io.github.helena-bioinformatics/noodle 源代码声明 Apache-2.0；上游数据授权、署名与使用条款仍需在人工批准时单独复核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://api.helena.bio/noodle/v1/mcp",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "公开无用户凭据的 MCP initialize 探测通过，HTTP 200。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-4/noodle-biomedical-literature.md",
+      "collectedAt": "2026-09-02T04:24:44.667Z",
+      "summary": "自动脱敏预检通过 get_corpus_summary 只读调用；原始响应正文未落盘。"
+    }
+  ]
+}

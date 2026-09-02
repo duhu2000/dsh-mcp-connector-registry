@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "california-proposition-65",
+  "name": "Proposition 65 加州化学品清单",
+  "vendor": "Toolstop（独立社区项目）",
+  "icon": "⚗️",
+  "category": "法律合规",
+  "summary": "化学品查询 / CAS 号 / 列入时间 / 加州警示清单",
+  "description": "连接 Toolstop 的 Proposition 65 公共查询服务，按化学品名称或 CAS 号检查是否列入加州 65 号提案清单，搜索相似名称并查看指定年份以来的新增条目。结果应保留官方清单名称、CAS 号、列入日期和分类，不应仅凭列入状态判断具体产品是否必须警示，也不能替代法律、毒理或产品合规意见。本连接器由 Toolstop 独立社区维护，并非加州 OEHHA 官方产品。",
+  "tags": [
+    "Proposition 65",
+    "加州 65 号提案",
+    "化学品",
+    "CAS",
+    "产品合规",
+    "法规清单"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/toolstop/toolstop",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788323285118,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "california-proposition-65",
+      "url": "https://prop65.toolstop.dev/",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "核对苯的清单状态",
+      "text": "检查 Benzene（CAS 71-43-2）是否列入 California Proposition 65 清单，列出官方名称、CAS 号、列入日期和分类；说明清单状态不等同于对具体产品警示义务的法律结论。",
+      "server": "main"
+    },
+    {
+      "title": "追踪近期新增化学品",
+      "text": "列出 2020 年以来新增到 Proposition 65 清单的化学品，按列入年份整理名称、CAS 号和分类，并注明数据更新时间及需要进一步核对的 OEHHA 官方来源。",
+      "server": "main"
+    }
+  ]
+}

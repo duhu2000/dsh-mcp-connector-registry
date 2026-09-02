@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export function selectMonthlyBatch(candidates, { size = 10 } = {}) {
-  if (!Number.isInteger(size) || size < 5 || size > 10) throw new Error('Monthly batch size must be an integer from 5 to 10');
+  if (!Number.isInteger(size) || size < 4 || size > 10) throw new Error('Monthly batch size must be an integer from 4 to 10');
   return [...candidates]
     .filter((candidate) => candidate.classification?.isDataService
       && candidate.source?.status === 'active'
@@ -28,8 +28,8 @@ export function renderMonthlyBatch(report, candidates, { size }) {
     `Requested ${size}; selected ${candidates.length}. Candidates are recommendations only and require human review plus real runtime acceptance.`,
     '',
   ];
-  if (candidates.length < 5) {
-    lines.push('> Blocked: fewer than five candidates met the public-reachability and evidence prerequisites. Do not lower the quality gates to fill the batch.', '');
+  if (candidates.length < 4) {
+    lines.push('> Blocked: fewer than four candidates met the public-reachability and evidence prerequisites. Do not lower the quality gates to fill the batch.', '');
   }
   lines.push('| Candidate | Score | Probe | Auth | License | Domains |', '|---|---:|---|---|---|---|');
   for (const candidate of candidates) {

@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "id": "starwell-world-statistics",
+  "registryName": "dev.starwell/world-data-statistics",
+  "title": "Starwell: World Data & Statistics",
+  "description": "Statistics from 28 agencies: FRED, Eurostat, ECB, World Bank, OECD. Cited values, computed answers.",
+  "version": "0.2.2",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "public",
+      "research"
+    ],
+    "matchedKeywords": [
+      "statistics"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/dev.starwell%2Fworld-data-statistics/versions/0.2.2",
+    "status": "active",
+    "publishedAt": "2026-08-13T19:52:11.614411Z",
+    "updatedAt": "2026-08-13T19:52:11.614411Z",
+    "retrievedAt": "2026-09-02T04:28:05.118Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://starwell.dev/",
+    "repository": {
+      "url": "https://github.com/Adarsh4052/starwell-mcp",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "starwell-mcp",
+        "version": "0.2.2"
+      }
+    },
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://starwell.dev/api/starwell/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "Official Registry 说明数据读取无需密钥；无用户凭据的 initialize、tools/list 与 list_sources 显式只读调用均已通过。计算问答、深度分析和监控属于额外鉴权能力，不纳入本次免密验收。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "MIT",
+    "evidenceUrl": "https://github.com/Adarsh4052/starwell-mcp/blob/main/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-08-13T19:52:11.614411Z",
+    "ageDays": 19,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-09-02T04:28:05.118Z",
+    "targetUrl": "https://starwell.dev/api/starwell/mcp",
+    "httpStatus": 200,
+    "reason": "MCP initialize returned a JSON-RPC or event-stream response."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 100,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 25,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 5
+    },
+    "reasons": [
+      "authority 25/25: Official Registry plus publisher links and namespace evidence",
+      "accessibility 25/25: 1 remote and 1 package transport(s); auth none",
+      "maintenance/security 20/20: status active; registry age 19 day(s); license declared",
+      "runtime 15/15: public probe pass",
+      "market gap 10/10: domains public, research; dedupe none",
+      "documentation 5/5: publisher-provided description and links"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "starwell-world-statistics",
+    "reviewedAt": "2026-09-02T04:29:34Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已逐项复核 Official Registry 身份、独立或第三方维护边界、公开端点、鉴权、软件许可证或服务条款、上游数据条款提示和脱敏运行报告，批准迁入正式记录并生成 Connector 卡片。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-09-02T04:24:41.369Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-4/starwell-world-statistics.md",
+    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 list_sources；未保存原始响应、会话标识或凭据。维护者 DuHu 已完成来源审核。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/dev.starwell%2Fworld-data-statistics/versions/0.2.2",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "Official Registry status active; version 0.2.2."
+    },
+    {
+      "type": "official-website",
+      "url": "https://starwell.dev/",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "Publisher-provided website URL from Official Registry."
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/Adarsh4052/starwell-mcp",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "社区仓库提供 Starwell MCP 的公开适配器；远程服务列出 11 个工具，其中数据源、目录、序列和观察值工具声明为只读。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://starwell.dev/catalog",
+      "collectedAt": "2026-09-02T04:29:34Z",
+      "summary": "Starwell 目录汇集多个公共机构的数据并在响应中携带来源、许可和引用；各机构数据授权、修订频率和跨源口径仍需逐项核对。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/Adarsh4052/starwell-mcp/blob/main/LICENSE",
+      "collectedAt": "2026-09-02T04:29:34Z",
+      "summary": "dev.starwell/world-data-statistics 源代码声明 MIT；上游数据授权、署名与使用条款仍需在人工批准时单独复核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://starwell.dev/api/starwell/mcp",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "公开无用户凭据的 MCP initialize 探测通过，HTTP 200。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-4/starwell-world-statistics.md",
+      "collectedAt": "2026-09-02T04:24:41.369Z",
+      "summary": "自动脱敏预检通过 list_sources 只读调用；原始响应正文未落盘。"
+    }
+  ]
+}
