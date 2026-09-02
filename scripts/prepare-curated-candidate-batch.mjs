@@ -14,6 +14,7 @@ function clone(value) {
 }
 
 function repositorySummary(evidence, summary) {
+  if (!summary) return evidence;
   return evidence.map((item) => item.type === 'official-repository' ? { ...item, summary } : item);
 }
 
@@ -40,9 +41,15 @@ export function prepareCuratedCandidate(sourceCandidate, item, { repositoryBaseU
     requiredHeaders: [],
     reason: requiredString(item.authenticationReason, `${id} authenticationReason`),
   };
+  const licenseStatus = item.licenseStatus ?? 'declared';
+  if (!['declared', 'not-applicable'].includes(licenseStatus)) {
+    throw new Error(`${id} licenseStatus must be declared or not-applicable`);
+  }
   candidate.license = {
-    status: 'declared',
-    spdxId: requiredString(item.softwareLicenseSpdx, `${id} softwareLicenseSpdx`),
+    status: licenseStatus,
+    spdxId: licenseStatus === 'declared'
+      ? requiredString(item.softwareLicenseSpdx, `${id} softwareLicenseSpdx`)
+      : null,
     evidenceUrl: requiredString(item.licenseUrl, `${id} licenseUrl`),
   };
   candidate.probe = {
@@ -68,7 +75,10 @@ export function prepareCuratedCandidate(sourceCandidate, item, { repositoryBaseU
     notes: `脱敏预检通过 initialize、tools/list 和只读工具 ${requiredString(item.safeTool, `${id} safeTool`)}；未保存原始响应、会话标识或凭据。人工来源批准仍为待办。`,
   };
 
-  candidate.evidence = repositorySummary(candidate.evidence, requiredString(item.repositorySummary, `${id} repositorySummary`));
+  const hasRepository = Boolean(candidate.officialLinks?.repository);
+  candidate.evidence = repositorySummary(candidate.evidence, hasRepository
+    ? requiredString(item.repositorySummary, `${id} repositorySummary`)
+    : null);
   candidate.evidence = candidate.evidence.filter((evidence) => !['license', 'probe', 'runtime-acceptance'].includes(evidence.type));
   candidate.evidence.push(
     {
@@ -81,7 +91,9 @@ export function prepareCuratedCandidate(sourceCandidate, item, { repositoryBaseU
       type: 'license',
       url: candidate.license.evidenceUrl,
       collectedAt: generatedAt,
-      summary: `${candidate.registryName} 源代码声明 ${candidate.license.spdxId}；上游数据授权、署名与使用条款仍需在人工批准时单独复核。`,
+      summary: candidate.license.status === 'declared'
+        ? `${candidate.registryName} 源代码声明 ${candidate.license.spdxId}；上游数据授权、署名与使用条款仍需在人工批准时单独复核。`
+        : `${candidate.registryName} 未提供开源软件许可证；以公开服务条款作为适用性证据，上游数据授权与使用边界仍需单独复核。`,
     },
     {
       type: 'probe',
@@ -137,7 +149,7 @@ export function renderBatchSummary(manifest, candidates) {
     '## 批次风险与后续门槛',
     '',
     `- 本批 ${candidates.length} 个 MCP 涉及 ${maintainers.length} 个维护主体（${maintainers.join('、')}）；仍需逐项评估维护者集中度、官方或社区身份与长期可用性。`,
-    '- Apache-2.0 仅证明 MCP 服务端源代码许可；每个上游数据集的授权、署名、使用政策、频率限制与商用边界必须分别复核。',
+    '- 开源许可证仅证明相应 MCP 代码的授权；闭源服务以公开服务条款为准。每个上游数据集的授权、署名、使用政策、频率限制与商用边界必须分别复核。',
     '- 卡片必须明确“社区独立维护、非数据机构官方产品”，不得把 Official MCP Registry 收录误写成数据机构官方背书。',
     '- 维护者完成来源和条款审核后，才能填写 `approved`、迁入 `candidates/records/` 并另行准备 Connector 描述符 PR。',
     '',
@@ -161,7 +173,7 @@ async function main() {
   const report = JSON.parse(await readFile(resolve(options.input), 'utf8'));
   const manifest = JSON.parse(await readFile(resolve(options.manifest), 'utf8'));
   if (!Array.isArray(report.candidates) || !Array.isArray(manifest.candidates)) throw new Error('Input report and manifest must contain candidates arrays');
-  if (manifest.candidates.length < 5 || manifest.candidates.length > 10) throw new Error('Curated batch must contain 5 to 10 candidates');
+  if (manifest.candidates.length < 4 || manifest.candidates.length > 10) throw new Error('Curated batch must contain 4 to 10 candidates');
   const names = manifest.candidates.map((item) => requiredString(item.registryName, 'registryName'));
   if (new Set(names).size !== names.length) throw new Error('Curated manifest contains duplicate registry names');
   const sourceByName = new Map(report.candidates.map((candidate) => [candidate.registryName, candidate]));

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "noodle-biomedical-literature",
+  "name": "Noodle 生物医学文献发现",
+  "vendor": "Helena Bioinformatics（独立项目）",
+  "icon": "🧬",
+  "category": "调研分析",
+  "summary": "生物医学论文 / PMID DOI / 引用网络 / 语义关联",
+  "description": "连接 Noodle 的公开生物医学文献发现服务，按自然语言、PMID、DOI 或 PMCID 检索 PubMed 衍生论文元数据，获取文献详情并遍历有边界的引用与语义关联网络。结果应保留原始标识、来源链接、边类型和检索条件；相关性、引用距离与语义相似度仅用于文献发现，不代表因果、科学有效性、诊断或治疗建议。本连接器由 Helena Bioinformatics 独立项目维护，并非 PubMed、NCBI 或医疗机构官方产品。",
+  "tags": [
+    "Noodle",
+    "生物医学",
+    "文献检索",
+    "PubMed",
+    "引用网络",
+    "科研数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/helena-bioinformatics/noodle-mcp",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788323285118,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "noodle-biomedical-literature",
+      "url": "https://api.helena.bio/noodle/v1/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检索基因编辑研究",
+      "text": "检索 2020—2026 年 CRISPR 碱基编辑脱靶检测相关生物医学论文，列出 PMID、DOI、发表年份、来源链接和检索条件，并说明语义相关性不等同于研究结论。",
+      "server": "main"
+    },
+    {
+      "title": "追踪论文引用网络",
+      "text": "查询 PMID 35008774 的完整文献记录，并获取一跳引用与语义关联文献；保留边类型、工作标识和来源链接，不把引用关系解释为因果证据。",
+      "server": "main"
+    }
+  ]
+}

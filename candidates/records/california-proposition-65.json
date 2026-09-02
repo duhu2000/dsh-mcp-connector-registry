@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "id": "california-proposition-65",
+  "registryName": "dev.toolstop/prop65",
+  "title": "Proposition 65",
+  "description": "Is a chemical on California's Proposition 65 list, and does it need a warning?",
+  "version": "0.1.0",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "legal",
+      "science"
+    ],
+    "matchedKeywords": [
+      "chemical"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/dev.toolstop%2Fprop65/versions/0.1.0",
+    "status": "active",
+    "publishedAt": "2026-08-11T06:02:22.9292Z",
+    "updatedAt": "2026-08-11T06:02:22.9292Z",
+    "retrievedAt": "2026-09-02T04:28:05.118Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://prop65.toolstop.dev/",
+    "repository": {
+      "url": "https://github.com/toolstop/toolstop",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@toolstop/prop65",
+        "version": "0.1.0"
+      }
+    },
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://prop65.toolstop.dev/",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "Official Registry 与服务页面提供免密公共端点；无用户凭据的 initialize、tools/list 与 describe_prop65_list 显式只读调用均已通过。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "MIT",
+    "evidenceUrl": "https://github.com/toolstop/toolstop/blob/main/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-08-11T06:02:22.9292Z",
+    "ageDays": 21,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-09-02T04:28:05.118Z",
+    "targetUrl": "https://prop65.toolstop.dev/",
+    "httpStatus": 200,
+    "reason": "MCP initialize returned a JSON-RPC or event-stream response."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 100,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 25,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 5
+    },
+    "reasons": [
+      "authority 25/25: Official Registry plus publisher links and namespace evidence",
+      "accessibility 25/25: 1 remote and 1 package transport(s); auth none",
+      "maintenance/security 20/20: status active; registry age 21 day(s); license declared",
+      "runtime 15/15: public probe pass",
+      "market gap 10/10: domains legal, science; dedupe none",
+      "documentation 5/5: publisher-provided description and links"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "california-proposition-65",
+    "reviewedAt": "2026-09-02T04:29:34Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已逐项复核 Official Registry 身份、独立或第三方维护边界、公开端点、鉴权、软件许可证或服务条款、上游数据条款提示和脱敏运行报告，批准迁入正式记录并生成 Connector 卡片。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-09-02T04:24:42.764Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-4/california-proposition-65.md",
+    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 describe_prop65_list；未保存原始响应、会话标识或凭据。维护者 DuHu 已完成来源审核。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/dev.toolstop%2Fprop65/versions/0.1.0",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "Official Registry status active; version 0.1.0."
+    },
+    {
+      "type": "official-website",
+      "url": "https://prop65.toolstop.dev/",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "Publisher-provided website URL from Official Registry."
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/toolstop/toolstop",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "Toolstop 公开仓库以 MIT 发布小型无状态 MCP 服务；Prop 65 端点提供 4 个显式只读查询工具。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://oehha.ca.gov/proposition-65/proposition-65-list",
+      "collectedAt": "2026-09-02T04:29:34Z",
+      "summary": "加州 OEHHA 发布并维护 Proposition 65 化学品官方清单；具体暴露、豁免、安全港水平和警示义务必须回到官方规则及专业意见核验。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/toolstop/toolstop/blob/main/LICENSE",
+      "collectedAt": "2026-09-02T04:29:34Z",
+      "summary": "dev.toolstop/prop65 源代码声明 MIT；上游数据授权、署名与使用条款仍需在人工批准时单独复核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://prop65.toolstop.dev/",
+      "collectedAt": "2026-09-02T04:28:05.118Z",
+      "summary": "公开无用户凭据的 MCP initialize 探测通过，HTTP 200。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-4/california-proposition-65.md",
+      "collectedAt": "2026-09-02T04:24:42.764Z",
+      "summary": "自动脱敏预检通过 describe_prop65_list 只读调用；原始响应正文未落盘。"
+    }
+  ]
+}

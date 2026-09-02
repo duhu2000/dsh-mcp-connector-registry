@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "starwell-world-statistics",
+  "name": "Starwell 全球公共统计",
+  "vendor": "Starwell（独立社区项目）",
+  "icon": "📊",
+  "category": "调研分析",
+  "summary": "全球统计 / 时间序列 / 官方来源 / 引用与许可",
+  "description": "连接 Starwell 汇集的全球公共统计，发现 FRED、Eurostat、ECB、世界银行、OECD 等机构的数据源、数据集和时间序列，查询观察值并保留来源、单位、许可、修订和引用信息。目录、序列和观察数据可免密读取；计算问答、深度分析与监控功能可能需要单独密钥，且创建或删除监控具有外部副作用。本连接器由 Starwell 独立社区维护，并非任何统计机构官方产品。",
+  "tags": [
+    "Starwell",
+    "公共统计",
+    "时间序列",
+    "宏观经济",
+    "官方数据",
+    "数据引用"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/Adarsh4052/starwell-mcp",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788323285118,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "starwell-world-statistics",
+      "url": "https://starwell.dev/api/starwell/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "核对美国就业与利率",
+      "text": "先列出 Starwell 可用数据源，再定位美国失业率和十年期国债收益率序列，查询 2020—2026 年观察值；保留 source、seriesId、单位、频率、修订状态、许可和引用链接。",
+      "server": "main"
+    },
+    {
+      "title": "比较多国通胀趋势",
+      "text": "查找能够比较中国、美国和欧元区 2015—2025 年通胀变化的公开统计序列，逐项核对覆盖期和口径后再比较；列出数据机构、序列 ID、单位、缺失值及不可直接比较之处。",
+      "server": "main"
+    }
+  ]
+}
