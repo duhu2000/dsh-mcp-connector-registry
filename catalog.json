@@ -3,6 +3,55 @@
   "connectors": [
     {
       "schemaVersion": 1,
+      "id": "agentnative-government-open-data",
+      "name": "AgentNative 政府公共数据",
+      "vendor": "CaziMedia AgentNative（独立服务）",
+      "icon": "🏛️",
+      "category": "调研分析",
+      "summary": "政府数据目录 / 联邦公报 / 官方来源 / 样例与聚合",
+      "description": "连接 CaziMedia AgentNative 的政府公共数据服务，发现联邦、州和城市层级的官方数据来源与数据集，并查询带来源、更新时间和聚合口径的公开样例；当前可直接体验美国 Federal Register 等数据。免密层提供有限样例，扩大查询、筛选和物化可能收费；请求数据物化、能力开通或付费访问属于外部操作，执行前必须取得用户明确确认。本连接器由 CaziMedia AgentNative 独立服务维护，并非任何政府机构官方产品。",
+      "tags": [
+        "AgentNative",
+        "政府数据",
+        "公共数据",
+        "Federal Register",
+        "数据目录",
+        "官方来源"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://cazimedia.com/agentnative",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788323285118,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "agentnative-government-open-data",
+          "url": "https://agentnative.cazimedia.com/mcp/government-data",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "盘点可用政府数据源",
+          "text": "列出 AgentNative 当前可查询的官方政府数据来源，按联邦、州和城市层级整理覆盖领域、来源机构、更新时间和免费样例限制；不要发起数据物化、能力申请或付费访问。",
+          "server": "main"
+        },
+        {
+          "title": "查询美国联邦公报",
+          "text": "查询最近 30 天美国 Federal Register 的公开记录，按文件类型和发布机构汇总，并列出原始来源、发布日期、摘要覆盖和查询限制；不要发起任何付费或写入操作。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "akshare",
       "name": "AKShare",
       "vendor": "AKShare 社区",
@@ -428,6 +477,55 @@
         {
           "title": "分析 2024 年 CEAPS 支出",
           "text": "分析 2024 年 CEAPS 议员配额支出：汇总总额并按费用类别排序，说明币种、统计期间、缺失项和数据更新时间，附官方来源；不要据此推断违法或不当行为",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "california-proposition-65",
+      "name": "Proposition 65 加州化学品清单",
+      "vendor": "Toolstop（独立社区项目）",
+      "icon": "⚗️",
+      "category": "法律合规",
+      "summary": "化学品查询 / CAS 号 / 列入时间 / 加州警示清单",
+      "description": "连接 Toolstop 的 Proposition 65 公共查询服务，按化学品名称或 CAS 号检查是否列入加州 65 号提案清单，搜索相似名称并查看指定年份以来的新增条目。结果应保留官方清单名称、CAS 号、列入日期和分类，不应仅凭列入状态判断具体产品是否必须警示，也不能替代法律、毒理或产品合规意见。本连接器由 Toolstop 独立社区维护，并非加州 OEHHA 官方产品。",
+      "tags": [
+        "Proposition 65",
+        "加州 65 号提案",
+        "化学品",
+        "CAS",
+        "产品合规",
+        "法规清单"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/toolstop/toolstop",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788323285118,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "california-proposition-65",
+          "url": "https://prop65.toolstop.dev/",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "核对苯的清单状态",
+          "text": "检查 Benzene（CAS 71-43-2）是否列入 California Proposition 65 清单，列出官方名称、CAS 号、列入日期和分类；说明清单状态不等同于对具体产品警示义务的法律结论。",
+          "server": "main"
+        },
+        {
+          "title": "追踪近期新增化学品",
+          "text": "列出 2020 年以来新增到 Proposition 65 清单的化学品，按列入年份整理名称、CAS 号和分类，并注明数据更新时间及需要进一步核对的 OEHHA 官方来源。",
           "server": "main"
         }
       ]
@@ -2861,6 +2959,55 @@
     },
     {
       "schemaVersion": 1,
+      "id": "noodle-biomedical-literature",
+      "name": "Noodle 生物医学文献发现",
+      "vendor": "Helena Bioinformatics（独立项目）",
+      "icon": "🧬",
+      "category": "调研分析",
+      "summary": "生物医学论文 / PMID DOI / 引用网络 / 语义关联",
+      "description": "连接 Noodle 的公开生物医学文献发现服务，按自然语言、PMID、DOI 或 PMCID 检索 PubMed 衍生论文元数据，获取文献详情并遍历有边界的引用与语义关联网络。结果应保留原始标识、来源链接、边类型和检索条件；相关性、引用距离与语义相似度仅用于文献发现，不代表因果、科学有效性、诊断或治疗建议。本连接器由 Helena Bioinformatics 独立项目维护，并非 PubMed、NCBI 或医疗机构官方产品。",
+      "tags": [
+        "Noodle",
+        "生物医学",
+        "文献检索",
+        "PubMed",
+        "引用网络",
+        "科研数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/helena-bioinformatics/noodle-mcp",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788323285118,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "noodle-biomedical-literature",
+          "url": "https://api.helena.bio/noodle/v1/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "检索基因编辑研究",
+          "text": "检索 2020—2026 年 CRISPR 碱基编辑脱靶检测相关生物医学论文，列出 PMID、DOI、发表年份、来源链接和检索条件，并说明语义相关性不等同于研究结论。",
+          "server": "main"
+        },
+        {
+          "title": "追踪论文引用网络",
+          "text": "查询 PMID 35008774 的完整文献记录，并获取一跳引用与语义关联文献；保留边类型、工作标识和来源链接，不把引用关系解释为因果证据。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "notion",
       "name": "Notion",
       "vendor": "Notion",
@@ -4439,6 +4586,55 @@
           "title": "汇总频道讨论",
           "text": "使用 Slack MCP 汇总我指定频道最近的关键讨论和待办；不要发送消息或执行其他写操作",
           "server": "slack"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "starwell-world-statistics",
+      "name": "Starwell 全球公共统计",
+      "vendor": "Starwell（独立社区项目）",
+      "icon": "📊",
+      "category": "调研分析",
+      "summary": "全球统计 / 时间序列 / 官方来源 / 引用与许可",
+      "description": "连接 Starwell 汇集的全球公共统计，发现 FRED、Eurostat、ECB、世界银行、OECD 等机构的数据源、数据集和时间序列，查询观察值并保留来源、单位、许可、修订和引用信息。目录、序列和观察数据可免密读取；计算问答、深度分析与监控功能可能需要单独密钥，且创建或删除监控具有外部副作用。本连接器由 Starwell 独立社区维护，并非任何统计机构官方产品。",
+      "tags": [
+        "Starwell",
+        "公共统计",
+        "时间序列",
+        "宏观经济",
+        "官方数据",
+        "数据引用"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://github.com/Adarsh4052/starwell-mcp",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1788323285118,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "starwell-world-statistics",
+          "url": "https://starwell.dev/api/starwell/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "核对美国就业与利率",
+          "text": "先列出 Starwell 可用数据源，再定位美国失业率和十年期国债收益率序列，查询 2020—2026 年观察值；保留 source、seriesId、单位、频率、修订状态、许可和引用链接。",
+          "server": "main"
+        },
+        {
+          "title": "比较多国通胀趋势",
+          "text": "查找能够比较中国、美国和欧元区 2015—2025 年通胀变化的公开统计序列，逐项核对覆盖期和口径后再比较；列出数据机构、序列 ID、单位、缺失值及不可直接比较之处。",
+          "server": "main"
         }
       ]
     },
