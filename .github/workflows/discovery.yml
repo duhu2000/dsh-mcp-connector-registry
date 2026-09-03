@@ -84,6 +84,13 @@ jobs:
           --output candidate-output
           --probe --max-probes 50 --min-probe-score 65
       - run: npm run candidates:monthly -- --input candidate-output/candidate-report.json --output candidate-output/monthly-batch.md --size 10
+      - name: Audit supplemental curated candidate sources
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          npm run candidates:curated-sources --
+          --output candidate-output/curated-sources
+          --last-good discovery-sources/curated-last-good.json
       - run: npm test
       - uses: actions/upload-artifact@v4
         if: always()
@@ -112,3 +119,24 @@ jobs:
               body,
             });
             core.info(`monthly issue ${result.action}: #${result.issueNumber}`);
+      - name: Create or update the curated-source watchlist
+        uses: actions/github-script@v7
+        env:
+          ISSUE_BODY_PATH: candidate-output/curated-sources/source-audit.md
+        with:
+          script: |
+            const fs = require('node:fs');
+            const path = require('node:path');
+            const { pathToFileURL } = require('node:url');
+            const helperUrl = pathToFileURL(path.join(process.env.GITHUB_WORKSPACE, 'scripts/discovery/github-issue.mjs')).href;
+            const { upsertDiscoveryIssue } = await import(helperUrl);
+            const body = fs.readFileSync(process.env.ISSUE_BODY_PATH, 'utf8');
+            const result = await upsertDiscoveryIssue({
+              github,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '[Discovery] Curated catalog candidate watchlist',
+              marker: '<!-- dsh-data-mcp-curated-sources-monthly -->',
+              body,
+            });
+            core.info(`curated-source issue ${result.action}: #${result.issueNumber}`);

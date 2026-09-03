@@ -2,8 +2,9 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-const [workflow, readme, contributing, onboarding] = await Promise.all([
+const [workflow, discoveryWorkflow, readme, contributing, onboarding] = await Promise.all([
   readFile(new URL('../.github/workflows/ci.yml', import.meta.url), 'utf8'),
+  readFile(new URL('../.github/workflows/discovery.yml', import.meta.url), 'utf8'),
   readFile(new URL('../README.md', import.meta.url), 'utf8'),
   readFile(new URL('../CONTRIBUTING.md', import.meta.url), 'utf8'),
   readFile(new URL('../docs/ONBOARDING.md', import.meta.url), 'utf8'),
@@ -27,6 +28,14 @@ test('CI 分离校验与 main 合并后的 catalog 自动重建', () => {
   assert.match(workflow, /node scripts\/purge-jsdelivr-cache\.mjs catalog\.json/);
   assert.doesNotMatch(workflow, /npm run check/);
   assert.doesNotMatch(workflow, /git diff --exit-code/);
+});
+
+test('monthly discovery audits curated sources without publishing or deleting Connectors', () => {
+  assert.match(discoveryWorkflow, /npm run candidates:curated-sources/);
+  assert.match(discoveryWorkflow, /discovery-sources\/curated-last-good\.json/);
+  assert.match(discoveryWorkflow, /Curated catalog candidate watchlist/);
+  assert.match(discoveryWorkflow, /dsh-data-mcp-curated-sources-monthly/);
+  assert.doesNotMatch(discoveryWorkflow, /git push|rm .*connectors|writeFileSync\([^)]*connectors/);
 });
 
 test('main 目录变化后自动清理并验证 jsDelivr 缓存', () => {

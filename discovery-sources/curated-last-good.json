@@ -1,0 +1,1584 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-03T01:18:28.920Z",
+  "sources": [
+    {
+      "id": "dsh-mcp-panel",
+      "repository": "https://github.com/PerryLink/dsh-mcp-panel",
+      "revision": "edd8b27666eef8016b585ad8e2ccd64ec1655aca",
+      "committedAt": "2026-09-02T15:05:17Z",
+      "retrievedAt": "2026-09-03T01:18:28.920Z",
+      "mode": "live",
+      "paths": [
+        "src/catalog.ts"
+      ],
+      "entries": [
+        {
+          "entryId": "filesystem",
+          "title": "Filesystem",
+          "description": "Read and write files through a local filesystem MCP server.",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-filesystem"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "requires-configuration",
+            "reason": "A user-selected local path or equivalent runtime configuration is required."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "git",
+          "title": "Git",
+          "description": "Git repository operations (status, diff, log, branches).",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "uvx",
+          "argumentSummary": {
+            "count": 1,
+            "flags": [],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "pypi",
+            "name": "mcp-server-git"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "github",
+          "title": "GitHub",
+          "description": "GitHub issues, PRs, repos, and search.",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-github"
+          },
+          "requiredEnvNames": [
+            "GITHUB_PERSONAL_ACCESS_TOKEN"
+          ],
+          "access": {
+            "mode": "requires-credentials",
+            "reason": "Requires user-supplied environment/header names: GITHUB_PERSONAL_ACCESS_TOKEN."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "fetch",
+          "title": "Fetch",
+          "description": "Fetch and convert web pages to Markdown.",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "uvx",
+          "argumentSummary": {
+            "count": 1,
+            "flags": [],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "pypi",
+            "name": "mcp-server-fetch"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "playwright",
+          "title": "Playwright",
+          "description": "Browser automation and page interaction.",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@playwright/mcp"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "sequential-thinking",
+          "title": "Sequential Thinking",
+          "description": "Structured, step-by-step reasoning.",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-sequential-thinking"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "memory",
+          "title": "Memory",
+          "description": "A knowledge-graph memory store.",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-memory"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "dsh-mcp-market",
+      "repository": "https://github.com/LKMeng2001/dsh-mcp-market",
+      "revision": "21155c9a48a6320155d7d0e6de8706cddcc2eae4",
+      "committedAt": "2026-08-16T07:45:36Z",
+      "retrievedAt": "2026-09-03T01:18:28.920Z",
+      "mode": "live",
+      "paths": [
+        "docs/servers.json"
+      ],
+      "entries": [
+        {
+          "entryId": "everything",
+          "title": "everything",
+          "description": "Reference server exercising every MCP feature; great for smoke-testing the bridge.",
+          "homepage": "https://github.com/modelcontextprotocol/servers",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-everything"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "filesystem",
+          "title": "filesystem",
+          "description": "Filesystem access restricted to allow-listed directories (edit the args to your own paths).",
+          "homepage": "https://github.com/modelcontextprotocol/servers",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 3,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 1,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-filesystem"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "requires-configuration",
+            "reason": "A user-selected local path or equivalent runtime configuration is required."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "git",
+          "title": "git",
+          "description": "Natural-language Git operations: commit, branch, reset, revert and more (36 tools).",
+          "homepage": "https://github.com/idootop/git-mcp",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "git-mcp"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "github",
+          "title": "github",
+          "description": "GitHub API access: issues, PRs, repos, search (requires a GITHUB_TOKEN).",
+          "homepage": "https://github.com/modelcontextprotocol/servers",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-github"
+          },
+          "requiredEnvNames": [
+            "GITHUB_TOKEN"
+          ],
+          "access": {
+            "mode": "requires-credentials",
+            "reason": "Requires user-supplied environment/header names: GITHUB_TOKEN."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "google-maps",
+          "title": "google-maps",
+          "description": "Google Maps API: geocoding, places, directions (requires GOOGLE_MAPS_API_KEY).",
+          "homepage": "https://github.com/modelcontextprotocol/servers",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-google-maps"
+          },
+          "requiredEnvNames": [
+            "GOOGLE_MAPS_API_KEY"
+          ],
+          "access": {
+            "mode": "requires-credentials",
+            "reason": "Requires user-supplied environment/header names: GOOGLE_MAPS_API_KEY."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "fetch",
+          "title": "fetch",
+          "description": "Web research: Google search, visit pages, screenshots (3 tools, no API key).",
+          "homepage": "https://github.com/mzxrai/mcp-webresearch",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@mzxrai/mcp-webresearch"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "memory",
+          "title": "memory",
+          "description": "Knowledge-graph based persistent memory for agents.",
+          "homepage": "https://github.com/modelcontextprotocol/servers",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-memory"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "sequential-thinking",
+          "title": "sequential-thinking",
+          "description": "Structured, revisable chain-of-thought tool for deep problem solving.",
+          "homepage": "https://github.com/modelcontextprotocol/servers",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-sequential-thinking"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "puppeteer",
+          "title": "puppeteer",
+          "description": "Browser automation via Puppeteer: navigate, click, screenshot (downloads Chromium on first run).",
+          "homepage": "https://github.com/modelcontextprotocol/servers",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-puppeteer"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "heavy-dependency",
+            "reason": "Source declares a heavy first-run browser dependency."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "playwright",
+          "title": "playwright",
+          "description": "Browser automation via Playwright (downloads browsers on first run).",
+          "homepage": "https://github.com/microsoft/playwright-mcp",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@playwright/mcp"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "heavy-dependency",
+            "reason": "Source declares a heavy first-run browser dependency."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "slack",
+          "title": "slack",
+          "description": "Slack workspace API: messages, channels, threads (requires SLACK_BOT_TOKEN and SLACK_TEAM_ID).",
+          "homepage": "https://github.com/modelcontextprotocol/servers",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-slack"
+          },
+          "requiredEnvNames": [
+            "SLACK_BOT_TOKEN",
+            "SLACK_TEAM_ID"
+          ],
+          "access": {
+            "mode": "requires-credentials",
+            "reason": "Requires user-supplied environment/header names: SLACK_BOT_TOKEN, SLACK_TEAM_ID."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "sqlite",
+          "title": "sqlite",
+          "description": "SQLite database operations via a maintained community server (default ./data.db).",
+          "homepage": "https://github.com/madnh/mcp-server-sqlite",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "mcp-server-sqlite"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "brave-search",
+          "title": "brave-search",
+          "description": "Web search via the Brave Search API (requires BRAVE_API_KEY).",
+          "homepage": "https://github.com/modelcontextprotocol/servers",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-brave-search"
+          },
+          "requiredEnvNames": [
+            "BRAVE_API_KEY"
+          ],
+          "access": {
+            "mode": "requires-credentials",
+            "reason": "Requires user-supplied environment/header names: BRAVE_API_KEY."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "redis",
+          "title": "redis",
+          "description": "Redis database operations (requires REDIS_URL).",
+          "homepage": "https://github.com/redis/mcp-redis",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-redis"
+          },
+          "requiredEnvNames": [
+            "REDIS_URL"
+          ],
+          "access": {
+            "mode": "requires-credentials",
+            "reason": "Requires user-supplied environment/header names: REDIS_URL."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        },
+        {
+          "entryId": "context7",
+          "title": "context7",
+          "description": "Up-to-date library documentation for any dependency, injected on demand.",
+          "homepage": "https://github.com/upstash/context7",
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@upstash/context7-mcp"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Source catalog does not persist a timestamped runtime tools/list result."
+          }
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "dsh-mcp-bridge",
+      "repository": "https://github.com/Edge-Echo/dsh-mcp-bridge",
+      "revision": "77cc8eae48495055f5392046b9f2317cc72fdc5c",
+      "committedAt": "2026-08-15T14:47:12Z",
+      "retrievedAt": "2026-09-03T01:18:28.920Z",
+      "mode": "live",
+      "paths": [
+        "servers/everything.json",
+        "servers/filesystem.json",
+        "servers/github.json",
+        "servers/memory.json",
+        "servers/playwright.json",
+        "servers/remote-http.json"
+      ],
+      "entries": [
+        {
+          "entryId": "mcp-everything",
+          "title": "MCP official everything test server (demo)",
+          "description": "Zero-config demo server: echo, add, longRunningOperation, getTinyImage and more. Enabled by default.",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-everything"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "PASS",
+            "checkedAt": "2026-08-15T00:00:00.000Z",
+            "toolCount": 13,
+            "reason": "End-to-end verified on Windows: model called mcp__everything__echo and received 'Echo: hello'."
+          }
+        },
+        {
+          "entryId": "mcp-filesystem",
+          "title": "Filesystem access (scoped roots)",
+          "description": "Official MCP filesystem server: read/write/search under explicitly granted root directories only.",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 3,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 1,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-filesystem"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "requires-configuration",
+            "reason": "A user-selected local path or equivalent runtime configuration is required."
+          },
+          "verification": {
+            "status": "DEFERRED",
+            "checkedAt": "2026-08-15T00:00:00.000Z",
+            "toolCount": null,
+            "reason": "Source-internal tool-count drift: definition says 13, README says 14."
+          }
+        },
+        {
+          "entryId": "mcp-github",
+          "title": "GitHub",
+          "description": "GitHub repo/issue/PR operations. Requires GITHUB_TOKEN.",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-github"
+          },
+          "requiredEnvNames": [
+            "GITHUB_TOKEN"
+          ],
+          "access": {
+            "mode": "requires-credentials",
+            "reason": "Requires user-supplied environment/header names: GITHUB_TOKEN."
+          },
+          "verification": {
+            "status": "DEFERRED",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Requires GITHUB_TOKEN. Package name: GitHub's official server has moved to 'github-mcp-server' — confirm the current package before enabling."
+          }
+        },
+        {
+          "entryId": "mcp-memory",
+          "title": "In-memory knowledge graph",
+          "description": "Zero-config persistent-in-session knowledge graph (entities / relations / observations). Useful for long conversations.",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@modelcontextprotocol/server-memory"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "zero-config",
+            "reason": "No credential, user path, or declared heavy dependency is present in the source definition."
+          },
+          "verification": {
+            "status": "PASS",
+            "checkedAt": "2026-08-15T00:00:00.000Z",
+            "toolCount": 9,
+            "reason": "Connectivity verified by scripts/verify-servers.mjs: 9 tools listed."
+          }
+        },
+        {
+          "entryId": "mcp-playwright",
+          "title": "Browser automation (Playwright)",
+          "description": "Official Playwright MCP: navigate, click, fill, screenshot and more. First launch downloads browsers.",
+          "homepage": null,
+          "transport": "stdio",
+          "command": "npx",
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
+          "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": {
+            "registry": "npm",
+            "name": "@playwright/mcp"
+          },
+          "requiredEnvNames": [],
+          "access": {
+            "mode": "heavy-dependency",
+            "reason": "Source declares a heavy first-run browser dependency."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Heavy first-run (browser download); excluded from CI verify. Set PLAYWRIGHT_BROWSERS_PATH or accept the download on first use."
+          }
+        },
+        {
+          "entryId": "mcp-remote",
+          "title": "Remote HTTP MCP server (streamable-http)",
+          "description": "Template for your own or a hosted MCP server over HTTP, with optional bearer auth. Ideal for sharing one tool service across DSH / Reasonix / CodeWhale.",
+          "homepage": null,
+          "transport": "streamable-http",
+          "command": null,
+          "argumentSummary": null,
+          "url": "http://localhost:3000/mcp",
+          "urlSanitization": {
+            "url": "http://localhost:3000/mcp",
+            "valid": true,
+            "localTemplate": true,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
+          "package": null,
+          "requiredEnvNames": [
+            "MCP_TOKEN"
+          ],
+          "access": {
+            "mode": "template",
+            "reason": "Localhost URL is a user template, not a public candidate endpoint."
+          },
+          "verification": {
+            "status": "SKIP",
+            "checkedAt": null,
+            "toolCount": null,
+            "reason": "Point url at your server; MCP_TOKEN only if auth is required."
+          }
+        }
+      ],
+      "error": null
+    }
+  ],
+  "packages": [
+    {
+      "identity": "npm:@modelcontextprotocol/server-brave-search",
+      "registry": "npm",
+      "requestedName": "@modelcontextprotocol/server-brave-search",
+      "resolvedName": "@modelcontextprotocol/server-brave-search",
+      "version": "0.6.2",
+      "modifiedAt": "2026-06-04T19:46:42.878Z",
+      "exists": true,
+      "deprecated": "Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.",
+      "repository": null,
+      "provenance": "missing",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "DEFERRED",
+      "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
+    },
+    {
+      "identity": "npm:@modelcontextprotocol/server-everything",
+      "registry": "npm",
+      "requestedName": "@modelcontextprotocol/server-everything",
+      "resolvedName": "@modelcontextprotocol/server-everything",
+      "version": "2026.8.31",
+      "modifiedAt": "2026-08-31T20:23:50.464Z",
+      "exists": true,
+      "deprecated": null,
+      "repository": "modelcontextprotocol/servers",
+      "provenance": "verified",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact npm package exists and its current metadata passed identity checks."
+    },
+    {
+      "identity": "npm:@modelcontextprotocol/server-filesystem",
+      "registry": "npm",
+      "requestedName": "@modelcontextprotocol/server-filesystem",
+      "resolvedName": "@modelcontextprotocol/server-filesystem",
+      "version": "2026.8.31",
+      "modifiedAt": "2026-08-31T20:25:55.925Z",
+      "exists": true,
+      "deprecated": null,
+      "repository": "modelcontextprotocol/servers",
+      "provenance": "verified",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact npm package exists and its current metadata passed identity checks."
+    },
+    {
+      "identity": "npm:@modelcontextprotocol/server-github",
+      "registry": "npm",
+      "requestedName": "@modelcontextprotocol/server-github",
+      "resolvedName": "@modelcontextprotocol/server-github",
+      "version": "2025.4.8",
+      "modifiedAt": "2026-07-03T11:08:29.291Z",
+      "exists": true,
+      "deprecated": "Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.",
+      "repository": null,
+      "provenance": "missing",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "DEFERRED",
+      "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
+    },
+    {
+      "identity": "npm:@modelcontextprotocol/server-google-maps",
+      "registry": "npm",
+      "requestedName": "@modelcontextprotocol/server-google-maps",
+      "resolvedName": "@modelcontextprotocol/server-google-maps",
+      "version": "0.6.2",
+      "modifiedAt": "2026-07-03T11:07:49.648Z",
+      "exists": true,
+      "deprecated": "Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.",
+      "repository": null,
+      "provenance": "missing",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "DEFERRED",
+      "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
+    },
+    {
+      "identity": "npm:@modelcontextprotocol/server-memory",
+      "registry": "npm",
+      "requestedName": "@modelcontextprotocol/server-memory",
+      "resolvedName": "@modelcontextprotocol/server-memory",
+      "version": "2026.8.31",
+      "modifiedAt": "2026-08-31T20:23:48.445Z",
+      "exists": true,
+      "deprecated": null,
+      "repository": "modelcontextprotocol/servers",
+      "provenance": "verified",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact npm package exists and its current metadata passed identity checks."
+    },
+    {
+      "identity": "npm:@modelcontextprotocol/server-puppeteer",
+      "registry": "npm",
+      "requestedName": "@modelcontextprotocol/server-puppeteer",
+      "resolvedName": "@modelcontextprotocol/server-puppeteer",
+      "version": "2025.5.12",
+      "modifiedAt": "2026-07-03T11:08:31.943Z",
+      "exists": true,
+      "deprecated": "Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.",
+      "repository": null,
+      "provenance": "missing",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "DEFERRED",
+      "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
+    },
+    {
+      "identity": "npm:@modelcontextprotocol/server-redis",
+      "registry": "npm",
+      "requestedName": "@modelcontextprotocol/server-redis",
+      "resolvedName": "@modelcontextprotocol/server-redis",
+      "version": "2025.4.25",
+      "modifiedAt": "2026-07-03T11:08:32.614Z",
+      "exists": true,
+      "deprecated": "Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.",
+      "repository": null,
+      "provenance": "missing",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "DEFERRED",
+      "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
+    },
+    {
+      "identity": "npm:@modelcontextprotocol/server-sequential-thinking",
+      "registry": "npm",
+      "requestedName": "@modelcontextprotocol/server-sequential-thinking",
+      "resolvedName": "@modelcontextprotocol/server-sequential-thinking",
+      "version": "2026.8.31",
+      "modifiedAt": "2026-08-31T20:23:45.270Z",
+      "exists": true,
+      "deprecated": null,
+      "repository": "modelcontextprotocol/servers",
+      "provenance": "verified",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact npm package exists and its current metadata passed identity checks."
+    },
+    {
+      "identity": "npm:@modelcontextprotocol/server-slack",
+      "registry": "npm",
+      "requestedName": "@modelcontextprotocol/server-slack",
+      "resolvedName": "@modelcontextprotocol/server-slack",
+      "version": "2025.4.25",
+      "modifiedAt": "2026-07-03T11:08:34.731Z",
+      "exists": true,
+      "deprecated": "Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.",
+      "repository": null,
+      "provenance": "missing",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "DEFERRED",
+      "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
+    },
+    {
+      "identity": "npm:@mzxrai/mcp-webresearch",
+      "registry": "npm",
+      "requestedName": "@mzxrai/mcp-webresearch",
+      "resolvedName": "@mzxrai/mcp-webresearch",
+      "version": "0.1.7",
+      "modifiedAt": "2024-12-18T03:38:42.957Z",
+      "exists": true,
+      "deprecated": null,
+      "repository": "mzxrai/mcp-webresearch",
+      "provenance": "verified",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact npm package exists and its current metadata passed identity checks."
+    },
+    {
+      "identity": "npm:@playwright/mcp",
+      "registry": "npm",
+      "requestedName": "@playwright/mcp",
+      "resolvedName": "@playwright/mcp",
+      "version": "0.0.80",
+      "modifiedAt": "2026-09-01T03:48:24.568Z",
+      "exists": true,
+      "deprecated": null,
+      "repository": "microsoft/playwright-mcp",
+      "provenance": "verified",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact npm package exists and its current metadata passed identity checks."
+    },
+    {
+      "identity": "npm:@upstash/context7-mcp",
+      "registry": "npm",
+      "requestedName": "@upstash/context7-mcp",
+      "resolvedName": "@upstash/context7-mcp",
+      "version": "4.0.4",
+      "modifiedAt": "2026-08-28T09:59:14.604Z",
+      "exists": true,
+      "deprecated": null,
+      "repository": "upstash/context7",
+      "provenance": "verified",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact npm package exists and its current metadata passed identity checks."
+    },
+    {
+      "identity": "npm:git-mcp",
+      "registry": "npm",
+      "requestedName": "git-mcp",
+      "resolvedName": "git-mcp",
+      "version": "1.0.0",
+      "modifiedAt": "2025-12-17T21:22:06.449Z",
+      "exists": true,
+      "deprecated": null,
+      "repository": null,
+      "provenance": "missing",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "DEFERRED",
+      "reason": "Source declares idootop/git-mcp, but npm metadata has no matching repository or homepage."
+    },
+    {
+      "identity": "npm:mcp-server-sqlite",
+      "registry": "npm",
+      "requestedName": "mcp-server-sqlite",
+      "resolvedName": "mcp-server-sqlite",
+      "version": "0.0.2",
+      "modifiedAt": "2025-09-28T01:57:59.252Z",
+      "exists": true,
+      "deprecated": null,
+      "repository": "madnh/mcp-server-sqlite",
+      "provenance": "verified",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact npm package exists and its current metadata passed identity checks."
+    },
+    {
+      "identity": "pypi:mcp-server-fetch",
+      "registry": "pypi",
+      "requestedName": "mcp-server-fetch",
+      "resolvedName": "mcp-server-fetch",
+      "version": "2026.8.18",
+      "modifiedAt": "2026-08-18T16:06:17.339100Z",
+      "exists": true,
+      "deprecated": null,
+      "repository": "modelcontextprotocol/servers",
+      "provenance": "registry-only",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact normalized PyPI package exists and its current metadata passed identity checks."
+    },
+    {
+      "identity": "pypi:mcp-server-git",
+      "registry": "pypi",
+      "requestedName": "mcp-server-git",
+      "resolvedName": "mcp-server-git",
+      "version": "2026.8.18",
+      "modifiedAt": "2026-08-18T16:06:13.164315Z",
+      "exists": true,
+      "deprecated": null,
+      "repository": "modelcontextprotocol/servers",
+      "provenance": "registry-only",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact normalized PyPI package exists and its current metadata passed identity checks."
+    }
+  ],
+  "repositories": [
+    {
+      "identity": "idootop/git-mcp",
+      "exists": false,
+      "archived": null,
+      "pushedAt": null,
+      "licenseSpdx": null,
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "DEFERRED",
+      "reason": "GitHub returned HTTP 404 for the repository declared by the source catalog."
+    },
+    {
+      "identity": "madnh/mcp-server-sqlite",
+      "exists": true,
+      "archived": false,
+      "pushedAt": "2025-09-28T01:36:17Z",
+      "licenseSpdx": "MIT",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact GitHub repository exists and is not archived."
+    },
+    {
+      "identity": "microsoft/playwright-mcp",
+      "exists": true,
+      "archived": false,
+      "pushedAt": "2026-09-02T21:01:16Z",
+      "licenseSpdx": "Apache-2.0",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact GitHub repository exists and is not archived."
+    },
+    {
+      "identity": "modelcontextprotocol/servers",
+      "exists": true,
+      "archived": false,
+      "pushedAt": "2026-09-03T01:15:45Z",
+      "licenseSpdx": "NOASSERTION",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact GitHub repository exists and is not archived."
+    },
+    {
+      "identity": "mzxrai/mcp-webresearch",
+      "exists": true,
+      "archived": true,
+      "pushedAt": "2024-12-18T03:38:30Z",
+      "licenseSpdx": "MIT",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "DEFERRED",
+      "reason": "GitHub repository exists but is archived."
+    },
+    {
+      "identity": "redis/mcp-redis",
+      "exists": true,
+      "archived": false,
+      "pushedAt": "2026-09-02T11:17:52Z",
+      "licenseSpdx": "MIT",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact GitHub repository exists and is not archived."
+    },
+    {
+      "identity": "upstash/context7",
+      "exists": true,
+      "archived": false,
+      "pushedAt": "2026-09-02T15:15:11Z",
+      "licenseSpdx": "MIT",
+      "metadataSource": "live",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
+      "status": "PASS",
+      "reason": "Exact GitHub repository exists and is not archived."
+    }
+  ]
+}

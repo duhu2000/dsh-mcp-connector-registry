@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "dsh-mcp-panel",
+      "repository": "PerryLink/dsh-mcp-panel",
+      "ref": "main",
+      "format": "panel-typescript",
+      "path": "src/catalog.ts"
+    },
+    {
+      "id": "dsh-mcp-market",
+      "repository": "LKMeng2001/dsh-mcp-market",
+      "ref": "main",
+      "format": "market-json",
+      "path": "docs/servers.json"
+    },
+    {
+      "id": "dsh-mcp-bridge",
+      "repository": "Edge-Echo/dsh-mcp-bridge",
+      "ref": "main",
+      "format": "bridge-json-directory",
+      "pathPrefix": "servers/"
+    }
+  ],
+  "knownReplacements": [
+    {
+      "identity": "npm:@modelcontextprotocol/server-github",
+      "connectorId": "github",
+      "reason": "旧 npm Server 已由 Registry 中的 GitHub 官方远程 MCP 取代。"
+    },
+    {
+      "identity": "npm:@modelcontextprotocol/server-slack",
+      "connectorId": "slack",
+      "reason": "旧 npm Server 已由 Registry 中的 Slack 官方远程 MCP 取代。"
+    }
+  ]
+}

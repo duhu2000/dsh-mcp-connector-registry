@@ -14,6 +14,7 @@
     "probe": "dsh-mcp-connector-probe catalog.json --allow-partial --output probe-report.json",
     "health:trend": "node scripts/update-health-state.mjs",
     "candidates:discover": "node scripts/discover-candidates.mjs",
+    "candidates:curated-sources": "node scripts/audit-curated-sources.mjs",
     "candidates:monthly": "node scripts/build-monthly-batch.mjs",
     "candidates:curate": "node scripts/prepare-curated-candidate-batch.mjs",
     "candidates:promote": "node scripts/promote-curated-candidate-batch.mjs",
