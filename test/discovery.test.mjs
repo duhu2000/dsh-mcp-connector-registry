@@ -8,6 +8,7 @@ import { PassThrough } from 'node:stream';
 import test from 'node:test';
 import {
   buildConnectorIndex,
+  canonicalPackageName,
   candidateId,
   dedupeCandidate,
   normalizeOfficialServer,
@@ -23,6 +24,12 @@ import {
 } from '../scripts/discovery/public-probe.mjs';
 
 const NOW = '2026-08-30T00:00:00.000Z';
+
+test('package identities strip version tags without accepting file paths', () => {
+  assert.equal(canonicalPackageName('@playwright/mcp@latest'), '@playwright/mcp');
+  assert.equal(canonicalPackageName('mcp-server-git@1.2.3'), 'mcp-server-git');
+  assert.equal(canonicalPackageName('/tmp/server.js'), null);
+});
 
 function officialEntry({
   name = 'com.example/market-data',

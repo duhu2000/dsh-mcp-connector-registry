@@ -46,6 +46,14 @@ export function candidateId(registryName) {
   return `${slugify(registryName).slice(0, 100)}-${digest}`;
 }
 
+export function canonicalPackageName(value) {
+  const candidate = String(value ?? '').trim();
+  const scoped = candidate.match(/^(@[a-z0-9][a-z0-9._-]*\/[a-z0-9][a-z0-9._-]*)(?:@[^\s]+)?$/i);
+  if (scoped) return scoped[1].toLowerCase();
+  const unscoped = candidate.match(/^([a-z0-9][a-z0-9._-]*)(?:@[^\s]+)?$/i);
+  return unscoped ? unscoped[1].toLowerCase() : null;
+}
+
 export function canonicalPublicUrl(value, { stripQuery = false } = {}) {
   if (!value) return null;
   try {
@@ -246,7 +254,8 @@ export function buildConnectorIndex(connectors) {
       addIndex(strong, url ? `url:${url}` : null, id);
       if (url) addIndex(weak, `host:${new URL(url).hostname}`, id);
       for (const arg of Array.isArray(server?.args) ? server.args : []) {
-        if (/^(?:@?[a-z0-9][a-z0-9._/-]+)$/i.test(arg)) addIndex(strong, `package:${String(arg).toLowerCase()}`, id);
+        const packageName = canonicalPackageName(arg);
+        addIndex(strong, packageName ? `package:${packageName}` : null, id);
       }
     }
   }
@@ -268,7 +277,10 @@ export function dedupeCandidate(candidate, index) {
       strongKeys.push(`url:${canonicalPublicUrl(transport.url, { stripQuery: true })}`);
       weakKeys.push(`host:${new URL(transport.url).hostname}`);
     }
-    if (transport.package?.identifier) strongKeys.push(`package:${transport.package.identifier.toLowerCase()}`);
+    if (transport.package?.identifier) {
+      const packageName = canonicalPackageName(transport.package.identifier);
+      if (packageName) strongKeys.push(`package:${packageName}`);
+    }
   }
   const strong = matchesFor(index.strong, strongKeys, 'Exact stable identity matches an existing connector.');
   const weak = matchesFor(index.weak, weakKeys, 'Name or host similarity requires human review and does not suppress the candidate.');
