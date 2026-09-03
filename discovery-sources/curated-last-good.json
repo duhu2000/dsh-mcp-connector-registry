@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-03T01:01:26.967Z",
+  "generatedAt": "2026-09-03T01:18:28.920Z",
   "sources": [
     {
       "id": "dsh-mcp-panel",
       "repository": "https://github.com/PerryLink/dsh-mcp-panel",
       "revision": "edd8b27666eef8016b585ad8e2ccd64ec1655aca",
       "committedAt": "2026-09-02T15:05:17Z",
-      "retrievedAt": "2026-09-03T01:01:26.967Z",
+      "retrievedAt": "2026-09-03T01:18:28.920Z",
       "mode": "live",
       "paths": [
         "src/catalog.ts"
@@ -20,11 +20,25 @@
           "homepage": null,
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-filesystem"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-filesystem"
@@ -48,10 +62,23 @@
           "homepage": null,
           "transport": "stdio",
           "command": "uvx",
-          "args": [
-            "mcp-server-git"
-          ],
+          "argumentSummary": {
+            "count": 1,
+            "flags": [],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "pypi",
             "name": "mcp-server-git"
@@ -75,11 +102,25 @@
           "homepage": null,
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-github"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-github"
@@ -105,10 +146,23 @@
           "homepage": null,
           "transport": "stdio",
           "command": "uvx",
-          "args": [
-            "mcp-server-fetch"
-          ],
+          "argumentSummary": {
+            "count": 1,
+            "flags": [],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "pypi",
             "name": "mcp-server-fetch"
@@ -132,11 +186,25 @@
           "homepage": null,
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@playwright/mcp@latest"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@playwright/mcp"
@@ -160,11 +228,25 @@
           "homepage": null,
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-sequential-thinking"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-sequential-thinking"
@@ -188,11 +270,25 @@
           "homepage": null,
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-memory"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-memory"
@@ -217,7 +313,7 @@
       "repository": "https://github.com/LKMeng2001/dsh-mcp-market",
       "revision": "21155c9a48a6320155d7d0e6de8706cddcc2eae4",
       "committedAt": "2026-08-16T07:45:36Z",
-      "retrievedAt": "2026-09-03T01:01:26.967Z",
+      "retrievedAt": "2026-09-03T01:18:28.920Z",
       "mode": "live",
       "paths": [
         "docs/servers.json"
@@ -230,11 +326,25 @@
           "homepage": "https://github.com/modelcontextprotocol/servers",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-everything"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-everything"
@@ -258,12 +368,25 @@
           "homepage": "https://github.com/modelcontextprotocol/servers",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-filesystem",
-            "/tmp"
-          ],
+          "argumentSummary": {
+            "count": 3,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 1,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-filesystem"
@@ -287,11 +410,25 @@
           "homepage": "https://github.com/idootop/git-mcp",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "git-mcp"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "git-mcp"
@@ -315,11 +452,25 @@
           "homepage": "https://github.com/modelcontextprotocol/servers",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-github"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-github"
@@ -345,11 +496,25 @@
           "homepage": "https://github.com/modelcontextprotocol/servers",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-google-maps"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-google-maps"
@@ -375,11 +540,25 @@
           "homepage": "https://github.com/mzxrai/mcp-webresearch",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@mzxrai/mcp-webresearch"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@mzxrai/mcp-webresearch"
@@ -403,11 +582,25 @@
           "homepage": "https://github.com/modelcontextprotocol/servers",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-memory"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-memory"
@@ -431,11 +624,25 @@
           "homepage": "https://github.com/modelcontextprotocol/servers",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-sequential-thinking"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-sequential-thinking"
@@ -459,11 +666,25 @@
           "homepage": "https://github.com/modelcontextprotocol/servers",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-puppeteer"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-puppeteer"
@@ -487,11 +708,25 @@
           "homepage": "https://github.com/microsoft/playwright-mcp",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@playwright/mcp@latest"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@playwright/mcp"
@@ -515,11 +750,25 @@
           "homepage": "https://github.com/modelcontextprotocol/servers",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-slack"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-slack"
@@ -546,11 +795,25 @@
           "homepage": "https://github.com/madnh/mcp-server-sqlite",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "mcp-server-sqlite"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "mcp-server-sqlite"
@@ -574,11 +837,25 @@
           "homepage": "https://github.com/modelcontextprotocol/servers",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-brave-search"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-brave-search"
@@ -604,11 +881,25 @@
           "homepage": "https://github.com/redis/mcp-redis",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-redis"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-redis"
@@ -634,11 +925,25 @@
           "homepage": "https://github.com/upstash/context7",
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@upstash/context7-mcp"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@upstash/context7-mcp"
@@ -663,7 +968,7 @@
       "repository": "https://github.com/Edge-Echo/dsh-mcp-bridge",
       "revision": "77cc8eae48495055f5392046b9f2317cc72fdc5c",
       "committedAt": "2026-08-15T14:47:12Z",
-      "retrievedAt": "2026-09-03T01:01:26.967Z",
+      "retrievedAt": "2026-09-03T01:18:28.920Z",
       "mode": "live",
       "paths": [
         "servers/everything.json",
@@ -681,11 +986,25 @@
           "homepage": null,
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-everything"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-everything"
@@ -709,12 +1028,25 @@
           "homepage": null,
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-filesystem",
-            "C:/path/to/allowed/root"
-          ],
+          "argumentSummary": {
+            "count": 3,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 1,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-filesystem"
@@ -738,11 +1070,25 @@
           "homepage": null,
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-github"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-github"
@@ -768,11 +1114,25 @@
           "homepage": null,
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@modelcontextprotocol/server-memory"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@modelcontextprotocol/server-memory"
@@ -796,11 +1156,25 @@
           "homepage": null,
           "transport": "stdio",
           "command": "npx",
-          "args": [
-            "-y",
-            "@playwright/mcp"
-          ],
+          "argumentSummary": {
+            "count": 2,
+            "flags": [
+              "-y"
+            ],
+            "credentialFlags": [],
+            "positionalValueCount": 0,
+            "redactedCredentialValueCount": 0
+          },
           "url": null,
+          "urlSanitization": {
+            "url": null,
+            "valid": true,
+            "localTemplate": false,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": {
             "registry": "npm",
             "name": "@playwright/mcp"
@@ -824,8 +1198,17 @@
           "homepage": null,
           "transport": "streamable-http",
           "command": null,
-          "args": [],
+          "argumentSummary": null,
           "url": "http://localhost:3000/mcp",
+          "urlSanitization": {
+            "url": "http://localhost:3000/mcp",
+            "valid": true,
+            "localTemplate": true,
+            "rejectedUserInfo": false,
+            "removedQuery": false,
+            "removedCredentialQuery": false,
+            "removedFragment": false
+          },
           "package": null,
           "requiredEnvNames": [
             "MCP_TOKEN"
@@ -858,7 +1241,7 @@
       "repository": null,
       "provenance": "missing",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "DEFERRED",
       "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
     },
@@ -874,7 +1257,7 @@
       "repository": "modelcontextprotocol/servers",
       "provenance": "verified",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact npm package exists and its current metadata passed identity checks."
     },
@@ -890,7 +1273,7 @@
       "repository": "modelcontextprotocol/servers",
       "provenance": "verified",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact npm package exists and its current metadata passed identity checks."
     },
@@ -906,7 +1289,7 @@
       "repository": null,
       "provenance": "missing",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "DEFERRED",
       "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
     },
@@ -922,7 +1305,7 @@
       "repository": null,
       "provenance": "missing",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "DEFERRED",
       "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
     },
@@ -938,7 +1321,7 @@
       "repository": "modelcontextprotocol/servers",
       "provenance": "verified",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact npm package exists and its current metadata passed identity checks."
     },
@@ -954,7 +1337,7 @@
       "repository": null,
       "provenance": "missing",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "DEFERRED",
       "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
     },
@@ -970,7 +1353,7 @@
       "repository": null,
       "provenance": "missing",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "DEFERRED",
       "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
     },
@@ -986,7 +1369,7 @@
       "repository": "modelcontextprotocol/servers",
       "provenance": "verified",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact npm package exists and its current metadata passed identity checks."
     },
@@ -1002,7 +1385,7 @@
       "repository": null,
       "provenance": "missing",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "DEFERRED",
       "reason": "npm marks the current package deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info."
     },
@@ -1018,7 +1401,7 @@
       "repository": "mzxrai/mcp-webresearch",
       "provenance": "verified",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact npm package exists and its current metadata passed identity checks."
     },
@@ -1034,7 +1417,7 @@
       "repository": "microsoft/playwright-mcp",
       "provenance": "verified",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact npm package exists and its current metadata passed identity checks."
     },
@@ -1050,7 +1433,7 @@
       "repository": "upstash/context7",
       "provenance": "verified",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact npm package exists and its current metadata passed identity checks."
     },
@@ -1066,7 +1449,7 @@
       "repository": null,
       "provenance": "missing",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "DEFERRED",
       "reason": "Source declares idootop/git-mcp, but npm metadata has no matching repository or homepage."
     },
@@ -1082,7 +1465,7 @@
       "repository": "madnh/mcp-server-sqlite",
       "provenance": "verified",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact npm package exists and its current metadata passed identity checks."
     },
@@ -1098,7 +1481,7 @@
       "repository": "modelcontextprotocol/servers",
       "provenance": "registry-only",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact normalized PyPI package exists and its current metadata passed identity checks."
     },
@@ -1114,7 +1497,7 @@
       "repository": "modelcontextprotocol/servers",
       "provenance": "registry-only",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact normalized PyPI package exists and its current metadata passed identity checks."
     }
@@ -1127,7 +1510,7 @@
       "pushedAt": null,
       "licenseSpdx": null,
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "DEFERRED",
       "reason": "GitHub returned HTTP 404 for the repository declared by the source catalog."
     },
@@ -1138,7 +1521,7 @@
       "pushedAt": "2025-09-28T01:36:17Z",
       "licenseSpdx": "MIT",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact GitHub repository exists and is not archived."
     },
@@ -1149,7 +1532,7 @@
       "pushedAt": "2026-09-02T21:01:16Z",
       "licenseSpdx": "Apache-2.0",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact GitHub repository exists and is not archived."
     },
@@ -1157,10 +1540,10 @@
       "identity": "modelcontextprotocol/servers",
       "exists": true,
       "archived": false,
-      "pushedAt": "2026-09-02T15:04:35Z",
+      "pushedAt": "2026-09-03T01:15:45Z",
       "licenseSpdx": "NOASSERTION",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact GitHub repository exists and is not archived."
     },
@@ -1171,7 +1554,7 @@
       "pushedAt": "2024-12-18T03:38:30Z",
       "licenseSpdx": "MIT",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "DEFERRED",
       "reason": "GitHub repository exists but is archived."
     },
@@ -1182,7 +1565,7 @@
       "pushedAt": "2026-09-02T11:17:52Z",
       "licenseSpdx": "MIT",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact GitHub repository exists and is not archived."
     },
@@ -1193,7 +1576,7 @@
       "pushedAt": "2026-09-02T15:15:11Z",
       "licenseSpdx": "MIT",
       "metadataSource": "live",
-      "checkedAt": "2026-09-03T01:01:26.967Z",
+      "checkedAt": "2026-09-03T01:18:28.920Z",
       "status": "PASS",
       "reason": "Exact GitHub repository exists and is not archived."
     }

@@ -4,6 +4,7 @@ import {
   auditCuratedSources,
   auditGitHubRepository,
   auditPackage,
+  assertNoCredentialValues,
   buildLastGoodSnapshot,
   collectCuratedSources,
   fetchCuratedSource,
@@ -96,6 +97,116 @@ test('bridge README verification fills tool counts and exposes source-internal d
   assert.equal(entry.access.mode, 'requires-configuration');
 });
 
+test('remote URL userinfo is discarded without copying its value', () => {
+  const entry = normalizeCuratedSourceEntry({
+    id: 'unsafe-remote', name: 'Unsafe Remote', description: 'Public data endpoint.',
+    transport: 'streamable-http', url: 'https://alice:never-copy-this@example.com/mcp',
+  }, { sourceId: 'market', sourceFormat: 'market-json' });
+  assert.equal(entry.url, null);
+  assert.equal(entry.urlSanitization.rejectedUserInfo, true);
+  assert.equal(entry.verification.status, 'DEFERRED');
+  assert.equal(entry.access.mode, 'requires-configuration');
+  assert.doesNotMatch(JSON.stringify(entry), /alice|never-copy-this/);
+});
+
+test('credential query and fragment are removed from public and localhost URLs', () => {
+  const remote = normalizeCuratedSourceEntry({
+    id: 'remote', name: 'Remote', description: 'Public data endpoint.',
+    transport: 'streamable-http', url: 'https://example.com/mcp?api_key=never-copy-query#fragment',
+  }, { sourceId: 'market', sourceFormat: 'market-json' });
+  assert.equal(remote.url, 'https://example.com/mcp');
+  assert.equal(remote.urlSanitization.removedCredentialQuery, true);
+  assert.equal(remote.verification.status, 'DEFERRED');
+  assert.equal(remote.access.mode, 'requires-credentials');
+  assert.doesNotMatch(JSON.stringify(remote), /never-copy-query|fragment/);
+
+  const local = normalizeCuratedSourceEntry({
+    id: 'local', name: 'Local', description: 'Local MCP template.',
+    transport: 'streamable-http', url: 'http://localhost:3000/mcp?token=never-copy-local#fragment',
+  }, { sourceId: 'bridge', sourceFormat: 'bridge-json-directory' });
+  assert.equal(local.url, 'http://localhost:3000/mcp');
+  assert.equal(local.access.mode, 'requires-credentials');
+  assert.equal(local.verification.status, 'DEFERRED');
+  assert.doesNotMatch(JSON.stringify(local), /never-copy-local|fragment/);
+
+  const configuredLocal = normalizeCuratedSourceEntry({
+    id: 'configured-local', name: 'Configured Local', description: 'Local MCP template.',
+    transport: 'streamable-http', url: 'http://localhost:3000/mcp?workspace=never-copy-workspace',
+  }, { sourceId: 'bridge', sourceFormat: 'bridge-json-directory' });
+  assert.equal(configuredLocal.url, 'http://localhost:3000/mcp');
+  assert.equal(configuredLocal.access.mode, 'requires-configuration');
+  assert.doesNotMatch(JSON.stringify(configuredLocal), /never-copy-workspace/);
+
+  const plainLocal = normalizeCuratedSourceEntry({
+    id: 'plain-local', name: 'Plain Local', description: 'Local MCP template.',
+    transport: 'streamable-http', url: 'http://localhost:3000/mcp',
+  }, { sourceId: 'bridge', sourceFormat: 'bridge-json-directory' });
+  assert.equal(plainLocal.url, 'http://localhost:3000/mcp');
+  assert.equal(plainLocal.access.mode, 'template');
+});
+
+test('stdio output stores only an argument summary and redacts credential flag values', () => {
+  const entry = normalizeCuratedSourceEntry({
+    id: 'safe-args', name: 'Safe Args', description: 'Public research data.', transport: 'stdio', command: 'npx',
+    args: ['-y', '@example/server@latest', '--token', 'never-copy-token', '--api-key=never-copy-key', '--mode=readonly', '/private/path'],
+  }, { sourceId: 'market', sourceFormat: 'market-json' });
+  assert.equal(Object.hasOwn(entry, 'args'), false);
+  assert.equal(entry.package.name, '@example/server');
+  assert.deepEqual(entry.argumentSummary.credentialFlags, ['--api-key', '--token']);
+  assert.equal(entry.argumentSummary.redactedCredentialValueCount, 2);
+  assert.equal(entry.argumentSummary.positionalValueCount, 1);
+  assert.equal(entry.access.mode, 'requires-credentials');
+  assert.doesNotMatch(JSON.stringify(entry), /never-copy-token|never-copy-key|readonly|\/private\/path/);
+  assertNoCredentialValues(entry);
+});
+
+test('credential flag values cannot be misclassified and persisted as package names', () => {
+  const entry = normalizeCuratedSourceEntry({
+    id: 'safe-package', name: 'Safe Package', description: 'Public research data.', transport: 'stdio', command: 'npx',
+    args: ['--token', 'never-package-this-secret', '@example/actual-server@latest'],
+  }, { sourceId: 'market', sourceFormat: 'market-json' });
+  assert.equal(entry.package.name, '@example/actual-server');
+  assert.doesNotMatch(JSON.stringify(entry), /never-package-this-secret/);
+  assertNoCredentialValues(entry);
+
+  const headerEntry = normalizeCuratedSourceEntry({
+    id: 'safe-header-package', name: 'Safe Header Package', description: 'Public research data.', transport: 'stdio', command: 'npx',
+    args: ['--header', 'Authorization: Bearer never-package-this-header', '@example/actual-server@latest'],
+  }, { sourceId: 'market', sourceFormat: 'market-json' });
+  assert.equal(headerEntry.package.name, '@example/actual-server');
+  assert.deepEqual(headerEntry.argumentSummary.credentialFlags, ['--header']);
+  assert.doesNotMatch(JSON.stringify(headerEntry), /never-package-this-header|Authorization|Bearer/);
+  assertNoCredentialValues(headerEntry);
+});
+
+test('credential defense accepts explicit placeholders and rejects concrete secrets', () => {
+  assert.doesNotThrow(() => assertNoCredentialValues({
+    note: 'Use --token <TOKEN>, api_key=${API_KEY}, and secret={{SECRET}}; MCP_TOKEN only if auth is required.',
+    url: 'https://example.com/mcp',
+  }));
+  assert.throws(() => assertNoCredentialValues({ note: '--token concrete-secret-value' }), /credential assignment/);
+  assert.throws(() => assertNoCredentialValues({ url: 'https://example.com/mcp?api_key=concrete-secret-value' }), /credential assignment|not stripped/);
+  assert.throws(() => assertNoCredentialValues({ args: ['--token', '<TOKEN>'] }), /must not persist raw stdio args/);
+});
+
+test('last-good snapshot contains only the stripped URL, never its original query value', () => {
+  const entry = normalizeCuratedSourceEntry({
+    id: 'remote', name: 'Remote', description: 'Public data endpoint.',
+    transport: 'streamable-http', url: 'https://example.com/mcp?token=never-copy-to-snapshot#fragment',
+  }, { sourceId: 'market', sourceFormat: 'market-json' });
+  const report = {
+    generatedAt: NOW,
+    summary: { sourceModes: { market: 'live' } },
+    sources: [{ id: 'market', mode: 'live', entries: [entry], error: null }],
+    leads: [{ identity: 'url:https://example.com/mcp', package: null, repositoryAudit: null }],
+  };
+  const snapshot = buildLastGoodSnapshot(report);
+  const serialized = JSON.stringify(snapshot);
+  assert.match(serialized, /https:\/\/example\.com\/mcp/);
+  assert.doesNotMatch(serialized, /never-copy-to-snapshot|fragment|\?token=/);
+  assertNoCredentialValues(snapshot);
+});
+
 test('failed live source fetch retains the checked-in last-good entries', async () => {
   const lastGood = {
     schemaVersion: 1,
@@ -118,6 +229,28 @@ test('source paths reject traversal before any network request', async () => {
   await assert.rejects(() => fetchCuratedSource({
     id: 'panel', repository: 'example/panel', ref: 'main', format: 'panel-typescript', path: '../catalog.ts',
   }, { fetchImpl: async () => { throw new Error('network should not be called'); } }), /without traversal segments/);
+});
+
+test('pinned GitHub file falls back to the authenticated contents API', async () => {
+  const catalog = "export const DEFAULT_CATALOG = Object.freeze([{ id: 'data', name: 'Data', description: 'Public statistics.', transport: 'stdio', command: 'npx', args: ['-y', '@example/data'] }])";
+  let rawAttempts = 0;
+  const fetched = await fetchCuratedSource({
+    id: 'panel', repository: 'example/panel', ref: 'main', format: 'panel-typescript', path: 'src/catalog.ts',
+  }, {
+    retrievedAt: NOW,
+    fetchImpl: async (url) => {
+      const value = String(url);
+      if (value.includes('/commits/')) return new Response(JSON.stringify({ sha: REVISION, commit: { committer: { date: NOW } } }), { status: 200 });
+      if (value.startsWith('https://raw.githubusercontent.com/')) {
+        rawAttempts += 1;
+        throw new Error('raw host unavailable');
+      }
+      return new Response(JSON.stringify({ type: 'file', encoding: 'base64', content: Buffer.from(catalog).toString('base64') }), { status: 200 });
+    },
+  });
+  assert.equal(rawAttempts, 3);
+  assert.equal(fetched.entries.length, 1);
+  assert.equal(fetched.entries[0].package.name, '@example/data');
 });
 
 test('bridge source accepts a repository-relative directory prefix with a trailing slash', async () => {

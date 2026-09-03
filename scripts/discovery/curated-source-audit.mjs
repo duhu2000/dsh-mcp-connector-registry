@@ -49,17 +49,26 @@ async function boundedResponse(url, {
   requestTimeoutMs = 20_000,
   acceptStatuses = [],
 } = {}) {
-  const response = await fetchImpl(url, {
-    headers,
-    redirect: 'error',
-    signal: AbortSignal.timeout(requestTimeoutMs),
-  });
-  if (!response.ok && !acceptStatuses.includes(response.status)) throw new Error(`${new URL(url).hostname} returned HTTP ${response.status}`);
-  const declaredLength = Number(response.headers.get('content-length') ?? 0);
-  if (declaredLength > MAX_RESPONSE_BYTES) throw new Error(`${new URL(url).hostname} response exceeds ${MAX_RESPONSE_BYTES} bytes`);
-  const text = await response.text();
-  if (Buffer.byteLength(text) > MAX_RESPONSE_BYTES) throw new Error(`${new URL(url).hostname} response exceeds ${MAX_RESPONSE_BYTES} bytes`);
-  return { response, text };
+  let lastError;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      const response = await fetchImpl(url, {
+        headers,
+        redirect: 'error',
+        signal: AbortSignal.timeout(requestTimeoutMs),
+      });
+      if (!response.ok && !acceptStatuses.includes(response.status)) throw new Error(`${new URL(url).hostname} returned HTTP ${response.status}`);
+      const declaredLength = Number(response.headers.get('content-length') ?? 0);
+      if (declaredLength > MAX_RESPONSE_BYTES) throw new Error(`${new URL(url).hostname} response exceeds ${MAX_RESPONSE_BYTES} bytes`);
+      const text = await response.text();
+      if (Buffer.byteLength(text) > MAX_RESPONSE_BYTES) throw new Error(`${new URL(url).hostname} response exceeds ${MAX_RESPONSE_BYTES} bytes`);
+      return { response, text };
+    } catch (error) {
+      lastError = error;
+      if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 100 * (2 ** attempt)));
+    }
+  }
+  throw lastError;
 }
 
 async function fetchJson(url, options) {
@@ -95,6 +104,28 @@ function rawGithubUrl(repository, revision, path) {
   return `https://raw.githubusercontent.com/${repository}/${revision}/${encodedPath}`;
 }
 
+async function fetchPinnedGithubText(repository, revision, path, options) {
+  try {
+    return (await boundedResponse(rawGithubUrl(repository, revision, path), options)).text;
+  } catch (rawError) {
+    const encodedPath = path.split('/').map(encodeURIComponent).join('/');
+    const url = `https://api.github.com/repos/${repository}/contents/${encodedPath}?ref=${revision}`;
+    try {
+      const document = (await fetchJson(url, options)).value;
+      if (document?.type !== 'file' || document?.encoding !== 'base64' || typeof document?.content !== 'string') {
+        throw new Error('GitHub contents response did not include a base64 file');
+      }
+      const encoded = document.content.replace(/\s+/g, '');
+      if (!/^[A-Za-z0-9+/]*={0,2}$/.test(encoded)) throw new Error('GitHub contents response used invalid base64');
+      const text = Buffer.from(encoded, 'base64').toString('utf8');
+      if (Buffer.byteLength(text) > MAX_RESPONSE_BYTES) throw new Error(`GitHub file exceeds ${MAX_RESPONSE_BYTES} bytes`);
+      return text;
+    } catch (apiError) {
+      throw new Error(`GitHub file fetch failed through raw and contents APIs: ${safeError(rawError)}; ${safeError(apiError)}`);
+    }
+  }
+}
+
 export async function fetchCuratedSource(sourceInput, {
   fetchImpl = fetch,
   githubToken,
@@ -120,14 +151,14 @@ export async function fetchCuratedSource(sourceInput, {
       .sort();
     if (paths.length === 0 || paths.length > 100) throw new Error(`${source.id} JSON definition count ${paths.length} is outside 1-100`);
     const documents = await Promise.all(paths.map(async (path) => {
-      const { text } = await boundedResponse(rawGithubUrl(source.repository, revision, path), { fetchImpl, requestTimeoutMs });
+      const text = await fetchPinnedGithubText(source.repository, revision, path, { fetchImpl, headers, requestTimeoutMs });
       return { path, text };
     }));
-    const { text: readmeText } = await boundedResponse(rawGithubUrl(source.repository, revision, 'README.md'), { fetchImpl, requestTimeoutMs });
+    const readmeText = await fetchPinnedGithubText(source.repository, revision, 'README.md', { fetchImpl, headers, requestTimeoutMs });
     parsed = parseAndNormalizeSource({ format: source.format, sourceId: source.id, documents, readmeText });
   } else {
     paths = [source.path];
-    const { text } = await boundedResponse(rawGithubUrl(source.repository, revision, source.path), { fetchImpl, requestTimeoutMs });
+    const text = await fetchPinnedGithubText(source.repository, revision, source.path, { fetchImpl, headers, requestTimeoutMs });
     parsed = parseAndNormalizeSource({ format: source.format, sourceId: source.id, text });
   }
   return {
@@ -764,7 +795,64 @@ export function renderCuratedSourceReport(report) {
 }
 
 export function assertNoCredentialValues(value) {
-  const serialized = JSON.stringify(value);
-  if (/Bearer\s+[A-Za-z0-9._~-]{12,}/i.test(serialized)) throw new Error('Curated source output appears to contain a Bearer credential');
-  if (/(?:api[_-]?key|token|secret|password)\s*[=:]\s*[A-Za-z0-9._~-]{16,}/i.test(serialized)) throw new Error('Curated source output appears to contain a credential value');
+  const isPlaceholder = (input) => {
+    const text = String(input ?? '').trim();
+    return !text
+      || /^<[^>]+>$/.test(text)
+      || /^\$\{[^}]+\}$/.test(text)
+      || /^\{\{[^}]+\}\}$/.test(text)
+      || /^(?:your|example|placeholder|replace(?:[-_ ]?me)?|redacted|omitted|none|null)(?:[-_ ].*)?$/i.test(text)
+      || /^\[(?:redacted|omitted)\]$/i.test(text);
+  };
+  const credentialField = /^(?:api[-_]?key|access[-_]?key|token|secret|password|passwd|authorization|auth)$/i;
+  const inspectString = (input, path) => {
+    const text = String(input);
+    if (/\bBearer\s+[A-Za-z0-9._~+/=-]{8,}/i.test(text) || /\bBasic\s+[A-Za-z0-9+/=]{8,}/i.test(text)) {
+      throw new Error(`Curated source output appears to contain an authorization credential at ${path}`);
+    }
+    if (/https?:\/\/[^\s/@:]+:[^\s/@]+@/i.test(text)) {
+      throw new Error(`Curated source output appears to contain URL userinfo at ${path}`);
+    }
+    const valuePattern = '("[^"]*"|\'[^\']*\'|<[^>]+>|\\$\\{[^}]+\\}|\\{\\{[^}]+\\}\\}|[^\\s&,;}\\]]+)';
+    const assignments = [
+      new RegExp(`(?:^|\\s)--?(?:api[-_]?key|access[-_]?key|token|secret|password|passwd|authorization|auth)(?:=|\\s+)${valuePattern}`, 'gi'),
+      new RegExp(`(?:^|[\\s?&,;])(?:api[-_]?key|access[-_]?key|token|secret|password|passwd|authorization|auth)\\s*[=:]\\s*${valuePattern}`, 'gi'),
+    ];
+    for (const assignment of assignments) {
+      for (const match of text.matchAll(assignment)) {
+        const candidate = match[1].replace(/^["']|["']$/g, '');
+        if (!isPlaceholder(candidate)) throw new Error(`Curated source output appears to contain a credential assignment at ${path}`);
+      }
+    }
+    if (/^https?:\/\//i.test(text)) {
+      try {
+        const parsed = new URL(text);
+        if (parsed.username || parsed.password || parsed.search || parsed.hash) {
+          throw new Error(`Curated source output URL is not stripped of userinfo, query, and fragment at ${path}`);
+        }
+      } catch (error) {
+        if (error instanceof Error && error.message.startsWith('Curated source output URL')) throw error;
+      }
+    }
+  };
+  const walk = (item, path = '$') => {
+    if (typeof item === 'string') {
+      inspectString(item, path);
+      return;
+    }
+    if (Array.isArray(item)) {
+      item.forEach((entry, index) => walk(entry, `${path}[${index}]`));
+      return;
+    }
+    if (!item || typeof item !== 'object') return;
+    for (const [key, entry] of Object.entries(item)) {
+      const entryPath = `${path}.${key}`;
+      if (key === 'args') throw new Error(`Curated source output must not persist raw stdio args at ${entryPath}`);
+      if (credentialField.test(key) && typeof entry === 'string' && !isPlaceholder(entry)) {
+        throw new Error(`Curated source output appears to contain a credential field value at ${entryPath}`);
+      }
+      walk(entry, entryPath);
+    }
+  };
+  walk(value);
 }

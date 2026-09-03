@@ -1,6 +1,9 @@
-import { canonicalPublicUrl, sanitizeText } from './candidate-model.mjs';
+import { canonicalPackageName, canonicalPublicUrl, sanitizeText } from './candidate-model.mjs';
 
 const ENV_NAME = /^[A-Z][A-Z0-9_]{1,99}$/;
+const EXECUTABLE_NAME = /^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$/;
+const CREDENTIAL_NAME = /(?:^|[-_])(api[-_]?key|access[-_]?key|token|secret|password|passwd|authorization|auth)(?:$|[-_])/i;
+const CREDENTIAL_FLAG = /^(?:--?(?:api[-_]?key|access[-_]?key|token|secret|password|passwd|authorization|auth|headers?|env)|-[HeE])(?:=|$)/i;
 
 function unique(values) {
   return [...new Set(values.filter(Boolean))];
@@ -189,24 +192,114 @@ export function parseBridgeReadmeVerification(text) {
 function cleanPackageSpec(value) {
   const spec = sanitizeText(value, 300);
   if (!spec || spec.startsWith('-')) return null;
-  if (spec.startsWith('@')) {
-    const slash = spec.indexOf('/');
-    const versionAt = spec.lastIndexOf('@');
-    return versionAt > slash ? spec.slice(0, versionAt) : spec;
-  }
-  const versionAt = spec.indexOf('@');
-  return versionAt > 0 ? spec.slice(0, versionAt) : spec;
+  const canonical = canonicalPackageName(spec);
+  if (!canonical || (!canonical.startsWith('@') && !/mcp/i.test(canonical))) return null;
+  return canonical;
 }
 
 function inferPackage(command, args, explicitPackage) {
   const explicit = cleanPackageSpec(explicitPackage);
   if (explicit) return { registry: 'npm', name: explicit };
   const executable = sanitizeText(command, 100).toLowerCase();
-  const packageSpec = (Array.isArray(args) ? args : []).map(cleanPackageSpec).find(Boolean);
+  const safeCandidates = [];
+  const inputArgs = Array.isArray(args) ? args : [];
+  for (let index = 0; index < inputArgs.length; index += 1) {
+    const value = sanitizeText(inputArgs[index], 300);
+    if (CREDENTIAL_FLAG.test(value)) {
+      if (!value.includes('=') && index + 1 < inputArgs.length && !String(inputArgs[index + 1]).startsWith('-')) index += 1;
+      continue;
+    }
+    if (!value.startsWith('-')) safeCandidates.push(value);
+  }
+  const packageSpec = cleanPackageSpec(safeCandidates[0]);
   if (!packageSpec) return null;
   if (executable === 'npx') return { registry: 'npm', name: packageSpec };
   if (executable === 'uvx') return { registry: 'pypi', name: packageSpec };
   return null;
+}
+
+function summarizeStdioArgs(args, packageInfo) {
+  const summary = {
+    count: args.length,
+    flags: [],
+    credentialFlags: [],
+    positionalValueCount: 0,
+    redactedCredentialValueCount: 0,
+  };
+  for (let index = 0; index < args.length; index += 1) {
+    const value = sanitizeText(args[index], 300);
+    if (!value) continue;
+    if (value.startsWith('-')) {
+      const flag = value.split('=', 1)[0].toLowerCase();
+      summary.flags.push(flag);
+      if (CREDENTIAL_FLAG.test(value)) {
+        summary.credentialFlags.push(flag);
+        if (value.includes('=')) summary.redactedCredentialValueCount += 1;
+        else if (index + 1 < args.length && !String(args[index + 1]).startsWith('-')) {
+          summary.redactedCredentialValueCount += 1;
+          index += 1;
+        }
+      }
+      continue;
+    }
+    if (packageInfo && cleanPackageSpec(value)?.toLowerCase() === packageInfo.name.toLowerCase()) continue;
+    summary.positionalValueCount += 1;
+  }
+  summary.flags = unique(summary.flags).sort();
+  summary.credentialFlags = unique(summary.credentialFlags).sort();
+  return summary;
+}
+
+function sanitizeSourceUrl(value) {
+  if (value == null || value === '') {
+    return {
+      url: null, valid: true, localTemplate: false, rejectedUserInfo: false,
+      removedQuery: false, removedCredentialQuery: false, removedFragment: false,
+    };
+  }
+  let parsed;
+  try {
+    parsed = new URL(String(value));
+  } catch {
+    return {
+      url: null, valid: false, localTemplate: false, rejectedUserInfo: false,
+      removedQuery: false, removedCredentialQuery: false, removedFragment: false,
+    };
+  }
+  const rejectedUserInfo = Boolean(parsed.username || parsed.password);
+  const removedQuery = Boolean(parsed.search);
+  const removedCredentialQuery = [...parsed.searchParams.keys()].some((name) => CREDENTIAL_NAME.test(name));
+  const removedFragment = Boolean(parsed.hash);
+  const hostname = parsed.hostname.toLowerCase();
+  const localTemplate = hostname === 'localhost' || hostname === '127.0.0.1';
+  if (rejectedUserInfo) {
+    return {
+      url: null, valid: false, localTemplate, rejectedUserInfo,
+      removedQuery, removedCredentialQuery, removedFragment,
+    };
+  }
+  parsed.search = '';
+  parsed.hash = '';
+  if (localTemplate) {
+    if (!['http:', 'https:'].includes(parsed.protocol)) {
+      return {
+        url: null, valid: false, localTemplate, rejectedUserInfo: false,
+        removedQuery, removedCredentialQuery, removedFragment,
+      };
+    }
+    parsed.hostname = hostname;
+    if ((parsed.protocol === 'https:' && parsed.port === '443') || (parsed.protocol === 'http:' && parsed.port === '80')) parsed.port = '';
+    if (parsed.pathname !== '/') parsed.pathname = parsed.pathname.replace(/\/+$/, '');
+    return {
+      url: parsed.toString(), valid: true, localTemplate, rejectedUserInfo: false,
+      removedQuery, removedCredentialQuery, removedFragment,
+    };
+  }
+  const url = canonicalPublicUrl(parsed.toString());
+  return {
+    url, valid: Boolean(url), localTemplate: false, rejectedUserInfo: false,
+    removedQuery, removedCredentialQuery, removedFragment,
+  };
 }
 
 function verificationFromBridge(entry, readmeVerification) {
@@ -230,8 +323,14 @@ function verificationFromBridge(entry, readmeVerification) {
   return { status: readme?.status ?? 'SKIP', checkedAt, toolCount, reason: readme?.reason || 'Source does not persist a runtime verification result.' };
 }
 
-function classifyAccess({ id, description, url, requiredEnvNames, verification, packageInfo, args }) {
+function classifyAccess({ id, description, commandRejected, url, urlSanitization, requiredEnvNames, verification, packageInfo, args, argumentSummary }) {
   const text = `${id} ${description} ${verification.reason}`.toLowerCase();
+  if (commandRejected) return { mode: 'requires-configuration', reason: 'Source command was not a safe executable name and was discarded.' };
+  if (urlSanitization?.rejectedUserInfo || urlSanitization?.valid === false) {
+    return { mode: 'requires-configuration', reason: 'Source URL was invalid or contained userinfo; the unsafe value was discarded.' };
+  }
+  if (urlSanitization?.removedCredentialQuery) return { mode: 'requires-credentials', reason: 'Credential-like URL query parameters were removed; explicit user configuration is required.' };
+  if (urlSanitization?.removedQuery) return { mode: 'requires-configuration', reason: 'URL query parameters were removed; endpoint semantics require human review.' };
   if (url) {
     try {
       const hostname = new URL(url).hostname;
@@ -241,6 +340,7 @@ function classifyAccess({ id, description, url, requiredEnvNames, verification, 
     }
   }
   if (requiredEnvNames.length > 0) return { mode: 'requires-credentials', reason: `Requires user-supplied environment/header names: ${requiredEnvNames.join(', ')}.` };
+  if (argumentSummary?.credentialFlags?.length > 0) return { mode: 'requires-credentials', reason: `Credential argument flags were detected and their values discarded: ${argumentSummary.credentialFlags.join(', ')}.` };
   if (/heavy|download(?:s|ing)? browsers?|chromium|first launch/i.test(text)) return { mode: 'heavy-dependency', reason: 'Source declares a heavy first-run browser dependency.' };
   if (packageInfo?.name === '@modelcontextprotocol/server-filesystem'
     || /edit (?:the )?args|existing root dir|path\/to\/allowed/i.test(text)
@@ -265,11 +365,13 @@ export function normalizeCuratedSourceEntry(entry, { sourceId, sourceFormat, rea
   const description = requiredString(rawDescription, `${sourceId}/${id} description`);
   const transport = requiredString(entry.transport, `${sourceId}/${id} transport`);
   if (!['stdio', 'streamable-http'].includes(transport)) throw new Error(`${sourceId}/${id} uses unsupported transport ${transport}`);
-  const command = transport === 'stdio' ? requiredString(entry.command, `${sourceId}/${id} command`) : null;
+  const declaredCommand = transport === 'stdio' ? requiredString(entry.command, `${sourceId}/${id} command`) : null;
+  const command = declaredCommand && EXECUTABLE_NAME.test(declaredCommand) ? declaredCommand : null;
+  const commandRejected = Boolean(declaredCommand && !command);
   const args = transport === 'stdio' ? (Array.isArray(entry.args) ? entry.args.map((arg) => sanitizeText(arg, 300)) : []) : [];
   const rawUrl = transport === 'streamable-http' ? entry.url : null;
-  const publicUrl = rawUrl ? canonicalPublicUrl(rawUrl) : null;
-  const safeUrl = rawUrl && !publicUrl ? sanitizeText(rawUrl, 500) : publicUrl;
+  const urlSanitization = sanitizeSourceUrl(rawUrl);
+  const safeUrl = urlSanitization.url;
   const requiredEnvNames = unique([
     ...(Array.isArray(entry.envKeys) ? entry.envKeys : []),
     ...(Array.isArray(entry.headerKeys) ? entry.headerKeys : []),
@@ -277,9 +379,26 @@ export function normalizeCuratedSourceEntry(entry, { sourceId, sourceFormat, rea
     ...(Array.isArray(entry.requiredEnv) ? entry.requiredEnv : []),
   ].map((name) => sanitizeText(name, 100)).filter((name) => ENV_NAME.test(name))).sort();
   const packageInfo = transport === 'stdio' ? inferPackage(command, args, entry.npmPackage) : null;
-  const verification = sourceVerification(sourceFormat, entry, readmeVerification);
+  const argumentSummary = transport === 'stdio' ? summarizeStdioArgs(args, packageInfo) : null;
+  let verification = sourceVerification(sourceFormat, entry, readmeVerification);
+  if (rawUrl && (urlSanitization.valid === false || urlSanitization.removedQuery)) {
+    verification = {
+      ...verification,
+      status: 'DEFERRED',
+      reason: urlSanitization.valid === false
+        ? 'Source URL was invalid or contained userinfo; the unsafe value was discarded pending human review.'
+      : 'Source URL query parameters were removed from persisted evidence; endpoint semantics require human review.',
+    };
+  }
+  if (commandRejected) {
+    verification = {
+      ...verification,
+      status: 'DEFERRED',
+      reason: 'Source command was not a safe executable name and was discarded pending human review.',
+    };
+  }
   const homepage = canonicalPublicUrl(entry.homepage, { stripQuery: true });
-  const access = classifyAccess({ id, description, url: safeUrl, requiredEnvNames, verification, packageInfo, args });
+  const access = classifyAccess({ id, description, commandRejected, url: safeUrl, urlSanitization, requiredEnvNames, verification, packageInfo, args, argumentSummary });
   return {
     entryId: id,
     title,
@@ -287,8 +406,9 @@ export function normalizeCuratedSourceEntry(entry, { sourceId, sourceFormat, rea
     homepage,
     transport,
     command,
-    args,
+    argumentSummary,
     url: safeUrl,
+    urlSanitization,
     package: packageInfo,
     requiredEnvNames,
     access,

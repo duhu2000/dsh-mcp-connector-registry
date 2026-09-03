@@ -69,7 +69,7 @@ npm run cdn:purge
 `Cross-Origin-Resource-Policy`，避免 URL 可访问但在 DSH Desktop 中被浏览器拦截。
 `cdn:purge` 会清理公共 `@main/catalog.json` 缓存并按完整 SHA-256 验证 CDN 内容，供维护者应急重跑；正常发布由 CI 自动执行，不需要贡献者或用户手工调用。
 
-`candidates:curated-sources` 只读审计 `dsh-mcp-panel`、`dsh-mcp-market` 和 `dsh-mcp-bridge` 的精选目录，将其与当前公共 Registry 去重，并检查 npm/PyPI 包存在性、精确名称、废弃状态、包与仓库归属、GitHub 仓库存在性及归档状态、配置成本、最近运行证据和工具数量。在线源临时失败时使用[已审核的 last-good 快照](discovery-sources/curated-last-good.json)保留候选，同时明确标记回退来源；该流程只输出候选报告，绝不自动新增、发布或删除 Connector。初次审计结论见[竞品精选目录候选源只读审计](docs/audits/CURATED-CANDIDATE-SOURCE-AUDIT-2026-09-03.md)。
+`candidates:curated-sources` 只读审计 `dsh-mcp-panel`、`dsh-mcp-market` 和 `dsh-mcp-bridge` 的精选目录，将其与当前公共 Registry 去重，并检查 npm/PyPI 包存在性、精确名称、废弃状态、包与仓库归属、GitHub 仓库存在性及归档状态、配置成本、最近运行证据和工具数量。持久化报告会清除 URL userinfo、query、fragment，stdio 仅保留不含参数值的安全摘要；在线源临时失败时使用[已审核的 last-good 快照](discovery-sources/curated-last-good.json)保留候选，同时明确标记回退来源。该流程只输出候选报告，绝不自动新增、发布或删除 Connector。初次审计结论见[竞品精选目录候选源只读审计](docs/audits/CURATED-CANDIDATE-SOURCE-AUDIT-2026-09-03.md)。
 
 完整描述格式见 [`schema/connector.schema.json`](schema/connector.schema.json)，贡献和安全规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md) 与 [`SECURITY.md`](SECURITY.md)。PR 模板会要求提供服务官网、MCP 配置文档、鉴权方式和 Logo 来源，便于维护者核验。
 
