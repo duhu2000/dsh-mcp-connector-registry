@@ -3,7 +3,7 @@
 本清单记录对标市场中暂未安全上架的候选，以及已上架但仍需复核的健康项。它不是收录承诺，
 也不保留 `id`；服务商或贡献者仍应按 [`ONBOARDING.md`](ONBOARDING.md) 提交可验证资料。
 
-更新时间：2026-09-02。
+更新时间：2026-09-04。
 
 ## 上架门槛
 
@@ -29,6 +29,7 @@
 | `coderabbit` | 未确认可供第三方客户端使用的公开 MCP Server | 官方 MCP 配置文档和可探针端点 |
 | `google-workspace` | Gmail、Drive、Docs、Sheets、Slides、Calendar、Chat、People 等官方 MCP 需要用户提供固定 OAuth Client ID/Secret；当前插件仅支持 DCR，无法完成该授权流程 | 插件先支持“静态 OAuth Client ID/Secret + PKCE”、本机安全存储和完整回归测试 |
 | `blender` | 官方 MCP 会在 Blender 中无防护执行 LLM 生成的 Python 代码，现有市场交互不足以表达任意代码执行风险 | 完成显式风险确认、命令预览、隔离环境与安装流程验收后单独评估 |
+| `figma` | Figma 官方远程 MCP 只允许列入 Figma MCP Catalog 的客户端连接；当前 DSH / `dsh-mcp-connector` 尚未获得客户端准入，OAuth 动态客户端注册会返回 HTTP 403，因此从公共市场暂时撤下 | Figma 接受客户端准入申请，并在 DSH Web 与 Desktop 上完成一次真实 OAuth 授权、工具发现和只读调用验收 |
 | `fayan-legal`、`mozun-trademark`、`ths-legal`、`mingbai-lawyer` | 未核验到可公开接入的官方 MCP 端点 | 服务商提交官方端点、鉴权和 Logo 来源 |
 
 ## 本轮保留的待验收数据 MCP

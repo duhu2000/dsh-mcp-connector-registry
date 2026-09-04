@@ -106,7 +106,7 @@ test('第二批连接器覆盖远程 OAuth 与多字段 stdio 凭据映射', asy
     await readFile(resolve('connectors', `${id}.json`), 'utf8'),
   );
   const batchIds = [
-    'amap', 'bocha-search', 'dingtalk', 'figma', 'gitlab',
+    'amap', 'bocha-search', 'dingtalk', 'gitlab',
     'google-calendar', 'langfuse', 'm365', 'mixpanel', 'neon',
     'producthunt', 'slack', 'temporal', 'tushare', 'vercel',
   ];
@@ -121,7 +121,6 @@ test('第二批连接器覆盖远程 OAuth 与多字段 stdio 凭据映射', asy
   assert.equal(byId.gitlab.auth.tokenEndpointAuthMethod, 'client_secret_basic');
   assert.equal(byId.neon.servers[0].url, 'https://mcp.neon.tech/mcp');
   assert.equal(byId.neon.auth.tokenEndpointAuthMethod, 'client_secret_post');
-  assert.equal(byId.figma.auth.scope, 'mcp:connect');
   assert.equal(byId.temporal.servers[0].serverName, 'temporal-docs');
 
   assert.deepEqual(
