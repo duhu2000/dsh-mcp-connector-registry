@@ -33,6 +33,14 @@ const BATCH_FOUR_IDS = [
   'starwell-world-statistics',
 ];
 
+const BATCH_FIVE_IDS = [
+  'bis-global-statistics',
+  'eia-us-energy-data',
+  'fred-economic-data',
+  'pubmed-biomedical-literature',
+  'usgs-earthquake-catalog',
+];
+
 async function fixtureCandidate() {
   const fixture = JSON.parse(await readFile(new URL('./fixtures/official-registry.json', import.meta.url), 'utf8'));
   return scoreCandidate(normalizeOfficialServer(fixture.servers[0], { retrievedAt: '2026-08-31T00:00:00.000Z' }));
@@ -202,6 +210,41 @@ test('approved batch four records support four-item batches and service terms', 
   assert.equal(agentnative.license.status, 'not-applicable');
   assert.equal(agentnative.license.spdxId, null);
   assert.match(agentnative.license.evidenceUrl, /terms/);
+});
+
+test('approved batch five records preserve upstream terms and direct starter prompts', async () => {
+  const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-5.manifest.json', import.meta.url), 'utf8'));
+  assert.equal(manifest.approval.decision, 'approved');
+  assert.equal(manifest.approval.reviewedBy, 'DuHu');
+  assert.equal(manifest.candidates.length, BATCH_FIVE_IDS.length);
+  for (const id of BATCH_FIVE_IDS) {
+    const item = manifest.candidates.find((candidate) => candidate.id === id);
+    const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
+    const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
+    assert.ok(item, `${id} is present in the review manifest`);
+    assert.equal(record.review.decision, 'approved');
+    assert.equal(record.review.reviewedBy, 'DuHu');
+    assert.equal(record.probe.status, 'pass');
+    assert.equal(record.runtimeAcceptance.status, 'pass');
+    assert.equal(record.score.band, 'selected');
+    assert.equal(record.license.status, 'declared');
+    assert.equal(descriptor.id, id);
+    assert.equal(descriptor.auth.mode, 'none');
+    assert.equal(descriptor.probeStatus, 'pass');
+    assert.equal(descriptor.prompts.length, 2);
+    assert.equal('promptVariables' in descriptor, false);
+    assert.equal(item.starterPromptsZh.some((prompt) => /\{\{|研究问题|请填写/.test(prompt)), false);
+    assert.equal(descriptor.prompts.some((prompt) => /\{\{|研究问题|请填写/.test(prompt.text)), false);
+    assert.match(descriptor.description, /(?:独立社区|社区独立|独立项目|独立服务|第三方)/);
+    assert.match(descriptor.description, /(?:并非|不是|非).{0,40}官方/);
+  }
+
+  const fred = JSON.parse(await readFile(new URL('../connectors/fred-economic-data.json', import.meta.url), 'utf8'));
+  const pubmed = JSON.parse(await readFile(new URL('../connectors/pubmed-biomedical-literature.json', import.meta.url), 'utf8'));
+  assert.match(fred.description, /API Key/);
+  assert.match(fred.description, /未获圣路易斯联储认可或认证/);
+  assert.match(pubmed.description, /文章级许可/);
+  assert.match(pubmed.description, /不构成医疗诊断或治疗建议/);
 });
 
 test('Connector generation refuses a placeholder prompt', async () => {

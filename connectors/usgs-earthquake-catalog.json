@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "usgs-earthquake-catalog",
+  "name": "USGS 全球地震目录",
+  "vendor": "Pipeworx（独立第三方服务）",
+  "icon": "🌋",
+  "category": "调研分析",
+  "summary": "全球地震 / 震级深度 / 区域检索 / 事件详情",
+  "description": "连接 Pipeworx 的 USGS Earthquake Catalog 专用公共 MCP 端点，按时间、震级、深度、经纬度或事件 ID 检索全球地震并统计结果。结果应保留 USGS 事件 ID、UTC 时间、震级类型、坐标、深度、状态、更新时间和官方详情链接；数据适合研究与信息查询，不应单独用于实时预警或应急决策。USGS 数据通常属于美国公共领域，使用时仍应注明 U.S. Geological Survey 来源。端点还包含 Pipeworx 网关通用工具。本连接器由 Pipeworx 独立第三方维护，并非 USGS 官方产品。",
+  "tags": [
+    "USGS",
+    "地震",
+    "地质",
+    "地理空间",
+    "灾害监测",
+    "事件目录",
+    "公共数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/pipeworx-io/mcp-usgs-earthquakes",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788587696257,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "usgs-earthquake-catalog",
+      "url": "https://gateway.pipeworx.io/usgs-earthquakes/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "盘点近期强震事件",
+      "text": "查询过去 30 天全球震级 6.0 及以上地震，按时间倒序列出 USGS 事件 ID、UTC 时间、地点、震级类型、深度、坐标、状态、更新时间和官方详情链接，并注明查询时间。",
+      "server": "main"
+    },
+    {
+      "title": "检索日本周边地震",
+      "text": "查询 2025 年日本本州中心点北纬 36.2、东经 138.3、半径 800 公里内震级 5.0 及以上地震，汇总数量和震级分布，并列出事件 ID、时间、深度、坐标、来源链接及目录可能修订的提示。",
+      "server": "main"
+    }
+  ]
+}

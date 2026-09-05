@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "pubmed-biomedical-literature",
+  "name": "PubMed 生物医学文献",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "🩺",
+  "category": "调研分析",
+  "summary": "PubMed / Europe PMC / MeSH / 引用与开放全文",
+  "description": "连接 cyanheads 托管的 PubMed MCP，检索 PubMed 与 Europe PMC，读取论文元数据、摘要、MeSH 主题词、引用关系，并在明确可用时访问 PMC、Europe PMC 或 Unpaywall 开放全文。结果应保留 PMID、PMCID、DOI、来源库、检索式、发表时间、全文可用性和文章级许可；可免费阅读不等于允许复制或再发布，摘要和全文可能受版权保护。文献检索结果不构成医疗诊断或治疗建议。本连接器由 cyanheads 独立社区维护，并非 NCBI、NLM、NIH 或医疗机构官方产品。",
+  "tags": [
+    "PubMed",
+    "生物医学",
+    "文献检索",
+    "MeSH",
+    "引用",
+    "开放全文",
+    "科研数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/pubmed-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788587696257,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "pubmed-biomedical-literature",
+      "url": "https://pubmed.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检索减重药物证据",
+      "text": "检索 2022—2026 年 GLP-1 受体激动剂用于成人肥胖管理的随机对照试验和系统综述，列出 PMID、DOI、研究类型、发表时间、期刊、检索式、引用信息及开放全文可用性，不超出摘要或全文证据下结论。",
+      "server": "main"
+    },
+    {
+      "title": "评估家庭血压监测研究",
+      "text": "检索 2020—2026 年家庭血压监测改善高血压控制效果的系统综述和荟萃分析，补充相关 MeSH 词并列出 PMID、PMCID 或 DOI、样本范围、主要结局、引用关系、来源链接和文章级许可。",
+      "server": "main"
+    }
+  ]
+}

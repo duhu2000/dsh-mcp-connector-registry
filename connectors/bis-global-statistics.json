@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "bis-global-statistics",
+  "name": "BIS 全球银行与金融统计",
+  "vendor": "Pipeworx（独立第三方服务）",
+  "icon": "🏦",
+  "category": "金融投资",
+  "summary": "信贷缺口 / 汇率利率 / 银行统计 / SDMX 数据流",
+  "description": "连接 Pipeworx 的 BIS 专用公共 MCP 端点，发现并查询国际清算银行公开的银行、信贷、汇率、利率和金融市场统计及元数据。结果应保留数据流、序列键、国家或地区、频率、单位、时间范围、BIS 及原始国家来源；中文摘要属于非官方翻译，不应暗示 BIS 背书。端点还包含 Pipeworx 网关通用工具。本连接器由 Pipeworx 独立第三方维护，并非国际清算银行官方产品。",
+  "tags": [
+    "BIS",
+    "银行统计",
+    "信贷缺口",
+    "汇率",
+    "利率",
+    "SDMX",
+    "金融数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/pipeworx-io/mcp-bis",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788587696257,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "bis-global-statistics",
+      "url": "https://gateway.pipeworx.io/bis/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "比较主要经济体信贷缺口",
+      "text": "查询美国、中国、日本和德国最新可得的私人非金融部门信贷占 GDP 缺口，并回溯最近十年的季度变化；列出国家代码、频率、单位、观测期、BIS 数据流和原始国家来源，不补齐缺失值。",
+      "server": "main"
+    },
+    {
+      "title": "检索有效汇率数据流",
+      "text": "检索 BIS 中名义与实际有效汇率相关数据流，比较美国、中国和欧元区 2015—2025 年指数变化；先核对基期、频率和覆盖期，再列出序列键、单位、来源及不可直接比较之处。",
+      "server": "main"
+    }
+  ]
+}

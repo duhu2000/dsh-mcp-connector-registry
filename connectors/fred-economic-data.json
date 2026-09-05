@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "fred-economic-data",
+  "name": "FRED 美国宏观经济数据",
+  "vendor": "Pipeworx（独立第三方服务）",
+  "icon": "📈",
+  "category": "调研分析",
+  "summary": "GDP / CPI / 就业 / 利率 / 经济时间序列",
+  "description": "连接 Pipeworx 的 FRED 专用公共 MCP 端点，检索美国及全球宏观经济序列、元数据、观测值、类别与发布信息。结果应保留 FRED 序列 ID、频率、单位、季调状态、观测期、来源和版权说明；不同序列可能来自第三方并适用各自限制。公共端点的通用问答工具可免密使用，直接调用部分 FRED 专用工具时可能要求用户自己的 API Key。本产品使用 FRED API，但未获圣路易斯联储认可或认证。本连接器由 Pipeworx 独立第三方维护，并非圣路易斯联储官方产品。",
+  "tags": [
+    "FRED",
+    "宏观经济",
+    "时间序列",
+    "通胀",
+    "就业",
+    "利率",
+    "公共数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/pipeworx-io/mcp-fred",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788587696257,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "fred-economic-data",
+      "url": "https://gateway.pipeworx.io/fred/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询失业率与通胀",
+      "text": "查询美国 2015—2025 年 UNRATE 与 CPIAUCSL 的变化，按月整理并比较趋势；列出每个序列的名称、频率、单位、季调状态、最新观测日期、来源和版权说明，不推断缺失值。",
+      "server": "main"
+    },
+    {
+      "title": "比较政策与房贷利率",
+      "text": "比较美国 2020—2025 年 FEDFUNDS 与 MORTGAGE30US 的变化，统一到月度口径并说明转换方法；保留 FRED 序列 ID、单位、观测期、发布日期、来源及版权限制。",
+      "server": "main"
+    }
+  ]
+}

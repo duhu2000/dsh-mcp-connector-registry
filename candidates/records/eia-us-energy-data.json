@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "id": "eia-us-energy-data",
+  "registryName": "io.github.cyanheads/eia-energy-mcp-server",
+  "title": "eia-energy-mcp-server",
+  "description": "Browse and query the EIA API v2 — electricity, petroleum, natural gas, coal, forecasts via MCP.",
+  "version": "0.4.1",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "public",
+      "research",
+      "science"
+    ],
+    "matchedKeywords": [
+      "coal",
+      "electricity",
+      "energy",
+      "natural gas",
+      "petroleum"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Feia-energy-mcp-server/versions/0.4.1",
+    "status": "active",
+    "publishedAt": "2026-08-25T07:11:26.02084Z",
+    "updatedAt": "2026-08-25T07:11:26.02084Z",
+    "retrievedAt": "2026-09-05T05:54:56.257Z"
+  },
+  "officialLinks": {
+    "websiteUrl": null,
+    "repository": {
+      "url": "https://github.com/cyanheads/eia-energy-mcp-server",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/eia-energy-mcp-server",
+        "version": "0.4.1"
+      }
+    },
+    {
+      "kind": "package",
+      "type": "streamable-http",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@cyanheads/eia-energy-mcp-server",
+        "version": "0.4.1"
+      }
+    },
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://eia-energy.caseyjhand.com/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "Official Registry 未声明连接凭据请求头；无用户凭据的 initialize、tools/list 与 eia_browse_routes 显式只读调用均已通过。上游 EIA 官方 API 通常要求注册密钥，公开托管端点由服务方管理其上游访问。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "Apache-2.0",
+    "evidenceUrl": "https://github.com/cyanheads/eia-energy-mcp-server/blob/main/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-08-25T07:11:26.02084Z",
+    "ageDays": 10,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-09-05T05:54:56.257Z",
+    "targetUrl": "https://eia-energy.caseyjhand.com/mcp",
+    "httpStatus": 200,
+    "reason": "MCP initialize returned a JSON-RPC or event-stream response."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 94,
+    "band": "selected",
+    "dimensions": {
+      "authority": 20,
+      "accessibility": 25,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 4
+    },
+    "reasons": [
+      "authority 20/25: Official Registry plus publisher links and namespace evidence",
+      "accessibility 25/25: 1 remote and 2 package transport(s); auth none",
+      "maintenance/security 20/20: status active; registry age 10 day(s); license declared",
+      "runtime 15/15: public probe pass",
+      "market gap 10/10: domains public, research, science; dedupe none",
+      "documentation 4/5: publisher-provided description and links"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "eia-us-energy-data",
+    "reviewedAt": "2026-09-05T05:55:39Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已逐项复核 Official Registry 身份、独立或第三方维护边界、公开端点、鉴权、软件许可证或服务条款、上游数据条款提示和脱敏运行报告，批准迁入正式记录并生成 Connector 卡片。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-09-05T05:47:24.041Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-5/eia-us-energy-data.md",
+    "notes": "脱敏预检通过 initialize、tools/list 和只读工具 eia_browse_routes；未保存原始响应、会话标识或凭据。维护者 DuHu 已完成来源审核。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.cyanheads%2Feia-energy-mcp-server/versions/0.4.1",
+      "collectedAt": "2026-09-05T05:54:56.257Z",
+      "summary": "Official Registry status active; version 0.4.1."
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/cyanheads/eia-energy-mcp-server",
+      "collectedAt": "2026-09-05T05:54:56.257Z",
+      "summary": "cyanheads 公开仓库以 Apache-2.0 发布 EIA API v2 MCP 适配器，提供路由浏览、检索、描述、查询与数据帧分析工具以及公共托管端点。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://www.eia.gov/opendata/terms-of-service.php",
+      "collectedAt": "2026-09-05T05:55:39Z",
+      "summary": "EIA API 条款允许检索、展示和分析其公共数据，要求以 EIA 或 U.S. Energy Information Administration 标识来源，禁止暗示背书或歪曲内容，并保留限制访问的权利。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/cyanheads/eia-energy-mcp-server/blob/main/LICENSE",
+      "collectedAt": "2026-09-05T05:55:39Z",
+      "summary": "io.github.cyanheads/eia-energy-mcp-server 源代码声明 Apache-2.0；上游数据授权、署名与使用条款仍需在人工批准时单独复核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://eia-energy.caseyjhand.com/mcp",
+      "collectedAt": "2026-09-05T05:54:56.257Z",
+      "summary": "公开无用户凭据的 MCP initialize 探测通过，HTTP 200。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/data-mcp-batch-5/eia-us-energy-data.md",
+      "collectedAt": "2026-09-05T05:47:24.041Z",
+      "summary": "自动脱敏预检通过 eia_browse_routes 只读调用；原始响应正文未落盘。"
+    }
+  ]
+}

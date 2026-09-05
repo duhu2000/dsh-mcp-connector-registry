@@ -227,6 +227,24 @@ test('app deployment platforms are not classified as data services from an incid
   assert.equal(platform.score.band, 'not-data');
 });
 
+test('energy and earthquake services are classified as scientific or geospatial data', () => {
+  const energy = normalizeOfficialServer(officialEntry({
+    name: 'gov.example/energy',
+    title: 'Energy Information',
+    description: 'Browse electricity, petroleum, natural gas, coal, and forecast series.',
+  }), { retrievedAt: NOW });
+  const earthquake = normalizeOfficialServer(officialEntry({
+    name: 'gov.example/earthquakes',
+    title: 'Earthquake Catalog',
+    description: 'Search recent earthquake events by time, magnitude, and geographic region.',
+  }), { retrievedAt: NOW });
+
+  assert.equal(energy.classification.isDataService, true);
+  assert.deepEqual(energy.classification.domains, ['science']);
+  assert.equal(earthquake.classification.isDataService, true);
+  assert.deepEqual(earthquake.classification.domains, ['geospatial']);
+});
+
 test('generated candidate contains every Candidate JSON Schema root field', async () => {
   const schema = JSON.parse(await readFile(resolve('schema/candidate.schema.json'), 'utf8'));
   const candidate = scoreCandidate(dedupeCandidate(
