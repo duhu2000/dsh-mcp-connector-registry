@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "eia-us-energy-data",
+  "name": "EIA 美国能源数据",
+  "vendor": "cyanheads（独立社区项目）",
+  "icon": "⚡",
+  "category": "调研分析",
+  "summary": "电力 / 石油 / 天然气 / 煤炭 / 能源预测",
+  "description": "连接 cyanheads 托管的 EIA Energy MCP，分层发现并查询美国能源信息署 API v2 的电力、石油、天然气、煤炭、能源消费与预测数据。公共端点无需用户提供凭据，但仍受 EIA 与托管服务的访问频率和可用性限制。结果应保留 API 路由、字段、维度、频率、单位、时间范围和 EIA 来源，不修改或歪曲原始数据，也不暗示 EIA 背书。本连接器由 cyanheads 独立社区维护，并非美国能源信息署官方产品。",
+  "tags": [
+    "EIA",
+    "能源",
+    "电力",
+    "石油",
+    "天然气",
+    "煤炭",
+    "公共数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/cyanheads/eia-energy-mcp-server",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1788587696257,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "eia-us-energy-data",
+      "url": "https://eia-energy.caseyjhand.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "比较州级电价走势",
+      "text": "比较加利福尼亚州与得克萨斯州 2020—2025 年居民零售电价的月度变化；先检索并说明所用 EIA API 路由、字段和州级维度，再列出单位、频率、缺失月份、数据来源和查询时间。",
+      "server": "main"
+    },
+    {
+      "title": "分析原油产量与库存",
+      "text": "查询美国 2019—2025 年原油月度产量与商业库存变化，分别核对 EIA 路由、指标定义、单位和频率后再比较；标明时间范围、最新可得期、来源及不可直接推断的因果关系。",
+      "server": "main"
+    }
+  ]
+}
