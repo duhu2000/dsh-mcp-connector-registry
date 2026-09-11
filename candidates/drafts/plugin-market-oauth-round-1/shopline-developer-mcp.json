@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "id": "shopline-developer-mcp",
+  "registryName": "npm:@shoplineos/shopline-developer-mcp",
+  "title": "SHOPLINE Developer MCP",
+  "description": "Official SHOPLINE stdio MCP for searching developer documentation, inspecting Admin REST API definitions and Storefront GraphQL schemas, and validating GraphQL code.",
+  "version": "1.1.0",
+  "classification": {
+    "isDataService": false,
+    "domains": [
+      "developer-tools",
+      "ecommerce"
+    ],
+    "matchedKeywords": [
+      "api",
+      "developer documentation",
+      "graphql",
+      "shopline"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://developer.shopline.com/docs/apps/development-tool/shopline-developer-mcp/",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-09-11T03:25:42Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://developer.shopline.com/docs/apps/development-tool/shopline-developer-mcp/",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@shoplineos/shopline-developer-mcp",
+        "version": "1.1.0"
+      }
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "SHOPLINE's official MCP documentation states that the stdio server runs locally and does not require authentication. The credential-free runtime acceptance passed."
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "MIT",
+    "evidenceUrl": "https://registry.npmjs.org/@shoplineos%2Fshopline-developer-mcp/1.1.0"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-09-11T03:25:42Z",
+    "targetUrl": null,
+    "httpStatus": null,
+    "reason": "Credential-free stdio initialize returned SHOPLINE Developer MCP 1.1.0 with protocol version 2025-06-18."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 96,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 25,
+      "maintenanceSecurity": 18,
+      "runtime": 15,
+      "marketGap": 8,
+      "documentation": 5
+    },
+    "reasons": [
+      "authority 25/25: SHOPLINE publishes the MCP launch configuration on its own developer domain and owns the npm namespace",
+      "accessibility 25/25: version-pinned stdio package starts without credentials",
+      "maintenance/security 18/20: MIT metadata and official package maintainer verified; no public source repository was declared",
+      "runtime 15/15: initialize, tools/list, and a read-only documentation search passed",
+      "market gap 8/10: adds official ecommerce developer documentation and API schema tooling",
+      "documentation 5/5: official setup, usage examples, and tool inventory are public"
+    ],
+    "gates": [
+      "Explicit maintainer approval is required before the Connector descriptor is published."
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "shopline-developer-mcp",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "Official vendor ownership, no-auth stdio transport, npm version and license metadata, runtime behavior, untrusted tool descriptions, and the external feedback side effect were reviewed. Awaiting explicit maintainer approval."
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-09-11T03:25:42Z",
+    "reviewedBy": "codex-preflight",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/plugin-market-oauth-round-1/shopline-developer-mcp.md",
+    "notes": "Credential-free stdio initialize and tools/list returned 9 tools. A read-only search_shopline_docs call succeeded; raw content and conversation identifiers were not retained."
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://developer.shopline.com/docs/apps/development-tool/shopline-developer-mcp/",
+      "collectedAt": "2026-09-11T03:25:42Z",
+      "summary": "SHOPLINE's own developer documentation publishes the no-auth stdio command and the complete nine-tool inventory."
+    },
+    {
+      "type": "license",
+      "url": "https://registry.npmjs.org/@shoplineos%2Fshopline-developer-mcp/1.1.0",
+      "collectedAt": "2026-09-11T03:25:42Z",
+      "summary": "npm registry metadata for version 1.1.0 declares MIT and the shopline-developer maintainer identity."
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/plugin-market-oauth-round-1/shopline-developer-mcp.md",
+      "collectedAt": "2026-09-11T03:25:42Z",
+      "summary": "Credential-free stdio initialize, tools/list, and a read-only public documentation search passed; the raw response was not stored."
+    }
+  ]
+}

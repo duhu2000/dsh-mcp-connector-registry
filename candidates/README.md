@@ -1,6 +1,8 @@
 # Candidate records
 
-`schema/candidate.schema.json` defines the review record used by the data MCP discovery pipeline. Generated discovery output is evidence for maintainers; it is not a Connector descriptor and cannot publish, merge, or delist anything.
+`schema/candidate.schema.json` defines the review record used by the data MCP discovery pipeline and the official-vendor manual review path. Generated discovery output is evidence for maintainers; it is not a Connector descriptor and cannot publish, merge, or delist anything.
+
+Candidates found outside the Official MCP Registry may use `source.kind: official-vendor` only when the MCP launch configuration is published on the vendor's own HTTPS documentation and the package or endpoint ownership is independently verifiable. This path may cover non-data MCP categories such as developer tools, but it still requires a real runtime acceptance report and explicit human approval. Community catalogs, plugin descriptions, search results, and package names without vendor documentation are not sufficient authority evidence.
 
 The first automated stage reads the public Official MCP Registry, copies only allowlisted fields, classifies data services, compares stable identities with the current catalog, and assigns an explainable score. It intentionally records license, public probe, human review, and runtime acceptance as unknown or not-run until later evidence is collected.
 

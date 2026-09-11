@@ -47,6 +47,23 @@ function acceptedRecord() {
   };
 }
 
+function acceptedOfficialVendorRecord() {
+  const record = acceptedRecord();
+  record.registryName = 'npm:@example/developer-mcp';
+  record.classification.isDataService = false;
+  record.source = {
+    kind: 'official-vendor',
+    status: 'active',
+    detailUrl: 'https://developer.example.com/mcp',
+  };
+  record.evidence = record.evidence.map((item) => (
+    item.type === 'official-registry'
+      ? { type: 'official-vendor', url: 'https://developer.example.com/mcp' }
+      : item
+  ));
+  return record;
+}
+
 test('new Connector acceptance requires human approval and a matching real runtime report', () => {
   assert.deepEqual(verifyRuntimeAcceptance({ id: 'approved-data' }, acceptedRecord()), []);
 
@@ -63,6 +80,30 @@ test('new Connector acceptance requires human approval and a matching real runti
   assert.ok(errors.some((error) => /runtime acceptance must pass/.test(error)));
   assert.ok(errors.some((error) => /evidence must match/.test(error)));
   assert.ok(errors.some((error) => /Official Registry evidence/.test(error)));
+});
+
+test('new Connector acceptance supports a reviewed official-vendor non-data MCP', () => {
+  assert.deepEqual(verifyRuntimeAcceptance({ id: 'approved-data' }, acceptedOfficialVendorRecord()), []);
+
+  const missingVendorEvidence = acceptedOfficialVendorRecord();
+  missingVendorEvidence.evidence = missingVendorEvidence.evidence.filter((item) => item.type !== 'official-vendor');
+  const errors = verifyRuntimeAcceptance({ id: 'approved-data' }, missingVendorEvidence);
+  assert.ok(errors.some((error) => /official vendor evidence/.test(error)));
+});
+
+test('SHOPLINE official-vendor candidate is runtime-ready but remains pending and unpublished', async () => {
+  const draft = JSON.parse(await readFile(new URL(
+    '../candidates/drafts/plugin-market-oauth-round-1/shopline-developer-mcp.json',
+    import.meta.url,
+  ), 'utf8'));
+  assert.equal(draft.source.kind, 'official-vendor');
+  assert.equal(draft.classification.isDataService, false);
+  assert.equal(draft.runtimeAcceptance.status, 'pass');
+  assert.equal(draft.review.decision, 'pending');
+  await assert.rejects(
+    readFile(new URL('../connectors/shopline-developer-mcp.json', import.meta.url), 'utf8'),
+    { code: 'ENOENT' },
+  );
 });
 
 test('runtime acceptance gate rejects mismatched IDs, non-HTTPS evidence, and credential-looking values', () => {

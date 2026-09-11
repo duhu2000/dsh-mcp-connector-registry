@@ -101,7 +101,7 @@ git commit -m "Add <connector-id>"
 git push origin add-my-connector
 ```
 
-向 `duhu2000/dsh-mcp-connector-registry:main` 发起 Pull Request，并完整填写 PR checklist。新增 Connector 还需要维护者补充 `candidates/records/<connector-id>.json`：核验 Official Registry/厂商资料、鉴权、许可证或服务条款，记录人工批准，并链接不含凭据、个人数据或客户数据的真实运行验收报告。确需仓库托管图标时，再提交 `assets/<connector-id>.*`。
+向 `duhu2000/dsh-mcp-connector-registry:main` 发起 Pull Request，并完整填写 PR checklist。新增 Connector 还需要维护者补充 `candidates/records/<connector-id>.json`：核验 Official Registry/厂商资料、鉴权、许可证或服务条款，记录人工批准，并链接不含凭据、个人数据或客户数据的真实运行验收报告。未进入 Official MCP Registry 的项目，仅在厂商自己的 HTTPS 文档明确发布 MCP 启动配置，且包或端点归属可独立核验时，才可按 `official-vendor` 人工审核通道处理；插件市场文案或第三方目录不能单独作为权威来源。确需仓库托管图标时，再提交 `assets/<connector-id>.*`。
 
 ### 第 6 步：等待 CI、审核与自动发布
 
