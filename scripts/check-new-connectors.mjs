@@ -14,10 +14,19 @@ function isHttps(value) {
 
 export function verifyRuntimeAcceptance(descriptor, record) {
   const errors = [];
+  const sourceKind = record?.source?.kind;
+  const isOfficialRegistrySource = sourceKind === 'official-mcp-registry';
+  const isOfficialVendorSource = sourceKind === 'official-vendor';
   if (!descriptor?.id) errors.push('descriptor is missing id');
   if (record?.schemaVersion !== 1 || !record?.id || !record?.registryName) errors.push('candidate record identity and schemaVersion 1 are required');
-  if (record?.classification?.isDataService !== true) errors.push('candidate must be classified as a data service');
-  if (record?.source?.kind !== 'official-mcp-registry' || record?.source?.status !== 'active') errors.push('candidate must retain an active Official Registry source');
+  if (!isOfficialRegistrySource && !isOfficialVendorSource) errors.push('candidate must retain an Official Registry or official vendor source');
+  if (record?.source?.status !== 'active') errors.push('candidate source must be active');
+  if (isOfficialRegistrySource && record?.classification?.isDataService !== true) {
+    errors.push('Official Registry discovery candidate must be classified as a data service');
+  }
+  if (isOfficialVendorSource && !isHttps(record?.source?.detailUrl)) {
+    errors.push('official vendor source must include an HTTPS detailUrl');
+  }
   if (record?.score?.band !== 'selected' || record?.score?.total < 80) errors.push('candidate must pass the selected score gate');
   const dimensions = record?.score?.dimensions && Object.values(record.score.dimensions);
   if (!Array.isArray(dimensions) || dimensions.some((value) => !Number.isInteger(value))
@@ -39,8 +48,11 @@ export function verifyRuntimeAcceptance(descriptor, record) {
   if (!record?.evidence?.some((item) => item.type === 'runtime-acceptance' && item.url === record.runtimeAcceptance.reportUrl)) {
     errors.push('runtime-acceptance evidence must match reportUrl');
   }
-  if (!record?.evidence?.some((item) => item.type === 'official-registry')) {
-    errors.push('Official Registry evidence is required');
+  const authorityEvidenceType = isOfficialVendorSource ? 'official-vendor' : 'official-registry';
+  const hasAuthorityEvidence = record?.evidence?.some((item) => item.type === authorityEvidenceType
+    && (!isOfficialVendorSource || item.url === record?.source?.detailUrl));
+  if (!hasAuthorityEvidence) {
+    errors.push(`${isOfficialVendorSource ? 'official vendor' : 'Official Registry'} evidence is required`);
   }
   if (!record?.evidence?.some((item) => item.type === 'license' && item.url === record?.license?.evidenceUrl)) {
     errors.push('license or service-terms evidence must match evidenceUrl');

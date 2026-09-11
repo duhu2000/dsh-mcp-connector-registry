@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/duhu2000/dsh-mcp-connector-registry/schema/candidate.schema.json",
-  "title": "DSH MCP Connector discovery candidate",
+  "title": "DSH MCP Connector review candidate",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -47,8 +47,8 @@
       "additionalProperties": false,
       "required": ["kind", "apiUrl", "detailUrl", "status", "publishedAt", "updatedAt", "retrievedAt"],
       "properties": {
-        "kind": { "const": "official-mcp-registry" },
-        "apiUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "kind": { "enum": ["official-mcp-registry", "official-vendor"] },
+        "apiUrl": { "type": ["string", "null"], "format": "uri", "pattern": "^https://" },
         "detailUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
         "status": { "enum": ["active", "deprecated", "deleted", "unknown"] },
         "publishedAt": { "type": ["string", "null"], "format": "date-time" },
@@ -230,7 +230,7 @@
         "additionalProperties": false,
         "required": ["type", "url", "collectedAt", "summary"],
         "properties": {
-          "type": { "enum": ["official-registry", "official-website", "official-repository", "license", "probe", "runtime-acceptance"] },
+          "type": { "enum": ["official-registry", "official-vendor", "official-website", "official-repository", "license", "probe", "runtime-acceptance"] },
           "url": { "type": "string", "format": "uri" },
           "collectedAt": { "type": "string", "format": "date-time" },
           "summary": { "type": "string" }

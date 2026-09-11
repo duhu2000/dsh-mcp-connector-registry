@@ -47,6 +47,23 @@ function acceptedRecord() {
   };
 }
 
+function acceptedOfficialVendorRecord() {
+  const record = acceptedRecord();
+  record.registryName = 'npm:@example/developer-mcp';
+  record.classification.isDataService = false;
+  record.source = {
+    kind: 'official-vendor',
+    status: 'active',
+    detailUrl: 'https://developer.example.com/mcp',
+  };
+  record.evidence = record.evidence.map((item) => (
+    item.type === 'official-registry'
+      ? { type: 'official-vendor', url: 'https://developer.example.com/mcp' }
+      : item
+  ));
+  return record;
+}
+
 test('new Connector acceptance requires human approval and a matching real runtime report', () => {
   assert.deepEqual(verifyRuntimeAcceptance({ id: 'approved-data' }, acceptedRecord()), []);
 
@@ -63,6 +80,39 @@ test('new Connector acceptance requires human approval and a matching real runti
   assert.ok(errors.some((error) => /runtime acceptance must pass/.test(error)));
   assert.ok(errors.some((error) => /evidence must match/.test(error)));
   assert.ok(errors.some((error) => /Official Registry evidence/.test(error)));
+});
+
+test('new Connector acceptance supports a reviewed official-vendor non-data MCP', () => {
+  assert.deepEqual(verifyRuntimeAcceptance({ id: 'approved-data' }, acceptedOfficialVendorRecord()), []);
+
+  const missingVendorEvidence = acceptedOfficialVendorRecord();
+  missingVendorEvidence.evidence = missingVendorEvidence.evidence.filter((item) => item.type !== 'official-vendor');
+  const errors = verifyRuntimeAcceptance({ id: 'approved-data' }, missingVendorEvidence);
+  assert.ok(errors.some((error) => /official vendor evidence/.test(error)));
+});
+
+test('approved SHOPLINE official-vendor candidate matches its published safe stdio card', async () => {
+  const record = JSON.parse(await readFile(new URL(
+    '../candidates/records/shopline-developer-mcp.json',
+    import.meta.url,
+  ), 'utf8'));
+  const descriptor = JSON.parse(await readFile(new URL(
+    '../connectors/shopline-developer-mcp.json',
+    import.meta.url,
+  ), 'utf8'));
+  assert.equal(record.source.kind, 'official-vendor');
+  assert.equal(record.classification.isDataService, false);
+  assert.equal(record.runtimeAcceptance.status, 'pass');
+  assert.equal(record.review.decision, 'approved');
+  assert.equal(record.review.reviewedBy, 'DuHu');
+  assert.deepEqual(verifyRuntimeAcceptance(descriptor, record), []);
+  assert.equal(descriptor.auth.mode, 'none');
+  assert.equal(descriptor.servers[0].transport, 'stdio');
+  assert.deepEqual(descriptor.servers[0].args, ['-y', '@shoplineos/shopline-developer-mcp@1.1.0']);
+  assert.equal(descriptor.prompts.length, 2);
+  assert.equal('promptVariables' in descriptor, false);
+  assert.equal(descriptor.prompts.some((prompt) => /\{\{|研究问题|请填写/.test(prompt.text)), false);
+  assert.match(descriptor.description, /明确同意/);
 });
 
 test('runtime acceptance gate rejects mismatched IDs, non-HTTPS evidence, and credential-looking values', () => {

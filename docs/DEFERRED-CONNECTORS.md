@@ -3,7 +3,7 @@
 本清单记录对标市场中暂未安全上架的候选，以及已上架但仍需复核的健康项。它不是收录承诺，
 也不保留 `id`；服务商或贡献者仍应按 [`ONBOARDING.md`](ONBOARDING.md) 提交可验证资料。
 
-更新时间：2026-09-04。
+更新时间：2026-09-11。
 
 ## 上架门槛
 
@@ -31,6 +31,25 @@
 | `blender` | 官方 MCP 会在 Blender 中无防护执行 LLM 生成的 Python 代码，现有市场交互不足以表达任意代码执行风险 | 完成显式风险确认、命令预览、隔离环境与安装流程验收后单独评估 |
 | `figma` | Figma 官方远程 MCP 只允许列入 Figma MCP Catalog 的客户端连接；当前 DSH / `dsh-mcp-connector` 尚未获得客户端准入，OAuth 动态客户端注册会返回 HTTP 403，因此从公共市场暂时撤下 | Figma 接受客户端准入申请，并在 DSH Web 与 Desktop 上完成一次真实 OAuth 授权、工具发现和只读调用验收 |
 | `fayan-legal`、`mozun-trademark`、`ths-legal`、`mingbai-lawyer` | 未核验到可公开接入的官方 MCP 端点 | 服务商提交官方端点、鉴权和 Logo 来源 |
+
+## 插件市场人工候选
+
+下列项目来自 2026-09-11 的 DSH 插件市场 OAuth/MCP 专项复核。它们已进入
+候选池，但尚未获得正式上架批准；详细证据见
+[`plugin-market-oauth-round-1.md`](review-batches/plugin-market-oauth-round-1.md)。
+
+`shopline-developer-mcp` 已由 `DuHu` 批准并迁入正式目录，不再列为延期候选。
+
+| 候选 | 已确认信息 | 当前阻塞 | 重新评估条件 |
+|---|---|---|---|
+| `atomgit` | `https://api.atomgit.com/mcp-server/v1/mcp` 从当前网络可达，未授权返回 401，MCP 层使用 Bearer PAT | 无标准 OAuth 发现挑战；无最小权限测试 PAT，未能执行 `tools/list`；官方 MCP 归属证据仍需补齐 | 服务方提供官方 MCP 文档，并使用专用测试账号的最小权限 PAT 完成工具发现与只读运行验收 |
+
+## 明确不收录
+
+| 项目 | 决策 |
+|---|---|
+| `dsh-qixin-insight-mcp-oauth` | 企业数据竞品；不收录、不合并、不以其端点生成 Connector。 |
+| `dsh-plugin-xparse` / TextIn xParse | 文档解析竞品；不收录、不合并、不以其 OAuth/AppKey 或 CLI 生成 Connector。 |
 
 ## 本轮保留的待验收数据 MCP
 
