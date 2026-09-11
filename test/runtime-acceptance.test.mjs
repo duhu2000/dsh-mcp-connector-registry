@@ -91,19 +91,28 @@ test('new Connector acceptance supports a reviewed official-vendor non-data MCP'
   assert.ok(errors.some((error) => /official vendor evidence/.test(error)));
 });
 
-test('SHOPLINE official-vendor candidate is runtime-ready but remains pending and unpublished', async () => {
-  const draft = JSON.parse(await readFile(new URL(
-    '../candidates/drafts/plugin-market-oauth-round-1/shopline-developer-mcp.json',
+test('approved SHOPLINE official-vendor candidate matches its published safe stdio card', async () => {
+  const record = JSON.parse(await readFile(new URL(
+    '../candidates/records/shopline-developer-mcp.json',
     import.meta.url,
   ), 'utf8'));
-  assert.equal(draft.source.kind, 'official-vendor');
-  assert.equal(draft.classification.isDataService, false);
-  assert.equal(draft.runtimeAcceptance.status, 'pass');
-  assert.equal(draft.review.decision, 'pending');
-  await assert.rejects(
-    readFile(new URL('../connectors/shopline-developer-mcp.json', import.meta.url), 'utf8'),
-    { code: 'ENOENT' },
-  );
+  const descriptor = JSON.parse(await readFile(new URL(
+    '../connectors/shopline-developer-mcp.json',
+    import.meta.url,
+  ), 'utf8'));
+  assert.equal(record.source.kind, 'official-vendor');
+  assert.equal(record.classification.isDataService, false);
+  assert.equal(record.runtimeAcceptance.status, 'pass');
+  assert.equal(record.review.decision, 'approved');
+  assert.equal(record.review.reviewedBy, 'DuHu');
+  assert.deepEqual(verifyRuntimeAcceptance(descriptor, record), []);
+  assert.equal(descriptor.auth.mode, 'none');
+  assert.equal(descriptor.servers[0].transport, 'stdio');
+  assert.deepEqual(descriptor.servers[0].args, ['-y', '@shoplineos/shopline-developer-mcp@1.1.0']);
+  assert.equal(descriptor.prompts.length, 2);
+  assert.equal('promptVariables' in descriptor, false);
+  assert.equal(descriptor.prompts.some((prompt) => /\{\{|研究问题|请填写/.test(prompt.text)), false);
+  assert.match(descriptor.description, /明确同意/);
 });
 
 test('runtime acceptance gate rejects mismatched IDs, non-HTTPS evidence, and credential-looking values', () => {

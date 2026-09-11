@@ -15,7 +15,7 @@ MCP 客户端独立启动或连接的 Server，才能进入市场候选。
 | 项目 | 结论 | 当前动作 |
 |---|---|---|
 | GitHub 官方远程 MCP | 远程端点同时接受 OAuth 获得的 Access Token 和 PAT，但当前 Registry Schema/UI 只能声明一个 `auth.mode`；DSH 通用 OAuth 客户端还强制要求 DCR，而 GitHub 明确不支持 DCR | 保留现有 PAT 卡片；将“静态 OAuth App/GitHub App 客户端 + PKCE”与“多授权选项”作为连接器插件后续能力 |
-| SHOPLINE Developer MCP | 官方 npm 包可以本地 stdio 启动，免鉴权；`initialize`、`tools/list` 和只读文档检索已通过 | 已完成技术与安全预检，分类为“开发工具”，等待维护者署名批准后生成正式卡片 |
+| SHOPLINE Developer MCP | 官方 npm 包可以本地 stdio 启动，免鉴权；`initialize`、`tools/list` 和只读文档检索已通过 | 维护者 `DuHu` 已批准；正式记录和“开发工具”卡片已生成，待 PR 合并发布 |
 | AtomGit 托管 MCP | 端点从当前网络可达，但 MCP 层使用 Bearer PAT，不是可发现的 MCP OAuth | 进入待鉴权验收队列；需专用最小权限 PAT 后才能完成 `tools/list` 和只读工具验收 |
 | TextIn xParse | 用户确认为竞品；且当前形态是 DSH Tool + CLI，不是独立 MCP Server | 明确排除，不进入市场 |
 
@@ -80,7 +80,7 @@ GitHub 服务端在概念上支持“OAuth Token 或 PAT”，但当前 `dsh-mcp
 - `shopline_mcp_feedback` 可向第三方提交反馈；市场卡片必须说明只有在用户明确同意后才可调用。
 - 其他工具主要检索和读取 SHOPLINE 开发文档/API Schema；正式卡片 Prompt 应默认限定为只读。
 - 正式卡片固定 `@shoplineos/shopline-developer-mcp@1.1.0`，避免 `latest` 漂移；升级需重新执行协议和只读工具验收。
-- 技术与安全预检已完成，候选草案和脱敏运行报告已落库；正式上架只剩维护者署名批准。
+- 技术与安全预检已完成；维护者 `DuHu` 于 2026-09-11T04:16:25Z 批准上架，候选草案已迁入正式记录并生成 Connector 卡片。
 
 ### 拟上架卡片
 
@@ -90,6 +90,14 @@ GitHub 服务端在概念上支持“OAuth Token 或 PAT”，但当前 `dsh-mcp
 - 安全边界：默认只读检索官方开发资料；`shopline_mcp_feedback` 只有在用户明确同意后才可调用。
 - 示例 1：查询创建 SHOPLINE 商品所需的 Admin REST API endpoint、必填字段和示例；先搜索官方文档，再给出来源链接，不调用反馈工具。
 - 示例 2：查找 SHOPLINE Storefront GraphQL 中查询商品标题、价格和库存的 schema，并生成一段可通过校验的只读查询；说明 API 版本与来源，不调用反馈工具。
+
+### 审批记录
+
+- 决策：`approved`
+- 审核人：`DuHu`
+- 审核时间：`2026-09-11T04:16:25Z`
+- 正式记录：`candidates/records/shopline-developer-mcp.json`
+- Connector：`connectors/shopline-developer-mcp.json`
 
 ## P1：AtomGit 托管 MCP 预检
 

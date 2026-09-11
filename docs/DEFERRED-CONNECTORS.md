@@ -38,9 +38,10 @@
 候选池，但尚未获得正式上架批准；详细证据见
 [`plugin-market-oauth-round-1.md`](review-batches/plugin-market-oauth-round-1.md)。
 
+`shopline-developer-mcp` 已由 `DuHu` 批准并迁入正式目录，不再列为延期候选。
+
 | 候选 | 已确认信息 | 当前阻塞 | 重新评估条件 |
 |---|---|---|---|
-| `shopline-developer-mcp` | SHOPLINE 官方 npm 包，MIT，stdio 免鉴权；`initialize`、9 个工具的 `tools/list` 和只读文档检索已通过；已固定版本并形成脱敏报告 | 尚未获得维护者署名批准，因此没有写入正式目录 | 维护者复核拟上架卡片和反馈工具边界后署名批准，再迁入 `candidates/records/` 与 `connectors/` |
 | `atomgit` | `https://api.atomgit.com/mcp-server/v1/mcp` 从当前网络可达，未授权返回 401，MCP 层使用 Bearer PAT | 无标准 OAuth 发现挑战；无最小权限测试 PAT，未能执行 `tools/list`；官方 MCP 归属证据仍需补齐 | 服务方提供官方 MCP 文档，并使用专用测试账号的最小权限 PAT 完成工具发现与只读运行验收 |
 
 ## 明确不收录

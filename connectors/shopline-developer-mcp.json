@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "shopline-developer-mcp",
+  "name": "SHOPLINE 开发者 MCP",
+  "vendor": "SHOPLINE",
+  "icon": "🛍️",
+  "category": "开发工具",
+  "summary": "开发文档 / Admin REST API / GraphQL Schema / 代码校验",
+  "description": "通过 SHOPLINE 官方 stdio MCP 检索开发者文档，查看 Admin REST API 定义与端点详情，查询 Storefront GraphQL Schema 并校验 GraphQL 代码。服务在本机启动且无需鉴权，结果依赖当前包版本、网络和 SHOPLINE 官方文档。工具清单包含向 SHOPLINE 发送反馈的能力；仅在用户明确同意并确认反馈内容后才可调用，默认示例均限定为只读开发资料查询，不访问或修改店铺业务数据。",
+  "tags": [
+    "SHOPLINE",
+    "电商开发",
+    "开发文档",
+    "Admin REST API",
+    "GraphQL",
+    "代码校验",
+    "stdio",
+    "官方 MCP"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://developer.shopline.com/docs/apps/development-tool/shopline-developer-mcp/",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1789100742000,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "shopline-developer-mcp",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@shoplineos/shopline-developer-mcp@1.1.0"
+      ],
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询商品创建接口",
+      "text": "查询创建 SHOPLINE 商品所需的 Admin REST API endpoint、必填字段和示例；先搜索官方文档，再给出来源链接，不调用反馈工具。",
+      "server": "main"
+    },
+    {
+      "title": "生成只读 GraphQL 查询",
+      "text": "查找 SHOPLINE Storefront GraphQL 中查询商品标题、价格和库存的 schema，并生成一段可通过校验的只读查询；说明 API 版本与来源，不调用反馈工具。",
+      "server": "main"
+    }
+  ],
+  "toolsSnapshot": [
+    {
+      "serverKey": "main",
+      "serverName": "shopline-developer-mcp",
+      "tools": [
+        { "name": "search_shopline_docs", "description": "检索 SHOPLINE 开发者文档。" },
+        { "name": "read_full_docs", "description": "读取指定 SHOPLINE 官方文档页面。" },
+        { "name": "get_rest_api_definition", "description": "获取 SHOPLINE Admin REST API 定义。" },
+        { "name": "search_admin_rest_endpoints", "description": "检索 SHOPLINE Admin REST API 端点。" },
+        { "name": "get_admin_rest_endpoint_detail", "description": "读取指定 Admin REST API 端点详情。" },
+        { "name": "get_graphql_schema", "description": "查询 SHOPLINE Storefront GraphQL Schema。" },
+        { "name": "validate_graphql_codes", "description": "根据官方 Schema 校验 GraphQL 代码。" },
+        { "name": "shopline_mcp_feedback", "description": "经用户明确同意后向 SHOPLINE 发送反馈。" },
+        { "name": "shopline_readme", "description": "读取 SHOPLINE MCP 的公开使用说明。" }
+      ]
+    }
+  ]
+}

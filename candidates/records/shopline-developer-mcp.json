@@ -90,42 +90,40 @@
       "market gap 8/10: adds official ecommerce developer documentation and API schema tooling",
       "documentation 5/5: official setup, usage examples, and tool inventory are public"
     ],
-    "gates": [
-      "Explicit maintainer approval is required before the Connector descriptor is published."
-    ]
+    "gates": []
   },
   "review": {
-    "decision": "pending",
+    "decision": "approved",
     "proposedConnectorId": "shopline-developer-mcp",
-    "reviewedAt": null,
-    "reviewedBy": null,
-    "notes": "Official vendor ownership, no-auth stdio transport, npm version and license metadata, runtime behavior, untrusted tool descriptions, and the external feedback side effect were reviewed. Awaiting explicit maintainer approval."
+    "reviewedAt": "2026-09-11T04:16:25Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已复核 SHOPLINE 官方文档、npm 包归属、免鉴权 stdio 配置、MIT 许可证元数据、版本固定策略、脱敏运行报告、服务端工具描述不可信边界与反馈工具的外部发送副作用，批准迁入正式记录并生成 Connector 卡片。"
   },
   "runtimeAcceptance": {
     "status": "pass",
     "checkedAt": "2026-09-11T03:25:42Z",
     "reviewedBy": "codex-preflight",
     "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/plugin-market-oauth-round-1/shopline-developer-mcp.md",
-    "notes": "Credential-free stdio initialize and tools/list returned 9 tools. A read-only search_shopline_docs call succeeded; raw content and conversation identifiers were not retained."
+    "notes": "免凭据 stdio initialize 与 tools/list 返回 9 个工具，只读 search_shopline_docs 调用成功；未保留原始正文、会话标识或服务端日志。维护者 DuHu 已完成来源与安全边界审核。"
   },
   "evidence": [
     {
       "type": "official-vendor",
       "url": "https://developer.shopline.com/docs/apps/development-tool/shopline-developer-mcp/",
       "collectedAt": "2026-09-11T03:25:42Z",
-      "summary": "SHOPLINE's own developer documentation publishes the no-auth stdio command and the complete nine-tool inventory."
+      "summary": "SHOPLINE 官方开发者文档公开免鉴权 stdio 启动命令和完整的 9 个工具清单。"
     },
     {
       "type": "license",
       "url": "https://registry.npmjs.org/@shoplineos%2Fshopline-developer-mcp/1.1.0",
       "collectedAt": "2026-09-11T03:25:42Z",
-      "summary": "npm registry metadata for version 1.1.0 declares MIT and the shopline-developer maintainer identity."
+      "summary": "npm Registry 中 1.1.0 版本元数据声明 MIT，并显示 shopline-developer 维护者身份。"
     },
     {
       "type": "runtime-acceptance",
       "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/plugin-market-oauth-round-1/shopline-developer-mcp.md",
       "collectedAt": "2026-09-11T03:25:42Z",
-      "summary": "Credential-free stdio initialize, tools/list, and a read-only public documentation search passed; the raw response was not stored."
+      "summary": "免凭据 stdio initialize、tools/list 和公开开发文档只读检索通过；原始响应未落盘。"
     }
   ]
 }
