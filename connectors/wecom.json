@@ -6,7 +6,7 @@
   "icon": "💬",
   "category": "办公协作",
   "summary": "通讯录 / 客户联系 / 消息与企业协作",
-  "description": "通过社区 @qwang007/wecom-mcp npm 包启动本地 stdio Server，调用企业微信通讯录、客户联系和消息等接口。需填写企业 ID、应用 Secret 与管理员 UserID，并按企业微信要求配置可信 IP；工具包含写操作，发送消息或修改数据前必须确认。",
+  "description": "通过社区 @qwang007/wecom-mcp npm 包启动本地 stdio Server，调用企业微信通讯录、客户联系和消息等接口。该包不是已核实的企业微信官方 MCP；需填写企业 ID、应用 Secret 与管理员 UserID，并按企业微信要求配置应用可见范围和可信 IP。工具包含外部写操作，发送消息、添加客户或修改数据前必须确认。",
   "tags": ["企业微信", "WeCom", "通讯录", "客户联系", "消息", "stdio", "社区 MCP"],
   "published": true,
   "featured": false,
@@ -14,7 +14,7 @@
   "probeStatus": "unverified",
   "auth": {
     "mode": "api-key",
-    "credentialDescription": "企业微信参数仅保存在 DSH 本机，并注入本地 MCP 进程；服务端还可能要求将出口 IP 加入可信列表。",
+    "credentialDescription": "企业微信参数仅保存在 DSH 本机，并注入社区 MCP 进程；请创建权限最小化的自建应用、限制可见范围，并将实际出口 IP 加入可信列表。",
     "credentialHelpLabel": "查看企业微信 MCP 包说明",
     "credentialFields": [
       { "key": "corpId", "label": "企业 ID", "placeholder": "请输入 Corp ID", "required": true, "secret": false },
