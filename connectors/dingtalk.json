@@ -22,7 +22,7 @@
       "serverKey": "dingtalk",
       "serverName": "dingtalk-workspace",
       "command": "npx",
-      "args": ["--yes", "--legacy-peer-deps", "--package", "dsh-mcp-connector@0.2.48", "--package", "dingtalk-workspace-cli@1.0.61", "dsh-mcp-cli-bridge", "--provider", "dingtalk-dws"],
+      "args": ["--yes", "--legacy-peer-deps", "--package", "dsh-mcp-connector@0.2.49", "--package", "dingtalk-workspace-cli@1.0.61", "dsh-mcp-cli-bridge", "--provider", "dingtalk-dws"],
       "transport": "stdio"
     }
   ],
