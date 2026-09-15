@@ -126,7 +126,7 @@ test('第二批连接器覆盖远程 OAuth 与多字段 stdio 凭据映射', asy
   assert.equal(byId.dingtalk.auth.mode, 'none');
   assert.equal(byId.dingtalk.servers[0].serverName, 'dingtalk-workspace');
   assert.deepEqual(byId.dingtalk.servers[0].args, [
-    '--yes', '--legacy-peer-deps', '--package', 'dsh-mcp-connector@0.2.48',
+    '--yes', '--legacy-peer-deps', '--package', 'dsh-mcp-connector@0.2.49',
     '--package', 'dingtalk-workspace-cli@1.0.61',
     'dsh-mcp-cli-bridge', '--provider', 'dingtalk-dws',
   ]);
