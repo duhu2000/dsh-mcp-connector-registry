@@ -37,6 +37,15 @@
 - 处理决定：快递100候选**暂停迁入 `connectors/`**，不能用该 npm 版本进行带 Key 验收；等待官方修复或审计通过的替代实现。官方 Python stdio 包可另行评估，但其源代码目前将 Key 放入 GET 查询参数，故也不能未经安全与日志复核就直接替换。仅采用官方远程 `?key=` URL 同样不符合公共 Registry 的凭据保护要求。
 - 金数据、Trello、Atlassian Rovo 仍可分别进行专用测试账号 OAuth、工具枚举和只读调用验收；未通过之前同样不得正式上架。
 
+## 2026-09-20 运行验收前复测
+
+13:12 UTC 使用同一无凭据 `initialize` 探针复测：金数据、Trello、Atlassian Rovo
+各返回 HTTP 401（`partial`，预期 OAuth 挑战）；快递100远程端点返回 HTTP 200
+（`pass`，仅表示协议握手）。本次没有授权、`tools/call`、真实运单或 API Key。
+这些结果**不构成** `runtimeAcceptance.status=pass`，不得据此生成正式候选记录或上架卡片。
+下一步需在专用 DSH 测试环境由账号持有人完成三项 OAuth 授权，再核对 `tools/list`、
+工具只读属性、最小只读调用、权限范围与费用；快递100待安全实现确认后再测。
+
 ## 官方依据
 
 - [金数据 MCP 与 OAuth 协议](https://open.jinshuju.net/mcp/oauth/)
