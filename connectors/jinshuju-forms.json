@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "jinshuju-forms",
+  "name": "金数据表单",
+  "vendor": "金数据",
+  "icon": "📝",
+  "category": "办公协作",
+  "summary": "表单检索 / 提交数据查询 / 表单管理",
+  "description": "接入金数据官方远程 MCP，查询授权范围内的表单和提交数据；服务还提供创建、编辑、删除表单及数据的工具。通过 OAuth 授权，权限与费用取决于账号、授权范围和套餐。表单可能包含个人信息，读取明细前应核对授权与用途；写入或删除前须明确确认。本连接器卡片由 DSH 社区独立维护，并非金数据官方产品或背书。",
+  "tags": ["金数据", "表单", "数据采集", "OAuth", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://open.jinshuju.net/mcp/",
+  "probeStatus": "partial",
+  "probeCheckedAt": 1789914425000,
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://account.jinshuju.net",
+    "scope": "public profile forms read_entries",
+    "clientName": "DeepSeek Harness - 金数据 MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "jinshuju-forms",
+      "serverName": "jinshuju_forms",
+      "url": "https://jinshuju.net/mcp",
+      "transport": "streamable-http",
+      "headers": { "Accept": "application/json, text/event-stream" }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看我的表单",
+      "text": "使用金数据 MCP 只读列出我有权限的最多 10 个表单，给出名称、用途和最近更新时间；不要读取提交者个人信息，也不要创建或修改表单。",
+      "server": "jinshuju-forms"
+    },
+    {
+      "title": "汇总表单提交量",
+      "text": "使用金数据 MCP 只读汇总我有权限的最多 10 个表单的提交数量，并注明统计时间；不要返回单条提交内容、个人信息，也不要修改或删除数据。",
+      "server": "jinshuju-forms"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "id": "jinshuju-forms",
+  "registryName": "vendor:jinshuju-mcp",
+  "title": "金数据表单 MCP",
+  "description": "金数据官方远程 MCP，支持在用户 OAuth 授权范围内查询表单与提交数据，也暴露表单和数据写入、删除工具。",
+  "version": "remote",
+  "classification": {
+    "isDataService": true,
+    "domains": ["forms", "data-collection", "office-collaboration"],
+    "matchedKeywords": ["金数据", "表单", "MCP", "OAuth"]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://open.jinshuju.net/mcp/",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-09-20T14:41:50Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://open.jinshuju.net/mcp/",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://jinshuju.net/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "oauth2",
+    "requiredHeaders": [],
+    "reason": "官方 MCP/OAuth 文档公布 DCR、PKCE S256 和 OAuth 受保护资源元数据；DSH Web 在用户授权的 workspace 显示 OAuth 已连接。卡片请求 public profile forms read_entries scope。"
+  },
+  "license": {
+    "status": "not-applicable",
+    "spdxId": null,
+    "evidenceUrl": "https://jinshuju.net/terms"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-09-20T13:12:00Z",
+    "targetUrl": "https://jinshuju.net/mcp",
+    "httpStatus": 401,
+    "reason": "无凭据 initialize 返回预期 OAuth 挑战；资源与授权服务器元数据可读。匿名探针不代表业务可用。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 84,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 23,
+      "maintenanceSecurity": 12,
+      "runtime": 10,
+      "marketGap": 9,
+      "documentation": 5
+    },
+    "reasons": [
+      "authority 25/25: 金数据官方开放平台公布 MCP 端点与 OAuth 协议",
+      "accessibility 23/25: 标准 HTTPS Streamable HTTP、DCR 和 PKCE，可在 DSH Web 完成连接",
+      "maintenance/security 12/20: 服务条款明确，但含个人数据与写入/删除工具，需用户逐项治理",
+      "runtime 10/15: DSH Web OAuth 连接、健康检查与 60 个工具发现通过；没有业务 tools/call，用户接受有限验收",
+      "market gap 9/10: 补充国内表单与数据采集服务",
+      "documentation 5/5: 官方 MCP、OAuth、使用条款与风险说明可核验"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "jinshuju-forms",
+    "reviewedAt": "2026-09-20T14:41:50Z",
+    "reviewedBy": "Duhu",
+    "notes": "用户确认将金数据 OAuth 连接、健康检查与 tools/list 视为有限验收通过，并要求合并上架；审核署名沿用本批已确认的 Duhu。已核对官方端点、OAuth 与服务条款，卡片披露个人数据和写入/删除工具风险。未执行业务 tools/call，不得宣称已验证业务查询。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-09-20T14:27:05Z",
+    "reviewedBy": "Duhu",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/nanowork-2026-09-20/jinshuju-forms.md",
+    "notes": "用户明确接受有限运行验收：DSH Web v0.2.51 OAuth 已连接，健康检查 ok，tools/list 发现 1 个服务、60 个工具。没有执行 tools/call、读取表单或提交数据；写入/删除工具默认允许的残余风险在报告中披露。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://open.jinshuju.net/mcp/",
+      "collectedAt": "2026-09-20T14:41:50Z",
+      "summary": "金数据官方开放平台公布 HTTPS MCP 端点、OAuth 接入方式及读写能力。"
+    },
+    {
+      "type": "license",
+      "url": "https://jinshuju.net/terms",
+      "collectedAt": "2026-09-20T14:41:50Z",
+      "summary": "服务以金数据使用条款而非开源软件许可证约束；条款披露个人信息处理责任及免费/付费套餐。"
+    },
+    {
+      "type": "probe",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/review-batches/nanowork-four-public-probe-2026-09-20.md",
+      "collectedAt": "2026-09-20T14:41:50Z",
+      "summary": "无凭据 initialize 的 401 OAuth 挑战与公开元数据已核验。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/nanowork-2026-09-20/jinshuju-forms.md",
+      "collectedAt": "2026-09-20T14:41:50Z",
+      "summary": "DSH Web 已连接、健康检查与 tools/list 通过；用户接受未做业务 tools/call 的有限验收，报告保留这一边界。"
+    }
+  ]
+}

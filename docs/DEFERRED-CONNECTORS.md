@@ -37,13 +37,14 @@
 2026-09-20 对以下四项完成了公开端点 `initialize` 探测；细节和安全边界见
 [`nanowork-four-public-probe-2026-09-20.md`](review-batches/nanowork-four-public-probe-2026-09-20.md)。
 `pass` / `partial` 只表示无凭据协议发现状态，不代表授权、业务调用或上架获批。
+`jinshuju-forms` 已由用户接受有限运行验收并单独批准上架；没有执行业务 `tools/call`，
+不再列入下方延期候选。其他三项仍未获批。
 
 | 候选 | 当前证据 | 下一步 |
 |---|---|---|
-| `jinshuju` | 已找到官方 MCP 地址与 OAuth 文档；无凭据 `initialize` 返回 401，资源/授权元数据和 DCR/PKCE S256 可发现 | 专用测试账号完成 DSH OAuth、只读工具发现与数据查询；复核写入/删除权限和个人数据边界 |
-| `kuaidi100` | 官方远程端点无凭据 `initialize` 与 `tools/list` 成功，列出 5 个工具 | 优先核验官方 stdio 包及环境变量 Key 注入；不将 Key 放在 URL Query；再做最小业务调用和费用核对 |
-| `trello` | 官方端点无凭据 `initialize` 返回 401，OAuth 元数据和 DCR/PKCE S256 可发现 | 验证 DSH 授权、单工作区范围、只读工具与写操作保护 |
-| `atlassian-rovo` | 官方 v2 端点无凭据 `initialize` 返回 401，OAuth 元数据和 DCR/PKCE S256 可发现 | 验证 DSH 授权、组织准入、按需工具发现、Jira/Confluence 只读能力与费用边界 |
+| `kuaidi100` | 官方远程端点无凭据 `initialize` 与 `tools/list` 成功；官方 npm `1.0.4` 包会记录含 Key 的请求并污染 stdio stdout | 等待官方修复或经复核的安全实现；不将 Key 放在 URL Query，不用当前 npm 版带 Key 验收 |
+| `trello` | OAuth 流程可启动，但测试账号提示无 Trello 工作区 | 用户决定跳过 Atlassian 测试；未来若重启审核，需专用工作区与最小只读验收 |
+| `atlassian-rovo` | 官方 v2 OAuth 元数据可发现；DSH 本机安装请求超时 | 用户决定跳过 Atlassian 测试；未来若重启审核，需组织准入、工具发现及费用核对 |
 
 ## 插件市场人工候选
 

@@ -5,7 +5,7 @@ import test from 'node:test';
 import { validateRegistryDescriptors } from '../node_modules/dsh-mcp-connector/lib/probe.js';
 
 const draftDirectory = resolve('candidates/drafts/nanowork-2026-09-20');
-const expectedIds = ['atlassian-rovo', 'jinshuju-forms', 'kuaidi100-logistics', 'trello'];
+const expectedIds = ['atlassian-rovo', 'kuaidi100-logistics', 'trello'];
 
 test('NanoWork comparison drafts are valid but cannot enter the published catalog', async () => {
   const files = (await readdir(draftDirectory)).filter((file) => file.endsWith('.json')).sort();
@@ -26,6 +26,16 @@ test('NanoWork comparison drafts are valid but cannot enter the published catalo
     assert.ok(!catalog.connectors.some((item) => item.id === id));
     assert.ok(!files.some((file) => file === `${id}.sample.json`));
   }
+});
+
+test('Jinshuju is promoted alone with a transparent limited-acceptance record', async () => {
+  const descriptor = JSON.parse(await readFile(resolve('connectors/jinshuju-forms.json'), 'utf8'));
+  const record = JSON.parse(await readFile(resolve('candidates/records/jinshuju-forms.json'), 'utf8'));
+  assert.equal(descriptor.published, true);
+  assert.equal(record.review.decision, 'approved');
+  assert.equal(record.runtimeAcceptance.status, 'pass');
+  assert.match(record.runtimeAcceptance.notes, /没有执行 tools\/call/);
+  assert.equal(record.review.proposedConnectorId, descriptor.id);
 });
 
 test('NanoWork comparison drafts never put a secret in URLs or stdio arguments', async () => {

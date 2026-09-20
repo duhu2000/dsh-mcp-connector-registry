@@ -59,9 +59,17 @@
 | Atlassian Rovo | 本机描述文件读取成功，但 DSH 安装请求提示“请求超时（145 秒）”，已安装数量未增加。 | 按用户要求跳过 Atlassian 测试；不重试、不授权、不解释为服务端故障。 |
 | 快递100 | 本轮未安装、未运行、未使用 Key。 | 继续因官方 npm 包日志泄露与 stdout 协议污染而暂停。 |
 
-该验收没有验证任何业务 `tools/call`，也没有完成权限/费用/条款核对，因此四项均
-**不能**标为 `runtimeAcceptance.status=pass` 或 `review.decision=approved`。
-现有 Draft PR 继续仅保存候选资料；上述 OAuth 临时链接及会话参数不记录、不复用。
+该轮观察没有验证任何业务 `tools/call`；截至此轮记录，四项均未达到原定完整运行
+验收门槛。上述 OAuth 临时链接及会话参数不记录、不复用。
+
+## 2026-09-20 用户有限验收决定与单项上架
+
+用户随后明确将**金数据**已完成的 OAuth 连接、健康检查和 60 个工具的 `tools/list`
+视为有限验收通过，并要求合并发布。维护者审核署名沿用本批确认的 `Duhu`。
+该决定不补写不存在的业务 `tools/call`，也不适用于 Trello、Atlassian Rovo 或快递100。
+金数据的残余风险、官方条款及待补测项见
+[`金数据有限运行验收`](../runtime-acceptance/nanowork-2026-09-20/jinshuju-forms.md)。
+本批只有金数据迁入 `connectors/` 与 `candidates/records/`；其余三项仍是未发布草案。
 
 ## 官方依据
 
