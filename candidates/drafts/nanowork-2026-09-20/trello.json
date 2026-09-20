@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "trello",
+  "name": "Trello 看板",
+  "vendor": "Atlassian / Trello",
+  "icon": "📋",
+  "category": "办公协作",
+  "summary": "看板 / 列表 / 卡片 / 待办协作",
+  "description": "接入 Trello 官方远程 MCP，通过 OAuth 查询授权工作区中的看板、列表和卡片。服务也具备创建、移动和归档等写能力，但草案拟请求只读权限；实际可用范围受用户授权和组织管理策略限制，修改前须明确确认。每次连接目前仅支持一个 Trello 工作区。",
+  "tags": ["Trello", "看板", "任务", "项目协作", "OAuth", "官方 MCP"],
+  "published": false,
+  "featured": false,
+  "homepage": "https://trello.com/mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://auth.atlassian.com/VCeDsk8ZHncYF1g234fKtc4lNipbBhu3",
+    "scope": "offline_access read:me read:account read:board:trello read:organization:trello read:member:trello",
+    "clientName": "DeepSeek Harness - Trello MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "trello",
+      "serverName": "trello",
+      "url": "https://mcp.trello.com/v1",
+      "transport": "streamable-http",
+      "headers": { "Accept": "application/json, text/event-stream" }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看本周待办",
+      "text": "使用 Trello MCP 只读列出当前授权工作区里未来 7 天到期且分配给我的卡片，按截止日期排序；不要创建、移动或归档卡片。",
+      "server": "trello"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "atlassian-rovo",
+  "name": "Atlassian Rovo · Jira/Confluence",
+  "vendor": "Atlassian",
+  "icon": "🔷",
+  "category": "办公协作",
+  "summary": "Jira 工作项 / Confluence 文档 / 跨产品搜索",
+  "description": "接入 Atlassian 官方 Rovo MCP v2，按授权与组织权限查询 Jira 工作项、Confluence 页面等信息。官方服务还可能提供跨产品搜索和写入能力，部分工具会消耗 Rovo credits；草案拟请求只读与搜索权限，修改工作项或页面前须明确确认。工具采用按需发现机制。",
+  "tags": ["Atlassian", "Rovo", "Jira", "Confluence", "OAuth", "官方 MCP"],
+  "published": false,
+  "featured": false,
+  "homepage": "https://developer.atlassian.com/cloud/rovo-mcp/guides/getting-started/",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://auth.atlassian.com/VCeDsk8ZHncYF1g234fKtc4lNipbBhu3",
+    "scope": "offline_access read:me read:account read:jira:agent-interface search:jira:agent-interface read:confluence:agent-interface search:confluence:agent-interface",
+    "clientName": "DeepSeek Harness - Atlassian Rovo MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "atlassian-rovo",
+      "serverName": "atlassian_rovo",
+      "url": "https://mcp.atlassian.com/v2/mcp",
+      "transport": "streamable-http",
+      "headers": { "Accept": "application/json, text/event-stream" }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看 Jira 待办",
+      "text": "使用 Atlassian Rovo MCP 只读查找我有权限访问的 Jira 站点，并汇总最近一周由我负责且尚未完成的工作项；列出来源链接，不修改工作项。",
+      "server": "atlassian-rovo"
+    }
+  ]
+}

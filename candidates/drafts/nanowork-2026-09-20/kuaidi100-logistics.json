@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "kuaidi100-logistics",
+  "name": "快递100 物流数据",
+  "vendor": "快递100",
+  "icon": "📦",
+  "category": "效率工具",
+  "summary": "物流轨迹 / 寄送时效 / 运费估算",
+  "description": "通过快递100官方 stdio MCP 查询物流轨迹、预估寄送时效与运费。需用户自备快递100 API Key，调用可能受套餐、配额和计费规则限制；运单号和详细地址可能涉及个人信息。凭据仅经本机环境变量注入，绝不写入 URL、命令参数或公共目录。",
+  "tags": ["快递100", "物流", "快递", "运费", "时效", "官方 MCP", "stdio"],
+  "published": false,
+  "featured": false,
+  "homepage": "https://api.kuaidi100.com/document/how-to-use-mcp-service",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "api-key",
+    "credentialDescription": "请从快递100 API 开放平台获取授权 Key。凭据只保存在 DSH 本机，并作为 KUAIDI100_API_KEY 环境变量传入官方 MCP 进程；业务调用可能计费。",
+    "credentialHelpLabel": "查看快递100 MCP 接入说明",
+    "credentialFields": [
+      { "key": "apiKey", "label": "快递100 API Key", "placeholder": "请输入您的快递100 API Key", "required": true, "secret": true }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "kuaidi100-logistics",
+      "serverName": "kuaidi100_logistics",
+      "command": "npx",
+      "args": ["-y", "@kuaidi100-mcp/kuaidi100-mcp-server@1.0.4"],
+      "credentialBindings": { "KUAIDI100_API_KEY": "apiKey" },
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "了解物流查询能力",
+      "text": "使用快递100 MCP 说明当前可用的物流轨迹、时效和运费工具分别需要哪些参数；不要查询真实运单、提交寄件请求或执行可能计费的业务调用。",
+      "server": "kuaidi100-logistics"
+    }
+  ]
+}
