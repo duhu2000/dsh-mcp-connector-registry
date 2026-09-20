@@ -4,10 +4,13 @@
 `connectors/` 下没有对应文件。无凭据预检见
 [`docs/review-batches/nanowork-four-public-probe-2026-09-20.md`](../../../docs/review-batches/nanowork-four-public-probe-2026-09-20.md)。
 
+审核人署名（2026-09-20 用户确认）：`Duhu`。这只是确认本批审核人，**不是**四项正式批准或
+真实运行验收签署；在实际验收通过前，不得把候选记录的 `review.decision` 填为 `approved`。
+
 | 草案 | 已完成 | 上架前仍需 |
 |---|---|---|
 | `jinshuju-forms.json` | 官方地址、401 挑战、资源/授权元数据、DCR/PKCE S256 | 专用账号完成 DSH OAuth、`tools/list` 和最小只读查询；确认 `forms` scope 的实际读写边界、服务条款与个人数据保护 |
-| `kuaidi100-logistics.json` | 官方包与无 Key 远程 `initialize`、5 个工具名；npm 包版本固定为 `1.0.4` | 对官方 stdio 包进行无凭据启动验收；用最小权限 Key 验证只读调用、费用与配额。不得改用含 Key 的 URL Query |
+| `kuaidi100-logistics.json` | 官方包与无 Key 远程 `initialize`、5 个工具名；已静态审计 npm `1.0.4` 包 | **暂停上架**：该版本向 stderr 打印含 Key 的请求数据，且向 stdout 写非协议日志；须先有经复核的修复版本或安全实现，再做 stdio 启动、最小权限 Key 调用、费用与配额验收。不得改用含 Key 的 URL Query |
 | `trello.json` | 官方地址、401 挑战、资源/授权元数据、DCR/PKCE S256 | 专用工作区完成 DSH OAuth、只读工具发现与查询；核对请求 scope、工作区选择和组织策略 |
 | `atlassian-rovo.json` | 官方 v2 地址、401 挑战、资源/授权元数据、DCR/PKCE S256 | 专用站点完成 DSH OAuth、按需工具发现和 Jira/Confluence 只读查询；核对组织策略及 Rovo credits |
 
@@ -16,6 +19,10 @@
 
 特别注意：快递100的远程端点允许匿名握手和工具枚举，不代表业务工具无需凭据；
 其官方远程示例将 Key 放在 URL Query，故草案只采用通过环境变量绑定 Key 的官方 stdio 形式。
-当前 npm 元数据还显示 `1.0.4` 对同名包的自依赖；运行第三方包前须核对发布内容与依赖树。
+官方 npm 包 `1.0.4` 的发布包静态审计进一步确认：`dist/http-request.js` 将含 `key` 的
+请求体写入 stderr，还记录响应；`dist/index.js` 在 stdio 连接后向 stdout 写入普通文本，
+不符合 stdout 仅用于 JSON-RPC 消息的要求。其 `package.json` 还包含同名包自依赖。
+因此当前 `npx` 草案**不得执行或发布**；后续即使取得测试 Key，也不能用该版本做真实业务验收。
+审计证据与替代方案边界见上方探测报告。
 Atlassian 官方工具目录的 `read_jira` 组内也列有 watch、上传附件等可改变状态的工具，
 因此只请求 `read:*` scope 和写“只读”提示词都不能替代逐工具策略审查与真实验收。

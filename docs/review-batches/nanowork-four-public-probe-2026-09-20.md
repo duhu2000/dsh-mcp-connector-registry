@@ -28,9 +28,19 @@
 3. Trello 与 Atlassian Rovo 共用 Atlassian 授权服务器，但资源 URL 和权限范围不同，应分别验证。Atlassian Rovo v2 采用按需发现工具的机制，授权后的 `tools/list` 可能只返回主工具，不能仅凭数量判断缺失。
 4. 本轮是候选协议预检，**不是上架批准**。未创建 Connector、未提交凭据、未调用业务工具，也未验证 DSH Web/Desktop 的完整授权和实际使用。
 
+## 2026-09-20 审核署名及快递100发布包复核
+
+- 用户确认本批审核人署名为 `Duhu`。署名确认不等于批准四项入库；真实运行验收和正式审核决定仍未完成，Draft PR 继续保持草案状态。
+- 将官方 npm 包 `@kuaidi100-mcp/kuaidi100-mcp-server@1.0.4` 下载到临时目录并只读查看发布包，未安装运行，未使用 API Key。发布包 SHA-512 integrity 为 `sha512-cY75POTJ12++X1+R7DQ3H1dNUueJJQCQFQ5cE/IxvGF+lK/nSA33SpxeDdzYtMxTsrVg1E+qIuqc3dUT5AEdQQ==`。
+- `dist/http-request.js` 在发出业务请求前将整个 `data` 打到 stderr；调用者在 `data.key` 放入 `KUAIDI100_API_KEY`，因此真实调用会泄露 Key 到本地日志。代码还将接口响应写入 stderr，可能暴露运单、地址等信息。
+- `dist/index.js` 在 `server.connect(transport)` 后调用 `console.log("MCP server is running...")`，把非 JSON-RPC 文本写入 stdio 协议使用的 stdout。`package.json` 还将自身列为 `^1.0.0` 运行依赖。静态代码已足以认定此版本不适合公共卡片；未作实际执行测试。
+- 处理决定：快递100候选**暂停迁入 `connectors/`**，不能用该 npm 版本进行带 Key 验收；等待官方修复或审计通过的替代实现。官方 Python stdio 包可另行评估，但其源代码目前将 Key 放入 GET 查询参数，故也不能未经安全与日志复核就直接替换。仅采用官方远程 `?key=` URL 同样不符合公共 Registry 的凭据保护要求。
+- 金数据、Trello、Atlassian Rovo 仍可分别进行专用测试账号 OAuth、工具枚举和只读调用验收；未通过之前同样不得正式上架。
+
 ## 官方依据
 
 - [金数据 MCP 与 OAuth 协议](https://open.jinshuju.net/mcp/oauth/)
 - [快递100 MCP 配置](https://api.kuaidi100.com/document/how-to-use-mcp-service)
+- [快递100官方 Python MCP 源码](https://github.com/kuaidi100-api/kuaidi100-MCP/blob/master/api_mcp.py)
 - [Trello 官方 MCP](https://trello.com/mcp)
 - [Atlassian Rovo MCP v2 接入指南](https://developer.atlassian.com/cloud/rovo-mcp/guides/getting-started/)
