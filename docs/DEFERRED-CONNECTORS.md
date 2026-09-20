@@ -3,7 +3,7 @@
 本清单记录对标市场中暂未安全上架的候选，以及已上架但仍需复核的健康项。它不是收录承诺，
 也不保留 `id`；服务商或贡献者仍应按 [`ONBOARDING.md`](ONBOARDING.md) 提交可验证资料。
 
-更新时间：2026-09-11。
+更新时间：2026-09-20。
 
 ## 上架门槛
 
@@ -31,6 +31,20 @@
 | `blender` | 官方 MCP 会在 Blender 中无防护执行 LLM 生成的 Python 代码，现有市场交互不足以表达任意代码执行风险 | 完成显式风险确认、命令预览、隔离环境与安装流程验收后单独评估 |
 | `figma` | Figma 官方远程 MCP 只允许列入 Figma MCP Catalog 的客户端连接；当前 DSH / `dsh-mcp-connector` 尚未获得客户端准入，OAuth 动态客户端注册会返回 HTTP 403，因此从公共市场暂时撤下 | Figma 接受客户端准入申请，并在 DSH Web 与 Desktop 上完成一次真实 OAuth 授权、工具发现和只读调用验收 |
 | `fayan-legal`、`mozun-trademark`、`ths-legal`、`mingbai-lawyer` | 未核验到可公开接入的官方 MCP 端点 | 服务商提交官方端点、鉴权和 Logo 来源 |
+
+## 纳米 Work 对标候选：已完成无凭据协议预检
+
+2026-09-20 对以下四项完成了公开端点 `initialize` 探测；细节和安全边界见
+[`nanowork-four-public-probe-2026-09-20.md`](review-batches/nanowork-four-public-probe-2026-09-20.md)。
+`pass` / `partial` 只表示无凭据协议发现状态，不代表授权、业务调用或上架获批。
+`jinshuju-forms` 已由用户接受有限运行验收并单独批准上架；没有执行业务 `tools/call`，
+不再列入下方延期候选。其他三项仍未获批。
+
+| 候选 | 当前证据 | 下一步 |
+|---|---|---|
+| `kuaidi100` | 官方远程端点无凭据 `initialize` 与 `tools/list` 成功；官方 npm `1.0.4` 包会记录含 Key 的请求并污染 stdio stdout | 等待官方修复或经复核的安全实现；不将 Key 放在 URL Query，不用当前 npm 版带 Key 验收 |
+| `trello` | OAuth 流程可启动，但测试账号提示无 Trello 工作区 | 用户决定跳过 Atlassian 测试；未来若重启审核，需专用工作区与最小只读验收 |
+| `atlassian-rovo` | 官方 v2 OAuth 元数据可发现；DSH 本机安装请求超时 | 用户决定跳过 Atlassian 测试；未来若重启审核，需组织准入、工具发现及费用核对 |
 
 ## 插件市场人工候选
 
@@ -67,7 +81,7 @@
 在资料补齐前不根据竞品 UI 文案猜测 URL，也不把普通 REST/SDK 包装成 MCP：
 
 - 金融投资：`ths-ifind`、`hsjy-mcp`、`morningstar`、`jinmen-research`、`tongzhou-research`
-- 办公协作：`weiyun`、`baidu-netdisk`、`jinshuju`、`tencent-survey`
+- 办公协作：`weiyun`、`baidu-netdisk`、`tencent-survey`
 - 调研分析：`jiushuyun-bi`、`ctrip`、`sorftime`、`jike-spatial`
 - 科学数据：`materials-project`、`oqmd`、`chembl`、`uniprot`、`pubchem`、`pubmed-pmc`、`sec`、`imf`、`arxiv`（当前主要为社区封装或缺少稳定官方 MCP 发布）
 - 设计创意：`picset-ai`、`jirui-video`
