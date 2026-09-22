@@ -54,7 +54,7 @@ export function canonicalPackageName(value) {
   return unscoped ? unscoped[1].toLowerCase() : null;
 }
 
-export function canonicalPublicUrl(value, { stripQuery = false } = {}) {
+export function canonicalPublicUrl(value, { stripQuery = false, preserveTrailingSlash = false } = {}) {
   if (!value) return null;
   try {
     const url = new URL(String(value));
@@ -65,7 +65,7 @@ export function canonicalPublicUrl(value, { stripQuery = false } = {}) {
     url.hash = '';
     if (stripQuery) url.search = '';
     if (url.port === '443') url.port = '';
-    if (url.pathname !== '/') url.pathname = url.pathname.replace(/\/+$/, '');
+    if (!preserveTrailingSlash && url.pathname !== '/') url.pathname = url.pathname.replace(/\/+$/, '');
     return url.toString();
   } catch {
     return null;
@@ -121,7 +121,9 @@ function normalizeTransports(server) {
     transports.push({
       kind: 'remote',
       type: sanitizeText(remote?.type, 40) || 'unknown',
-      url: canonicalPublicUrl(rawUrl, { stripQuery: rawUrl.includes('?') }),
+      // A trailing slash can be part of an MCP endpoint's route. Keep it for
+      // transport/probing; dedupe still canonicalizes slash variants below.
+      url: canonicalPublicUrl(rawUrl, { stripQuery: rawUrl.includes('?'), preserveTrailingSlash: true }),
       package: null,
     });
   }

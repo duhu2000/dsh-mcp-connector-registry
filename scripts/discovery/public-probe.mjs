@@ -137,7 +137,7 @@ export async function probeRemoteUrl(url, {
   lookupImpl = lookup,
   requestImpl = httpsRequest,
 } = {}) {
-  const targetUrl = canonicalPublicUrl(url, { stripQuery: true });
+  const targetUrl = canonicalPublicUrl(url, { stripQuery: true, preserveTrailingSlash: true });
   if (!targetUrl) return { status: 'fail', checkedAt, targetUrl: null, httpStatus: null, reason: 'Probe blocked: unsafe public HTTPS URL.' };
   try {
     const addresses = await publicAddresses(new URL(targetUrl).hostname, lookupImpl);

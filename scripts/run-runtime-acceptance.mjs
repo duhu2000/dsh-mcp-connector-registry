@@ -69,7 +69,7 @@ export async function publicMcpPost(targetUrl, message, {
   requestImpl = httpsRequest,
   sessionId,
 } = {}) {
-  const safeUrl = canonicalPublicUrl(targetUrl, { stripQuery: true });
+  const safeUrl = canonicalPublicUrl(targetUrl, { stripQuery: true, preserveTrailingSlash: true });
   if (!safeUrl) throw new Error('Runtime acceptance requires a public HTTPS endpoint without URL credentials');
   const addresses = await publicAddresses(new URL(safeUrl).hostname, lookupImpl);
   if (addresses.length === 0) throw new Error('Runtime acceptance blocked a private, local, or unresolved endpoint');
@@ -118,7 +118,7 @@ export async function runRuntimeAcceptance({
   reviewer = 'local-runtime-reviewer',
   postImpl = publicMcpPost,
 } = {}) {
-  const targetUrl = canonicalPublicUrl(url, { stripQuery: true });
+  const targetUrl = canonicalPublicUrl(url, { stripQuery: true, preserveTrailingSlash: true });
   if (!targetUrl) throw new Error('A public HTTPS --url is required');
   if (!/^[A-Za-z0-9_.:-]+$/.test(tool ?? '')) throw new Error('A safe --tool name is required');
   const argumentLeaks = detectCredentialExposure(args);
