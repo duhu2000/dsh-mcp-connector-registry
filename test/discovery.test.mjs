@@ -154,6 +154,17 @@ test('normalization copies only allowlisted public evidence and never copies hea
   assert.equal(candidate.runtimeAcceptance.status, 'not-run');
 });
 
+test('MCP transport preserves an explicit trailing slash while dedupe treats slash variants as one endpoint', () => {
+  const candidate = normalizeOfficialServer(officialEntry({
+    url: 'https://data.example.com/mcp/?token=must-not-survive#fragment',
+  }), { retrievedAt: NOW });
+  assert.equal(candidate.transports[0].url, 'https://data.example.com/mcp/');
+  const existing = buildConnectorIndex([{ id: 'existing-data', servers: [{ url: 'https://data.example.com/mcp' }] }]);
+  dedupeCandidate(candidate, existing);
+  assert.equal(candidate.dedupe.level, 'strong');
+  assert.doesNotMatch(JSON.stringify(candidate), /must-not-survive/);
+});
+
 test('selection stays gated until probe, authentication, and license evidence are ready', () => {
   const candidate = dedupeCandidate(
     normalizeOfficialServer(officialEntry(), { retrievedAt: NOW }),
@@ -299,6 +310,21 @@ test('public probe sends only a bounded credential-free MCP initialize request',
   assert.equal(JSON.parse(observed.options.body).method, 'initialize');
   assert.equal(observed.options.headers.Authorization, undefined);
   assert.equal(observed.options.headers.Cookie, undefined);
+});
+
+test('public probe posts to the supplied HTTPS slash route without following a redirect', async () => {
+  let observedUrl;
+  const result = await probeRemoteUrl('https://data.example.com/mcp/?token=must-not-survive', {
+    checkedAt: NOW,
+    lookupImpl: async () => [{ address: '93.184.216.34', family: 4 }],
+    fetchImpl: async (url) => {
+      observedUrl = url;
+      return new Response(JSON.stringify({ jsonrpc: '2.0', id: 1, result: {} }), { status: 200 });
+    },
+  });
+  assert.equal(observedUrl, 'https://data.example.com/mcp/');
+  assert.equal(result.targetUrl, observedUrl);
+  assert.equal(result.status, 'pass');
 });
 
 test('default public probe pins the HTTPS connection to the audited public DNS address', async () => {

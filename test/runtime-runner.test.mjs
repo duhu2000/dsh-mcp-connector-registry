@@ -54,6 +54,22 @@ test('runtime runner saves only a safe summary for an explicit read-only tool', 
   assert.doesNotMatch(rendered, /safe public result|session-value-never-reported/);
 });
 
+test('runtime runner preserves a safe HTTPS slash route through every request', async () => {
+  const urls = [];
+  const post = fakePost({ content: [{ type: 'text', text: 'public result' }], isError: false });
+  const report = await runRuntimeAcceptance({
+    url: 'https://data.example.com/mcp/?token=must-not-survive',
+    tool: 'lookup',
+    postImpl: async (url, message, options) => {
+      urls.push(url);
+      return post(url, message, options);
+    },
+  });
+  assert.equal(report.targetUrl, 'https://data.example.com/mcp/');
+  assert.deepEqual(urls, Array(4).fill(report.targetUrl));
+  assert.doesNotMatch(JSON.stringify(report), /must-not-survive/);
+});
+
 test('runtime runner fails closed when a tool result emits a credential-shaped value', async () => {
   const report = await runRuntimeAcceptance({
     url: 'https://data.example.com/mcp',
