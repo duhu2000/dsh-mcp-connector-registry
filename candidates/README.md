@@ -6,6 +6,8 @@ Candidates found outside the Official MCP Registry may use `source.kind: officia
 
 The first automated stage reads the public Official MCP Registry, copies only allowlisted fields, classifies data services, compares stable identities with the current catalog, and assigns an explainable score. It intentionally records license, public probe, human review, and runtime acceptance as unknown or not-run until later evidence is collected.
 
+Maintainer decisions in [`discovery-sources/exclusions.json`](../discovery-sources/exclusions.json) are applied before a discovered item can enter candidate output. Exact stable identities—Official Registry name, package identifier, repository URL, or remote endpoint—are recorded with the reviewer and decision date. Matching items remain visible only in the report's policy-exclusion evidence and cannot be selected, probed, curated, or promoted by the automated candidate path.
+
 Deduplication has two levels:
 
 - `strong`: exact Connector ID, Official Registry/server name, canonical HTTPS endpoint, or package identifier. A strong match is classified as `duplicate` and must be reconciled.

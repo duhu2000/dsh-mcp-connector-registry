@@ -18,6 +18,7 @@ import {
   collectOfficialRegistry,
   discoverOfficialCandidates,
 } from '../scripts/discovery/official-registry.mjs';
+import { loadExclusionPolicy, matchExclusion } from '../scripts/discovery/exclusion-policy.mjs';
 import {
   probeCandidate,
   probeRemoteUrl,
@@ -224,6 +225,41 @@ test('explainable score is the exact sum of bounded dimensions and gates duplica
   const notData = candidates.find((candidate) => candidate.registryName === 'com.example/task-runner');
   assert.equal(duplicate.score.band, 'duplicate');
   assert.equal(notData.score.band, 'not-data');
+});
+
+test('explicit do-not-list identities are retained as policy evidence but never enter candidate output', async () => {
+  const { candidates, excluded, rejected } = await discoverOfficialCandidates({
+    entries: [officialEntry({
+      name: 'icen-ai/mcp-cnbs',
+      title: 'CNBS Statistics',
+      description: 'Public statistics and economic data.',
+      repository: { url: 'https://github.com/icen-ai/mcp-cnbs', source: 'github', id: 'cnbs' },
+    })],
+    connectors: [],
+    exclusionPolicy: {
+      schemaVersion: 1,
+      exclusions: [{
+        id: 'mcp-cnbs', decision: 'do-not-list', decidedBy: 'DuHu', decidedAt: '2026-09-29', reason: 'Explicit user decision.',
+        match: {
+          registryNames: ['icen-ai/mcp-cnbs'], packages: ['mcp-cnbs'],
+          repositories: ['https://github.com/icen-ai/mcp-cnbs'], remoteUrls: [],
+        },
+      }],
+    },
+    retrievedAt: NOW,
+  });
+  assert.equal(candidates.length, 0);
+  assert.equal(rejected.length, 0);
+  assert.equal(excluded.length, 1);
+  assert.equal(excluded[0].id, 'mcp-cnbs');
+  assert.deepEqual(excluded[0].matchedBy, ['registry-name', 'repository']);
+});
+
+test('checked-in exclusion policy persists all three explicit user decisions by stable identity', async () => {
+  const policy = await loadExclusionPolicy();
+  assert.equal(matchExclusion({ registryName: 'icen-ai/mcp-cnbs' }, policy)?.id, 'mcp-cnbs');
+  assert.equal(matchExclusion({ transports: [{ url: 'https://data.shuidi.cn/mcp/' }] }, policy)?.id, 'shuidi-enterprise-data');
+  assert.equal(matchExclusion({ officialLinks: { repository: { url: 'https://github.com/lttxzmj/chinese-law-mcp' } } }, policy)?.id, 'chinese-law-mcp');
 });
 
 test('app deployment platforms are not classified as data services from an incidental database keyword', () => {
