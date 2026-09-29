@@ -21,7 +21,7 @@
     "candidates:accept": "node scripts/run-runtime-acceptance.mjs"
   },
   "devDependencies": {
-    "dsh-mcp-connector": "^0.2.29",
+    "dsh-mcp-connector": "^0.2.61",
     "zod": "^4.4.0"
   },
   "engines": {

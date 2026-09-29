@@ -33,6 +33,8 @@ const BATCH_FOUR_IDS = [
   'starwell-world-statistics',
 ];
 
+const DELISTED_BATCH_FOUR_IDS = new Set(['california-proposition-65']);
+
 const BATCH_FIVE_IDS = [
   'bis-global-statistics',
   'eia-us-energy-data',
@@ -181,7 +183,7 @@ test('approved batch three records match ready-to-use Connector cards', async ()
   }
 });
 
-test('approved batch four records support four-item batches and service terms', async () => {
+test('batch four preserves historical approval while current cards follow delisting decisions', async () => {
   const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-4.manifest.json', import.meta.url), 'utf8'));
   assert.equal(manifest.approval.decision, 'approved');
   assert.equal(manifest.approval.reviewedBy, 'DuHu');
@@ -189,6 +191,13 @@ test('approved batch four records support four-item batches and service terms', 
   for (const id of BATCH_FOUR_IDS) {
     const item = manifest.candidates.find((candidate) => candidate.id === id);
     const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
+    if (DELISTED_BATCH_FOUR_IDS.has(id)) {
+      assert.ok(item, `${id} remains in the historical review manifest`);
+      assert.equal(record.review.decision, 'approved');
+      assert.equal(record.runtimeAcceptance.status, 'pass');
+      await assert.rejects(readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'), { code: 'ENOENT' });
+      continue;
+    }
     const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
     assert.ok(item, `${id} is present in the review manifest`);
     assert.equal(record.review.decision, 'approved');

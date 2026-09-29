@@ -3,7 +3,7 @@
 本清单记录对标市场中暂未安全上架的候选，以及已上架但仍需复核的健康项。它不是收录承诺，
 也不保留 `id`；服务商或贡献者仍应按 [`ONBOARDING.md`](ONBOARDING.md) 提交可验证资料。
 
-更新时间：2026-09-20。
+更新时间：2026-09-29。
 
 ## 上架门槛
 
@@ -64,6 +64,12 @@
 |---|---|
 | `dsh-qixin-insight-mcp-oauth` | 企业数据竞品；不收录、不合并、不以其端点生成 Connector。 |
 | `dsh-plugin-xparse` / TextIn xParse | 文档解析竞品；不收录、不合并、不以其 OAuth/AppKey 或 CLI 生成 Connector。 |
+
+## 已下架归档
+
+| 连接器 | 下架时间 | 原因 | 重新评估条件 |
+|---|---|---|---|
+| `california-proposition-65` | 2026-09-29 | Toolstop 于 2026-09-17 明确公告 Hosted endpoints 已停止，`prop65.toolstop.dev` 连续两周 DNS `ENOTFOUND`；Official MCP Registry 条目已不存在，npm `@toolstop/prop65` 也已标记 deprecated。详见[下架调查记录](incidents/2026-09-29-california-proposition-65-delisting.md)。 | 上游恢复受维护的 HTTPS MCP 服务，或提供未废弃、数据持续更新且完成安全验收的 stdio 包。 |
 
 ## 本轮保留的待验收数据 MCP
 
