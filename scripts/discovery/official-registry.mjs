@@ -7,6 +7,7 @@ import {
   rankCandidates,
   scoreCandidate,
 } from './candidate-model.mjs';
+import { matchExclusion } from './exclusion-policy.mjs';
 
 function requireRegistryPage(payload) {
   if (!payload || !Array.isArray(payload.servers)) throw new Error('Official Registry response must contain a servers array');
@@ -100,15 +101,25 @@ export async function collectOfficialRegistry({
 export async function discoverOfficialCandidates({
   entries,
   connectors = [],
+  exclusionPolicy = { schemaVersion: 1, exclusions: [] },
   retrievedAt = new Date().toISOString(),
   apiBase = OFFICIAL_REGISTRY_API,
 } = {}) {
   const index = buildConnectorIndex(connectors);
   const candidates = [];
+  const excluded = [];
   const rejected = [];
   for (const entry of entries ?? []) {
     try {
       const candidate = normalizeOfficialServer(entry, { retrievedAt, apiBase });
+      const exclusion = matchExclusion(candidate, exclusionPolicy);
+      if (exclusion) {
+        excluded.push({
+          registryName: candidate.registryName,
+          ...exclusion,
+        });
+        continue;
+      }
       candidates.push(scoreCandidate(dedupeCandidate(candidate, index)));
     } catch (error) {
       rejected.push({
@@ -117,7 +128,7 @@ export async function discoverOfficialCandidates({
       });
     }
   }
-  return { candidates: rankCandidates(candidates), rejected };
+  return { candidates: rankCandidates(candidates), excluded, rejected };
 }
 
 export async function loadConnectorCatalog(path = 'catalog.json') {

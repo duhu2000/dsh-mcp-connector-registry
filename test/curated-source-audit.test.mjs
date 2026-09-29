@@ -379,6 +379,40 @@ test('curated audit canonicalizes package versions and never selects or publishe
   assert.equal(report.leads[0].ownership.kind, 'official-or-publisher');
 });
 
+test('curated audit excludes an explicit do-not-list package from eligible data leads', async () => {
+  const sources = [{
+    id: 'market', repository: 'https://github.com/example/market', revision: REVISION,
+    committedAt: NOW, retrievedAt: NOW, mode: 'live', paths: ['catalog.json'], entries: [sourceEntry({
+      id: 'cnbs', name: 'CNBS Statistics', description: 'Public statistics and economic data.',
+      homepage: 'https://github.com/icen-ai/mcp-cnbs', args: ['-y', 'mcp-cnbs@latest'],
+    })], error: null,
+  }];
+  const report = await auditCuratedSources({
+    config: { schemaVersion: 1, knownReplacements: [] },
+    sources,
+    connectors: [],
+    exclusionPolicy: {
+      schemaVersion: 1,
+      exclusions: [{
+        id: 'mcp-cnbs', decision: 'do-not-list', decidedBy: 'DuHu', decidedAt: '2026-09-29', reason: 'Explicit user decision.',
+        match: {
+          registryNames: [], packages: ['mcp-cnbs'],
+          repositories: ['https://github.com/icen-ai/mcp-cnbs'], remoteUrls: [],
+        },
+      }],
+    },
+    checkedAt: NOW,
+    fetchImpl: async (url) => String(url).includes('api.github.com')
+      ? githubResponse('icen-ai/mcp-cnbs')
+      : npmResponse('mcp-cnbs', { repository: 'git+https://github.com/icen-ai/mcp-cnbs.git' }),
+  });
+  assert.equal(report.summary.dataLeads, 0);
+  assert.equal(report.summary.policyExclusions, 1);
+  assert.equal(report.leads[0].priority, 'excluded');
+  assert.equal(report.leads[0].exclusion.id, 'mcp-cnbs');
+  assert.match(renderCuratedSourceReport(report), /do-not-list: mcp-cnbs/);
+});
+
 test('generic storage infrastructure is excluded while public web and map data remain leads', () => {
   const sources = [{
     id: 'market', mode: 'live', revision: REVISION,

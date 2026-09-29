@@ -3,7 +3,7 @@
 本清单记录对标市场中暂未安全上架的候选，以及已上架但仍需复核的健康项。它不是收录承诺，
 也不保留 `id`；服务商或贡献者仍应按 [`ONBOARDING.md`](ONBOARDING.md) 提交可验证资料。
 
-更新时间：2026-09-20。
+更新时间：2026-09-29。
 
 ## 上架门槛
 
@@ -64,6 +64,14 @@
 |---|---|
 | `dsh-qixin-insight-mcp-oauth` | 企业数据竞品；不收录、不合并、不以其端点生成 Connector。 |
 | `dsh-plugin-xparse` / TextIn xParse | 文档解析竞品；不收录、不合并、不以其 OAuth/AppKey 或 CLI 生成 Connector。 |
+| `shuididata/mcp-server` / 水滴企业数据 MCP | 用户明确确认为企业数据竞品；不收录、不合并、不以其端点或代码生成 Connector。 |
+| `icen-ai/mcp-cnbs` / `mcp-cnbs` | 用户明确决定不上架；不再作为 watch 候选自动入选。 |
+| `lttxzmj/chinese-law-mcp` | 用户明确决定不上架；不再作为 watch 候选自动入选。 |
+
+上述决策同步记录在
+[`discovery-sources/exclusions.json`](../discovery-sources/exclusions.json)。Discovery 与精选目录审计会按
+Registry 名、包名、仓库或远程端点的稳定身份标记 `do-not-list`，防止定时流程重新推荐；
+原审计证据仍保留，但不得解读为待许可解决的上架队列。
 
 ## 本轮保留的待验收数据 MCP
 

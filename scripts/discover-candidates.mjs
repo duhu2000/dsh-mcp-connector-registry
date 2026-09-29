@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { OFFICIAL_REGISTRY_API } from './discovery/candidate-model.mjs';
+import { loadExclusionPolicy } from './discovery/exclusion-policy.mjs';
 import { probeCandidates } from './discovery/public-probe.mjs';
 import {
   collectOfficialRegistry,
@@ -14,6 +15,7 @@ function parseArgs(argv) {
   const options = {
     output: 'candidate-output', limit: 100, maxPages: 1000, requestTimeoutMs: 20_000,
     maxAttempts: 3, maxProbes: 25, minProbeScore: 65,
+    exclusions: 'discovery-sources/exclusions.json',
   };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -28,6 +30,7 @@ function parseArgs(argv) {
     else if (arg === '--probe') options.probe = true;
     else if (arg === '--max-probes') options.maxProbes = Number(argv[++index]);
     else if (arg === '--min-probe-score') options.minProbeScore = Number(argv[++index]);
+    else if (arg === '--exclusions') options.exclusions = argv[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
   if (!options.output) throw new Error('--output must not be empty');
@@ -57,6 +60,7 @@ export function renderCandidateReport(report) {
     `Generated: ${report.generatedAt}`,
     '',
     `Scanned ${report.summary.scanned} Official Registry record(s); normalized ${report.summary.normalized}; data candidates ${report.summary.dataCandidates}; rejected ${report.summary.rejected}.`,
+    `Policy exclusions: ${report.summary.excluded}.`,
     '',
     `Score distribution: selected ${report.summary.scoreDistribution.selected}, watchlist ${report.summary.scoreDistribution.watchlist}, defer ${report.summary.scoreDistribution.defer}, duplicate ${report.summary.scoreDistribution.duplicate}.`,
     '',
@@ -72,6 +76,10 @@ export function renderCandidateReport(report) {
   if (report.rejected.length > 0) {
     lines.push('', '## Normalization rejects', '');
     for (const item of report.rejected.slice(0, 50)) lines.push(`- \`${markdownCell(item.registryName)}\`: ${markdownCell(item.reason)}`);
+  }
+  if (report.excluded.length > 0) {
+    lines.push('', '## Policy exclusions', '');
+    for (const item of report.excluded) lines.push(`- \`${markdownCell(item.registryName)}\`: ${markdownCell(item.reason)} (${markdownCell(item.id)}; ${markdownCell(item.decidedBy)} ${markdownCell(item.decidedAt)})`);
   }
   lines.push('', 'Human review of vendor documentation, licensing, authentication, security boundaries, and real runtime acceptance is mandatory before a descriptor PR.', '');
   return lines.join('\n');
@@ -109,8 +117,11 @@ async function main() {
     entries = result.records;
     pages = result.pages;
   }
-  const connectors = await loadConnectorCatalog(resolve('catalog.json'));
-  const discovery = await discoverOfficialCandidates({ entries, connectors, retrievedAt: generatedAt, apiBase });
+  const [connectors, exclusionPolicy] = await Promise.all([
+    loadConnectorCatalog(resolve('catalog.json')),
+    loadExclusionPolicy(options.exclusions),
+  ]);
+  const discovery = await discoverOfficialCandidates({ entries, connectors, exclusionPolicy, retrievedAt: generatedAt, apiBase });
   if (options.probe) {
     await probeCandidates(discovery.candidates, {
       maxProbes: options.maxProbes,
@@ -127,9 +138,10 @@ async function main() {
     source: { kind: 'official-mcp-registry', apiBase, pages, updatedSince: options.updatedSince ?? null },
     summary: {
       scanned: entries.length,
-      normalized: discovery.candidates.length,
+      normalized: discovery.candidates.length + discovery.excluded.length,
       dataCandidates: dataCandidates.length,
       rejected: discovery.rejected.length,
+      excluded: discovery.excluded.length,
       scoreDistribution: scoreDistribution(discovery.candidates),
       probeDistribution: discovery.candidates.reduce((counts, candidate) => {
         counts[candidate.probe.status] = (counts[candidate.probe.status] ?? 0) + 1;
@@ -137,6 +149,7 @@ async function main() {
       }, {}),
     },
     candidates: dataCandidates,
+    excluded: discovery.excluded,
     rejected: discovery.rejected,
   };
   assertNoCredentialValues(report);
@@ -151,7 +164,7 @@ async function main() {
     writeFile(resolve(output, 'candidate-report.json'), `${JSON.stringify(report, null, 2)}\n`),
     writeFile(resolve(output, 'candidate-report.md'), renderCandidateReport(report)),
   ]);
-  console.log(`candidate discovery: ${entries.length} scanned / ${dataCandidates.length} data candidates / ${discovery.rejected.length} rejected -> ${output}`);
+  console.log(`candidate discovery: ${entries.length} scanned / ${dataCandidates.length} data candidates / ${discovery.excluded.length} excluded / ${discovery.rejected.length} rejected -> ${output}`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

@@ -9,6 +9,7 @@ import {
   slugify,
 } from './candidate-model.mjs';
 import { parseAndNormalizeSource } from './curated-source-parsers.mjs';
+import { matchExclusion } from './exclusion-policy.mjs';
 
 const MAX_RESPONSE_BYTES = 5 * 1024 * 1024;
 const NON_DATA_TOOL_PATTERNS = [
@@ -663,6 +664,7 @@ export async function auditCuratedSources({
   config,
   sources,
   connectors = [],
+  exclusionPolicy = { schemaVersion: 1, exclusions: [] },
   lastGood = {},
   fetchImpl = fetch,
   githubToken,
@@ -681,10 +683,15 @@ export async function auditCuratedSources({
     const repositoryIdentity = sourceRepository(leads[index].homepages) ?? packageAudits[index]?.repository;
     leads[index].repositoryAudit = repositoryIdentity ? repositoryAuditByIdentity.get(repositoryIdentity) ?? null : null;
     leads[index].ownership = ownershipForLead(leads[index]);
+    leads[index].exclusion = matchExclusion(leads[index], exclusionPolicy);
     leads[index].dedupe = dedupeLead(leads[index], connectors, config.knownReplacements);
     leads[index].verification = overallVerification(leads[index]);
     leads[index].score = scoreLead(leads[index]);
-    leads[index].priority = leads[index].classification.isDataService && leads[index].dedupe.level !== 'strong'
+    if (leads[index].exclusion) {
+      leads[index].score.band = 'defer';
+      leads[index].score.gates.unshift(`Explicit do-not-list decision ${leads[index].exclusion.id}.`);
+    }
+    leads[index].priority = !leads[index].exclusion && leads[index].classification.isDataService && leads[index].dedupe.level !== 'strong'
       ? 'P2-overseas-supplement'
       : 'excluded';
   }
@@ -709,7 +716,8 @@ export async function auditCuratedSources({
       uniqueIdentities: leads.length,
       executableIdentities: leads.filter((lead) => !lead.identity.startsWith('template:')).length,
       templates: leads.filter((lead) => lead.identity.startsWith('template:')).length,
-      dataLeads: leads.filter((lead) => lead.classification.isDataService).length,
+      dataLeads: leads.filter((lead) => lead.classification.isDataService && !lead.exclusion).length,
+      policyExclusions: leads.filter((lead) => lead.exclusion).length,
       strongDuplicates: leads.filter((lead) => lead.dedupe.level === 'strong').length,
       weakDuplicates: leads.filter((lead) => lead.dedupe.level === 'weak').length,
       sourceModes,
@@ -761,7 +769,7 @@ export function renderCuratedSourceReport(report) {
     '',
     `Generated: ${report.generatedAt}`,
     '',
-    `Raw entries ${report.summary.rawEntries}; unique identities ${report.summary.uniqueIdentities}; executable ${report.summary.executableIdentities}; templates ${report.summary.templates}; data leads ${report.summary.dataLeads}.`,
+    `Raw entries ${report.summary.rawEntries}; unique identities ${report.summary.uniqueIdentities}; executable ${report.summary.executableIdentities}; templates ${report.summary.templates}; eligible data leads ${report.summary.dataLeads}; policy exclusions ${report.summary.policyExclusions}.`,
     '',
     `Verification: PASS ${report.summary.statusDistribution.PASS}; SKIP ${report.summary.statusDistribution.SKIP}; FAIL ${report.summary.statusDistribution.FAIL}; DEFERRED ${report.summary.statusDistribution.DEFERRED}.`,
     '',
@@ -772,14 +780,17 @@ export function renderCuratedSourceReport(report) {
     '| Identity | Source | Sources | Access | Package | Verification | Tools | Dedupe | Score / band | Schedule |',
     '|---|---|---|---|---|---|---:|---|---|---|',
   ];
-  const dataLeads = report.leads.filter((lead) => lead.classification.isDataService);
+  const dataLeads = report.leads.filter((lead) => lead.classification.isDataService && !lead.exclusion);
   if (dataLeads.length === 0) lines.push('| — | — | — | — | — | — | — | — | — | No curated-source data lead passed deterministic classification. |');
   for (const lead of dataLeads) {
     lines.push(`| <code>${markdownCell(lead.identity)}</code><br>${markdownCell(lead.title)} | ${lead.ownership.kind}<br>${markdownCell(lead.ownership.repository ?? '—')} | ${lead.sources.map((source) => markdownCell(source.sourceId)).join(', ')} | ${lead.access.mode} | ${lead.packageAudit ? `${lead.packageAudit.status} ${lead.packageAudit.version ?? ''}`.trim() : 'n/a'} | ${lead.verification.status}<br>${markdownCell(lead.verification.reason)} | ${lead.verification.toolCount ?? '—'} | ${lead.dedupe.level}: ${matchIds(lead.dedupe)} | ${lead.score.total} / ${lead.score.band} | ${lead.priority} |`);
   }
   lines.push('', '## Complete deduplicated inventory', '', '| Identity | Data | Sources | Verification | Existing coverage | Decision |', '|---|---|---|---|---|---|');
   for (const lead of report.leads) {
-    lines.push(`| <code>${markdownCell(lead.identity)}</code> | ${lead.classification.isDataService ? lead.classification.domains.join(', ') : 'no'} | ${lead.sources.map((source) => markdownCell(source.sourceId)).join(', ')} | ${lead.verification.status} | ${lead.dedupe.level}: ${matchIds(lead.dedupe)} | ${lead.score.band} |`);
+    const decision = lead.exclusion
+      ? `do-not-list: ${markdownCell(lead.exclusion.id)} (${markdownCell(lead.exclusion.decidedBy)} ${markdownCell(lead.exclusion.decidedAt)})`
+      : lead.score.band;
+    lines.push(`| <code>${markdownCell(lead.identity)}</code> | ${lead.classification.isDataService ? lead.classification.domains.join(', ') : 'no'} | ${lead.sources.map((source) => markdownCell(source.sourceId)).join(', ')} | ${lead.verification.status} | ${lead.dedupe.level}: ${matchIds(lead.dedupe)} | ${decision} |`);
   }
   lines.push(
     '',

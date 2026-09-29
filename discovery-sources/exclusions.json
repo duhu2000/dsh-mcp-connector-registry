@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "exclusions": [
+    {
+      "id": "mcp-cnbs",
+      "decision": "do-not-list",
+      "decidedBy": "DuHu",
+      "decidedAt": "2026-09-29",
+      "reason": "User explicitly decided not to list this community statistics MCP.",
+      "match": {
+        "registryNames": [
+          "mcp-cnbs",
+          "icen-ai/mcp-cnbs",
+          "io.github.icen-ai/mcp-cnbs"
+        ],
+        "packages": [
+          "mcp-cnbs"
+        ],
+        "repositories": [
+          "https://github.com/icen-ai/mcp-cnbs"
+        ],
+        "remoteUrls": []
+      }
+    },
+    {
+      "id": "shuidi-enterprise-data",
+      "decision": "do-not-list",
+      "decidedBy": "DuHu",
+      "decidedAt": "2026-09-29",
+      "reason": "User identified Shuidi enterprise data MCP as a competitor and explicitly decided not to list it.",
+      "match": {
+        "registryNames": [
+          "shuididata/mcp-server",
+          "io.github.shuididata/mcp-server"
+        ],
+        "packages": [],
+        "repositories": [
+          "https://github.com/shuididata/mcp-server"
+        ],
+        "remoteUrls": [
+          "https://data.shuidi.cn/mcp/"
+        ]
+      }
+    },
+    {
+      "id": "chinese-law-mcp",
+      "decision": "do-not-list",
+      "decidedBy": "DuHu",
+      "decidedAt": "2026-09-29",
+      "reason": "User explicitly decided not to list this community Chinese-law MCP.",
+      "match": {
+        "registryNames": [
+          "chinese-law-mcp",
+          "lttxzmj/chinese-law-mcp",
+          "io.github.lttxzmj/chinese-law-mcp"
+        ],
+        "packages": [],
+        "repositories": [
+          "https://github.com/lttxzmj/chinese-law-mcp"
+        ],
+        "remoteUrls": []
+      }
+    }
+  ]
+}

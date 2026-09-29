@@ -9,11 +9,13 @@ import {
   collectCuratedSources,
   renderCuratedSourceReport,
 } from './discovery/curated-source-audit.mjs';
+import { loadExclusionPolicy } from './discovery/exclusion-policy.mjs';
 import { loadConnectorCatalog } from './discovery/official-registry.mjs';
 
 function parseArgs(argv) {
   const options = {
     config: 'discovery-sources/curated-sources.json',
+    exclusions: 'discovery-sources/exclusions.json',
     lastGood: 'discovery-sources/curated-last-good.json',
     output: 'candidate-output/curated-sources',
     requestTimeoutMs: 20_000,
@@ -21,6 +23,7 @@ function parseArgs(argv) {
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
     if (arg === '--config') options.config = argv[++index];
+    else if (arg === '--exclusions') options.exclusions = argv[++index];
     else if (arg === '--last-good') options.lastGood = argv[++index];
     else if (arg === '--output') options.output = argv[++index];
     else if (arg === '--request-timeout-ms') options.requestTimeoutMs = Number(argv[++index]);
@@ -47,10 +50,11 @@ async function readJson(path, fallback) {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const generatedAt = new Date().toISOString();
-  const [config, lastGood, connectors] = await Promise.all([
+  const [config, lastGood, connectors, exclusionPolicy] = await Promise.all([
     readJson(options.config),
     readJson(options.lastGood, { schemaVersion: 1, sources: [], packages: [] }),
     loadConnectorCatalog(resolve('catalog.json')),
+    loadExclusionPolicy(options.exclusions),
   ]);
   const unavailableFetch = async () => { throw new Error('Offline mode requested'); };
   const sourceOptions = {
@@ -64,6 +68,7 @@ async function main() {
     config,
     sources,
     connectors,
+    exclusionPolicy,
     lastGood,
     checkedAt: generatedAt,
     requestTimeoutMs: options.requestTimeoutMs,
