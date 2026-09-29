@@ -47,8 +47,8 @@
     },
     {
       "name": "dates",
-      "label": "入住日期",
-      "placeholder": "例如：11 月 12–15 日",
+      "label": "入住及退房日期",
+      "placeholder": "例如：2026-11-12 至 2026-11-15",
       "required": true
     }
   ],
