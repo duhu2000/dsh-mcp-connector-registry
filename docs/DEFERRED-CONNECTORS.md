@@ -73,6 +73,12 @@
 Registry 名、包名、仓库或远程端点的稳定身份标记 `do-not-list`，防止定时流程重新推荐；
 原审计证据仍保留，但不得解读为待许可解决的上架队列。
 
+## 已下架归档
+
+| 连接器 | 下架时间 | 原因 | 重新评估条件 |
+|---|---|---|---|
+| `california-proposition-65` | 2026-09-29 | Toolstop 于 2026-09-17 明确公告 Hosted endpoints 已停止，`prop65.toolstop.dev` 连续两周 DNS `ENOTFOUND`；Official MCP Registry 条目已不存在，npm `@toolstop/prop65` 也已标记 deprecated。详见[下架调查记录](incidents/2026-09-29-california-proposition-65-delisting.md)。 | 上游恢复受维护的 HTTPS MCP 服务，或提供未废弃、数据持续更新且完成安全验收的 stdio 包。 |
+
 ## 本轮保留的待验收数据 MCP
 
 以下 3 个候选来自 2026-09-02 的数据 MCP 自动发现流程，具有继续跟进价值，但尚未满足当前只读运行验收门槛。它们并非被拒绝，也不计入本批正式 Connector 数量：
