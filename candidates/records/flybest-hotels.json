@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "id": "flybest-hotels",
+  "registryName": "org.flybest/travel-hotels",
+  "title": "FlyBest Travel — Hotel Booking with Advisor Benefits",
+  "description": "Travel hotel data and booking service with live availability, rates, advisor benefits, payment-link creation, trip lookup and cancellation under user OAuth authorization.",
+  "version": "1.0.1",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "travel",
+      "hotels",
+      "booking"
+    ],
+    "matchedKeywords": [
+      "hotel",
+      "rates",
+      "travel",
+      "booking",
+      "advisor benefits"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/org.flybest%2Ftravel-hotels/versions/1.0.1",
+    "status": "active",
+    "publishedAt": "2026-09-29T06:39:17.853877Z",
+    "updatedAt": "2026-09-29T06:39:17.853877Z",
+    "retrievedAt": "2026-09-30T04:11:59Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://flybest.org/en/ai/",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://ai.flybest.org/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "oauth2",
+    "requiredHeaders": [],
+    "reason": "Authorization Server 与 Protected Resource Metadata 公布 DCR、Authorization Code、Refresh Token、public client 和 PKCE S256；DSH 候选卡片已完成 scope=mcp 的 OAuth 授权并成功执行只读工具。"
+  },
+  "license": {
+    "status": "not-applicable",
+    "spdxId": null,
+    "evidenceUrl": "https://ai.flybest.org/terms"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-09-29T06:39:17.853877Z",
+    "ageDays": 0,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-09-29T11:30:04Z",
+    "targetUrl": "https://ai.flybest.org/mcp",
+    "httpStatus": 401,
+    "reason": "无凭据 initialize 返回预期的 401 OAuth challenge；资源元数据、授权服务器元数据、DCR 和 PKCE S256 已公开核验。匿名探针不代表业务可用。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 93,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 25,
+      "maintenanceSecurity": 14,
+      "runtime": 15,
+      "marketGap": 9,
+      "documentation": 5
+    },
+    "reasons": [
+      "authority 25/25: Official MCP Registry active 版本、FlyBest 官方网站与同域 MCP/OAuth 端点相互印证",
+      "accessibility 25/25: HTTPS Streamable HTTP、DCR、public client、PKCE S256 与 Refresh Token 均通过 DSH 运行验证",
+      "maintenance/security 14/20: 正式服务条款与隐私政策已发布并披露旅行社登记，但服务新近上线且无公开源代码仓库",
+      "runtime 15/15: initialize、tools/list、annotations、sabre_hotel_search 与 sabre_hotel_content 真实只读验收通过",
+      "market gap 9/10: 增加全球酒店实时查询、顾问礼遇和用户授权下的预订管理能力",
+      "documentation 5/5: 官方页面、OAuth 元数据、服务条款、隐私政策和工具说明均可核验"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "flybest-hotels",
+    "reviewedAt": "2026-09-30T04:11:59Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已复核 Official MCP Registry 身份、正式条款与隐私政策、FlyBest 与 Coastline Travel Advisors 的披露、OAuth DCR/PKCE、工具 annotations 和 DSH 最小只读调用；付款页生成与取消订单的副作用已在卡片和验收报告中明确，批准进入公共目录。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-09-30T04:11:59Z",
+    "reviewedBy": "DuHu",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/pr-31/flybest-hotels.md",
+    "notes": "DSH MCP 连接器 v0.2.62 完成 DCR + PKCE OAuth、initialize 与 8 个工具发现；sabre_hotel_search 和 sabre_hotel_content 两项只读调用成功。没有保存凭据或账号信息，没有生成付款页、预订或取消订单。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/org.flybest%2Ftravel-hotels/versions/1.0.1",
+      "collectedAt": "2026-09-30T04:11:59Z",
+      "summary": "Official MCP Registry 状态 active，版本 1.0.1，官方远程端点为 https://ai.flybest.org/mcp。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://flybest.org/en/ai/",
+      "collectedAt": "2026-09-30T04:11:59Z",
+      "summary": "Official Registry 发布者链接说明 FlyBest 酒店 MCP 的查询、礼遇和预订能力。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://ai.flybest.org/privacy",
+      "collectedAt": "2026-09-30T04:11:59Z",
+      "summary": "正式隐私政策为 Version 2026-09-29，说明 OAuth、酒店查询与预订相关数据处理边界。"
+    },
+    {
+      "type": "license",
+      "url": "https://ai.flybest.org/terms",
+      "collectedAt": "2026-09-30T04:11:59Z",
+      "summary": "正式服务条款为 Version 2026-09-29，并列出 Coastline Travel Advisors 的 CST 2040360-40 与 ARC 05582905。"
+    },
+    {
+      "type": "probe",
+      "url": "https://ai.flybest.org/mcp",
+      "collectedAt": "2026-09-29T11:30:04Z",
+      "summary": "无凭据 initialize 返回预期 OAuth challenge；DCR、PKCE 和相关元数据端点公开可达。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/pr-31/flybest-hotels.md",
+      "collectedAt": "2026-09-30T04:11:59Z",
+      "summary": "DSH OAuth、8 个工具发现、annotations 核验及 sabre_hotel_search、sabre_hotel_content 两项只读调用通过；未执行付款、预订或取消操作。"
+    }
+  ]
+}
