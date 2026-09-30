@@ -1491,6 +1491,78 @@
     },
     {
       "schemaVersion": 1,
+      "id": "flybest-hotels",
+      "name": "FlyBest·AI 订酒店",
+      "vendor": "FlyBest",
+      "icon": "https://flybest.org/wp-content/uploads/2026/09/flybest-icon-512.png",
+      "category": "其他",
+      "summary": "全球酒店实时房价 / 顾问礼遇对比 / 一次性付款页下单 / 订单查询与取消",
+      "description": "接入 FlyBest 远程 MCP，背后是持牌旅行社的酒店预订系统：按城市和日期搜索酒店；查看单家酒店全部房型的实时含税总价、是否含早、免费取消期限和订金或预付条款，以及顾问合作价附带的礼遇（例如双人早餐、酒店消费额度、视房态升级）。选定房型后生成一次性付款页：卡号只在 FlyBest 自己域名的页面填写，不经过对话或工具调用，用户提交后才以其姓名向酒店下单。可列出本连接下的订单；取消前先返回下单时确认的条款，需用户确认后才执行。使用 OAuth 2.1 + PKCE（动态客户端注册），以邮箱验证码登录，无需 API Key。免费使用，订房只付酒店房费，按酒店币种以国际信用卡支付；只订酒店，不订机票。有副作用的操作：生成付款页（提交前不下单、不扣款）和取消订单（不可撤销）。服务由 FlyBest 提供和维护，收录不代表 dsh-mcp-connector 或企查查背书。",
+      "tags": [
+        "酒店",
+        "旅行",
+        "订房",
+        "奢华酒店",
+        "OAuth",
+        "PKCE",
+        "第三方收录"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://flybest.org/ai/",
+      "probeStatus": "unverified",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://ai.flybest.org",
+        "scope": "mcp",
+        "clientName": "DeepSeek Harness - FlyBest",
+        "tokenEndpointAuthMethod": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "hotels",
+          "url": "https://ai.flybest.org/mcp",
+          "serverName": "flybest",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "promptVariables": [
+        {
+          "name": "city",
+          "label": "城市",
+          "placeholder": "例如：京都",
+          "required": true
+        },
+        {
+          "name": "dates",
+          "label": "入住及退房日期",
+          "placeholder": "例如：2026-11-12 至 2026-11-15",
+          "required": true
+        }
+      ],
+      "prompts": [
+        {
+          "title": "搜索酒店",
+          "text": "用 FlyBest 帮我找 {{city}} {{dates}} 的酒店，两位成人，列出实时房价和带顾问礼遇的酒店；只查询，不要生成付款页",
+          "server": "hotels"
+        },
+        {
+          "title": "对比一家酒店的房价",
+          "text": "用 FlyBest 查看 {{city}} 一家五星酒店 {{dates}} 的全部房型，对比含早、免费取消期限和顾问礼遇；只查询，不要下单",
+          "server": "hotels"
+        },
+        {
+          "title": "查看我的订单",
+          "text": "用 FlyBest 列出我通过这个连接创建的订单和状态；不要取消任何订单",
+          "server": "hotels"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "fred-economic-data",
       "name": "FRED 美国宏观经济数据",
       "vendor": "Pipeworx（独立第三方服务）",
