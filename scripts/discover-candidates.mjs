@@ -13,8 +13,8 @@ import {
 
 function parseArgs(argv) {
   const options = {
-    output: 'candidate-output', limit: 100, maxPages: 1000, requestTimeoutMs: 20_000,
-    maxAttempts: 3, maxProbes: 25, minProbeScore: 65,
+    output: 'candidate-output', limit: 100, maxPages: 1000, requestTimeoutMs: 45_000,
+    maxAttempts: 4, maxProbes: 25, minProbeScore: 65,
     exclusions: 'discovery-sources/exclusions.json',
   };
   for (let index = 0; index < argv.length; index += 1) {
@@ -26,6 +26,7 @@ function parseArgs(argv) {
     else if (arg === '--max-pages') options.maxPages = Number(argv[++index]);
     else if (arg === '--request-timeout-ms') options.requestTimeoutMs = Number(argv[++index]);
     else if (arg === '--max-attempts') options.maxAttempts = Number(argv[++index]);
+    else if (arg === '--allow-partial') options.allowPartial = true;
     else if (arg === '--api-base') options.apiBase = argv[++index];
     else if (arg === '--probe') options.probe = true;
     else if (arg === '--max-probes') options.maxProbes = Number(argv[++index]);
@@ -59,6 +60,12 @@ export function renderCandidateReport(report) {
     '',
     `Generated: ${report.generatedAt}`,
     '',
+    ...(report.source.complete === false ? [
+      '> [!WARNING]',
+      `> Incomplete Official Registry snapshot: ${markdownCell(report.source.incompleteReason)}`,
+      '> The last complete issue remains authoritative; this partial artifact must not update it.',
+      '',
+    ] : []),
     `Scanned ${report.summary.scanned} Official Registry record(s); normalized ${report.summary.normalized}; data candidates ${report.summary.dataCandidates}; rejected ${report.summary.rejected}.`,
     `Policy exclusions: ${report.summary.excluded}.`,
     '',
@@ -97,6 +104,8 @@ async function main() {
   const apiBase = options.apiBase ?? OFFICIAL_REGISTRY_API;
   let entries;
   let pages;
+  let complete = true;
+  let incompleteReason = null;
   if (options.input) {
     const payload = JSON.parse(await readFile(resolve(options.input), 'utf8'));
     entries = Array.isArray(payload) ? payload : payload.servers;
@@ -110,12 +119,18 @@ async function main() {
       maxPages: options.maxPages,
       requestTimeoutMs: options.requestTimeoutMs,
       maxAttempts: options.maxAttempts,
+      allowPartial: options.allowPartial,
       onPage: ({ page, count, total, nextCursor }) => {
         if (page === 1 || page % 10 === 0 || !nextCursor) console.log(`candidate discovery: page ${page} fetched (${count} records; ${total} total)`);
+      },
+      onIncomplete: ({ page, total, reason }) => {
+        console.warn(`candidate discovery: incomplete after ${total} record(s); page ${page} failed: ${reason}`);
       },
     });
     entries = result.records;
     pages = result.pages;
+    complete = result.complete;
+    incompleteReason = result.incompleteReason;
   }
   const [connectors, exclusionPolicy] = await Promise.all([
     loadConnectorCatalog(resolve('catalog.json')),
@@ -135,7 +150,10 @@ async function main() {
   const report = {
     schemaVersion: 1,
     generatedAt,
-    source: { kind: 'official-mcp-registry', apiBase, pages, updatedSince: options.updatedSince ?? null },
+    source: {
+      kind: 'official-mcp-registry', apiBase, pages, updatedSince: options.updatedSince ?? null,
+      complete, incompleteReason,
+    },
     summary: {
       scanned: entries.length,
       normalized: discovery.candidates.length + discovery.excluded.length,

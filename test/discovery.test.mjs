@@ -117,7 +117,49 @@ test('Official Registry collector retries transient failures and preserves bound
   });
   assert.equal(attempts, 2);
   assert.equal(result.records.length, 1);
+  assert.equal(result.complete, true);
+  assert.equal(result.incompleteReason, null);
   assert.deepEqual(progress, [{ page: 1, count: 1, total: 1, nextCursor: null }]);
+});
+
+test('Official Registry collector can preserve a partial snapshot without treating it as complete', async () => {
+  let calls = 0;
+  const incomplete = [];
+  const result = await collectOfficialRegistry({
+    allowPartial: true,
+    maxAttempts: 1,
+    onIncomplete: (value) => incomplete.push(value),
+    fetchImpl: async () => {
+      calls += 1;
+      if (calls === 1) {
+        return new Response(JSON.stringify({
+          servers: [officialEntry()],
+          metadata: { nextCursor: 'opaque:two' },
+        }), { status: 200 });
+      }
+      throw new Error('simulated page timeout');
+    },
+  });
+  assert.equal(result.records.length, 1);
+  assert.equal(result.pages, 1);
+  assert.equal(result.complete, false);
+  assert.match(result.incompleteReason, /pagination stopped before page 2/);
+  assert.deepEqual(incomplete, [{
+    page: 2,
+    total: 1,
+    reason: 'Official Registry request failed after 1 attempt(s): simulated page timeout',
+  }]);
+});
+
+test('Official Registry collector still fails when no page was captured', async () => {
+  await assert.rejects(
+    collectOfficialRegistry({
+      allowPartial: true,
+      maxAttempts: 1,
+      fetchImpl: async () => { throw new Error('first page timeout'); },
+    }),
+    /first page timeout/,
+  );
 });
 
 test('Official Registry collector rejects unsupported page sizes before network access', async () => {

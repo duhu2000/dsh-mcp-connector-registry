@@ -81,6 +81,9 @@ test('discovery workflow only emits artifacts and idempotent issues', async () =
   assert.match(workflow, /issues: write/);
   assert.match(workflow, /--updated-since/);
   assert.match(workflow, /--probe --max-probes 25/);
+  assert.match(workflow, /--allow-partial/);
+  assert.match(workflow, /source\.complete/);
+  assert.equal((workflow.match(/if: steps\.completeness\.outputs\.complete == 'true'/g) ?? []).length, 3);
   assert.match(workflow, /--size 10/);
   assert.match(workflow, /dsh-data-mcp-discovery-daily/);
   assert.match(workflow, /dsh-data-mcp-discovery-monthly/);

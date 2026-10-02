@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "cninfo-listed-company-reports",
+  "name": "巨潮资讯上市公司报告（社区）",
+  "vendor": "youhaozhao（独立社区项目）",
+  "icon": "📑",
+  "category": "金融投资",
+  "summary": "年报 / 半年报 / 季报 / 招股书 / 原始披露文件",
+  "description": "通过独立社区项目 cninfo-mcp 查询巨潮资讯公开的上市公司定期报告和招股书，并可按用户明确指令下载原始披露文件。查询结果应保留证券代码、公司名称、报告类型、公告日期和巨潮资讯原始链接；下载工具会写入本地文件，必须由用户确认目标目录后调用。当前启动器还会创建 Python 虚拟环境并安装依赖，完成受控安装、上游条款与运行验收前不得正式上架。本项目并非巨潮资讯官方产品。",
+  "tags": [
+    "巨潮资讯",
+    "上市公司",
+    "年报",
+    "招股书",
+    "信息披露",
+    "社区 MCP",
+    "stdio"
+  ],
+  "published": false,
+  "featured": false,
+  "homepage": "https://github.com/youhaozhao/cninfo-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "cninfo-listed-company-reports",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@youhaozhao/cninfo-mcp@1.4.1"
+      ],
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询公司最近三年年报",
+      "text": "查询证券代码 000001 最近三个完整年度的年度报告列表，列出公司名称、报告标题、公告日期和巨潮资讯原始链接；只查询元数据，不下载文件。",
+      "server": "main"
+    },
+    {
+      "title": "核对招股书与定期报告",
+      "text": "查询证券代码 300750 可获得的招股书、年度报告和半年度报告，按公告日期整理并说明报告类型；只返回元数据和原始链接，不下载或写入本地文件。",
+      "server": "main"
+    }
+  ]
+}

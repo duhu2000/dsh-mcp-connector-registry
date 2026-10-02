@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "national-statistics-cn",
+  "name": "国家统计局公共统计（社区）",
+  "vendor": "Ddhjx-code（独立社区项目）",
+  "icon": "📊",
+  "category": "调研分析",
+  "summary": "GDP / CPI / 人口 / 就业 / 分省统计",
+  "description": "通过独立社区项目 national-stats-mcp 查询国家统计局公开的月度、季度、年度及分省统计数据，支持指标搜索、分类浏览、指标元数据和批量取值。结果应保留指标名称、统计口径、单位、地区、时间范围和国家统计局来源，不猜测缺失值，也不暗示国家统计局背书。当前候选仍存在软件许可证声明不一致，完成澄清与运行验收前不得正式上架。",
+  "tags": [
+    "国家统计局",
+    "宏观经济",
+    "人口",
+    "就业",
+    "分省统计",
+    "公共数据",
+    "社区 MCP",
+    "stdio"
+  ],
+  "published": false,
+  "featured": false,
+  "homepage": "https://github.com/Ddhjx-code/national_data",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "national-statistics-cn",
+      "command": "npx",
+      "args": [
+        "-y",
+        "national-stats-mcp@2.0.0"
+      ],
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "比较地区人口与经济变化",
+      "text": "查询江苏、浙江和广东 2015—2025 年常住人口与地区生产总值；先检索并核对指标、地区、统计口径和可用年份，再列出单位、缺失期、国家统计局来源和查询时间，不推断缺失值。",
+      "server": "main"
+    },
+    {
+      "title": "核对 CPI 与就业指标",
+      "text": "检索全国 2020—2026 年居民消费价格和城镇调查失业率相关指标；说明指标定义、统计频率、单位、覆盖期和口径变化，按国家统计局原始时间序列整理，不把相关性解释为因果关系。",
+      "server": "main"
+    }
+  ]
+}
