@@ -55,7 +55,9 @@ export async function collectOfficialRegistry({
   requestTimeoutMs = 20_000,
   maxAttempts = 3,
   retryBaseMs = 250,
+  allowPartial = false,
   onPage = () => {},
+  onIncomplete = () => {},
   fetchImpl = fetch,
 } = {}) {
   if (!Number.isInteger(limit) || limit < 1 || limit > 100) {
@@ -81,12 +83,25 @@ export async function collectOfficialRegistry({
       url.searchParams.set('include_deleted', 'true');
     }
     if (cursor) url.searchParams.set('cursor', cursor);
-    const payload = await fetchRegistryPage(url, {
-      fetchImpl,
-      requestTimeoutMs,
-      maxAttempts,
-      retryBaseMs,
-    });
+    let payload;
+    try {
+      payload = await fetchRegistryPage(url, {
+        fetchImpl,
+        requestTimeoutMs,
+        maxAttempts,
+        retryBaseMs,
+      });
+    } catch (error) {
+      if (!allowPartial || records.length === 0) throw error;
+      const reason = error instanceof Error ? error.message : String(error);
+      onIncomplete({ page: pages + 1, total: records.length, reason });
+      return {
+        records,
+        pages,
+        complete: false,
+        incompleteReason: `Official Registry pagination stopped before page ${pages + 1}: ${reason}`,
+      };
+    }
     records.push(...payload.servers);
     pages += 1;
     const nextCursor = payload.metadata?.nextCursor || null;
@@ -95,7 +110,7 @@ export async function collectOfficialRegistry({
     cursor = nextCursor;
     onPage({ page: pages, count: payload.servers.length, total: records.length, nextCursor: cursor });
   } while (cursor);
-  return { records, pages };
+  return { records, pages, complete: true, incompleteReason: null };
 }
 
 export async function discoverOfficialCandidates({

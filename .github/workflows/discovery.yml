@@ -33,11 +33,16 @@ jobs:
         id: window
         run: node -e "require('node:fs').appendFileSync(process.env.GITHUB_OUTPUT, 'since=' + new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString() + '\n')"
       - name: Discover and probe public candidates
+        id: discover
         run: >-
           npm run candidates:discover --
           --updated-since '${{ steps.window.outputs.since }}'
           --output candidate-output
+          --request-timeout-ms 45000 --max-attempts 4 --allow-partial
           --probe --max-probes 25 --min-probe-score 65
+      - name: Record discovery completeness
+        id: completeness
+        run: node -e "const fs=require('node:fs');const r=require('./candidate-output/candidate-report.json');fs.appendFileSync(process.env.GITHUB_OUTPUT,'complete='+String(r.source.complete !== false)+'\n')"
       - run: npm test
       - uses: actions/upload-artifact@v4
         if: always()
@@ -46,6 +51,7 @@ jobs:
           path: candidate-output/
           retention-days: 30
       - name: Create or update the single discovery issue
+        if: steps.completeness.outputs.complete == 'true'
         uses: actions/github-script@v7
         env:
           ISSUE_BODY_PATH: candidate-output/candidate-report.md
@@ -79,11 +85,17 @@ jobs:
           cache: npm
       - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
       - name: Full discovery and bounded public probe
+        id: discover
         run: >-
           npm run candidates:discover --
           --output candidate-output
+          --request-timeout-ms 60000 --max-attempts 5 --allow-partial
           --probe --max-probes 50 --min-probe-score 65
-      - run: npm run candidates:monthly -- --input candidate-output/candidate-report.json --output candidate-output/monthly-batch.md --size 10
+      - name: Record discovery completeness
+        id: completeness
+        run: node -e "const fs=require('node:fs');const r=require('./candidate-output/candidate-report.json');fs.appendFileSync(process.env.GITHUB_OUTPUT,'complete='+String(r.source.complete !== false)+'\n')"
+      - if: steps.completeness.outputs.complete == 'true'
+        run: npm run candidates:monthly -- --input candidate-output/candidate-report.json --output candidate-output/monthly-batch.md --size 10
       - name: Audit supplemental curated candidate sources
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -99,6 +111,7 @@ jobs:
           path: candidate-output/
           retention-days: 90
       - name: Create or update the single monthly review issue
+        if: steps.completeness.outputs.complete == 'true'
         uses: actions/github-script@v7
         env:
           ISSUE_BODY_PATH: candidate-output/monthly-batch.md
