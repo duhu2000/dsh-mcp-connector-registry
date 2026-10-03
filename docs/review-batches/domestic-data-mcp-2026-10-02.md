@@ -17,7 +17,9 @@
 
 可直接提交给上游的修复清单已整理至
 [`domestic-data-upstream-remediation-2026-10-03.md`](domestic-data-upstream-remediation-2026-10-03.md)。
-该文件只是草案，未向上游发送 Issue，也不代表上架批准。
+巨潮资讯候选的整改请求已于 2026-10-03 提交为
+[`youhaozhao/cninfo-mcp#8`](https://github.com/youhaozhao/cninfo-mcp/issues/8)；
+国家统计候选仍保留为未发送草案。提交整改请求不代表上架批准。
 
 | 候选 | 协议与工具发现 | 最小真实调用 | 官方身份 | 安全与条款 | 结论 |
 |---|---|---|---|---|---|
@@ -49,7 +51,7 @@
 ## 下一步
 
 1. 向 `national-stats-mcp` 维护者要求统一许可证、移除请求参数日志并为 6 个查询工具补 `readOnlyHint: true`、`destructiveHint: false`。
-2. 向 `cninfo-mcp` 维护者要求改用 HTTPS 查询、提供无启动时 pip 副作用的固定包，并为查询/下载分别声明只读与写入注解。
+2. 跟进 [`cninfo-mcp` Issue #8](https://github.com/youhaozhao/cninfo-mcp/issues/8)：等待 HTTPS 查询、无启动时 pip 副作用的固定包，以及查询/下载工具的准确注解。
 3. 两个项目申请进入 Official MCP Registry，或提供能满足本仓库权威来源门槛的发布证据。
 4. 修复版本发布后重新执行固定版本安装、`initialize`、`tools/list` 和真实只读调用。
 5. 只有届时达到 `selected`、具名批准并形成正式运行报告，才可迁入 `connectors/`。
@@ -60,5 +62,6 @@
 - 国家统计局候选 npm：https://www.npmjs.com/package/national-stats-mcp
 - 巨潮资讯候选仓库：https://github.com/youhaozhao/cninfo-mcp
 - 巨潮资讯候选 npm：https://www.npmjs.com/package/@youhaozhao/cninfo-mcp
+- 巨潮资讯上游整改 Issue：https://github.com/youhaozhao/cninfo-mcp/issues/8
 - 国家统计局运行预检：[`../runtime-acceptance/domestic-data-mcp-2026-10-02/national-statistics-cn.md`](../runtime-acceptance/domestic-data-mcp-2026-10-02/national-statistics-cn.md)
 - 巨潮资讯运行预检：[`../runtime-acceptance/domestic-data-mcp-2026-10-02/cninfo-listed-company-reports.md`](../runtime-acceptance/domestic-data-mcp-2026-10-02/cninfo-listed-company-reports.md)

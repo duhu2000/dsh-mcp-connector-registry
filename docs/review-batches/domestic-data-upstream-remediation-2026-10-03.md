@@ -1,6 +1,9 @@
 # 国内数据 MCP 上游修复建议（2026-10-03）
 
-本文件是可向上游提交的 Issue 草案，尚未对外发布。
+本文件记录可向上游提交的 Issue 内容。
+截至 2026-10-03，巨潮资讯候选已提交为
+[`youhaozhao/cninfo-mcp#8`](https://github.com/youhaozhao/cninfo-mcp/issues/8)，
+国家统计候选仍是未发送草案。
 它只记录进入 DSH MCP Connector Registry 前的最小修复门槛，
 不是上架批准或对第三方数据来源的背书。
 
@@ -34,6 +37,9 @@
 - 工具实现：`src/index.ts`
 
 ## `@youhaozhao/cninfo-mcp`
+
+提交状态：已创建
+[`youhaozhao/cninfo-mcp#8`](https://github.com/youhaozhao/cninfo-mcp/issues/8)。
 
 建议 Issue 标题：
 
