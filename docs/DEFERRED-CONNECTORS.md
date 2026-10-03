@@ -3,7 +3,7 @@
 本清单记录对标市场中暂未安全上架的候选，以及已上架但仍需复核的健康项。它不是收录承诺，
 也不保留 `id`；服务商或贡献者仍应按 [`ONBOARDING.md`](ONBOARDING.md) 提交可验证资料。
 
-更新时间：2026-10-02。
+更新时间：2026-10-03。
 
 ## 上架门槛
 
@@ -93,6 +93,9 @@ Registry 名、包名、仓库或远程端点的稳定身份标记 `do-not-list`
 
 2026-10-02 对以下两个社区 stdio 包完成了隔离环境 `initialize`、`tools/list` 和一次最小只读调用。
 详细证据见 [`domestic-data-mcp-2026-10-02.md`](review-batches/domestic-data-mcp-2026-10-02.md)。
+于 2026-10-03 再次复核 npm 最新版本与上游源码，两者均无新版本，下列阻塞仍存在；
+上游修复 Issue 草案见
+[`domestic-data-upstream-remediation-2026-10-03.md`](review-batches/domestic-data-upstream-remediation-2026-10-03.md)。
 二者均未进入 Official MCP Registry，也未获得具名上架批准。
 
 | 候选 | 已确认信息 | 当前阻塞 | 重新评估条件 |

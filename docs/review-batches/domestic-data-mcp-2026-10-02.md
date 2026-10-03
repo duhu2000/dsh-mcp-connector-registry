@@ -3,6 +3,22 @@
 本轮目标是验证“国家统计局公共统计”和“巨潮资讯上市公司报告”是否已达到正式市场卡片门槛。
 没有自动批准、生成正式 Connector、合并或发布。
 
+## 2026-10-03 上游复核
+
+两个包均没有新版本，阻塞项仍可在最新代码中复现，因此继续 `DEFERRED`：
+
+- `national-stats-mcp` 仍为 `2.0.0`（npm 最后发布 2026-07-08）。`package.json` 和 README 声明 MIT，
+  但根目录 `License` 仍是 Apache-2.0；`src/api-client.ts` 仍将查询参数、完整 URL 和
+  数据请求 payload 写入 stderr；6 个工具仍未提供 `readOnlyHint` / `destructiveHint`。
+- `@youhaozhao/cninfo-mcp` 仍为 `1.4.1`（npm 最后发布 2026-09-06）。查询端点仍使用
+  `http://www.cninfo.com.cn`；`postinstall` 与启动器仍会在 `~/.cninfo-mcp/venv` 建立持久化
+  Python 环境并自动执行 pip；下载工具仍允许传入任意 `save_path` 并写盘，两个工具均未声明
+  MCP tool annotations。
+
+可直接提交给上游的修复清单已整理至
+[`domestic-data-upstream-remediation-2026-10-03.md`](domestic-data-upstream-remediation-2026-10-03.md)。
+该文件只是草案，未向上游发送 Issue，也不代表上架批准。
+
 | 候选 | 协议与工具发现 | 最小真实调用 | 官方身份 | 安全与条款 | 结论 |
 |---|---|---|---|---|---|
 | 国家统计局公共统计（社区） | PASS：MCP `2025-06-18`，6 工具 | PASS：`list_provinces` 与公开 `GDP` 搜索 | DEFERRED：不在 Official MCP Registry，不是国家统计局官方产品 | DEFERRED：MIT/Apache-2.0 冲突；请求参数写 stderr；工具无 annotations | **DEFERRED** |
@@ -41,6 +57,8 @@
 ## 证据
 
 - 国家统计局候选仓库：https://github.com/Ddhjx-code/national_data
+- 国家统计局候选 npm：https://www.npmjs.com/package/national-stats-mcp
 - 巨潮资讯候选仓库：https://github.com/youhaozhao/cninfo-mcp
+- 巨潮资讯候选 npm：https://www.npmjs.com/package/@youhaozhao/cninfo-mcp
 - 国家统计局运行预检：[`../runtime-acceptance/domestic-data-mcp-2026-10-02/national-statistics-cn.md`](../runtime-acceptance/domestic-data-mcp-2026-10-02/national-statistics-cn.md)
 - 巨潮资讯运行预检：[`../runtime-acceptance/domestic-data-mcp-2026-10-02/cninfo-listed-company-reports.md`](../runtime-acceptance/domestic-data-mcp-2026-10-02/cninfo-listed-company-reports.md)
