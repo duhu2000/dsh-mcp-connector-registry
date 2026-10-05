@@ -20,10 +20,10 @@ test('CI 分离校验与 main 合并后的 catalog 自动重建', () => {
   assert.match(workflow, /chore: rebuild catalog products \[skip ci\]/);
   assert.match(workflow, /git add catalog\.json catalog-stats\.json README\.md/);
   assert.match(workflow, /git push/);
-  assert.match(workflow, /outputs:\s*[\s\S]*?catalog_changed:/);
   assert.match(workflow, /purge-cdn:/);
   assert.match(workflow, /needs: rebuild-catalog/);
-  assert.match(workflow, /needs\['rebuild-catalog'\]\.outputs\.catalog_changed == 'true'/);
+  assert.doesNotMatch(workflow, /catalog_changed/);
+  assert.match(workflow, /purge-cdn:\s*[\s\S]*?if: >-\s*[\s\S]*?github\.event_name == 'push'[\s\S]*?github\.ref == 'refs\/heads\/main'/);
   assert.match(workflow, /ref: main/);
   assert.match(workflow, /node scripts\/purge-jsdelivr-cache\.mjs catalog\.json/);
   assert.doesNotMatch(workflow, /npm run check/);
@@ -38,7 +38,7 @@ test('monthly discovery audits curated sources without publishing or deleting Co
   assert.doesNotMatch(discoveryWorkflow, /git push|rm .*connectors|writeFileSync\([^)]*connectors/);
 });
 
-test('main 目录变化后自动清理并验证 jsDelivr 缓存', () => {
+test('main 每次合并后都自动清理并验证 jsDelivr 缓存', () => {
   assert.match(workflow, /JSDELIVR_VERIFY_ATTEMPTS: 6/);
   assert.match(workflow, /JSDELIVR_VERIFY_DELAY_MS: 2000/);
   assert.match(readme, /自动清理并校验 jsDelivr/);
