@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "adwhispr",
+  "name": "AdWhispr",
+  "vendor": "AdWhispr",
+  "icon": "https://adwhispr.com/adwhispr-favicon.svg",
+  "category": "调研分析",
+  "summary": "Meta / Google / TikTok 广告投放与管理平台 / 竞品广告调研 / 爆款广告克隆",
+  "description": "接入 AdWhispr 官方托管 MCP Server，通过 OAuth 授权访问用户自己的 AdWhispr 账户。可查找同行业正在投放广告的竞争对手，查看其投放时间最长的广告，把优质广告改编成自己品牌的图片或视频素材，并在 Meta、Google、TikTok、X 和 ChatGPT 上创建和管理广告系列。新建的广告系列默认为暂停状态，需用户确认后才会开始投放。投放功能需要用户先在 AdWhispr 中连接自己的广告账户；部分功能受套餐额度限制。界面与返回内容以英文为主。",
+  "tags": [
+    "广告",
+    "广告投放",
+    "广告管理",
+    "竞品广告",
+    "竞品分析",
+    "营销",
+    "Meta Ads",
+    "Facebook Ads",
+    "Instagram Ads",
+    "Google Ads",
+    "TikTok Ads",
+    "X Ads",
+    "ChatGPT Ads",
+    "ad launch",
+    "ad management",
+    "competitor ads",
+    "OAuth",
+    "官方 MCP"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://adwhispr.com",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://adwhispr.com",
+    "scope": "read write",
+    "clientName": "DeepSeek Harness - AdWhispr MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "adwhispr",
+      "url": "https://adwhispr.com/api/mcp",
+      "serverName": "adwhispr",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "谁在我的领域投放广告？",
+      "text": "使用 AdWhispr 看看谁在我的领域投放广告",
+      "server": "adwhispr"
+    },
+    {
+      "title": "克隆一条爆款广告",
+      "text": "使用 AdWhispr 为我的品牌克隆一条爆款广告",
+      "server": "adwhispr"
+    },
+    {
+      "title": "优化我的广告花费",
+      "text": "使用 AdWhispr 优化我广告账户的花费",
+      "server": "adwhispr"
+    },
+    {
+      "title": "上线一个新广告系列",
+      "text": "使用 AdWhispr 用我的素材上线一个新的广告系列，先保持暂停，等我确认",
+      "server": "adwhispr"
+    }
+  ]
+}
