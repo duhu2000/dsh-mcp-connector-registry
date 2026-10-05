@@ -3,7 +3,7 @@
 本清单记录对标市场中暂未安全上架的候选，以及已上架但仍需复核的健康项。它不是收录承诺，
 也不保留 `id`；服务商或贡献者仍应按 [`ONBOARDING.md`](ONBOARDING.md) 提交可验证资料。
 
-更新时间：2026-10-03。
+更新时间：2026-10-05。
 
 ## 上架门槛
 
@@ -96,12 +96,15 @@ Registry 名、包名、仓库或远程端点的稳定身份标记 `do-not-list`
 于 2026-10-03 再次复核 npm 最新版本与上游源码，两者均无新版本，下列阻塞仍存在；
 上游修复 Issue 草案见
 [`domestic-data-upstream-remediation-2026-10-03.md`](review-batches/domestic-data-upstream-remediation-2026-10-03.md)。
-二者均未进入 Official MCP Registry，也未获得具名上架批准。
+`cninfo-listed-company-reports` 已在 2026-10-05 改用 DSH/QCC 独立维护的
+`@duhu2000/cninfo-mcp@1.4.3`：纯 Node.js、HTTPS-only、无安装副作用、仅一个带只读注解的查询工具；
+npm、Official MCP Registry、真实只读运行验收及 `DuHu` 具名批准均已完成，已迁入正式目录。
+原 `@youhaozhao/cninfo-mcp@1.4.1` 的阻塞与上游 Issue 继续作为历史证据保留，但不再代表正式卡片运行版本。
+国家统计候选仍未进入 Official MCP Registry，也未获得具名上架批准。
 
 | 候选 | 已确认信息 | 当前阻塞 | 重新评估条件 |
 |---|---|---|---|
 | `national-stats-mcp@2.0.0` | 协议 `2025-06-18`；6 工具；公开 GDP 搜索成功；数据基址为国家统计局 HTTPS | npm/README 的 MIT 与包内 Apache-2.0 冲突；查询参数写 stderr；6 工具均无只读/破坏性 annotations；社区项目无 Official Registry 身份 | 统一许可证、移除或脱敏请求日志、补工具 annotations，并以固定修复版本重新验收 |
-| `@youhaozhao/cninfo-mcp@1.4.1` | 协议 `2025-06-18`；2 工具；公开年报元数据查询成功；未下载文件 | 查询使用 HTTP；启动器在用户目录建 venv 并自动 pip；下载工具写盘；无工具 annotations；社区项目无 Official Registry 身份 | 已提交上游 [Issue #8](https://github.com/youhaozhao/cninfo-mcp/issues/8)；等待 HTTPS、受控安装、工具 annotations、下载边界和权威发布证据后重新验收 |
 
 ## 等待权威接入资料
 
