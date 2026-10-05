@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "id": "cninfo-listed-company-reports",
+  "registryName": "io.github.duhu2000/cninfo-mcp",
+  "title": "CNINFO Listed Company Reports",
+  "description": "Independent community MCP for read-only queries of Chinese listed-company reports and prospectuses published through CNINFO.",
+  "version": "1.4.3",
+  "classification": {
+    "isDataService": true,
+    "domains": ["finance", "public-disclosure", "china"],
+    "matchedKeywords": ["CNINFO", "listed company", "annual report", "prospectus"]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.duhu2000%2Fcninfo-mcp/versions/1.4.3",
+    "status": "active",
+    "publishedAt": "2026-10-05T07:39:21.182135Z",
+    "updatedAt": "2026-10-05T07:39:21.182135Z",
+    "retrievedAt": "2026-10-05T07:51:36Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://github.com/duhu2000/cninfo-mcp",
+    "repository": "https://github.com/duhu2000/cninfo-mcp"
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "npm",
+        "identifier": "@duhu2000/cninfo-mcp",
+        "version": "1.4.3"
+      }
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "固定版本 stdio 包无需用户凭据；全新临时目录安装后的 initialize、tools/list 和公开证券代码最小只读调用均通过。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "MIT",
+    "evidenceUrl": "https://github.com/duhu2000/cninfo-mcp/blob/v1.4.3/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-10-05T07:39:21.182135Z",
+    "ageDays": 0,
+    "repositoryActivity": "active"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-10-05T07:51:36Z",
+    "targetUrl": null,
+    "httpStatus": null,
+    "reason": "Fresh npm tarball installation completed without lifecycle scripts; stdio initialize and tools/list returned one explicitly read-only, non-destructive query tool."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 93,
+    "band": "selected",
+    "dimensions": {
+      "authority": 20,
+      "accessibility": 25,
+      "maintenanceSecurity": 20,
+      "runtime": 15,
+      "marketGap": 9,
+      "documentation": 4
+    },
+    "reasons": [
+      "authority 20/25: Official MCP Registry active identity, npm mcpName ownership and public maintained repository agree; connector remains an independent community project rather than a CNINFO official product",
+      "accessibility 25/25: credential-free, version-pinned, zero-setup Node.js stdio package",
+      "maintenance/security 20/20: MIT, HTTPS-only upstream routes, no install scripts, one read-only tool and no file download or write capability",
+      "runtime 15/15: initialize, tools/list and a real read-only 000001 annual-report query passed from a freshly installed tarball",
+      "market gap 9/10: adds direct Chinese listed-company disclosure metadata and original CNINFO PDF links",
+      "documentation 4/5: repository, npm package, Official Registry metadata and limitations are public; upstream CNINFO service is outside the connector maintainer's control"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "cninfo-listed-company-reports",
+    "reviewedAt": "2026-10-05T07:51:36Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已复核 DSH/QCC 独立社区维护边界、Official MCP Registry 身份、npm 固定版本、MIT 许可证、HTTPS 查询、零安装副作用、只读工具注解和真实公开数据调用，批准迁入正式记录并生成 Connector 卡片。卡片明确说明并非巨潮资讯官方产品。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-10-05T07:51:36Z",
+    "reviewedBy": "DuHu",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/domestic-data-mcp-2026-10-02/cninfo-listed-company-reports.md",
+    "notes": "@duhu2000/cninfo-mcp@1.4.3 在全新临时目录完成无生命周期脚本安装、initialize、单工具 tools/list 与 000001 的 2024 年报真实只读查询；未下载文件、未写入用户目录、未保存原始响应或凭据。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.duhu2000%2Fcninfo-mcp/versions/1.4.3",
+      "collectedAt": "2026-10-05T07:51:36Z",
+      "summary": "Official MCP Registry 状态 active，版本 1.4.3，指向固定 npm 包 @duhu2000/cninfo-mcp@1.4.3。"
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/duhu2000/cninfo-mcp/tree/v1.4.3",
+      "collectedAt": "2026-10-05T07:51:36Z",
+      "summary": "DSH/QCC 维护分支公开纯 Node.js、HTTPS-only、只读实现及 MIT 许可证；项目明确为独立社区维护。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/duhu2000/cninfo-mcp/blob/v1.4.3/LICENSE",
+      "collectedAt": "2026-10-05T07:51:36Z",
+      "summary": "v1.4.3 固定标签中的 LICENSE 声明 MIT，与 npm 元数据一致。"
+    },
+    {
+      "type": "package",
+      "url": "https://www.npmjs.com/package/@duhu2000/cninfo-mcp/v/1.4.3",
+      "collectedAt": "2026-10-05T07:51:36Z",
+      "summary": "npm 1.4.3 已发布并回读完整性哈希；发布包仅含 6 个声明文件，不含 Python 环境、postinstall 或下载工具。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/domestic-data-mcp-2026-10-02/cninfo-listed-company-reports.md",
+      "collectedAt": "2026-10-05T07:51:36Z",
+      "summary": "全新 tarball 安装后的 initialize、tools/list、工具 annotations 与 000001 的 2024 年报真实只读调用通过。"
+    },
+    {
+      "type": "upstream-remediation",
+      "url": "https://github.com/youhaozhao/cninfo-mcp/issues/8",
+      "collectedAt": "2026-10-05T07:51:36Z",
+      "summary": "原上游问题持续保留为协作记录；正式卡片改用已消除明文 HTTP、启动安装与文件写盘风险的 DSH/QCC 维护版本。"
+    }
+  ]
+}

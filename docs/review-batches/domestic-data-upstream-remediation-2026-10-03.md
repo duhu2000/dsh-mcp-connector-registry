@@ -7,6 +7,12 @@
 它只记录进入 DSH MCP Connector Registry 前的最小修复门槛，
 不是上架批准或对第三方数据来源的背书。
 
+> 2026-10-05 更新：`cninfo-listed-company-reports` 的正式卡片没有继续使用原
+> `@youhaozhao/cninfo-mcp@1.4.1`，而是固定使用 DSH/QCC 独立维护的
+> `@duhu2000/cninfo-mcp@1.4.3`。新包已去除 Python/安装副作用和下载工具，改为
+> HTTPS-only 的单一只读工具，并完成 npm、Official MCP Registry、真实运行验收和
+> `DuHu` 具名批准。上游 Issue #8 仍保留为原项目协作记录。
+
 ## `national-stats-mcp`
 
 建议 Issue 标题：

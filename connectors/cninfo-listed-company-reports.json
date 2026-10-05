@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "cninfo-listed-company-reports",
+  "name": "巨潮资讯上市公司报告",
+  "vendor": "DuHu / QCC（独立社区维护）",
+  "icon": "📑",
+  "category": "金融投资",
+  "summary": "年报 / 半年报 / 季报 / 招股书 / 原始 PDF 链接",
+  "description": "通过 DuHu / QCC 维护的独立社区 MCP 查询巨潮资讯公开的上市公司定期报告和招股书。服务使用固定版本的纯 Node.js stdio 包，无需凭据，仅提供只读查询，不下载文件、不写入用户目录；结果保留证券代码、证券简称、报告类型、公告日期和巨潮资讯 HTTPS 原始 PDF 链接。数据覆盖、可用性和内容以巨潮资讯公开服务为准，使用时应遵守其网站规则与数据使用要求。本连接器并非巨潮资讯官方产品，也不暗示巨潮资讯背书。",
+  "tags": [
+    "巨潮资讯",
+    "中国上市公司",
+    "年报",
+    "季报",
+    "招股书",
+    "信息披露",
+    "国内数据",
+    "只读",
+    "stdio"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/duhu2000/cninfo-mcp",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1791186697071,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "cninfo-listed-company-reports",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@duhu2000/cninfo-mcp@1.4.3"
+      ],
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询平安银行年度报告",
+      "text": "查询平安银行（000001）的 2024 年年度报告，列出证券代码、证券简称、公告标题、公告日期和巨潮资讯原始 PDF 链接；仅依据返回结果，不猜测缺失数据。",
+      "server": "main"
+    },
+    {
+      "title": "查询贵州茅台一季报",
+      "text": "查询贵州茅台（600519）的 2024 年第一季度报告，核对证券代码、证券简称、公告日期和巨潮资讯原始 PDF 链接，并说明结果是否完整。",
+      "server": "main"
+    }
+  ],
+  "toolsSnapshot": [
+    {
+      "serverKey": "main",
+      "serverName": "cninfo-listed-company-reports",
+      "tools": [
+        {
+          "name": "query_annual_reports_tool",
+          "description": "按证券代码、年份和报告类型只读查询巨潮资讯公开报告元数据及 HTTPS 原始 PDF 链接。"
+        }
+      ]
+    }
+  ]
+}
