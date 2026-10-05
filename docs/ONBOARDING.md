@@ -110,7 +110,7 @@ CI 先验证新增描述符已具备上述人工审核与真实运行验收记�
 1. `validate` job 再次执行测试、Descriptor 校验和图片检查；
 2. `rebuild-catalog` job 运行确定性构建；
 3. 如果目录或产品统计有变化，`github-actions[bot]` 自动提交 `chore: rebuild catalog products [skip ci]` 并推送 `catalog.json`、`catalog-stats.json` 与 README 数量区块；
-4. `purge-cdn` job 自动清理 jsDelivr 的 `@main/catalog.json` 缓存，并重试验证 CDN 内容与 `main` 产物的完整 SHA-256 一致；
+4. `purge-cdn` job 在每次合并到 `main` 后都自动清理 jsDelivr 的 `@main/catalog.json` 缓存，即使 PR 已提交最新目录、重建阶段没有额外差异也不跳过；随后重试验证 CDN 内容与 `main` 产物的完整 SHA-256 一致；
 5. 用户在 MCP连接器市场点击“刷新”即可看到新卡片，无需人工清理 CDN、重装插件或重启 DSH。
 
 ## 4. 完整 Descriptor 模板
