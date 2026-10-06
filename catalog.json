@@ -2332,6 +2332,61 @@
     },
     {
       "schemaVersion": 1,
+      "id": "itjuzi-venture-capital-data",
+      "name": "IT桔子创投数据",
+      "vendor": "IT桔子",
+      "icon": "🍊",
+      "category": "金融投资",
+      "summary": "一级市场公司 / 融资事件 / 投资机构与人物",
+      "description": "接入 IT桔子官方托管 MCP，使用付费 API Key 查询一级市场公司、融资与并购事件、投资机构、创投人物、FA 案例、标签和融资统计。API Key 通过 Authorization Bearer 发送，套餐决定数据范围、配额与水下事件权限；服务仅适合人在 MCP 客户端中进行投研问答，不支持批量导出、系统入库或平台分发。使用时应限制查询范围、核对数据时间与披露口径，不提交无关客户名单、个人信息或内部项目资料。本卡片由 DSH 社区独立维护，并非 IT桔子官方产品或背书。",
+      "tags": [
+        "IT桔子",
+        "创投数据",
+        "企业数据",
+        "融资事件",
+        "投资机构",
+        "付费服务",
+        "官方 MCP"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://mcp.itjuzi.com/",
+      "probeStatus": "partial",
+      "probeCheckedAt": 1791282042000,
+      "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/itjuzi-2026-10-06/itjuzi-venture-capital-data.md",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "IT桔子 MCP API Key",
+        "credentialPlaceholder": "请输入 IT桔子签发的 MCP API Key",
+        "credentialDescription": "API Key 仅保存在 DSH 本机，并以 Authorization: Bearer 方式发送；连接和查询可能受套餐、配额及计费限制。",
+        "credentialHelpLabel": "获取 IT桔子 MCP API Key"
+      },
+      "servers": [
+        {
+          "serverKey": "itjuzi-venture-capital-data",
+          "serverName": "itjuzi_mcp",
+          "url": "https://mcp.itjuzi.com/mcp",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看近期 AI 融资事件",
+          "text": "使用 IT桔子 MCP 查询最近 30 天国内人工智能融资事件，最多返回 20 条；按轮次和地区汇总，列出公司、事件日期、披露金额、投资方及 IT桔子来源链接。说明未披露字段、查询时间和套餐权限限制，不批量导出或推断缺失金额。",
+          "server": "itjuzi-venture-capital-data"
+        },
+        {
+          "title": "比较机器人赛道融资",
+          "text": "使用 IT桔子 MCP 比较北京、上海、深圳在 2025 年至 2026 年机器人赛道的披露融资事件数与融资总额；先检索匹配标签并核对统计口径，再给出分城市结果、代表事件、来源链接和数据限制，不把未披露金额记为零。",
+          "server": "itjuzi-venture-capital-data"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "jenkins",
       "name": "Jenkins",
       "vendor": "社区连接器",

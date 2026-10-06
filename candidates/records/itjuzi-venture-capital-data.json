@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "id": "itjuzi-venture-capital-data",
+  "registryName": "vendor:itjuzi-mcp",
+  "title": "IT桔子创投数据",
+  "description": "IT桔子官方托管的付费远程 MCP，以 API Key 查询一级市场公司、融资事件、投资机构、人物、FA 案例与聚合统计。",
+  "version": "1.27.1",
+  "classification": {
+    "isDataService": true,
+    "domains": ["finance", "venture-capital", "company-data", "china"],
+    "matchedKeywords": ["IT桔子", "创投数据", "融资事件", "投资机构", "企业数据"]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://mcp.itjuzi.com/",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-10-06T10:20:42Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://mcp.itjuzi.com/",
+    "repository": "https://github.com/lgyers/itjuzi-mcp"
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://mcp.itjuzi.com/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "bearer",
+    "requiredHeaders": ["Authorization"],
+    "reason": "服务商签发的 MCP API Key 通过 Authorization: Bearer <API Key> 发送；DSH 使用 Bearer 凭据模式自动添加前缀，真实 Key 只保存在用户本机。"
+  },
+  "license": {
+    "status": "not-applicable",
+    "spdxId": null,
+    "evidenceUrl": "https://github.com/lgyers/itjuzi-mcp/blob/main/docs/pricing.md"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "active"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-10-06T10:20:42Z",
+    "targetUrl": "https://mcp.itjuzi.com/mcp",
+    "httpStatus": 200,
+    "reason": "无凭据 initialize 和 tools/list 均成功，服务端报告 MCP 2025-06-18、版本 1.27.1 和 21 个工具；无凭据最小只读 tools/call 返回“缺少 API Key”，证明业务访问受凭据控制。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 81,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 20,
+      "maintenanceSecurity": 12,
+      "runtime": 10,
+      "marketGap": 9,
+      "documentation": 5
+    },
+    "reasons": [
+      "authority 25/25: IT桔子官方域名托管 MCP 端点，官方公开客户端仓库给出同一端点和 API Key 配置",
+      "accessibility 20/25: 标准 HTTPS Streamable HTTP，DSH 可用 Bearer 模式安全注入 API Key；服务为付费且权限依套餐而定",
+      "maintenance/security 12/20: 官方托管、凭据边界明确且匿名业务调用被阻止；服务端 21 个工具未提供 MCP annotations，仍需客户端按只读查询治理",
+      "runtime 10/15: 真实 initialize、tools/list 和未授权拦截通过；未使用付费 API Key 执行业务数据调用",
+      "market gap 9/10: 补充国内一级市场公司、融资事件、投资机构、人物和 FA 数据",
+      "documentation 5/5: 官方落地页、公开客户端仓库、工具文档、价格权益与使用限制可核验"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "itjuzi-venture-capital-data",
+    "reviewedAt": "2026-10-06T10:20:42Z",
+    "reviewedBy": "DuHu",
+    "notes": "DuHu 已确认 IT桔子创投数据与企查查无直接竞争关系，并批准作为金融投资类付费数据服务上架。审核核对了官方端点、API Key Bearer 传输、21 个实时发现工具、价格与禁止批量导出/系统入库/平台分发边界；卡片不内置凭据，也不复制或转售数据。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-10-06T10:20:42Z",
+    "reviewedBy": "DuHu",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/itjuzi-2026-10-06/itjuzi-venture-capital-data.md",
+    "notes": "有限运行验收通过：公网真实端点完成 initialize，tools/list 返回 21 个工具，无凭据只读字典调用被正确拒绝为缺少 API Key。未使用付费凭据、未读取业务数据；该边界已在验收报告和卡片中披露。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://mcp.itjuzi.com/",
+      "collectedAt": "2026-10-06T10:20:42Z",
+      "summary": "IT桔子官方 MCP 页面公布创投数据能力、服务规模、工具与付费接入信息。"
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/lgyers/itjuzi-mcp",
+      "collectedAt": "2026-10-06T10:20:42Z",
+      "summary": "公开客户端仓库给出 https://mcp.itjuzi.com/mcp、Authorization Bearer API Key 配置、工具文档和使用边界。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/lgyers/itjuzi-mcp/blob/main/docs/pricing.md",
+      "collectedAt": "2026-10-06T10:20:42Z",
+      "summary": "托管数据服务不适用客户端代码许可证；价格权益文档说明付费方案，并禁止批量导出、系统入库或平台分发。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/itjuzi-2026-10-06/itjuzi-venture-capital-data.md",
+      "collectedAt": "2026-10-06T10:20:42Z",
+      "summary": "公网真实端点 initialize、21 项 tools/list 和无凭据业务访问拦截通过；未使用付费 API Key 或读取业务数据。"
+    }
+  ]
+}
