@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "vedar",
+  "name": "Vedar（维达尔）· 堪察加旅游",
+  "vendor": "Vedar (vedarai.ru)",
+  "icon": "https://vedarai.ru/icons/icon-400.png",
+  "category": "效率工具",
+  "summary": "堪察加半岛旅游：团队游与真实余位、地点与路线安全状况、住宿、接送、天气、行程规划",
+  "description": "Vedar（vedarai.ru，俄文名 Ведар）是俄罗斯堪察加半岛的旅游平台，向 AI 代理开放 MCP 服务器：本地旅行社的团队游及其真实余位、地点与路线的安全信息和当前状况（火山、地震、天气预警）、住宿、装备租赁、接送、天气、行程规划。写操作只有四种申请（选团 create_lead、指定团和日期的预订申请 create_booking_request、住宿申请 create_stay_request、包车申请 request_charter），均由人工确认，无在线支付，无需认证，按 IP 限流。平台数据为俄文，工具参数以俄文或英文为佳。堪察加紧急电话：112。",
+  "tags": ["旅游", "堪察加", "俄罗斯", "火山", "安全", "行程规划", "MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://vedarai.ru/zh",
+  "probeStatus": "unverified",
+  "auth": { "mode": "none" },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "vedar",
+      "url": "https://vedarai.ru/api/mcp",
+      "transport": "streamable-http",
+      "headers": { "Accept": "application/json, text/event-stream" }
+    }
+  ],
+  "promptVariables": [
+    { "name": "month", "label": "出行月份", "placeholder": "例如：八月", "required": true }
+  ],
+  "prompts": [
+    { "title": "看棕熊", "text": "{{month}}去堪察加，哪里能看到棕熊？现在那里安全吗？", "server": "main" },
+    { "title": "火山现状", "text": "用 Vedar 查一下堪察加各火山的当前状况和安全提示", "server": "main" },
+    { "title": "团队游余位", "text": "用 Vedar 列出{{month}}有余位的堪察加团队游，并说明价格和时长；不要提交任何申请", "server": "main" }
+  ]
+}
