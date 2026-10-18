@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "id": "vedar",
+  "registryName": "ru.vedarai/mcp",
+  "title": "Vedar — Kamchatka travel",
+  "description": "Travel platform for the Kamchatka Peninsula, Russia: operator tours with live availability, volcano and safety status, weather, stays, gear, transfers and trip plans. Write operations are four human-confirmed requests only (tour selection, booking request for a specific tour and date, stay request, vehicle charter); they send the traveller's name and phone to the platform/operator and require explicit consent (consent:true) confirmed with the person first. No online payment, no auth, rate-limited by IP. Safety data comes from official sources with update times and is not a safety guarantee.",
+  "version": "2.5.0",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "travel",
+      "tourism"
+    ],
+    "matchedKeywords": [
+      "Kamchatka",
+      "tour",
+      "volcano",
+      "travel"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/ru.vedarai%2Fmcp/versions/2.5.0",
+    "status": "active",
+    "publishedAt": "2026-10-17T02:49:49.441196Z",
+    "updatedAt": "2026-10-17T02:49:49.441196Z",
+    "retrievedAt": "2026-10-18T03:00:00.000Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://vedarai.ru",
+    "repository": {
+      "url": "https://github.com/tourhabk-ui/pos",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://vedarai.ru/api/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "Public endpoint, no credentials; initialize and tools/list verified without auth."
+  },
+  "license": {
+    "status": "not-applicable",
+    "spdxId": null,
+    "evidenceUrl": "https://vedarai.ru/about"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-10-17T02:49:49.441196Z",
+    "ageDays": 1,
+    "repositoryActivity": "active"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-10-18T03:00:00.000Z",
+    "targetUrl": "https://vedarai.ru/api/mcp",
+    "httpStatus": 200,
+    "reason": "Unauthenticated initialize returned vedar-mcp 2.5.0; tools/list returned 20 tools; read-only get_tours call returned live tour data with operator names and prices. No booking/stay/charter/lead request was created during verification."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 80,
+    "band": "selected",
+    "dimensions": {
+      "authority": 20,
+      "availability": 20,
+      "safety": 20,
+      "usefulness": 20
+    }
+  }
+}
