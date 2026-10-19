@@ -6,7 +6,7 @@
   "icon": "https://vedarai.ru/icons/icon-400.png",
   "category": "效率工具",
   "summary": "堪察加半岛旅游：团队游与真实余位、地点与路线安全状况、住宿、接送、天气、行程规划",
-  "description": "Vedar（vedarai.ru，俄文名 Ведар）是俄罗斯堪察加半岛的旅游平台，向 AI 代理开放 MCP 服务器：本地旅行社的团队游及其真实余位、地点与路线的安全信息和当前状况（火山、地震、天气预警）、住宿、装备租赁、接送、天气、行程规划。写操作只有四种申请（选团 create_lead、指定团和日期的预订申请 create_booking_request、住宿申请 create_stay_request、包车申请 request_charter），均由人工确认，无在线支付，无需认证，按 IP 限流。平台数据为俄文，工具参数以俄文或英文为佳。堪察加紧急电话：112。",
+  "description": "Vedar（vedarai.ru，俄文名 Ведар）是俄罗斯堪察加半岛的旅游平台，向 AI 代理开放 MCP 服务器：本地旅行社的团队游及其真实余位、地点与路线的安全信息和当前状况（火山、地震、天气预警）、住宿、装备租赁、接送、天气、行程规划。会改变状态的工具共五个：edit_trip_plan 按 plan_id 在服务端保存匿名行程草稿（保留 7 天，不含个人数据，不发送给真人或运营商）；另外四种申请——选团 create_lead、指定团和日期的预订申请 create_booking_request、住宿申请 create_stay_request、包车申请 request_charter——会把用户的姓名和电话发送给平台/运营商/服务商，必须先取得用户明确确认并传入 consent:true，否则不会创建，均由人工确认。安全信息会注明来源和更新时间，但不构成安全保证。无在线支付，无需认证，按 IP 限流。平台数据为俄文，工具参数以俄文或英文为佳。堪察加紧急电话：112。",
   "tags": ["旅游", "堪察加", "俄罗斯", "火山", "安全", "行程规划", "MCP"],
   "published": true,
   "featured": false,
