@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "datasinking",
+  "name": "DataSinking",
+  "vendor": "DataSinking",
+  "icon": "https://datasink.ing/icon-512.png",
+  "category": "金融投资",
+  "summary": "Full-text financial reports (US, China, Japan, Korea, Taiwan, UK) as clean Markdown for RAG agents.",
+  "description": "DataSinking 把 6 个市场（美股 / A股 / 日本 / 韩国 / 台湾 / 英国）上市公司的年报、季报全文，转成干净、可按章节取用的 Markdown——正是行情和数字接口给不了的「管理层讨论、风险提示、附注」那部分。REST + Python 包 + MCP server。免费档在官网领 key（3 次/秒），年付 31 次/秒。",
+  "tags": ["财报", "财务", "金融", "RAG", "MCP", "年报"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://datasink.ing",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "DataSinking API Key",
+    "credentialPlaceholder": "请输入 DataSinking API Key（官网免费领取）",
+    "credentialDescription": "Key 仅保存在 DSH 本机；免费档 3 次/秒、约 8,191 篇/滚动 7 天，年付 $31 提升到 31 次/秒。",
+    "credentialHelpLabel": "领取 API Key"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "url": "https://api.datasink.ing/mcp",
+      "serverName": "datasinking",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "看某公司近三年营收与净利润",
+      "text": "使用 DataSinking 查询 {{company}} 最近三年的营业收入、净利润、总资产，并总结变化趋势。",
+      "server": "main"
+    },
+    {
+      "title": "读财报管理层讨论与分析",
+      "text": "拉取 {{company}} 最新年报的管理层讨论与分析（MD&A），总结经营情况和风险提示。",
+      "server": "main"
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "company",
+      "label": "公司",
+      "placeholder": "例如：贵州茅台 / Apple / 丰田",
+      "required": true
+    }
+  ]
+}
