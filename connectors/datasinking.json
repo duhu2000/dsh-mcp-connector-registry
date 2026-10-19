@@ -6,18 +6,14 @@
   "icon": "https://datasink.ing/icon-512.png",
   "category": "金融投资",
   "summary": "Full-text financial reports (US, China, Japan, Korea, Taiwan, UK) as clean Markdown for RAG agents.",
-  "description": "DataSinking 把 6 个市场（美股 / A股 / 日本 / 韩国 / 台湾 / 英国）上市公司的年报、季报全文，转成干净、可按章节取用的 Markdown——正是行情和数字接口给不了的「管理层讨论、风险提示、附注」那部分。REST + Python 包 + MCP server。免费档在官网领 key（3 次/秒），年付 31 次/秒。",
+  "description": "DataSinking 把 6 个市场（美股 / A股 / 日本 / 韩国 / 台湾 / 英国）上市公司的年报、季报全文，转成干净、可按章节取用的 Markdown——正是行情和数字接口给不了的「管理层讨论、风险提示、附注」那部分。REST + Python 包 + MCP server。无需 key 即可试用（每 IP 7 天 31 篇、约 3 秒 1 次）；在官网免费注册 key 提升到 8,191 篇 / 7 天、3 次/秒；年付 $31/年 31 次/秒、524,287 篇 / 7 天。",
   "tags": ["财报", "财务", "金融", "RAG", "MCP", "年报"],
   "published": true,
   "featured": false,
   "homepage": "https://datasink.ing",
   "probeStatus": "unverified",
   "auth": {
-    "mode": "bearer",
-    "credentialName": "DataSinking API Key",
-    "credentialPlaceholder": "请输入 DataSinking API Key（官网免费领取）",
-    "credentialDescription": "Key 仅保存在 DSH 本机；免费档 3 次/秒、约 8,191 篇/滚动 7 天，年付 $31 提升到 31 次/秒。",
-    "credentialHelpLabel": "领取 API Key"
+    "mode": "none"
   },
   "servers": [
     {
