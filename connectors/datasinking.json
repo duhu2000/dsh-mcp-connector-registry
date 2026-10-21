@@ -5,8 +5,8 @@
   "vendor": "DataSinking",
   "icon": "https://datasink.ing/icon-512.png",
   "category": "金融投资",
-  "summary": "Full-text financial reports (US, China, Japan, Korea, Taiwan, UK) as clean Markdown for RAG agents.",
-  "description": "DataSinking 把 6 个市场（美股 / A股 / 日本 / 韩国 / 台湾 / 英国）上市公司的年报、季报全文，转成干净、可按章节取用的 Markdown——正是行情和数字接口给不了的「管理层讨论、风险提示、附注」那部分。REST + Python 包 + MCP server。无需 key 即可试用（每 IP 7 天 31 篇、约 3 秒 1 次）；在官网免费注册 key 提升到 8,191 篇 / 7 天、3 次/秒；年付 $31/年 31 次/秒、524,287 篇 / 7 天。",
+  "summary": "上市公司财报全文与章节检索 / Markdown / 匿名试用",
+  "description": "DataSinking 提供上市公司财报的 Markdown 全文和章节检索，适合阅读管理层讨论、风险因素及财务附注，不是结构化财务指标 API。本卡片仅使用匿名试用连接，不提供 API Key 输入；获取 Key 不会自动提升本连接额度。需要 Key 时，请通过「添加连接」单独配置 https://api.datasink.ing/mcp，选择 Bearer 鉴权并仅在本机凭据输入框录入，不把 Key 放进 URL、Prompt 或公共配置。匿名访问曾通过协议验收，但其适用条款和额度仍待服务商澄清；套餐价格及限制以官网为准，不承诺持续免费。使用时须注明财报期、币种、单位、来源和章节；仅在返回中存在有效原文链接时引用，不编造缺失链接。内容仅供信息参考，使用受第三方服务条款及原始披露文件权利约束。",
   "tags": ["财报", "财务", "金融", "RAG", "MCP", "年报"],
   "published": true,
   "featured": false,
@@ -29,12 +29,12 @@
   "prompts": [
     {
       "title": "看某公司近三年营收与净利润",
-      "text": "使用 DataSinking 查询 {{company}} 最近三年的营业收入、净利润、总资产，并总结变化趋势。",
+      "text": "使用 DataSinking 先列出 {{company}} 最近三年可用年报，再按需读取相关章节，从财报文本提取营业收入、净利润和总资产。逐项注明财报期、币种、单位、来源及章节，区分合并与母公司口径；缺失或不可比时明确说明，不推算缺失数据。仅引用实际返回的有效原文链接，没有链接则说明缺失。这是文本提取，不是结构化财务指标 API。",
       "server": "main"
     },
     {
       "title": "读财报管理层讨论与分析",
-      "text": "拉取 {{company}} 最新年报的管理层讨论与分析（MD&A），总结经营情况和风险提示。",
+      "text": "使用 DataSinking 列出 {{company}} 可用年报，确认具体财报期后仅按需读取管理层讨论与分析（MD&A）章节，总结经营情况和风险提示。注明财报期、来源及章节；涉及金额时保留币种、单位和口径。仅引用实际返回的有效原文链接，没有链接则说明缺失；不要把披露日期当作财报期，不推断为实时经营状态。",
       "server": "main"
     }
   ],

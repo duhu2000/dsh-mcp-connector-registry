@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "datasinking",
+  "registryName": "datasinking",
+  "title": "DataSinking 财报全文与章节检索",
+  "description": "Hosted report-text MCP. Anonymous report/section retrieval passed a limited protocol smoke test; anonymous terms and quota remain unresolved. The proposed card has no Key input. Keyed access via a Bearer header is documented separately and has not been tested with an authorized account.",
+  "version": "0.2.17",
+  "classification": {"isDataService": true, "domains": ["finance"], "matchedKeywords": ["financial reports", "财报"]},
+  "source": {"kind": "official-vendor", "apiUrl": null, "detailUrl": "https://datasink.ing/docs", "status": "active", "publishedAt": null, "updatedAt": null, "retrievedAt": "2026-10-21T03:42:33Z"},
+  "officialLinks": {"websiteUrl": "https://datasink.ing/", "repository": null},
+  "transports": [{"kind": "remote", "type": "streamable-http", "url": "https://api.datasink.ing/mcp", "package": null}],
+  "authentication": {"mode": "none", "requiredHeaders": [], "reason": "Anonymous calls passed on 2026-10-20; current card is anonymous only. Vendor docs also support a separately configured Bearer header. Terms still require a Key; anonymous applicability must be clarified before approval."},
+  "license": {"status": "unknown", "spdxId": null, "evidenceUrl": "https://datasink.ing/terms"},
+  "maintenance": {"registryStatus": "unknown", "registryUpdatedAt": null, "ageDays": null, "repositoryActivity": "unknown"},
+  "probe": {"status": "pass", "checkedAt": "2026-10-20T14:56:07Z", "targetUrl": "https://api.datasink.ing/mcp", "httpStatus": null, "reason": "Historical independent initialization and six-tool discovery succeeded; anonymous report/section business acceptance is preserved in the report. No calls repeated for dossier preparation."},
+  "dedupe": {"level": "none", "strong": [], "weak": []},
+  "score": {
+    "total": 73, "band": "watchlist",
+    "dimensions": {"authority": 20, "accessibility": 18, "maintenanceSecurity": 8, "runtime": 15, "marketGap": 8, "documentation": 4},
+    "reasons": [
+      "authority 20/25: vendor website and MCP documentation agree on the endpoint; no Official Registry claim made",
+      "accessibility 18/25: anonymous HTTPS works in the recorded test; no keyed-session acceptance and preview terms are unclear",
+      "maintenanceSecurity 8/20: public service terms/privacy exist, but anonymous applicability and maintenance history are unverified",
+      "runtime 15/15: one limited report-list, section-list and section-body sequence passed; not an all-tools or UI test",
+      "marketGap 8/10: report narrative retrieval complements structured financial indicators",
+      "documentation 4/5: endpoint/header documented; anonymous quota is not evidenced on the checked pricing page"
+    ],
+    "gates": ["Vendor clarification of anonymous terms and limits", "Human maintainer assessment and approval", "Final exact-head CI success"]
+  },
+  "review": {"decision": "pending", "proposedConnectorId": "datasinking", "reviewedAt": null, "reviewedBy": null, "notes": "Codex prepared this dossier under user instruction; this is not a human approval. Retain pending until vendor clarification and genuine maintainer assessment."},
+  "runtimeAcceptance": {"status": "pass", "checkedAt": "2026-10-20T14:56:07Z", "reviewedBy": "Codex (automated protocol runner; not human approval)", "reportUrl": "https://github.com/heubme2020/dsh-mcp-connector-registry/blob/add-datasinking/docs/runtime-acceptance/pr-49/datasinking.md", "notes": "Preserves independent evidence from PR review 5586918780: anonymous list_reports, list_sections, get_section succeeded; one short chapter only. No DSH UI, Key-based session, bulk retrieval or financial-accuracy verification."},
+  "evidence": [
+    {"type": "official-vendor", "url": "https://datasink.ing/docs", "collectedAt": "2026-10-21T03:42:33Z", "summary": "Official hosted endpoint and Authorization Bearer alternative to URL credentials."},
+    {"type": "official-website", "url": "https://datasink.ing/pricing", "collectedAt": "2026-10-21T03:42:33Z", "summary": "Keyed plans listed; exact anonymous allowance claimed in PR not evidenced here."},
+    {"type": "license", "url": "https://datasink.ing/terms", "collectedAt": "2026-10-21T03:42:33Z", "summary": "Terms dated 2026-08-25 section 3 requires a Key; anonymous preview applicability unresolved. Hosted-service terms, not a software licence approval."},
+    {"type": "official-website", "url": "https://datasink.ing/privacy", "collectedAt": "2026-10-21T03:42:33Z", "summary": "Privacy policy records API usage metadata; no personal data or secrets used in acceptance."},
+    {"type": "runtime-acceptance", "url": "https://github.com/heubme2020/dsh-mcp-connector-registry/blob/add-datasinking/docs/runtime-acceptance/pr-49/datasinking.md", "collectedAt": "2026-10-20T14:56:07Z", "summary": "Independent historical protocol smoke evidence, parameters, UTC times and hashes; no new provider quota used."}
+  ]
+}
