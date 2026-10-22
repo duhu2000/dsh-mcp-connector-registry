@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "id": "vedar",
+  "registryName": "ru.vedarai/mcp",
+  "title": "Vedar — Kamchatka travel",
+  "description": "Kamchatka travel: tours with availability, volcano/safety status, weather, stays, transfers, trip plans. Five state-changing tools: edit_trip_plan persists an anonymous 7-day draft by plan_id (no personal data); create_lead, create_booking_request, create_stay_request and request_charter send the user's name/phone to the platform/operator/provider and require prior confirmation with consent:true. No online payment. Safety info cites source and update time; not a safety guarantee.",
+  "version": "2.5.0",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "travel",
+      "tourism"
+    ],
+    "matchedKeywords": [
+      "Kamchatka",
+      "tour",
+      "volcano",
+      "travel"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/ru.vedarai%2Fmcp/versions/2.5.0",
+    "status": "active",
+    "publishedAt": "2026-10-17T02:49:49.441196Z",
+    "updatedAt": "2026-10-17T02:49:49.441196Z",
+    "retrievedAt": "2026-10-19T05:42:43.281Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://vedarai.ru",
+    "repository": {
+      "url": "https://github.com/tourhabk-ui/pos",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://vedarai.ru/api/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "Public endpoint, no credentials; initialize and tools/list verified without auth on 2026-10-19."
+  },
+  "license": {
+    "status": "not-applicable",
+    "spdxId": null,
+    "evidenceUrl": "https://vedarai.ru/legal/terms"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-10-17T02:49:49.441196Z",
+    "ageDays": 2,
+    "repositoryActivity": "active"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-10-19T05:42:43.281Z",
+    "targetUrl": "https://vedarai.ru/api/mcp",
+    "httpStatus": 200,
+    "reason": "Unauthenticated initialize returned vedar-mcp 2.5.0 (protocol 2025-06-18); tools/list returned 20 tools, five with readOnlyHint=false (edit_trip_plan, create_lead, create_booking_request, create_stay_request, request_charter). No request-creation tool was called."
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 85,
+    "band": "selected",
+    "dimensions": {
+      "authority": 20,
+      "accessibility": 20,
+      "maintenanceSecurity": 15,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 5
+    },
+    "reasons": [
+      "authority 20/25: Official MCP Registry active record ru.vedarai/mcp 2.5.0 and the vendor's own vedarai.ru domain publish the same endpoint https://vedarai.ru/api/mcp",
+      "accessibility 20/25: public HTTPS Streamable HTTP with no authentication; five state-changing tools are annotated readOnlyHint=false and the four request tools require consent:true, so clients must gate them explicitly",
+      "maintenanceSecurity 15/20: active registry record and repository; service terms (2026-10-05), privacy policy (2026-10-15) and partner offer are published on the vendor domain; hosted service, no software licence applies",
+      "runtime 15/15: initialize, tools/list (20 tools) and one reproducible read-only get_tours call passed on 2026-10-19 (page 1 of 6, 37 tours); credential scan pass; no request was created",
+      "marketGap 10/10: first Kamchatka travel connector with live operator availability and regional safety/volcano data",
+      "documentation 5/5: public MCP manifest https://vedarai.ru/.well-known/mcp.json, official registry detail page, terms and privacy pages are reachable"
+    ],
+    "gates": [
+      "Human maintainer review is still pending; submitter runtime evidence does not approve this candidate."
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "vedar",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "Submitted by tourhabk-ui in PR #44 for maintainer review. Five state-changing tools, name/phone consent disclosure for the four request tools, and a structured read-only runtime acceptance report are documented; human approval remains with the maintainer."
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-10-19T05:42:43.281Z",
+    "reviewedBy": "tourhabk-ui",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/pr-44/vedar.md",
+    "notes": "Repo runner scripts/run-runtime-acceptance.mjs (client dsh-registry-runtime-acceptance 1.0.0, protocol 2025-06-18): unauthenticated initialize returned vedar-mcp 2.5.0, tools/list returned 20 tools, and one read-only get_tours call with non-personal parameters {} succeeded (page 1 of 6, 37 tours total, 7 on the page; response SHA-256 in the report). No booking, lead, stay or charter request was created and no personal data was used."
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/ru.vedarai%2Fmcp/versions/2.5.0",
+      "collectedAt": "2026-10-19T05:42:43.281Z",
+      "summary": "Official MCP Registry record ru.vedarai/mcp version 2.5.0, status active, remote endpoint https://vedarai.ru/api/mcp."
+    },
+    {
+      "type": "official-website",
+      "url": "https://vedarai.ru/.well-known/mcp.json",
+      "collectedAt": "2026-10-19T05:42:43.281Z",
+      "summary": "Vendor-published MCP manifest for vedar-mcp 2.5.0 naming the same endpoint https://vedarai.ru/api/mcp; HTTP 200 on 2026-10-19."
+    },
+    {
+      "type": "official-website",
+      "url": "https://vedarai.ru/legal/privacy",
+      "collectedAt": "2026-10-19T05:42:43.281Z",
+      "summary": "Privacy policy, edition 2026-10-15 (HTTP 200), covering processing of personal data including name and phone submitted through platform requests."
+    },
+    {
+      "type": "license",
+      "url": "https://vedarai.ru/legal/terms",
+      "collectedAt": "2026-10-19T05:42:43.281Z",
+      "summary": "User agreement (service terms), edition 2026-10-05 (HTTP 200), of the hosted Vedar service; no software licence applies, so this is the service-terms evidence. Partner offer: https://vedarai.ru/legal/offer (edition 2026-10-05, HTTP 200)."
+    },
+    {
+      "type": "probe",
+      "url": "https://vedarai.ru/api/mcp",
+      "collectedAt": "2026-10-19T05:42:43.281Z",
+      "summary": "Unauthenticated initialize (HTTP 200, vedar-mcp 2.5.0) and tools/list returned 20 tools; five tools carry readOnlyHint=false."
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/pr-44/vedar.md",
+      "collectedAt": "2026-10-19T05:42:43.281Z",
+      "summary": "Structured read-only acceptance report for PR #44: endpoint, timestamp, get_tours parameters {} and result summary (page 1 of 6, 37 tours), five state-changing tools and consent disclosure; no request-creation tool was called."
+    }
+  ]
+}
