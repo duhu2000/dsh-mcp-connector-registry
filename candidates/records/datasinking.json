@@ -3,7 +3,7 @@
   "id": "datasinking",
   "registryName": "datasinking",
   "title": "DataSinking 财报全文与章节检索",
-  "description": "Hosted report-text MCP using the officially documented mandatory Bearer API Key route. macOS DSH Desktop acceptance passed for a user-configured Bearer connection: report list, section list and one short section. No all-tools, billing-tier or financial-accuracy claim. Human listing approval remains pending.",
+  "description": "Hosted report-text MCP using the officially documented mandatory Bearer API Key route. macOS DSH Desktop acceptance passed for a user-configured Bearer connection: report list, section list and one short section. No all-tools, billing-tier or financial-accuracy claim. The human maintainer explicitly approved listing within this scope; final exact-head CI remains required.",
   "version": "0.2.17",
   "classification": {"isDataService": true, "domains": ["finance"], "matchedKeywords": ["financial reports", "财报"]},
   "source": {"kind": "official-vendor", "apiUrl": null, "detailUrl": "https://datasink.ing/docs/mcp", "status": "active", "publishedAt": null, "updatedAt": null, "retrievedAt": "2026-10-24T06:10:31Z"},
@@ -25,9 +25,9 @@
       "marketGap 8/10: report narrative retrieval complements structured financial indicators",
       "documentation 5/5: dedicated official MCP page, Key requirements, usage restrictions and plan limits identified"
     ],
-    "gates": ["Human maintainer assessment and approval", "Final exact-head CI success"]
+    "gates": ["Final exact-head CI success"]
   },
-  "review": {"decision": "pending", "proposedConnectorId": "datasinking", "reviewedAt": null, "reviewedBy": null, "notes": "User approval to implement Bearer and confirmation of local Key entry are not human listing approval. Codex completed a scoped Desktop smoke test; named maintainer assessment remains required. Selected score reflects technical evidence, not approval."},
+  "review": {"decision": "approved", "proposedConnectorId": "datasinking", "reviewedAt": "2026-10-24T06:40:45Z", "reviewedBy": "duhu2000", "notes": "Recorded by Codex from the maintainer's explicit confirmation: 批准此限定范围上架并记录我的维护者确认. Approval covers the official mandatory Bearer route and the scoped macOS Desktop evidence: six tools discovered, three read-only calls passed. It does not certify all tools, paid tiers, data accuracy or other platforms. The timestamp records this confirmation in the dossier. Final exact-head CI and post-merge catalog verification remain required; this is not approval inferred from Key entry or an assistant impersonating a human reviewer."},
   "runtimeAcceptance": {"status": "pass", "checkedAt": "2026-10-24T06:32:26Z", "reviewedBy": "Codex (native Desktop trace inspection; not human approval)", "reportUrl": "https://github.com/heubme2020/dsh-mcp-connector-registry/blob/add-datasinking/docs/runtime-acceptance/pr-49/datasinking.md", "notes": "macOS DSH Desktop 0.2.79 connector UI: user-configured Bearer connection, six discovered tools, three actual read calls for one report and one short chapter. Checked native tool trace rather than final-answer assertions alone. No raw Key/header read, no anonymous fallback, full report, billing validation or other-platform acceptance. Temporary connection disabled afterwards."},
   "evidence": [
     {"type": "runtime-acceptance", "url": "https://github.com/heubme2020/dsh-mcp-connector-registry/blob/add-datasinking/docs/runtime-acceptance/pr-49/datasinking.md", "collectedAt": "2026-10-24T06:32:26Z", "summary": "Authorized local-Key Desktop smoke: list_reports -> list_sections -> get_section, exactly three observed business calls, non-empty readable output and period/source metadata; temporary connection disabled. Public evidence contains no credentials, account identity or private paths."},

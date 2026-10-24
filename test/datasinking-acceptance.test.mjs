@@ -24,7 +24,7 @@ test('DataSinking card requires official Bearer credentials without public secre
   }
 });
 
-test('DataSinking evidence preserves historical acceptance without granting human approval', async () => {
+test('DataSinking records explicit scoped maintainer approval separately from runtime evidence', async () => {
   const card = await json('../connectors/datasinking.json');
   const record = await json('../candidates/records/datasinking.json');
   const report = await readFile(new URL('../docs/runtime-acceptance/pr-49/datasinking.md', import.meta.url), 'utf8');
@@ -37,10 +37,15 @@ test('DataSinking evidence preserves historical acceptance without granting huma
   assert.match(report, /not newly generated measurements/);
   const errors = verifyRuntimeAcceptance(card, record);
   assert.ok(!errors.includes('candidate record appears to contain a credential value'));
-  if (record.review.decision === 'pending') {
-    assert.ok(errors.includes('human review decision must be approved'));
-    assert.equal(record.review.reviewedBy, null);
-  }
+  assert.deepEqual(errors, []);
+  assert.equal(record.review.decision, 'approved');
+  assert.equal(record.review.reviewedBy, 'duhu2000');
+  assert.match(record.review.notes, /批准此限定范围上架并记录我的维护者确认/);
+  assert.match(report, /not an assistant-generated human review/);
+  assert.deepEqual(record.score.gates, ['Final exact-head CI success']);
+  const runtimeOnly = structuredClone(record);
+  runtimeOnly.review = { ...record.review, decision: 'pending', reviewedAt: null, reviewedBy: null };
+  assert.ok(verifyRuntimeAcceptance(card, runtimeOnly).includes('human review decision must be approved'));
   assert.equal(record.license.status, 'declared');
   assert.ok(record.evidence.some(item => item.url === 'https://datasink.ing/docs/mcp'));
   assert.equal(record.runtimeAcceptance.status, 'pass');

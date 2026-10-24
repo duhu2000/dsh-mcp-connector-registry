@@ -1,4 +1,19 @@
-# DataSinking PR #49 — scoped Bearer Desktop acceptance, pending human approval
+# DataSinking PR #49 — scoped Bearer Desktop acceptance and maintainer approval
+
+## Explicit human listing approval (recorded 2026-10-24T06:40:45Z)
+
+Maintainer `duhu2000` explicitly confirmed in the user conversation:
+“批准此限定范围上架并记录我的维护者确认”. Codex records that actual human
+confirmation here; it is not an assistant-generated human review or approval
+inferred from the earlier Key-entry confirmation.
+
+The approval question stated the scope: official Bearer Desktop access, six
+tools discovered and three successful read-only calls, with official terms and
+Key configuration aligned. It explicitly excluded all-tools, paid-tier and
+financial-data-accuracy verification. The maintainer approved listing within
+those limits, conditional on final exact-head CI, without bypassing gates.
+Other platforms and post-merge market-card installation are not certified by
+this approval. The timestamp above is the dossier recording time.
 
 ## 2026-10-24 authorized Desktop acceptance
 
@@ -41,8 +56,9 @@ no invalid-Key experiment or anonymous fallback was performed. All six tools
 were discovered but only the three listed tools were exercised.
 
 Runtime acceptance is now pass for this scoped path. A score of 82 reflects the
-documented access path and observed runtime evidence, not a human approval.
-`review.decision` remains pending; no named reviewer has been invented.
+documented access path and observed runtime evidence, not itself a human approval.
+The separate explicit maintainer confirmation above now supplies human listing
+approval; the runtime inspector and the human approver remain distinguished.
 
 ## 2026-10-24 route decision
 
@@ -120,14 +136,16 @@ not invent an original link.
    This documented configuration path has now passed the scoped Desktop test above;
    server-side credential enforcement and paid-tier entitlements were not tested.
 
-## Still blocked before merge
+## Remaining release gates
 
-- Scoped Bearer Desktop acceptance passed as recorded above. Final human approval
-  must consider its limits; anonymous results do not substitute for it.
-- Human maintainer must assess the completed evidence, final score and exact
-  descriptor. `review.decision` remains pending with no named human reviewer.
-- Final exact-head CI must pass after those requirements are satisfied.
+- Scoped Bearer Desktop acceptance and explicit human approval are recorded above;
+  historical anonymous results do not substitute for either.
+- Final exact-head CI must pass, with no unresolved safety feedback or conflict.
+  Any required workflow-run authorization is separate from listing approval.
+- Merge must lock the reviewed head. Main CI, catalog rebuild and market/CDN
+  consistency must be checked afterwards; merge alone is not proof of rollout.
 
 The candidate record now records declared terms and scoped runtime acceptance
-for the Key route, while retaining human approval and final CI gates;
-do not change approval fields simply to make CI pass.
+for the Key route and the genuine human confirmation, while retaining the final
+CI gate. Approval fields were changed only after explicit maintainer confirmation,
+not simply to make CI pass.
