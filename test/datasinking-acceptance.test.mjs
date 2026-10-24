@@ -43,8 +43,11 @@ test('DataSinking evidence preserves historical acceptance without granting huma
   }
   assert.equal(record.license.status, 'declared');
   assert.ok(record.evidence.some(item => item.url === 'https://datasink.ing/docs/mcp'));
-  assert.equal(record.runtimeAcceptance.status, 'not-run');
-  assert.equal(record.runtimeAcceptance.checkedAt, null);
-  assert.equal(record.runtimeAcceptance.reviewedBy, null);
-  assert.ok(errors.includes('real runtime acceptance must pass'));
+  assert.equal(record.runtimeAcceptance.status, 'pass');
+  assert.match(record.runtimeAcceptance.reviewedBy, /not human approval/);
+  assert.ok(!errors.includes('real runtime acceptance must pass'));
+  assert.match(report, /2026-10-24T14:29:12\+08:00/);
+  assert.match(report, /Three actual business calls/);
+  assert.match(report, /temporary connection.*disabled/);
+  assert.match(report, /not independently proven/);
 });

@@ -3,7 +3,7 @@
   "id": "datasinking",
   "registryName": "datasinking",
   "title": "DataSinking 财报全文与章节检索",
-  "description": "Hosted report-text MCP using the officially documented mandatory Bearer API Key route. Historical anonymous evidence is retained but does not count as acceptance of this configuration. Authorized Key-based Desktop acceptance remains pending.",
+  "description": "Hosted report-text MCP using the officially documented mandatory Bearer API Key route. macOS DSH Desktop acceptance passed for a user-configured Bearer connection: report list, section list and one short section. No all-tools, billing-tier or financial-accuracy claim. Human listing approval remains pending.",
   "version": "0.2.17",
   "classification": {"isDataService": true, "domains": ["finance"], "matchedKeywords": ["financial reports", "财报"]},
   "source": {"kind": "official-vendor", "apiUrl": null, "detailUrl": "https://datasink.ing/docs/mcp", "status": "active", "publishedAt": null, "updatedAt": null, "retrievedAt": "2026-10-24T06:10:31Z"},
@@ -15,21 +15,22 @@
   "probe": {"status": "pass", "checkedAt": "2026-10-20T14:56:07Z", "targetUrl": "https://api.datasink.ing/mcp", "httpStatus": null, "reason": "Historical independent initialization and six-tool discovery succeeded; anonymous report/section business acceptance is preserved in the report. No calls repeated for dossier preparation."},
   "dedupe": {"level": "none", "strong": [], "weak": []},
   "score": {
-    "total": 63, "band": "watchlist",
-    "dimensions": {"authority": 20, "accessibility": 18, "maintenanceSecurity": 12, "runtime": 0, "marketGap": 8, "documentation": 5},
+    "total": 82, "band": "selected",
+    "dimensions": {"authority": 20, "accessibility": 22, "maintenanceSecurity": 12, "runtime": 15, "marketGap": 8, "documentation": 5},
     "reasons": [
       "authority 20/25: vendor website and MCP documentation agree on the endpoint; no Official Registry claim made",
-      "accessibility 18/25: official HTTPS configuration with Bearer documented, authorized keyed session remains untested",
+      "accessibility 22/25: official HTTPS route and user-configured Bearer connection passed Desktop import, discovery and bounded reading; other platforms and paid tiers untested",
       "maintenanceSecurity 12/20: official Key terms and limits apply to the chosen evaluation route; no redistribution or bypass permitted; maintenance history unverified",
-      "runtime 0/15: historical anonymous smoke results are not evidence for the new mandatory-Key configuration",
+      "runtime 15/15: actual Desktop trace confirms three successful bounded read calls using the user-configured Bearer connection, not anonymous historical evidence; all-tool coverage is not claimed",
       "marketGap 8/10: report narrative retrieval complements structured financial indicators",
       "documentation 5/5: dedicated official MCP page, Key requirements, usage restrictions and plan limits identified"
     ],
-    "gates": ["Authorized Bearer Key-based DSH Desktop acceptance", "Human maintainer assessment and approval", "Final exact-head CI success"]
+    "gates": ["Human maintainer assessment and approval", "Final exact-head CI success"]
   },
-  "review": {"decision": "pending", "proposedConnectorId": "datasinking", "reviewedAt": null, "reviewedBy": null, "notes": "User approval to implement Bearer is not approval to list. Codex prepared the route change; genuine maintainer assessment and authorized-account acceptance remain required."},
-  "runtimeAcceptance": {"status": "not-run", "checkedAt": null, "reviewedBy": null, "reportUrl": "https://github.com/heubme2020/dsh-mcp-connector-registry/blob/add-datasinking/docs/runtime-acceptance/pr-49/datasinking.md", "notes": "Mandatory configuration using Bearer has not yet been accepted. Historical anonymous results in the report are preserved only as historical evidence, not as a pass for this route."},
+  "review": {"decision": "pending", "proposedConnectorId": "datasinking", "reviewedAt": null, "reviewedBy": null, "notes": "User approval to implement Bearer and confirmation of local Key entry are not human listing approval. Codex completed a scoped Desktop smoke test; named maintainer assessment remains required. Selected score reflects technical evidence, not approval."},
+  "runtimeAcceptance": {"status": "pass", "checkedAt": "2026-10-24T06:32:26Z", "reviewedBy": "Codex (native Desktop trace inspection; not human approval)", "reportUrl": "https://github.com/heubme2020/dsh-mcp-connector-registry/blob/add-datasinking/docs/runtime-acceptance/pr-49/datasinking.md", "notes": "macOS DSH Desktop 0.2.79 connector UI: user-configured Bearer connection, six discovered tools, three actual read calls for one report and one short chapter. Checked native tool trace rather than final-answer assertions alone. No raw Key/header read, no anonymous fallback, full report, billing validation or other-platform acceptance. Temporary connection disabled afterwards."},
   "evidence": [
+    {"type": "runtime-acceptance", "url": "https://github.com/heubme2020/dsh-mcp-connector-registry/blob/add-datasinking/docs/runtime-acceptance/pr-49/datasinking.md", "collectedAt": "2026-10-24T06:32:26Z", "summary": "Authorized local-Key Desktop smoke: list_reports -> list_sections -> get_section, exactly three observed business calls, non-empty readable output and period/source metadata; temporary connection disabled. Public evidence contains no credentials, account identity or private paths."},
     {"type": "official-vendor", "url": "https://datasink.ing/docs/mcp", "collectedAt": "2026-10-24T06:10:31Z", "summary": "Dedicated official MCP setup explicitly requests a Key and documents Authorization Bearer at the same HTTPS endpoint, including DSH configuration."},
     {"type": "license", "url": "https://datasink.ing/terms", "collectedAt": "2026-10-24T06:10:31Z", "summary": "Key-based route aligns with section 3. Free evaluation remains limited; standalone redistribution/resale and bypass are prohibited. This records applicable declared hosted terms, not human approval or a grant of broader data rights."},
     {"type": "official-website", "url": "https://datasink.ing/pricing", "collectedAt": "2026-10-24T06:10:31Z", "summary": "Free tier supports evaluation/light personal use with per-Key and shared limits; do not hard-code prices or unlimited-access promises."},
