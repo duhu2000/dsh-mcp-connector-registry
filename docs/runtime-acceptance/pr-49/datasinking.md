@@ -1,4 +1,28 @@
-# DataSinking PR #49 — anonymous protocol acceptance and open review gates
+# DataSinking PR #49 — mandatory Bearer route, pending authorized acceptance
+
+## 2026-10-24 route decision
+
+The user explicitly approved implementing the official Bearer API Key route and
+will enter an authorized Key locally in DSH. The descriptor now requires Bearer;
+there is no anonymous fallback. This implementation approval is not listing approval.
+[Official MCP setup](https://datasink.ing/docs/mcp), [terms](https://datasink.ing/terms)
+and [pricing](https://datasink.ing/pricing) were rechecked: Key-based evaluation
+is documented, subject to account, rate and rolling/shared limits. Standalone
+redistribution/resale and authentication/limit bypass are prohibited. No account
+registration or purchase is authorized by this report.
+
+The candidate runtime status is reset to **not-run** for the new route; historical
+anonymous success below does not prove the user's Key was sent, accepted or charged.
+Current server version remains unverified; 0.2.17 is the historical observation.
+
+Minimum next acceptance: user enters the Key in the local masked credential field;
+verify connection and tool list; read at most one public report's list, section list
+and one short section through DSH. Stop on authentication/permission/rate errors.
+Never retry anonymously or obtain another Key; no bulk/full-report downloads.
+Record only non-secret parameters, result status, metadata and evidence summary.
+Do not read or export credential storage, raw headers, Key values or session tokens.
+
+## Historical evidence (unchanged)
 
 Prepared by Codex on 2026-10-21. This preserves the independent 2026-10-20
 observations already recorded in [review 5586918780](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/49#pullrequestreview-5586918780).
@@ -44,23 +68,21 @@ not invent an original link.
 
 ## Connection paths
 
-1. Current proposed market card: `auth.mode=none`; anonymous only. No credential
-   input is shown, and acquiring a Key cannot upgrade this saved connection.
-2. Separate keyed connection: use DSH's Add Connection form, HTTPS endpoint
+1. Current proposed market card: `auth.mode=bearer`; a local masked API Key field
+   is required. No credential value is stored in the public descriptor.
+2. Isolated acceptance connection: use DSH's Add Connection form, HTTPS endpoint
    `https://api.datasink.ing/mcp`, and Bearer authentication. Enter the Key only
    in the local credential field. Never place it in the URL, prompt or PR.
    This is a documented configuration path, **not a tested Key-based session**.
 
 ## Still blocked before merge
 
-- Vendor must reconcile anonymous preview with section 3 of its terms and
-  publish/identify an authoritative anonymous allowance or explicitly remove
-  the unsupported anonymous path. A passing public call is not a rights grant.
-- If the proposal switches to mandatory Bearer, authorized-account acceptance
-  is required; existing anonymous results cannot substitute for it.
+- Mandatory Bearer authorized-account acceptance is required; existing anonymous
+  results cannot substitute for it. Anonymous terms are no longer the proposed route.
 - Human maintainer must assess the completed evidence, final score and exact
   descriptor. `review.decision` remains pending with no named human reviewer.
 - Final exact-head CI must pass after those requirements are satisfied.
 
-The candidate record intentionally retains service-terms and approval gates;
+The candidate record now records declared terms for the Key route and retains
+authorized runtime acceptance and human approval gates;
 do not change approval fields simply to make CI pass.

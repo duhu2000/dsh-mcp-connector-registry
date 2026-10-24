@@ -5,15 +5,19 @@
   "vendor": "DataSinking",
   "icon": "https://datasink.ing/icon-512.png",
   "category": "金融投资",
-  "summary": "上市公司财报全文与章节检索 / Markdown / 匿名试用",
-  "description": "DataSinking 提供上市公司财报的 Markdown 全文和章节检索，适合阅读管理层讨论、风险因素及财务附注，不是结构化财务指标 API。本卡片仅使用匿名试用连接，不提供 API Key 输入；获取 Key 不会自动提升本连接额度。需要 Key 时，请通过「添加连接」单独配置 https://api.datasink.ing/mcp，选择 Bearer 鉴权并仅在本机凭据输入框录入，不把 Key 放进 URL、Prompt 或公共配置。匿名访问曾通过协议验收，但其适用条款和额度仍待服务商澄清；套餐价格及限制以官网为准，不承诺持续免费。使用时须注明财报期、币种、单位、来源和章节；仅在返回中存在有效原文链接时引用，不编造缺失链接。内容仅供信息参考，使用受第三方服务条款及原始披露文件权利约束。",
+  "summary": "上市公司财报全文与章节检索 / Markdown / API Key",
+  "description": "DataSinking 提供上市公司财报的 Markdown 全文和章节检索，适合阅读管理层讨论、风险因素及财务附注，不是结构化财务指标 API。需使用服务商签发且有权使用的 API Key，通过 Bearer Header 接入；Key 仅在 DSH 本机录入，不放入 URL、Prompt 或公共配置。免费档用于评估与轻量个人使用，受速率、滚动额度及共享额度限制；收费方案与权限以官网为准，不承诺持续免费或无限使用。禁止独立转售、再分发服务内容或绕过鉴权与额度限制。使用时须注明财报期、币种、单位、来源和章节；仅在返回中存在有效原文链接时引用，不编造缺失链接。内容仅供信息参考，使用受第三方服务条款及原始披露文件权利约束。",
   "tags": ["财报", "财务", "金融", "RAG", "MCP", "年报"],
   "published": true,
   "featured": false,
-  "homepage": "https://datasink.ing",
+  "homepage": "https://datasink.ing/docs/mcp",
   "probeStatus": "unverified",
   "auth": {
-    "mode": "none"
+    "mode": "bearer",
+    "credentialName": "DataSinking API Key",
+    "credentialPlaceholder": "请输入有权使用的 API Key（不含 Bearer 前缀）",
+    "credentialDescription": "仅在 DSH 本机保存，通过 Authorization: Bearer 发送给 api.datasink.ing。不要将 Key 放入 URL、Prompt、日志或公开配置；免费档与付费档额度以账号和官网为准。",
+    "credentialHelpLabel": "查看官方 MCP 接入与 API Key 申请说明"
   },
   "servers": [
     {
