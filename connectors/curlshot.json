@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "curlshot",
+  "name": "CurlShot·网页截图",
+  "vendor": "CurlShot",
+  "icon": "https://curlshot.com/icons/logo-512.png",
+  "category": "开发工具",
+  "summary": "网页截图 / 整页截图 / 网页转 PDF / 设备预设",
+  "description": "接入 CurlShot 远程 MCP Server（https://curlshot.com/api/mcp），对公开网页截图，输出 PNG、JPEG、WebP 或 PDF，支持整页截图、手机/平板/桌面设备预设、深色模式、按 CSS 选择器截取元素以及屏蔽广告和 Cookie 弹窗。take_screenshot 需要 CurlShot API Key（免费套餐每月 100 次，无需绑卡；付费套餐按月订阅），list_devices 无需凭据。只读取公开网页，不对目标网站执行写入操作。",
+  "tags": ["CurlShot", "网页截图", "整页截图", "网页转 PDF", "前端调试", "Bearer"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://curlshot.com/docs/guides/ai-agents",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "CurlShot API Key",
+    "credentialPlaceholder": "请输入 CurlShot API Key",
+    "credentialDescription": "API Key 仅保存在 DSH 本机，以 Authorization: Bearer 方式发送；可在 curlshot.com 注册免费账号后于控制台获取。",
+    "credentialHelpLabel": "查看 CurlShot MCP 接入说明"
+  },
+  "servers": [
+    {
+      "serverKey": "curlshot",
+      "serverName": "curlshot",
+      "url": "https://curlshot.com/api/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "url",
+      "label": "网页地址",
+      "default": "https://example.com",
+      "placeholder": "例如：https://example.com",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "整页截图",
+      "text": "用 CurlShot 对 {{url}} 进行整页截图（PNG），并描述页面的主要布局",
+      "server": "curlshot"
+    },
+    {
+      "title": "手机视图检查",
+      "text": "用 CurlShot 以手机设备预设截取 {{url}}，检查是否存在布局错位或文字溢出",
+      "server": "curlshot"
+    },
+    {
+      "title": "网页转 PDF",
+      "text": "用 CurlShot 将 {{url}} 导出为 PDF，并屏蔽广告和 Cookie 弹窗",
+      "server": "curlshot"
+    }
+  ]
+}
