@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "callmemcp",
+  "name": "CallMeMCP·手机来电",
+  "vendor": "CallMeMCP",
+  "icon": "📞",
+  "category": "效率工具",
+  "summary": "让 Agent 给你的真实手机打电话或发消息，口头回答转成文字",
+  "description": "让 AI Agent 联系你本人的手机（iPhone 或 Android）。call 工具拨打你在 /call-me 应用里的专属 10 位号码，来电界面和普通电话一样，问题会被朗读出来，你开口回答，语音转写成文字回到 Agent；text 工具发送单向文字消息，wait_for_reply 可等待你之后发回的文字或语音留言，poll_result 查询尚未结束的通话，setup 返回应用下载与配置说明。无需登录、OAuth 或 API Key，只需把应用「我的号码」里的 10 位数字告诉 Agent。使用前须安装 /call-me 应用并订阅（付费，新订阅含试用期，价格见官网与应用商店）；号码未激活时通话和消息会失败。call、say、text 会让真实手机响铃或收到消息，请只填你自己的号码；不要让 Agent 反复重拨。",
+  "tags": [
+    "电话",
+    "来电",
+    "手机",
+    "语音",
+    "通知",
+    "人机协同",
+    "付费"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://callmemcp.com",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "callmemcp",
+      "url": "https://callmemcp.com/mcp",
+      "serverName": "callmemcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "number",
+      "label": "Call Me 号码",
+      "placeholder": "应用「我的号码」里的 10 位数字",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "测试来电",
+      "text": "用 CallMeMCP 的 call 工具给我的手机打一次电话，号码（to 参数）是 {{number}}，只说一句“来电测试”并请我随便回答一句话。收到回答后挂断，再把我说的话复述给我。",
+      "server": "callmemcp"
+    },
+    {
+      "title": "做完后来电汇报",
+      "text": "当前任务做完后，用 CallMeMCP 的 call 工具给我打电话（号码 {{number}}），用两三句话汇报结果并问我下一步。我没接就改用 text 工具发一条文字消息，不要反复重拨。",
+      "server": "callmemcp"
+    },
+    {
+      "title": "需要拍板时先问我",
+      "text": "遇到需要我做决定的地方，先用 CallMeMCP 的 call 工具给我打电话（号码 {{number}}），把选项念清楚，按我的口头回答继续。每个决定最多打一次，没接就发 text 消息等我回复。",
+      "server": "callmemcp"
+    }
+  ]
+}
