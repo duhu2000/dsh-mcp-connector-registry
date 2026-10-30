@@ -58,3 +58,24 @@ used. The only tool call was the read-only `get_tours` above.
 All three URLs returned HTTP 200 on 2026-10-19. The MCP service is a hosted
 service, not distributed software, so a software licence is not applicable;
 the service terms above are the applicable evidence.
+
+## Addendum 2026-10-30: make_trip_plan annotation corrected (maintainer review of 2026-10-20)
+
+- Fix: tourhabk-ui/pos#2879, merge commit `baaa91ac1e0d77fb3d0c2d8afb0688f242e05f5a`
+  (merged 2026-10-30T11:48:25Z); Timeweb deploy completed 2026-10-30T12:10:01Z.
+- Live check 2026-10-30 ~12:10Z, unauthenticated `initialize` + `tools/list` on
+  https://vedarai.ru/api/mcp: server `vedar-mcp` 2.10.0, 23 tools.
+  `make_trip_plan` annotations: `readOnlyHint=false`, `destructiveHint=false`,
+  `idempotentHint=false`, `openWorldHint=true`.
+- State-changing tools now (`readOnlyHint=false`), seven in total:
+
+| Tool | Class |
+| --- | --- |
+| `make_trip_plan` | Anonymous draft write: saves a new trip-plan draft (7 days) when it produces days; no personal data, nothing sent to a human/operator; repeat calls create new drafts. |
+| `edit_trip_plan` | Anonymous draft write: edits that draft by `plan_id`; same properties. |
+| `create_lead`, `create_booking_request`, `create_stay_request`, `request_charter`, `create_car_rental_request` | Requests that transmit name/phone; require explicit prior user confirmation and `consent:true`; confirmed by a human. |
+
+- Note: since the 2026-10-19 report the server added `create_car_rental_request`
+  (car rental without driver), so there are five consent-gated request tools, not four.
+- No write tool was called for this addendum; no personal data was used.
+  Human maintainer review remains pending.

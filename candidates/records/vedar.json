@@ -3,7 +3,7 @@
   "id": "vedar",
   "registryName": "ru.vedarai/mcp",
   "title": "Vedar — Kamchatka travel",
-  "description": "Kamchatka travel: tours with availability, volcano/safety status, weather, stays, transfers, trip plans. Five state-changing tools: edit_trip_plan persists an anonymous 7-day draft by plan_id (no personal data); create_lead, create_booking_request, create_stay_request and request_charter send the user's name/phone to the platform/operator/provider and require prior confirmation with consent:true. No online payment. Safety info cites source and update time; not a safety guarantee.",
+  "description": "Kamchatka travel: tours with availability, volcano/safety status, weather, stays, transfers, car rental, trip plans. Seven state-changing tools (readOnlyHint=false, live 2026-10-30): make_trip_plan and edit_trip_plan persist an anonymous 7-day trip-plan draft by plan_id (no personal data, nothing sent to a human or operator; not idempotent); create_lead, create_booking_request, create_stay_request, request_charter and create_car_rental_request send the user's name/phone to the platform/operator/provider and require prior confirmation with consent:true. No online payment. Safety info cites source and update time; not a safety guarantee.",
   "version": "2.5.0",
   "classification": {
     "isDataService": true,
