@@ -4,7 +4,7 @@
   "registryName": "ru.vedarai/mcp",
   "title": "Vedar — Kamchatka travel",
   "description": "Kamchatka travel: tours with availability, volcano/safety status, weather, stays, transfers, car rental, trip plans. Seven state-changing tools (readOnlyHint=false, live 2026-10-30): make_trip_plan and edit_trip_plan persist an anonymous 7-day trip-plan draft by plan_id (no personal data, nothing sent to a human or operator; not idempotent); create_lead, create_booking_request, create_stay_request, request_charter and create_car_rental_request send the user's name/phone to the platform/operator/provider and require prior confirmation with consent:true. No online payment. Safety info cites source and update time; not a safety guarantee.",
-  "version": "2.5.0",
+  "version": "2.10.0",
   "classification": {
     "isDataService": true,
     "domains": [
@@ -21,7 +21,7 @@
   "source": {
     "kind": "official-mcp-registry",
     "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
-    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/ru.vedarai%2Fmcp/versions/2.5.0",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers/ru.vedarai%2Fmcp/versions/2.10.0",
     "status": "active",
     "publishedAt": "2026-10-17T02:49:49.441196Z",
     "updatedAt": "2026-10-17T02:49:49.441196Z",
@@ -62,10 +62,10 @@
   },
   "probe": {
     "status": "pass",
-    "checkedAt": "2026-10-19T05:42:43.281Z",
+    "checkedAt": "2026-10-30T12:11:12.430Z",
     "targetUrl": "https://vedarai.ru/api/mcp",
     "httpStatus": 200,
-    "reason": "Unauthenticated initialize returned vedar-mcp 2.5.0 (protocol 2025-06-18); tools/list returned 20 tools, five with readOnlyHint=false (edit_trip_plan, create_lead, create_booking_request, create_stay_request, request_charter). No request-creation tool was called."
+    "reason": "Unauthenticated initialize returned vedar-mcp 2.10.0 (protocol 2025-06-18); tools/list returned 23 tools, seven with readOnlyHint=false: make_trip_plan and edit_trip_plan (anonymous 7-day draft writes, no personal data) and create_lead, create_booking_request, create_stay_request, request_charter, create_car_rental_request (consent:true required, name/phone). No write tool was called."
   },
   "dedupe": {
     "level": "none",
@@ -84,10 +84,10 @@
       "documentation": 5
     },
     "reasons": [
-      "authority 20/25: Official MCP Registry active record ru.vedarai/mcp 2.5.0 and the vendor's own vedarai.ru domain publish the same endpoint https://vedarai.ru/api/mcp",
-      "accessibility 20/25: public HTTPS Streamable HTTP with no authentication; five state-changing tools are annotated readOnlyHint=false and the four request tools require consent:true, so clients must gate them explicitly",
+      "authority 20/25: Official MCP Registry active record ru.vedarai/mcp 2.10.0 (isLatest) and the vendor's own vedarai.ru domain publish the same endpoint https://vedarai.ru/api/mcp",
+      "accessibility 20/25: public HTTPS Streamable HTTP with no authentication; seven state-changing tools are annotated readOnlyHint=false (two anonymous draft writes) and the five request tools require consent:true, so clients must gate them explicitly",
       "maintenanceSecurity 15/20: active registry record and repository; service terms (2026-10-05), privacy policy (2026-10-15) and partner offer are published on the vendor domain; hosted service, no software licence applies",
-      "runtime 15/15: initialize, tools/list (20 tools) and one reproducible read-only get_tours call passed on 2026-10-19 (page 1 of 6, 37 tours); credential scan pass; no request was created",
+      "runtime 15/15: initialize, tools/list (23 tools) and one reproducible read-only get_tours call passed on 2026-10-30 against 2.10.0; credential scan pass; no request was created",
       "marketGap 10/10: first Kamchatka travel connector with live operator availability and regional safety/volcano data",
       "documentation 5/5: public MCP manifest https://vedarai.ru/.well-known/mcp.json, official registry detail page, terms and privacy pages are reachable"
     ],
@@ -100,27 +100,27 @@
     "proposedConnectorId": "vedar",
     "reviewedAt": null,
     "reviewedBy": null,
-    "notes": "Submitted by tourhabk-ui in PR #44 for maintainer review. Five state-changing tools, name/phone consent disclosure for the four request tools, and a structured read-only runtime acceptance report are documented; human approval remains with the maintainer."
+    "notes": "Submitted by tourhabk-ui in PR #44 for maintainer review. Seven state-changing tools (two anonymous draft writes), name/phone consent disclosure for the five request tools, and a structured read-only runtime acceptance report are documented; human approval remains with the maintainer."
   },
   "runtimeAcceptance": {
     "status": "pass",
-    "checkedAt": "2026-10-19T05:42:43.281Z",
+    "checkedAt": "2026-10-30T12:11:12.430Z",
     "reviewedBy": "tourhabk-ui",
     "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/pr-44/vedar.md",
-    "notes": "Repo runner scripts/run-runtime-acceptance.mjs (client dsh-registry-runtime-acceptance 1.0.0, protocol 2025-06-18): unauthenticated initialize returned vedar-mcp 2.5.0, tools/list returned 20 tools, and one read-only get_tours call with non-personal parameters {} succeeded (page 1 of 6, 37 tours total, 7 on the page; response SHA-256 in the report). No booking, lead, stay or charter request was created and no personal data was used."
+    "notes": "Repo runner scripts/run-runtime-acceptance.mjs (protocol 2025-06-18) re-run 2026-10-30 against live vedar-mcp 2.10.0: initialize, tools/list (23 tools) and one read-only get_tours call with parameters {} succeeded (response SHA-256 360d80b7e0cb5df5630607f902a754f41ad0ef0e7ebcb021630c5944f9182b4c); credential scan pass. No write tool was called and no personal data was used."
   },
   "evidence": [
     {
       "type": "official-registry",
-      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/ru.vedarai%2Fmcp/versions/2.5.0",
-      "collectedAt": "2026-10-19T05:42:43.281Z",
-      "summary": "Official MCP Registry record ru.vedarai/mcp version 2.5.0, status active, remote endpoint https://vedarai.ru/api/mcp."
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/ru.vedarai%2Fmcp/versions/2.10.0",
+      "collectedAt": "2026-10-30T12:11:12.430Z",
+      "summary": "Official MCP Registry record ru.vedarai/mcp version 2.10.0 (isLatest), status active, remote endpoint https://vedarai.ru/api/mcp."
     },
     {
       "type": "official-website",
       "url": "https://vedarai.ru/.well-known/mcp.json",
-      "collectedAt": "2026-10-19T05:42:43.281Z",
-      "summary": "Vendor-published MCP manifest for vedar-mcp 2.5.0 naming the same endpoint https://vedarai.ru/api/mcp; HTTP 200 on 2026-10-19."
+      "collectedAt": "2026-10-30T12:11:12.430Z",
+      "summary": "Vendor-published MCP manifest for vedar-mcp 2.10.0 naming the same endpoint https://vedarai.ru/api/mcp; HTTP 200 on 2026-10-30."
     },
     {
       "type": "official-website",
@@ -137,14 +137,14 @@
     {
       "type": "probe",
       "url": "https://vedarai.ru/api/mcp",
-      "collectedAt": "2026-10-19T05:42:43.281Z",
-      "summary": "Unauthenticated initialize (HTTP 200, vedar-mcp 2.5.0) and tools/list returned 20 tools; five tools carry readOnlyHint=false."
+      "collectedAt": "2026-10-30T12:11:12.430Z",
+      "summary": "Unauthenticated initialize (HTTP 200, vedar-mcp 2.10.0) and tools/list returned 23 tools; seven tools carry readOnlyHint=false."
     },
     {
       "type": "runtime-acceptance",
       "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/pr-44/vedar.md",
-      "collectedAt": "2026-10-19T05:42:43.281Z",
-      "summary": "Structured read-only acceptance report for PR #44: endpoint, timestamp, get_tours parameters {} and result summary (page 1 of 6, 37 tours), five state-changing tools and consent disclosure; no request-creation tool was called."
+      "collectedAt": "2026-10-30T12:11:12.430Z",
+      "summary": "Read-only acceptance report for PR #44 (2026-10-19, addendum and re-run 2026-10-30 on 2.10.0): get_tours {} succeeded; seven state-changing tools — two anonymous draft writes and five consent-gated request tools; no write tool was called."
     }
   ]
 }

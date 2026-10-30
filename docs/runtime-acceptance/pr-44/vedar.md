@@ -79,3 +79,10 @@ the service terms above are the applicable evidence.
   (car rental without driver), so there are five consent-gated request tools, not four.
 - No write tool was called for this addendum; no personal data was used.
   Human maintainer review remains pending.
+
+### Re-run 2026-10-30 on live 2.10.0
+
+`node scripts/run-runtime-acceptance.mjs --url https://vedarai.ru/api/mcp --tool get_tours --args '{}' --reviewer tourhabk-ui`
+- Checked at: 2026-10-30T12:11:12.430Z; server `vedar-mcp` 2.10.0; protocol 2025-06-18; 23 tools.
+- `get_tours` `{}`: success; response SHA-256 `360d80b7e0cb5df5630607f902a754f41ad0ef0e7ebcb021630c5944f9182b4c`; credential scan pass; decision pass.
+- Official MCP Registry: `ru.vedarai/mcp` 2.10.0 active, isLatest (published 2026-10-30T05:58:26Z).
