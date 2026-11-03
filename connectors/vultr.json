@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "vultr",
+  "name": "Vultr",
+  "vendor": "Vultr",
+  "icon": "☁️",
+  "category": "开发工具",
+  "summary": "云服务器 / Kubernetes / 账单等 Vultr 基础设施只读查询",
+  "description": "接入 Vultr 官方托管的远程 MCP Server，登录后可用自然语言只读查询云服务器实例、区域与套餐、Kubernetes 集群和账单等基础设施信息。服务当前为公开预览版，工具面与端点结构在正式发布前可能变化。MCP Server 本身是只读的，不能创建、修改或删除资源，也没有会花钱的工具；实际可见数据以登录用户在 Vultr 中的组织与权限为限，每次登录只绑定一个组织，切换组织需要重新授权。使用前需由组织管理员启用 MCP Server，并为用户、用户组或角色附加 Use MCP 权限策略。MCP Server 没有会花钱的工具；账户内已有的 Vultr 资源仍按 Vultr 定价计费，具体费用以 Vultr 账单为准。",
+  "tags": ["Vultr", "云服务器", "Kubernetes", "基础设施", "账单", "OAuth", "官方 MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://docs.vultr.com/reference/mcp-server/overview",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://mcp.vultr.com/",
+    "scope": "",
+    "clientName": "DeepSeek Harness - Vultr MCP",
+    "tokenEndpointAuthMethod": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "url": "https://mcp.vultr.com/mcp",
+      "serverName": "vultr",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "确认当前账号",
+      "text": "使用 Vultr MCP 查询我当前连接的是哪个 Vultr 账号和组织；只做只读查询，不要修改任何资源",
+      "server": "main"
+    },
+    {
+      "title": "巡检运行中的实例",
+      "text": "使用 Vultr MCP 列出指定区域正在运行的云服务器实例及其套餐，并标出可能长期闲置或规格异常的实例；只做只读查询，不要创建、修改或删除任何资源",
+      "server": "main"
+    },
+    {
+      "title": "上月账单摘要",
+      "text": "使用 Vultr MCP 汇总我上一个自然月的账单和主要费用项并按产品归类；只做只读查询",
+      "server": "main"
+    }
+  ]
+}
