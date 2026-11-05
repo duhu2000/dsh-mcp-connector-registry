@@ -8,6 +8,14 @@ import { assessIconResponse } from '../scripts/check-icon-assets.mjs';
 
 const script = resolve('scripts/build-registry.mjs');
 
+test('TuShare credential help points to official token guide, not project homepage (#209)', async () => {
+  const descriptor = JSON.parse(await readFile('connectors/tushare.json', 'utf8'));
+  assert.equal(descriptor.auth.credentialHelpUrl, 'https://tushare.pro/document/1?doc_id=39');
+  assert.equal(descriptor.auth.credentialHelpLabel, '如何获取 TuShare Token');
+  assert.equal(descriptor.homepage, 'https://github.com/kshern/tushare-ts');
+  assert.equal(descriptor.servers[0].credentialBindings.TUSHARE_TOKEN, 'token');
+});
+
 async function fixture() {
   const root = await mkdtemp(resolve(tmpdir(), 'dsh-registry-'));
   const connectors = resolve(root, 'connectors');
