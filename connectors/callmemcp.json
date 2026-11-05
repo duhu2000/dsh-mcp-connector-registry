@@ -6,7 +6,7 @@
   "icon": "📞",
   "category": "效率工具",
   "summary": "让 Agent 给你的真实手机打电话或发消息，口头回答转成文字",
-  "description": "让 AI Agent 联系你本人的手机（iPhone 或 Android）。call 工具拨打你在 /call-me 应用里的专属 10 位号码，来电界面和普通电话一样，问题会被朗读出来，你开口回答，语音转写成文字回到 Agent；text 工具发送单向文字消息，wait_for_reply 可等待你之后发回的文字或语音留言，poll_result 查询尚未结束的通话，setup 返回应用下载与配置说明。无需登录、OAuth 或 API Key，只需把应用「我的号码」里的 10 位数字告诉 Agent。使用前须安装 /call-me 应用并订阅（付费，新订阅含试用期，价格见官网与应用商店）；号码未激活时通话和消息会失败。call、say、text 会让真实手机响铃或收到消息，请只填你自己的号码；不要让 Agent 反复重拨。",
+  "description": "让 AI Agent 联系你本人的手机（iPhone 或 Android）。call 工具拨打你在 /call-me 应用里的专属 10 位号码，来电界面和普通电话一样，问题会被朗读出来，你开口回答，语音转写成文字回到 Agent；text 工具发送单向文字消息，wait_for_reply 可等待你之后发回的文字或语音留言，poll_result 查询尚未结束的通话，setup 返回应用下载与配置说明。端点本身无需登录、OAuth 或 API Key（auth.mode none 只描述 MCP 端点）。10 位号码是应用「我的号码」里的私人标识，不是 SIM 电话号码：知道号码的人可以呼叫或发消息给该手机，但不能代表所有者读取历史、删除或迁移号码（这些需要只有应用持有的设备凭据）。号码会作为工具参数出现在对话中，模型和宿主可见，请只填你自己的号码，示例一律使用保留的演示号码 5550001234（自动应答，不会打扰真人）。本地客户端（Claude Code 插件、本地 Codex 服务）从 ~/.aiphone/config.json 读取号码，不进入对话。数据说明：Agent 发送的文字由 ElevenLabs 朗读，你的语音回答由 ElevenLabs 转写后返回 Agent，ElevenLabs 按其条款保留处理的数据；若你在 Agent 还在处理时说话，这句话会交给 Amazon Bedrock 上的 Claude Haiku 生成一句等待回复。消息与通话转写保存在服务端，直到所有者在应用中删除号码。使用前须安装 /call-me 应用并订阅（付费，通过 App Store 或 Google Play 自动续订，价格与优惠以用户自己的商店页面为准）；号码未激活时通话和消息会失败。服务条款 https://callmemcp.com/terms ，隐私政策 https://callmemcp.com/privacy 。call、say、text 会让真实手机响铃或收到消息，请不要让 Agent 反复重拨。",
   "tags": [
     "电话",
     "来电",
@@ -38,7 +38,7 @@
     {
       "name": "number",
       "label": "Call Me 号码",
-      "placeholder": "应用「我的号码」里的 10 位数字",
+      "placeholder": "应用「我的号码」里的 10 位数字（私人标识；测试可用演示号码 5550001234）",
       "required": true
     }
   ],
