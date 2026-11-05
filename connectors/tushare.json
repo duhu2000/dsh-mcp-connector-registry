@@ -15,7 +15,8 @@
   "auth": {
     "mode": "api-key",
     "credentialDescription": "TuShare Token 仅保存在 DSH 本机，并注入本地 MCP 进程。",
-    "credentialHelpLabel": "查看 TuShare MCP 项目说明",
+    "credentialHelpLabel": "如何获取 TuShare Token",
+    "credentialHelpUrl": "https://tushare.pro/document/1?doc_id=39",
     "credentialFields": [
       {
         "key": "token",
