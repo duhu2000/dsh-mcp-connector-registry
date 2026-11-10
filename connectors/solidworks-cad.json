@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "solidworks-cad",
+  "name": "SolidWorks 参数化建模",
+  "vendor": "wangruiyu070802",
+  "icon": "📐",
+  "category": "设计创意",
+  "summary": "驱动本机 SOLIDWORKS 参数化建模并衔接 Bambu Studio 3D 打印的 MCP 服务",
+  "description": "面向 Windows + SOLIDWORKS 用户：以自然语言驱动 agent 通过 COM 创建参数化平板零件（矩形板 + 任意多个圆孔，单位 mm），内置 0.4 喷嘴 FDM 打印可行性硬护栏（最小壁厚 0.8mm、最小孔径 1.2mm、孔边距 0.8mm），可导出 STL/SLDPRT 并自动打开 Bambu Studio 供人工切片打印。\n\n重要说明与副作用：本服务会真实操作本机 SolidWorks（新建文档、重建模型、关闭旧文档）并可能拉起 Bambu Studio 界面；调用需串行执行。不涉及网络与云端数据，免费使用。部分 Bambu Studio 版本无命令行切片能力，切片需人工完成。",
+  "tags": ["CAD", "SolidWorks", "3D打印", "Bambu Studio", "FDM"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/wangruiyu070802/solidworks-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "solidworks",
+      "command": "uvx",
+      "args": ["--from", "https://github.com/wangruiyu070802/solidworks-mcp", "solidworks-mcp"],
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检查连接与模型状态",
+      "text": "检查 SolidWorks 连接状态，告诉我当前模型参数和可打印性结论",
+      "server": "main"
+    },
+    {
+      "title": "建一块板并导出",
+      "text": "建一块 60×40×5 的平板，中心开一个 8mm 通孔，检查可打印性，导出 STL 并打开 Bambu Studio",
+      "server": "main"
+    }
+  ]
+}
