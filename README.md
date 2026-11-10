@@ -1,5 +1,12 @@
 # DSH MCP Connector Registry
 
+### 配套插件下载趋势
+
+[![dsh-mcp-connector npm 下载趋势](https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector/main/docs/metrics/npm-downloads.png)](https://github.com/duhu2000/dsh-mcp-connector/blob/main/docs/metrics/npm-downloads.json)
+
+这是 **配套插件 `dsh-mcp-connector`** 的 npm 下载次数，不是本 Registry 的下载量或单张连接器卡片的安装量。包含升级、重复安装及自动化下载，不等于独立用户数；统计日期见图中 UTC 标注。[安装使用](https://github.com/duhu2000/dsh-mcp-connector#开始使用) · [统计口径](https://github.com/duhu2000/dsh-mcp-connector/blob/main/docs/metrics/README.md)
+
+
 `dsh-mcp-connector` 的独立公共连接器目录。新卡片在本仓库通过 PR 上架，无需重新发布插件 npm 包。
 
 ## 公共目录
