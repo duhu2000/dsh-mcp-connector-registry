@@ -1,12 +1,5 @@
 # DSH MCP Connector Registry
 
-### 配套插件下载趋势
-
-[![dsh-mcp-connector npm 下载趋势](https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector/main/docs/metrics/npm-downloads.png)](https://github.com/duhu2000/dsh-mcp-connector/blob/main/docs/metrics/npm-downloads.json)
-
-这是 **配套插件 `dsh-mcp-connector`** 的 npm 下载次数，不是本 Registry 的下载量或单张连接器卡片的安装量。包含升级、重复安装及自动化下载，不等于独立用户数；统计日期见图中 UTC 标注。[安装使用](https://github.com/duhu2000/dsh-mcp-connector#开始使用) · [统计口径](https://github.com/duhu2000/dsh-mcp-connector/blob/main/docs/metrics/README.md)
-
-
 `dsh-mcp-connector` 的独立公共连接器目录。新卡片在本仓库通过 PR 上架，无需重新发布插件 npm 包。
 
 ## 公共目录
@@ -60,6 +53,12 @@ flowchart LR
 `featured` 由维护者管理。第三方收录不代表服务商官方背书，实际权限、费用和可用性以服务商为准。
 
 普通用户的安装、升级、分类浏览、连接与故障排查请看插件仓库的[MCP连接器用户手册](https://github.com/duhu2000/dsh-mcp-connector/blob/main/docs/USER-GUIDE.md)。Registry README 不放产品 UI 截图：上架流程图更稳定，真实产品界面统一由插件仓库维护，避免两处截图随版本演进失同步。
+
+### 配套插件累计下载趋势
+
+[![dsh-mcp-connector npm 累计下载趋势](https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector/main/docs/metrics/npm-downloads.png)](https://github.com/duhu2000/dsh-mcp-connector/blob/main/docs/metrics/npm-downloads.json)
+
+这是 **配套插件 `dsh-mcp-connector`** 的 npm 下载次数，不是本 Registry 的下载量或单张连接器卡片的安装量。包含升级、重复安装及自动化下载，不等于独立用户数；统计日期见图中 UTC 标注。[安装使用](https://github.com/duhu2000/dsh-mcp-connector#开始使用) · [统计口径](https://github.com/duhu2000/dsh-mcp-connector/blob/main/docs/metrics/README.md)
 
 ## 维护命令
 
