@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "solidworks-cad",
+  "name": "SolidWorks 参数化建模",
+  "vendor": "wangruiyu070802",
+  "icon": "📐",
+  "category": "设计创意",
+  "summary": "驱动本机 SOLIDWORKS 参数化建模并衔接 Bambu Studio 3D 打印的本地 stdio MCP 服务（待人工验收）",
+  "description": "面向 Windows + SOLIDWORKS 用户：以自然语言驱动 agent 通过 COM 创建参数化零件（平板/圆孔、手机支架、四件套 V 叉支架，单位 mm），导出 STL/SLDPRT/3MF 并自动打开 Bambu Studio 供人工切片打印。\n\n副作用与安全：本服务会真实操作本机 SolidWorks——它只新建/关闭自己创建的模型文档，从不关闭你的其他文档；写状态与日志到输出目录；导出默认不覆盖已存在文件（需 overwrite=true）且先写临时文件再原子替换；可能拉起 Bambu Studio GUI；任何 COM 调用在 SolidWorks 未运行时可能启动它；工具调用需串行。\n\n打印可行性检查返回 WARN 建议（壁厚/孔径/孔边距），非强制执行，PASS 不构成制造安全保证。\n\n许可与网络：本插件 MIT，但运行需要已授权的 SOLIDWORKS（商业软件）与（可选）Bambu Studio；安装过程需联网下载依赖，运行阶段不上传模型。",
+  "tags": ["CAD", "SolidWorks", "3D打印", "Bambu Studio", "FDM"],
+  "published": false,
+  "featured": false,
+  "homepage": "https://github.com/wangruiyu070802/solidworks-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "solidworks",
+      "command": "uvx",
+      "args": ["--from", "https://github.com/wangruiyu070802/solidworks-mcp@v0.2.0", "solidworks-mcp"],
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "检查连接与模型状态",
+      "text": "检查 SolidWorks 连接状态，告诉我当前模型参数和可打印性结论",
+      "server": "main"
+    },
+    {
+      "title": "建一块板并导出",
+      "text": "建一块 60×40×5 的平板，中心开一个 8mm 通孔，检查可打印性，导出 STL 并打开 Bambu Studio",
+      "server": "main"
+    }
+  ]
+}
