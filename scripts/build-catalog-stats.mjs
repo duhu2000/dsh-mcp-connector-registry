@@ -69,7 +69,7 @@ export function calculateCatalogStats(catalog, metadata, { updatedOn } = {}) {
 }
 
 export function renderReadmeStats(stats) {
-  return `${README_START}\n截至 ${stats.updatedOn}，公共 Registry 已发布 ${stats.registryCount} 条连接器描述；与随包的 ${stats.bundledUniqueCount} 张企查查卡片合并去重后，市场页可浏览 ${stats.marketCount} 张卡片，覆盖${stats.categoryNames.join('、')} ${stats.categoryCount} 类。推荐位严格保留 4 张企查查卡片、北大法宝和 Wind，共 ${stats.featuredCount} 张；其他连接器按业务分类展示。Registry 可独立持续更新，实际数量以客户端刷新后的市场页签徽标和 [catalog-stats.json](catalog-stats.json) 为准。\n${README_END}`;
+  return `${README_START}\n截至 ${stats.updatedOn}，公共 Registry 已发布 ${stats.registryCount} 条连接器描述；与随包的 ${stats.bundledUniqueCount} 张企查查卡片合并去重后，市场页可浏览 ${stats.marketCount} 张卡片，覆盖${stats.categoryNames.join('、')} ${stats.categoryCount} 类。首页推荐由插件版本的推荐规则决定，不以 Registry 的 featured 字段数量代表首页推荐数量。Registry 可独立持续更新，实际数量以客户端刷新后的市场页签徽标和 [catalog-stats.json](catalog-stats.json) 为准。\n${README_END}`;
 }
 
 export function replaceMarkedBlock(text, block) {
