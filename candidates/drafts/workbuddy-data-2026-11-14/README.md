@@ -103,3 +103,5 @@ OpenBoost：
 分数不能替代账号验收和具名批准。
 
 后续一轮新增证据与卡片状态见 [有赞、森浦、亿欧及其余候选推进](REMAINING-BATCH-REVIEW.md)。
+
+最新只读验收预算已明确为每个服务最多 1 积分、1 次调用；价格尚不能证明符合上限，未执行业务调用。详见 [预算与价格核对](evidence/readonly-acceptance-budget-check.md)。
