@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "id": "zerone-private-equity",
+  "registryName": "cn.com.zerone/private-equity",
+  "title": "执中另类资产数据",
+  "description": "查询 LP、GP、基金与交易事件数据；公开文档使用 URL query api_key，当前描述符没有相应秘密参数绑定，暂不生成可连接卡片。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "private-equity"
+    ],
+    "matchedKeywords": [
+      "执中另类资产数据",
+      "国内数据",
+      "MCP"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://www.zerone.com.cn/products/mcp",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-14T13:57:59.669928Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://www.zerone.com.cn/products/mcp",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://ai.zerone.com.cn/mcp/pe",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "api-key",
+    "requiredHeaders": [],
+    "reason": "官方文档使用 URL query api_key；URL 只保存不带凭据的基址。未核实可替换为 Header，不能把 query Key 错填为 Header。"
+  },
+  "license": {
+    "status": "unknown",
+    "spdxId": null,
+    "evidenceUrl": null
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-14T13:57:59.669928Z",
+    "targetUrl": "https://ai.zerone.com.cn/mcp/pe",
+    "httpStatus": 200,
+    "reason": "匿名握手 200，serverInfo zerone 1.26.0；保持会话后工具发现 9 项，无业务调用。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 60,
+    "band": "defer",
+    "dimensions": {
+      "authority": 24,
+      "accessibility": 17,
+      "maintenanceSecurity": 5,
+      "runtime": 0,
+      "marketGap": 9,
+      "documentation": 5
+    },
+    "reasons": [
+      "人工证据分，不等于上架批准；内部 registryName 不声称已注册 Official Registry。",
+      "真实业务运行未验收，runtime=0。",
+      "国内提供方；实际许可、账号权益和维护状态须继续核验。",
+      "先解决 URL query 凭据在客户端的安全绑定与脱敏，不在卡片 URL 中放占位或真实密钥。"
+    ],
+    "gates": [
+      "service-terms-review",
+      "authenticated-runtime-acceptance",
+      "named-human-approval",
+      "query-credential-binding"
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "zerone-private-equity",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "用户授权继续评估其余卡片；未把其他连接器审核署名复用到本候选。"
+  },
+  "runtimeAcceptance": {
+    "status": "not-run",
+    "checkedAt": null,
+    "reviewedBy": null,
+    "reportUrl": null,
+    "notes": "仅无凭据协议/工具发现探测，未执行 tools/call；工具数量与文档声明分开记录。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://www.zerone.com.cn/products/mcp",
+      "collectedAt": "2026-11-14T13:57:59.669928Z",
+      "summary": "官方产品/接入文档；所有条目仍在草案目录。"
+    },
+    {
+      "type": "probe",
+      "url": "https://ai.zerone.com.cn/mcp/pe",
+      "collectedAt": "2026-11-14T13:57:59.669928Z",
+      "summary": "匿名握手 200，serverInfo zerone 1.26.0；保持会话后工具发现 9 项，无业务调用。"
+    },
+    {
+      "type": "official-vendor",
+      "url": "https://cdn.zdeal.com.cn/ai/file/%E6%89%A7%E4%B8%ADMCP%E5%8A%9F%E8%83%BD%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
+      "collectedAt": "2026-11-14T13:57:59.669928Z",
+      "summary": "2026 年 5 月使用说明书第 13 页给出 HTTP MCP + URL query api_key 配置；描述能力不等同当前授权工具清单。"
+    }
+  ]
+}

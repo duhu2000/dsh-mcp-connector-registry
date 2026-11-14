@@ -1,0 +1,115 @@
+[
+  {
+    "id": "youzan-shop-data",
+    "url": "https://claw.youzan.com/mcp/sse/v1",
+    "checkedAt": "2026-11-14T14:24:57.598239Z",
+    "authenticated": false,
+    "network": "local HTTPS proxy; not mainland-direct verification",
+    "toolsCalled": false,
+    "requests": [
+      {
+        "method": "initialize",
+        "httpStatus": 401,
+        "curlExitCode": 0,
+        "resultType": "non-jsonrpc-json",
+        "toolCount": null
+      },
+      {
+        "method": "tools/list",
+        "httpStatus": 401,
+        "curlExitCode": 0,
+        "resultType": "non-jsonrpc-json",
+        "toolCount": null
+      }
+    ]
+  },
+  {
+    "id": "sumscope-qeubee-data",
+    "url": "https://data-api.qeubee.cn/sumscope/common/mcp/stream",
+    "checkedAt": "2026-11-14T14:24:56.866743Z",
+    "authenticated": false,
+    "network": "local HTTPS proxy; not mainland-direct verification",
+    "toolsCalled": false,
+    "requests": [
+      {
+        "method": "initialize",
+        "httpStatus": 401,
+        "curlExitCode": 0,
+        "resultType": "non-jsonrpc-json",
+        "toolCount": null
+      },
+      {
+        "method": "tools/list",
+        "httpStatus": 401,
+        "curlExitCode": 0,
+        "resultType": "non-jsonrpc-json",
+        "toolCount": null
+      }
+    ]
+  },
+  {
+    "id": "iyiou-financing-data",
+    "url": "https://mcp.iyiou.com/data",
+    "checkedAt": "2026-11-14T14:24:57.667712Z",
+    "authenticated": false,
+    "network": "local HTTPS proxy; not mainland-direct verification",
+    "toolsCalled": false,
+    "requests": [
+      {
+        "method": "initialize",
+        "httpStatus": 200,
+        "curlExitCode": 0,
+        "resultType": "jsonrpc-result",
+        "toolCount": null,
+        "serverInfo": {
+          "name": "mcp-iyiou-adapter",
+          "version": "1.0.0"
+        },
+        "protocolVersion": "2025-03-26"
+      },
+      {
+        "method": "notifications/initialized",
+        "httpStatus": 202,
+        "curlExitCode": 0,
+        "resultType": "unparsed",
+        "toolCount": null
+      },
+      {
+        "method": "tools/list",
+        "httpStatus": 200,
+        "curlExitCode": 0,
+        "resultType": "jsonrpc-result",
+        "toolCount": 4,
+        "hasNextCursor": false,
+        "tools": [
+          {
+            "name": "search_companies",
+            "annotations": null,
+            "requiredParameters": [
+              "name"
+            ]
+          },
+          {
+            "name": "query_company_invest_events",
+            "annotations": null,
+            "requiredParameters": []
+          },
+          {
+            "name": "batch_query_company_invest_events",
+            "annotations": null,
+            "requiredParameters": [
+              "arguments"
+            ]
+          },
+          {
+            "name": "filter_invest_events",
+            "annotations": null,
+            "requiredParameters": [
+              "arguments"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

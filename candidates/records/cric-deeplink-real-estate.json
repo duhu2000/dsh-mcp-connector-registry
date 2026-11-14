@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "id": "cric-deeplink-real-estate",
+  "registryName": "com.dichanai/cric-deeplink",
+  "title": "克而瑞·深度智联地产数据",
+  "description": "已验证连接及工具发现，业务查询尚未验收。连接深度智联官方 MCP，查询克而瑞授权的不动产统计与行业知识。问数用于具体指标、排行和趋势，问知用于政策与行业研究；实际覆盖以账号权限和返回结果为准。需使用本人 API Key，按预付积分计费；正常查询返回无数据也可能扣费，重复查询会重复计费。结果请保留来源、时间和指标口径。本卡片由 DSH 社区维护，并非克而瑞或深度智联官方产品。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "real-estate"
+    ],
+    "matchedKeywords": [
+      "克而瑞·深度智联地产数据",
+      "国内数据",
+      "MCP"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://mcp.dichanai.com/docs",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-14T13:57:59.218287Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://mcp.dichanai.com/docs",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://mcp.dichanai.com/mcp-server",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "bearer",
+    "requiredHeaders": [
+      {
+        "name": "Authorization",
+        "required": true,
+        "secret": true
+      }
+    ],
+    "reason": "官方通用配置明确 Authorization: Bearer API Key；替代 token Header 不作为本卡片默认。"
+  },
+  "license": {
+    "status": "not-applicable",
+    "spdxId": null,
+    "evidenceUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/review-batches/workbuddy-limited-2026-11-15.md"
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-14T13:57:59.218287Z",
+    "targetUrl": "https://mcp.dichanai.com/mcp-server",
+    "httpStatus": 401,
+    "reason": "匿名 initialize/tools/list 均 401；用户随后在 DSH 本机录入 Key，问数/问知工具发现成功。匿名探测与本机预检时间分别见 evidence；未执行业务调用。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 72,
+    "band": "watchlist",
+    "dimensions": {
+      "authority": 24,
+      "accessibility": 24,
+      "maintenanceSecurity": 9,
+      "runtime": 0,
+      "marketGap": 10,
+      "documentation": 5
+    },
+    "reasons": [
+      "人工证据分，不等于上架批准；内部 registryName 不声称已注册 Official Registry。",
+      "真实业务运行未验收，runtime=0。",
+      "国内提供方；实际许可、账号权益和维护状态须继续核验。",
+      "已按具名批准有限验证上架；业务验收与费用核对继续跟进。",
+      "有限验证人工批准不提高评分；保持 watchlist 与 runtime=0，不代表达到完整运行验收标准。"
+    ],
+    "gates": [
+      "authenticated-runtime-acceptance",
+      "long-request-timeout-compatibility"
+    ]
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "cric-deeplink-real-estate",
+    "reviewedAt": "2026-11-14T23:33:28.378538Z",
+    "reviewedBy": "DuHu",
+    "notes": "2026-11-15 用户明确回复“按有限验证状态上架，署名 DuHu”。仅批准连接及工具发现范围，卡片必须标注 partial、业务查询尚未验收；不构成业务调用、超预算查询或订阅购买授权。",
+    "scope": "connection-only"
+  },
+  "runtimeAcceptance": {
+    "status": "not-run",
+    "checkedAt": null,
+    "reviewedBy": null,
+    "reportUrl": null,
+    "notes": "2026-11-14 22:05:45 +08:00 本机 DSH v0.2.106 连接与问数/问知工具发现成功；未执行 tools/call 或付费业务验收。见 evidence/cric-dsh-connection-preflight.md。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://mcp.dichanai.com/docs",
+      "collectedAt": "2026-11-14T13:57:59.218287Z",
+      "summary": "历史采集记录：官方产品/接入文档；所有条目仍在草案目录。"
+    },
+    {
+      "type": "probe",
+      "url": "https://mcp.dichanai.com/mcp-server",
+      "collectedAt": "2026-11-14T13:57:59.218287Z",
+      "summary": "历史采集记录：匿名 initialize/tools/list 均 401；官方鉴权配置已确认，等待本机账号工具发现。"
+    },
+    {
+      "type": "official-vendor",
+      "url": "https://mcp.dichanai.com/assets/DocsPage-Dvt2Ik3y.js",
+      "collectedAt": "2026-11-14T13:57:59.218287Z",
+      "summary": "官方文档页公开资源声明 MCP 端点、Bearer 鉴权、问数/问知及按次积分计费；SHA-256 678315e82d39d9e8665e75e75ea867f8f2d9a02be699f1cbedba9ed82258820c"
+    },
+    {
+      "type": "probe",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/workbuddy-data-batches-20261114/candidates/drafts/workbuddy-data-2026-11-14/evidence/cric-dsh-connection-preflight.md",
+      "collectedAt": "2026-11-14T14:05:45Z",
+      "summary": "本机 Bearer 连接和问数/问知工具发现成功；只看参数，没有业务调用。"
+    },
+    {
+      "type": "connection-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/workbuddy-limited-2026-11-15/cric-deeplink-real-estate.md",
+      "collectedAt": "2026-11-14T23:33:28.378538Z",
+      "summary": "DSH v0.2.106 本机连接及 2 个工具发现已记录，用户复核连通并批准有限验证上架；未执行 tools/call，不能据此认定业务数据、账号套餐或付费查询通过。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/review-batches/workbuddy-limited-2026-11-15.md",
+      "collectedAt": "2026-11-14T23:33:28.378538Z",
+      "summary": "只发布公开连接元数据，不分发服务代码、密钥或商业数据；用户使用自己账号并遵守供应商套餐及数据许可，完整合同权限不作保证。官方来源及剩余限制见审查报告。"
+    }
+  ],
+  "connectionAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-14T14:05:45Z",
+    "reviewedBy": "DuHu",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/workbuddy-limited-2026-11-15/cric-deeplink-real-estate.md",
+    "toolCount": 2,
+    "notes": "DSH v0.2.106 本机连接及 2 个工具发现已记录，用户复核连通并批准有限验证上架；未执行 tools/call，不能据此认定业务数据、账号套餐或付费查询通过。"
+  }
+}

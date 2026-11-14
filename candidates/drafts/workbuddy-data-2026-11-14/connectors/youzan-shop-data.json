@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "published": false,
+  "featured": false,
+  "probeStatus": "unverified",
+  "id": "youzan-shop-data",
+  "name": "有赞店铺经营数据",
+  "vendor": "有赞",
+  "icon": "🛍️",
+  "category": "企业数据",
+  "summary": "店铺商品 / 经营数据 / 授权查询",
+  "description": "通过有赞 MCP 授权访问本人管理的店铺数据，用于商品资料查询和经营分析。可用工具及数据范围以实际授权为准；需有有赞账号及店铺权限，订阅与费用以有赞规则为准。默认示例只读，不修改商品、订单、会员或营销设置；不导出客户个人信息。本卡片由 DSH 社区维护，并非有赞官方产品。",
+  "tags": [
+    "有赞店铺经营数据",
+    "有赞",
+    "国内服务",
+    "授权账号"
+  ],
+  "homepage": "https://claw.youzan.com/",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://claw.youzan.com",
+    "scope": "youzan_query",
+    "clientName": "DeepSeek Harness - Youzan MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "youzan-shop-data",
+      "serverName": "youzan_shop_data",
+      "url": "https://claw.youzan.com/mcp/sse/v1",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      },
+      "oauthResource": "https://claw.youzan.com/mcp/sse/v1"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看店铺商品概况",
+      "text": "查看当前已授权店铺的在售商品，最多列出 5 件的名称、公开价格与上架状态，并注明查询时间；如有多个店铺先让我选择。不修改商品，不读取订单或会员个人信息。",
+      "server": "youzan-shop-data"
+    },
+    {
+      "title": "核对商品库存",
+      "text": "查询当前已授权店铺中名称包含“咖啡”的商品，最多列出 5 件及其可用库存、规格和查询时间；如有多个店铺先让我选择。缺失库存不按零处理，不补货、不调价、不创建订单。",
+      "server": "youzan-shop-data"
+    }
+  ]
+}

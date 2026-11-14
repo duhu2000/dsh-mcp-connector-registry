@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "id": "morningstar-investment-research",
+  "registryName": "com.morningstar/mcp",
+  "title": "晨星基金与投资研究",
+  "description": "连接 Morningstar 官方 MCP，通过晨星账号授权访问许可范围内的基金与投资研究数据。可用市场、指标和研究内容取决于账号订阅；中国基金覆盖与组合分析能力须以实际工具和权限为准。本卡片由 DSH 社区独立维护，并非晨星官方产品或背书。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "investment",
+      "funds"
+    ],
+    "matchedKeywords": [
+      "晨星",
+      "Morningstar",
+      "基金",
+      "投资研究",
+      "OAuth",
+      "授权订阅"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://www.morningstar.com/business/products/mcp-server",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-14T13:19:37.016429Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://www.morningstar.com/business/products/mcp-server",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://mcp.morningstar.com/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "oauth2",
+    "requiredHeaders": [],
+    "reason": "公开元数据声明 S256、DCR 与 none；草案最小 scope openid offline_access，需验证账号准入、DCR 和 scopes，未执行注册。"
+  },
+  "license": {
+    "status": "unknown",
+    "spdxId": null,
+    "evidenceUrl": "https://www.morningstar.com/company/terms-and-conditions"
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-14T13:15:43.588315Z",
+    "targetUrl": "https://mcp.morningstar.com/mcp",
+    "httpStatus": 401,
+    "reason": "匿名 initialize/tools/list 401，公开 OAuth 元数据 200；未验证授权账号。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 65,
+    "band": "watchlist",
+    "dimensions": {
+      "authority": 23,
+      "accessibility": 21,
+      "maintenanceSecurity": 8,
+      "runtime": 0,
+      "marketGap": 9,
+      "documentation": 4
+    },
+    "reasons": [
+      "人工证据评分；不是上架通过分。官方域名和公开配置已确认。",
+      "可用协议、鉴权文档已发现，授权后兼容性尚未验收。",
+      "未核验服务条款适用性、版本及长期维护，保守计分。",
+      "真实业务运行未验收，runtime 记 0。",
+      "registryName 仅为官方域名派生内部稳定身份，不声称已在 Official Registry 注册。"
+    ],
+    "gates": [
+      "service-terms-review",
+      "authenticated-runtime-acceptance",
+      "named-human-approval",
+      "oauth-client-onboarding"
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "morningstar-investment-research",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "用户授权按批次推进评估及上架准备；不能沿用飞常准的 DuHu 批准为本批次签名。"
+  },
+  "runtimeAcceptance": {
+    "status": "not-run",
+    "checkedAt": null,
+    "reviewedBy": null,
+    "reportUrl": null,
+    "notes": "仅公开协议探测。没有 tools/call，没有使用真实凭据或付费额度。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://www.morningstar.com/business/products/mcp-server",
+      "collectedAt": "2026-11-14T13:19:37.016429Z",
+      "summary": "官方 MCP 产品/配置说明；客户端卡片草案保持 published=false。"
+    },
+    {
+      "type": "probe",
+      "url": "https://mcp.morningstar.com/mcp",
+      "collectedAt": "2026-11-14T13:15:43.588315Z",
+      "summary": "HTTP/1.1 401 Unauthorized；详情见同批 evidence/public-probe.json。"
+    },
+    {
+      "type": "official-vendor",
+      "url": "https://mcp.morningstar.com/.well-known/oauth-protected-resource",
+      "collectedAt": "2026-11-14T13:19:37.016429Z",
+      "summary": "官方服务域名返回 resource、authorization_servers 和支持 scopes。"
+    },
+    {
+      "type": "official-vendor",
+      "url": "https://mcp.morningstar.com/.well-known/oauth-authorization-server",
+      "collectedAt": "2026-11-14T13:19:37.016429Z",
+      "summary": "官方声明 issuer、注册/授权/令牌端点、S256；未进行真实注册或用户授权。"
+    },
+    {
+      "type": "official-vendor",
+      "url": "https://www.morningstar.com/company/terms-and-conditions",
+      "collectedAt": "2026-11-14T13:19:37.016429Z",
+      "summary": "网站通用条款已读取，不能替代 MCP 商业订阅许可，因此 license.status 仍为 unknown。"
+    }
+  ]
+}

@@ -64,3 +64,17 @@ ServerName、URL 与潜在密钥。合并到 `main` 后，独立 CI job 会重�
 `npm run build` 会从正式 `catalog.json` 自动生成分类目录和 README 分类数量。
 新卡片合并后，在 `docs/catalog-additions.json` 记录正式上架日期、对应 PR 编号及准确验收边界；日期不得使用文案修改日期替代。不补写无法核实的历史上架日期。
 构建同时生成 `docs/RECENT-ADDITIONS.md` 和 `docs/ANNOUNCEMENT-DRAFT.md`，后者仅供运营审核，不自动发帖。卡片更新不要求发布插件 npm。
+
+## 具名批准的有限连接验收
+
+默认仍要求真实只读业务运行验收通过。用户/维护者明确批准仅连接验收时，可在
+`review.scope` 记录 `connection-only`，同时提供 `connectionAcceptance`（成功时间、
+审核人、非零工具数、脱敏报告）和同 URL 的 `connection-acceptance` 证据。
+不得将连接成功改写为业务通过：`runtimeAcceptance` 必须保持 `not-run`，无业务验收时间、
+审核人或报告；评分保留 `watchlist`、总分至少 60、runtime=0。该路径不用于自动发现批量发布。
+
+有限路径仍要求官方厂商来源、明确鉴权配置、条款适用性证据、无重复和具名批准。
+卡片必须 `published=true`、`featured=false`、`probeStatus=partial`，描述包含
+“业务查询尚未验收”。不能只加 partial 就绕过批准或证据要求；未知 scope 一律失败。
+`connectionAcceptance` 不证明业务套餐权限或收费数据可用，未验证事项须在报告和卡片中保留。
+付费测试上限及订阅购买仍遵守用户单独授权。模板迁入正式目录同样触发新增卡片校验。

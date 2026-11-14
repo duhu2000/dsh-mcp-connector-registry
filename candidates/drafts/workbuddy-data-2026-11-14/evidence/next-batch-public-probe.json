@@ -1,0 +1,144 @@
+[
+  {
+    "id": "cric-deeplink-real-estate",
+    "url": "https://mcp.dichanai.com/mcp-server",
+    "checkedAt": "2026-11-14T13:57:59.218287+00:00",
+    "authenticated": false,
+    "network": "local HTTPS proxy; not mainland-direct verification",
+    "toolsCalled": false,
+    "requests": [
+      {
+        "method": "initialize",
+        "httpStatus": 401,
+        "curlExitCode": 0,
+        "resultType": "non-jsonrpc-json",
+        "toolCount": null
+      },
+      {
+        "method": "tools/list",
+        "httpStatus": 401,
+        "curlExitCode": 0,
+        "resultType": "non-jsonrpc-json",
+        "toolCount": null
+      }
+    ]
+  },
+  {
+    "id": "zerone-private-equity",
+    "url": "https://ai.zerone.com.cn/mcp/pe",
+    "checkedAt": "2026-11-14T13:57:59.669928+00:00",
+    "authenticated": false,
+    "network": "local HTTPS proxy; not mainland-direct verification",
+    "toolsCalled": false,
+    "requests": [
+      {
+        "method": "initialize",
+        "httpStatus": 200,
+        "curlExitCode": 0,
+        "resultType": "jsonrpc-result",
+        "toolCount": null,
+        "serverInfo": {
+          "name": "zerone",
+          "version": "1.26.0"
+        },
+        "protocolVersion": "2025-03-26"
+      },
+      {
+        "method": "notifications/initialized",
+        "httpStatus": 202,
+        "curlExitCode": 0,
+        "resultType": "unparsed",
+        "toolCount": null
+      },
+      {
+        "method": "tools/list",
+        "httpStatus": 200,
+        "curlExitCode": 0,
+        "resultType": "jsonrpc-result",
+        "toolCount": 9,
+        "hasNextCursor": false,
+        "tools": [
+          {
+            "name": "model_financing_probability",
+            "annotations": null,
+            "requiredParameters": [
+              "entity_name"
+            ]
+          },
+          {
+            "name": "model_company_match_gp",
+            "annotations": null,
+            "requiredParameters": [
+              "company_name"
+            ]
+          },
+          {
+            "name": "entity_financial_list",
+            "annotations": null,
+            "requiredParameters": [
+              "entity_name"
+            ]
+          },
+          {
+            "name": "entity_profile",
+            "annotations": null,
+            "requiredParameters": [
+              "entity_name"
+            ]
+          },
+          {
+            "name": "entity_search",
+            "annotations": null,
+            "requiredParameters": [
+              "keyword"
+            ]
+          },
+          {
+            "name": "get_available_tables",
+            "annotations": null,
+            "requiredParameters": []
+          },
+          {
+            "name": "get_table_schema",
+            "annotations": null,
+            "requiredParameters": [
+              "table_name"
+            ]
+          },
+          {
+            "name": "execute_query",
+            "annotations": null,
+            "requiredParameters": [
+              "table",
+              "select_columns"
+            ]
+          },
+          {
+            "name": "execute_aggregate_query",
+            "annotations": null,
+            "requiredParameters": [
+              "table"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xiniu-venture-data",
+    "url": "https://vip.xiniudata.com/mcp",
+    "checkedAt": "2026-11-14T13:58:03.858974+00:00",
+    "authenticated": false,
+    "network": "local HTTPS proxy; not mainland-direct verification",
+    "toolsCalled": false,
+    "requests": [
+      {
+        "method": "initialize",
+        "httpStatus": null,
+        "curlExitCode": 35,
+        "resultType": "transport-error",
+        "toolCount": null
+      }
+    ]
+  }
+]

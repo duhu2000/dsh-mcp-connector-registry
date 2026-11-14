@@ -1,0 +1,85 @@
+{
+  "checkedAt": "2026-11-14T14:35:57.189323Z",
+  "authenticated": false,
+  "registrationPerformed": false,
+  "authorizationPerformed": false,
+  "toolsCalled": false,
+  "network": "local HTTPS proxy; not mainland-direct verification",
+  "sources": [
+    {
+      "id": "youzan",
+      "resourceMetadataUrl": "https://claw.youzan.com/.well-known/oauth-protected-resource",
+      "resourceMetadata": {
+        "resource": "https://claw.youzan.com/mcp/sse/v1",
+        "authorization_servers": [
+          "https://claw.youzan.com"
+        ],
+        "bearer_methods_supported": [
+          "header"
+        ],
+        "scopes_supported": [
+          "youzan_query"
+        ]
+      },
+      "authorizationMetadataUrl": "https://claw.youzan.com/.well-known/oauth-authorization-server",
+      "authorizationMetadata": {
+        "issuer": "https://claw.youzan.com",
+        "authorization_endpoint": "https://claw.youzan.com/api/mcp/oauth/authorize",
+        "token_endpoint": "https://claw.youzan.com/api/mcp/oauth/token",
+        "revocation_endpoint": "https://claw.youzan.com/api/mcp/oauth/revoke",
+        "registration_endpoint": "https://claw.youzan.com/api/mcp/oauth/register",
+        "response_types_supported": [
+          "code"
+        ],
+        "grant_types_supported": [
+          "authorization_code",
+          "refresh_token"
+        ],
+        "code_challenge_methods_supported": [
+          "S256"
+        ],
+        "token_endpoint_auth_methods_supported": [
+          "none"
+        ],
+        "scopes_supported": [
+          "youzan_query"
+        ]
+      }
+    },
+    {
+      "id": "sumscope",
+      "resourceMetadataUrl": "https://data-api.qeubee.cn/.well-known/oauth-protected-resource",
+      "resourceMetadata": {
+        "resource": "https://data-api.qeubee.cn/sumscope/common/mcp/stream",
+        "authorization_servers": [
+          "https://auth.qeubee.cn"
+        ]
+      },
+      "authorizationMetadataUrl": "https://auth.qeubee.cn/.well-known/oauth-authorization-server",
+      "authorizationMetadata": {
+        "issuer": "https://auth.qeubee.cn",
+        "authorization_endpoint": "https://auth.qeubee.cn/oauth/authorize",
+        "token_endpoint": "https://auth.qeubee.cn/oauth/token",
+        "registration_endpoint": "https://auth.qeubee.cn/oauth/register",
+        "scopes_supported": [
+          "read",
+          "write",
+          "offline_access"
+        ],
+        "response_types_supported": [
+          "code"
+        ],
+        "grant_types_supported": [
+          "authorization_code",
+          "refresh_token"
+        ],
+        "code_challenge_methods_supported": [
+          "S256"
+        ],
+        "token_endpoint_auth_methods_supported": [
+          "none"
+        ]
+      }
+    }
+  ]
+}
