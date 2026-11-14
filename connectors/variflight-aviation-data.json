@@ -6,9 +6,9 @@
   "icon": "✈️",
   "category": "调研分析",
   "summary": "航班动态 / 中转方案 / 机场天气 / 实时位置 / 机票价格",
-  "description": "接入飞常准官方 Aviation MCP，使用飞友 AI 开放平台 API Key 查询航班动态、直飞与中转方案、航班舒适度、航空器实时位置、机场天气和机票价格。远程服务按工具调用计费，协议层调用与 getTodayDate 免费；实际费用、数据范围和限额以飞常准控制台为准。在任何可能产生费用的查询前应先说明工具、预计调用次数和费用并等待用户确认。",
+  "description": "接入飞常准官方 Aviation MCP，使用飞友 AI 开放平台 API Key 查询航班动态、直飞与中转方案、航班舒适度、航空器实时位置、机场天气和机票价格。远程服务按工具调用计费，协议层调用与 getTodayDate 免费；实际费用、数据范围和限额以飞常准控制台为准。在任何可能产生费用的查询前应先说明工具、预计调用次数和费用并等待用户确认。当前为有限验收：连接、9 个工具发现与免费日期调用已通过，收费业务数据尚未验收，工具发现曾出现超时。",
   "tags": ["飞常准", "VariFlight", "航班", "机场", "航空", "出行", "API Key", "官方 MCP"],
-  "published": false,
+  "published": true,
   "featured": false,
   "homepage": "https://mcp.variflight.com/docs/aviation",
   "probeStatus": "partial",
@@ -33,6 +33,11 @@
     }
   ],
   "prompts": [
+    {
+      "title": "免费验证连接",
+      "text": "仅调用飞常准 Aviation MCP 的免费 getTodayDate 工具一次，参数为空，返回实际日期结果。不要调用航班、机场天气、票价等收费工具；如失败请如实说明，不自动重试，也不用系统日期代替。",
+      "server": "variflight-aviation"
+    },
     {
       "title": "查看指定航班动态",
       "text": "使用飞常准 Aviation MCP 查询明天 MU5102 的航班动态。先调用免费的 getTodayDate 确定日期，再说明将使用的收费工具、参数和预计调用次数；等待我确认后再执行查询，并标注查询时间、数据来源和可用性限制。",

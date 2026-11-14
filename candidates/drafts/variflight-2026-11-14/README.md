@@ -1,10 +1,13 @@
 # 飞常准 Aviation MCP 候选草案
 
-状态：`pending`，不是正式市场卡片，不计入公开目录。
+状态：`approved`，审核人 `DuHu`，2026-11-14 批准按有限验收范围上架。
+本目录仅保留评估历史；卡片已迁至
+[`connectors/variflight-aviation-data.json`](../../../connectors/variflight-aviation-data.json)，
+正式候选记录见 [审核记录](../../records/variflight-aviation-data.json)。
 
 ## 结论
 
-建议继续推进，但暂不迁入 `connectors/`。候选评分从原先的 82 分上调为
+初评时建议继续推进但暂不迁入正式目录。候选评分从原先的 82 分上调为
 **87/100**：官方归属、Official MCP Registry、OAuth 2.1/PKCE/DCR、服务条款、
 npm ISC 许可元数据、实时维护状态和无凭据协议探测均已核验。
 
@@ -27,7 +30,7 @@ npm ISC 许可元数据、实时维护状态和无凭据协议探测均已核验
 - 隔离运行固定 npm 版本，`initialize` 和 `tools/list` 通过，确认 9 个工具；
   进程未输出非协议 stdout 或 stderr。
 
-## 上架前必须完成
+## 验收与后续跟踪
 
 1. API Key 已在 DSH Web 连接成功，远程工具发现确认 9 个工具。
    2026-11-14 18:05（Asia/Shanghai）免费 `getTodayDate({})` 实际调用成功。
@@ -35,9 +38,10 @@ npm ISC 许可元数据、实时维护状态和无凭据协议探测均已核验
 3. 由用户明确同意一次最小付费航班查询；
    报告仅保留哈希、工具名和结果状态，不保留凭据、原始航班结果或个人行程。
 4. 核对 API Key 卡片凭据表单与计费提示。
-5. 获得具名人工批准后，才能迁入 `candidates/records/` 和 `connectors/`。
+5. DuHu 已批准有限验收上架：不要求本轮调用收费业务工具，保留 partial
+   和未验证范围。收费业务验证仅在未来另获授权后执行。
 
-拟上架草案调整为已通过真实测试的官方远程 API Key 入口，Header 为
+正式卡片采用已通过真实测试的官方远程 API Key 入口，Header 为
 `X-API-Key`。OAuth 仅完成元数据探测，尚未完成用户授权、续期和撤销测试，
 单独保留待验证，不以 API Key 成功替代 OAuth 验收。
 评分暂保留初评 87 分，待业务验收和稳定性复核后重新评定。
