@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "published": false,
+  "featured": false,
+  "probeStatus": "unverified",
+  "id": "morningstar-investment-research",
+  "name": "晨星基金与投资研究",
+  "vendor": "Morningstar",
+  "icon": "⭐",
+  "category": "金融投资",
+  "summary": "基金筛选 / 投资研究 / 组合分析",
+  "description": "连接 Morningstar 官方 MCP，通过晨星账号授权访问许可范围内的基金与投资研究数据。可用市场、指标和研究内容取决于账号订阅；中国基金覆盖与组合分析能力须以实际工具和权限为准。本卡片由 DSH 社区独立维护，并非晨星官方产品或背书。",
+  "tags": [
+    "晨星",
+    "Morningstar",
+    "基金",
+    "投资研究",
+    "OAuth",
+    "授权订阅"
+  ],
+  "homepage": "https://www.morningstar.com/business/products/mcp-server",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://mcp.morningstar.com/mcp",
+    "scope": "openid offline_access",
+    "clientName": "DeepSeek Harness - Morningstar MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "morningstar-investment-research",
+      "serverName": "morningstar_investment_research",
+      "url": "https://mcp.morningstar.com/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "比较两只标普 500 ETF",
+      "text": "使用晨星数据比较 VOO 与 IVV 的费用率、跟踪基准和最近可得的三年收益；先确认证券身份、可用指标及统计日期，列出来源和缺失项，不用估算值填补缺失数据。",
+      "server": "morningstar-investment-research"
+    },
+    {
+      "title": "筛选美国大盘股票基金",
+      "text": "使用晨星数据筛选可访问的美国大盘股票基金，最多列出 5 只；比较费用率、基金规模和最近可得的三年收益，说明币种、份额类别、数据日期与筛选条件，不作买卖指令。",
+      "server": "morningstar-investment-research"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "id": "openboost-cross-border-data",
+  "registryName": "com.openboostai/openboost-all-mcp",
+  "title": "OpenBoost 跨境数据",
+  "description": "连接 OpenBoost 官方 MCP，查询套餐许可范围内的 Amazon、TikTok、专利和社交媒体数据，用于跨境市场研究与竞品分析。使用 secret-key Header 鉴权，查询可能消耗套餐额度。服务还包含账号查询和套餐下单工具；本卡片示例仅用于数据研究，不授权创建订单、购买或支付。工具未提供只读注解，应按实际用途审核权限。结果需保留数据来源、统计期间和覆盖限制。本卡片由 DSH 社区独立维护，并非 OpenBoost 官方产品或背书。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "cross-border-commerce",
+      "market-research"
+    ],
+    "matchedKeywords": [
+      "OpenBoost",
+      "跨境电商",
+      "Amazon",
+      "TikTok",
+      "API Key",
+      "付费服务"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://openboostai.com/mcp-list",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-14T13:19:37.016429Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://openboostai.com/mcp-list",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://mcp.openboostai.com/mcp-servers/openboost-all-mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "api-key",
+    "requiredHeaders": [
+      {
+        "name": "secret-key",
+        "required": true,
+        "secret": true
+      }
+    ],
+    "reason": "官方 mcp-list 页面的手动 HTTP 模板明确使用 secret-key；匿名工具发现不表示业务查询免鉴权。"
+  },
+  "license": {
+    "status": "unknown",
+    "spdxId": null,
+    "evidenceUrl": null
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-14T13:15:45.435544Z",
+    "targetUrl": "https://mcp.openboostai.com/mcp-servers/openboost-all-mcp",
+    "httpStatus": 200,
+    "reason": "匿名 initialize/tools/list 200，104 个工具，无 nextCursor；未调用任何业务工具。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 68,
+    "band": "watchlist",
+    "dimensions": {
+      "authority": 23,
+      "accessibility": 23,
+      "maintenanceSecurity": 8,
+      "runtime": 0,
+      "marketGap": 10,
+      "documentation": 4
+    },
+    "reasons": [
+      "人工证据评分；不是上架通过分。官方域名和公开配置已确认。",
+      "可用协议、鉴权文档已发现，授权后兼容性尚未验收。",
+      "未核验服务条款适用性、版本及长期维护，保守计分。",
+      "真实业务运行未验收，runtime 记 0。",
+      "registryName 仅为官方域名派生内部稳定身份，不声称已在 Official Registry 注册。"
+    ],
+    "gates": [
+      "service-terms-review",
+      "authenticated-runtime-acceptance",
+      "named-human-approval",
+      "order-create-tool-governance"
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "openboost-cross-border-data",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "用户授权按批次推进评估及上架准备；不能沿用飞常准的 DuHu 批准为本批次签名。"
+  },
+  "runtimeAcceptance": {
+    "status": "not-run",
+    "checkedAt": null,
+    "reviewedBy": null,
+    "reportUrl": null,
+    "notes": "仅公开协议探测。没有 tools/call，没有使用真实凭据或付费额度。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://openboostai.com/mcp-list",
+      "collectedAt": "2026-11-14T13:19:37.016429Z",
+      "summary": "官方 MCP 产品/配置说明；客户端卡片草案保持 published=false。"
+    },
+    {
+      "type": "probe",
+      "url": "https://mcp.openboostai.com/mcp-servers/openboost-all-mcp",
+      "collectedAt": "2026-11-14T13:15:45.435544Z",
+      "summary": "HTTP/2 200 ；详情见同批 evidence/public-probe.json。"
+    },
+    {
+      "type": "official-vendor",
+      "url": "https://openboostai.com/main-DLCEKYHB.js",
+      "collectedAt": "2026-11-14T13:19:37.016429Z",
+      "summary": "官方配置页的公开前端资源 manualHttpJson 声明 HTTP 端点和 secret-key Header；SHA-256 a79e84106406c397ffb6f8f2c7b74cb209ac9d10acb06767df0a033d1324bb40。未执行网页脚本、未读取登录态。"
+    }
+  ]
+}

@@ -3,7 +3,14 @@
 本清单记录对标市场中暂未安全上架的候选，以及已上架但仍需复核的健康项。它不是收录承诺，
 也不保留 `id`；服务商或贡献者仍应按 [`ONBOARDING.md`](ONBOARDING.md) 提交可验证资料。
 
-更新时间：2026-10-05。
+更新时间：2026-11-14。
+
+## WorkBuddy 数据候选分批推进
+
+本轮 13 项已建立[分批推进清单及第一批草案](../candidates/drafts/workbuddy-data-2026-11-14/README.md)。
+第一批为晨星与 OpenBoost：公开协议预检已完成，业务运行验收和人工审核未完成。
+第二批万方、森浦、克而瑞补齐官方独立接入资料；其余按清单逐项处理。
+这些草案不会增加市场数量，也不代表正式收录。
 
 ## 上架门槛
 
@@ -111,7 +118,7 @@ npm、Official MCP Registry、真实只读运行验收及 `DuHu` 具名批准均
 以下候选来自既有对标清单，但仍缺少固定端点、官方 stdio 命令、鉴权说明或服务商归属证据。
 在资料补齐前不根据竞品 UI 文案猜测 URL，也不把普通 REST/SDK 包装成 MCP：
 
-- 金融投资：`ths-ifind`、`hsjy-mcp`、`morningstar`、`jinmen-research`、`tongzhou-research`
+- 金融投资：`ths-ifind`、`hsjy-mcp`、`jinmen-research`、`tongzhou-research`。晨星已找到官方 MCP/OAuth 公开配置，移至上方 WorkBuddy 第一批授权验收队列。
 - 办公协作：`weiyun`、`baidu-netdisk`、`tencent-survey`
 - 调研分析：`jiushuyun-bi`、`ctrip`、`sorftime`、`jike-spatial`
 - 科学数据：`materials-project`、`oqmd`、`chembl`、`uniprot`、`pubchem`、`pubmed-pmc`、`sec`、`imf`、`arxiv`（当前主要为社区封装或缺少稳定官方 MCP 发布）
