@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "id": "variflight-aviation-data",
+  "registryName": "io.github.variflight/variflight-mcp",
+  "title": "飞常准航空数据",
+  "description": "飞常准官方 Aviation MCP，提供航班动态、中转、舒适度、机场天气、航空器位置及机票价格；按用户批准的有限验收范围上架。",
+  "version": "1.1.0",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "transportation",
+      "aviation",
+      "china"
+    ],
+    "matchedKeywords": [
+      "飞常准",
+      "航班",
+      "航空",
+      "API Key"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.variflight%2Fvariflight-mcp",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-14T08:27:03Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://ai.variflight.com/zh/docs/aviation",
+    "repository": {
+      "url": "https://github.com/variflight/variflight-mcp",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://ai.variflight.com/servers/aviation/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "api-key",
+    "requiredHeaders": [
+      "X-API-Key"
+    ],
+    "reason": "官方文档支持 API Key 或 OAuth。DSH Web v0.2.106 手动 API Key 接入、远程工具发现及免费 getTodayDate 实测通过；本卡片仅提供已验证的 API Key 路径。"
+  },
+  "license": {
+    "status": "not-applicable",
+    "spdxId": null,
+    "evidenceUrl": "https://mcp.variflight.com/terms"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "官方仓库未归档，最近推送 2026-10-10；npm 1.1.0 发布于 2026-09-26。"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-14T08:27:03Z",
+    "targetUrl": "https://ai.variflight.com/servers/aviation/mcp",
+    "httpStatus": 401,
+    "reason": "匿名 initialize 返回预期鉴权挑战；授权后发现 9 个工具并完成免费日期调用。曾有一次工具发现超时，收费业务数据未验收。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 87,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 23,
+      "maintenanceSecurity": 16,
+      "runtime": 8,
+      "marketGap": 10,
+      "documentation": 5
+    },
+    "reasons": [
+      "官方域名、仓库与 Official Registry 记录一致。",
+      "API Key 远程接入已验证；OAuth 仅验证元数据，不声明端到端通过。",
+      "远程服务受服务条款约束；可选 npm 包声明 ISC，不将其扩展为数据许可。",
+      "有限运行验收：9 个工具发现及免费日期调用成功；业务数据和持续稳定性待跟踪。",
+      "补齐国内官方航空数据服务；不包含个人行程验收。"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "variflight-aviation-data",
+    "reviewedAt": "2026-11-14T11:46:27Z",
+    "reviewedBy": "DuHu",
+    "notes": "用户明确回复“批准上架，审核人 署名 DuHu”，批准按已告知的有限验收范围上架：API Key、9 个工具发现和免费日期调用通过；收费业务未验收，保留 partial。用户此前明确暂不调用付费工具，此批准不授权收费测试。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-14T10:05:00Z",
+    "reviewedBy": "DuHu",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/variflight-aviation-2026-11-14/variflight-aviation.md",
+    "notes": "具名批准的有限验收：DSH Web v0.2.106 API Key 连接、9 个工具发现，以及 getTodayDate({}) 实际返回 2026-11-14。未读取收费航空业务数据；工具列表曾一次超时，后续免费调用成功。不将 API Key 成功视为 OAuth 验收。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.variflight%2Fvariflight-mcp",
+      "collectedAt": "2026-11-14T11:46:27Z",
+      "summary": "Official MCP Registry active，io.github.variflight/variflight-mcp@1.1.0。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://ai.variflight.com/zh/docs/aviation",
+      "collectedAt": "2026-11-14T11:46:27Z",
+      "summary": "官方端点、X-API-Key Header、9 个工具、免费协议调用与按次收费说明。"
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/variflight/variflight-mcp",
+      "collectedAt": "2026-11-14T11:46:27Z",
+      "summary": "官方实现；npm 包声明 ISC，但仓库未检出 LICENSE，不将代码许可等同数据授权。"
+    },
+    {
+      "type": "license",
+      "url": "https://mcp.variflight.com/terms",
+      "collectedAt": "2026-11-14T11:46:27Z",
+      "summary": "本卡片使用官方托管服务，适用平台服务条款；不是分发 npm 包或数据。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/variflight-aviation-2026-11-14/variflight-aviation.md",
+      "collectedAt": "2026-11-14T11:46:27Z",
+      "summary": "记录真实 API Key 连接、工具发现及一次免费工具调用；DuHu 批准有限验收上架，保留未验证范围。"
+    }
+  ]
+}
