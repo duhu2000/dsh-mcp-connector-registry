@@ -1,5 +1,8 @@
 # Vedar MCP: read-only runtime acceptance (PR #44)
 
+> **Current evidence: the run of 2026-11-14 on `vedar-mcp` 2.10.2** — see "[Current acceptance 2026-11-14](#current-acceptance-2026-11-14-vedar-mcp-2102)" at the end of this report.
+> Everything between this note and that section is **dated historical evidence** (2.5.0 on 2026-10-19, 2.10.0 on 2026-10-30) and is kept unchanged; version numbers and tool counts there describe the server on those dates, not today.
+
 - Checked at: 2026-10-19T05:42:43.281Z
 - Reviewer (submitter): tourhabk-ui
 - Endpoint: https://vedarai.ru/api/mcp
@@ -86,3 +89,48 @@ the service terms above are the applicable evidence.
 - Checked at: 2026-10-30T12:11:12.430Z; server `vedar-mcp` 2.10.0; protocol 2025-06-18; 23 tools.
 - `get_tours` `{}`: success; response SHA-256 `360d80b7e0cb5df5630607f902a754f41ad0ef0e7ebcb021630c5944f9182b4c`; credential scan pass; decision pass.
 - Official MCP Registry: `ru.vedarai/mcp` 2.10.0 active, isLatest (published 2026-10-30T05:58:26Z).
+
+## Current acceptance 2026-11-14: vedar-mcp 2.10.2
+
+- Checked at: 2026-11-14T00:37:47.033Z
+- Reviewer (submitter): tourhabk-ui
+- Endpoint: https://vedarai.ru/api/mcp
+- Runner: `scripts/run-runtime-acceptance.mjs` of this repository, unchanged, executed on a GitHub-hosted runner
+  (`node scripts/run-runtime-acceptance.mjs --url https://vedarai.ru/api/mcp --tool get_tours --args '{}' --reviewer tourhabk-ui`),
+  protocol 2025-06-18. The workflow, its pinned inputs and the run log are public:
+  https://github.com/tourhabk-ui/pos/blob/main/.github/workflows/dsh-registry-acceptance.yml
+  https://github.com/tourhabk-ui/pos/actions/runs/43535436125
+  (registry commit `15caa8a20e1d54b654995c6ebf26819b2593c4b2`, runner script SHA-256
+  `69fa231401f2e6f56b7e36b88d7e9b08d8055c9d79ab2d4636cbdc53b23da0a0`).
+- Server: `vedar-mcp` 2.10.2 (`initialize` result, unauthenticated).
+- `tools/list` returned 25 tools.
+- `get_tours` `{}`: success; response SHA-256 `279096e777250e89041737d8b7e05208bbef89bd1a541536544a8e5a62fc94ad`; credential scan pass; decision pass.
+- Official MCP Registry: `ru.vedarai/mcp` 2.10.2, status active, published 2026-11-13T15:58:32.431654Z
+  (https://registry.modelcontextprotocol.io/v0.1/servers/ru.vedarai%2Fmcp/versions/2.10.2), read 2026-11-14T00:37:50.000Z.
+
+### State-changing tools on 2026-11-14 (`readOnlyHint=false`), 9 in total
+
+| Tool | Class |
+| --- | --- |
+| `make_trip_plan` | Anonymous draft write: saves a new trip-plan draft (7 days) when it produces days; no personal data, nothing sent to a human or operator; repeat calls create new drafts. |
+| `edit_trip_plan` | Anonymous draft write: edits that draft by `plan_id`; same properties. |
+| `create_trip_request`, `create_lead`, `create_booking_request`, `create_stay_request`, `request_charter`, `create_car_rental_request` | Requests that transmit the user's name and phone to the platform/operator/provider; `name`, `phone` and `consent` are required and `consent:true` means explicit prior user confirmation; each request is confirmed by a human and is a request, not a booking. |
+| `change_request` | Changes an existing tour request by the status key returned when it was created: cancels it or moves it to another date (`destructiveHint=true`). Takes no name or phone and no consent field; call only when the user asks. If the operator has already answered, it only forwards the ask to the operator. |
+
+Since the 2026-10-30 run the server added `create_trip_request` (a whole trip in one request: tour, stay and charter vehicle under one trip id) and
+`change_request`, so there are six consent-gated request tools and one key-gated change tool; the two anonymous
+draft-write tools are unchanged.
+
+### Boundaries
+
+The only tool call was the read-only `get_tours` above. No request of any kind was created, cancelled or moved,
+and no contact details or other personal data were used. Human maintainer review remains pending.
+
+### Service terms evidence, re-read 2026-11-14
+
+- User agreement (service terms), edition 2026-10-05: https://vedarai.ru/legal/terms
+- Privacy policy, edition 2026-10-15: https://vedarai.ru/legal/privacy
+- Public offer for partners, edition 2026-10-05: https://vedarai.ru/legal/offer
+- Public MCP manifest (`vedar-mcp` 2.10.2): https://vedarai.ru/.well-known/mcp.json
+
+All four URLs returned HTTP 200 on 2026-11-14.
