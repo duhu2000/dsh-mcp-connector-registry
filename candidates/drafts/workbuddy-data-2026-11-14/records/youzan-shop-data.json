@@ -58,7 +58,7 @@
     "checkedAt": "2026-11-14T14:24:57.598239Z",
     "targetUrl": "https://claw.youzan.com/mcp/sse/v1",
     "httpStatus": 401,
-    "reason": "initialize/tools/list 均 401；OAuth 元数据确认资源 URL 和授权服务器，真实工具数未知。"
+    "reason": "initialize/tools/list 均 401；OAuth 元数据确认资源 URL 和授权服务器，真实工具数未知。 后续本机 DCR HTTP 400 invalid_client_metadata；一次复现得到 unsupported DCR client，未创建注册客户端。见独立 OAuth 预检记录。"
   },
   "dedupe": {
     "level": "none",
@@ -66,11 +66,11 @@
     "weak": []
   },
   "score": {
-    "total": 66,
-    "band": "watchlist",
+    "total": 55,
+    "band": "defer",
     "dimensions": {
       "authority": 23,
-      "accessibility": 23,
+      "accessibility": 12,
       "maintenanceSecurity": 8,
       "runtime": 0,
       "marketGap": 7,
@@ -79,7 +79,8 @@
     "reasons": [
       "人工证据评分，不等于上架批准；review/ registryName 仅为内部候选标识。",
       "真实业务运行尚未验收，runtime=0。",
-      "服务条款和账号权限尚待确认。"
+      "服务条款和账号权限尚待确认。",
+      "本机 OAuth 注册被服务端拒绝 unsupported DCR client；accessibility 下调，未登录或完成工具发现。"
     ],
     "gates": [
       "service-terms-review",
@@ -87,7 +88,8 @@
       "named-human-approval",
       "oauth-end-to-end",
       "test-shop-isolation",
-      "tool-write-governance"
+      "tool-write-governance",
+      "vendor-dcr-client-acceptance"
     ]
   },
   "review": {
@@ -102,7 +104,7 @@
     "checkedAt": null,
     "reviewedBy": null,
     "reportUrl": null,
-    "notes": "仅无凭据协议/工具发现探测，未执行 tools/call；工具数量与文档声明分开记录。"
+    "notes": "用户有测试店铺，但 DSH v0.2.106 在登录前注册失败；无工具发现或业务查询。见 evidence/youzan-dsh-oauth-preflight.md。"
   },
   "evidence": [
     {
@@ -128,6 +130,12 @@
       "url": "https://claw.youzan.com/.well-known/oauth-authorization-server",
       "collectedAt": "2026-11-14T14:35:57.189323Z",
       "summary": "声明 DCR/S256/refresh_token/public client；未注册/授权。"
+    },
+    {
+      "type": "probe",
+      "url": "https://claw.youzan.com/api/mcp/oauth/register",
+      "collectedAt": "2026-11-14T14:57:34.960111Z",
+      "summary": "DSH 注册失败；一次公开元数据复现返回 invalid_client_metadata / unsupported DCR client，clientCreated=false；未登录、未执行业务工具。"
     }
   ]
 }

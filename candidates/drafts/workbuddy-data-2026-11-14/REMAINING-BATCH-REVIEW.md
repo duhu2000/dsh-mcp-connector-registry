@@ -5,7 +5,7 @@
 
 | 候选 | 提供方/属性 | 新证据 | 状态与下一步 |
 |---|---|---|---|
-| 有赞店铺经营数据 | 有赞，国内服务 | 官方域名 401 challenge、资源及授权服务器元数据齐全；S256/DCR/refresh_token，scope=youzan_query | DEFERRED：OAuth 卡片完成；用户已有测试店铺，继续授权与工具发现，之后只读业务验收、条款及具名审核 |
+| 有赞店铺经营数据 | 有赞，国内服务 | 官方域名 401 challenge、资源及授权服务器元数据齐全；S256/DCR/refresh_token，scope=youzan_query | DEFERRED：OAuth 卡片完成；用户已有测试店铺，但本机 DCR 返回 unsupported DCR client；需厂商确认注册规则，再做授权/工具发现与只读验收 |
 | 森浦 qeubee 固收数据 | 森浦，国内服务 | 服务明确返回 missing X-Access-Key；官方资源元数据确认 MCP 地址；另有 OAuth 元数据 | DEFERRED：API Key 卡片完成；需最小权限账号、真实工具发现与只读查询。OAuth 尚未实测，不能因元数据存在宣布双入口均可用 |
 | 亿欧产业投融资数据 | 亿欧，国内服务 | 匿名 initialize/tools/list 成功，4 个工具，serverInfo=mcp-iyiou-adapter 1.0.0 | DEFERRED：正式候选草案记录完成；双 Header 仍为第三方配置线索，先获厂商确认并解决客户端绑定 |
 | 外贸公社 Tradesparq | 外贸公社，国内服务商；数据覆盖海外 | 官方开放平台可确认海关/贸易 API 与趋势、地区分析，尚无独立 MCP 配置证据 | DEFERRED：补官方 MCP URL、鉴权、额度及数据许可，不能把 REST API 当 MCP |
@@ -39,7 +39,7 @@ https://github.com/ahang1598/doubao-workbuddy-qwenwork-skills/tree/main/workbudd
 
 ## 鉴权和验收边界
 
-有赞元数据声明公开客户端、DCR、S256 和刷新令牌；本轮只读取这些声明，尚未以真实授权验证全部流程。
+有赞元数据声明公开客户端、DCR、S256 和刷新令牌；初期只读取这些声明；随后本机授权在 DCR 阶段失败，见 [有赞预检](evidence/youzan-dsh-oauth-preflight.md)，未完成登录或授权。
 `youzan_query` 不能单独证明所有工具都是只读，必须在授权后审阅工具清单和权限。
 用户确认有有赞账号及测试店铺；仅准备 OAuth、连接与工具发现，不查询订单、会员或修改店铺。
 
