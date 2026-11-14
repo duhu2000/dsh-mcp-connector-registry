@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "id": "sumscope-qeubee-data",
+  "registryName": "review/sumscope-qeubee-data",
+  "title": "森浦 qeubee 固收数据",
+  "description": "连接森浦 qeubee MCP，在账户授权范围内查询债券资料、一级发行、宏观指标和交易日历等固定收益市场数据。需使用森浦签发的访问密钥；可用数据、行情时效和收费以账户合同及实际工具为准。结果保留统计口径、时间和来源。本卡片由 DSH 社区维护，并非森浦官方产品。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "finance"
+    ],
+    "matchedKeywords": [
+      "森浦 qeubee 固收数据",
+      "国内服务",
+      "MCP"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://www.sumscope.com/app/mobile/index/senpuchanpin.html",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-14T14:35:57.189323Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://www.sumscope.com/app/mobile/index/senpuchanpin.html",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://data-api.qeubee.cn/sumscope/common/mcp/stream",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "api-key",
+    "requiredHeaders": [
+      {
+        "name": "X-Access-Key",
+        "required": true,
+        "secret": true
+      }
+    ],
+    "reason": "官方服务匿名响应明确 missing X-Access-Key；同一服务公布 OAuth 元数据。本草案使用单 Header Key，OAuth 仅为待验收备选。"
+  },
+  "license": {
+    "status": "unknown",
+    "spdxId": null,
+    "evidenceUrl": null
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-14T14:24:56.866743Z",
+    "targetUrl": "https://data-api.qeubee.cn/sumscope/common/mcp/stream",
+    "httpStatus": 401,
+    "reason": "initialize/tools/list 均 401；服务明确要求 X-Access-Key，资源元数据精确指向本 MCP URL。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 67,
+    "band": "watchlist",
+    "dimensions": {
+      "authority": 23,
+      "accessibility": 23,
+      "maintenanceSecurity": 8,
+      "runtime": 0,
+      "marketGap": 8,
+      "documentation": 5
+    },
+    "reasons": [
+      "人工证据评分，不等于上架批准；review/ registryName 仅为内部候选标识。",
+      "真实业务运行尚未验收，runtime=0。",
+      "服务条款和账号权限尚待确认。"
+    ],
+    "gates": [
+      "service-terms-review",
+      "authenticated-runtime-acceptance",
+      "named-human-approval",
+      "authorized-tool-discovery",
+      "scope-and-billing-review"
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "sumscope-qeubee-data",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "继续评估授权不等于具名上架批准；未复用其他候选审核人。"
+  },
+  "runtimeAcceptance": {
+    "status": "not-run",
+    "checkedAt": null,
+    "reviewedBy": null,
+    "reportUrl": null,
+    "notes": "仅无凭据协议/工具发现探测，未执行 tools/call；工具数量与文档声明分开记录。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://www.sumscope.com/app/mobile/index/senpuchanpin.html",
+      "collectedAt": "2026-11-14T14:35:57.189323Z",
+      "summary": "官方产品归属。"
+    },
+    {
+      "type": "probe",
+      "url": "https://data-api.qeubee.cn/sumscope/common/mcp/stream",
+      "collectedAt": "2026-11-14T14:35:57.189323Z",
+      "summary": "匿名 401，错误信息 missing X-Access-Key；没有使用密钥。"
+    },
+    {
+      "type": "official-vendor",
+      "url": "https://data-api.qeubee.cn/.well-known/oauth-protected-resource",
+      "collectedAt": "2026-11-14T14:35:57.189323Z",
+      "summary": "官方资源元数据确认 MCP URL 与 auth.qeubee.cn 授权服务器。"
+    },
+    {
+      "type": "official-vendor",
+      "url": "https://auth.qeubee.cn/.well-known/oauth-authorization-server",
+      "collectedAt": "2026-11-14T14:35:57.189323Z",
+      "summary": "声明 DCR、S256、刷新令牌及 read/write/offline_access；未注册客户端或完成授权。"
+    }
+  ]
+}

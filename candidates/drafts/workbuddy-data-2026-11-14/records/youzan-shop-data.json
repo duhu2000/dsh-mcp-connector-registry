@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "id": "youzan-shop-data",
+  "registryName": "review/youzan-shop-data",
+  "title": "有赞店铺经营数据",
+  "description": "通过有赞 MCP 授权访问本人管理的店铺数据，用于商品资料查询和经营分析。可用工具及数据范围以实际授权为准；需有有赞账号及店铺权限，订阅与费用以有赞规则为准。默认示例只读，不修改商品、订单、会员或营销设置；不导出客户个人信息。本卡片由 DSH 社区维护，并非有赞官方产品。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "commerce"
+    ],
+    "matchedKeywords": [
+      "有赞店铺经营数据",
+      "国内服务",
+      "MCP"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://claw.youzan.com/",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-14T14:35:57.189323Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://claw.youzan.com/",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://claw.youzan.com/mcp/sse/v1",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "oauth2",
+    "requiredHeaders": [],
+    "reason": "官方 401 challenge 指向资源元数据；授权服务器声明 S256、动态注册、刷新令牌和 youzan_query scope。尚未实际授权，scope 名称不证明工具全部只读。"
+  },
+  "license": {
+    "status": "unknown",
+    "spdxId": null,
+    "evidenceUrl": null
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-14T14:24:57.598239Z",
+    "targetUrl": "https://claw.youzan.com/mcp/sse/v1",
+    "httpStatus": 401,
+    "reason": "initialize/tools/list 均 401；OAuth 元数据确认资源 URL 和授权服务器，真实工具数未知。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 66,
+    "band": "watchlist",
+    "dimensions": {
+      "authority": 23,
+      "accessibility": 23,
+      "maintenanceSecurity": 8,
+      "runtime": 0,
+      "marketGap": 7,
+      "documentation": 5
+    },
+    "reasons": [
+      "人工证据评分，不等于上架批准；review/ registryName 仅为内部候选标识。",
+      "真实业务运行尚未验收，runtime=0。",
+      "服务条款和账号权限尚待确认。"
+    ],
+    "gates": [
+      "service-terms-review",
+      "authenticated-runtime-acceptance",
+      "named-human-approval",
+      "oauth-end-to-end",
+      "test-shop-isolation",
+      "tool-write-governance"
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "youzan-shop-data",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "继续评估授权不等于具名上架批准；未复用其他候选审核人。"
+  },
+  "runtimeAcceptance": {
+    "status": "not-run",
+    "checkedAt": null,
+    "reviewedBy": null,
+    "reportUrl": null,
+    "notes": "仅无凭据协议/工具发现探测，未执行 tools/call；工具数量与文档声明分开记录。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://claw.youzan.com/",
+      "collectedAt": "2026-11-14T14:35:57.189323Z",
+      "summary": "有赞官方产品域名。"
+    },
+    {
+      "type": "probe",
+      "url": "https://claw.youzan.com/mcp/sse/v1",
+      "collectedAt": "2026-11-14T14:35:57.189323Z",
+      "summary": "匿名 401，Bearer challenge 含官方资源元数据地址。"
+    },
+    {
+      "type": "official-vendor",
+      "url": "https://claw.youzan.com/.well-known/oauth-protected-resource",
+      "collectedAt": "2026-11-14T14:35:57.189323Z",
+      "summary": "明确 MCP resource 与 youzan_query scope。"
+    },
+    {
+      "type": "official-vendor",
+      "url": "https://claw.youzan.com/.well-known/oauth-authorization-server",
+      "collectedAt": "2026-11-14T14:35:57.189323Z",
+      "summary": "声明 DCR/S256/refresh_token/public client；未注册/授权。"
+    }
+  ]
+}

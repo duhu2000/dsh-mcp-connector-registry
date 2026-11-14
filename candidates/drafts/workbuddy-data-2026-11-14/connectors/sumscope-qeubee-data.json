@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "published": false,
+  "featured": false,
+  "probeStatus": "unverified",
+  "id": "sumscope-qeubee-data",
+  "name": "森浦 qeubee 固收数据",
+  "vendor": "森浦 Sumscope",
+  "icon": "📈",
+  "category": "金融投资",
+  "summary": "债券资料 / 发行信息 / 宏观日历",
+  "description": "连接森浦 qeubee MCP，在账户授权范围内查询债券资料、一级发行、宏观指标和交易日历等固定收益市场数据。需使用森浦签发的访问密钥；可用数据、行情时效和收费以账户合同及实际工具为准。结果保留统计口径、时间和来源。本卡片由 DSH 社区维护，并非森浦官方产品。",
+  "tags": [
+    "森浦 qeubee 固收数据",
+    "森浦 Sumscope",
+    "国内服务",
+    "授权账号"
+  ],
+  "homepage": "https://www.sumscope.com/app/mobile/index/senpuchanpin.html",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "X-Access-Key",
+    "credentialName": "qeubee X_ACCESS_KEY",
+    "credentialPlaceholder": "请输入森浦签发的访问密钥",
+    "credentialDescription": "向 qeubee 客户经理或官方客服申请访问密钥；通过 X-Access-Key 请求头发送，无需添加 Bearer 前缀。数据范围与收费以账号权益为准。",
+    "credentialHelpLabel": "联系森浦申请接入",
+    "credentialHelpUrl": "https://www.sumscope.com/app/apply.html"
+  },
+  "servers": [
+    {
+      "serverKey": "sumscope-qeubee-data",
+      "serverName": "sumscope_qeubee_data",
+      "url": "https://data-api.qeubee.cn/sumscope/common/mcp/stream",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询国债发行资料",
+      "text": "查询 2025 年 6 月发行的中国国债基础资料，最多列出 5 只，给出债券代码、期限、发行日期和来源；先确认账号可用工具，只读查询，不发起交易或自动扩大范围。",
+      "server": "sumscope-qeubee-data"
+    },
+    {
+      "title": "查看债市交易日历",
+      "text": "查询 2025 年 6 月中国银行间债券市场交易日历，列出交易日、日历来源及适用市场；若当前权限没有此数据，说明限制，不推算或自动追加查询。",
+      "server": "sumscope-qeubee-data"
+    }
+  ]
+}
