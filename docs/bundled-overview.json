@@ -1,26 +1,50 @@
 {
   "source": "duhu2000/dsh-mcp-connector/catalog/catalog.json",
-  "sourceVersion": "0.2.107",
+  "sourceVersion": "0.2.108",
   "connectors": [
     {
       "id": "qcc-company",
       "name": "企查查·企业工商",
-      "category": "企业数据"
+      "category": "企业数据",
+      "summary": "一站式企业工商 / 股权 / 经营信息查询",
+      "vendor": "企查查 Qichacha",
+      "auth": {
+        "mode": "oauth2-pkce"
+      },
+      "probeStatus": "未提供独立探测记录"
     },
     {
       "id": "qcc-legal",
       "name": "企查查·法律数据",
-      "category": "法律合规"
+      "category": "法律合规",
+      "summary": "法规条文 / 司法案例检索与核验",
+      "vendor": "企查查 Qichacha",
+      "auth": {
+        "mode": "oauth2-pkce"
+      },
+      "probeStatus": "未提供独立探测记录"
     },
     {
       "id": "qcc-tender",
       "name": "企查查·招投标",
-      "category": "企业数据"
+      "category": "企业数据",
+      "summary": "招投标公告 / 中标结果 / 采购信息",
+      "vendor": "企查查 Qichacha",
+      "auth": {
+        "mode": "oauth2-pkce"
+      },
+      "probeStatus": "未提供独立探测记录"
     },
     {
       "id": "qcc-document",
       "name": "企查查·智能文档解析",
-      "category": "效率工具"
+      "category": "效率工具",
+      "summary": "本机文件 / 在线链接 · OCR 与结构化解析",
+      "vendor": "企查查 Qichacha",
+      "auth": {
+        "mode": "oauth2-pkce"
+      },
+      "probeStatus": "未提供独立探测记录"
     }
   ]
 }
