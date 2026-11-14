@@ -88,7 +88,7 @@
     },
     "reasons": [
       "人工证据评分；不是上架通过分。官方域名和公开配置已确认。",
-      "可用协议、鉴权文档已发现，授权后兼容性尚未验收。",
+      "官方配置与 DSH 本机 API Key 连接、104 工具发现已核实；业务鉴权与套餐权益尚未验收。",
       "未核验服务条款适用性、版本及长期维护，保守计分。",
       "真实业务运行未验收，runtime 记 0。",
       "registryName 仅为官方域名派生内部稳定身份，不声称已在 Official Registry 注册。"
@@ -112,7 +112,7 @@
     "checkedAt": null,
     "reviewedBy": null,
     "reportUrl": null,
-    "notes": "仅公开协议探测。没有 tools/call，没有使用真实凭据或付费额度。"
+    "notes": "用户在 DSH 本机填写 Key 并确认连接成功；2026-11-14 21:39:07 +08:00 界面显示连接及工具发现成功、104 个工具。匿名也能发现工具，因此不据此认定业务鉴权或套餐权益通过。没有 tools/call 或付费业务调用。详见同批 evidence/openboost-dsh-connection-preflight.md。"
   },
   "evidence": [
     {
@@ -132,6 +132,12 @@
       "url": "https://openboostai.com/main-DLCEKYHB.js",
       "collectedAt": "2026-11-14T13:19:37.016429Z",
       "summary": "官方配置页的公开前端资源 manualHttpJson 声明 HTTP 端点和 secret-key Header；SHA-256 a79e84106406c397ffb6f8f2c7b74cb209ac9d10acb06767df0a033d1324bb40。未执行网页脚本、未读取登录态。"
+    },
+    {
+      "type": "probe",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/workbuddy-data-batches-20261114/candidates/drafts/workbuddy-data-2026-11-14/evidence/openboost-dsh-connection-preflight.md",
+      "collectedAt": "2026-11-14T13:39:07Z",
+      "summary": "DSH v0.2.106 本机手动连接显示成功，工具发现 104 项；未执行 tools/call。下单工具仍显示默认允许，尚未落实独立禁用。"
     }
   ]
 }
