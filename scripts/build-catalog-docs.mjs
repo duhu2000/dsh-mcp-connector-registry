@@ -9,11 +9,11 @@ export function renderDirectory(cards){
 export function renderOverview(cards,bundled){
  const order=['企业数据','金融投资','法律合规','调研分析','办公协作','开发工具','设计创意','效率工具','其他'];
  const base='https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/';
- const preferred=['wind-stock-data','pkulaw-legal','variflight-aviation-data'];
+ const preferred=['wind-stock-data','pkulaw-legal','variflight-aviation-data','tushare','akshare','patsnap','openalex-research-catalog','pubmed-biomedical-literature','tencent-docs','feishu','notion','github','playwright'];
  const rows=order.map(category=>{
  const local=bundled.filter(c=>c.category===category);
  const remote=cards.filter(c=>c.category===category&&!bundled.some(b=>b.id===c.id));
- const examples=[...local,...remote.filter(c=>preferred.includes(c.id)),...remote.filter(c=>!preferred.includes(c.id))].slice(0,5);
+ const examples=[...local,...remote.filter(c=>preferred.includes(c.id)).sort((a,b)=>preferred.indexOf(a.id)-preferred.indexOf(b.id)),...remote.filter(c=>!preferred.includes(c.id))].slice(0,5);
  const links=examples.map(c=>`[${cell(c.name)}](${local.includes(c)?'https://github.com/duhu2000/dsh-mcp-connector/blob/main/catalog/catalog.json':base+'connectors/'+c.id+'.json'})`).join('、');
  return `| ${category} | 公共 ${remote.length}＋内置 ${local.length} | ${links||'暂无条目'} |`;
  });
