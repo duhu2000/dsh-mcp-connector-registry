@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "variflight-aviation-data",
+  "name": "飞常准航空数据",
+  "vendor": "飞常准（VariFlight）",
+  "icon": "✈️",
+  "category": "调研分析",
+  "summary": "航班动态 / 中转方案 / 机场天气 / 实时位置 / 机票价格",
+  "description": "接入飞常准官方 Aviation MCP，通过 OAuth 2.1 查询航班动态、直飞与中转方案、航班舒适度、航空器实时位置、机场天气和机票价格。远程服务按工具调用计费，协议层调用与 getTodayDate 免费；实际费用、数据范围和限额以飞常准控制台为准。卡片拟仅请求 read 与 mcp:access 范围，在任何可能产生费用的查询前应先说明工具和预计调用次数并等待用户确认。",
+  "tags": ["飞常准", "VariFlight", "航班", "机场", "航空", "出行", "OAuth", "官方 MCP"],
+  "published": false,
+  "featured": false,
+  "homepage": "https://mcp.variflight.com/docs/aviation",
+  "probeStatus": "partial",
+  "probeCheckedAt": 1794644823000,
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://ai.variflight.com",
+    "scope": "read mcp:access",
+    "clientName": "DeepSeek Harness - 飞常准航空数据 MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "variflight-aviation",
+      "serverName": "variflight_aviation_data",
+      "url": "https://ai.variflight.com/servers/aviation/mcp",
+      "oauthResource": "https://ai.variflight.com/servers/aviation/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看指定航班动态",
+      "text": "使用飞常准 Aviation MCP 查询明天 MU5102 的航班动态。先调用免费的 getTodayDate 确定日期，再说明将使用的收费工具、参数和预计调用次数；等待我确认后再执行查询，并标注查询时间、数据来源和可用性限制。",
+      "server": "variflight-aviation"
+    },
+    {
+      "title": "比较沪京直飞方案",
+      "text": "使用飞常准 Aviation MCP 比较明天从上海到北京的直飞航班，关注起降机场、计划时间、准点和舒适度。先列出所需工具、参数、预计调用次数和可能费用；等待我确认后再查询，对大量结果使用 summary 和合理的 limit，不连续翻页。",
+      "server": "variflight-aviation"
+    }
+  ]
+}
