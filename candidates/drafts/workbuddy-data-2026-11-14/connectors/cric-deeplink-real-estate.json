@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "published": false,
+  "featured": false,
+  "probeStatus": "unverified",
+  "id": "cric-deeplink-real-estate",
+  "name": "克而瑞·深度智联地产数据",
+  "vendor": "克而瑞 / 深度智联",
+  "icon": "🏙️",
+  "category": "调研分析",
+  "summary": "地产问数 / 城市对比 / 行业知识",
+  "description": "连接深度智联官方 MCP，查询克而瑞授权的不动产统计与行业知识。问数用于具体指标、排行和趋势，问知用于政策与行业研究；实际覆盖以账号权限和返回结果为准。需使用本人 API Key，按预付积分计费；正常查询返回无数据也可能扣费，重复查询会重复计费。结果请保留来源、时间和指标口径。本卡片由 DSH 社区维护，并非克而瑞或深度智联官方产品。",
+  "tags": [
+    "克而瑞",
+    "CRIC",
+    "深度智联",
+    "地产",
+    "城市研究",
+    "付费服务",
+    "国内数据"
+  ],
+  "homepage": "https://mcp.dichanai.com/docs",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "深度智联 API Key",
+    "credentialPlaceholder": "请输入完整 API Key，无需添加 Bearer 前缀",
+    "credentialDescription": "使用深度智联个人中心的完整 API Key，DSH 自动添加 Authorization: Bearer。密钥仅保存在本机；查询消耗账号积分，有效空结果也可能计费。",
+    "credentialHelpLabel": "查看官方 MCP 接入与计费说明",
+    "credentialHelpUrl": "https://mcp.dichanai.com/docs"
+  },
+  "servers": [
+    {
+      "serverKey": "cric-deeplink-real-estate",
+      "serverName": "cric_deeplink_real_estate",
+      "url": "https://mcp.dichanai.com/mcp-server",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看上海新房成交走势",
+      "text": "使用地产问数查询上海 2025 年各月新建商品住宅成交面积，保持同一统计口径；列出月份、数值、单位和来源，说明缺失月份。仅查询这一项指标，不自动重试或扩展到其他城市。",
+      "server": "cric-deeplink-real-estate"
+    },
+    {
+      "title": "了解长租公寓运营指标",
+      "text": "使用地产问知说明长租公寓的出租率通常如何定义和计算，整理适用范围及来源；使用默认快速模式，仅提出这一个问题，不自动追加查询。",
+      "server": "cric-deeplink-real-estate"
+    }
+  ]
+}

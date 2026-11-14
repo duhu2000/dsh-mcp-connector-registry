@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "published": false,
+  "featured": false,
+  "probeStatus": "unverified",
+  "id": "openboost-cross-border-data",
+  "name": "OpenBoost 跨境数据",
+  "vendor": "OpenBoost",
+  "icon": "🌐",
+  "category": "调研分析",
+  "summary": "Amazon / TikTok / 跨境选品与竞品研究",
+  "description": "连接 OpenBoost 官方 MCP，查询套餐许可范围内的 Amazon、TikTok、专利和社交媒体数据，用于跨境市场研究与竞品分析。使用 secret-key Header 鉴权，查询可能消耗套餐额度。服务还包含账号查询和套餐下单工具；本卡片示例仅用于数据研究，不授权创建订单、购买或支付。工具未提供只读注解，应按实际用途审核权限。结果需保留数据来源、统计期间和覆盖限制。本卡片由 DSH 社区独立维护，并非 OpenBoost 官方产品或背书。",
+  "tags": [
+    "OpenBoost",
+    "跨境电商",
+    "Amazon",
+    "TikTok",
+    "API Key",
+    "付费服务"
+  ],
+  "homepage": "https://openboostai.com/mcp-list",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "secret-key",
+    "credentialName": "OpenBoost MCP Secret Key",
+    "credentialPlaceholder": "请输入 OpenBoost MCP Secret Key",
+    "credentialDescription": "请在 DSH 本机填写 Secret Key；按套餐授权调用，业务查询可能计费。",
+    "credentialHelpUrl": "https://openboostai.com/mcp-list",
+    "credentialHelpLabel": "获取 OpenBoost MCP 密钥"
+  },
+  "servers": [
+    {
+      "serverKey": "openboost-cross-border-data",
+      "serverName": "openboost_cross_border_data",
+      "url": "https://mcp.openboostai.com/mcp-servers/openboost-all-mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看美国无线充电器搜索趋势",
+      "text": "使用 OpenBoost 查询 Amazon 美国站 wireless charger 关键词最近可得的月度搜索趋势；先核对站点和时间范围，再说明旺季变化、来源与缺失月份。按已有套餐执行一次查询，不创建套餐订单、不购买或支付。",
+      "server": "openboost-cross-border-data"
+    },
+    {
+      "title": "了解 TikTok 美国市场",
+      "text": "使用 OpenBoost 查询 TikTok 美国市场最近可得的市场概览，说明统计期间、指标含义和数据覆盖；区分观察到的数据与分析判断。按已有套餐执行一次查询，不读取账号订单、不创建套餐订单、不购买或支付。",
+      "server": "openboost-cross-border-data"
+    }
+  ]
+}

@@ -1,0 +1,754 @@
+{
+  "toolCount": 104,
+  "nextCursorPresent": false,
+  "tools": [
+    {
+      "name": "tt_shop_info_list",
+      "annotations": null,
+      "required": [
+        "dataPeriod"
+      ]
+    },
+    {
+      "name": "tt_expert_basic_analyze",
+      "annotations": null,
+      "required": [
+        "expertId"
+      ]
+    },
+    {
+      "name": "patent_pdf",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "tt_video_detail",
+      "annotations": null,
+      "required": [
+        "videoId"
+      ]
+    },
+    {
+      "name": "tt_expert_detail",
+      "annotations": null,
+      "required": [
+        "expertId"
+      ]
+    },
+    {
+      "name": "patent_query_search",
+      "annotations": null,
+      "required": [
+        "query_text"
+      ]
+    },
+    {
+      "name": "patent_legal_status",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "amz_amazon_seeds_m_detail",
+      "annotations": null,
+      "required": [
+        "site",
+        "asin"
+      ]
+    },
+    {
+      "name": "amz_market_price",
+      "annotations": null,
+      "required": [
+        "marketplace",
+        "nodeIdPath"
+      ]
+    },
+    {
+      "name": "amz_hot_amz_hot_cat_tree",
+      "annotations": null,
+      "required": [
+        "rankType",
+        "webSiteId"
+      ]
+    },
+    {
+      "name": "amz_market_seller_location",
+      "annotations": null,
+      "required": [
+        "marketplace",
+        "nodeIdPath"
+      ]
+    },
+    {
+      "name": "amz_keyword_research",
+      "annotations": null,
+      "required": [
+        "webSiteId"
+      ]
+    },
+    {
+      "name": "tt_commodity_expert_draw_expert_trend",
+      "annotations": null,
+      "required": [
+        "commodityId"
+      ]
+    },
+    {
+      "name": "tt_expert_fans_analyze",
+      "annotations": null,
+      "required": [
+        "commodityId"
+      ]
+    },
+    {
+      "name": "tt_video_voice_summary",
+      "annotations": null,
+      "required": [
+        "videoId"
+      ]
+    },
+    {
+      "name": "amz_category_query",
+      "annotations": null,
+      "required": [
+        "catId"
+      ]
+    },
+    {
+      "name": "amz_market_statistics",
+      "annotations": null,
+      "required": [
+        "marketplace"
+      ]
+    },
+    {
+      "name": "amz_market_research",
+      "annotations": null,
+      "required": [
+        "marketplace"
+      ]
+    },
+    {
+      "name": "amz_market_brand",
+      "annotations": null,
+      "required": [
+        "marketplace",
+        "nodeIdPath"
+      ]
+    },
+    {
+      "name": "amz_market_rating",
+      "annotations": null,
+      "required": [
+        "marketplace",
+        "nodeIdPath"
+      ]
+    },
+    {
+      "name": "amz_traffic_listing_stat",
+      "annotations": null,
+      "required": [
+        "webSiteId",
+        "asinList"
+      ]
+    },
+    {
+      "name": "tt_video_new_video_summary",
+      "annotations": null,
+      "required": [
+        "videoId"
+      ]
+    },
+    {
+      "name": "tt_shop_detail",
+      "annotations": null,
+      "required": [
+        "shopId"
+      ]
+    },
+    {
+      "name": "amz_category_query_v2",
+      "annotations": null,
+      "required": [
+        "level"
+      ]
+    },
+    {
+      "name": "amz_sales_prediction_bsr",
+      "annotations": null,
+      "required": [
+        "webSiteId",
+        "bsr",
+        "cat1Id"
+      ]
+    },
+    {
+      "name": "patent_description",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "patent_abstract_translated",
+      "annotations": null,
+      "required": [
+        "lang"
+      ]
+    },
+    {
+      "name": "patent_query_count",
+      "annotations": null,
+      "required": [
+        "query_text"
+      ]
+    },
+    {
+      "name": "reddit_fetch_post_details",
+      "annotations": null,
+      "required": [
+        "media_url"
+      ]
+    },
+    {
+      "name": "account_orders",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "amz_keyword_research_trends",
+      "annotations": null,
+      "required": [
+        "webSiteId",
+        "keyword"
+      ]
+    },
+    {
+      "name": "tt_commodity_get_commodity_cat_tree",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "reddit_fetch_post_comments",
+      "annotations": null,
+      "required": [
+        "media_url"
+      ]
+    },
+    {
+      "name": "youtube_fetch_post_comments",
+      "annotations": null,
+      "required": [
+        "media_id",
+        "review_token"
+      ]
+    },
+    {
+      "name": "youtube_fetch_post_info",
+      "annotations": null,
+      "required": [
+        "media_id"
+      ]
+    },
+    {
+      "name": "instagram_fetch_post_info",
+      "annotations": null,
+      "required": [
+        "post_id"
+      ]
+    },
+    {
+      "name": "instagram_fetch_user_info",
+      "annotations": null,
+      "required": [
+        "user_id"
+      ]
+    },
+    {
+      "name": "instagram_fetch_user_reels",
+      "annotations": null,
+      "required": [
+        "user_id",
+        "max_pages"
+      ]
+    },
+    {
+      "name": "amz_product_selection",
+      "annotations": null,
+      "required": [
+        "webSiteId"
+      ]
+    },
+    {
+      "name": "amz_aba_research_trends",
+      "annotations": null,
+      "required": [
+        "webSiteId",
+        "keyword",
+        "timeGranularity"
+      ]
+    },
+    {
+      "name": "amz_traffic_listing_page",
+      "annotations": null,
+      "required": [
+        "webSiteId",
+        "asinList",
+        "relations"
+      ]
+    },
+    {
+      "name": "tt_shop_commodity_account_list",
+      "annotations": null,
+      "required": [
+        "shopId"
+      ]
+    },
+    {
+      "name": "patent_image_search_multiple",
+      "annotations": null,
+      "required": [
+        "urls",
+        "model",
+        "patent_type"
+      ]
+    },
+    {
+      "name": "patent_semantic_search",
+      "annotations": null,
+      "required": [
+        "text"
+      ]
+    },
+    {
+      "name": "instagram_fetch_hashtag_posts",
+      "annotations": null,
+      "required": [
+        "hashtag",
+        "max_pages"
+      ]
+    },
+    {
+      "name": "amz_sales_query",
+      "annotations": null,
+      "required": [
+        "skuId"
+      ]
+    },
+    {
+      "name": "amz_market_ratings",
+      "annotations": null,
+      "required": [
+        "marketplace",
+        "nodeIdPath"
+      ]
+    },
+    {
+      "name": "amz_traffic_keyword_stat",
+      "annotations": null,
+      "required": [
+        "webSiteId",
+        "asin"
+      ]
+    },
+    {
+      "name": "amz_traffic_extend",
+      "annotations": null,
+      "required": [
+        "webSiteId",
+        "asinList"
+      ]
+    },
+    {
+      "name": "tt_commodity_voice_analyze",
+      "annotations": null,
+      "required": [
+        "commodityId"
+      ]
+    },
+    {
+      "name": "tt_expert_category_analyze",
+      "annotations": null,
+      "required": [
+        "commodityId",
+        "categoryLevel"
+      ]
+    },
+    {
+      "name": "patent_abstract_image",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "account_info",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "amz_sku_query",
+      "annotations": null,
+      "required": [
+        "skuId"
+      ]
+    },
+    {
+      "name": "amz_review_query",
+      "annotations": null,
+      "required": [
+        "skuId"
+      ]
+    },
+    {
+      "name": "amz_research_monthly",
+      "annotations": null,
+      "required": [
+        "webSiteId"
+      ]
+    },
+    {
+      "name": "amz_keyword_miner",
+      "annotations": null,
+      "required": [
+        "webSiteId"
+      ]
+    },
+    {
+      "name": "tt_dashboard_overview",
+      "annotations": null,
+      "required": [
+        "countryRegion"
+      ]
+    },
+    {
+      "name": "tt_commodity_statistics_get_expert_statistics",
+      "annotations": null,
+      "required": [
+        "countryRegion"
+      ]
+    },
+    {
+      "name": "tt_shop_sales_trend",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "tt_shop_market_info",
+      "annotations": null,
+      "required": [
+        "dataPeriod"
+      ]
+    },
+    {
+      "name": "amz_aba_research_weekly",
+      "annotations": null,
+      "required": [
+        "webSiteId"
+      ]
+    },
+    {
+      "name": "tt_video_script_diy_query",
+      "annotations": null,
+      "required": [
+        "videoId"
+      ]
+    },
+    {
+      "name": "tt_video_voice_read",
+      "annotations": null,
+      "required": [
+        "videoId"
+      ]
+    },
+    {
+      "name": "tk_expert_sale_show",
+      "annotations": null,
+      "required": [
+        "expertId"
+      ]
+    },
+    {
+      "name": "patent_claim_translated",
+      "annotations": null,
+      "required": [
+        "lang"
+      ]
+    },
+    {
+      "name": "patent_description_translated",
+      "annotations": null,
+      "required": [
+        "lang"
+      ]
+    },
+    {
+      "name": "patent_fulltext_image",
+      "annotations": null,
+      "required": [
+        "limit",
+        "offset"
+      ]
+    },
+    {
+      "name": "patent_image_search_single",
+      "annotations": null,
+      "required": [
+        "url",
+        "model",
+        "patent_type"
+      ]
+    },
+    {
+      "name": "tt_commodity_statistics_get_category_statistics",
+      "annotations": null,
+      "required": [
+        "countryRegion"
+      ]
+    },
+    {
+      "name": "tt_commodity_sales_trend",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "tt_video_content",
+      "annotations": null,
+      "required": [
+        "videoId"
+      ]
+    },
+    {
+      "name": "tt_expert_fans_portrait",
+      "annotations": null,
+      "required": [
+        "expertId"
+      ]
+    },
+    {
+      "name": "account_catalog",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "account_order_status",
+      "annotations": null,
+      "required": [
+        "mchOrderNo"
+      ]
+    },
+    {
+      "name": "amz_amazon_seeds_reviews_v3",
+      "annotations": null,
+      "required": [
+        "site",
+        "asin",
+        "stars",
+        "page",
+        "filter_recent_sort",
+        "only_purchase"
+      ]
+    },
+    {
+      "name": "amz_market_seller",
+      "annotations": null,
+      "required": [
+        "marketplace",
+        "nodeIdPath"
+      ]
+    },
+    {
+      "name": "amz_market_seller_type",
+      "annotations": null,
+      "required": [
+        "marketplace",
+        "nodeIdPath"
+      ]
+    },
+    {
+      "name": "amz_market_goods",
+      "annotations": null,
+      "required": [
+        "marketplace",
+        "nodeIdPath"
+      ]
+    },
+    {
+      "name": "amz_market_shelf_trend",
+      "annotations": null,
+      "required": [
+        "marketplace",
+        "nodeIdPath"
+      ]
+    },
+    {
+      "name": "amz_traffic_source",
+      "annotations": null,
+      "required": [
+        "webSiteId",
+        "q"
+      ]
+    },
+    {
+      "name": "patent_query_search_with_agg",
+      "annotations": null,
+      "required": [
+        "query",
+        "field",
+        "limit",
+        "offset"
+      ]
+    },
+    {
+      "name": "instagram_fetch_reel_info",
+      "annotations": null,
+      "required": [
+        "post_id"
+      ]
+    },
+    {
+      "name": "amz_hot_amz_hot_list_v2",
+      "annotations": null,
+      "required": [
+        "webSiteId",
+        "rankType"
+      ]
+    },
+    {
+      "name": "amz_google_trends",
+      "annotations": null,
+      "required": [
+        "keywords",
+        "geo",
+        "date"
+      ]
+    },
+    {
+      "name": "tt_commodity_info_list",
+      "annotations": null,
+      "required": [
+        "countryRegion"
+      ]
+    },
+    {
+      "name": "account_links",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "amz_market_shelf_time",
+      "annotations": null,
+      "required": [
+        "marketplace",
+        "nodeIdPath"
+      ]
+    },
+    {
+      "name": "amz_traffic_keyword",
+      "annotations": null,
+      "required": [
+        "webSiteId",
+        "asin"
+      ]
+    },
+    {
+      "name": "youtube_fetch_user_info",
+      "annotations": null,
+      "required": [
+        "author_id"
+      ]
+    },
+    {
+      "name": "instagram_fetch_post_comments",
+      "annotations": null,
+      "required": [
+        "post_id"
+      ]
+    },
+    {
+      "name": "tt_commodity_statistics_get_total_statistics",
+      "annotations": null,
+      "required": [
+        "countryRegion"
+      ]
+    },
+    {
+      "name": "patent_bibliography",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "account_order_create",
+      "annotations": null,
+      "required": [
+        "planId"
+      ]
+    },
+    {
+      "name": "amz_keyword_order",
+      "annotations": null,
+      "required": [
+        "webSiteId",
+        "asins",
+        "reverseType"
+      ]
+    },
+    {
+      "name": "tt_video_info_list",
+      "annotations": null,
+      "required": [
+        "countryRegion"
+      ]
+    },
+    {
+      "name": "tt_hashtag_list",
+      "annotations": null,
+      "required": [
+        "region"
+      ]
+    },
+    {
+      "name": "patent_family",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "patent_claim_data",
+      "annotations": null,
+      "required": []
+    },
+    {
+      "name": "amz_product_competitor",
+      "annotations": null,
+      "required": [
+        "webSiteId"
+      ]
+    },
+    {
+      "name": "tt_commodity_voice_read",
+      "annotations": null,
+      "required": [
+        "commodityId",
+        "countryRegion"
+      ]
+    },
+    {
+      "name": "tt_commodity_detail",
+      "annotations": null,
+      "required": [
+        "commodityId",
+        "countryRegion"
+      ]
+    },
+    {
+      "name": "tt_commodity_statistics_get_price_statistics",
+      "annotations": null,
+      "required": [
+        "countryRegion"
+      ]
+    },
+    {
+      "name": "tt_expert_info_list",
+      "annotations": null,
+      "required": [
+        "countryRegion"
+      ]
+    }
+  ]
+}
