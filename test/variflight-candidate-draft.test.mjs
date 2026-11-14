@@ -8,7 +8,7 @@ const draftUrl = new URL(
   import.meta.url,
 );
 
-test('VariFlight aviation draft validates but remains unpublished pending OAuth runtime acceptance', async () => {
+test('VariFlight aviation draft uses verified API Key header and remains unpublished pending business acceptance', async () => {
   const draft = JSON.parse(await readFile(draftUrl, 'utf8'));
   const catalog = JSON.parse(await readFile(new URL('../catalog.json', import.meta.url), 'utf8'));
 
@@ -17,11 +17,10 @@ test('VariFlight aviation draft validates but remains unpublished pending OAuth 
   assert.equal(draft.published, false);
   assert.equal(draft.featured, false);
   assert.equal(draft.probeStatus, 'partial');
-  assert.equal(draft.auth.mode, 'oauth2-pkce');
-  assert.equal(draft.auth.scope, 'read mcp:access');
-  assert.equal(draft.auth.tokenEndpointAuthMethod, 'none');
+  assert.equal(draft.auth.mode, 'api-key');
+  assert.equal(draft.auth.apiKeyHeader, 'X-API-Key');
   assert.equal(draft.servers[0].url, 'https://ai.variflight.com/servers/aviation/mcp');
-  assert.equal(draft.servers[0].oauthResource, draft.servers[0].url);
+  assert.equal(draft.servers[0].oauthResource, undefined);
   assert.equal(catalog.connectors.some((item) => item.id === draft.id), false);
 
   for (const prompt of draft.prompts) {
