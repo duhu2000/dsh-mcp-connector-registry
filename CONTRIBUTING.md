@@ -58,3 +58,9 @@ ServerName、URL 与潜在密钥。合并到 `main` 后，独立 CI job 会重�
 - 服务地址、鉴权方式或品牌信息变化时，请提交更新 PR。
 - 每周健康巡检仅使用无凭据探测；连续失败不会自动删除卡片，由维护者复核后处理。
 - 安全问题和疑似凭据泄漏请按 [`SECURITY.md`](SECURITY.md) 私密报告。
+
+### 目录与上新宣传同步
+
+`npm run build` 会从正式 `catalog.json` 自动生成分类目录和 README 分类数量。
+新卡片合并后，在 `docs/catalog-additions.json` 记录正式上架日期、对应 PR 编号及准确验收边界；日期不得使用文案修改日期替代。不补写无法核实的历史上架日期。
+构建同时生成 `docs/RECENT-ADDITIONS.md` 和 `docs/ANNOUNCEMENT-DRAFT.md`，后者仅供运营审核，不自动发帖。卡片更新不要求发布插件 npm。

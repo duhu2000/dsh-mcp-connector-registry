@@ -6,7 +6,7 @@
   "description": "Public connector catalog for dsh-mcp-connector",
   "scripts": {
     "test": "node --test",
-    "build": "node scripts/build-registry.mjs && node scripts/build-catalog-stats.mjs",
+    "build": "node scripts/build-registry.mjs && node scripts/build-catalog-stats.mjs && node scripts/build-catalog-docs.mjs",
     "validate": "npm run build && dsh-mcp-connector-probe catalog.json --validate-only",
     "check": "npm test && npm run validate && npm run assets:check",
     "assets:check": "node scripts/check-icon-assets.mjs",
