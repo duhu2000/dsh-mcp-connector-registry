@@ -39,7 +39,7 @@
 
 ## 调研分析
 
-共 38 个连接器。
+共 40 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -47,6 +47,7 @@
 | [BLS 美国劳工统计](../connectors/bls-us-labour-statistics.json) | CPI / 就业失业 / 工资工时 / JOLTS | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [博查搜索](../connectors/bocha-search.json) | 网页搜索 / AI 搜索 / 内容检索 | 社区连接器 | api-key | 公共目录 | unverified |
 | [Consensus](../connectors/consensus.json) | 同行评审论文检索 / 证据梳理 / 引用来源 | Consensus | oauth2-pkce | 公共目录 | unverified |
+| [克而瑞·深度智联地产数据](../connectors/cric-deeplink-real-estate.json) | 地产问数 / 城市对比 / 行业知识 | 克而瑞 / 深度智联 | bearer | 公共目录 | partial |
 | [EIA 美国能源数据](../connectors/eia-us-energy-data.json) | 电力 / 石油 / 天然气 / 煤炭 / 能源预测 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [EUR-Lex 欧盟法律开放数据](../connectors/eur-lex-eu-law.json) | 欧盟立法 / CJEU 判例 / 条约 / CELEX 与 EuroVoc | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [Exa·网络搜索](../connectors/exa-search.json) | 匿名语义网页搜索 / 网页抓取 / 高级检索 | Exa | none | 公共目录 | unverified |
@@ -64,6 +65,7 @@
 | [NWS 美国实时天气](../connectors/nws-us-weather.json) | 美国天气预报 / 实时警报 / 观测站 / 预报讨论 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [OECD 全球公共统计](../connectors/oecd-public-statistics.json) | 跨国经济 / 教育就业 / 环境社会 / OECD SDMX | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [OpenAlex 全球学术研究](../connectors/openalex-research-catalog.json) | 论文 / 作者机构 / 主题趋势 / 引用网络 | cyanheads（独立社区项目） | none | 公共目录 | pass |
+| [OpenBoost 跨境数据](../connectors/openboost-cross-border-data.json) | Amazon / TikTok / 跨境选品与竞品研究 | OpenBoost | api-key | 公共目录 | partial |
 | [OpenFEC 美国竞选资金](../connectors/openfec-campaign-finance.json) | 候选人委员会 / 收支申报 / 独立支出 / 选举日历 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [OpenStreetMap 全球地理数据](../connectors/openstreetmap-geospatial-data.json) | 地点搜索 / 反向地理编码 / POI / Overpass 空间查询 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [智慧芽专利与文献](../connectors/patsnap.json) | 全球专利 / 科学文献 / 研发情报检索 | PatSnap / 智慧芽 | bearer | 公共目录 | unverified |
