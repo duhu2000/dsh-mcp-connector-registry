@@ -1,0 +1,26 @@
+{
+  "source": "duhu2000/dsh-mcp-connector/catalog/catalog.json",
+  "sourceVersion": "0.2.107",
+  "connectors": [
+    {
+      "id": "qcc-company",
+      "name": "企查查·企业工商",
+      "category": "企业数据"
+    },
+    {
+      "id": "qcc-legal",
+      "name": "企查查·法律数据",
+      "category": "法律合规"
+    },
+    {
+      "id": "qcc-tender",
+      "name": "企查查·招投标",
+      "category": "企业数据"
+    },
+    {
+      "id": "qcc-document",
+      "name": "企查查·智能文档解析",
+      "category": "效率工具"
+    }
+  ]
+}
