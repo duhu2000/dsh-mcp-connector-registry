@@ -3,7 +3,7 @@
   "id": "openboost-cross-border-data",
   "registryName": "com.openboostai/openboost-all-mcp",
   "title": "OpenBoost 跨境数据",
-  "description": "连接 OpenBoost 官方 MCP，查询套餐许可范围内的 Amazon、TikTok、专利和社交媒体数据，用于跨境市场研究与竞品分析。使用 secret-key Header 鉴权，查询可能消耗套餐额度。服务还包含账号查询和套餐下单工具；本卡片示例仅用于数据研究，不授权创建订单、购买或支付。工具未提供只读注解，应按实际用途审核权限。结果需保留数据来源、统计期间和覆盖限制。本卡片由 DSH 社区独立维护，并非 OpenBoost 官方产品或背书。",
+  "description": "已验证连接及工具发现，业务查询尚未验收。连接 OpenBoost 官方 MCP，查询套餐许可范围内的 Amazon、TikTok、专利和社交媒体数据，用于跨境市场研究与竞品分析。使用 secret-key Header 鉴权，查询可能消耗套餐额度。服务还包含账号查询和套餐下单工具；本卡片示例仅用于数据研究，不授权创建订单、购买或支付。工具未提供只读注解，下单工具未验证独立禁用，使用前请核对宿主权限。结果需保留数据来源、统计期间和覆盖限制。本卡片由 DSH 社区独立维护，并非 OpenBoost 官方产品或背书。",
   "version": "unknown",
   "classification": {
     "isDataService": true,
@@ -53,9 +53,9 @@
     "reason": "官方 mcp-list 页面的手动 HTTP 模板明确使用 secret-key；匿名工具发现不表示业务查询免鉴权。"
   },
   "license": {
-    "status": "unknown",
+    "status": "not-applicable",
     "spdxId": null,
-    "evidenceUrl": null
+    "evidenceUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/review-batches/workbuddy-limited-2026-11-15.md"
   },
   "maintenance": {
     "registryStatus": "unknown",
@@ -89,23 +89,23 @@
     "reasons": [
       "人工证据评分；不是上架通过分。官方域名和公开配置已确认。",
       "官方配置与 DSH 本机 API Key 连接、104 工具发现已核实；业务鉴权与套餐权益尚未验收。",
-      "未核验服务条款适用性、版本及长期维护，保守计分。",
+      "远程服务按官方账号/套餐条款使用；完整合同权限、版本和长期维护仍保守计分。",
       "真实业务运行未验收，runtime 记 0。",
-      "registryName 仅为官方域名派生内部稳定身份，不声称已在 Official Registry 注册。"
+      "registryName 仅为官方域名派生内部稳定身份，不声称已在 Official Registry 注册。",
+      "有限验证人工批准不提高评分；保持 watchlist 与 runtime=0，不代表达到完整运行验收标准。"
     ],
     "gates": [
-      "service-terms-review",
       "authenticated-runtime-acceptance",
-      "named-human-approval",
       "order-create-tool-governance"
     ]
   },
   "review": {
-    "decision": "pending",
+    "decision": "approved",
     "proposedConnectorId": "openboost-cross-border-data",
-    "reviewedAt": null,
-    "reviewedBy": null,
-    "notes": "用户授权按批次推进评估及上架准备；不能沿用飞常准的 DuHu 批准为本批次签名。"
+    "reviewedAt": "2026-11-14T23:33:28.378538Z",
+    "reviewedBy": "DuHu",
+    "notes": "2026-11-15 用户明确回复“按有限验证状态上架，署名 DuHu”。仅批准连接及工具发现范围，卡片必须标注 partial、业务查询尚未验收；不构成业务调用、超预算查询或订阅购买授权。",
+    "scope": "connection-only"
   },
   "runtimeAcceptance": {
     "status": "not-run",
@@ -119,7 +119,7 @@
       "type": "official-vendor",
       "url": "https://openboostai.com/mcp-list",
       "collectedAt": "2026-11-14T13:19:37.016429Z",
-      "summary": "官方 MCP 产品/配置说明；客户端卡片草案保持 published=false。"
+      "summary": "历史采集记录：官方 MCP 产品/配置说明；客户端卡片草案保持 published=false。"
     },
     {
       "type": "probe",
@@ -138,6 +138,26 @@
       "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/workbuddy-data-batches-20261114/candidates/drafts/workbuddy-data-2026-11-14/evidence/openboost-dsh-connection-preflight.md",
       "collectedAt": "2026-11-14T13:39:07Z",
       "summary": "DSH v0.2.106 本机手动连接显示成功，工具发现 104 项；未执行 tools/call。下单工具仍显示默认允许，尚未落实独立禁用。"
+    },
+    {
+      "type": "connection-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/workbuddy-limited-2026-11-15/openboost-cross-border-data.md",
+      "collectedAt": "2026-11-14T23:33:28.378538Z",
+      "summary": "DSH v0.2.106 本机连接及 104 个工具发现已记录，用户复核连通并批准有限验证上架；未执行 tools/call，不能据此认定业务数据、账号套餐或付费查询通过。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/review-batches/workbuddy-limited-2026-11-15.md",
+      "collectedAt": "2026-11-14T23:33:28.378538Z",
+      "summary": "只发布公开连接元数据，不分发服务代码、密钥或商业数据；用户使用自己账号并遵守供应商套餐及数据许可，完整合同权限不作保证。官方来源及剩余限制见审查报告。"
     }
-  ]
+  ],
+  "connectionAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-14T13:39:07Z",
+    "reviewedBy": "DuHu",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/workbuddy-limited-2026-11-15/openboost-cross-border-data.md",
+    "toolCount": 104,
+    "notes": "DSH v0.2.106 本机连接及 104 个工具发现已记录，用户复核连通并批准有限验证上架；未执行 tools/call，不能据此认定业务数据、账号套餐或付费查询通过。"
+  }
 }

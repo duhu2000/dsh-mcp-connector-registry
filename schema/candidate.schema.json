@@ -204,10 +204,49 @@
       "required": ["decision", "proposedConnectorId", "reviewedAt", "reviewedBy", "notes"],
       "properties": {
         "decision": { "enum": ["pending", "approved", "watchlist", "rejected"] },
+        "scope": { "enum": ["full-runtime", "connection-only"] },
         "proposedConnectorId": { "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9_-]*$" },
         "reviewedAt": { "type": ["string", "null"], "format": "date-time" },
         "reviewedBy": { "type": ["string", "null"] },
         "notes": { "type": "string" }
+      }
+    },
+    "connectionAcceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "checkedAt",
+        "reviewedBy",
+        "reportUrl",
+        "toolCount",
+        "notes"
+      ],
+      "properties": {
+        "status": {
+          "const": "pass"
+        },
+        "checkedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reviewedBy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reportUrl": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "toolCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     },
     "runtimeAcceptance": {
@@ -230,7 +269,7 @@
         "additionalProperties": false,
         "required": ["type", "url", "collectedAt", "summary"],
         "properties": {
-          "type": { "enum": ["official-registry", "official-vendor", "official-website", "official-repository", "license", "probe", "runtime-acceptance"] },
+          "type": { "enum": ["official-registry", "official-vendor", "official-website", "official-repository", "license", "probe", "runtime-acceptance", "connection-acceptance"] },
           "url": { "type": "string", "format": "uri" },
           "collectedAt": { "type": "string", "format": "date-time" },
           "summary": { "type": "string" }

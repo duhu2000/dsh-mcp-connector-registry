@@ -134,3 +134,101 @@ test('CI runs the acceptance gate only for newly added Connector descriptors', a
   assert.match(workflow, /github\.event_name == 'pull_request'/);
   assert.match(template, /real runtime acceptance report/);
 });
+
+async function limitedListing(id = 'openboost-cross-border-data') {
+  return {
+    descriptor: JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8')),
+    record: JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8')),
+  };
+}
+
+test('named connection-only approval publishes partial cards without inventing business acceptance', async () => {
+  for (const id of ['openboost-cross-border-data', 'cric-deeplink-real-estate']) {
+    const { descriptor, record } = await limitedListing(id);
+    assert.deepEqual(verifyRuntimeAcceptance(descriptor, record), []);
+    assert.equal(record.review.reviewedBy, 'DuHu');
+    assert.equal(record.runtimeAcceptance.status, 'not-run');
+    assert.equal(record.score.dimensions.runtime, 0);
+    assert.equal(record.score.band, 'watchlist');
+    assert.equal(descriptor.probeStatus, 'partial');
+    assert.equal(descriptor.prompts.some(p => /\{\{|研究问题/.test(p.text)), false);
+  }
+});
+
+test('connection-only path cannot silently replace full runtime approval', async () => {
+  for (const scope of [undefined, 'full-runtime', 'typo']) {
+    const { descriptor, record } = await limitedListing();
+    record.review.scope = scope;
+    const errors = verifyRuntimeAcceptance(descriptor, record);
+    assert.ok(errors.includes('real runtime acceptance must pass'));
+    assert.ok(errors.includes('candidate must pass the selected score gate'));
+  }
+});
+
+test('connection-only path rejects missing approval, missing evidence, or disguised runtime success', async () => {
+  const mutations = [
+    r => { r.review.decision = 'pending'; },
+    r => { r.review.reviewedBy = ' '; },
+    r => { r.review.reviewedAt = 'invalid'; },
+    r => { delete r.connectionAcceptance; },
+    r => { r.connectionAcceptance.status = 'fail'; },
+    r => { r.connectionAcceptance.toolCount = 0; },
+    r => { r.connectionAcceptance.checkedAt = 'invalid'; },
+    r => { r.connectionAcceptance.reportUrl = 'http://example.com/report'; },
+    r => { r.evidence = r.evidence.filter(e => e.type !== 'connection-acceptance'); },
+    r => { r.runtimeAcceptance.status = 'pass'; },
+    r => { r.runtimeAcceptance.checkedAt = '2026-11-15T00:00:00Z'; },
+    r => { r.score.dimensions.runtime = 7; r.score.total += 7; },
+    r => { r.dedupe.level = 'strong'; },
+    r => { r.authentication.mode = 'unknown'; },
+    r => { r.license.status = 'unknown'; },
+    r => { r.evidence = r.evidence.filter(e => e.type !== 'license'); },
+  ];
+  for (const mutate of mutations) {
+    const { descriptor, record } = await limitedListing();
+    mutate(record);
+    assert.ok(verifyRuntimeAcceptance(descriptor, record).length > 0, String(mutate));
+  }
+});
+
+test('connection-only cards cannot hide limitations or claim recommended/full validation', async () => {
+  for (const mutate of [
+    d => { d.featured = true; },
+    d => { d.probeStatus = 'pass'; },
+    d => { d.description = '业务查询已验收'; },
+    d => { d.published = false; },
+  ]) {
+    const { descriptor, record } = await limitedListing();
+    mutate(descriptor);
+    assert.ok(verifyRuntimeAcceptance(descriptor, record).length > 0);
+  }
+});
+
+test('moving a draft into connectors cannot skip the new-connector gate via Git rename detection', async () => {
+  const { mkdtemp, mkdir, writeFile, rename, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { fileURLToPath } = await import('node:url');
+  const { execFileSync, spawnSync } = await import('node:child_process');
+  const cwd = await mkdtemp(join(tmpdir(), 'registry-promote-gate-'));
+  const git = (...args) => execFileSync('git', args, { cwd, stdio: 'pipe' });
+  try {
+    git('init');
+    git('config', 'user.name', 'registry-test');
+    git('config', 'user.email', 'registry-test@example.invalid');
+    await mkdir(join(cwd, 'drafts'));
+    await mkdir(join(cwd, 'connectors'));
+    await writeFile(join(cwd, 'drafts/example.json'), '{"id":"example"}\n');
+    git('add', '.');
+    git('-c', 'commit.gpgsign=false', 'commit', '-m', 'QMCP-2014 test draft fixture');
+    const base = git('rev-parse', 'HEAD').toString().trim();
+    await rename(join(cwd, 'drafts/example.json'), join(cwd, 'connectors/example.json'));
+    git('add', '-A');
+    git('-c', 'commit.gpgsign=false', 'commit', '-m', 'QMCP-2014 test promotion fixture');
+    const result = spawnSync(process.execPath, [fileURLToPath(new URL('../scripts/check-new-connectors.mjs', import.meta.url)), '--base', base], { cwd, encoding: 'utf8' });
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /missing candidates\/records\/example.json/);
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});

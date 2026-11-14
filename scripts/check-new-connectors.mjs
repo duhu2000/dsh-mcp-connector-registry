@@ -14,6 +14,9 @@ function isHttps(value) {
 
 export function verifyRuntimeAcceptance(descriptor, record) {
   const errors = [];
+  const scope = record?.review?.scope ?? 'full-runtime';
+  const connectionOnly = scope === 'connection-only';
+  if (!['full-runtime', 'connection-only'].includes(scope)) errors.push('unsupported human review scope');
   const sourceKind = record?.source?.kind;
   const isOfficialRegistrySource = sourceKind === 'official-mcp-registry';
   const isOfficialVendorSource = sourceKind === 'official-vendor';
@@ -27,7 +30,11 @@ export function verifyRuntimeAcceptance(descriptor, record) {
   if (isOfficialVendorSource && !isHttps(record?.source?.detailUrl)) {
     errors.push('official vendor source must include an HTTPS detailUrl');
   }
-  if (record?.score?.band !== 'selected' || record?.score?.total < 80) errors.push('candidate must pass the selected score gate');
+  // Connection-only listings preserve their lower discovery score; human approval
+  // must explicitly select this scope instead of fabricating runtime points.
+  if (!connectionOnly && (record?.score?.band !== 'selected' || record?.score?.total < 80)) errors.push('candidate must pass the selected score gate');
+  if (connectionOnly && (record?.score?.band !== 'watchlist' || record?.score?.total < 60
+    || record?.score?.dimensions?.runtime !== 0)) errors.push('connection-only listing must retain watchlist score >= 60 and zero runtime points');
   const dimensions = record?.score?.dimensions && Object.values(record.score.dimensions);
   if (!Array.isArray(dimensions) || dimensions.some((value) => !Number.isInteger(value))
     || dimensions.reduce((sum, value) => sum + value, 0) !== record?.score?.total) {
@@ -41,12 +48,37 @@ export function verifyRuntimeAcceptance(descriptor, record) {
   if (record?.authentication?.mode === 'unknown') errors.push('authentication mode must be verified');
   if (record?.license?.status === 'unknown') errors.push('license or service-terms applicability must be verified');
   if (!isHttps(record?.license?.evidenceUrl)) errors.push('license or service-terms evidenceUrl must use HTTPS');
-  if (record?.runtimeAcceptance?.status !== 'pass') errors.push('real runtime acceptance must pass');
-  if (!record?.runtimeAcceptance?.checkedAt || !record?.runtimeAcceptance?.reviewedBy) errors.push('runtime acceptance timestamp and reviewer are required');
-  if (!isHttps(record?.runtimeAcceptance?.reportUrl)) errors.push('runtime acceptance reportUrl must use HTTPS');
-  if (!record?.runtimeAcceptance?.notes) errors.push('runtime acceptance notes are required');
-  if (!record?.evidence?.some((item) => item.type === 'runtime-acceptance' && item.url === record.runtimeAcceptance.reportUrl)) {
-    errors.push('runtime-acceptance evidence must match reportUrl');
+  if (connectionOnly) {
+    const connection = record?.connectionAcceptance;
+    if (!Number.isFinite(Date.parse(record?.review?.reviewedAt)) || typeof record?.review?.reviewedBy !== 'string'
+      || !record.review.reviewedBy.trim() || !record?.review?.notes?.trim()) errors.push('connection-only listing requires dated named human approval');
+    if (!isOfficialVendorSource) errors.push('connection-only listing requires an official vendor source');
+    if (record?.dedupe?.level !== 'none') errors.push('connection-only listing must not duplicate an existing connector');
+    if (!['api-key', 'bearer', 'oauth2'].includes(record?.authentication?.mode)) errors.push('connection-only listing requires verified credential configuration');
+    if (descriptor?.published !== true || descriptor?.featured !== false || descriptor?.probeStatus !== 'partial') {
+      errors.push('connection-only card must be published, not featured, and marked partial');
+    }
+    if (!descriptor?.description?.includes('业务查询尚未验收')) errors.push('connection-only card must disclose untested business queries');
+    if (record?.runtimeAcceptance?.status !== 'not-run' || record.runtimeAcceptance.checkedAt != null
+      || record.runtimeAcceptance.reviewedBy != null || record.runtimeAcceptance.reportUrl != null
+      || !record.runtimeAcceptance.notes) errors.push('connection-only business runtime must remain not-run with no claimed runtime evidence');
+    if (connection?.status !== 'pass' || !Number.isInteger(connection?.toolCount) || connection.toolCount < 1) {
+      errors.push('successful connection and nonempty tool discovery are required');
+    }
+    if (!connection?.checkedAt || !Number.isFinite(Date.parse(connection.checkedAt))
+      || !connection?.reviewedBy?.trim() || !connection?.notes?.trim()) errors.push('connection acceptance timestamp, reviewer, and notes are required');
+    if (!isHttps(connection?.reportUrl)) errors.push('connection acceptance reportUrl must use HTTPS');
+    if (!record?.evidence?.some((item) => item.type === 'connection-acceptance' && item.url === connection?.reportUrl)) {
+      errors.push('connection-acceptance evidence must match reportUrl');
+    }
+  } else {
+    if (record?.runtimeAcceptance?.status !== 'pass') errors.push('real runtime acceptance must pass');
+    if (!record?.runtimeAcceptance?.checkedAt || !record?.runtimeAcceptance?.reviewedBy) errors.push('runtime acceptance timestamp and reviewer are required');
+    if (!isHttps(record?.runtimeAcceptance?.reportUrl)) errors.push('runtime acceptance reportUrl must use HTTPS');
+    if (!record?.runtimeAcceptance?.notes) errors.push('runtime acceptance notes are required');
+    if (!record?.evidence?.some((item) => item.type === 'runtime-acceptance' && item.url === record.runtimeAcceptance.reportUrl)) {
+      errors.push('runtime-acceptance evidence must match reportUrl');
+    }
   }
   const authorityEvidenceType = isOfficialVendorSource ? 'official-vendor' : 'official-registry';
   const hasAuthorityEvidence = record?.evidence?.some((item) => item.type === authorityEvidenceType
@@ -67,7 +99,7 @@ export function verifyRuntimeAcceptance(descriptor, record) {
 
 function addedConnectorPaths(base) {
   const output = execFileSync('git', [
-    'diff', '--name-only', '--diff-filter=A', `${base}...HEAD`, '--', 'connectors/*.json',
+    'diff', '--no-renames', '--name-only', '--diff-filter=A', `${base}...HEAD`, '--', 'connectors/*.json',
   ], { encoding: 'utf8' });
   return output.split(/\r?\n/).filter((path) => path.endsWith('.json') && !path.endsWith('.sample.json'));
 }
