@@ -47,7 +47,7 @@
 | [BLS 美国劳工统计](../connectors/bls-us-labour-statistics.json) | CPI / 就业失业 / 工资工时 / JOLTS | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [博查搜索](../connectors/bocha-search.json) | 网页搜索 / AI 搜索 / 内容检索 | 社区连接器 | api-key | 公共目录 | unverified |
 | [Consensus](../connectors/consensus.json) | 同行评审论文检索 / 证据梳理 / 引用来源 | Consensus | oauth2-pkce | 公共目录 | unverified |
-| [克而瑞·深度智联地产数据](../connectors/cric-deeplink-real-estate.json) | 地产问数 / 城市对比 / 行业知识 | 克而瑞 / 深度智联 | bearer | 公共目录 | partial |
+| [克而瑞·深度智联地产数据](../connectors/cric-deeplink-real-estate.json) | 地产问数 / 城市对比 / 行业知识 | 克而瑞 / 深度智联 | bearer | 公共目录 | pass |
 | [EIA 美国能源数据](../connectors/eia-us-energy-data.json) | 电力 / 石油 / 天然气 / 煤炭 / 能源预测 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [EUR-Lex 欧盟法律开放数据](../connectors/eur-lex-eu-law.json) | 欧盟立法 / CJEU 判例 / 条约 / CELEX 与 EuroVoc | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [Exa·网络搜索](../connectors/exa-search.json) | 匿名语义网页搜索 / 网页抓取 / 高级检索 | Exa | none | 公共目录 | unverified |
@@ -80,7 +80,7 @@
 | [美国财政部 FiscalData](../connectors/us-treasury-fiscaldata.json) | 美国国债 / 利率汇率 / 财政收支 / 官方财政数据 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [USAspending 美国联邦支出](../connectors/usaspending-federal-awards.json) | 联邦合同 / 拨款贷款 / 受款方 / 支出分析 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [USGS 全球地震目录](../connectors/usgs-earthquake-catalog.json) | 全球地震 / 震级深度 / 区域检索 / 事件详情 | Pipeworx（独立第三方服务） | none | 公共目录 | pass |
-| [飞常准航空数据](../connectors/variflight-aviation-data.json) | 航班动态 / 中转方案 / 机场天气 / 实时位置 / 机票价格 | 飞常准（VariFlight） | api-key | 公共目录 | partial |
+| [飞常准航空数据](../connectors/variflight-aviation-data.json) | 航班动态 / 中转方案 / 机场天气 / 实时位置 / 机票价格 | 飞常准（VariFlight） | api-key | 公共目录 | pass |
 | [Wolfram](../connectors/wolfram.json) | 可计算知识 / Wolfram&#124;Alpha / 符号与数值计算 | Wolfram Research | none | 公共目录 | unverified |
 | [世界银行 Data360](../connectors/world-bank-data360.json) | 发展指标 / 国家对比 / 时间序列 / 元数据与图表 | World Bank Group | none | 公共目录 | pass |
 
