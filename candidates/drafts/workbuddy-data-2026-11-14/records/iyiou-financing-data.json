@@ -116,6 +116,12 @@
       "url": "https://mcp.iyiou.com/data",
       "collectedAt": "2026-11-14T14:35:57.189323Z",
       "summary": "匿名 initialize 和 tools/list 成功，4 工具，仅保存工具名、必填参数及注解。"
+    },
+    {
+      "type": "probe",
+      "url": "https://mcp.iyiou.com/data",
+      "collectedAt": "2026-11-15T04:29:11.711891+00:00",
+      "summary": "2026-11-15 匿名复核：initialize HTTP 200；tools/list 4 工具；无业务调用。"
     }
   ]
 }

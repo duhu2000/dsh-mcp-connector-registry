@@ -136,6 +136,12 @@
       "url": "https://claw.youzan.com/api/mcp/oauth/register",
       "collectedAt": "2026-11-14T14:57:34.960111Z",
       "summary": "DSH 注册失败；一次公开元数据复现返回 invalid_client_metadata / unsupported DCR client，clientCreated=false；未登录、未执行业务工具。"
+    },
+    {
+      "type": "probe",
+      "url": "https://claw.youzan.com/mcp/sse/v1",
+      "collectedAt": "2026-11-15T04:30:24.759220+00:00",
+      "summary": "2026-11-15 匿名复核：initialize HTTP 401；无授权工具发现或业务调用。"
     }
   ]
 }

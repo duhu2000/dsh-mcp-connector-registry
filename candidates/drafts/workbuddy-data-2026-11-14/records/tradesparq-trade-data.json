@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "id": "tradesparq-trade-data",
+  "registryName": "com.tradesparq/mcp",
+  "title": "外贸公社全球贸易数据",
+  "description": "连接外贸公社贸易数据 MCP，在账号许可范围内查询海关与进出口贸易数据，用于市场趋势和供应链研究。国家、时间、HS 编码位数及数据覆盖以实际工具与订阅为准，不将局部样本视为全量海关数据。默认示例仅查询汇总统计，不提取个人联系方式；费用须在调用前确认。OAuth 注册预检已通过，授权登录和业务工具尚未验收。本卡片由 DSH 社区维护，并非外贸公社官方产品。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "trade",
+      "china-provider"
+    ],
+    "matchedKeywords": [
+      "外贸公社 Tradesparq",
+      "国内数据",
+      "OAuth",
+      "授权订阅"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://mcp.tradesparq.com/mcp/data-search/.well-known/oauth-protected-resource",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-15T04:39:11.154763+00:00"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://opens.tradesparq.com/public/",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://mcp.tradesparq.com/mcp/data-search",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "oauth2",
+    "requiredHeaders": [],
+    "reason": "官方 401 challenge 与 PRM/AS 元数据交叉核实；S256、公开客户端 none；以 DSH 名称 DCR 返回 201。未完成用户授权/刷新令牌或 tools/list。"
+  },
+  "license": {
+    "status": "unknown",
+    "spdxId": null,
+    "evidenceUrl": null
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-15T04:30:24.879004+00:00",
+    "targetUrl": "https://mcp.tradesparq.com/mcp/data-search",
+    "httpStatus": 401,
+    "reason": "匿名 initialize 返回预期 401；官方 OAuth 发现链可用，DSH 名称 DCR 注册通过。真实工具数量未知，业务未调用。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 69,
+    "band": "watchlist",
+    "dimensions": {
+      "authority": 23,
+      "accessibility": 23,
+      "maintenanceSecurity": 8,
+      "runtime": 0,
+      "marketGap": 10,
+      "documentation": 5
+    },
+    "reasons": [
+      "人工证据评分，仅代表优先级，不代表上架批准。",
+      "独立官方域名、授权元数据与 DCR 已核验；登录、工具发现和业务结果未知，runtime=0。",
+      "提供方为国内服务，数据覆盖范围不等同运营地域；商业数据许可及维护版本待核实。"
+    ],
+    "gates": [
+      "service-terms-review",
+      "oauth-end-to-end",
+      "authenticated-runtime-acceptance",
+      "named-human-approval"
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "tradesparq-trade-data",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "用户要求继续评估；不沿用其他连接器的具名上架批准。"
+  },
+  "runtimeAcceptance": {
+    "status": "not-run",
+    "checkedAt": null,
+    "reviewedBy": null,
+    "reportUrl": null,
+    "notes": "仅匿名协议与 DCR 预检；没有登录或业务查询，没有付费调用。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://mcp.tradesparq.com/mcp/data-search/.well-known/oauth-protected-resource",
+      "collectedAt": "2026-11-15T04:39:11.154763+00:00",
+      "summary": "官方 401 指定的资源元数据，确认端点及授权服务器。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://opens.tradesparq.com/public/",
+      "collectedAt": "2026-11-15T04:39:11.154763+00:00",
+      "summary": "厂商产品及数据服务入口。"
+    },
+    {
+      "type": "probe",
+      "url": "https://mcp.tradesparq.com/mcp/data-search",
+      "collectedAt": "2026-11-15T04:30:24.879004+00:00",
+      "summary": "匿名 initialize 401；无业务调用。"
+    },
+    {
+      "type": "probe",
+      "url": "https://mcp.tradesparq.com/oauth2/register",
+      "collectedAt": "2026-11-15T04:39:11.154763+00:00",
+      "summary": "DSH 名称、loopback callback、公开客户端 none 动态注册 201；客户端标识未保存，不等于用户授权通过。"
+    }
+  ]
+}

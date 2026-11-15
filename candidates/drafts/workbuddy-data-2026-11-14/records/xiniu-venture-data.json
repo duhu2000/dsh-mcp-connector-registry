@@ -115,6 +115,12 @@
       "url": "https://vip.xiniudata.com/mcp",
       "collectedAt": "2026-11-14T13:58:03.858974Z",
       "summary": "本次本机代理链路 TLS 失败（curl 35），未得到目标 HTTP 响应；不据此认定服务失效或删除候选。"
+    },
+    {
+      "type": "probe",
+      "url": "https://vip.xiniudata.com/mcp",
+      "collectedAt": "2026-11-15T04:29:11.939960+00:00",
+      "summary": "2026-11-15 匿名复核：TLS 链路仍失败；不据此删除候选。"
     }
   ]
 }

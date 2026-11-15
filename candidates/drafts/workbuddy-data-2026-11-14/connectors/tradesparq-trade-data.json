@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "published": false,
+  "featured": false,
+  "probeStatus": "unverified",
+  "id": "tradesparq-trade-data",
+  "name": "外贸公社全球贸易数据",
+  "vendor": "外贸公社 Tradesparq",
+  "icon": "🚢",
+  "category": "调研分析",
+  "summary": "海关贸易 / 进出口趋势 / 供应链研究",
+  "description": "连接外贸公社贸易数据 MCP，在账号许可范围内查询海关与进出口贸易数据，用于市场趋势和供应链研究。国家、时间、HS 编码位数及数据覆盖以实际工具与订阅为准，不将局部样本视为全量海关数据。默认示例仅查询汇总统计，不提取个人联系方式；费用须在调用前确认。OAuth 注册预检已通过，授权登录和业务工具尚未验收。本卡片由 DSH 社区维护，并非外贸公社官方产品。",
+  "tags": [
+    "外贸公社 Tradesparq",
+    "国内数据",
+    "OAuth",
+    "授权订阅"
+  ],
+  "homepage": "https://opens.tradesparq.com/public/",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://mcp.tradesparq.com",
+    "scope": "openid profile offline_access",
+    "clientName": "DeepSeek Harness - Tradesparq MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "tradesparq-trade-data",
+      "serverName": "tradesparq_trade_data",
+      "url": "https://mcp.tradesparq.com/mcp/data-search",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看美国电气设备进口趋势",
+      "text": "查询 2025 年美国 HS 8504 相关进口月度趋势，先确认支持的 HS 位数、国家覆盖和统计单位，再列月份、数值和来源。只返回汇总统计，不提取联系方式；若无覆盖直接说明，如需收费先确认。",
+      "server": "tradesparq-trade-data"
+    },
+    {
+      "title": "比较两个市场的出口趋势",
+      "text": "比较 2024—2025 年中国向美国和德国出口光伏组件的贸易趋势，先核对实际支持的商品和 HS 编码口径，再按可比期间整理汇总表，说明样本覆盖与缺失项。不导出联系人，不自动追加查询；收费前确认。",
+      "server": "tradesparq-trade-data"
+    }
+  ]
+}

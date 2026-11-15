@@ -1,0 +1,54 @@
+[
+  {
+    "id": "wanfang",
+    "endpoint": "https://my.wfdata.com/auth/oauth2/register.do",
+    "checkedAt": "2026-11-15T04:39:11.154763+00:00",
+    "requestedClientName": "DeepSeek Harness - Wanfang MCP",
+    "requestedScope": "read",
+    "requestedAuthMethod": "none",
+    "loginAttempted": false,
+    "businessCalls": 0,
+    "httpStatus": 201,
+    "clientCreated": true,
+    "clientSecretReturned": false,
+    "authMethod": "none",
+    "error": null,
+    "errorDescription": ""
+  },
+  {
+    "id": "tradesparq",
+    "endpoint": "https://mcp.tradesparq.com/oauth2/register",
+    "checkedAt": "2026-11-15T04:39:11.155439+00:00",
+    "requestedClientName": "DeepSeek Harness - Tradesparq MCP",
+    "requestedScope": "openid profile offline_access",
+    "requestedAuthMethod": "none",
+    "loginAttempted": false,
+    "businessCalls": 0,
+    "httpStatus": 201,
+    "clientCreated": true,
+    "clientSecretReturned": false,
+    "authMethod": "none",
+    "error": null,
+    "errorDescription": ""
+  },
+  {
+    "id": "westock",
+    "endpoint": "https://stockbuddy.qq.com/cgi/cgi-bin/openai/mcp/oauth/register",
+    "checkedAt": "2026-11-15T04:39:11.155649+00:00",
+    "requestedClientName": "DeepSeek Harness - WeStock MCP",
+    "requestedScope": "read",
+    "requestedAuthMethod": "none",
+    "loginAttempted": false,
+    "businessCalls": 0,
+    "httpStatus": 400,
+    "clientCreated": false,
+    "clientSecretReturned": false,
+    "authMethod": "",
+    "error": {
+      "error": "invalid_redirect_uri",
+      "error_description": "redirect_uri must be workbuddy://workbuddy/mcp/connector:<name>/oauth/callback",
+      "error_uri": ""
+    },
+    "errorDescription": ""
+  }
+]
