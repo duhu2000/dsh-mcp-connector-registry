@@ -58,10 +58,27 @@ export function verifyRuntimeAcceptance(descriptor, record) {
     if (descriptor?.published !== true || descriptor?.featured !== false || descriptor?.probeStatus !== 'partial') {
       errors.push('connection-only card must be published, not featured, and marked partial');
     }
-    if (!descriptor?.description?.includes('业务查询尚未验收')) errors.push('connection-only card must disclose untested business queries');
-    if (record?.runtimeAcceptance?.status !== 'not-run' || record.runtimeAcceptance.checkedAt != null
+    const runtime = record?.runtimeAcceptance;
+    const followup = ['pass', 'fail'].includes(runtime?.status);
+    if (followup) {
+      // Later observations update runtime facts, not the original approval scope or score.
+      if (!Number.isFinite(Date.parse(runtime.checkedAt))
+        || Date.parse(runtime.checkedAt) <= Date.parse(record.review.reviewedAt)
+        || !runtime.reviewedBy?.trim() || !runtime.notes?.trim()
+        || !isHttps(runtime.reportUrl)
+        || !record.evidence?.some(e => e.type === 'runtime-acceptance' && e.url === runtime.reportUrl)) {
+        errors.push('follow-up runtime requires dated post-approval evidence and reviewer');
+      }
+      if (!descriptor?.description?.includes('有限验收') || !descriptor.description.includes('尚未验收')
+        || !descriptor.description.includes(runtime.status === 'pass' ? '业务查询通过' : '业务查询未通过')) {
+        errors.push('follow-up card must disclose its runtime outcome and remaining limitations');
+      }
+    } else {
+      if (!descriptor?.description?.includes('业务查询尚未验收')) errors.push('connection-only card must disclose untested business queries');
+      if (runtime?.status !== 'not-run' || runtime.checkedAt != null
       || record.runtimeAcceptance.reviewedBy != null || record.runtimeAcceptance.reportUrl != null
       || !record.runtimeAcceptance.notes) errors.push('connection-only business runtime must remain not-run with no claimed runtime evidence');
+    }
     if (connection?.status !== 'pass' || !Number.isInteger(connection?.toolCount) || connection.toolCount < 1) {
       errors.push('successful connection and nonempty tool discovery are required');
     }
