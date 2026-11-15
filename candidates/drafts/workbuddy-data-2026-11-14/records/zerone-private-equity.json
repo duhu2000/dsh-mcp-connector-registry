@@ -94,7 +94,7 @@
     "proposedConnectorId": "zerone-private-equity",
     "reviewedAt": null,
     "reviewedBy": null,
-    "notes": "用户授权继续评估其余卡片；未把其他连接器审核署名复用到本候选。"
+    "notes": "用户授权继续评估其余卡片；未把其他连接器审核署名复用到本候选。 本轮公开前端可读，网站登录的 Bearer 不等于 MCP Bearer 鉴权已证实；免费 MCP 权益未核验。v0.2.109 的 credentialBindings 仅用于 stdio，query API Key 绑定仍待实现。"
   },
   "runtimeAcceptance": {
     "status": "not-run",
