@@ -3,7 +3,7 @@
   "id": "variflight-aviation-data",
   "registryName": "io.github.variflight/variflight-mcp",
   "title": "飞常准航空数据",
-  "description": "有限验收：API Key 连接、9 个工具发现、免费日期及 PEK 机场天气单次业务查询已通过；2026-11-15 天气查询实际扣费 10 积分。其他收费工具、OAuth 与长期稳定性尚未验收，工具发现曾出现超时。接入飞常准官方 Aviation MCP，使用飞友 AI 开放平台 API Key 查询航班动态、直飞与中转方案、航班舒适度、航空器实时位置、机场天气和机票价格。远程服务按工具调用计费，协议层调用与 getTodayDate 免费；实际费用、数据范围和限额以飞常准控制台为准。在任何可能产生费用的查询前应先说明工具、预计调用次数和费用并等待用户确认。",
+  "description": "运行验收通过：API Key 连接、9 个工具发现、免费日期及 PEK 机场天气单次业务查询已通过；2026-11-15 天气查询实际扣费 10 积分。本次验证范围为 API Key 接入、工具发现及日期与机场天气查询；其他收费工具尚未验收。接入飞常准官方 Aviation MCP，使用飞友 AI 开放平台 API Key 查询航班动态、直飞与中转方案、航班舒适度、航空器实时位置、机场天气和机票价格。远程服务按工具调用计费，协议层调用与 getTodayDate 免费；实际费用、数据范围和限额以飞常准控制台为准。在任何可能产生费用的查询前应先说明工具、预计调用次数和费用并等待用户确认。",
   "version": "1.1.0",
   "classification": {
     "isDataService": true,
@@ -105,14 +105,14 @@
     "proposedConnectorId": "variflight-aviation-data",
     "reviewedAt": "2026-11-14T11:46:27Z",
     "reviewedBy": "DuHu",
-    "notes": "用户明确回复“批准上架，审核人 署名 DuHu”，批准按已告知的有限验收范围上架：API Key、9 个工具发现和免费日期调用通过；收费业务未验收，保留 partial。用户此前明确暂不调用付费工具，此批准不授权收费测试。"
+    "notes": "用户明确回复“批准上架，审核人 署名 DuHu”，批准按已告知的有限验收范围上架：API Key、9 个工具发现和免费日期调用通过；收费业务未验收，保留 partial。用户此前明确暂不调用付费工具，此批准不授权收费测试。 2026-11-15 后续用户确认这两项已测试通过，应显示 pass；据已有真实业务验收报告更新市场展示，原始上架审批时间及范围保留作为历史记录。"
   },
   "runtimeAcceptance": {
     "status": "pass",
     "checkedAt": "2026-11-15T03:21:13.498Z",
     "reviewedBy": "codex-runtime-verification",
     "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/variflight-aviation-2026-11-14/airport-weather-single-call-2026-11-15.md",
-    "notes": "getFutureWeatherByAirport({airport:PEK}) 单次返回 code=200 / Success 及非空天气数据，耗时 541 毫秒；控制台确认扣除赠送积分 10 分。其他收费工具、OAuth 和长期稳定性未验收。 用户要求基于本次测试更新市场目录；历史具名上架批准与评分保持不变。"
+    "notes": "getFutureWeatherByAirport({airport:PEK}) 单次返回 code=200 / Success 及非空天气数据，耗时 541 毫秒；控制台确认扣除赠送积分 10 分。其他收费工具、OAuth 和长期稳定性未验收。 用户要求基于本次测试更新市场目录；历史具名上架批准与评分保持不变。 2026-11-15 用户明确要求飞常准、克而瑞已测试通过应显示 pass；市场状态按本次代表性业务验收更新，不代表全部工具覆盖测试，历史匿名 probe 及上架评分保留。"
   },
   "evidence": [
     {

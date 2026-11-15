@@ -141,6 +141,7 @@ async function limitedListing(id = 'openboost-cross-border-data') {
     record: JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8')),
   };
   // Model the original approval snapshot independently of later live observations.
+  fixture.descriptor.probeStatus = 'partial';
   fixture.descriptor.description = '已验证连接及工具发现，业务查询尚未验收。';
   fixture.record.runtimeAcceptance = { status: 'not-run', checkedAt: null, reviewedBy: null, reportUrl: null, notes: '初次连接验收，未调用业务工具。' };
   return fixture;
@@ -151,6 +152,7 @@ test('limited listings retain approval scope while recording later pass/fail evi
     const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
     const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
     assert.equal(record.runtimeAcceptance.status, status);
+    assert.equal(descriptor.probeStatus, status === 'pass' ? 'pass' : 'partial');
     assert.deepEqual(verifyRuntimeAcceptance(descriptor, record), []);
     for (const mutate of [
       r => { r.runtimeAcceptance.checkedAt = r.review.reviewedAt; },
@@ -162,7 +164,7 @@ test('limited listings retain approval scope while recording later pass/fail evi
       assert.ok(verifyRuntimeAcceptance(descriptor, copy).length > 0);
     }
     for (const mutate of [
-      d => { d.probeStatus = 'pass'; },
+      d => { d.probeStatus = status === 'pass' ? 'partial' : 'pass'; },
       d => { d.featured = true; },
       d => { d.description = '业务查询通过'; },
       d => { d.description = `有限验收，业务查询${status === 'pass' ? '未通过' : '通过'}，其他范围尚未验收。`; },
