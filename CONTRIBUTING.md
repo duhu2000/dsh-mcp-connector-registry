@@ -70,11 +70,23 @@ ServerName、URL 与潜在密钥。合并到 `main` 后，独立 CI job 会重�
 默认仍要求真实只读业务运行验收通过。用户/维护者明确批准仅连接验收时，可在
 `review.scope` 记录 `connection-only`，同时提供 `connectionAcceptance`（成功时间、
 审核人、非零工具数、脱敏报告）和同 URL 的 `connection-acceptance` 证据。
-不得将连接成功改写为业务通过：`runtimeAcceptance` 必须保持 `not-run`，无业务验收时间、
+初次仅连接验收时，不得将连接成功改写为业务通过：`runtimeAcceptance` 必须保持 `not-run`，无业务验收时间、
 审核人或报告；评分保留 `watchlist`、总分至少 60、runtime=0。该路径不用于自动发现批量发布。
 
 有限路径仍要求官方厂商来源、明确鉴权配置、条款适用性证据、无重复和具名批准。
-卡片必须 `published=true`、`featured=false`、`probeStatus=partial`，描述包含
+初次仅连接验收的卡片必须 `published=true`、`featured=false`、`probeStatus=partial`，描述包含
 “业务查询尚未验收”。不能只加 partial 就绕过批准或证据要求；未知 scope 一律失败。
 `connectionAcceptance` 不证明业务套餐权限或收费数据可用，未验证事项须在报告和卡片中保留。
 付费测试上限及订阅购买仍遵守用户单独授权。模板迁入正式目录同样触发新增卡片校验。
+
+### 上架后的业务验收与市场状态
+
+后续真实代表性业务调用通过后，`runtimeAcceptance.status=pass`，市场卡片更新为
+`probeStatus=pass`，`probeCheckedAt` 对应真实测试时间。pass 不等于所有工具、所有账号
+权益或长期稳定性均已验收；卡片必须说明已通过的业务范围及尚未验收范围。
+后续验收失败或尚未调用业务工具的有限验收卡片继续 partial，不得伪造通过。
+
+原 `connection-only` 批准记录及评分保留为历史事实。后续结果必须具有晚于原批准时间
+的测试时间、检查人、HTTPS 报告和匹配的 runtime-acceptance 证据；成功卡片描述包含
+“运行验收通过”“业务查询通过”及剩余未验收范围，失败卡片保留“有限验收”及准确失败说明。
+候选记录中的历史匿名 probe 不用授权业务结果覆盖；featured 仍为 false。

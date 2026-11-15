@@ -55,10 +55,13 @@ export function verifyRuntimeAcceptance(descriptor, record) {
     if (!isOfficialVendorSource) errors.push('connection-only listing requires an official vendor source');
     if (record?.dedupe?.level !== 'none') errors.push('connection-only listing must not duplicate an existing connector');
     if (!['api-key', 'bearer', 'oauth2'].includes(record?.authentication?.mode)) errors.push('connection-only listing requires verified credential configuration');
-    if (descriptor?.published !== true || descriptor?.featured !== false || descriptor?.probeStatus !== 'partial') {
-      errors.push('connection-only card must be published, not featured, and marked partial');
-    }
     const runtime = record?.runtimeAcceptance;
+    // A later successful representative business call advances the market badge;
+    // original approval scope and discovery score remain historical facts.
+    const expectedStatus = runtime?.status === 'pass' ? 'pass' : 'partial';
+    if (descriptor?.published !== true || descriptor?.featured !== false || descriptor?.probeStatus !== expectedStatus) {
+      errors.push('connection-only follow-up card must be published, not featured, and match runtime status');
+    }
     const followup = ['pass', 'fail'].includes(runtime?.status);
     if (followup) {
       // Later observations update runtime facts, not the original approval scope or score.
@@ -69,7 +72,7 @@ export function verifyRuntimeAcceptance(descriptor, record) {
         || !record.evidence?.some(e => e.type === 'runtime-acceptance' && e.url === runtime.reportUrl)) {
         errors.push('follow-up runtime requires dated post-approval evidence and reviewer');
       }
-      if (!descriptor?.description?.includes('有限验收') || !descriptor.description.includes('尚未验收')
+      if (!descriptor?.description?.includes(runtime.status === 'pass' ? '运行验收通过' : '有限验收') || !descriptor.description.includes('尚未验收')
         || !descriptor.description.includes(runtime.status === 'pass' ? '业务查询通过' : '业务查询未通过')) {
         errors.push('follow-up card must disclose its runtime outcome and remaining limitations');
       }
