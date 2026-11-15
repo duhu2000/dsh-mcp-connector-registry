@@ -39,7 +39,7 @@
 
 ## 调研分析
 
-共 40 个连接器。
+共 41 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -81,6 +81,7 @@
 | [USAspending 美国联邦支出](../connectors/usaspending-federal-awards.json) | 联邦合同 / 拨款贷款 / 受款方 / 支出分析 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [USGS 全球地震目录](../connectors/usgs-earthquake-catalog.json) | 全球地震 / 震级深度 / 区域检索 / 事件详情 | Pipeworx（独立第三方服务） | none | 公共目录 | pass |
 | [飞常准航空数据](../connectors/variflight-aviation-data.json) | 航班动态 / 中转方案 / 机场天气 / 实时位置 / 机票价格 | 飞常准（VariFlight） | api-key | 公共目录 | pass |
+| [万方学术文献](../connectors/wanfang-literature-data.json) | 中文文献检索 / 学术资料 / 引文研究 | 万方数据 | oauth2-pkce | 公共目录 | pass |
 | [Wolfram](../connectors/wolfram.json) | 可计算知识 / Wolfram&#124;Alpha / 符号与数值计算 | Wolfram Research | none | 公共目录 | unverified |
 | [世界银行 Data360](../connectors/world-bank-data360.json) | 发展指标 / 国家对比 / 时间序列 / 元数据与图表 | World Bank Group | none | 公共目录 | pass |
 

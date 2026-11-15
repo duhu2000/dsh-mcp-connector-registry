@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "id": "wanfang-literature-data",
+  "registryName": "com.wfdata/mcp",
+  "title": "万方学术文献",
+  "description": "通过万方数据官方 MCP，使用本人账号 OAuth 授权检索中文学术文献。已完成授权连接、2 个工具发现和一次文献元数据检索验收，支持以自然语言查找文献并整理题录。全文下载尚未验收，检索及下载的费用、可用文献范围以账号权益和万方服务规则为准。默认示例只检索元数据，不自动下载全文或批量导出；不共享账号、不授予额外文献使用许可。本卡片由 DSH 社区维护，并非万方官方产品。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "academic",
+      "china-provider"
+    ],
+    "matchedKeywords": [
+      "万方数据",
+      "国内数据",
+      "OAuth",
+      "授权订阅"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://api.wfdata.com/.well-known/oauth-protected-resource/mcp/wf-search-download",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-15T04:39:11.154763+00:00"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://ai.wfdata.com/",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://api.wfdata.com/mcp/wf-search-download",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "oauth2",
+    "requiredHeaders": [],
+    "reason": "官方 OAuth 发现链、S256 与 DSH DCR 已核验；用户确认授权成功，DSH 截图显示连接 ok、2 个工具。刷新令牌尚未验收。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": null,
+    "evidenceUrl": "https://cx.wanfangdata.com.cn/s/terms.html",
+    "notes": "厂商通用使用协议适用本人账号与文献使用；非开源数据许可，MCP 具体收费仍以账号约定为准。"
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-11-15T19:32:29+08:00",
+    "targetUrl": "https://api.wfdata.com/mcp/wf-search-download",
+    "httpStatus": null,
+    "reason": "用户提供 DSH 连接与工具发现截图：ok，1 个服务入口，search/fulltext 共 2 个工具。截图时间为工具缓存时间；无原始 HTTP 状态。历史匿名 401 保留在预检证据中。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 85,
+    "band": "selected",
+    "dimensions": {
+      "authority": 24,
+      "accessibility": 23,
+      "maintenanceSecurity": 8,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 5
+    },
+    "reasons": [
+      "人工候选优先级评分，不代表全部工具和全部账号权益。",
+      "保留原预检维度，新增用户回传单次 search 业务验收 runtime 15/15；总分 85。",
+      "官方 OAuth 与用户连接/工具截图；国内中文学术文献补充，全文与计费未验证。"
+    ],
+    "gates": []
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "wanfang-literature-data",
+    "reviewedAt": "2026-11-15T11:43:11.703660+00:00",
+    "reviewedBy": "DuHu",
+    "notes": "用户在本会话明确“批准 上架”，沿用此前指定审核人 DuHu；依据用户回传 OAuth、工具发现和一次 search 验收，上架本人授权的文献检索连接器；不宣称全文、免费额度或全工具验收通过。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-15",
+    "reviewedBy": "Codex（复核用户回传执行报告，不代表上架审核人署名）",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/f2b491deedd248c2853483dddf9264823fc21fbb/candidates/drafts/workbuddy-data-2026-11-14/evidence/wanfang-user-runtime-2026-11-15.md",
+    "notes": "用户回传一次 search 成功：OpenPeriodicalChi，2023—2025 年钠离子电池储能，rows=3，总命中 310。未重试/下载/fulltext。精确调用时间与计费未知。证据：evidence/wanfang-user-runtime-2026-11-15.md；已关联版本固定的证据报告；上架批准单独记录于 review。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://api.wfdata.com/.well-known/oauth-protected-resource/mcp/wf-search-download",
+      "collectedAt": "2026-11-15T04:39:11.154763+00:00",
+      "summary": "官方 401 指定的资源元数据，确认端点及授权服务器。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://ai.wfdata.com/",
+      "collectedAt": "2026-11-15T04:39:11.154763+00:00",
+      "summary": "厂商产品及数据服务入口。"
+    },
+    {
+      "type": "probe",
+      "url": "https://api.wfdata.com/mcp/wf-search-download",
+      "collectedAt": "2026-11-15T04:30:25.076534+00:00",
+      "summary": "匿名 initialize 401；无业务调用。"
+    },
+    {
+      "type": "probe",
+      "url": "https://my.wfdata.com/auth/oauth2/register.do",
+      "collectedAt": "2026-11-15T04:39:11.154763+00:00",
+      "summary": "DSH 名称、loopback callback、公开客户端 none 动态注册 201；客户端标识未保存，不等于用户授权通过。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/f2b491deedd248c2853483dddf9264823fc21fbb/candidates/drafts/workbuddy-data-2026-11-14/evidence/wanfang-user-runtime-2026-11-15.md",
+      "collectedAt": "2026-11-15T11:43:11.703660+00:00",
+      "summary": "用户 DSH 截图：OAuth 已连接、2 工具；用户执行报告：一次 search 成功，310 命中返回 3 条。非助手直接重放；全文及费用未知。"
+    },
+    {
+      "type": "license",
+      "url": "https://cx.wanfangdata.com.cn/s/terms.html",
+      "collectedAt": "2026-11-15T11:43:11.703660+00:00",
+      "summary": "核对厂商通用使用协议，按本人账号与内容许可连接；具体 MCP 套餐计费未知，不声明免费。"
+    }
+  ]
+}
