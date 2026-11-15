@@ -107,7 +107,7 @@
     "checkedAt": null,
     "reviewedBy": null,
     "reportUrl": null,
-    "notes": "仅无凭据协议/工具发现探测，未执行 tools/call；工具数量与文档声明分开记录。"
+    "notes": "仅无凭据协议/工具发现探测，未执行 tools/call；工具数量与文档声明分开记录。 2026-11-15 用户确认暂时没有这两项授权账号，等待账号后验收。"
   },
   "evidence": [
     {
@@ -133,6 +133,12 @@
       "url": "https://auth.qeubee.cn/.well-known/oauth-authorization-server",
       "collectedAt": "2026-11-14T14:35:57.189323Z",
       "summary": "声明 DCR、S256、刷新令牌及 read/write/offline_access；未注册客户端或完成授权。"
+    },
+    {
+      "type": "probe",
+      "url": "https://data-api.qeubee.cn/sumscope/common/mcp/stream",
+      "collectedAt": "2026-11-15T04:29:11.711127+00:00",
+      "summary": "2026-11-15 匿名复核：initialize HTTP 401；无授权工具发现或业务调用。"
     }
   ]
 }

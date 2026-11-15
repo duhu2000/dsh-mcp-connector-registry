@@ -106,7 +106,7 @@
     "checkedAt": null,
     "reviewedBy": null,
     "reportUrl": null,
-    "notes": "仅公开协议探测。没有 tools/call，没有使用真实凭据或付费额度。"
+    "notes": "仅公开协议探测。没有 tools/call，没有使用真实凭据或付费额度。 2026-11-15 用户确认暂时没有这两项授权账号，等待账号后验收。"
   },
   "evidence": [
     {
@@ -138,6 +138,12 @@
       "url": "https://www.morningstar.com/company/terms-and-conditions",
       "collectedAt": "2026-11-14T13:19:37.016429Z",
       "summary": "网站通用条款已读取，不能替代 MCP 商业订阅许可，因此 license.status 仍为 unknown。"
+    },
+    {
+      "type": "probe",
+      "url": "https://mcp.morningstar.com/mcp",
+      "collectedAt": "2026-11-15T04:29:11.710278+00:00",
+      "summary": "2026-11-15 匿名复核：initialize HTTP 401；无授权工具发现或业务调用。"
     }
   ]
 }

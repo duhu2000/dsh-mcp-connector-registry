@@ -121,6 +121,12 @@
       "url": "https://cdn.zdeal.com.cn/ai/file/%E6%89%A7%E4%B8%ADMCP%E5%8A%9F%E8%83%BD%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf",
       "collectedAt": "2026-11-14T13:57:59.669928Z",
       "summary": "2026 年 5 月使用说明书第 13 页给出 HTTP MCP + URL query api_key 配置；描述能力不等同当前授权工具清单。"
+    },
+    {
+      "type": "probe",
+      "url": "https://ai.zerone.com.cn/mcp/pe",
+      "collectedAt": "2026-11-15T04:29:12.125055+00:00",
+      "summary": "2026-11-15 匿名复核：initialize HTTP 200；tools/list 9 工具；无业务调用。"
     }
   ]
 }
