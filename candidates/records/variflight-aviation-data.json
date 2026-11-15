@@ -3,7 +3,7 @@
   "id": "variflight-aviation-data",
   "registryName": "io.github.variflight/variflight-mcp",
   "title": "飞常准航空数据",
-  "description": "飞常准官方 Aviation MCP，提供航班动态、中转、舒适度、机场天气、航空器位置及机票价格；按用户批准的有限验收范围上架。",
+  "description": "有限验收：API Key 连接、9 个工具发现、免费日期及 PEK 机场天气单次业务查询已通过；2026-11-15 天气查询实际扣费 10 积分。其他收费工具、OAuth 与长期稳定性尚未验收，工具发现曾出现超时。接入飞常准官方 Aviation MCP，使用飞友 AI 开放平台 API Key 查询航班动态、直飞与中转方案、航班舒适度、航空器实时位置、机场天气和机票价格。远程服务按工具调用计费，协议层调用与 getTodayDate 免费；实际费用、数据范围和限额以飞常准控制台为准。在任何可能产生费用的查询前应先说明工具、预计调用次数和费用并等待用户确认。",
   "version": "1.1.0",
   "classification": {
     "isDataService": true,
@@ -48,7 +48,11 @@
   "authentication": {
     "mode": "api-key",
     "requiredHeaders": [
-      "X-API-Key"
+      {
+        "name": "X-API-Key",
+        "required": true,
+        "secret": true
+      }
     ],
     "reason": "官方文档支持 API Key 或 OAuth。DSH Web v0.2.106 手动 API Key 接入、远程工具发现及免费 getTodayDate 实测通过；本卡片仅提供已验证的 API Key 路径。"
   },
@@ -61,7 +65,7 @@
     "registryStatus": "active",
     "registryUpdatedAt": null,
     "ageDays": null,
-    "repositoryActivity": "官方仓库未归档，最近推送 2026-10-10；npm 1.1.0 发布于 2026-09-26。"
+    "repositoryActivity": "active"
   },
   "probe": {
     "status": "partial",
@@ -90,8 +94,9 @@
       "官方域名、仓库与 Official Registry 记录一致。",
       "API Key 远程接入已验证；OAuth 仅验证元数据，不声明端到端通过。",
       "远程服务受服务条款约束；可选 npm 包声明 ISC，不将其扩展为数据许可。",
-      "有限运行验收：9 个工具发现及免费日期调用成功；业务数据和持续稳定性待跟踪。",
-      "补齐国内官方航空数据服务；不包含个人行程验收。"
+      "补齐国内官方航空数据服务；不包含个人行程验收。",
+      "保留上架时评分，不因本次单工具测试自动提升评级；最新结果以 runtimeAcceptance 为准。getFutureWeatherByAirport({airport:PEK}) 单次返回 code=200 / Success 及非空天气数据，耗时 541 毫秒；控制台确认扣除赠送积分 10 分。其他收费工具、OAuth 和长期稳定性未验收。",
+      "历史维护核查：官方仓库未归档，最近推送 2026-10-10；npm 1.1.0 发布于 2026-09-26。"
     ],
     "gates": []
   },
@@ -104,10 +109,10 @@
   },
   "runtimeAcceptance": {
     "status": "pass",
-    "checkedAt": "2026-11-14T10:05:00Z",
-    "reviewedBy": "DuHu",
-    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/variflight-aviation-2026-11-14/variflight-aviation.md",
-    "notes": "具名批准的有限验收：DSH Web v0.2.106 API Key 连接、9 个工具发现，以及 getTodayDate({}) 实际返回 2026-11-14。未读取收费航空业务数据；工具列表曾一次超时，后续免费调用成功。不将 API Key 成功视为 OAuth 验收。"
+    "checkedAt": "2026-11-15T03:21:13.498Z",
+    "reviewedBy": "codex-runtime-verification",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/variflight-aviation-2026-11-14/airport-weather-single-call-2026-11-15.md",
+    "notes": "getFutureWeatherByAirport({airport:PEK}) 单次返回 code=200 / Success 及非空天气数据，耗时 541 毫秒；控制台确认扣除赠送积分 10 分。其他收费工具、OAuth 和长期稳定性未验收。 用户要求基于本次测试更新市场目录；历史具名上架批准与评分保持不变。"
   },
   "evidence": [
     {
@@ -139,6 +144,12 @@
       "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/variflight-aviation-2026-11-14/variflight-aviation.md",
       "collectedAt": "2026-11-14T11:46:27Z",
       "summary": "记录真实 API Key 连接、工具发现及一次免费工具调用；DuHu 批准有限验收上架，保留未验证范围。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/variflight-aviation-2026-11-14/airport-weather-single-call-2026-11-15.md",
+      "collectedAt": "2026-11-15T03:21:13.498Z",
+      "summary": "getFutureWeatherByAirport({airport:PEK}) 单次返回 code=200 / Success 及非空天气数据，耗时 541 毫秒；控制台确认扣除赠送积分 10 分。其他收费工具、OAuth 和长期稳定性未验收。"
     }
   ]
 }

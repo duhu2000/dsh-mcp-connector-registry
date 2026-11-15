@@ -24,8 +24,9 @@ test('VariFlight card preserves approved limited acceptance and explicit paid-ca
   assert.equal(draft.servers[0].oauthResource, undefined);
   assert.equal(record.review.reviewedBy, 'DuHu');
   assert.deepEqual(verifyRuntimeAcceptance(draft, record), []);
-  assert.match(draft.description, /收费业务数据尚未验收/);
-  assert.match(record.runtimeAcceptance.notes, /有限验收/);
+  assert.match(draft.description, /机场天气单次业务查询已通过/);
+  assert.match(draft.description, /其他收费工具、OAuth 与长期稳定性尚未验收/);
+  assert.match(record.runtimeAcceptance.notes, /getFutureWeatherByAirport/);
   assert.match(draft.prompts[0].text, /getTodayDate/);
   assert.match(draft.prompts[0].text, /不要调用/);
 
