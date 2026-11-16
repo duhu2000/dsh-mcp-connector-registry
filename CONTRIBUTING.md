@@ -90,3 +90,12 @@ ServerName、URL 与潜在密钥。合并到 `main` 后，独立 CI job 会重�
 的测试时间、检查人、HTTPS 报告和匹配的 runtime-acceptance 证据；成功卡片描述包含
 “运行验收通过”“业务查询通过”及剩余未验收范围，失败卡片保留“有限验收”及准确失败说明。
 候选记录中的历史匿名 probe 不用授权业务结果覆盖；featured 仍为 false。
+
+
+### 官方服务条款未公开的具名例外
+
+当维护者知晓条款未公开仍明确批准某一连接器上架时，可在正式记录的 `review.serviceTermsException` 中记录例外。该路径仅适用于官方厂商、已验证凭据配置且真实业务 runtime PASS 的非推荐卡片；不能用于自动发现或 connection-only 上架。
+
+必填：`connectorId` 匹配卡片；`decision=approved`；`reasonCode=official-terms-unavailable`；`reviewedBy`、`reviewedAt` 与主审核记录一致；非空 `notes`；HTTPS `reportUrl` 与 `service-terms-exception` 类型证据一致。报告保留用户明确指令与缺失事实，不冒充厂商授权。来源、评分、真实运行报告等校验照常执行。
+
+`license.status` 必须保留 `unknown`，`spdxId` 和 `evidenceUrl` 必须为 null。已发布卡片必须为 `pass`、`featured=false`，描述须包含“服务条款未公开，尚未核验”。该例外不授予额外数据许可，不能推广到其他候选；取得官方协议后需重新核验。

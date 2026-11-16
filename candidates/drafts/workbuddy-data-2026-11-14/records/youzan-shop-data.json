@@ -97,7 +97,7 @@
     "proposedConnectorId": "youzan-shop-data",
     "reviewedAt": null,
     "reviewedBy": null,
-    "notes": "继续评估授权不等于具名上架批准；未复用其他候选审核人。"
+    "notes": "继续评估授权不等于具名上架批准；未复用其他候选审核人。 本轮 AS 仍声明 DCR/S256/youzan_query；无新注册配置依据，没有重复 DCR。网站注册送算力不等于第三方 MCP 授权权益。"
   },
   "runtimeAcceptance": {
     "status": "not-run",

@@ -95,7 +95,7 @@
     "proposedConnectorId": "iyiou-financing-data",
     "reviewedAt": null,
     "reviewedBy": null,
-    "notes": "继续评估授权不等于具名上架批准；未复用其他候选审核人。"
+    "notes": "继续评估授权不等于具名上架批准；未复用其他候选审核人。 用户本轮确认暂无账号/试用额度；官方免费试用入口保留，本轮页面返回校验脚本，未获得新 Header 证据。v0.2.109 credentialBindings 仅用于 stdio 环境变量，HTTP 多凭据仍待适配。"
   },
   "runtimeAcceptance": {
     "status": "not-run",

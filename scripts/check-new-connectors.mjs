@@ -46,8 +46,35 @@ export function verifyRuntimeAcceptance(descriptor, record) {
   if (!record?.review?.notes) errors.push('human review notes are required');
   if (!['pass', 'partial'].includes(record?.probe?.status)) errors.push('public probe must pass or be partially reachable');
   if (record?.authentication?.mode === 'unknown') errors.push('authentication mode must be verified');
-  if (record?.license?.status === 'unknown') errors.push('license or service-terms applicability must be verified');
-  if (!isHttps(record?.license?.evidenceUrl)) errors.push('license or service-terms evidenceUrl must use HTTPS');
+  // An explicit human exception preserves unknown terms instead of fabricating
+  // license evidence. It cannot waive source, auth, score or runtime checks.
+  const termsException = record?.review?.serviceTermsException;
+  const hasTermsException = termsException != null;
+  const termsExceptionValid = hasTermsException
+    && termsException.reasonCode === 'official-terms-unavailable'
+    && termsException.decision === 'approved'
+    && termsException.connectorId === descriptor?.id
+    && typeof termsException.reviewedBy === 'string' && termsException.reviewedBy.trim()
+    && termsException.reviewedBy === record?.review?.reviewedBy
+    && Number.isFinite(Date.parse(termsException.reviewedAt))
+    && termsException.reviewedAt === record?.review?.reviewedAt
+    && typeof termsException.notes === 'string' && termsException.notes.trim()
+    && isHttps(termsException.reportUrl)
+    && record?.evidence?.some(e => e.type === 'service-terms-exception' && e.url === termsException.reportUrl)
+    && record?.review?.decision === 'approved'
+    && isOfficialVendorSource && !connectionOnly
+    && record?.runtimeAcceptance?.status === 'pass'
+    && ['api-key', 'bearer', 'oauth2'].includes(record?.authentication?.mode)
+    && record?.license?.status === 'unknown'
+    && record.license.spdxId === null && record.license.evidenceUrl === null
+    && descriptor?.published === true && descriptor?.featured === false
+    && descriptor?.probeStatus === 'pass'
+    && descriptor?.description?.includes('服务条款未公开，尚未核验');
+  if (hasTermsException && !termsExceptionValid) errors.push('service-terms exception requires explicit matching named approval, runtime PASS and market disclosure');
+  if (!termsExceptionValid) {
+    if (record?.license?.status === 'unknown') errors.push('license or service-terms applicability must be verified');
+    if (!isHttps(record?.license?.evidenceUrl)) errors.push('license or service-terms evidenceUrl must use HTTPS');
+  }
   if (connectionOnly) {
     const connection = record?.connectionAcceptance;
     if (!Number.isFinite(Date.parse(record?.review?.reviewedAt)) || typeof record?.review?.reviewedBy !== 'string'
@@ -106,7 +133,7 @@ export function verifyRuntimeAcceptance(descriptor, record) {
   if (!hasAuthorityEvidence) {
     errors.push(`${isOfficialVendorSource ? 'official vendor' : 'Official Registry'} evidence is required`);
   }
-  if (!record?.evidence?.some((item) => item.type === 'license' && item.url === record?.license?.evidenceUrl)) {
+  if (!termsExceptionValid && !record?.evidence?.some((item) => item.type === 'license' && item.url === record?.license?.evidenceUrl)) {
     errors.push('license or service-terms evidence must match evidenceUrl');
   }
   const serialized = JSON.stringify(record ?? {});

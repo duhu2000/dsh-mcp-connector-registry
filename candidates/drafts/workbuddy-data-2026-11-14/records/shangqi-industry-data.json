@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "id": "shangqi-industry-data",
+  "registryName": "review/shangqi-industry-data",
+  "title": "上奇产业通",
+  "description": "连接上奇产业通产业数据服务，支持产业链图谱及区域产业研究。已确认连接与 18 个工具发现，并依据用户提供的 DSH 执行结果完成“新能源汽车”产业链图谱单次查询验收；其余工具尚未逐项实测。本次图谱未返回重点企业列表，未标注原始数据来源、统计口径或更新频率。使用需账号授权，费用以服务商套餐为准。本卡片由 DSH 社区维护，并非上奇官方产品。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "industry",
+      "china-provider"
+    ],
+    "matchedKeywords": [
+      "上奇产业通",
+      "国内数据",
+      "产业研究"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://www.chanyedata.com/",
+    "status": "active",
+    "retrievedAt": "2026-11-16T00:45:30.519848+00:00"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://www.chanyedata.com/",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://api.chanyedata.com/mcp/3d1eed666d38dc6db60bd0395156006b/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "api-key",
+    "requiredHeaders": [
+      "Authorization"
+    ],
+    "reason": "用户提供后台配置为 Authorization 原样 API Key（不加 Bearer）；用户确认手动连接成功，随后 DSH 截图显示已连接、18 个工具和 1 个服务入口。未读取真实 Key。"
+  },
+  "license": {
+    "status": "unknown",
+    "spdxId": null,
+    "evidenceUrl": null
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-16T00:45:30.519848+00:00",
+    "targetUrl": "https://api.chanyedata.com/mcp/3d1eed666d38dc6db60bd0395156006b/mcp",
+    "httpStatus": 401,
+    "reason": "历史匿名 initialize 返回 401；随后用户凭据连接与工具发现截图通过（18 工具）。历史 HTTP 状态与匿名探测时间保持不变。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 0,
+    "band": "defer",
+    "dimensions": {
+      "authority": 0,
+      "accessibility": 0,
+      "maintenanceSecurity": 0,
+      "runtime": 0,
+      "marketGap": 0,
+      "documentation": 0
+    },
+    "reasons": [
+      "未评分占位；连接及产业链图谱单次业务验收已通过，剩余服务条款、市场范围及正式审核待完成。"
+    ],
+    "gates": [
+      "service-terms-review",
+      "final-score-review"
+    ]
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "shangqi-industry-data",
+    "reviewedAt": "2026-11-16T06:12:45.281524+00:00",
+    "reviewedBy": "DuHu",
+    "notes": "用户在本会话明确要求“继续，处理上架，提交PR, 上架处理”，沿用既定审核署名 DuHu；范围以产业链与区域产业研究为主。仅新能源汽车产业链图谱单次实测，不代表全部工具通过。卡片分类和示例不构成其他工具禁用；服务条款仍须核验，未发布。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-16T14:01:43+08:00",
+    "reviewedBy": "Codex（复核用户提供的 DSH 执行结果）",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/58001a6d4e88eebd8c88b32094a4b8c803fcec07/candidates/drafts/workbuddy-data-2026-11-14/evidence/shangqi-connection-2026-11-16.md",
+    "notes": "证据为用户转述的实际执行结果，未取得原始响应。仅 get_industry_chain_graph(keyword=新能源汽车) 一次；status=00000，message=请求成功，无重试或前置调用。checkedAt 采用用户报告的接口返回时间（按本地 Asia/Shanghai 记录），不是数据更新时间。返回产业链环节，不含重点企业列表；来源、统计口径、更新频率及实际扣费未知。其余 17 工具未实测；报告已关联固定提交，随本分支推送。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://www.chanyedata.com/",
+      "collectedAt": "2026-11-16T00:45:30.519848+00:00",
+      "summary": "官网可读，标题产业可信数据空间。"
+    },
+    {
+      "type": "probe",
+      "url": "https://api.chanyedata.com/mcp/3d1eed666d38dc6db60bd0395156006b/mcp",
+      "collectedAt": "2026-11-16T00:45:30.519848+00:00",
+      "summary": "用户指定端点匿名 initialize 401 Invalid token；配置来自用户后台，不存储真实 Key。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/58001a6d4e88eebd8c88b32094a4b8c803fcec07/candidates/drafts/workbuddy-data-2026-11-14/evidence/shangqi-connection-2026-11-16.md",
+      "collectedAt": "2026-11-16T14:01:43+08:00",
+      "summary": "用户提供的 DSH 截图及执行结果；连接 18 工具，新能源汽车产业链图谱一次成功，非助手直接重放。"
+    },
+    {
+      "type": "connection-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/58001a6d4e88eebd8c88b32094a4b8c803fcec07/candidates/drafts/workbuddy-data-2026-11-14/evidence/shangqi-connection-2026-11-16.md",
+      "collectedAt": "2026-11-16T13:31:46+08:00",
+      "summary": "用户提供的 DSH 截图及执行结果；连接 18 工具，新能源汽车产业链图谱一次成功，非助手直接重放。"
+    }
+  ],
+  "connectionAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-16T13:31:46+08:00",
+    "reviewedBy": "Codex（复核用户提供的 DSH 截图）",
+    "toolCount": 18,
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/58001a6d4e88eebd8c88b32094a4b8c803fcec07/candidates/drafts/workbuddy-data-2026-11-14/evidence/shangqi-connection-2026-11-16.md",
+    "notes": "用户手动配置连接；截图最近成功缓存 2026/11/16 13:31:46，已连接，1 个服务入口。仅可见 search_company_id 名称及企业匹配描述；其余 17 个工具未逐项核实。此时间是工具缓存时间，不是业务调用时间；证据已关联固定提交，随本分支推送。 后续用户提供全部 18 个工具描述汇总，记录于 toolInventoryReview；原始 schema 未取得。"
+  },
+  "toolInventoryReview": {
+    "status": "user-reported",
+    "reviewedOn": "2026-11-16",
+    "toolCount": 18,
+    "groups": {
+      "产业": [
+        "search_industry_id",
+        "get_industry_chain_graph",
+        "get_company_recommendation_ranking"
+      ],
+      "区域": [
+        "search_region_id",
+        "search_park_id",
+        "get_region_migration_overview"
+      ],
+      "企业": [
+        "search_company_id",
+        "search_company_list",
+        "get_company_basic_profile",
+        "get_company_business_profile",
+        "get_company_competitive_relations",
+        "get_company_supply_relations",
+        "get_company_innovation_relations",
+        "get_company_financing_history",
+        "get_company_connect_path",
+        "get_company_risk_overview"
+      ],
+      "产业×区域": [
+        "analyze_region_chain_advantages",
+        "get_region_industry_overview"
+      ]
+    },
+    "notes": "依据用户转述 DSH 已加载描述整理，未取得原始 tools/list JSON Schema；清单整理阶段未执行 tools/call；后续单次业务结果见 runtimeAcceptance。条件必填、前置依赖及地域范围须按目标工具实际 schema 复核。"
+  }
+}

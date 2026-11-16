@@ -1,0 +1,25 @@
+{
+  "candidateId": "shangqi-industry-data",
+  "checkedAt": "2026-11-16T00:45:30.519848+00:00",
+  "configurationSource": "用户提供后台 mcpServers 配置，真实 Key 未提供；公开目录中的企业动态追踪线索不视为此入口能力证明。",
+  "targetUrl": "https://api.chanyedata.com/mcp/3d1eed666d38dc6db60bd0395156006b/mcp",
+  "transport": "streamable-http",
+  "authentication": {
+    "mode": "api-key",
+    "header": "Authorization",
+    "prefix": "none per user-provided configuration",
+    "credentialTested": false
+  },
+  "network": "local HTTPS proxy; not proof of mainland direct access",
+  "initialize": {
+    "httpStatus": 401,
+    "contentType": "application/json; charset=utf-8",
+    "errorType": "new_api_error",
+    "message": "Invalid token",
+    "note": "请求不带凭据；不判断用户 Key 有效性，移除请求跟踪 ID。"
+  },
+  "toolsList": "not-run",
+  "businessCalls": 0,
+  "accountDataStored": false,
+  "nextStep": "DSH 本机填写 Key 后进行连接和工具发现；当前没有业务额度授权。"
+}

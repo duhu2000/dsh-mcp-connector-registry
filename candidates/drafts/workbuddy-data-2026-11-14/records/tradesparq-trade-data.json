@@ -95,7 +95,7 @@
     "proposedConnectorId": "tradesparq-trade-data",
     "reviewedAt": null,
     "reviewedBy": null,
-    "notes": "用户要求继续评估；不沿用其他连接器的具名上架批准。"
+    "notes": "用户要求继续评估；不沿用其他连接器的具名上架批准。 用户明确仅采购客户可取得 MCP 账号，要求暂不处理；保留候选与历史证据，不继续申请、授权或探测。"
   },
   "runtimeAcceptance": {
     "status": "not-run",

@@ -94,7 +94,7 @@
     "proposedConnectorId": "xiniu-venture-data",
     "reviewedAt": null,
     "reviewedBy": null,
-    "notes": "用户授权继续评估其余卡片；未把其他连接器审核署名复用到本候选。"
+    "notes": "用户授权继续评估其余卡片；未把其他连接器审核署名复用到本候选。 用户本轮确认暂无账号/试用额度；官网本轮 TLS EOF，未关闭证书校验。7 月活动不保证当前赠送积分。v0.2.109 尚无可确认的 HTTP query 凭据绑定。"
   },
   "runtimeAcceptance": {
     "status": "not-run",
