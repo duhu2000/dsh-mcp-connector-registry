@@ -1,32 +1,45 @@
-# 草料二维码：公开接入检查与验收状态
+# 草料二维码接入验收
 
-检查日期：2026-11-13。本文不含账号、组织数据或凭据。
+## 服务来源与使用边界
 
-## 官方来源
+- [草料二维码官网](https://cli.im/)
+- [官方 MCP 文档与授权范围](https://cli.im/open-api/agent/open-platform-mcp.html)
+- [额度与费用](https://cli.im/open-api/start/quota-and-pricing.html)
+- [服务条款](https://cli.im/help/policy-and-terms/user-agreement) · [隐私政策](https://cli.im/help/policy-and-terms/privacy-policy)
+- [维护与问题反馈](https://github.com/caoliao/dsh-caoliao-qrcode/issues)
 
-- 官网：https://cli.im/
-- 官方 MCP 配置：https://cli.im/open-api/agent/open-platform-mcp.html
-- 额度与费用：https://cli.im/open-api/start/quota-and-pricing.html
-- 服务条款：https://cli.im/help/policy-and-terms/user-agreement
-- 配套插件及维护入口：https://github.com/caoliao/dsh-caoliao-qrcode/issues
-- 品牌使用说明：https://github.com/caoliao/dsh-caoliao-qrcode/blob/v2026.11.1/BRANDING.md
+服务提供方为宁波邻家网络科技有限公司。配套插件的 MIT 许可证不替代在线服务条款。
 
-草料二维码服务提供方为宁波邻家网络科技有限公司。配套插件代码的 MIT 许可证不替代在线服务条款或品牌使用规则。
+此配置申请 `mcp:tools records.read templates.read templates.write qrcodes.write assets.write`，包含创建、编辑及上传权限。模板修改可能影响已有子码；只读提示词不会缩小 OAuth 授权范围。仅查询可使用 `mcp:tools records.read` 的最小授权配置。授权范围不会扩大用户在所选组织内的资源访问权限。
 
-## 公开端点检查（已执行）
+管理类 MCP 的实际额度通过 `usage_get` 查询；具体功能、额度及费用以账号套餐和权限为准。
 
-| 检查 | 结果 |
+## 公开接入检查
+
+检查日期：2026-11-13。
+
+| 项目 | 结果 |
 |---|---|
-| https://oauth.cli.im/.well-known/oauth-authorization-server | HTTP 200；issuer 与描述符一致；声明 PKCE S256、授权码、refresh_token、动态客户端注册、none 客户端鉴权 |
-| https://open.cli.im/.well-known/oauth-protected-resource | HTTP 200；resource 为 https://open.cli.im/mcp；authorization_servers 指向 https://oauth.cli.im；scopes 与描述符一致 |
-| 描述符 icon URL | HTTP 200；image/png；Access-Control-Allow-Origin: *；Cross-Origin-Resource-Policy: cross-origin |
+| OAuth 授权服务器元数据 | HTTP 200；issuer 为 https://oauth.cli.im；支持 PKCE S256、授权码、refresh_token、动态客户端注册及公共客户端 none 鉴权 |
+| 受保护资源元数据 | HTTP 200；resource 为 https://open.cli.im/mcp；授权服务器与描述符一致 |
+| 图标 | HTTP 200，image/png；允许跨域加载；固定至厂商仓库版本标签 |
 
-Logo 固定到厂商仓库 tag，不依赖 Registry 合并后的尚不存在文件。
-Logo SHA-256：`c5eb2d3e5f9355f6b9f9312a53442ed851d7470e3b3dcc56a72bc99c13f24efe`。
+## 第三方连接器运行验收
 
-## 验证摘要
+验收日期：2026-11-16。验收方：草料二维码提交方。结论：通过。
 
-- 描述符校验及公开 OAuth 元数据、Logo 检查通过。
-- Windows / Node.js 24.13.0：132 项测试中 128 项通过，4 项 Firefox 路径、换行或 symlink 测试失败；完整检查以 PR CI 为准。
-- 第三方连接器的真实账号授权、刷新和只读调用验收待补充，`probeStatus` 保持 `unverified`。
-- 候选记录与 official-vendor 审批由维护者完成。
+验收对象为第三方 `dsh-mcp-connector` 的草料连接配置，由提交方按授权、工具发现、只读调用、重连和撤销授权流程人工验收并确认结果。
+
+| 项目 | 结果 |
+|---|---|
+| DSH 桌面版 | `@deepseek-ai/dsh-desktop` `0.2.2-rc.3` |
+| MCP 连接器 | `dsh-mcp-connector` `0.2.109` |
+| 登录授权及回调 | 通过 |
+| 连接建立与工具发现 | 通过 |
+| 最小只读调用 | `usage_get`，参数 `request: {}`，调用成功 |
+| 重连后只读调用 | 通过 |
+| 撤销授权后访问检查 | 通过 |
+
+只读调用的返回摘要：成功取得当前授权组织的使用额度，无报错或降级提示；未创建或修改业务数据。报告不公开具体额度、套餐或原始业务响应。
+
+本次验证包含重连，不单独声明 Token 到期后的自动刷新已经验证。报告不附账号、组织标识或授权凭据。

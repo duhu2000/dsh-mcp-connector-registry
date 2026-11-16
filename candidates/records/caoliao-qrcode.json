@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "id": "caoliao-qrcode",
+  "registryName": "caoliao-qrcode",
+  "title": "草料二维码",
+  "description": "在 AI 对话中直接使用草料二维码。说出要做的事，助手会帮你生成二维码、批量建立设备或人员档案、搭建填写表单和周期任务，也能查询已有的填写记录、任务完成情况和扫码数据。适合需要展示信息、收集数据和管理现场业务的个人与团队。使用前需连接草料二维码账号并授权。可用功能和使用额度与账号权限、所在组织的版本有关。",
+  "version": "2026.11.1",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "二维码",
+      "表单",
+      "巡检"
+    ],
+    "matchedKeywords": [
+      "二维码",
+      "记录",
+      "数据分析"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://cli.im/open-api/agent/open-platform-mcp.html",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-16T01:13:48Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://cli.im/",
+    "repository": {
+      "url": "https://github.com/caoliao/dsh-caoliao-qrcode",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://open.cli.im/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "oauth2",
+    "requiredHeaders": [],
+    "reason": "OAuth 2.0 Authorization Code + PKCE S256，支持动态客户端注册及 refresh_token，公共客户端使用 none。请求 mcp:tools records.read templates.read templates.write qrcodes.write assets.write，包含写权限；只读提示词不会缩小 OAuth 授权范围。仅查询可改用 mcp:tools records.read。权限受当前用户及所选组织资源权限约束。"
+  },
+  "license": {
+    "status": "not-applicable",
+    "spdxId": null,
+    "evidenceUrl": "https://cli.im/help/policy-and-terms/user-agreement"
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": null,
+    "targetUrl": "https://open.cli.im/mcp",
+    "httpStatus": null,
+    "reason": "公开 OAuth 元数据已核对；受保护 MCP 端点需用户授权。详见 docs/runtime-acceptance/caoliao-qrcode.md。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 0,
+    "band": "defer",
+    "dimensions": {
+      "authority": 0,
+      "accessibility": 0,
+      "maintenanceSecurity": 0,
+      "runtime": 0,
+      "marketGap": 0,
+      "documentation": 0
+    },
+    "reasons": [
+      "候选材料已准备，评分留待维护者审核；零分表示尚未评分。"
+    ],
+    "gates": [
+      "维护者评分与审批"
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "caoliao-qrcode",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "申请 official-vendor 来源审核。服务提供方为宁波邻家网络科技有限公司；维护与问题反馈通过 caoliao/dsh-caoliao-qrcode Issues。在线服务适用草料服务条款与隐私政策，配套插件 MIT 不替代服务条款。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-16T01:32:32Z",
+    "reviewedBy": "caoliao (submitter)",
+    "reportUrl": "https://github.com/caoliao/dsh-mcp-connector-registry/blob/add-caoliao-qrcode/docs/runtime-acceptance/caoliao-qrcode.md",
+    "notes": "2026-11-16 提交方确认人工验收通过；DSH Desktop 0.2.2-rc.3，dsh-mcp-connector 0.2.109。授权回调、工具发现、usage_get 只读调用、重连及撤销授权检查通过。checkedAt 为结果登记时间；自动刷新未单独验证。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://cli.im/open-api/agent/open-platform-mcp.html",
+      "collectedAt": "2026-11-16T01:13:48Z",
+      "summary": "草料官方 MCP 文档，包含端点、OAuth scope 和组织资源权限边界。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://cli.im/",
+      "collectedAt": "2026-11-16T01:13:48Z",
+      "summary": "草料二维码官网。"
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/caoliao/dsh-caoliao-qrcode",
+      "collectedAt": "2026-11-16T01:13:48Z",
+      "summary": "草料配套插件及公开维护入口；不是远程 MCP 服务源码。"
+    },
+    {
+      "type": "license",
+      "url": "https://cli.im/help/policy-and-terms/user-agreement",
+      "collectedAt": "2026-11-16T01:13:48Z",
+      "summary": "在线服务适用草料用户服务协议。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://cli.im/help/policy-and-terms/privacy-policy",
+      "collectedAt": "2026-11-16T01:13:48Z",
+      "summary": "草料隐私政策。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://cli.im/open-api/start/quota-and-pricing.html",
+      "collectedAt": "2026-11-16T01:13:48Z",
+      "summary": "管理类 MCP 的额度以 usage_get 返回的已用、预占、剩余和重置时间为准；不承诺免费或无限使用。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/caoliao/dsh-mcp-connector-registry/blob/add-caoliao-qrcode/docs/runtime-acceptance/caoliao-qrcode.md",
+      "collectedAt": "2026-11-16T01:32:32Z",
+      "summary": "提交方人工验收：第三方连接器授权、工具发现、usage_get 只读调用、重连和撤销授权检查通过。报告仅保留脱敏结果。"
+    }
+  ]
+}
