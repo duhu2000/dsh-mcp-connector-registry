@@ -95,8 +95,8 @@
     "status": "pass",
     "checkedAt": "2026-11-16T14:01:43+08:00",
     "reviewedBy": "Codex（复核用户提供的 DSH 执行结果）",
-    "reportUrl": null,
-    "notes": "证据为用户转述的实际执行结果，未取得原始响应。仅 get_industry_chain_graph(keyword=新能源汽车) 一次；status=00000，message=请求成功，无重试或前置调用。checkedAt 采用用户报告的接口返回时间（按本地 Asia/Shanghai 记录），不是数据更新时间。返回产业链环节，不含重点企业列表；来源、统计口径、更新频率及实际扣费未知。其余 17 工具未实测；报告尚未发布。"
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/58001a6d4e88eebd8c88b32094a4b8c803fcec07/candidates/drafts/workbuddy-data-2026-11-14/evidence/shangqi-connection-2026-11-16.md",
+    "notes": "证据为用户转述的实际执行结果，未取得原始响应。仅 get_industry_chain_graph(keyword=新能源汽车) 一次；status=00000，message=请求成功，无重试或前置调用。checkedAt 采用用户报告的接口返回时间（按本地 Asia/Shanghai 记录），不是数据更新时间。返回产业链环节，不含重点企业列表；来源、统计口径、更新频率及实际扣费未知。其余 17 工具未实测；报告已关联固定提交，随本分支推送。"
   },
   "evidence": [
     {
@@ -110,6 +110,18 @@
       "url": "https://api.chanyedata.com/mcp/3d1eed666d38dc6db60bd0395156006b/mcp",
       "collectedAt": "2026-11-16T00:45:30.519848+00:00",
       "summary": "用户指定端点匿名 initialize 401 Invalid token；配置来自用户后台，不存储真实 Key。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/58001a6d4e88eebd8c88b32094a4b8c803fcec07/candidates/drafts/workbuddy-data-2026-11-14/evidence/shangqi-connection-2026-11-16.md",
+      "collectedAt": "2026-11-16T14:01:43+08:00",
+      "summary": "用户提供的 DSH 截图及执行结果；连接 18 工具，新能源汽车产业链图谱一次成功，非助手直接重放。"
+    },
+    {
+      "type": "connection-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/58001a6d4e88eebd8c88b32094a4b8c803fcec07/candidates/drafts/workbuddy-data-2026-11-14/evidence/shangqi-connection-2026-11-16.md",
+      "collectedAt": "2026-11-16T13:31:46+08:00",
+      "summary": "用户提供的 DSH 截图及执行结果；连接 18 工具，新能源汽车产业链图谱一次成功，非助手直接重放。"
     }
   ],
   "connectionAcceptance": {
@@ -117,8 +129,8 @@
     "checkedAt": "2026-11-16T13:31:46+08:00",
     "reviewedBy": "Codex（复核用户提供的 DSH 截图）",
     "toolCount": 18,
-    "reportUrl": null,
-    "notes": "用户手动配置连接；截图最近成功缓存 2026/11/16 13:31:46，已连接，1 个服务入口。仅可见 search_company_id 名称及企业匹配描述；其余 17 个工具未逐项核实。此时间是工具缓存时间，不是业务调用时间；证据尚未发布。 后续用户提供全部 18 个工具描述汇总，记录于 toolInventoryReview；原始 schema 未取得。"
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/58001a6d4e88eebd8c88b32094a4b8c803fcec07/candidates/drafts/workbuddy-data-2026-11-14/evidence/shangqi-connection-2026-11-16.md",
+    "notes": "用户手动配置连接；截图最近成功缓存 2026/11/16 13:31:46，已连接，1 个服务入口。仅可见 search_company_id 名称及企业匹配描述；其余 17 个工具未逐项核实。此时间是工具缓存时间，不是业务调用时间；证据已关联固定提交，随本分支推送。 后续用户提供全部 18 个工具描述汇总，记录于 toolInventoryReview；原始 schema 未取得。"
   },
   "toolInventoryReview": {
     "status": "user-reported",
