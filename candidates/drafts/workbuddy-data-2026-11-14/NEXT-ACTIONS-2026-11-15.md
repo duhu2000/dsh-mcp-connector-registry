@@ -56,3 +56,11 @@ DEFERRED 是保留候选，不删除，也不擅自标记 PASS。本轮不更改
 等待用户提供不含密钥的服务名称、MCP Server 地址及鉴权 Header 名；若 URL 包含密钥，须先替换为 <REDACTED>。需要区分上奇直连与云平台代接入。之后生成未发布验收卡片，在本机填写 Key，仅做 initialize/tools/list，再根据实际工具和费用选择一次只读业务查询。当前尚无授权连接、工具数、业务结果或上架批准；不记录为 PASS，不新增正式卡片。
 
 用户已补充后台配置：Streamable HTTP，上奇 api.chanyedata.com 域名，Authorization 原样 API Key，无 Bearer 前缀。新增 shangqi-industry-data 未发布验收草案及脱敏匿名预检报告；initialize 返回 401 Invalid token（请求无 Key），尚无工具发现和业务调用。接下来由用户本机填写 Key，不再要求重复提供公开配置。
+
+2026-11-16 连接进展：用户手动连接成功，截图显示 18 工具/1 服务入口，最近缓存 13:31:46。见 [连接验收证据](evidence/shangqi-connection-2026-11-16.md)。已确认企业匹配工具 search_company_id；完整清单、产业/区域能力、收费与业务验收待核实。
+
+2026-11-16 完整工具汇总已收到：18 个（产业 3、区域 3、企业 10、交叉 2），来源为用户转述的已加载描述。连接 PASS，业务 not-run；已更正草案过期的“连接未验收”文案。下一步核对 get_industry_chain_graph 参数与费用，获预算授权后执行一次产业链只读查询；不扩展到企业联系人或明细，不自动重试。
+
+2026-11-16 14:01:43 业务结果补充：用户报告 get_industry_chain_graph(keyword=新能源汽车) 一次成功，status=00000。候选 runtimeAcceptance 和草案 probeStatus 更新为 pass（限本次图谱查询），published=false；其余工具未实测。数据来源/更新频率未知，本次无企业 TOP 列表。下一步完成服务条款与市场范围审核、正式具名批准及证据发布，不再重复收费验收。
+
+用户已要求上架及提交 PR，人工审核记录为 approved / DuHu。条款公开入口暂未核验，不等同服务停止；license unknown 保留。下一步取得官方协议证据再完成正式迁入，不要求重复业务测试或重复上架批准。
