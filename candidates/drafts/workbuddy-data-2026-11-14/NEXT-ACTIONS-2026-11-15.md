@@ -46,3 +46,13 @@ DEFERRED 是保留候选，不删除，也不擅自标记 PASS。本轮不更改
 技术路径：HTTP 多凭据/安全 query 绑定可解除亿欧、烯牛、执中的共用适配缺口，但不代替厂商许可与运行验收。有赞/腾讯自选股需厂商准入，不能靠更换用户账号解决。
 
 准备给厂商确认的接入信息（未发送）：DSH 为第三方 MCP 客户端，使用 OAuth Authorization Code + PKCE S256、本机 loopback callback；询问是否支持 DCR，若不支持应如何正式申请 client_id、允许的回调规则、最小只读 scope、测试额度及单次查询计费。不得索取或复用其他平台客户端凭据。
+
+## 2026-11-16 补充：上奇开始账号验收准备
+
+用户确认已有上奇产业通账号与 MCP Key，授权推进验证。未接收、读取或保存真实 Key。候选由缺账号线索推进为等待精确接入配置。
+
+上奇官网 https://www.chanyedata.com/ 本轮通过代理 GET 可达，页面标题为“产业可信数据空间”；网页文档抓取器返回 502，但本机公开 HTTP 读取成功，不据此判定停服。公开第三方目录仅定位到 sq-company-dynamic（企业动态追踪）服务，不能据此替代用户账号下具体服务配置或证明产业/区域工具已开通。
+
+等待用户提供不含密钥的服务名称、MCP Server 地址及鉴权 Header 名；若 URL 包含密钥，须先替换为 <REDACTED>。需要区分上奇直连与云平台代接入。之后生成未发布验收卡片，在本机填写 Key，仅做 initialize/tools/list，再根据实际工具和费用选择一次只读业务查询。当前尚无授权连接、工具数、业务结果或上架批准；不记录为 PASS，不新增正式卡片。
+
+用户已补充后台配置：Streamable HTTP，上奇 api.chanyedata.com 域名，Authorization 原样 API Key，无 Bearer 前缀。新增 shangqi-industry-data 未发布验收草案及脱敏匿名预检报告；initialize 返回 401 Invalid token（请求无 Key），尚无工具发现和业务调用。接下来由用户本机填写 Key，不再要求重复提供公开配置。

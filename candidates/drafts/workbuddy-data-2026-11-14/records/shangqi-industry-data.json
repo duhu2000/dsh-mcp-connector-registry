@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "id": "shangqi-industry-data",
+  "registryName": "review/shangqi-industry-data",
+  "title": "上奇产业通",
+  "description": "按用户提供的上奇官方域名 MCP 配置连接本人账号。具体产业、区域或企业数据能力，以此服务入口授权后返回的工具清单和账号权益为准。当前仅通过无凭据可达性检查，连接、工具发现及业务查询尚未验收；不承诺包含全部上奇产品能力或免费额度。优先评估产业链与区域研究增量，业务查询前确认费用。本卡片由 DSH 社区维护，并非上奇官方产品。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "industry",
+      "china-provider"
+    ],
+    "matchedKeywords": [
+      "上奇产业通",
+      "国内数据",
+      "产业研究"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://www.chanyedata.com/",
+    "status": "active",
+    "retrievedAt": "2026-11-16T00:45:30.519848+00:00"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://www.chanyedata.com/",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://api.chanyedata.com/mcp/3d1eed666d38dc6db60bd0395156006b/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "api-key",
+    "requiredHeaders": [
+      "Authorization"
+    ],
+    "reason": "用户提供后台配置为 Authorization: <YOUR_API_KEY>，不加 Bearer；凭据尚未进行实际连接验证。"
+  },
+  "license": {
+    "status": "unknown",
+    "spdxId": null,
+    "evidenceUrl": null
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-16T00:45:30.519848+00:00",
+    "targetUrl": "https://api.chanyedata.com/mcp/3d1eed666d38dc6db60bd0395156006b/mcp",
+    "httpStatus": 401,
+    "reason": "匿名 initialize 返回 Invalid token；仅证明入口可达且要求鉴权。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 0,
+    "band": "defer",
+    "dimensions": {
+      "authority": 0,
+      "accessibility": 0,
+      "maintenanceSecurity": 0,
+      "runtime": 0,
+      "marketGap": 0,
+      "documentation": 0
+    },
+    "reasons": [
+      "未评分占位，不代表低质量；缺授权工具、业务能力和服务条款证据。"
+    ],
+    "gates": [
+      "authenticated-tool-discovery",
+      "business-scope-review",
+      "service-terms-review",
+      "authenticated-runtime-acceptance",
+      "named-human-approval"
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "shangqi-industry-data",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "用户授权推进验证，不等于正式上架批准；优先核实产业链/区域增量，企业画像覆盖另审。"
+  },
+  "runtimeAcceptance": {
+    "status": "not-run",
+    "checkedAt": null,
+    "reviewedBy": null,
+    "reportUrl": null,
+    "notes": "仅匿名 initialize，无 tools/call；Key 由用户在本机填写。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://www.chanyedata.com/",
+      "collectedAt": "2026-11-16T00:45:30.519848+00:00",
+      "summary": "官网可读，标题产业可信数据空间。"
+    },
+    {
+      "type": "probe",
+      "url": "https://api.chanyedata.com/mcp/3d1eed666d38dc6db60bd0395156006b/mcp",
+      "collectedAt": "2026-11-16T00:45:30.519848+00:00",
+      "summary": "用户指定端点匿名 initialize 401 Invalid token；配置来自用户后台，不存储真实 Key。"
+    }
+  ]
+}
