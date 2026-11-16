@@ -3,8 +3,8 @@
   "id": "zerone-private-equity",
   "registryName": "cn.com.zerone/private-equity",
   "title": "执中另类资产数据",
-  "description": "查询 LP、GP、基金与交易事件数据；公开文档使用 URL query api_key，当前描述符没有相应秘密参数绑定，暂不生成可连接卡片。",
-  "version": "unknown",
+  "description": "国内另类资产数据：PE 入口提供 LP/GP/基金、主体画像、融资模型与结构化查询；base 入口提供企业专利查询。用户已具备账号和 Key，匿名双入口工具发现通过；query api_key 安全绑定与授权业务验收尚未完成。",
+  "version": "1.26.0",
   "classification": {
     "isDataService": true,
     "domains": [
@@ -23,7 +23,7 @@
     "status": "active",
     "publishedAt": null,
     "updatedAt": null,
-    "retrievedAt": "2026-11-14T13:57:59.669928Z"
+    "retrievedAt": "2026-11-16T09:15:41.343570+00:00"
   },
   "officialLinks": {
     "websiteUrl": "https://www.zerone.com.cn/products/mcp",
@@ -34,6 +34,12 @@
       "kind": "remote",
       "type": "streamable-http",
       "url": "https://ai.zerone.com.cn/mcp/pe",
+      "package": null
+    },
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://ai.zerone.com.cn/mcp/base",
       "package": null
     }
   ],
@@ -55,10 +61,10 @@
   },
   "probe": {
     "status": "partial",
-    "checkedAt": "2026-11-14T13:57:59.669928Z",
+    "checkedAt": "2026-11-16T09:15:41.343570+00:00",
     "targetUrl": "https://ai.zerone.com.cn/mcp/pe",
     "httpStatus": 200,
-    "reason": "匿名握手 200，serverInfo zerone 1.26.0；保持会话后工具发现 9 项，无业务调用。"
+    "reason": "2026-11-16 经本机 HTTPS 代理匿名复核：pe/base 均 initialize=200、tools/list=200；分别 9/1 工具、均无下一页；10 个工具名称不重复。无 Key、无 tools/call，不证明鉴权或大陆直连通过。"
   },
   "dedupe": {
     "level": "none",
@@ -94,14 +100,14 @@
     "proposedConnectorId": "zerone-private-equity",
     "reviewedAt": null,
     "reviewedBy": null,
-    "notes": "用户授权继续评估其余卡片；未把其他连接器审核署名复用到本候选。 本轮公开前端可读，网站登录的 Bearer 不等于 MCP Bearer 鉴权已证实；免费 MCP 权益未核验。v0.2.109 的 credentialBindings 仅用于 stdio，query API Key 绑定仍待实现。"
+    "notes": "用户授权继续评估其余卡片；未把其他连接器审核署名复用到本候选。 本轮公开前端可读，网站登录的 Bearer 不等于 MCP Bearer 鉴权已证实；免费 MCP 权益未核验。v0.2.109 的 credentialBindings 仅用于 stdio，query API Key 绑定仍待实现。 2026-11-16 用户确认已有账号及 Key，并要求推进评估测试和上架；本轮只核实公开双入口，不将上架意向标为已完成验收后的具名审核。"
   },
   "runtimeAcceptance": {
     "status": "not-run",
     "checkedAt": null,
     "reviewedBy": null,
     "reportUrl": null,
-    "notes": "仅无凭据协议/工具发现探测，未执行 tools/call；工具数量与文档声明分开记录。"
+    "notes": "2026-11-16 两入口匿名协议与工具发现通过；未使用 Key、未执行业务工具。用户持有 Key 不等于鉴权通过；两个入口的账号权限须分别验证。"
   },
   "evidence": [
     {
@@ -127,6 +133,18 @@
       "url": "https://ai.zerone.com.cn/mcp/pe",
       "collectedAt": "2026-11-15T04:29:12.125055+00:00",
       "summary": "2026-11-15 匿名复核：initialize HTTP 200；tools/list 9 工具；无业务调用。"
+    },
+    {
+      "type": "probe",
+      "url": "https://ai.zerone.com.cn/mcp/pe",
+      "collectedAt": "2026-11-16T09:15:41.343570+00:00",
+      "summary": "匿名 initialize HTTP 200，tools/list HTTP 200，9 工具，无 tools/call；证据见 evidence/zerone-dual-endpoint-probe-2026-11-16.json。"
+    },
+    {
+      "type": "probe",
+      "url": "https://ai.zerone.com.cn/mcp/base",
+      "collectedAt": "2026-11-16T09:15:41.344101+00:00",
+      "summary": "匿名 initialize HTTP 200，tools/list HTTP 200，1 工具，无 tools/call；证据见 evidence/zerone-dual-endpoint-probe-2026-11-16.json。"
     }
   ]
 }

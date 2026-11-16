@@ -1,0 +1,72 @@
+[
+  {
+    "name": "youzan-as",
+    "url": "https://claw.youzan.com/.well-known/oauth-authorization-server",
+    "httpStatus": 200,
+    "summary": {
+      "issuer": "https://claw.youzan.com",
+      "registration_endpoint": "https://claw.youzan.com/api/mcp/oauth/register",
+      "code_challenge_methods_supported": [
+        "S256"
+      ],
+      "scopes_supported": [
+        "youzan_query"
+      ]
+    }
+  },
+  {
+    "name": "tencent-stock-as",
+    "url": "https://stockbuddy.qq.com/.well-known/oauth-authorization-server",
+    "httpStatus": 200,
+    "summary": {
+      "issuer": "https://stockbuddy.qq.com/",
+      "registration_endpoint": "https://stockbuddy.qq.com/cgi/cgi-bin/openai/mcp/oauth/register",
+      "code_challenge_methods_supported": [
+        "S256"
+      ],
+      "scopes_supported": [
+        "read",
+        "write"
+      ]
+    }
+  },
+  {
+    "name": "plugin-package",
+    "url": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector/main/package.json",
+    "httpStatus": 200,
+    "summary": {
+      "version": "0.2.109"
+    }
+  },
+  {
+    "name": "plugin-catalog",
+    "url": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector/main/lib/catalog.js",
+    "httpStatus": 200,
+    "summary": [
+      "// credentialBindings 的 key 是待注入的环境变量名，value 只能是凭据字段引用；",
+      "if (key === 'credentialBindings') continue;",
+      "const bindings = server.credentialBindings ?? {};",
+      "throw new Error(t('connector \"{id}\" 的 OAuth stdio server 不能同时声明 credentialBindings', { id: descriptor.id }));",
+      "throw new Error(t('connector \"{id}\" 的 stdio credentialBindings 需要 bearer/api-key 凭据定义', { id: descriptor.id }));",
+      "throw new Error(t('connector \"{id}\" 的凭据型 stdio server 必须声明 credentialBindings', { id: descriptor.id }));",
+      "throw new Error(t('connector \"{id}\" credentialBindings 环境变量名非法: {env}', { id: descriptor.id, env: envName }));",
+      "throw new Error(t('connector \"{id}\" credentialBindings 与 servers[].env 重复声明: {env}', { id: descriptor.id, env: envName }));",
+      "throw new Error(t('connector \"{id}\" credentialBindings 引用了未知凭据字段: {key}', { id: descriptor.id, key: credentialKey }));"
+    ]
+  },
+  {
+    "name": "zerone-product",
+    "url": "https://www.zerone.com.cn/products/mcp",
+    "httpStatus": 200,
+    "summary": {
+      "pageReadable": true,
+      "mentionsMCP": true
+    }
+  },
+  {
+    "name": "plugin-index",
+    "url": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector/main/lib/index.js",
+    "httpStatus": 200,
+    "summary": "公开 lib/index.js 仍引用 bindStdioCredentials；credentialBindings 为 stdio 环境变量映射，未见 HTTP 多 Header / query 凭据绑定。"
+  }
+]
