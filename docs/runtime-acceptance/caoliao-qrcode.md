@@ -40,6 +40,23 @@
 | 重连后只读调用 | 通过 |
 | 撤销授权后访问检查 | 通过 |
 
-只读调用的返回摘要：成功取得当前授权组织的使用额度，无报错或降级提示；未创建或修改业务数据。报告不公开具体额度、套餐或原始业务响应。
+只读调用的返回摘要：成功取得当前授权组织的使用额度，无报错或降级提示；未创建或修改业务数据。
 
 本次验证包含重连，不单独声明 Token 到期后的自动刷新已经验证。报告不附账号、组织标识或授权凭据。
+
+### 撤销授权后的访问结果
+
+提交方确认手动撤销授权。以下时间均为北京时间（UTC+8），日期为 2026-11-16。
+
+| 时间 | 调用 | 结果 |
+|---|---|---|
+| 13:35 | `usage_get`，`request: {}` | 成功，无错误码或错误信息 |
+| 13:36 | 手动撤销授权后的 `usage_get`，`request: {}` | 访问被拒绝，错误码 `invalid_token`，未返回额度数据 |
+
+错误信息：
+
+```text
+Authentication failed. The provided bearer token is invalid, expired, or no longer recognized by the server. To resolve: clear authentication tokens in your MCP client and reconnect. Your client should automatically re-register and obtain new tokens.
+```
+
+外层异常：`SdkHttpError: Error POSTing to endpoint`。
