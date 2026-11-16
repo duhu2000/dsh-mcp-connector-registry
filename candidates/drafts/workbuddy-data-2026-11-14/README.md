@@ -117,3 +117,7 @@ OpenBoost：
 后续一轮新增证据与卡片状态见 [有赞、森浦、亿欧及其余候选推进](REMAINING-BATCH-REVIEW.md)。
 
 最新只读验收预算已明确为每个服务最多 1 积分、1 次调用；价格尚不能证明符合上限，未执行业务调用。详见 [预算与价格核对](evidence/readonly-acceptance-budget-check.md)。
+
+## 正式上架准备（2026-11-16）
+
+用户在获知条款缺失后明确要求继续，审核人 DuHu。正式卡片及审核记录已迁入 connectors/ 与 candidates/records/；本目录草案保留历史。条款仍 unknown，具名例外另记，不冒充厂商条款。公开目录是否可见以 PR 合并及发布验证为准。

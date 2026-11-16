@@ -39,7 +39,7 @@
 
 ## 调研分析
 
-共 41 个连接器。
+共 42 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -73,6 +73,7 @@
 | [PubMed 生物医学文献](../connectors/pubmed-biomedical-literature.json) | PubMed / Europe PMC / MeSH / 引用与开放全文 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [RCSB PDB](../connectors/rcsb-pdb.json) | 蛋白质结构 / 序列 / 配体 / 注释与交叉引用 | RCSB Protein Data Bank | none | 公共目录 | pass |
 | [SEC EDGAR 美国公司披露](../connectors/sec-edgar-company-filings.json) | 上市公司申报 / XBRL 财务 / 重大事件 / 持股披露 | cyanheads（独立社区项目） | none | 公共目录 | pass |
+| [上奇产业通](../connectors/shangqi-industry-data.json) | 产业链图谱 / 区域产业研究 | 上奇产业通 | api-key | 公共目录 | pass |
 | [Similarweb](../connectors/similarweb.json) | 网站流量 / 竞品对标 / 渠道与受众分析 | Similarweb | api-key | 公共目录 | partial |
 | [Starwell 全球公共统计](../connectors/starwell-world-statistics.json) | 全球统计 / 时间序列 / 官方来源 / 引用与许可 | Starwell（独立社区项目） | none | 公共目录 | pass |
 | [Tavily](../connectors/tavily-search.json) | 实时网页搜索 / 内容提取 / 站点地图 / 网页抓取 | Tavily | oauth2-pkce | 公共目录 | unverified |

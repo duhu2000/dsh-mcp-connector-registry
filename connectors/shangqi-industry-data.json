@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "shangqi-industry-data",
+  "name": "上奇产业通",
+  "vendor": "上奇产业通",
+  "icon": "🏭",
+  "category": "调研分析",
+  "summary": "产业链图谱 / 区域产业研究",
+  "description": "连接上奇产业通产业数据服务，支持产业链图谱及区域产业研究。已确认连接与 18 个工具发现，并依据用户提供的 DSH 执行结果完成“新能源汽车”产业链图谱单次查询验收；其余工具尚未逐项实测。本次图谱未返回重点企业列表，未标注原始数据来源、统计口径或更新频率。使用需账号授权，费用以服务商套餐为准。本卡片由 DSH 社区维护，并非上奇官方产品。 服务条款未公开，尚未核验；本目录仅提供连接配置，不赋予额外数据使用权。",
+  "tags": [
+    "上奇",
+    "产业通",
+    "国内数据",
+    "产业链",
+    "区域研究",
+    "API Key",
+    "授权服务"
+  ],
+  "homepage": "https://www.chanyedata.com/",
+  "published": true,
+  "featured": false,
+  "probeStatus": "pass",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "Authorization",
+    "credentialName": "上奇 MCP API Key",
+    "credentialPlaceholder": "仅在本机输入上奇 MCP Key",
+    "credentialDescription": "按本次后台配置，将完整 Key 作为 Authorization 请求头值发送，不额外添加 Bearer 前缀。请确认 Key 已开通此服务入口；不要将 Key 粘贴到对话或 URL。",
+    "credentialHelpLabel": "上奇产业可信数据空间",
+    "credentialHelpUrl": "https://www.chanyedata.com/"
+  },
+  "servers": [
+    {
+      "serverKey": "shangqi-industry-data",
+      "serverName": "shangqi_industry_data",
+      "url": "https://api.chanyedata.com/mcp/3d1eed666d38dc6db60bd0395156006b/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "了解新能源汽车产业链",
+      "text": "查询“新能源汽车”的产业链图谱，整理主要上下游环节及层级关系。先核对账号权益与费用，获确认后仅查询一次，不自动重试或追加企业查询；未返回的企业名单、数据来源和更新时间标为未知。",
+      "server": "shangqi-industry-data"
+    },
+    {
+      "title": "准备苏州产业链长短板分析",
+      "text": "根据上奇已加载的工具说明，为“苏州市新能源汽车产业链长短板”制定最小查询方案，列出需要的产业与区域参数。先说明预计调用次数和费用，等待确认后再执行；不查询联系人、不自动批量导出，不把产业覆盖数量直接等同于竞争优势。",
+      "server": "shangqi-industry-data"
+    }
+  ],
+  "probeCheckedAt": 1794808903000
+}

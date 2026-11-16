@@ -265,3 +265,41 @@ test('moving a draft into connectors cannot skip the new-connector gate via Git 
     await rm(cwd, { recursive: true, force: true });
   }
 });
+
+test('unpublished service terms require a scoped named exception and preserve unknown facts', async () => {
+  const descriptor = JSON.parse(await readFile(new URL('../connectors/shangqi-industry-data.json', import.meta.url), 'utf8'));
+  const record = JSON.parse(await readFile(new URL('../candidates/records/shangqi-industry-data.json', import.meta.url), 'utf8'));
+  assert.equal(record.license.status, 'unknown');
+  assert.equal(record.license.evidenceUrl, null);
+  assert.deepEqual(verifyRuntimeAcceptance(descriptor, record), []);
+  for (const mutate of [
+    r => { delete r.review.serviceTermsException; },
+    r => { r.review.serviceTermsException.connectorId = 'other-connector'; },
+    r => { r.review.serviceTermsException.reviewedBy = 'other-reviewer'; },
+    r => { r.review.serviceTermsException.reviewedAt = 'invalid'; },
+    r => { r.review.serviceTermsException.notes = ''; },
+    r => { r.review.serviceTermsException.notes = 1; },
+    r => { r.review.serviceTermsException.reviewedBy = 1; },
+    r => { r.review.serviceTermsException.decision = 'pending'; },
+    r => { r.review.decision = 'pending'; },
+    r => { r.review.scope = 'connection-only'; },
+    r => { r.runtimeAcceptance.status = 'not-run'; },
+    r => { r.authentication.mode = 'unknown'; },
+    r => { r.license.status = 'declared'; },
+    r => { r.license.evidenceUrl = 'https://example.com/fake-terms'; },
+    r => { r.evidence = r.evidence.filter(e => e.type !== 'service-terms-exception'); },
+    r => { r.evidence = r.evidence.filter(e => e.type !== 'runtime-acceptance'); },
+    r => { r.score.total = 79; },
+  ]) {
+    const copy = structuredClone(record); mutate(copy);
+    assert.ok(verifyRuntimeAcceptance(descriptor, copy).length > 0, String(mutate));
+  }
+  for (const mutate of [
+    d => { d.description = '仅展示工具能力'; },
+    d => { d.featured = true; },
+    d => { d.probeStatus = 'partial'; },
+  ]) {
+    const copy = structuredClone(descriptor); mutate(copy);
+    assert.ok(verifyRuntimeAcceptance(copy, record).length > 0, String(mutate));
+  }
+});
