@@ -99,3 +99,8 @@ ServerName、URL 与潜在密钥。合并到 `main` 后，独立 CI job 会重�
 必填：`connectorId` 匹配卡片；`decision=approved`；`reasonCode=official-terms-unavailable`；`reviewedBy`、`reviewedAt` 与主审核记录一致；非空 `notes`；HTTPS `reportUrl` 与 `service-terms-exception` 类型证据一致。报告保留用户明确指令与缺失事实，不冒充厂商授权。来源、评分、真实运行报告等校验照常执行。
 
 `license.status` 必须保留 `unknown`，`spdxId` 和 `evidenceUrl` 必须为 null。已发布卡片必须为 `pass`、`featured=false`，描述须包含“服务条款未公开，尚未核验”。该例外不授予额外数据许可，不能推广到其他候选；取得官方协议后需重新核验。
+
+
+### 同步近期新增文档
+
+`docs/CONNECTOR-DIRECTORY.md` 由正式卡片自动生成；`docs/RECENT-ADDITIONS.md` 与运营草稿则读取 `docs/catalog-additions.json`。发布新卡片后，应根据实际合并 PR 和北京时间的合并日期补充该索引，不以文件修改日期代替上架日期。后续业务验收变化时，也要同步对应 acceptance 文案，保留初次有限验收与后续结果的区别。运行 `npm run build` 重新生成文档；不要只编辑生成文件。
