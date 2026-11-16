@@ -71,6 +71,16 @@ class AcceptanceTests(unittest.TestCase):
     def test_redirect_is_not_followed(self):
         self.assertIsNone(probe.NoRedirect().redirect_request(None, None, 302, '', {}, 'https://other.example/?api_key=test'))
 
+    def test_refuses_echoing_key_input(self):
+        with tempfile.TemporaryDirectory() as directory, \
+             patch.object(probe.Path, 'home', return_value=Path(directory)), \
+             patch.object(probe.sys, 'argv', ['probe']), \
+             patch.object(probe.sys.stdin, 'isatty', return_value=True), \
+             patch.object(probe.getpass, 'getpass', side_effect=probe.getpass.GetPassWarning()), \
+             patch.object(probe, 'rpc') as rpc, contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(probe.main(), 2)
+            rpc.assert_not_called()
+
     def test_sse_ignores_unrelated_ids(self):
         response = io.BytesIO(b'data: {"id":99,"result":{}}\n\ndata: {"id":3,"result":{"ok":true}}\n\n')
         response.headers = {'Content-Type': 'text/event-stream'}

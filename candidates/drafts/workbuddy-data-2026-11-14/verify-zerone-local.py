@@ -12,6 +12,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import warnings
 
 ENDPOINT = "https://ai.zerone.com.cn/mcp/pe"
 RUN_ID = "zerone-pe-20261116-once"
@@ -107,7 +108,13 @@ def main():
         return 2
     print("仅 PE get_available_tables 一次，按实际单次扣费；不重试、不查企业、不下载。")
     print("输入的 Key 不显示、不落盘；仅发送给 ai.zerone.com.cn。")
-    key = getpass.getpass("在本机粘贴执中 Key（输入隐藏）：").strip()
+    try:
+        with warnings.catch_warnings():
+            warnings.simplefilter("error", getpass.GetPassWarning)
+            key = getpass.getpass("在本机粘贴执中 Key（输入隐藏）：").strip()
+    except getpass.GetPassWarning:
+        print("当前终端不能关闭输入回显，已停止；请在 macOS 终端中运行。")
+        return 2
     if not key:
         print("未输入 Key，未发送请求。")
         return 2
