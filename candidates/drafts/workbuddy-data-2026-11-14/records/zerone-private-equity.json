@@ -3,7 +3,7 @@
   "id": "zerone-private-equity",
   "registryName": "cn.com.zerone/private-equity",
   "title": "执中另类资产数据",
-  "description": "国内另类资产数据：PE 入口提供 LP/GP/基金、主体画像、融资模型与结构化查询；base 入口提供企业专利查询。用户已具备账号和 Key，匿名双入口工具发现通过；query api_key 安全绑定与授权业务验收尚未完成。",
+  "description": "国内另类资产数据：PE 提供 LP/GP/基金、主体画像、融资模型与结构化查询；base 提供企业专利查询。用户在本机使用 Key 完成 PE get_available_tables 一次调用，返回 26 张表描述；query api_key 客户端适配与 DSH 验收仍待完成。",
   "version": "1.26.0",
   "classification": {
     "isDataService": true,
@@ -84,15 +84,15 @@
     },
     "reasons": [
       "人工证据分，不等于上架批准；内部 registryName 不声称已注册 Official Registry。",
-      "真实业务运行未验收，runtime=0。",
+      "保留此前 60 分的历史评分，不以单次目录读取自动重算评级；最新限定范围结果以 runtimeAcceptance 为准，DSH 集成尚未验收。",
       "国内提供方；实际许可、账号权益和维护状态须继续核验。",
       "先解决 URL query 凭据在客户端的安全绑定与脱敏，不在卡片 URL 中放占位或真实密钥。"
     ],
     "gates": [
       "service-terms-review",
-      "authenticated-runtime-acceptance",
       "named-human-approval",
-      "query-credential-binding"
+      "query-credential-binding",
+      "dsh-integration-acceptance"
     ]
   },
   "review": {
@@ -100,14 +100,14 @@
     "proposedConnectorId": "zerone-private-equity",
     "reviewedAt": null,
     "reviewedBy": null,
-    "notes": "用户授权继续评估其余卡片；未把其他连接器审核署名复用到本候选。 本轮公开前端可读，网站登录的 Bearer 不等于 MCP Bearer 鉴权已证实；免费 MCP 权益未核验。v0.2.109 的 credentialBindings 仅用于 stdio，query API Key 绑定仍待实现。 2026-11-16 用户确认已有账号及 Key，并要求推进评估测试和上架；本轮只核实公开双入口，不将上架意向标为已完成验收后的具名审核。"
+    "notes": "用户授权继续评估其余卡片；未把其他连接器审核署名复用到本候选。 本轮公开前端可读，网站登录的 Bearer 不等于 MCP Bearer 鉴权已证实；免费 MCP 权益未核验。v0.2.109 的 credentialBindings 仅用于 stdio，query API Key 绑定仍待实现。 2026-11-16 用户确认已有账号及 Key，并要求推进评估测试和上架；本轮只核实公开双入口，不将上架意向标为已完成验收后的具名审核。 后续用户已在本机执行一次获批的 PE 表目录读取，技术复核通过，见 runtimeAcceptance；不自动转为正式具名上架批准。"
   },
   "runtimeAcceptance": {
-    "status": "not-run",
-    "checkedAt": null,
-    "reviewedBy": null,
-    "reportUrl": null,
-    "notes": "2026-11-16 两入口匿名协议与工具发现通过；未使用 Key、未执行业务工具。用户持有 Key 不等于鉴权通过；两个入口的账号权限须分别验证。"
+    "status": "pass",
+    "checkedAt": "2026-11-16T13:58:39.798165+00:00",
+    "reviewedBy": "codex-runtime-verification",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/review/zerone-dual-endpoint-20261116/candidates/drafts/workbuddy-data-2026-11-14/evidence/zerone-pe-table-directory-2026-11-16.json",
+    "notes": "仅 PE get_available_tables 单次表目录读取 PASS：本机隐藏输入 Key，发现 9 工具，返回 26 张结构化表描述，isError=false，未重试。用户终端结果与本机脱敏报告一致，未保留原始响应，实际费用未核验。不是 DSH 端到端验收；base、企业/金融数据、模型结果及其他工具未验收，不证明所有工具可用或鉴权拒绝策略。"
   },
   "evidence": [
     {
@@ -145,6 +145,12 @@
       "url": "https://ai.zerone.com.cn/mcp/base",
       "collectedAt": "2026-11-16T09:15:41.344101+00:00",
       "summary": "匿名 initialize HTTP 200，tools/list HTTP 200，1 工具，无 tools/call；证据见 evidence/zerone-dual-endpoint-probe-2026-11-16.json。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/review/zerone-dual-endpoint-20261116/candidates/drafts/workbuddy-data-2026-11-14/evidence/zerone-pe-table-directory-2026-11-16.json",
+      "collectedAt": "2026-11-16T13:58:39.798165+00:00",
+      "summary": "用户本机执行 get_available_tables 一次，26 张表描述，isError=false；助手核对本机脱敏报告与终端输出，限定范围通过，不追加调用。"
     }
   ]
 }
