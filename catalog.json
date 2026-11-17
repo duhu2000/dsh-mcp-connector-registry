@@ -7020,6 +7020,148 @@
     },
     {
       "schemaVersion": 1,
+      "id": "zerone-private-equity",
+      "name": "执中另类资产与专利数据",
+      "vendor": "执中 ZERONE",
+      "icon": "📊",
+      "category": "金融投资",
+      "summary": "LP/GP/基金 / 创投查询 / 企业专利",
+      "description": "通过本机 stdio 桥接连接执中官方 PE 与 base 两个 MCP 服务，查询 LP、GP、基金、项目公司、财务和交易事件，并检索企业专利。桥接由 DSH 社区维护，并非执中原生 stdio 服务。需在本机输入执中 API Key，两个入口的权限与费用以账号套餐为准，不承诺免费。运行验收通过：PE 数据表目录读取和 base 单次专利查询；其他工具及完整 DSH 界面流程尚未验收。结果应保留来源、时间、字段口径、缺失项与截断说明，不把采样记录当作总量，模型预测须与事实区分。服务条款未公开，尚未核验。 本目录仅提供连接配置，不赋予额外数据使用权。",
+      "tags": [
+        "执中",
+        "ZERONE",
+        "国内数据",
+        "LP",
+        "GP",
+        "基金",
+        "创投",
+        "专利",
+        "企业数据",
+        "API Key",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://zerone.com.cn/products/mcp",
+      "auth": {
+        "mode": "api-key",
+        "credentialName": "执中 API Key",
+        "credentialDescription": "Key 仅在本机填写，供 PE 与专利两个官方入口使用；按账号实际权限和套餐计费。请勿把 Key 放入公开地址或发送到会话。",
+        "credentialHelpLabel": "执中接入平台",
+        "credentialHelpUrl": "https://ai.zerone.com.cn/",
+        "credentialFields": [
+          {
+            "key": "apiKey",
+            "label": "执中 API Key",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "pe",
+          "serverName": "zerone_pe",
+          "transport": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "--package=dsh-mcp-connector@0.2.110",
+            "dsh-zerone-mcp-bridge",
+            "--service",
+            "pe"
+          ],
+          "credentialBindings": {
+            "ZERONE_API_KEY": "apiKey"
+          }
+        },
+        {
+          "serverKey": "base",
+          "serverName": "zerone_base",
+          "transport": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "--package=dsh-mcp-connector@0.2.110",
+            "dsh-zerone-mcp-bridge",
+            "--service",
+            "base"
+          ],
+          "credentialBindings": {
+            "ZERONE_API_KEY": "apiKey"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看可查询的数据范围",
+          "server": "pe",
+          "text": "查看我的执中账号当前可查询的数据表，按 LP、GP、基金、项目公司和交易事件整理用途；只读取一次数据表目录，不查询企业明细，不调用预测模型，不追加查询。"
+        },
+        {
+          "title": "查询宁德时代有效发明授权专利",
+          "server": "base",
+          "text": "查询宁德时代新能源科技股份有限公司的有效发明授权专利，说明返回数量、是否截断和数据来源，并概述前 5 条记录；只做一次专利查询，不追加企业匹配、不翻页、不下载全文。"
+        }
+      ],
+      "toolsSnapshot": [
+        {
+          "serverKey": "pe",
+          "serverName": "zerone_pe",
+          "tools": [
+            {
+              "name": "model_financing_probability",
+              "description": "查询项目公司的融资概率预测模型。\n\n    【使用场景】用户想了解某个项目公司未来获得融资的可能性，或对比多家公司的融资潜力。\n    【前置条件】建议先用 entity_search 确认标准公司名称和类型。\n    【支持类型】COMPANY（项目公司）、PREIPO（拟上市）、LISTED（上市公司）、NEEQ（新三板）。\n\n    Args:\n        entity_name: 公司名称，如\"字节跳动\"、\"美团\"。数据库中存储的是标准全称，若用户提供的是简称，建议先用 entity"
+            },
+            {
+              "name": "model_company_match_gp",
+              "description": "为指定项目公司匹配潜在适合出资的投资机构。\n\n    【使用场景】用户想知道某个项目公司适合找哪些投资机构融资，或分析某家公司的潜在投资方列表。\n    【前置条件】建议先用 entity_search 确认项目公司的标准全称。\n\n    Args:\n        company_name: 项目公司名称，如\"字节跳动\"。数据库中存储的是标准全称，简称需先用 entity_search 确认。\n        page: 页码，从 1 开始，默认 1。\n        page_size: 每"
+            },
+            {
+              "name": "entity_financial_list",
+              "description": "查询上市或拟上市公司的财务数据列表（分页）。\n\n    【使用场景】用户想查看某家上市公司的历史财务指标（营收、利润、资产负债等）。\n    【前置条件】建议先用 entity_search 确认标准名称和类型。\n    【市场路由】market 留空时，后端根据权威上市证券表识别并查询全部上市标识；指定 market 时查询该市场下的全部标识。\n    【支持范围】A 股、新三板和拟上市公司沿用原 OpenAPI；港股和美股使用 ZPE MySQL 数据源。\n    【金额展示】港股和美股记录"
+            },
+            {
+              "name": "entity_profile",
+              "description": "查询实体的综合画像（全景档案）。\n\n    【使用场景】用户想了解某个机构/公司/基金的完整信息，如\"红杉中国投资了哪些公司\"、\n    \"字节跳动的融资历史\"、\"某家基金的规模和管理人\"等。此工具聚合了多个数据源，一站式返回。\n    【前置条件】建议先用 entity_search 确认标准名称和类型，类型正确可大幅提升查询准确性。\n    【支持类型】8 种业务类型：GP（投资机构）、FUND（基金）、LP（出资方）、COMPANY（项目公司）、\n    FUND_MANAGER（基金管理"
+            },
+            {
+              "name": "entity_search",
+              "description": "实体模糊搜索 — 所有涉及名称查询的前置步骤。\n\n    【使用场景】用户提供简称/别称（如\"红杉\"、\"字节\"）、拼写不确定、或名称有歧义时，\n    先调用此工具获取标准全称和实体类型，再代入其他工具进行精确查询。\n    【为什么必须先用】数据库中存储的是标准全称（如\"红杉资本中国基金\"而非\"红杉中国\"），\n    直接使用简称可能导致查询无结果或结果不准确。\n\n    【支持类型】8 种业务实体类型，以及工商兜底类型：\n    - GP：投资机构（如红杉资本、高瓴资本）\n    - FUN"
+            },
+            {
+              "name": "get_available_tables",
+              "description": "获取当前可查询的数据表列表。\n\n    【使用场景】通用数据查询的第一步。当用户的问题无法通过业务专题工具（entity_profile 等）\n    直接回答时，先调用此工具了解有哪些表可用，再决定用哪张表进行 execute_query/execute_aggregate_query。\n\n    【为什么是第一步】此工具返回的表列表已包含每张表的描述和适用场景，帮助你快速判断\n    \"该用 company 表还是 company_financing 表\"。一个复合问题可能需要多个数据集；不"
+            },
+            {
+              "name": "get_table_schema",
+              "description": "获取指定数据表的字段结构、类型、可筛选性和允许的操作类型。\n\n    【使用场景】通用数据查询的第二步。在确定要查哪张表后，调用此工具确认：\n    1. 目标表有哪些字段可用\n    2. 每个字段是什么类型（string/date/decimal/int/array）\n    3. 每个字段支持哪些操作（equal/like/range/list_or）\n    4. 字段的中文映射名（用于向用户展示）\n\n    【前置条件】table_name 必须从 get_available_tabl"
+            },
+            {
+              "name": "execute_query",
+              "description": "执行单表结构化查询（列表/明细查询）。\n\n    【使用场景】当业务专题工具无法满足需求时，使用此工具进行任意筛选、排序、分页查询。\n    典型场景：按多个条件组合筛选（如\"2023年北京人工智能赛道获融资的公司\"）、\n    获取特定字段列表（如\"只返回公司名称和融资轮次\"）、分页浏览大量数据。\n\n    【分页限制】每页最多 50 条，仅支持访问排序后的前 500 条结果，最大页数随 pageSize 变化。\n    翻页时递增 page，并保持筛选条件、排序和 pageSize 一致。根"
+            },
+            {
+              "name": "execute_aggregate_query",
+              "description": "执行聚合查询（统计/分析）。\n\n    【使用场景】适用于所有统计、分析、汇总类需求，典型场景：\n    - 整体统计：\"总共有多少条记录\"、\"总托管行规模\"、\"整体平均值\"\n    - 按维度统计数量：\"各赛道有多少家公司\"、\"各省份有多少支基金\"\n    - 按维度求和/平均：\"各省份基金的平均规模\"、\"各投资机构累计投资金额\"\n    - 按维度求最大/最小：\"每个赛道最新的融资日期\"\n    - 去重计数：\"每个投资机构投资了多少家不同公司\"\n    - 按时间趋势：\"近年融资事件数量走"
+            }
+          ]
+        },
+        {
+          "serverKey": "base",
+          "serverName": "zerone_base",
+          "tools": [
+            {
+              "name": "get_patent_info",
+              "description": "查询企业专利信息。\n\n    【使用场景】用户想了解某家企业的专利数量、专利名称、申请号、公告号、专利类型与法律状态。\n    【前置条件】建议先用 entity_search 确认企业工商全称，再用全称调用本工具，避免同名误配。\n    【返回口径】最多返回 100 条，按公开（公告）日期倒序；总数超过 100 时返回「提示」说明已截断。\n    工具成功执行但无记录时，视为该企业暂无专利记录，是有效结论。\n\n    Args:\n        searchKey: 企业名称，建议使用工商全称"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "zotero",
       "name": "Zotero",
       "vendor": "Zotero MCP 社区",

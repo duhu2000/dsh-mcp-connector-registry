@@ -1,5 +1,11 @@
 [
   {
+    "id": "zerone-private-equity",
+    "publishedOn": "2026-11-17",
+    "pr": 77,
+    "acceptance": "DuHu 批准 PE/base 双入口及条款未知例外。PE 一次表目录读取返回 26 张表描述；base 经社区 stdio 桥接一次专利查询返回 100 条采样记录，状态 pass。其余工具、完整 DSH UI、实际费用未核验；样本不代表专利总量。服务条款未公开，尚未核验，不赋予额外数据权利。"
+  },
+  {
     "id": "shangqi-industry-data",
     "publishedOn": "2026-11-16",
     "pr": 75,
