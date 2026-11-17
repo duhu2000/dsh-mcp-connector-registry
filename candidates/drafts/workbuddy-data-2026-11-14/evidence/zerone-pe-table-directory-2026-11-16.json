@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "evidenceSource": "user-executed local script; sanitized local report independently read by assistant",
+  "execution": {
+    "endpoint": "https://ai.zerone.com.cn/mcp/pe",
+    "checkedAt": "2026-11-16T13:58:39.798165+00:00",
+    "credentialSource": "local-hidden-input",
+    "tool": "get_available_tables",
+    "arguments": {},
+    "businessCallAttempts": 1,
+    "automaticRetries": 0,
+    "status": "needs-review",
+    "scope": "PE table-directory only; base and all other tools untested",
+    "billing": "User approved one actual-price call; actual charge not independently verified",
+    "discoveredToolCount": 9,
+    "responseSha256": "aec3c17e38358f9e0a622b33a9e0401b5135d0421dbeba560ca1a78dd70b1d1e",
+    "isError": false,
+    "tableDescriptorCount": 26,
+    "structuredTableDirectoryObserved": true
+  },
+  "review": {
+    "status": "pass",
+    "scope": "PE get_available_tables single-call table-directory read only",
+    "reviewedBy": "codex-runtime-verification",
+    "basis": "One completed tools/call, isError=false, 26 structured table descriptors observed; matches user-provided terminal result. Raw response was deliberately not retained.",
+    "limitations": [
+      "No DSH end-to-end acceptance",
+      "No business entity, financial, prediction or patent data validation",
+      "base endpoint remains untested with credentials",
+      "No negative-key test; successful request alone does not prove server enforcement of authentication",
+      "Actual charge not independently verified"
+    ],
+    "additionalCalls": 0
+  }
+}
