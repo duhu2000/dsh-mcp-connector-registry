@@ -105,7 +105,7 @@
 | [TuShare](../connectors/tushare.json) | A 股 / 指数 / 基金 / 财务 / 宏观数据 | TuShare 社区 | api-key | 公共目录 | unverified |
 | [Wind·股票数据](../connectors/wind-stock-data.json) | 全球股票档案 / 行情 / 技术指标 / 财务与公司事件 | Wind 万得 | bearer | 公共目录 | unverified |
 | [盈米·基金投顾](../connectors/yingmi-wealth-management.json) | 基金检索 / 组合诊断 / 资产配置 / 投资风险分析 | 盈米基金 / 且慢 | api-key | 公共目录 | unverified |
-| [执中另类资产与专利数据](../connectors/zerone-private-equity.json) | LP/GP/基金 / 创投查询 / 企业专利 | 执中 ZERONE | api-key | 公共目录 | pass |
+| [执中](../connectors/zerone-private-equity.json) | 私募股权、并购、产业链、REITs | 执中 ZERONE | api-key | 公共目录 | pass |
 
 ## 设计创意
 
