@@ -1,6 +1,10 @@
 # 执中：账号就绪后的接入评估
 
-日期：2026-11-16。状态：DEFERRED；本次不生成正式 Connector，不改变市场数量。
+更新：2026-11-17。技术评分 81/selected；双入口限定范围运行 PASS；正式上架待桥接包发布及具名条款审核，不改变市场数量。
+
+## 最新进展（覆盖下文历史准备状态）
+
+PE 表目录和 base 专利单次查询均已通过，详情见 [双入口运行验收](evidence/ZERONE-RUNTIME-2026-11-17.md)。base 经新 stdio 桥接返回 100 条采样记录，非专利总量。未追加调用。双入口草案已更新 PASS，published=false；下文涉及 base 未验收和历史 60 分的段落仅保留为此前过程记录。
 
 ## 后续已完成：本机 PE 表目录读取 PASS
 
@@ -79,3 +83,14 @@
 业务请求发送前写入一次性标记 `~/.dsh/acceptance/zerone-pe-20261116-once.claim`；网络失败或响应丢失也不会自动重试，再次运行将拒绝业务调用。不要自行删除标记重试。输出 `~/.dsh/acceptance/zerone-pe-20261116-once.json`，不保存 Key、会话 ID 或数据表内容。业务响应不直接自动标 PASS，须核对脱敏报告；base 仍未授权验收。
 
 验证：`python3 test/zerone-local-acceptance.test.py`，覆盖 Key 特殊字符编码、一次调用/重复运行阻断、未知网络结果不重试、错误与文件无密钥、0600 文件权限、拒绝重定向、SSE 响应 ID 匹配。使用模拟请求，不消耗账号额度。
+
+
+## 双入口上架准备增量
+
+用户要求 PE 与 base 全部推进，未取消任一入口。新增未发布双入口卡片 `connectors/zerone-private-equity.json`，通过现有 stdio `credentialBindings` 将本机输入的 Key 传给社区桥接；桥接只允许执中固定 pe/base HTTPS 地址，请求时注入 query，拒绝重定向且不自动重试。
+
+卡片暂固定计划版本 `dsh-mcp-connector@0.2.110`，该版本在完成正式发布前不可将卡片迁入市场目录。当前 published=false。桥接源码及回归测试位于插件分支 `feat/zerone-query-auth-bridge`。
+
+新增 `verify-zerone-base-local.py`，在本机提示确认未知单次费用后隐藏输入 Key，最多调用 get_patent_info 一次，参数为宁德时代新能源科技股份有限公司、有效、发明授权；不调用 entity_search、不翻页、不下载。下载目录的“执中专利MCP单次验收.command”通过 DSH_ZERONE_BRIDGE_SCRIPT 指向本机源码，以真实 stdio 桥接路径验收，不重复 PE 调用。
+
+报告与一次性标记采用独立的 `zerone-base-20261116-once` 文件名，防止误用 PE 许可或把旧报告当作专利验证。报告只保留返回形状、计数、错误标志和哈希，不保存专利/人员明细。没有匹配结构时保持 needs-review，不能把工具调用无错误自动判为业务 PASS。

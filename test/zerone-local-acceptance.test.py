@@ -12,6 +12,9 @@ SOURCE = Path(__file__).resolve().parents[1] / 'candidates/drafts/workbuddy-data
 SPEC = importlib.util.spec_from_file_location('zerone_probe', SOURCE)
 probe = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(probe)
+BASE_SPEC = importlib.util.spec_from_file_location('zerone_base_probe', SOURCE.with_name('verify-zerone-base-local.py'))
+base_probe = importlib.util.module_from_spec(BASE_SPEC)
+BASE_SPEC.loader.exec_module(base_probe)
 
 
 class AcceptanceTests(unittest.TestCase):
@@ -80,6 +83,22 @@ class AcceptanceTests(unittest.TestCase):
              patch.object(probe, 'rpc') as rpc, contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(probe.main(), 2)
             rpc.assert_not_called()
+
+    def test_patent_report_preserves_sampling_without_exporting_records(self):
+        result = {'content': [{'type': 'text', 'text': json.dumps({'items': [{'title': 'private sample', 'person': 'not exported'}], 'count': 100, 'sampled': True})}]}
+        summary = base_probe.patent_summary(result)
+        self.assertEqual(summary['patentResultShapes'], [{'itemsLength': 1, 'count': 100, 'sampled': True}])
+        self.assertTrue(summary['structuredPatentResultObserved'])
+        self.assertNotIn('private sample', json.dumps(summary))
+        self.assertNotIn('person', json.dumps(summary))
+        self.assertIn('needs-review', summary['resultInterpretation'])
+
+    def test_patent_error_and_empty_result_never_auto_pass(self):
+        for result in [{'isError': True, 'structuredContent': {'items': []}}, {'content': [{'type': 'text', 'text': 'not JSON'}]}]:
+            self.assertFalse(base_probe.patent_summary(result)['structuredPatentResultObserved'])
+        empty = base_probe.patent_summary({'structuredContent': {'items': [], 'count': 0}})
+        self.assertEqual(empty['patentResultShapes'], [{'itemsLength': 0, 'count': 0}])
+        self.assertIn('needs-review', empty['resultInterpretation'])
 
     def test_sse_ignores_unrelated_ids(self):
         response = io.BytesIO(b'data: {"id":99,"result":{}}\n\ndata: {"id":3,"result":{"ok":true}}\n\n')

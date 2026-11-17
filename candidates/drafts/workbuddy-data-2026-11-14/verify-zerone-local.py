@@ -95,18 +95,26 @@ def rpc(opener, url, headers, method, params, request_id=None):
         return result["result"]
 
 
-def main():
+def main(*, endpoint=ENDPOINT, run_id=RUN_ID, tool="get_available_tables", arguments=None,
+         scope="PE table-directory only; base and all other tools untested",
+         summarize=None, confirm_charge=False):
+    arguments = {} if arguments is None else arguments
     if len(sys.argv) != 1 or not sys.stdin.isatty():
         print("请直接在本机终端运行脚本；不接受参数、管道或环境变量中的 Key。")
         return 2
     folder = Path.home() / ".dsh" / "acceptance"
     folder.mkdir(mode=0o700, parents=True, exist_ok=True)
-    claim = folder / (RUN_ID + ".claim")
-    report_path = folder / (RUN_ID + ".json")
+    claim = folder / (run_id + ".claim")
+    report_path = folder / (run_id + ".json")
     if claim.exists():
         print("本次一次性调用许可已使用或结果待确认；不会重试。请先核对现有验收报告。")
         return 2
-    print("仅 PE get_available_tables 一次，按实际单次扣费；不重试、不查企业、不下载。")
+    print(f"仅 {tool} 一次，参数：{json.dumps(arguments, ensure_ascii=False)}；不重试、不追加查询、不下载。")
+    if confirm_charge:
+        print("单次费用未知。仅本次验收按账号实际单次扣费，不充值或购买。")
+        if input("同意后输入 YES（其他输入取消）：").strip() != "YES":
+            print("已取消，未发送请求。")
+            return 2
     print("输入的 Key 不显示、不落盘；仅发送给 ai.zerone.com.cn。")
     try:
         with warnings.catch_warnings():
@@ -118,13 +126,13 @@ def main():
     if not key:
         print("未输入 Key，未发送请求。")
         return 2
-    url = ENDPOINT + "?" + urllib.parse.urlencode({"api_key": key})
+    url = endpoint + "?" + urllib.parse.urlencode({"api_key": key})
     headers = {"Content-Type": "application/json", "Accept": "application/json, text/event-stream"}
     opener = urllib.request.build_opener(NoRedirect())
-    report = {"endpoint": ENDPOINT, "checkedAt": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-              "credentialSource": "local-hidden-input", "tool": "get_available_tables", "arguments": {},
+    report = {"endpoint": endpoint, "checkedAt": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "credentialSource": "local-hidden-input", "tool": tool, "arguments": arguments,
               "businessCallAttempts": 0, "automaticRetries": 0, "status": "not-run",
-              "scope": "PE table-directory only; base and all other tools untested",
+              "scope": scope,
               "billing": "User approved one actual-price call; actual charge not independently verified"}
     phase = "initialize"
     try:
@@ -136,20 +144,23 @@ def main():
         listing = rpc(opener, url, headers, "tools/list", {}, 2)
         names = {item.get("name") for item in listing.get("tools", [])}
         report["discoveredToolCount"] = len(names)
-        if "get_available_tables" not in names:
+        if tool not in names:
             raise ValueError("approved tool unavailable")
         # Claim BEFORE sending. A lost response cannot trigger an accidental second charge.
         fd = os.open(claim, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
         os.close(fd)
         report["businessCallAttempts"] = 1
         phase = "tools/call"
-        result = rpc(opener, url, headers, "tools/call", {"name": "get_available_tables", "arguments": {}}, 3)
+        result = rpc(opener, url, headers, "tools/call", {"name": tool, "arguments": arguments}, 3)
         report["responseSha256"] = hashlib.sha256(json.dumps(result, sort_keys=True).encode()).hexdigest()
         report["isError"] = result.get("isError") is True
-        report["tableDescriptorCount"] = table_count(result)
+        if summarize is None:
+            report["tableDescriptorCount"] = table_count(result)
+            report["structuredTableDirectoryObserved"] = report["tableDescriptorCount"] > 0 and not report["isError"]
+        else:
+            report.update(summarize(result))
         # Transport success alone is not a business PASS. Reviewer checks this bounded evidence.
         report["status"] = "tool-error" if report["isError"] else "needs-review"
-        report["structuredTableDirectoryObserved"] = report["tableDescriptorCount"] > 0 and not report["isError"]
     except Exception as error:
         report["status"] = "failed-or-unknown"
         report["phase"] = phase
