@@ -1,5 +1,11 @@
 [
   {
+    "id": "tradesparq-trade-data",
+    "publishedOn": "2026-11-18",
+    "pr": 84,
+    "acceptance": "DuHu 批准有限验收上架：OAuth、19 个工具发现和一次会话初始化已确认；业务查询尚未验收，状态 partial。商业订阅与权限以服务协议为准。"
+  },
+  {
     "id": "zerone-private-equity",
     "publishedOn": "2026-11-17",
     "pr": 77,

@@ -1,0 +1,22 @@
+{
+  "connectorId": "tradesparq-trade-data",
+  "source": "user-provided DSH screenshot and authorization confirmation",
+  "checkedAt": "2026-11-18T15:57:52+08:00",
+  "clientVersion": "0.2.109",
+  "oauthAuthorization": "user-confirmed-success",
+  "connectionStatus": "connected",
+  "discoveredToolCount": 19,
+  "serverCount": 1,
+  "observedToolNames": [
+    "init_session",
+    "search_record"
+  ],
+  "businessCallsObserved": 0,
+  "runtimeAcceptance": "not-run",
+  "limitations": [
+    "OAuth refresh has not been verified.",
+    "The later user report confirms one init_session call; resources/read and trade aggregate were not executed.",
+    "Tool descriptions were subsequently reviewed for all 19 tools; billing remains unknown."
+  ],
+  "nextStep": "Resource reader fix PR #264; do not repeat the consumed init_session call. Review proposed connection-only listing before formal promotion."
+}
