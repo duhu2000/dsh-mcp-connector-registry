@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "id": "drillr",
+  "registryName": "ai.drillr/drillr",
+  "title": "Drillr — The financial MCP for AI agents",
+  "description": "drillr 官方远程 MCP：美股、日股、A 股的公告与财报检索、财务表和另类数据表只读 SQL、公司发现、新闻与研究信号，10 个只读工具。",
+  "version": "2.3.0",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "finance",
+      "research"
+    ],
+    "matchedKeywords": [
+      "financial data",
+      "SEC filings",
+      "equities",
+      "A股",
+      "财报"
+    ]
+  },
+  "source": {
+    "kind": "official-mcp-registry",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers",
+    "detailUrl": "https://registry.modelcontextprotocol.io/v0.1/servers?search=ai.drillr/drillr",
+    "status": "active",
+    "publishedAt": "2026-09-13T14:22:16.738525Z",
+    "updatedAt": "2026-09-13T14:22:16.738525Z",
+    "retrievedAt": "2026-11-18T12:50:09Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://drillr.ai/docs/mcp",
+    "repository": {
+      "url": "https://github.com/Little-Grebe-Inc/drillr-mcp-server",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://gateway.drillr.ai/mcp/data",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "oauth2",
+    "requiredHeaders": [],
+    "reason": "OAuth 2.1 Authorization Code + PKCE S256，支持动态客户端注册与 refresh_token，公共客户端使用 none；无自定义 scope。无凭据 initialize 返回 401 并给出 resource_metadata。API key（Bearer）为 drillr 官方备选方式，本卡片使用 OAuth。"
+  },
+  "license": {
+    "status": "not-applicable",
+    "spdxId": null,
+    "evidenceUrl": "https://drillr.ai/terms"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-09-13T14:22:16.738525Z",
+    "ageDays": 66,
+    "repositoryActivity": "active"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-18T12:50:09Z",
+    "targetUrl": "https://gateway.drillr.ai/mcp/data",
+    "httpStatus": 401,
+    "reason": "无凭据 initialize 返回预期 OAuth 挑战；资源与授权服务器元数据可读。详见 docs/runtime-acceptance/drillr.md。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 0,
+    "band": "defer",
+    "dimensions": {
+      "authority": 0,
+      "accessibility": 0,
+      "maintenanceSecurity": 0,
+      "runtime": 0,
+      "marketGap": 0,
+      "documentation": 0
+    },
+    "reasons": [
+      "候选材料由提交方准备，评分留待维护者审核；零分表示尚未评分。"
+    ],
+    "gates": [
+      "维护者评分与审批",
+      "经 dsh-mcp-connector 的 OAuth 运行验收"
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "drillr",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "申请 official-mcp-registry 来源审核（ai.drillr/drillr）。服务提供方 Little Grebe Inc.；问题反馈 https://github.com/Little-Grebe-Inc/drillr-mcp-server/issues 。在线服务适用 drillr 服务条款与隐私政策。"
+  },
+  "runtimeAcceptance": {
+    "status": "not-run",
+    "checkedAt": null,
+    "reviewedBy": "Little Grebe Inc. (submitter)",
+    "reportUrl": "https://github.com/Little-Grebe-Inc/dsh-mcp-connector-registry/blob/add-drillr/docs/runtime-acceptance/drillr.md",
+    "notes": "经 dsh-mcp-connector 的 OAuth 路径尚未验收。补充证据：DSH Desktop 0.2.2-rc.2 经官方 dsh-mcp-client 以 API key 连同一端点，2026-11-18 两个会话共 28 次只读调用，22 次成功，6 次为模型自写 SQL 列名错误并由服务端返回表结构提示。"
+  },
+  "evidence": [
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers?search=ai.drillr/drillr",
+      "collectedAt": "2026-11-18T12:50:09Z",
+      "summary": "ai.drillr/drillr 2.3.0 active，remote streamable-http https://gateway.drillr.ai/mcp/data。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://drillr.ai/developer/mcp-install.md",
+      "collectedAt": "2026-11-18T12:50:09Z",
+      "summary": "官方安装指南：端点、Streamable HTTP、OAuth 优先、API key 备选。"
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/Little-Grebe-Inc/drillr-mcp-server",
+      "collectedAt": "2026-11-18T12:50:09Z",
+      "summary": "官方 MCP 仓库，MIT，工具索引与各客户端接入说明。"
+    },
+    {
+      "type": "probe",
+      "url": "https://gateway.drillr.ai/.well-known/oauth-authorization-server",
+      "collectedAt": "2026-11-18T12:50:09Z",
+      "summary": "issuer https://gateway.drillr.ai，PKCE S256，DCR，token_endpoint_auth_methods none。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/Little-Grebe-Inc/dsh-mcp-connector-registry/blob/add-drillr/docs/runtime-acceptance/drillr.md",
+      "collectedAt": "2026-11-18T12:50:09Z",
+      "summary": "提交方自测记录：公开协议检查与 DSH Desktop 真实调用（API key 路径）；OAuth 连接器路径待验收。"
+    }
+  ]
+}
