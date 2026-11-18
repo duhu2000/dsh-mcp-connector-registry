@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "tradesparq-trade-data",
   "registryName": "com.tradesparq/mcp",
-  "title": "外贸公社全球贸易数据",
-  "description": "连接外贸公社贸易数据 MCP，在账号许可范围内查询海关与进出口贸易数据，用于市场趋势和供应链研究。国家、时间、HS 编码位数及数据覆盖以实际工具与订阅为准，不将局部样本视为全量海关数据。默认示例仅查询汇总统计，不提取个人联系方式；费用须在调用前确认。OAuth 注册预检已通过，授权登录和业务工具尚未验收。本卡片由 DSH 社区维护，并非外贸公社官方产品。",
+  "title": "外贸公社 · 贸易数据",
+  "description": "有限验收：OAuth 连接、19 个工具发现及一次会话初始化已确认，业务查询尚未验收。Tradesparq 全球海关与进出口提单贸易数据查询：按产品、HS编码、国家、港口、提单号等条件智能检索，支持交易记录、贸易趋势与公司贸易画像，适合市场研究、竞品与供应链分析。实际数据覆盖、查询权限、费用及数据使用范围以账号订阅和服务协议为准；不代表可免费查询或转售数据。",
   "version": "unknown",
   "classification": {
     "isDataService": true,
@@ -42,7 +42,7 @@
   "authentication": {
     "mode": "oauth2",
     "requiredHeaders": [],
-    "reason": "官方 401 challenge 与 PRM/AS 元数据交叉核实；S256、公开客户端 none；以 DSH 名称 DCR 返回 201。未完成用户授权/刷新令牌或 tools/list。"
+    "reason": "官方资源/授权元数据及既往 DCR 通过；2026-11-18 用户确认 DSH OAuth 授权成功，截图显示 19 工具、1 服务。刷新令牌与业务调用仍未验收。"
   },
   "license": {
     "status": "unknown",
@@ -60,7 +60,7 @@
     "checkedAt": "2026-11-15T04:30:24.879004+00:00",
     "targetUrl": "https://mcp.tradesparq.com/mcp/data-search",
     "httpStatus": 401,
-    "reason": "匿名 initialize 返回预期 401；官方 OAuth 发现链可用，DSH 名称 DCR 注册通过。真实工具数量未知，业务未调用。"
+    "reason": "公开发现正常；用户确认 OAuth 已连接并发现 19 工具，init_session 单次成功。缺少资源读取入口，汇总业务查询未执行，保持 partial。"
   },
   "dedupe": {
     "level": "none",
@@ -80,7 +80,7 @@
     },
     "reasons": [
       "人工证据评分，仅代表优先级，不代表上架批准。",
-      "独立官方域名、授权元数据与 DCR 已核验；登录、工具发现和业务结果未知，runtime=0。",
+      "独立官方域名、授权元数据与 DCR 已核验；用户报告 OAuth、19 工具发现及一次会话初始化成功，业务查询未执行，runtime=0。",
       "提供方为国内服务，数据覆盖范围不等同运营地域；商业数据许可及维护版本待核实。"
     ],
     "gates": [
@@ -95,14 +95,14 @@
     "proposedConnectorId": "tradesparq-trade-data",
     "reviewedAt": null,
     "reviewedBy": null,
-    "notes": "用户要求继续评估；不沿用其他连接器的具名上架批准。 用户明确仅采购客户可取得 MCP 账号，要求暂不处理；保留候选与历史证据，不继续申请、授权或探测。"
+    "notes": "2026-11-18 用户已提供账号就绪确认、官方 MCP 配置、卡片文案及 Logo，明确恢复推进，撤销此前暂停。尚待本次 OAuth 授权、工具发现、真实只读验收及具名上架批准。 2026-11-18 用户截图确认 OAuth 已连接、19 工具；等待工具参数/计费核验及一次只读业务验收。 2026-11-18 已完成可审查的有限验收卡片草案；尚未取得本候选 connection-only 具名批准，维持 pending，不填写 approved。"
   },
   "runtimeAcceptance": {
     "status": "not-run",
     "checkedAt": null,
     "reviewedBy": null,
     "reportUrl": null,
-    "notes": "仅匿名协议与 DCR 预检；没有登录或业务查询，没有付费调用。"
+    "notes": "2026-11-18 用户报告 init_session 调用 1 次成功；参数枚举读取 0 次、search_stats_overview 0 次。因 DSH 未暴露 resources/read 主动停止；业务查询仍未验收，未保存 sid。"
   },
   "evidence": [
     {
@@ -128,6 +128,12 @@
       "url": "https://mcp.tradesparq.com/oauth2/register",
       "collectedAt": "2026-11-15T04:39:11.154763+00:00",
       "summary": "DSH 名称、loopback callback、公开客户端 none 动态注册 201；客户端标识未保存，不等于用户授权通过。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://www.tradesparq.com/cn/terms",
+      "collectedAt": "2026-11-18T07:25:09.878395+00:00",
+      "summary": "公开通用条款已找到，涉及具体服务附加条款及自动化访问限制；MCP 账号授权范围和专属条款适用性待核验，不直接标记许可通过。"
     }
   ]
 }
