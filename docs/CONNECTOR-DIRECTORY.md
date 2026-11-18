@@ -39,7 +39,7 @@
 
 ## 调研分析
 
-共 42 个连接器。
+共 43 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -77,6 +77,7 @@
 | [Similarweb](../connectors/similarweb.json) | 网站流量 / 竞品对标 / 渠道与受众分析 | Similarweb | api-key | 公共目录 | partial |
 | [Starwell 全球公共统计](../connectors/starwell-world-statistics.json) | 全球统计 / 时间序列 / 官方来源 / 引用与许可 | Starwell（独立社区项目） | none | 公共目录 | pass |
 | [Tavily](../connectors/tavily-search.json) | 实时网页搜索 / 内容提取 / 站点地图 / 网页抓取 | Tavily | oauth2-pkce | 公共目录 | unverified |
+| [外贸公社 · 贸易数据](../connectors/tradesparq-trade-data.json) | 海关贸易 / 进出口趋势 / 供应链研究 | 外贸公社 Tradesparq | oauth2-pkce | 公共目录 | partial |
 | [UniProt 蛋白质数据](../connectors/uniprot-protein-data.json) | 蛋白检索 / 审校条目 / ID 映射 / 序列与蛋白组 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [美国财政部 FiscalData](../connectors/us-treasury-fiscaldata.json) | 美国国债 / 利率汇率 / 财政收支 / 官方财政数据 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [USAspending 美国联邦支出](../connectors/usaspending-federal-awards.json) | 联邦合同 / 拨款贷款 / 受款方 / 支出分析 | cyanheads（独立社区项目） | none | 公共目录 | pass |

@@ -5885,6 +5885,60 @@
     },
     {
       "schemaVersion": 1,
+      "published": true,
+      "featured": false,
+      "probeStatus": "partial",
+      "id": "tradesparq-trade-data",
+      "name": "外贸公社 · 贸易数据",
+      "vendor": "外贸公社 Tradesparq",
+      "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/88cd338a1d291a7647e36b168090a445e685e4d2/candidates/drafts/workbuddy-data-2026-11-14/assets/tradesparq-trade-data.png",
+      "category": "调研分析",
+      "summary": "海关贸易 / 进出口趋势 / 供应链研究",
+      "description": "有限验收：OAuth 连接、19 个工具发现及一次会话初始化已确认，业务查询尚未验收。Tradesparq 全球海关与进出口提单贸易数据查询：按产品、HS编码、国家、港口、提单号等条件智能检索，支持交易记录、贸易趋势与公司贸易画像，适合市场研究、竞品与供应链分析。实际数据覆盖、查询权限、费用及数据使用范围以账号订阅和服务协议为准；不代表可免费查询或转售数据。",
+      "tags": [
+        "外贸公社",
+        "Tradesparq",
+        "国内服务商",
+        "全球贸易",
+        "海关数据",
+        "OAuth",
+        "付费服务"
+      ],
+      "homepage": "https://opens.tradesparq.com/public/",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://mcp.tradesparq.com",
+        "scope": "openid profile offline_access",
+        "clientName": "DeepSeek Harness - Tradesparq MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "tradesparq-trade-data",
+          "serverName": "tradesparq_trade_data",
+          "url": "https://mcp.tradesparq.com/mcp/data-search",
+          "transport": "streamable-http",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询静止式变流器贸易概况",
+          "text": "查询 2025 年 12 月 HS 850440 的贸易汇总。先核对服务支持的 HS 位数、国家、数据源和指标枚举；不支持时停止并说明。只返回汇总指标、单位、覆盖范围和数据时间，不查联系人、不导出明细。调用前说明需要几次请求并确认费用；不要自动重试。",
+          "server": "tradesparq-trade-data"
+        },
+        {
+          "title": "查看美国进口月度趋势",
+          "text": "查看 2025 年美国 HS 8504 相关产品的进口月度趋势。先核对实际支持的国家、商品编码、日期范围和统计单位；若无法读取服务要求的参数枚举，停止查询并说明。按可比口径展示月份、指标与缺失项，不追加企业或联系人查询；收费调用前确认。",
+          "server": "tradesparq-trade-data"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "tushare",
       "name": "TuShare",
       "vendor": "TuShare 社区",

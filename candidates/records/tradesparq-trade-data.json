@@ -45,9 +45,9 @@
     "reason": "官方资源/授权元数据及既往 DCR 通过；2026-11-18 用户确认 DSH OAuth 授权成功，截图显示 19 工具、1 服务。刷新令牌与业务调用仍未验收。"
   },
   "license": {
-    "status": "unknown",
+    "status": "not-applicable",
     "spdxId": null,
-    "evidenceUrl": null
+    "evidenceUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/review-batches/tradesparq-limited-2026-11-18.md"
   },
   "maintenance": {
     "registryStatus": "unknown",
@@ -84,18 +84,18 @@
       "提供方为国内服务，数据覆盖范围不等同运营地域；商业数据许可及维护版本待核实。"
     ],
     "gates": [
-      "service-terms-review",
-      "oauth-end-to-end",
       "authenticated-runtime-acceptance",
-      "named-human-approval"
+      "oauth-refresh-verification",
+      "mcp-specific-service-terms-followup"
     ]
   },
   "review": {
-    "decision": "pending",
+    "decision": "approved",
     "proposedConnectorId": "tradesparq-trade-data",
-    "reviewedAt": null,
-    "reviewedBy": null,
-    "notes": "2026-11-18 用户已提供账号就绪确认、官方 MCP 配置、卡片文案及 Logo，明确恢复推进，撤销此前暂停。尚待本次 OAuth 授权、工具发现、真实只读验收及具名上架批准。 2026-11-18 用户截图确认 OAuth 已连接、19 工具；等待工具参数/计费核验及一次只读业务验收。 2026-11-18 已完成可审查的有限验收卡片草案；尚未取得本候选 connection-only 具名批准，维持 pending，不填写 approved。"
+    "reviewedAt": "2026-11-18T10:06:16.369336+00:00",
+    "reviewedBy": "DuHu",
+    "scope": "connection-only",
+    "notes": "用户明确批准“有限验收上架，署名 DuHu”。范围仅限 OAuth 连接、19 个工具发现及一次会话初始化已确认；业务查询尚未验收，卡片必须保持 partial、featured=false。不追加收费调用或 init_session 次数。"
   },
   "runtimeAcceptance": {
     "status": "not-run",
@@ -134,6 +134,26 @@
       "url": "https://www.tradesparq.com/cn/terms",
       "collectedAt": "2026-11-18T07:25:09.878395+00:00",
       "summary": "公开通用条款已找到，涉及具体服务附加条款及自动化访问限制；MCP 账号授权范围和专属条款适用性待核验，不直接标记许可通过。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/review-batches/tradesparq-limited-2026-11-18.md",
+      "collectedAt": "2026-11-18T10:06:16.369336+00:00",
+      "summary": "公开厂商 MCP 授权入口和通用服务条款已记录。not-applicable 仅指目录不分发软件包，并非免除厂商服务条款；MCP 专属合同、数据导出及再分发权未完整核验。"
+    },
+    {
+      "type": "connection-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/workbuddy-data-2026-11-14/evidence/tradesparq-dsh-connection-2026-11-18.json",
+      "collectedAt": "2026-11-18T10:06:16.369336+00:00",
+      "summary": "用户本机 OAuth 成功和 19 个工具发现；仅连接验收。"
     }
-  ]
+  ],
+  "connectionAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-18T15:57:52+08:00",
+    "reviewedBy": "DuHu",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/workbuddy-data-2026-11-14/evidence/tradesparq-dsh-connection-2026-11-18.json",
+    "toolCount": 19,
+    "notes": "用户 DSH 截图及授权成功确认，后续按工具描述列出 19 个工具；另报告 init_session 单次成功。证据由用户本机验收提供，未独立重放，不等于贸易业务结果通过。"
+  }
 }

@@ -4,7 +4,7 @@
 
 名称：外贸公社 · 贸易数据。提供方：外贸公社 Tradesparq（国内服务商，数据覆盖全球）。分类：调研分析。简介：海关贸易 / 进出口趋势 / 供应链研究。使用用户提供的红色 Logo，OAuth 2.0 PKCE，商业订阅服务。
 
-拟采用现有 connection-only 上架路径：正式卡片 published=true、featured=false、probeStatus=partial；首句明确“业务查询尚未验收”。当前交付仍是 published=false 草案，审核 pending，未宣称人工批准。
+拟采用现有 connection-only 上架路径：正式卡片 published=true、featured=false、probeStatus=partial；首句明确“业务查询尚未验收”。该草案随后获得用户明确批准“批准有限验收上架，署名 DuHu”，现已迁入正式目录；批准及服务使用边界见 docs/review-batches/tradesparq-limited-2026-11-18.md。
 
 ## 已取得证据与边界
 
@@ -21,10 +21,10 @@
 
 公开通用条款：https://www.tradesparq.com/cn/terms 。条款 1.2 提醒具体服务可能需要附加条款；3.1.8 涉及自动获取平台内容的限制。现有证据不构成完整 MCP 合同、数据导出或再分发权核验通过。本卡片只指向厂商 MCP 服务，由用户自行授权；不分发软件包、账号、商业数据，不提供网页抓取或绕过订阅能力。后续如使用 not-applicable 许可证标记，只表示未分发开源软件包，不能表示服务条款不适用。
 
-## 待确认决策
+## 决策记录
 
-仓库 scripts/check-new-connectors.mjs 的 connection-only 路径要求具体候选的具名批准与连接证据。建议由 DuHu 明确批准“仅连接及工具发现已验收”的 partial 上架范围；不将会话初始化替代贸易业务验收，不将其他候选的批准复用于本候选。
+仓库 scripts/check-new-connectors.mjs 的 connection-only 路径要求具体候选的具名批准与连接证据。已由 DuHu 明确批准“仅连接及工具发现已验收”的 partial 上架范围；不将会话初始化替代贸易业务验收，不将其他候选的批准复用于本候选。
 
 若选择完整 PASS 路径，先发布资源读取修复、读取真实枚举并执行尚未消耗的单次汇总验收；原业务 sid 失效时停止，不能自动再次 init_session。
 
-本材料不会增加已批准的收费调用次数，也不会自行生成 approved 信息。
+本材料不会增加已批准的收费调用次数；approved 信息仅依据用户本次明确批准写入。

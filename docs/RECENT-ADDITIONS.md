@@ -2,6 +2,14 @@
 
 仅收录有合并证据的正式上架；不将修改日期当作上架日期。历史条目尚未全部回溯。
 
+### 2026-11-18 · 外贸公社 · 贸易数据
+
+海关贸易 / 进出口趋势 / 供应链研究。接入方式：oauth2-pkce；探测状态：partial。
+
+DuHu 批准有限验收上架：OAuth、19 个工具发现和一次会话初始化已确认；业务查询尚未验收，状态 partial。商业订阅与权限以服务协议为准。
+
+[上架 PR #84](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/84) · [卡片详情](../connectors/tradesparq-trade-data.json)
+
 ### 2026-11-17 · 执中
 
 私募股权、并购、产业链、REITs。接入方式：api-key；探测状态：pass。
