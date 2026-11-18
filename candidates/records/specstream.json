@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "id": "specstream",
+  "registryName": "ai.specstream/specstream",
+  "title": "SpecStream",
+  "description": "SpecStream 官方远程 MCP Server：实时网页搜索 (search_web)、网页正文提取 (read_pages)、结构化深度检索与研究报告。由厂商提交；人工批准与真实运行验收由维护者填写，提交方未自填。",
+  "version": "1.3.4",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "web-search",
+      "web-data"
+    ],
+    "matchedKeywords": [
+      "SpecStream",
+      "网页搜索",
+      "网页提取",
+      "MCP"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": "https://registry.modelcontextprotocol.io/v0.1/servers?search=ai.specstream",
+    "detailUrl": "https://specstream.ai/agents.md",
+    "status": "active",
+    "publishedAt": "2026-11-12T18:47:15Z",
+    "updatedAt": "2026-11-12T18:47:15Z",
+    "retrievedAt": "2026-11-18T03:20:32Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://specstream.ai",
+    "repository": {
+      "url": "https://github.com/specstream/specstream-tools",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://api.specstream.ai/mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "oauth2",
+    "requiredHeaders": [
+      {
+        "name": "Authorization",
+        "required": true,
+        "secret": true
+      }
+    ],
+    "reason": "agents.md 说明 MCP 鉴权为 OAuth（客户端为用户登录）或 SpecStream API Key 作为 Bearer Token。匿名 initialize 返回 401，并指向 https://api.specstream.ai/.well-known/oauth-protected-resource/mcp；授权服务器元数据声明 S256 PKCE 与动态客户端注册。凭据保存在用户 DSH 本机，每次请求发送给 SpecStream 服务用于身份验证。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": null,
+    "evidenceUrl": "https://specstream.ai/terms"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": "2026-11-12T18:47:15Z",
+    "ageDays": 5,
+    "repositoryActivity": "active"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-18T03:20:32Z",
+    "targetUrl": "https://api.specstream.ai/mcp",
+    "httpStatus": 401,
+    "reason": "匿名 initialize 返回 HTTP 401（需要 OAuth Token 或 API Key）。这只是连通性证据，不是 OAuth 授权验收，也不是业务验收；未执行 tools/list 或 tools/call。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 0,
+    "band": "defer",
+    "dimensions": {
+      "authority": 0,
+      "accessibility": 0,
+      "maintenanceSecurity": 0,
+      "runtime": 0,
+      "marketGap": 0,
+      "documentation": 0
+    },
+    "reasons": [
+      "提交方未自评；评分由维护者核验后填写。"
+    ],
+    "gates": [
+      "named-human-approval",
+      "authenticated-runtime-acceptance",
+      "service-terms-review"
+    ]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "specstream",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": ""
+  },
+  "runtimeAcceptance": {
+    "status": "not-run",
+    "checkedAt": null,
+    "reviewedBy": null,
+    "reportUrl": null,
+    "notes": ""
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://specstream.ai/agents.md",
+      "collectedAt": "2026-11-18T03:20:32Z",
+      "summary": "官方代理说明：MCP 端点 https://api.specstream.ai/mcp（Streamable HTTP），OAuth 或 API Key 鉴权；search_web、read_pages 与深度检索流程及价格。"
+    },
+    {
+      "type": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers?search=ai.specstream",
+      "collectedAt": "2026-11-18T03:20:32Z",
+      "summary": "官方 MCP Registry 条目 ai.specstream/specstream，最新版本 1.3.4，状态 active。"
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/specstream/specstream-tools",
+      "collectedAt": "2026-11-18T03:20:32Z",
+      "summary": "官方公开仓库：MCP 客户端配置、插件、SDK 与示例；服务本身托管运行。"
+    },
+    {
+      "type": "license",
+      "url": "https://specstream.ai/terms",
+      "collectedAt": "2026-11-18T03:20:32Z",
+      "summary": "SpecStream 服务条款，HTTP 200；适用性待维护者核验。"
+    },
+    {
+      "type": "probe",
+      "url": "https://api.specstream.ai/mcp",
+      "collectedAt": "2026-11-18T03:20:32Z",
+      "summary": "匿名 initialize 返回 401；仅为连通性证据，不作为验收证据。"
+    }
+  ]
+}
