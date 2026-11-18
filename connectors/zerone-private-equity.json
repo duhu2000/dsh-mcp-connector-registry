@@ -3,10 +3,10 @@
   "id": "zerone-private-equity",
   "name": "执中",
   "vendor": "执中 ZERONE",
-  "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/8557b2458110700c5109fb9c45bbf018a9724278/assets/zerone-private-equity.png",
+  "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/3c1c360f86dd509e6bf232319afc9814bd9c3b61/assets/zerone-private-equity.png",
   "category": "金融投资",
   "summary": "私募股权、并购、产业链、REITs",
-  "description": "连接执中高质量可信金融数据，覆盖科技企业、LP、GP、基金及管理人和九类交易事件，支持主体画像、产业赛道研究、资金链路分析及预测匹配。 验收仅覆盖数据表目录读取和一次基础数据查询。服务条款未公开，尚未核验。",
+  "description": "连接执中高质量可信金融数据，覆盖科技企业、LP、GP、基金及管理人，跟踪LP出资、投融资、并购、IPO 及退出等各类交易事件，支持主体画像、产业赛道研究、资金链路分析及预测与匹配。 验收仅覆盖数据表目录读取和一次基础数据查询。服务条款未公开，尚未核验。",
   "tags": [
     "执中",
     "ZERONE",
