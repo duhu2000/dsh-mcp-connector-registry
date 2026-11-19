@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "id": "iyiou-financing-data",
+  "name": "亿欧数据 · 产业投融资",
+  "vendor": "亿欧",
+  "icon": "📊",
+  "category": "金融投资",
+  "summary": "企业融资历史 / 投资方 / 投融资事件筛选",
+  "description": "连接亿欧官方投融资 MCP，支持企业名称匹配、企业融资历史、批量融资事件查询，以及按融资时间和投资方筛选事件。需在亿欧申请 Client ID 与 Client Secret，调用按账号权益及服务方规则计费。市场卡片双凭据配置需 MCP连接器 v0.2.115 或更高版本；已有 JSON 导入连接可继续使用。已通过连接、4 个工具发现及单次投融资事件查询验收，其余 3 个工具尚未逐项验收。结果中的来源、采集时间和费用可能不返回，应如实注明，不推断缺失值。本卡片由 DSH 社区维护；服务条款未公开，尚未核验，数据使用范围以用户与亿欧的约定为准，不授予额外转售或再分发许可。",
+  "tags": [
+    "亿欧",
+    "国内数据",
+    "企业数据",
+    "投融资",
+    "投资机构",
+    "产业研究",
+    "API Key",
+    "付费服务"
+  ],
+  "published": true,
+  "featured": false,
+  "probeStatus": "pass",
+  "homepage": "https://data.iyiou.com/ai",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "X-Client-Secret",
+    "credentialName": "Client ID 与 Client Secret（需 v0.2.115+）",
+    "credentialDescription": "如只显示一个输入框，请升级 MCP连接器至 v0.2.115 或更高版本。两个凭据分别填写，均不加 Bearer 前缀。",
+    "credentialHelpUrl": "https://data.iyiou.com/ai",
+    "credentialHelpLabel": "前往亿欧申请 MCP 凭据",
+    "headerCredentialFields": [
+      {
+        "key": "clientId",
+        "label": "Client ID",
+        "required": true,
+        "placeholder": "请输入亿欧 Client ID"
+      },
+      {
+        "key": "clientSecret",
+        "label": "Client Secret",
+        "required": true,
+        "placeholder": "请输入亿欧 Client Secret",
+        "description": "原样填写，仅保存在本机连接中，不写入市场目录或对话。"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "serverKey": "iyiou-invest",
+      "serverName": "iyiou-invest",
+      "transport": "streamable-http",
+      "url": "https://mcp.iyiou.com/invest",
+      "headerCredentialBindings": {
+        "X-Client-Id": "clientId",
+        "X-Client-Secret": "clientSecret"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看一个月的融资事件",
+      "server": "iyiou-invest",
+      "text": "查询 2026 年 10 月的投融资事件。先核对本次费用并取得额度授权，仅调用 filter_invest_events 一次，arguments 为 {page:1,page_size:3,invest_time_start:\"2026-10-01\",invest_time_end:\"2026-10-31\"}。列出返回的企业、融资日期、轮次、金额及投资方，缺失字段注明未返回；说明仅展示第一页3条，不推断完整市场规模。不重试、不翻页、不下载。"
+    },
+    {
+      "title": "查询企业融资历史",
+      "server": "iyiou-invest",
+      "text": "查询北京智谱华章科技有限公司的融资历史。先确认所需调用次数及费用并取得授权，再匹配企业并查询第一页最多5条；如名称不唯一先让我确认。整理日期、轮次、金额和投资方，来源或采集时间未返回时如实注明，不补猜、不自动翻页或下载。"
+    }
+  ]
+}
