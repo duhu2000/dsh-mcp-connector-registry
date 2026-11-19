@@ -15,7 +15,7 @@
     "官方 MCP",
     "公开 Beta"
   ],
-  "published": true,
+  "published": false,
   "featured": false,
   "homepage": "https://anansi-haven.anansidata.workers.dev",
   "probeStatus": "unverified",
@@ -58,7 +58,7 @@
   "prompts": [
     {
       "title": "检查英文草稿的 AI 写作痕迹",
-      "text": "使用 draftcheck_check 对以下英文段落评分，列出发现的常见 AI 写作痕迹、位置和修改建议。评分只是文风启发式，不能证明文本由谁撰写：{{text}}",
+      "text": "在调用 draftcheck_check 评分服务之前，请先确认：将把所提供的英文文本发送到独立的 DraftCheck 评分服务；此次调用会计入有限的每日免费额度（每调用方每天 5 次，另有共享日上限）；请勿提交机密或敏感文本。确认后再对以下英文段落评分，列出发现的常见 AI 写作痕迹、位置和修改建议。评分只是文风启发式，不能证明文本由谁撰写：{{text}}",
       "server": "anansi-haven-core"
     },
     {
