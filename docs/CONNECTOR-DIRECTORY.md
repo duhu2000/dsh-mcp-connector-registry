@@ -39,7 +39,7 @@
 
 ## 调研分析
 
-共 44 个连接器。
+共 45 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -69,6 +69,7 @@
 | [OpenBoost 跨境数据](../connectors/openboost-cross-border-data.json) | Amazon / TikTok / 跨境选品与竞品研究 | OpenBoost | api-key | 公共目录 | partial |
 | [OpenFEC 美国竞选资金](../connectors/openfec-campaign-finance.json) | 候选人委员会 / 收支申报 / 独立支出 / 选举日历 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [OpenStreetMap 全球地理数据](../connectors/openstreetmap-geospatial-data.json) | 地点搜索 / 反向地理编码 / POI / Overpass 空间查询 | cyanheads（独立社区项目） | none | 公共目录 | pass |
+| [Patentics 专利检索与分析](../connectors/patentics-patent-research.json) | 专利检索 / 权利要求 / 法律状态 / 技术分析 | Patentics | api-key | 公共目录 | pass |
 | [智慧芽专利与文献](../connectors/patsnap.json) | 全球专利 / 科学文献 / 研发情报检索 | PatSnap / 智慧芽 | bearer | 公共目录 | unverified |
 | [Product Hunt](../connectors/producthunt.json) | 产品发现 / 搜索 / 榜单 / GraphQL 数据分析 | 社区连接器 | bearer | 公共目录 | unverified |
 | [PubMed 生物医学文献](../connectors/pubmed-biomedical-literature.json) | PubMed / Europe PMC / MeSH / 引用与开放全文 | cyanheads（独立社区项目） | none | 公共目录 | pass |

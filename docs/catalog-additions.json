@@ -1,5 +1,11 @@
 [
   {
+    "id": "patentics-patent-research",
+    "publishedOn": "2026-11-19",
+    "pr": 88,
+    "acceptance": "DuHu 批准上架。官方 Streamable HTTP 与 apikey 鉴权；DSH 发现21个工具，助手核对一次 get_patent_abstract 查询 CN106257978A 成功返回有效摘要，状态 pass。未重试、未追加查询、未下载全文；其余20个工具未逐项实测。授权及说明价0.1积分，实际扣费未回传。官方服务条款已核实，具体使用权按账号约定。"
+  },
+  {
     "id": "bcpmdata-pharma-research",
     "publishedOn": "2026-11-19",
     "pr": 87,
