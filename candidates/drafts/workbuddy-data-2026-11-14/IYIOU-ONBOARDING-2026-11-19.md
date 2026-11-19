@@ -57,3 +57,7 @@
 ## 上架批准更新
 
 用户已明确批准亿欧专属条款例外并上架，署名 DuHu，见 [批准记录](evidence/iyiou-terms-exception-2026-11-19.json)。正式卡片与候选记录已准备迁入 connectors/、candidates/records/，并登记 PR #90。此前待条款状态为历史，license 继续 unknown；合并应等待插件 v0.2.116 发布可用。
+
+## 插件发布完成，目录等待合并
+
+[插件 PR #273](https://github.com/duhu2000/dsh-mcp-connector/pull/273) 已合并，[v0.2.116](https://github.com/duhu2000/dsh-mcp-connector/releases/tag/v0.2.116) 已完成 npm 正式发布。Registry 校验依赖同步升级至 ^0.2.116，以正式包校验双凭据字段。正式上架范围仍为4个工具发现、1个工具的代表性只读验收；未追加业务调用。目录合并入口为 [PR #90](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/90)，合并后由 CI 更新目录并清理 CDN 缓存。
