@@ -40,7 +40,7 @@
 
 ## 调研分析
 
-共 45 个连接器。
+共 46 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -54,6 +54,7 @@
 | [EUR-Lex 欧盟法律开放数据](../connectors/eur-lex-eu-law.json) | 欧盟立法 / CJEU 判例 / 条约 / CELEX 与 EuroVoc | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [Exa·网络搜索](../connectors/exa-search.json) | 匿名语义网页搜索 / 网页抓取 / 高级检索 | Exa | none | 公共目录 | unverified |
 | [FAOSTAT 全球粮农统计](../connectors/faostat-food-agriculture.json) | 农产品产量 / 单产贸易 / 食品农业 / FAOSTAT | cyanheads（独立社区项目） | none | 公共目录 | pass |
+| [FastMoss · TikTok电商数据](../connectors/fastmoss-tiktok-commerce.json) | TikTok 商品 / 达人 / 店铺 / 广告与类目研究 | FastMoss | oauth2-pkce | 公共目录 | pass |
 | [FRED 美国宏观经济数据](../connectors/fred-economic-data.json) | GDP / CPI / 就业 / 利率 / 经济时间序列 | Pipeworx（独立第三方服务） | none | 公共目录 | pass |
 | [GBIF 全球生物多样性](../connectors/gbif-global-biodiversity.json) | 物种分类 / 出现记录 / 数据集 / 全球生物多样性 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [Google Analytics](../connectors/google-analytics.json) | GA4 属性 / 报表 / 实时数据 / 漏斗与转化分析 | Google Analytics | api-key | 公共目录 | partial |

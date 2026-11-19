@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "id": "fastmoss-tiktok-commerce",
+  "registryName": "com.fastmoss/mcp",
+  "title": "FastMoss · TikTok电商数据",
+  "provider": "FastMoss",
+  "providerRegion": "中国运营关联/跨境主体，具体签约主体待核实",
+  "dataCoverage": "海外 TikTok Shop 市场",
+  "status": "PASS",
+  "source": {
+    "kind": "official-vendor",
+    "status": "active",
+    "detailUrl": "https://developers.fastmoss.com/zh/docs/mcp/setup.html"
+  },
+  "transports": [
+    {
+      "serverKey": "fastmoss",
+      "serverName": "fastmoss",
+      "transport": "streamable-http",
+      "url": "https://mcp.fastmoss.com/mcp",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "authentication": {
+    "mode": "oauth2",
+    "publicDiscovery": "pass",
+    "userConnection": "pass",
+    "note": "Preferred clean OAuth endpoint; API Key URL variant is not published in the card."
+  },
+  "license": {
+    "status": "service-terms",
+    "spdxId": null,
+    "evidenceUrl": "https://developers.fastmoss.com/zh/terms"
+  },
+  "maintenance": {
+    "publicEndpointCheckedAt": "2026-11-19T12:02:30.920302+00:00",
+    "repositoryActivity": "unknown",
+    "note": "Official hosted MCP; no npm package required."
+  },
+  "connectionAcceptance": {
+    "status": "pass",
+    "toolCount": 79,
+    "source": "user screenshot and connection report",
+    "checkedAt": "2026-11-19T19:57:45+08:00",
+    "reviewedBy": "Codex",
+    "notes": "User screenshot and assistant DSH UI confirm 79 discovered tools; discovery does not establish entitlement to every tool.",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/fastmoss-2026-11-19/evidence/connection-tools.json"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-19T20:33:00+08:00",
+    "reviewedBy": "Codex",
+    "notes": "US daily product bestseller first page only. Other 78 tools and all other markets, dates and tiers are untested. Observed one successful call returning 3 results; actual charge not returned.",
+    "reportPath": "evidence/runtime-acceptance.json",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/fastmoss-2026-11-19/evidence/runtime-acceptance.json"
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "fastmoss-tiktok-commerce",
+    "reviewedAt": "2026-11-19T12:48:22.576326+00:00",
+    "reviewedBy": "DuHu",
+    "scope": "full-runtime",
+    "notes": "DuHu explicitly approved this candidate for OAuth paid-service listing. Full-runtime denotes representative single-query acceptance, not all 79 tools. Public proprietary terms reviewed; no terms exception."
+  },
+  "dedupe": {
+    "level": "none",
+    "overlap": [
+      "openboost-cross-border-data"
+    ],
+    "notes": "No existing FastMoss name or endpoint match in current registry search; overlaps OpenBoost in TikTok subject, but vendor and endpoint differ. No claim of superior coverage."
+  },
+  "score": {
+    "total": 88,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 23,
+      "maintenanceSecurity": 15,
+      "runtime": 15,
+      "marketGap": 5,
+      "documentation": 5
+    },
+    "gates": [],
+    "reasons": [
+      "Official hosted endpoint, OAuth metadata, setup and applicable service terms.",
+      "OAuth connected; per-tier permissions and credits remain account-specific.",
+      "No audited release history or all-tool security review.",
+      "One real US daily ranking call passed; other tools untested.",
+      "Complements existing cross-border data vendors with some subject overlap."
+    ]
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://developers.fastmoss.com/zh/docs/mcp/setup.html",
+      "collectedAt": "2026-11-19T12:48:22.576326+00:00",
+      "summary": "Official OAuth client setup and clean endpoint."
+    },
+    {
+      "type": "license",
+      "url": "https://developers.fastmoss.com/zh/terms",
+      "collectedAt": "2026-11-19T12:48:22.576326+00:00",
+      "summary": "Public proprietary terms apply to API/MCP; no redistribution right granted."
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/fastmoss-2026-11-19/evidence/runtime-acceptance.json",
+      "collectedAt": "2026-11-19T12:48:22.576326+00:00",
+      "summary": "One successful bounded daily ranking call; no business records retained."
+    },
+    {
+      "type": "connection-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/fastmoss-2026-11-19/evidence/connection-tools.json",
+      "collectedAt": "2026-11-19T12:48:22.576326+00:00",
+      "summary": "79 tools discovered; entitlement not inferred."
+    },
+    {
+      "type": "public-probe",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/fastmoss-2026-11-19/evidence/public-probe.json",
+      "collectedAt": "2026-11-19T12:48:22.576326+00:00",
+      "summary": "Anonymous OAuth discovery and challenge."
+    },
+    {
+      "type": "human-approval",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/fastmoss-2026-11-19/evidence/human-approval.json",
+      "collectedAt": "2026-11-19T12:48:22.576326+00:00",
+      "summary": "DuHu candidate-specific listing approval."
+    },
+    {
+      "type": "service-terms-review",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/fastmoss-2026-11-19/evidence/official-review.json",
+      "collectedAt": "2026-11-19T12:48:22.576326+00:00",
+      "summary": "Public setup, pricing and terms review."
+    }
+  ],
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "ecommerce",
+      "market-research",
+      "cross-border"
+    ],
+    "matchedKeywords": [
+      "TikTok",
+      "商品榜单",
+      "跨境电商"
+    ]
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-19T12:01:28.060878+00:00",
+    "targetUrl": "https://mcp.fastmoss.com/mcp",
+    "reason": "Anonymous initialize returns expected 401 OAuth challenge; metadata succeeds. Authorized DSH connection and representative runtime separately passed."
+  }
+}
