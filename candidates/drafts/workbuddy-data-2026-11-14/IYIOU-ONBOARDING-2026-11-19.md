@@ -50,6 +50,10 @@
 
 ## 正式卡片送审
 
-[待上架描述符](connectors/iyiou-financing-data.json)已准备，提供两个独立密码输入框、两条无需填写占位符的中文示例。仅记录公开字段映射。插件新增 HTTP Header 凭据绑定并经 Mock 测试；旧版目录解析兼容性已用 v0.2.74 验证。新卡片配置需 v0.2.115+，旧版仍可读取整体目录，已有 JSON 导入连接不受影响。
+[待上架描述符](connectors/iyiou-financing-data.json)已准备，提供两个独立密码输入框、两条无需填写占位符的中文示例。仅记录公开字段映射。插件新增 HTTP Header 凭据绑定并经 Mock 测试；旧版目录解析兼容性已用 v0.2.74 验证。新卡片配置需 v0.2.116+，旧版仍可读取整体目录，已有 JSON 导入连接不受影响。
 
 用户本轮批准上架推进，审核人沿用 DuHu；[服务条款核验记录](evidence/iyiou-service-terms-2026-11-19.json)仍为 unknown，不能复用其他厂商的例外。卡片保留在 drafts，暂不计入正式目录。
+
+## 上架批准更新
+
+用户已明确批准亿欧专属条款例外并上架，署名 DuHu，见 [批准记录](evidence/iyiou-terms-exception-2026-11-19.json)。正式卡片与候选记录已准备迁入 connectors/、candidates/records/，并登记 PR #90。此前待条款状态为历史，license 继续 unknown；合并应等待插件 v0.2.116 发布可用。

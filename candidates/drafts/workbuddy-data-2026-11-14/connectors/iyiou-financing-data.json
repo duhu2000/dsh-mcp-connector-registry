@@ -6,7 +6,7 @@
   "icon": "📊",
   "category": "金融投资",
   "summary": "企业融资历史 / 投资方 / 投融资事件筛选",
-  "description": "连接亿欧官方投融资 MCP，支持企业名称匹配、企业融资历史、批量融资事件查询，以及按融资时间和投资方筛选事件。需在亿欧申请 Client ID 与 Client Secret，调用按账号权益及服务方规则计费。市场卡片双凭据配置需 MCP连接器 v0.2.115 或更高版本；已有 JSON 导入连接可继续使用。已通过连接、4 个工具发现及单次投融资事件查询验收，其余 3 个工具尚未逐项验收。结果中的来源、采集时间和费用可能不返回，应如实注明，不推断缺失值。本卡片由 DSH 社区维护；服务条款未公开，尚未核验，数据使用范围以用户与亿欧的约定为准，不授予额外转售或再分发许可。",
+  "description": "连接亿欧官方投融资 MCP，支持企业名称匹配、企业融资历史、批量融资事件查询，以及按融资时间和投资方筛选事件。需在亿欧申请 Client ID 与 Client Secret，调用按账号权益及服务方规则计费。市场卡片双凭据配置需 MCP连接器 v0.2.116 或更高版本；已有 JSON 导入连接可继续使用。已通过连接、4 个工具发现及单次投融资事件查询验收，其余 3 个工具尚未逐项验收。结果中的来源、采集时间和费用可能不返回，应如实注明，不推断缺失值。本卡片由 DSH 社区维护；服务条款未公开，尚未核验，数据使用范围以用户与亿欧的约定为准，不授予额外转售或再分发许可。",
   "tags": [
     "亿欧",
     "国内数据",
@@ -24,8 +24,8 @@
   "auth": {
     "mode": "api-key",
     "apiKeyHeader": "X-Client-Secret",
-    "credentialName": "Client ID 与 Client Secret（需 v0.2.115+）",
-    "credentialDescription": "如只显示一个输入框，请升级 MCP连接器至 v0.2.115 或更高版本。两个凭据分别填写，均不加 Bearer 前缀。",
+    "credentialName": "Client ID 与 Client Secret（需 v0.2.116+）",
+    "credentialDescription": "如只显示一个输入框，请升级 MCP连接器至 v0.2.116 或更高版本。两个凭据分别填写，均不加 Bearer 前缀。",
     "credentialHelpUrl": "https://data.iyiou.com/ai",
     "credentialHelpLabel": "前往亿欧申请 MCP 凭据",
     "headerCredentialFields": [

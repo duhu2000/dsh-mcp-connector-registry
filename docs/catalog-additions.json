@@ -1,5 +1,11 @@
 [
   {
+    "id": "iyiou-financing-data",
+    "publishedOn": "2026-11-19",
+    "pr": 90,
+    "acceptance": "已完成双凭据连接、4工具发现和单次投融资事件筛选查询；其余3工具未逐项验收。DuHu 批准服务条款未公开例外，卡片明确披露。市场双凭据表单需插件 v0.2.116+。"
+  },
+  {
     "id": "quandashi-trademark",
     "publishedOn": "2026-11-19",
     "pr": 89,
