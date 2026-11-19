@@ -1,0 +1,16 @@
+{
+  "reviewedAt": "2026-11-19T08:05:47.904962+00:00",
+  "status": "declared",
+  "scope": "Public connector configuration for each user’s own authorized MCP account; not a data redistribution licence",
+  "officialCapabilityUrl": "https://www.quandashi.com/data-ai/index.html",
+  "termsUrl": "https://www.quandashi.com/index/reg-xieyi",
+  "findings": [
+    "Official data/AI page expressly offers MCP/API integration into third-party AI work systems.",
+    "General terms cover quandashi.com tools/services; account sharing, unauthorized commercial reuse and automated website access are restricted.",
+    "Assessment distinguishes vendor-provided authenticated MCP access from website scraping; no scraping, shared credentials or data resale is included in this card.",
+    "Specific account contracts and per-tool charges were not independently verified; users remain subject to their account entitlements.",
+    "No separate public MCP contract located; declared general service terms plus explicit official integration offering are retained, without claiming an unrestricted licence.",
+    "Brand reuse permission not verified; published card uses a generic icon and does not redistribute the supplied logo."
+  ],
+  "exception": false
+}

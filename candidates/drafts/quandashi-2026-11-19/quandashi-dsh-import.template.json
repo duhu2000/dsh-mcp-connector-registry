@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "ipmaster_platform": {
+      "type": "streamable-http",
+      "url": "https://ai.quandashi.com/mcp/ipmaster_platform",
+      "headers": {
+        "Authorization": "Bearer YOUR_QUANDASHI_APP_KEY"
+      }
+    }
+  }
+}

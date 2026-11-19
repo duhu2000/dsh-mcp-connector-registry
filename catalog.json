@@ -4850,6 +4850,59 @@
     },
     {
       "schemaVersion": 1,
+      "id": "quandashi-trademark",
+      "name": "权大师商标查询",
+      "vendor": "权大师",
+      "icon": "🔎",
+      "category": "法律合规",
+      "summary": "商标检索 / 公告查询 / 全球商标数据",
+      "description": "通过权大师 MCP 查询账号授权范围内的中国及全球商标、公告、尼斯商品与服务分类，支持品牌检索和知识产权研究。需开通权大师 AppKey，费用及数据使用范围以账号权益和服务协议为准，不授予额外转售或再分发许可。已确认23个工具发现及一次尼斯分类查询运行验收通过，其余工具尚未逐项验收。档案和案件工具可能涉及客户数据或写入，须按用户授权使用。结果供研究与人工复核，不保证商标注册结果。本卡片由 DSH 社区维护。",
+      "tags": [
+        "权大师",
+        "Quandashi",
+        "商标",
+        "知识产权",
+        "国内数据服务",
+        "Bearer Token"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://www.quandashi.com/data-ai/index.html",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "权大师 AppKey",
+        "credentialPlaceholder": "请输入权大师发放的 AppKey",
+        "credentialDescription": "仅在本机填写原始 AppKey，不加 Bearer 前缀；DSH 自动使用 Authorization: Bearer。权限和计费以已开通服务为准。",
+        "credentialHelpUrl": "https://www.quandashi.com/data-ai/index.html",
+        "credentialHelpLabel": "查看权大师数据与AI服务"
+      },
+      "servers": [
+        {
+          "serverKey": "ipmaster_platform",
+          "serverName": "ipmaster_platform",
+          "transport": "streamable-http",
+          "url": "https://ai.quandashi.com/mcp/ipmaster_platform",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询计算机软件相关商品与服务分类",
+          "server": "ipmaster_platform",
+          "text": "查询“计算机软件”相关的尼斯商品／服务分类，按实际返回列出项目名称、类别、类似群和编码，区分商品与软件服务。未返回的数据版本注明缺失，不把响应 schema_version 当作尼斯分类版次。先核对工具费用并按我的授权额度执行，不追加查询、不下载、不读取或修改客户档案。"
+        },
+        {
+          "title": "检索华为在中国的商标",
+          "server": "ipmaster_platform",
+          "text": "检索中国商标中名称包含“华为”的记录，仅查看首页前3条，列出商标名称、申请号、类别、公开法律状态及数据时间；没有返回的字段注明缺失。先核对工具和费用，按我授权的额度执行，不翻页、下载或修改档案，不将检索结果视为可注册结论。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "qveris-capability-network",
       "name": "QVerisMCP",
       "vendor": "QVeris",
