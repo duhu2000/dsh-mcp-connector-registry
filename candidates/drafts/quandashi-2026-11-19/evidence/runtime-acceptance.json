@@ -1,0 +1,71 @@
+{
+  "candidateId": "quandashi-trademark",
+  "recordedDate": "2026-11-19",
+  "status": "pass",
+  "scope": "Single read-only Nice goods/services lookup only",
+  "evidenceSource": "User-provided execution report in this conversation; raw response not independently captured",
+  "exactExecutionTime": null,
+  "tool": "search_nice_goods_and_services",
+  "queryIntent": "计算机软件",
+  "exactArguments": null,
+  "businessCallAttempts": 1,
+  "automaticRetries": 0,
+  "paginationCalls": 0,
+  "downloads": 0,
+  "customerArchiveAccess": false,
+  "writes": false,
+  "result": {
+    "status": "matched",
+    "class": 42,
+    "similarGroup": "4220",
+    "groupName": "计算机编程及相关服务",
+    "candidateCount": 20,
+    "indexUsed": true,
+    "schemaVersion": "1.1",
+    "sourceFile": "45-pdf-scope.json",
+    "sourceSha256": "27e40ef0c0c5fb0c814a19b3dae3c717a51ab6f906dd2f6969e8f25f1b1d9ebb",
+    "independentDatasetVersion": null,
+    "fullyVisibleCandidateCount": 6,
+    "responsePartiallyTruncated": true
+  },
+  "visibleItems": [
+    {
+      "name": "计算机软件出租",
+      "code": "420159"
+    },
+    {
+      "name": "计算机软件咨询",
+      "code": "420204"
+    },
+    {
+      "name": "计算机软件安装",
+      "code": "420201"
+    },
+    {
+      "name": "计算机软件更新",
+      "code": "420140"
+    },
+    {
+      "name": "计算机软件维护",
+      "code": "420176"
+    },
+    {
+      "name": "计算机软件维护服务",
+      "code": null
+    }
+  ],
+  "limitations": [
+    "PASS applies only to the tested lookup, not all 23 tools.",
+    "Class 42 describes returned software-related services; do not generalize to every software product.",
+    "schema_version describes response structure, not independently verified Nice edition.",
+    "Source filename and digest identify source content but do not prove currency or authoritative provenance.",
+    "Uncoded filing eligibility is a service-returned assertion, not independently verified.",
+    "Remaining candidates were not fully visible; no follow-up call authorized or needed."
+  ],
+  "billing": {
+    "authorization": "One actual-price call approved by user",
+    "actualCharge": null
+  },
+  "listingApproval": "approved by DuHu",
+  "evidenceReviewedAt": "2026-11-19T08:05:47.904962+00:00"
+}

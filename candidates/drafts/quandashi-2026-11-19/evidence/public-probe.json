@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-11-19T07:37:24.634942+00:00",
+  "credentialUsed": false,
+  "method": "initialize",
+  "endpoint": "https://ai.quandashi.com/mcp/ipmaster_platform",
+  "httpStatus": 401,
+  "contentType": "text/plain; charset=utf-8",
+  "response": "Unauthorized",
+  "result": "auth-required; reachability confirmed only",
+  "toolCount": null,
+  "businessCallAttempts": 0
+}
