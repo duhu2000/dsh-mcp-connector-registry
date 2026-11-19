@@ -2,6 +2,14 @@
 
 仅收录有合并证据的正式上架；不将修改日期当作上架日期。历史条目尚未全部回溯。
 
+### 2026-11-19 · 权大师商标查询
+
+商标检索 / 公告查询 / 全球商标数据。接入方式：bearer；探测状态：pass。
+
+DuHu 批准上架。Bearer AppKey 直连官方 MCP，DSH 发现23个工具；用户回传一次尼斯分类查询“计算机软件”命中第42类4220群，20个候选中6项完整可见，状态 pass。未重试、翻页、下载或访问客户档案；其余工具未逐项验收，实际费用未知。schema_version不代表尼斯分类数据版次；按本人账号权益及服务协议使用。
+
+[上架 PR #89](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/89) · [卡片详情](../connectors/quandashi-trademark.json)
+
 ### 2026-11-19 · Patentics 专利检索与分析
 
 专利检索 / 权利要求 / 法律状态 / 技术分析。接入方式：api-key；探测状态：pass。
