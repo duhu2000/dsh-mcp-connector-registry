@@ -7536,6 +7536,59 @@
     },
     {
       "schemaVersion": 1,
+      "id": "zoodata-commerce-data",
+      "name": "ZooData · 电商市场数据",
+      "vendor": "ZooData",
+      "icon": "📊",
+      "category": "调研分析",
+      "summary": "Amazon 类目画像 / 市场趋势 / 价格与竞争分析",
+      "description": "连接 ZooData 官方 MCP，使用 API Key 查询电商市场数据。当前未标记弃用的市场分析工具覆盖美国 Amazon 类目画像、历史趋势、价格与评分分布、品牌及卖家集中度等，适合选品和竞品研究。全市场规模与最多100个商品的领先样本指标需分别解读，并保留统计日期、币种、覆盖范围及缺失值。调用按账号套餐和平台规则计费；发现工具不代表全部工具可用。第三方内容使用受来源平台及 ZooData 服务条款约束。 已确认连接与47个工具发现；业务验收仅覆盖美国单个类目的一次市场画像查询，其余工具尚未验收。",
+      "tags": [
+        "ZooData",
+        "Amazon",
+        "跨境电商",
+        "市场分析",
+        "API Key",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://zoodata.ai/en",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "ZooData API Key",
+        "credentialPlaceholder": "填写 API Key，不加 Bearer 前缀",
+        "credentialDescription": "在 ZooData 账号中获取 API Key；仅保存在本机。",
+        "credentialHelpUrl": "https://zoodata.ai/en",
+        "credentialHelpLabel": "ZooData 官网"
+      },
+      "servers": [
+        {
+          "serverKey": "zoodata",
+          "serverName": "zoodata",
+          "transport": "streamable-http",
+          "url": "https://api.zoodata.ai/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看女士平底鞋市场画像",
+          "server": "zoodata",
+          "text": "查看 ZooData 美国 Amazon 女士平底鞋类目（679399011） 的最新市场画像，先返回实际类目名称，再解释规模、价格及竞争集中度。使用单类目查询，区分全市场与领先样本口径，注明日期和缺失值；先确认费用预算，再执行一次查询，不追加详情。"
+        },
+        {
+          "title": "观察耳机市场的价格和竞争",
+          "server": "zoodata",
+          "text": "研究美国 Amazon 耳机类目的价格分布、品牌集中度和市场趋势。先确认可用类目、数据日期和调用预算，经确认后查询；区分样本与全市场指标，不猜测缺失值。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "zotero",
       "name": "Zotero",
       "vendor": "Zotero MCP 社区",
