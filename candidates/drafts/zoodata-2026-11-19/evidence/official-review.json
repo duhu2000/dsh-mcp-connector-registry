@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-11-19",
+  "setup": "https://zoodata.ai/en",
+  "terms": "https://zoodata.ai/en/terms",
+  "about": "https://zoodata.ai/en/about",
+  "pricing": "https://zoodata.ai/en/pricing",
+  "auth": "Bearer API Key",
+  "termsUpdated": "July 2026",
+  "findings": [
+    "Public MCP configuration matches user endpoint and Authorization Bearer header.",
+    "API quotas depend on subscription; third-party content rights are not granted.",
+    "About page gives US contact address; contracting entity remains unverified.",
+    "Public per-market profile unit price not confirmed."
+  ],
+  "toolScope": "14 market tools without deprecated UI label; 33 with deprecated label. Initial card focuses on market analysis."
+}

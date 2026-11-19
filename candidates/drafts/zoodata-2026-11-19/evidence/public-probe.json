@@ -1,0 +1,9 @@
+{
+  "targetUrl": "https://api.zoodata.ai/mcp",
+  "checkedAt": "2026-11-19T14:24:14.925296+00:00",
+  "credentialsUsed": false,
+  "businessCalls": 0,
+  "httpStatus": 403,
+  "status": "partial",
+  "notes": "Anonymous request rejected; authorized connection and runtime separately recorded."
+}

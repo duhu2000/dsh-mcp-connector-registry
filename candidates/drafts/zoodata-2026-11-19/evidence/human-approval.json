@@ -1,0 +1,8 @@
+{
+  "connectorId": "zoodata-commerce-data",
+  "decision": "approved",
+  "reviewedBy": "DuHu",
+  "reviewedAt": "2026-11-19T14:25:15.359219+00:00",
+  "scope": "full-runtime",
+  "notes": "User explicitly approved ZooData listing using Bearer API Key as a paid service; only one US category profile is runtime-tested. Public service terms reviewed; no terms exception."
+}

@@ -1,5 +1,11 @@
 [
   {
+    "id": "zoodata-commerce-data",
+    "publishedOn": "2026-11-19",
+    "pr": 92,
+    "acceptance": "DuHu 批准上架。Bearer API Key 连接官方 MCP，发现47个工具；单次美国 Amazon 女士平底鞋类目市场画像验收成功，快照2026-11-18，状态 pass。DSH 报告消耗1 credit；其余46个工具未验收。14个市场工具未标记弃用，33个工具在清单中标记已弃用。未重试、翻页或下载；按账号套餐及公开服务条款使用。"
+  },
+  {
     "id": "fastmoss-tiktok-commerce",
     "publishedOn": "2026-11-19",
     "pr": 91,
