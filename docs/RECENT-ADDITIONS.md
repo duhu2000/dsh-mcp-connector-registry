@@ -2,6 +2,14 @@
 
 仅收录有合并证据的正式上架；不将修改日期当作上架日期。历史条目尚未全部回溯。
 
+### 2026-11-19 · ZooData · 电商市场数据
+
+Amazon 类目画像 / 市场趋势 / 价格与竞争分析。接入方式：bearer；探测状态：pass。
+
+DuHu 批准上架。Bearer API Key 连接官方 MCP，发现47个工具；单次美国 Amazon 女士平底鞋类目市场画像验收成功，快照2026-11-18，状态 pass。DSH 报告消耗1 credit；其余46个工具未验收。14个市场工具未标记弃用，33个工具在清单中标记已弃用。未重试、翻页或下载；按账号套餐及公开服务条款使用。
+
+[上架 PR #92](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/92) · [卡片详情](../connectors/zoodata-commerce-data.json)
+
 ### 2026-11-19 · FastMoss · TikTok电商数据
 
 TikTok 商品 / 达人 / 店铺 / 广告与类目研究。接入方式：oauth2-pkce；探测状态：pass。

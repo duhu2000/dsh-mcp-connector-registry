@@ -39,7 +39,7 @@
     "reviewedBy": "Codex",
     "source": "User screenshot and descriptions",
     "notes": "Discovery only; does not imply all-tool runtime acceptance.",
-    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zoodata-2026-11-19/evidence/connection-tools.json"
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/connection-tools.json"
   },
   "runtimeAcceptance": {
     "status": "pass",
@@ -47,7 +47,7 @@
     "reviewedBy": "Codex",
     "reportPath": "evidence/runtime-acceptance.json",
     "notes": "Single US category profile only; remaining 46 tools untested.",
-    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zoodata-2026-11-19/evidence/runtime-acceptance.json"
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/runtime-acceptance.json"
   },
   "review": {
     "connectorId": "zoodata-commerce-data",
@@ -127,31 +127,31 @@
     },
     {
       "type": "runtime-acceptance",
-      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zoodata-2026-11-19/evidence/runtime-acceptance.json",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/runtime-acceptance.json",
       "collectedAt": "2026-11-19T14:25:15.359219+00:00",
       "summary": "Single US category profile only; remaining 46 tools untested."
     },
     {
       "type": "connection-acceptance",
-      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zoodata-2026-11-19/evidence/connection-tools.json",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/connection-tools.json",
       "collectedAt": "2026-11-19T14:25:15.359219+00:00",
       "summary": "Discovery only; does not imply all-tool runtime acceptance."
     },
     {
       "type": "human-approval",
-      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zoodata-2026-11-19/evidence/human-approval.json",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/human-approval.json",
       "collectedAt": "2026-11-19T14:25:15.359219+00:00",
       "summary": "human-approval"
     },
     {
       "type": "public-probe",
-      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zoodata-2026-11-19/evidence/public-probe.json",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/public-probe.json",
       "collectedAt": "2026-11-19T14:25:15.359219+00:00",
       "summary": "public-probe"
     },
     {
       "type": "service-terms-review",
-      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zoodata-2026-11-19/evidence/official-review.json",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/official-review.json",
       "collectedAt": "2026-11-19T14:25:15.359219+00:00",
       "summary": "service-terms-review"
     }
