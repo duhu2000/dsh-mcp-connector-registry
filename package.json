@@ -22,7 +22,7 @@
     "candidates:stdio-preflight": "node scripts/run-stdio-preflight.mjs"
   },
   "devDependencies": {
-    "dsh-mcp-connector": "^0.2.73",
+    "dsh-mcp-connector": "^0.2.116",
     "zod": "^4.4.0"
   },
   "engines": {

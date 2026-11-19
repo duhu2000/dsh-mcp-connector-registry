@@ -92,7 +92,7 @@
 
 ## 金融投资
 
-共 14 个连接器。
+共 15 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -104,6 +104,7 @@
 | [Excel 财务建模助手（社区）](../connectors/financial-modeling.json) | Excel 读取 / 写入 / 公式 / 表格建模 | 社区连接器 | none | 公共目录 | unverified |
 | [Gangtise](../connectors/gangtise.json) | 机构调研 / 专家纪要 / 行业与公司研究 | Gangtise | bearer | 公共目录 | unverified |
 | [IT桔子创投数据](../connectors/itjuzi-venture-capital-data.json) | 一级市场公司 / 融资事件 / 投资机构与人物 | IT桔子 | bearer | 公共目录 | partial |
+| [亿欧数据 · 产业投融资](../connectors/iyiou-financing-data.json) | 企业融资历史 / 投资方 / 投融资事件筛选 | 亿欧 | api-key | 公共目录 | pass |
 | [Stock SDK 股票分析](../connectors/stock-analysis.json) | A 股 / 港股 / 美股 / 基金综合分析 | Stock SDK 社区 | none | 公共目录 | unverified |
 | [通达信行情（社区）](../connectors/tongdaxin-mcp.json) | A 股行情 / 分时 / K 线 / 市场数据 | 社区连接器 | none | 公共目录 | unverified |
 | [TuShare](../connectors/tushare.json) | A 股 / 指数 / 基金 / 财务 / 宏观数据 | TuShare 社区 | api-key | 公共目录 | unverified |
