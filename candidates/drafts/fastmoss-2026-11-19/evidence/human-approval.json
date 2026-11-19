@@ -1,0 +1,9 @@
+{
+  "decision": "approved",
+  "connectorId": "fastmoss-tiktok-commerce",
+  "reviewedBy": "DuHu",
+  "reviewedAt": "2026-11-19T12:48:22.576326+00:00",
+  "scope": "full-runtime",
+  "statement": "批准 FastMoss 上架，署名 DuHu",
+  "limitations": "Representative US daily product ranking passed; remaining 78 tools untested. OAuth, paid service, public terms reviewed; actual charge not independently verified."
+}
