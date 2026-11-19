@@ -1,0 +1,40 @@
+{
+  "reviewedAt": "2026-11-19T05:54:06.324041+00:00",
+  "evidenceType": "user-provided-dsh-screenshot",
+  "connectionName": "Patentics 专利检索与分析",
+  "connectionStatus": "connected",
+  "toolCount": 21,
+  "serverCount": 1,
+  "serverName": "patentics",
+  "lastSuccessfulCacheDisplayed": "2026/11/19 13:53:13",
+  "cacheTimezone": "not stated in screenshot",
+  "visibleToolNames": [
+    "get_patent_fig"
+  ],
+  "scope": "Screenshot and user-pasted descriptions confirm 21 tools. Descriptions reviewed; raw JSON Schema not provided. Business calls pending.",
+  "runtimeAcceptance": "pending",
+  "credentialsCollected": false,
+  "describedToolNames": [
+    "get_patent_fig",
+    "get_patent_Bibliographic",
+    "get_re_examination",
+    "get_patent_litigation_information",
+    "get_patent_novelty_creativity_gran",
+    "Retrieve_relevant_patents",
+    "get_patent_fulltext",
+    "get_patent_abstract",
+    "get_patent_claims",
+    "get_patent_description",
+    "get_patent_summary",
+    "get_patent_main_claim",
+    "get_patent_independent_claims",
+    "get_PVED",
+    "get_patent_LegalStatus",
+    "get_patent_analysis_data",
+    "boolsearch",
+    "get_patent_cluster_map",
+    "search_magic_matrix",
+    "get_balance",
+    "get_analysis_quote"
+  ]
+}

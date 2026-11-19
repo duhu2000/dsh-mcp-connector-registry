@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-11-19T04:50:53.094361+00:00",
+  "source": "https://www.patentics.com/mcph/",
+  "httpEndpoint": "https://www.patentics.com/mcps/mcp",
+  "sseEndpoint": "https://www.patentics.com/mcps/sse",
+  "header": "apikey",
+  "freeToolDocumented": "get_balance",
+  "pricingExamples": {
+    "get_patent_abstract": "0.1积分/次",
+    "Retrieve_relevant_patents": "1积分/次（用户提供的DSH描述）"
+  },
+  "quotaCaveat": "官网同页出现100积分与100次调用两种赠送文案，以实际账号为准；不把积分写成固定次数。",
+  "termsStatus": "declared; see service-terms-review.json",
+  "runtimeAcceptance": "pass: single abstract query only",
+  "approval": "approved by DuHu on 2026-11-19"
+}
