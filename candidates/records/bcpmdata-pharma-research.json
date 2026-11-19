@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "id": "bcpmdata-pharma-research",
+  "registryName": "com.bcpmdata/openmcp",
+  "title": "摩熵 · 医药研发数据",
+  "description": "通过摩熵数科官方 MCP 查询账号授权范围内的药物研发、临床试验、医药监管、文献与专利数据，适用于医药研发情报和行业研究。采用本机 SSE 兼容程序连接官方服务，需自行提供摩熵 API Key。具体工具、数据覆盖、额度、费用和使用许可以账号订阅及服务规则为准，仅限本人授权使用，不共享账号或转售、再分发数据。DSH 连接与 114 个工具发现已确认，已完成一次中国临床试验列表查询验收，其余工具未逐项验收；不用于个人诊断、处方或治疗建议。本卡片由 DSH 社区维护。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "biomedical",
+      "patent",
+      "china-provider"
+    ],
+    "matchedKeywords": [
+      "摩熵",
+      "临床试验",
+      "专利"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://open.bcpmdata.com/mcp",
+    "status": "active",
+    "retrievedAt": "2026-11-19T01:43:17.817190+00:00"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://open.bcpmdata.com/",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "sse",
+      "url": "https://openmcp.bcpmdata.com/general/sse",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "api-key",
+    "requiredHeaders": [
+      "apiKey"
+    ],
+    "reason": "官方 apiKey Header；用户在本机填入 Key 并确认连接成功，DSH 成功工具缓存证实发现 114 个工具。未导出凭据。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": null,
+    "evidenceUrl": "https://uzone.bcpmdata.com/agreement",
+    "notes": "已核对厂商通用账号协议与官方第三方 MCP 接入说明。只提供本人 API Key 连接配置，不授予数据再分发、转售或额外商业使用许可。具体 API 套餐及权利以账号约定为准，软件 MIT 不用于数据许可。"
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "repositoryActivity": "not-applicable"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-11-19T02:24:32.912156+00:00",
+    "targetUrl": "https://openmcp.bcpmdata.com/general/sse",
+    "reason": "DSH 安全缓存确认发现 114 个工具；用户回传单次中国临床试验列表查询成功报告（code 10200，返回10条、total 92）。本次仅审核脱敏报告，未重新调用。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": [
+      "pubmed-biomedical-literature",
+      "wanfang-literature-data",
+      "patsnap"
+    ]
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "bcpmdata-pharma-research",
+    "reviewedAt": "2026-11-19T02:47:04.509088+00:00",
+    "reviewedBy": "DuHu",
+    "scope": "full-runtime",
+    "notes": "用户在本会话于单次业务验收报告及PR更新后明确“批准上架”，沿用指定署名 DuHu。仅代表已记录的代表性查询验收；保留其余工具、费用及账号权益边界。已核对官方通用协议和第三方 MCP 指南，无条款例外。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-19T02:24:32.912156+00:00",
+    "reviewedBy": "Codex (review of user-reported DSH result)",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/848cdd5a7c4955fe951ca94345475e9824298ee6/candidates/drafts/bcpmdata-2026-11-19/evidence/runtime-acceptance.json",
+    "notes": "用户报告单次 GeneralV1_CnClinicalTrialList 成功，page=1、drug_name=司美格鲁肽，返回10条/总命中92；没有独立试验名称或状态字段，NA不视为有效药名。未重试、翻页、详情或下载。checkedAt为证据审核时间，执行准确时间未提供。实际费用未知；不声称其余113个工具已验收。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://open.bcpmdata.com/mcp",
+      "collectedAt": "2026-11-19T01:43:17.817190+00:00",
+      "summary": "SSE 官方端点与 apiKey Header；明确供通用客户端接入。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://open.bcpmdata.com/guide/1.html",
+      "collectedAt": "2026-11-19T01:43:17.817190+00:00",
+      "summary": "接入指南列出 MCP 服务试用入口，不能据此推断具体账号所有接口免费。"
+    },
+    {
+      "type": "adapter",
+      "url": "https://github.com/punkpeye/mcp-remote",
+      "collectedAt": "2026-11-19T01:43:17.817190+00:00",
+      "summary": "MIT 适配器固定为 npm 0.16.7；该许可证不代表厂商数据服务许可。"
+    },
+    {
+      "type": "local-dsh-tool-cache",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/848cdd5a7c4955fe951ca94345475e9824298ee6/candidates/drafts/bcpmdata-2026-11-19/evidence/dsh-tool-discovery.json",
+      "collectedAt": "2026-11-19T01:54:35.458013+00:00",
+      "summary": "用户本机导入成功；安全工具缓存确认 114 个工具，未截断。没有业务调用，尚非业务 PASS。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/848cdd5a7c4955fe951ca94345475e9824298ee6/candidates/drafts/bcpmdata-2026-11-19/evidence/runtime-acceptance.json",
+      "collectedAt": "2026-11-19T02:24:32.912156+00:00",
+      "summary": "用户执行并回传的单次只读列表查询成功报告；未由助手重放。"
+    },
+    {
+      "type": "license",
+      "url": "https://uzone.bcpmdata.com/agreement",
+      "collectedAt": "2026-11-19T02:47:04.509088+00:00",
+      "summary": "官方用户协议与MCP第三方客户端指南共同核验；本人账号使用，禁止账号共享及未经许可数据传播、转售；具体API权益按订阅。公开静态协议正文哈希记录于 service-terms-review.json。"
+    }
+  ],
+  "score": {
+    "total": 85,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 21,
+      "maintenanceSecurity": 9,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 5
+    },
+    "reasons": [
+      "人工候选优先级评估：官方域名、专门 MCP 文档及通用服务协议，authority 25/25。",
+      "accessibility 21/25：API Key 通过本机固定版本适配器连接，114工具发现；保留 Node/npm 和 SSE 兼容依赖扣分。",
+      "maintenanceSecurity 9/20：当前端点可用、适配器版本固定且本机凭据绑定；厂商发布历史/SLA及全工具安全性未验证。",
+      "runtime 15/15：单次列表查询用户回传成功证据，不代表114个工具全部通过。",
+      "marketGap 10/10：补充国内医药研发数据服务，无同端点或同厂商卡片；与学术/专利卡片仅弱重合。",
+      "documentation 5/5：官方接入、接口字段、限流及用户协议；未查得单次价格，不声明免费。"
+    ],
+    "gates": []
+  }
+}

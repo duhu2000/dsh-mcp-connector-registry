@@ -1,5 +1,11 @@
 [
   {
+    "id": "bcpmdata-pharma-research",
+    "publishedOn": "2026-11-19",
+    "pr": 87,
+    "acceptance": "DuHu 批准上架。通过本机 SSE 兼容程序连接官方服务，发现114个工具；用户回传一次司美格鲁肽中国临床试验列表查询成功，返回10条、total 92，状态 pass。未翻页、下载或重试，其余工具未逐项验收。列表未返回独立试验名称和状态，实际费用未知；按本人账号订阅与服务协议使用。"
+  },
+  {
     "id": "tradesparq-trade-data",
     "publishedOn": "2026-11-18",
     "pr": 84,

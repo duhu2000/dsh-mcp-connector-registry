@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "candidateId": "bcpmdata-pharma-research",
+  "status": "pass",
+  "evidenceSource": "user-reported DSH execution result in this conversation",
+  "recordedAt": "2026-11-19T02:24:32.912156+00:00",
+  "executedAt": null,
+  "executedAtNote": "Exact execution timestamp was not supplied; recordedAt is evidence review time, not execution time.",
+  "independentlyReplayed": false,
+  "tool": "GeneralV1_CnClinicalTrialList",
+  "arguments": {
+    "page": 1,
+    "search": {
+      "drug_name": "司美格鲁肽"
+    }
+  },
+  "businessCallAttempts": 1,
+  "automaticRetries": 0,
+  "paginationRequests": 0,
+  "detailRequests": 0,
+  "downloads": 0,
+  "result": {
+    "reportedSuccess": true,
+    "code": 10200,
+    "message": "",
+    "returnedCount": 10,
+    "reportedTotal": 92,
+    "missingFields": [
+      "trial name",
+      "trial status"
+    ],
+    "drugNameIsNotTrialName": true,
+    "missingDrugNameMarkerObserved": "NA"
+  },
+  "scope": "Single first-page Chinese clinical-trial list query only; no acceptance claim for all 114 discovered tools.",
+  "billing": {
+    "authorization": "One actual-price call approved by user in this conversation",
+    "actualCharge": null,
+    "reason": "No charge returned by endpoint; not independently verified"
+  },
+  "privacy": "No API Key, account identifiers, patient data, investigator contacts or raw response recorded."
+}
