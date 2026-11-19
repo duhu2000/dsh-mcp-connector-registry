@@ -23,3 +23,5 @@
 ## 实际验收结果
 
 2026-11-19 20:33（Asia/Shanghai），DSH 调用轨迹确认仅执行 product_rank_top_selling 一次，参数为美国市场2026-11-18日榜、第1页、pagesize=3。成功返回3条，total=500；GMV、销量与USD币种字段存在。实际扣费未回传，未额外查余额。详见 evidence/runtime-acceptance.json。其他78个工具未验收；未保存商品/店铺/达人明细或凭据。
+
+上架 PR：https://github.com/duhu2000/dsh-mcp-connector-registry/pull/91 。正式证据链接固定到首个发布提交，避免后续目录修改改变验收依据。

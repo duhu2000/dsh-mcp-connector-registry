@@ -2,6 +2,14 @@
 
 仅收录有合并证据的正式上架；不将修改日期当作上架日期。历史条目尚未全部回溯。
 
+### 2026-11-19 · FastMoss · TikTok电商数据
+
+TikTok 商品 / 达人 / 店铺 / 广告与类目研究。接入方式：oauth2-pkce；探测状态：pass。
+
+DuHu 批准上架。OAuth 连接官方 MCP，DSH 发现79个工具；助手核对单次美国2026-11-18日热销商品榜单调用成功返回3条，包含GMV、销量及USD币种字段，状态 pass。其余78个工具未验收；最多1 credit授权，实际扣费未回传。未重试、翻页、下载或查询联系人；按本人套餐权益及公开服务条款使用。
+
+[上架 PR #91](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/91) · [卡片详情](../connectors/fastmoss-tiktok-commerce.json)
+
 ### 2026-11-19 · 亿欧数据 · 产业投融资
 
 企业融资历史 / 投资方 / 投融资事件筛选。接入方式：api-key；探测状态：pass。

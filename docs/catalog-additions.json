@@ -1,5 +1,11 @@
 [
   {
+    "id": "fastmoss-tiktok-commerce",
+    "publishedOn": "2026-11-19",
+    "pr": 91,
+    "acceptance": "DuHu 批准上架。OAuth 连接官方 MCP，DSH 发现79个工具；助手核对单次美国2026-11-18日热销商品榜单调用成功返回3条，包含GMV、销量及USD币种字段，状态 pass。其余78个工具未验收；最多1 credit授权，实际扣费未回传。未重试、翻页、下载或查询联系人；按本人套餐权益及公开服务条款使用。"
+  },
+  {
     "id": "iyiou-financing-data",
     "publishedOn": "2026-11-19",
     "pr": 90,
