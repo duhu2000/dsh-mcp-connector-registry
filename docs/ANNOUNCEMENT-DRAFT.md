@@ -2,6 +2,14 @@
 
 供运营审核选用；不得将部分验证宣传为全部业务可用。未自动发布到任何平台。
 
+### 2026-11-19 · Patentics 专利检索与分析
+
+专利检索 / 权利要求 / 法律状态 / 技术分析。接入方式：api-key；探测状态：pass。
+
+DuHu 批准上架。官方 Streamable HTTP 与 apikey 鉴权；DSH 发现21个工具，助手核对一次 get_patent_abstract 查询 CN106257978A 成功返回有效摘要，状态 pass。未重试、未追加查询、未下载全文；其余20个工具未逐项实测。授权及说明价0.1积分，实际扣费未回传。官方服务条款已核实，具体使用权按账号约定。
+
+[上架 PR #88](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/88) · [卡片详情](../connectors/patentics-patent-research.json)
+
 ### 2026-11-19 · 摩熵 · 医药研发数据
 
 药物研发 / 临床试验 / 医药专利 / 医药监管。接入方式：api-key；探测状态：pass。
