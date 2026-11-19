@@ -1,6 +1,6 @@
 # 摩熵 · 医药研发数据上架准备（2026-11-19）
 
-状态：业务验收 PASS（单次列表查询、用户执行报告）；待条款核验及最终具名批准，尚未发布。
+状态：业务验收 PASS；DuHu 已批准上架，正式卡片与记录已生成，待 PR 合并与 CDN 验证。草案目录保留准备阶段记录，以正式 connectors/ 和 candidates/records/ 为准。
 
 ## 已核实
 
@@ -35,3 +35,7 @@
 用户在 DSH 完成 GeneralV1_CnClinicalTrialList 一次查询，page=1、search.drug_name=司美格鲁肽，报告 code 10200、message 为空、返回10条、total 92。没有重试、翻页、详情调用或下载；助手未重放请求。证据见 evidence/runtime-acceptance.json，准确执行时间未提供，记录时间不冒充执行时间。
 
 本次列表没有独立试验名称和试验状态字段，药品名称不能替代试验名称，NA 按缺失处理。卡片首条示例已改为经核实的查询参数及实际返回字段。费用未回传，仍为未知。PASS 仅覆盖这次列表查询，不表示114个工具或全文、专利等其他能力全部通过。
+
+## 正式上架审核
+
+用户已明确批准上架，署名 DuHu。已核验官方用户协议 https://uzone.bcpmdata.com/agreement 与官方 MCP 接入说明，详见 evidence/service-terms-review.json。仅提供本人授权连接配置，不共享账号、不转售或再分发厂商数据，不宣称所有工具免费。正式记录保留单次业务验收范围；无需新增插件 npm 版本。
