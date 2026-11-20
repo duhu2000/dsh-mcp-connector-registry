@@ -1,0 +1,29 @@
+{
+  "status": "pass",
+  "source": "User-provided screenshot and tool descriptions",
+  "toolCacheLocalTime": "2026-11-20 14:42:57 Asia/Shanghai",
+  "toolCount": 9,
+  "tools": [
+    "IcEnterpriseDataQuery",
+    "SmartStockSelection",
+    "SmartFundSelection",
+    "SmartFundManagerSelection",
+    "FinQuery",
+    "MacroIndustryData",
+    "AnnouncementData",
+    "FinDataFallbackQuery",
+    "WebSearch"
+  ],
+  "authentication": {
+    "userReported": "OAuth",
+    "suppliedConfiguration": "URL query token",
+    "standardOAuthVerified": false,
+    "notes": "Connection success does not establish OAuth discovery or formal-card authorization."
+  },
+  "notObserved": [
+    "FinancialResearchReport",
+    "NewsDataQuery",
+    "InvestMeetingNoteQuery",
+    "SmartIndexSelection"
+  ]
+}

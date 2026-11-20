@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "id": "gildata-financial-query",
+  "title": "聚源金融综合问数",
+  "provider": "恒生聚源",
+  "providerRegion": "国内",
+  "status": "DEFERRED",
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://website.gildata.com/",
+    "status": "active"
+  },
+  "connectionAcceptance": {
+    "status": "pass",
+    "toolCount": 9,
+    "reportPath": "evidence/connection-tools.json"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-20T14:59:00+08:00",
+    "reviewedBy": "Codex",
+    "reportPath": "evidence/runtime-acceptance.json",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/gildata-2026-11-20/evidence/runtime-acceptance.json",
+    "notes": "One direct FinQuery company annual financial query passed; local bridge initialize and nine tools/list passed without another business call. Other eight tools untested."
+  },
+  "authentication": {
+    "mode": "api-key",
+    "placement": "query token through GILDATA_API_KEY stdio bridge",
+    "standardOAuthVerified": false,
+    "formalCardFlow": "local bridge connection and tool discovery passed; published package pending"
+  },
+  "license": {
+    "status": "unknown",
+    "spdxId": null,
+    "evidenceUrl": null
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "gildata-financial-query"
+  },
+  "dedupe": {
+    "level": "none",
+    "notes": "No exact Gildata provider/endpoint match in current connectors; financial-domain overlap with Wind and DZH."
+  },
+  "blockers": [
+    "Publish bridge package and pin the released version in descriptor.",
+    "Applicable service terms or candidate-specific named exception pending.",
+    "Named listing approval pending."
+  ],
+  "nextStep": "Review plugin and Registry PRs; finalize applicable terms or named exception and publish bridge before card promotion. No further paid query authorized.",
+  "registryName": "review/gildata-financial-query",
+  "probe": {
+    "status": "partial",
+    "reason": "Anonymous initialize requires credential; authenticated local bridge tool discovery passed.",
+    "reportPath": "evidence/public-review.json"
+  },
+  "score": {
+    "total": 80,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 18,
+      "maintenanceSecurity": 12,
+      "runtime": 15,
+      "marketGap": 5,
+      "documentation": 5
+    },
+    "reasons": [
+      "Official vendor data; authenticated nine-tool discovery and single FinQuery runtime passed.",
+      "Credential-isolated bridge connection passed; published package and formal card end-to-end flow pending.",
+      "Applicable MCP service terms not obtained; official terminal privacy policy cannot substitute."
+    ]
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://website.gildata.com/"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/gildata-2026-11-20/evidence/runtime-acceptance.json"
+    },
+    {
+      "type": "bridge-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/gildata-2026-11-20/evidence/bridge-acceptance.json"
+    }
+  ]
+}

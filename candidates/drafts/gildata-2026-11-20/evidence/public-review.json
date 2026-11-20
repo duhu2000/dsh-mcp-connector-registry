@@ -1,0 +1,47 @@
+{
+  "checkedDate": "2026-11-20",
+  "endpoint": "https://api.gildata.com/mcp-servers/aidata-assistant-srv-tool",
+  "sources": [
+    {
+      "url": "https://website.gildata.com/",
+      "kind": "official-provider",
+      "notes": "SPA; no readable public terms found during this review."
+    },
+    {
+      "url": "https://market.aliyun.com/detail/cmapi00075042",
+      "kind": "vendor-marketplace-listing",
+      "notes": "Search-index evidence identifies 金融综合问数MCP裸接口版 and 上海恒生聚源数据服务有限公司; direct page extraction unavailable."
+    },
+    {
+      "url": "https://ft.gildata.com/web/privacy/index.html",
+      "kind": "official-terminal-privacy-policy",
+      "notes": "Public privacy policy for the financial terminal, SDK/API; not verified as the applicable financial-query MCP data service agreement. Not used to claim service-terms approval."
+    }
+  ],
+  "anonymousProbe": {
+    "initializeHttpStatus": 401,
+    "code": 1001,
+    "message": "认证凭证缺失或有误",
+    "wwwAuthenticateObserved": false,
+    "oauthPathsChecked": [
+      {
+        "path": "/.well-known/oauth-protected-resource/mcp-servers/aidata-assistant-srv-tool",
+        "httpStatus": 404
+      },
+      {
+        "path": "/.well-known/oauth-authorization-server",
+        "httpStatus": 404
+      }
+    ],
+    "limitation": "These observations do not prove all OAuth configurations unsupported; no credentials used."
+  },
+  "license": {
+    "status": "unverified",
+    "notes": "Applicable public MCP service terms not obtained; no exception approval recorded."
+  },
+  "descriptorCompatibility": {
+    "queryCredentialBindingSupported": false,
+    "evidence": "Current registry schema supports headerCredentialBindings and stdio credentialBindings, no URL query credential binding.",
+    "nextStep": "Fixed-endpoint stdio bridge implemented and authenticated initialize/tools/list passed; release pending."
+  }
+}
