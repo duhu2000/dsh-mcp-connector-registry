@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "id": "ths-ifind",
+  "registryName": "com.51ifind/hexin-ifind-ds-mcp",
+  "title": "同花顺 iFinD 金融数据",
+  "description": "同花顺 iFinD 官方综合 MCP，以本人账号签发的 MCP 密钥查询证券行情、财务、基金、债券、宏观及公告数据。DSH Web 实测发现 11 个工具，完成一次只读财务查询。返回值的单位与报告期标注需复核。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "financial-markets",
+      "investment-research",
+      "macroeconomics"
+    ],
+    "matchedKeywords": [
+      "iFinD",
+      "行情",
+      "财务",
+      "宏观",
+      "公告"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://mcp.51ifind.com/#/documents/mcp/overview",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-19T12:52:01Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://mcp.51ifind.com/",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://api-mcp.51ifind.com:8643/ds-mcp-servers/hexin-ifind-ds-mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "api-key",
+    "requiredHeaders": [
+      {
+        "name": "Authorization",
+        "required": true,
+        "secret": true
+      }
+    ],
+    "reason": "官网个人中心生成的 HTTP 配置将 iFinD MCP 密钥原样放入 Authorization 请求头。DSH 使用 API Key 模式保留完整原值。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": null,
+    "evidenceUrl": "https://mcp.51ifind.com/#/terms/member-service"
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-19T12:46:42Z",
+    "targetUrl": "https://api-mcp.51ifind.com:8643/ds-mcp-servers/hexin-ifind-ds-mcp",
+    "httpStatus": 401,
+    "reason": "一次无凭据 MCP initialize 收到 HTTP 401 和 JSON-RPC 错误 -32001，确认官方鉴权网关可达。此处记录匿名探测，授权结果见运行验收。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "review": {
+    "decision": "approved",
+    "scope": "full-runtime",
+    "proposedConnectorId": "ths-ifind",
+    "reviewedAt": "2026-11-20T06:03:14.177Z",
+    "reviewedBy": "DuHu",
+    "notes": "QMCP-5020。DuHu 以维护者身份授权办理上架并提交 Registry PR，并确认验收账号为本次验收单独注册，未用于日常或生产，仅使用默认免费体验权限。官方综合服务文档和开通说明支持第三方客户端直连。卡片仅提供公开连接配置，由用户使用本人密钥依账号适用条款直连服务。已复核官方会员协议与试用权益。验收覆盖工具发现与一次代表性只读查询。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-20T05:40:00Z",
+    "reviewedBy": "Codex",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/39e90a67370aa70e85dec5ee9281012cc795c3fd/docs/runtime-acceptance/ths-ifind-2026-11-20/ths-ifind.json",
+    "notes": "DSH Web v0.2.117 发现 11 个工具、1 个服务入口。get_security_indicators 调用一次返回 code=1 和 success，包含证券代码、日期、数值及单位标注。表头标元、数值带亿，且年报日期对应的指标参数标为最新一期（MRQ）。本次通过范围为连接、工具发现和代表性只读调用，财务口径尚待复核。脱敏报告记录了账号用途、权限及维护者批准。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://mcp.51ifind.com/#/documents/mcp/overview",
+      "collectedAt": "2026-11-19T12:52:01Z",
+      "summary": "厂商说明综合服务的数据范围、工具与示例，并将快查和法智列为独立入口。文档列出 9 个综合服务工具，实际工具数以登录后的 DSH 发现为准。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://mcp.51ifind.com/#/documents/guide-prepare",
+      "collectedAt": "2026-11-19T12:52:01Z",
+      "summary": "官方开通说明提供个人中心的密钥和 MCP 配置入口。官网公开页面代码公布综合服务的完整 HTTPS 端点，HTTP 配置生成器将所选密钥直接写入 Authorization。"
+    },
+    {
+      "type": "license",
+      "url": "https://mcp.51ifind.com/#/terms/member-service",
+      "collectedAt": "2026-11-19T12:52:03Z",
+      "summary": "官方会员服务协议第二条规定会员账户仅供申请者使用，限制共享、转售、分发和超范围调用，并限定中国大陆地区内使用。协议作为用户协议的补充，具体账号合同和权益待上架审核时复核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://api-mcp.51ifind.com:8643/ds-mcp-servers/hexin-ifind-ds-mcp",
+      "collectedAt": "2026-11-19T12:46:42Z",
+      "summary": "匿名 initialize 已收到鉴权拒绝。请求未携带凭据，未发起工具发现或工具调用。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://mcp.51ifind.com/#/pricing",
+      "collectedAt": "2026-11-20T06:03:14.177Z",
+      "summary": "官网个人订阅页明确列出免费体验版。维护者确认验收账号仅使用默认免费体验权限。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/39e90a67370aa70e85dec5ee9281012cc795c3fd/docs/runtime-acceptance/ths-ifind-2026-11-20/ths-ifind.json",
+      "collectedAt": "2026-11-20T05:40:00Z",
+      "summary": "DSH Web 从官方综合入口发现 11 个工具，单次代表性只读查询返回成功。报告保留单位和报告期标注差异。"
+    }
+  ],
+  "score": {
+    "total": 82,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 21,
+      "maintenanceSecurity": 12,
+      "runtime": 12,
+      "marketGap": 7,
+      "documentation": 5
+    },
+    "reasons": [
+      "官方页面发布综合服务、端点、连接配置与密钥获取方式。",
+      "匿名请求可达鉴权网关，DSH Web 通过用户已安装的连接发现 11 个工具。",
+      "官方会员条款与免费体验权益已复核。单一试用账号验收，长期稳定性待观察。",
+      "一次代表性只读查询成功返回数据，单位和报告期标注存在需复核项。",
+      "补充 iFinD 官方综合入口，与既有行情、财务和宏观类连接器部分重合。",
+      "厂商提供开通指南、工具文档及只读查询示例。"
+    ],
+    "gates": []
+  }
+}

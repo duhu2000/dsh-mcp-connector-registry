@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "ths-ifind",
+  "name": "同花顺 iFinD 金融数据",
+  "vendor": "同花顺 iFinD",
+  "icon": "📈",
+  "category": "金融投资",
+  "summary": "证券行情与财务 / 基金与债券 / 宏观数据与公告",
+  "description": "通过同花顺 iFinD 官方综合 MCP 查询账号授权范围内的行情、财务、基金、债券、宏观指标和公告资讯。使用本人 iFinD MCP 密钥，工具权限、额度和费用以账号权益为准。会员协议将使用范围限定在中国大陆地区和用户自身内部业务，具体以 iFinD 协议及适用合同为准。运行验收通过。DSH 已发现 11 个工具，单次营业收入业务查询通过。引用财务数值前请核对报告期与单位，其余工具尚未逐项验收。本卡片由 DSH 社区维护。",
+  "tags": [
+    "同花顺",
+    "iFinD",
+    "行情",
+    "财务数据",
+    "宏观经济",
+    "公告"
+  ],
+  "published": true,
+  "featured": false,
+  "probeStatus": "pass",
+  "probeCheckedAt": 1795153200000,
+  "homepage": "https://mcp.51ifind.com/",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "Authorization",
+    "credentialName": "iFinD MCP 密钥",
+    "credentialPlaceholder": "填写 iFinD 个人中心的 MCP 密钥",
+    "credentialDescription": "原样填写官网签发的 MCP 密钥。DSH 在本机保存该值，并通过 Authorization 请求头向 iFinD 发送。调用消耗以账号权益为准。",
+    "credentialHelpUrl": "https://mcp.51ifind.com/#/documents/guide-prepare",
+    "credentialHelpLabel": "查看 iFinD 开通与密钥说明"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "hexin-ifind-ds-mcp",
+      "transport": "streamable-http",
+      "url": "https://api-mcp.51ifind.com:8643/ds-mcp-servers/hexin-ifind-ds-mcp",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询贵州茅台 2024 年度营业收入",
+      "server": "main",
+      "text": "使用同花顺 iFinD 综合服务的 get_security_indicators，仅查询贵州茅台（600519.SH）2024 年度营业收入。先核对工具参数和调用额度，在我确认后调用一次。列出证券代码、返回日期、数值和单位。如果报告期参数或表头单位与数值标注有差异，同时保留原标注并说明。查询结束后停止。"
+    }
+  ],
+  "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/39e90a67370aa70e85dec5ee9281012cc795c3fd/docs/runtime-acceptance/ths-ifind-2026-11-20/ths-ifind.json"
+}
