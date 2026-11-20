@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "id": "solidworks-cad",
+  "registryName": "solidworks-mcp",
+  "title": "SolidWorks 参数化建模",
+  "description": "本地 stdio MCP，通过 COM 驱动 Windows 上的 SOLIDWORKS 参数化建模并衔接 Bambu Studio 3D 打印。只操作本服务自建文档、输出默认不覆盖、打印检查为建议性（非强制）；需已授权 SOLIDWORKS。已修复隔离/覆盖问题，独立运行时验收与维护者批准待完成。",
+  "version": "0.2.0",
+  "classification": {
+    "isDataService": false,
+    "domains": ["cad", "3d-printing", "manufacturing"],
+    "matchedKeywords": ["SolidWorks", "CAD", "FDM", "Bambu Studio", "stdio"]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://github.com/wangruiyu070802/solidworks-mcp/blob/20a1c75eb695830c94d301b249b4cfe6d2549bd5/README.md",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": "2026-11-11T05:22:55Z",
+    "retrievedAt": "2026-11-11T05:22:55Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://github.com/wangruiyu070802/solidworks-mcp",
+    "repository": {
+      "url": "https://github.com/wangruiyu070802/solidworks-mcp",
+      "source": "github",
+      "id": null,
+      "subfolder": null
+    }
+  },
+  "transports": [
+    {
+      "kind": "package",
+      "type": "stdio",
+      "url": null,
+      "package": {
+        "registryType": "git",
+        "identifier": "https://github.com/wangruiyu070802/solidworks-mcp",
+        "version": "v0.2.0"
+      }
+    }
+  ],
+  "authentication": {
+    "mode": "none",
+    "requiredHeaders": [],
+    "reason": "本地 stdio，无托管服务、API Key 或账号；运行阶段不上传模型或数据。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": "MIT",
+    "evidenceUrl": "https://github.com/wangruiyu070802/solidworks-mcp/blob/20a1c75eb695830c94d301b249b4cfe6d2549bd5/LICENSE"
+  },
+  "maintenance": {
+    "registryStatus": "active",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "not-run",
+    "checkedAt": null,
+    "targetUrl": null,
+    "httpStatus": null,
+    "reason": "本地 stdio，无公开 HTTP MCP 端点；需 Windows + 已授权 SOLIDWORKS 运行时验收，尚未独立执行。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "score": {
+    "total": 60,
+    "band": "watchlist",
+    "dimensions": {
+      "authority": 15,
+      "accessibility": 15,
+      "maintenanceSecurity": 12,
+      "runtime": 5,
+      "marketGap": 8,
+      "documentation": 5
+    },
+    "reasons": [
+      "authority 15/25: 源码为贡献者自有仓库（固定 tag v0.2.0），启动配置在仓库 README 公开；独立来源核验待维护者完成。",
+      "accessibility 15/25: 无鉴权、本地 stdio 可用；但需 Windows + 已授权 SOLIDWORKS（商业软件），非零门槛。",
+      "maintenanceSecurity 12/20: MIT 明确；已修复文档隔离与覆盖安全；维护活跃度未独立评级。",
+      "runtime 5/15: 纯函数测试 27 项通过，但 COM 运行时验收与隔离失败路径证据尚未独立重跑。",
+      "marketGap 8/10: 目录尚无 SolidWorks/CAD 本地建模连接器，差异化明显。",
+      "documentation 5/5: README/runbook/验收文档齐备，副作用与许可边界已披露。"
+    ],
+    "gates": ["runtime-acceptance-pending", "maintainer-approval-pending"]
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "solidworks-cad",
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "notes": "贡献者已按维护者 review 修复隔离/覆盖/文案问题并固定安装源，但来源审核、独立 Windows/SOLIDWORKS 运行时验收与人工批准仍待维护者完成；贡献者自报证据不构成批准。"
+  },
+  "runtimeAcceptance": {
+    "status": "not-run",
+    "checkedAt": null,
+    "reviewedBy": null,
+    "reportUrl": null,
+    "notes": "修复后尚未在真实 SOLIDWORKS 会话中重跑集成自测；待维护者按本目录 README 的 disposable 流程执行。纯函数回归 27 项已通过（含覆盖拒绝/越界路径/写失败保留/所有权匹配）。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://github.com/wangruiyu070802/solidworks-mcp/blob/20a1c75eb695830c94d301b249b4cfe6d2549bd5/README.md",
+      "collectedAt": "2026-11-11T05:22:55Z",
+      "summary": "固定 tag v0.2.0 的 README：安装（uvx 固定版本）、环境要求、副作用与安全边界、许可区分（MIT/SOLIDWORKS/Bambu）。"
+    },
+    {
+      "type": "license",
+      "url": "https://github.com/wangruiyu070802/solidworks-mcp/blob/20a1c75eb695830c94d301b249b4cfe6d2549bd5/LICENSE",
+      "collectedAt": "2026-11-11T05:22:55Z",
+      "summary": "本插件 MIT 许可；SOLIDWORKS 为 Dassault Systèmes 商业软件需自有许可，Bambu Studio 为独立第三方应用。"
+    },
+    {
+      "type": "official-repository",
+      "url": "https://github.com/wangruiyu070802/solidworks-mcp/tree/20a1c75eb695830c94d301b249b4cfe6d2549bd5",
+      "collectedAt": "2026-11-11T05:22:55Z",
+      "summary": "固定提交的源码树：server.py 工具定义、tests/test_pure.py 纯函数回归、connectors/solidworks-cad.json 描述符。"
+    }
+  ]
+}
