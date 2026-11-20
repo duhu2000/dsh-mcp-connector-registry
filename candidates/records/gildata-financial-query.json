@@ -4,7 +4,7 @@
   "title": "聚源金融综合问数",
   "provider": "恒生聚源",
   "providerRegion": "国内",
-  "status": "DEFERRED",
+  "status": "PASS",
   "source": {
     "kind": "official-vendor",
     "detailUrl": "https://website.gildata.com/",
@@ -27,7 +27,7 @@
     "mode": "api-key",
     "placement": "query token through GILDATA_API_KEY stdio bridge",
     "standardOAuthVerified": false,
-    "formalCardFlow": "local bridge connection and tool discovery passed; published package pending"
+    "formalCardFlow": "Published stdio bridge package verified against authenticated initialize/tools/list acceptance; full market UI installation not independently retested."
   },
   "license": {
     "status": "unknown",
@@ -39,7 +39,7 @@
     "proposedConnectorId": "gildata-financial-query",
     "reviewedAt": "2026-11-20T10:53:06.322073+00:00",
     "reviewedBy": "DuHu",
-    "notes": "用户明确批准本候选条款例外及上架。技术验收仅覆盖单次 FinQuery 及桥接连接、9工具发现；其他工具未验收。正式上架仍需等待桥接 npm 包发布。",
+    "notes": "用户明确批准本候选条款例外及上架。技术验收仅覆盖单次 FinQuery 及桥接连接、9工具发现；其他工具未验收。桥接 npm 包 v0.2.118 已发布，完整性、启动入口和验收代码指纹均已核验。",
     "serviceTermsException": {
       "connectorId": "gildata-financial-query",
       "reasonCode": "official-terms-unavailable",
@@ -54,10 +54,8 @@
     "level": "none",
     "notes": "No exact Gildata provider/endpoint match in current connectors; financial-domain overlap with Wind and DZH."
   },
-  "blockers": [
-    "Publish bridge package and pin the released version in descriptor."
-  ],
-  "nextStep": "Publish and verify bridge package, then promote approved card and generated catalog documentation.",
+  "blockers": [],
+  "nextStep": "Merge approved Registry PR #95 and verify published catalog/CDN. Do not repeat paid acceptance calls.",
   "registryName": "review/gildata-financial-query",
   "probe": {
     "status": "partial",
@@ -97,6 +95,10 @@
     {
       "type": "service-terms-exception",
       "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/gildata-2026-11-20/evidence/terms-exception.json"
+    },
+    {
+      "type": "release-verification",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/gildata-2026-11-20/evidence/release-verification.json"
     }
   ]
 }
