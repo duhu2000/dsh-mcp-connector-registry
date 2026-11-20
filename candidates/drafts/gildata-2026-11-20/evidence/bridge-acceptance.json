@@ -1,0 +1,25 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-11-20T10:37:26.038056+00:00",
+  "acceptanceTransport": "stdio-bridge",
+  "endpoint": "https://api.gildata.com/mcp-servers/aidata-assistant-srv-tool",
+  "businessCallAttempts": 0,
+  "automaticRetries": 0,
+  "toolCount": 9,
+  "recognizedTools": [
+    "AnnouncementData",
+    "FinDataFallbackQuery",
+    "FinQuery",
+    "IcEnterpriseDataQuery",
+    "MacroIndustryData",
+    "SmartFundManagerSelection",
+    "SmartFundSelection",
+    "SmartStockSelection",
+    "WebSearch"
+  ],
+  "unknownToolCount": 0,
+  "hasMoreTools": false,
+  "finQueryRequiredQueryString": true,
+  "bridgeSha256": "1098e335e702939266f7eef899c5654be4f5808aeaa91db375d7cfb605af13a6",
+  "coreSha256": "0d1fa4bfd3181014bc5eb058b479235e4784263132ce043e2968025a481a5cc8"
+}
