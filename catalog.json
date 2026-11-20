@@ -1930,6 +1930,59 @@
     },
     {
       "schemaVersion": 1,
+      "id": "finchina-financial-risk-data",
+      "name": "财汇 · 金融与风险数据",
+      "vendor": "财汇",
+      "icon": "📊",
+      "category": "金融投资",
+      "summary": "债券与基金 / 宏观区域经济 / 企业财务与风险",
+      "description": "连接财汇 MCP，在账号授权范围内查询债券、基金、股票、企业财务与风险、宏观与区域经济、新闻公告等数据。使用 API Key（x-api-key），属于按账号权益和数据查询量计费的服务，部分模块需要额外权限。采用先获取子工具定义、再执行查询的两步流程。已发现 42 个顶层工具；代表性基金档案查询链路运行验收通过，返回代码、全称与管理人，但本次请求的基金类型和成立日期未匹配，部分记录存在空值，其余能力尚未验收。保留参数处理警告、日期、单位、覆盖范围和缺失值，注明来源：财汇MCP。使用范围以用户协议及账号合同为准，须遵守境内访问和数据使用要求；连接器不授予数据转售、公开再分发或境外传输许可。",
+      "tags": [
+        "财汇",
+        "FinChina",
+        "国内数据",
+        "债券",
+        "基金",
+        "宏观经济",
+        "企业数据",
+        "风险数据",
+        "API Key",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://mcp.finchina.com/",
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "x-api-key",
+        "credentialName": "财汇 API Key",
+        "credentialPlaceholder": "填写财汇 API Key，不加 Bearer 前缀",
+        "credentialDescription": "使用财汇发放的 API Key，原样填写；仅在本机保存。"
+      },
+      "servers": [
+        {
+          "serverKey": "caihui-mcp",
+          "serverName": "caihui-mcp",
+          "transport": "streamable-http",
+          "url": "https://mcp.finchina.com/finchina-data-mcp-server/mcp"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询沪深300ETF基础档案",
+          "server": "caihui-mcp",
+          "text": "查询沪深300ETF（510300）的基金代码、全称和基金管理人。先确认调用次数与费用，再读取基金档案子工具定义并查询；保留代码后缀、参数处理警告及缺失字段，不将不同代码记录直接计为不同基金。数据日期未返回时注明未知，标注数据来源：财汇MCP，不自动追加净值、持仓或下载。"
+        },
+        {
+          "title": "比较长三角三省市经济指标",
+          "server": "caihui-mcp",
+          "text": "比较上海、江苏、浙江 2025 年地区生产总值和一般公共预算收入。先核对可用指标、统计期间、单位及调用费用，经确认后查询；区分数据缺失与零值，不混用不同报告期，注明数据来源：财汇MCP。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "firefox-devtools",
       "name": "Firefox · 页面检查",
       "vendor": "Mozilla",

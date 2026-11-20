@@ -1,0 +1,93 @@
+{
+  "candidateId": "finchina-financial-risk-data",
+  "checkedAtLocal": "2026-11-20T22:09:00+08:00",
+  "timePrecision": "minute; observed DSH message time",
+  "evidenceSource": "DSH Chrome tool-call trace and rendered response, inspected by assistant",
+  "status": "pass",
+  "transportAcceptance": "pass",
+  "businessAcceptance": "pass",
+  "scope": "Representative fund basic-profile execution chain only: returned code, full name and manager; original five-field goal remains incomplete; other capabilities untested",
+  "calls": [
+    {
+      "tool": "query_fund_basics_and_issuance",
+      "arguments": {},
+      "attempts": 1,
+      "status": {
+        "code": 0,
+        "info": "成功",
+        "message": "SUCCESS"
+      },
+      "subToolCount": 6,
+      "selectedSubtool": "get_fund_basic_info"
+    },
+    {
+      "tool": "execute_tool",
+      "arguments": {
+        "tool_name": "get_fund_basic_info",
+        "arguments": {
+          "target_fund": [
+            "510300"
+          ],
+          "indicator_name": [
+            "基金代码",
+            "基金全称",
+            "基金类型",
+            "成立日期",
+            "基金管理人"
+          ]
+        }
+      },
+      "attempts": 1,
+      "status": {
+        "code": 1,
+        "info": "成功，存在参数兼容处理，已按默认值继续查询",
+        "message": "SUCCESS"
+      },
+      "matchedTargetCount": 1,
+      "returnedRecordCount": 2,
+      "acceptedIndicators": [
+        "基金代码",
+        "基金全称",
+        "基金管理人"
+      ],
+      "unsupportedIndicators": [
+        "基金类型",
+        "成立日期"
+      ],
+      "returnedCodes": [
+        "510300.SH",
+        "510300.OF"
+      ],
+      "observedFundFullName": "华泰柏瑞沪深300交易型开放式指数证券投资基金",
+      "observedFundManager": "华泰柏瑞基金管理有限公司",
+      "missingValues": [
+        "510300.OF 基金全称为 null"
+      ],
+      "dataDate": null,
+      "unit": "not applicable; text/code fields"
+    }
+  ],
+  "automaticRetries": 0,
+  "additionalCalls": 0,
+  "billing": {
+    "authorization": "User approved at most the two specified calls at actual account price",
+    "actualCharge": "unknown; no billing information returned",
+    "chargedCallCount": null
+  },
+  "limitations": [
+    "Advertised 基金类型 and 成立日期 were rejected by this account/channel response; underlying cause not independently established.",
+    "Two returned code rows must not be presented as two distinct funds without further evidence.",
+    "No independent data-update timestamp returned.",
+    "Only the observed returned basic fields are validated; not all 42 top-level tools."
+  ],
+  "credentialHandling": "No credential values read, recorded or included in evidence",
+  "dataSource": "财汇MCP",
+  "requestedFieldCompleteness": "partial",
+  "review": {
+    "reviewedAt": "2026-11-20T14:31:13.279762+00:00",
+    "reviewedBy": "Codex",
+    "previousAssessment": "partial",
+    "reason": "Official FAQ confirms code=1 is a successful query with parameter compatibility handling. Returned nonempty fund data validates the representative execution chain, not all requested fields. No new calls performed; unsupported indicators and null remain recorded.",
+    "evidenceUrl": "https://mcp.finchina.com/guide/mcp/tools/faq"
+  }
+}
