@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-11-20T14:31:13.279762+00:00",
+  "method": "Unauthenticated reads of official website and its public frontend assets; no account or business calls",
+  "provider": "上海大智慧财汇数据科技有限公司",
+  "officialHomepage": "https://mcp.finchina.com/",
+  "integration": {
+    "url": "https://mcp.finchina.com/guide/mcp/tools/usage",
+    "protocol": "Streamable HTTP",
+    "endpoint": "https://mcp.finchina.com/finchina-data-mcp-server/mcp",
+    "authHeader": "x-api-key",
+    "notes": "Official guide documents third-party AI/MCP clients including Codex, WorkBuddy, QoderWork and OpenClaw, with manual setup for other platforms."
+  },
+  "responseSemantics": {
+    "url": "https://mcp.finchina.com/guide/mcp/tools/faq",
+    "code0": "Success without parameter compatibility handling",
+    "code1": "Successful completed query with compatibility handling; warnings and returned scope must be disclosed"
+  },
+  "terms": {
+    "url": "https://mcp.finchina.com/agreement/user",
+    "linkedDocument": "https://cdn.finchina.com/app/h5/introduce/agreement/agreement-2026-11-18.html",
+    "title": "企业预警通用户协议",
+    "publicationDate": "2026-11-18",
+    "linkage": "MCP site user-agreement route embeds official CDN agreement selector; latest entry links this version.",
+    "applicability": "MCP-site-linked general agreement, read together with explicit MCP third-party client integration guide; not a separate redistribution license or a legal opinion.",
+    "limitations": [
+      "Account and data use are limited by purchased entitlements and specific contracts.",
+      "General agreement restricts offshore access/data transfer, cloud-network access, bulk extraction, account sharing and unauthorized resale/redistribution.",
+      "Do not infer that third-party MCP support permits public data redistribution or all hosting/model-processing locations.",
+      "General agreement restricts off-product image reuse; use a neutral emoji rather than copying official brand assets."
+    ],
+    "nextStep": "Users must confirm their contract and deployment/data-processing arrangements with the provider where general terms and MCP integration scope differ."
+  },
+  "billing": {
+    "source": "https://mcp.finchina.com/guide/mcp/tools/usage",
+    "notes": "Guide describes credits based on data type and quantity; no fixed charge for this test independently verified."
+  },
+  "sources": [
+    {
+      "url": "https://mcp.finchina.com/static/js/async/774.c422075a0f.js",
+      "sha256": "b658b55b45273d10fe74522d14fc9226e64a9c9f1e24a1100d5fca0482c313ac"
+    },
+    {
+      "url": "https://cdn.finchina.com/app/h5/introduce/agreement/static/js/agreement.f6e52878.js",
+      "sha256": "93095b248b066e5b45961def128eae3acc39bb690cbf0fd94919502eaeba7e95"
+    },
+    {
+      "url": "https://cdn.finchina.com/app/h5/introduce/agreement/static/js/agreement-2026-11-18.49fce4b5.js",
+      "sha256": "d7abaf60cb505c30ee831e4f330fe18b88bbf33ff0c37092f797b87a48eefae6"
+    },
+    {
+      "url": "https://mcp.finchina.com/static/js/async/951.7a28192f6a.js",
+      "sha256": "8f9f56b788642d64fa144098d879f5a143db89755412d26cef1c995b73d87ca5"
+    }
+  ]
+}
