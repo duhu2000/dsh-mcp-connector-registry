@@ -1,0 +1,61 @@
+{
+  "candidateId": "ths-ifind",
+  "checkedAt": "2026-11-20T05:40:00Z",
+  "timeSource": "iFinD 工具响应显示北京时间 13:40:00，DSH 会话于当日完成。",
+  "reviewedBy": "Codex",
+  "status": "pass",
+  "scope": "DSH Web 上的已安装连接、工具发现及一次代表性只读调用。",
+  "evidenceSource": "在内置浏览器查看 DSH 连接详情、工具参数和已完成会话的实际工具调用输入输出。",
+  "connectorVersion": "0.2.117",
+  "testAccount": {
+    "registration": "用户本人在 iFinD 官网注册。",
+    "plan": "试用版",
+    "credentialSourceUrl": "https://mcp.51ifind.com/#/profile",
+    "credentialSource": "用户说明所用密钥取自 iFinD 个人中心。用户提供的截图可见试用版标记及密钥管理页面。",
+    "usage": "维护者确认该账号为本次验收单独注册，未用于日常或生产。",
+    "permissions": "维护者确认仅使用默认免费体验权限。官方个人订阅页列出体验版累计额度和请求频率。",
+    "planEvidenceUrl": "https://mcp.51ifind.com/#/pricing",
+    "confirmedBy": "DuHu",
+    "confirmedAt": "2026-11-20T06:03:14.177Z"
+  },
+  "connection": {
+    "serverName": "hexin-ifind-ds-mcp",
+    "state": "connected",
+    "authMode": "api-key",
+    "serviceCount": 1,
+    "toolCount": 11,
+    "discoveryCheckedAt": "2026-11-20T05:39:09Z"
+  },
+  "businessCall": {
+    "tool": "mcp__hexin-ifind-ds-mcp__get_security_indicators",
+    "market": "A股",
+    "security": "600519.SH",
+    "requestedReportDate": "2024-12-31",
+    "indicator": "营业收入",
+    "attempts": 1,
+    "otherToolCalls": 0,
+    "responseCode": 1,
+    "responseMessage": "success",
+    "returnedSecurity": "600519.SH",
+    "returnedTableDate": "2024-12-31",
+    "numericValueReturned": true,
+    "unitLabelReturned": true,
+    "observations": [
+      "营业收入表头标注元，数值文本带亿的缩放标记。",
+      "结果表日期对应请求的年报截止日，营业收入的指标参数却标为最新一期（MRQ）。",
+      "响应附带额外的季度与同比字段。此次检查仅覆盖指定营业收入字段的返回情况。"
+    ]
+  },
+  "limits": [
+    "本次只验证代表性调用返回结果，财务数值准确性、会计口径和其余 10 个工具未逐项验证。",
+    "使用用户已安装的连接。实际扣费未核实。"
+  ],
+  "credentialsRecorded": false,
+  "rawResponseRecorded": false,
+  "maintainerApproval": {
+    "task": "QMCP-5020",
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-20T06:03:14.177Z",
+    "notes": "维护者本人授权办理 ths-ifind 上架并提交 Registry PR。"
+  }
+}
