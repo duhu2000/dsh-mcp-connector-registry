@@ -2212,6 +2212,69 @@
     },
     {
       "schemaVersion": 1,
+      "id": "gildata-financial-query",
+      "name": "聚源金融综合问数",
+      "vendor": "恒生聚源",
+      "icon": "📊",
+      "category": "金融投资",
+      "summary": "金融产品 / 财务报表 / 宏观行业数据问数",
+      "description": "连接恒生聚源金融数据，通过自然语言查询股票、基金、债券、指数等金融产品数据、财务报表、宏观与行业指标和公告，并支持股票、基金及基金经理条件筛选。已发现9个工具，单次公司年度财务指标查询验收通过；其余工具尚未验收。数据范围、时效与费用以账号授权和套餐为准；结果应保留报告期、单位和缺失项，未返回来源链接或更新时间时明确说明。 通过本地适配连接官方服务，需自行提供聚源 Token。服务条款未公开，尚未核验；数据使用范围以本人账号合同为准，不附带再分发权。",
+      "tags": [
+        "聚源",
+        "恒生聚源",
+        "金融数据",
+        "财务报表",
+        "宏观经济",
+        "API Key",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://website.gildata.com/",
+      "auth": {
+        "mode": "api-key",
+        "credentialFields": [
+          {
+            "key": "apiKey",
+            "label": "聚源 Token / API Key",
+            "required": true,
+            "secret": true,
+            "description": "仅在本机填写本人聚源 Token，不加 Bearer 前缀。"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "gildata-finquery",
+          "serverName": "gildata-finquery",
+          "transport": "stdio",
+          "command": "npx",
+          "args": [
+            "--yes",
+            "--package=dsh-mcp-connector@0.2.118",
+            "dsh-gildata-mcp-bridge"
+          ],
+          "credentialBindings": {
+            "GILDATA_API_KEY": "apiKey"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询恒生电子年度财务指标",
+          "text": "查询恒生电子（600570）2025年年度营业收入和归母净利润，注明单位与报告期。先核对账户额度，仅调用一次 FinQuery；缺失数据直接说明，不自动追加查询。",
+          "server": "gildata-finquery"
+        },
+        {
+          "title": "查看宏观经济年度变化",
+          "text": "查询中国2023—2025年国内生产总值及同比增速，列出年份、单位、统计口径、来源与可得更新时间。先核对账户额度与工具支持范围，不补造缺失值。",
+          "server": "gildata-finquery"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "gitee",
       "name": "Gitee",
       "vendor": "Gitee",

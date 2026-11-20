@@ -1,0 +1,9 @@
+{
+  "connectorId": "gildata-financial-query",
+  "reasonCode": "official-terms-unavailable",
+  "decision": "approved",
+  "reviewedBy": "DuHu",
+  "reviewedAt": "2026-11-20T10:53:06.322073+00:00",
+  "notes": "用户明确批准聚源条款例外并上架，署名 DuHu。卡片披露服务条款未公开，尚未核验；本例外不是厂商许可，不授予数据再分发权，仅适用于聚源候选。",
+  "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/gildata-2026-11-20/evidence/terms-exception.json"
+}

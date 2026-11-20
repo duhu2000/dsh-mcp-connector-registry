@@ -35,19 +35,29 @@
     "evidenceUrl": null
   },
   "review": {
-    "decision": "pending",
-    "proposedConnectorId": "gildata-financial-query"
+    "decision": "approved",
+    "proposedConnectorId": "gildata-financial-query",
+    "reviewedAt": "2026-11-20T10:53:06.322073+00:00",
+    "reviewedBy": "DuHu",
+    "notes": "用户明确批准本候选条款例外及上架。技术验收仅覆盖单次 FinQuery 及桥接连接、9工具发现；其他工具未验收。正式上架仍需等待桥接 npm 包发布。",
+    "serviceTermsException": {
+      "connectorId": "gildata-financial-query",
+      "reasonCode": "official-terms-unavailable",
+      "decision": "approved",
+      "reviewedBy": "DuHu",
+      "reviewedAt": "2026-11-20T10:53:06.322073+00:00",
+      "notes": "用户明确批准聚源条款例外并上架，署名 DuHu。卡片披露服务条款未公开，尚未核验；本例外不是厂商许可，不授予数据再分发权，仅适用于聚源候选。",
+      "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/gildata-2026-11-20/evidence/terms-exception.json"
+    }
   },
   "dedupe": {
     "level": "none",
     "notes": "No exact Gildata provider/endpoint match in current connectors; financial-domain overlap with Wind and DZH."
   },
   "blockers": [
-    "Publish bridge package and pin the released version in descriptor.",
-    "Applicable service terms or candidate-specific named exception pending.",
-    "Named listing approval pending."
+    "Publish bridge package and pin the released version in descriptor."
   ],
-  "nextStep": "Review plugin and Registry PRs; finalize applicable terms or named exception and publish bridge before card promotion. No further paid query authorized.",
+  "nextStep": "Publish and verify bridge package, then promote approved card and generated catalog documentation.",
   "registryName": "review/gildata-financial-query",
   "probe": {
     "status": "partial",
@@ -83,6 +93,10 @@
     {
       "type": "bridge-acceptance",
       "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/gildata-2026-11-20/evidence/bridge-acceptance.json"
+    },
+    {
+      "type": "service-terms-exception",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/gildata-2026-11-20/evidence/terms-exception.json"
     }
   ]
 }

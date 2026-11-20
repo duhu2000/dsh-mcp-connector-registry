@@ -1,5 +1,11 @@
 [
   {
+    "id": "gildata-financial-query",
+    "publishedOn": "2026-11-20",
+    "pr": 95,
+    "acceptance": "DuHu 具名批准本候选上架及条款例外，服务条款未公开，尚未核验。直连 FinQuery 单次公司年度财务问数验收通过；安全 stdio 桥接连接及9工具发现通过，无追加业务调用。其他8工具未验收，费用未回传。通过固定官方端点适配并在本机填写 Token。"
+  },
+  {
     "id": "dzh-financial-data",
     "publishedOn": "2026-11-20",
     "pr": 93,
