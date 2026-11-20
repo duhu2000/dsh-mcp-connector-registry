@@ -1,5 +1,11 @@
 [
   {
+    "id": "finchina-financial-risk-data",
+    "publishedOn": "2026-11-20",
+    "pr": 96,
+    "acceptance": "已确认 42 个顶层工具，单次基金档案查询链路通过；官方将 code=1 定义为带参数兼容处理的成功。基金类型、成立日期未匹配，部分记录为空，原五字段目标不完整，其余工具未验收。API Key 鉴权，使用与费用以账号权益及官方协议为准。"
+  },
+  {
     "id": "gildata-financial-query",
     "publishedOn": "2026-11-20",
     "pr": 95,
