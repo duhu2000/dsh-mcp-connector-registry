@@ -2,6 +2,14 @@
 
 供运营审核选用；不得将部分验证宣传为全部业务可用。未自动发布到任何平台。
 
+### 2026-11-20 · 大智慧 · 金融数据
+
+股票 / 基金 / 期货行情与财务资讯。接入方式：oauth2-pkce；探测状态：pass。
+
+DuHu 具名批准。已发现17个工具；SH601519 公司简况单次查询验收通过，其他16工具尚未验收。参数保护修复已通过新旧 Host 本地回归并部署验收；费用未返回，按账号套餐执行。正式卡片 OAuth 流程尚未单独测试。
+
+[上架 PR #93](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/93) · [卡片详情](../connectors/dzh-financial-data.json)
+
 ### 2026-11-19 · ZooData · 电商市场数据
 
 Amazon 类目画像 / 市场趋势 / 价格与竞争分析。接入方式：bearer；探测状态：pass。

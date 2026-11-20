@@ -1,0 +1,27 @@
+{
+  "status": "pass",
+  "source": "User screenshot and supplied tool descriptions",
+  "checkedAt": "2026-11-19T22:34:17+08:00",
+  "toolCount": 17,
+  "tools": [
+    "ai-mcp-open_tools_getAShareQuoteData",
+    "ai-mcp-open_tools_getAnnounceInfo",
+    "ai-mcp-open_tools_getCompanyProfile",
+    "ai-mcp-open_tools_getAShareDividendData",
+    "ai-mcp-open_tools_getAShareFinanceData",
+    "ai-mcp-open_tools_getFundData",
+    "ai-mcp-open_tools_getFuturesData",
+    "ai-mcp-open_tools_getHkStockData",
+    "ai-mcp-open_tools_getAShareHolderData",
+    "ai-mcp-open_tools_getIndexBlockData",
+    "ai-mcp-open_tools_getAShareLhbData",
+    "ai-mcp-open_tools_findMultiDimStockCodes",
+    "ai-mcp-open_tools_getNewsInfo",
+    "ai-mcp-open_tools_naturalLanguageQuery",
+    "ai-mcp-open_tools_queryTask",
+    "ai-mcp-open_tools_getAShareTechIndicator",
+    "ai-mcp-open_tools_getUsStockData"
+  ],
+  "scope": "Connection and discovery only; user reports OAuth authorization",
+  "credentialsRecorded": false
+}
