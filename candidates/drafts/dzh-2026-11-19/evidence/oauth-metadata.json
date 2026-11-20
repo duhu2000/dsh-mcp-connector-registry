@@ -1,0 +1,24 @@
+{
+  "issuer": "https://aiappgw.dzh.com.cn",
+  "authorization_endpoint": "https://aiappgw.dzh.com.cn/oauth2/authorize",
+  "token_endpoint": "https://aiappgw.dzh.com.cn/oauth2/token",
+  "registration_endpoint": "https://aiappgw.dzh.com.cn/oauth2/connect/register",
+  "scopes_supported": [
+    "mcp_workbuddy_read",
+    "mcp_officeace_read",
+    "mcp_doubao_read",
+    "mcp_qwen_read",
+    "mcp_yoyo_read",
+    "mcp_baidu_read"
+  ],
+  "code_challenge_methods_supported": [
+    "S256"
+  ],
+  "grant_types_supported": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "token_endpoint_auth_methods_supported": [
+    "none"
+  ]
+}

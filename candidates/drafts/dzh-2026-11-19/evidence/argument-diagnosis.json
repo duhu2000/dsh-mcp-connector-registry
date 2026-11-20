@@ -1,0 +1,115 @@
+{
+  "checkedAt": "2026-11-20T02:22:25.967547+00:00",
+  "source": "Chrome DSH tool parameter UI, cached 2026-11-20 10:17:41 Asia/Shanghai",
+  "tool": "ai-mcp-open_tools_getCompanyProfile",
+  "observedFields": {
+    "param": {
+      "type": "object",
+      "required": true,
+      "children": {
+        "stockCode": {
+          "type": "string",
+          "required": true
+        },
+        "getF10BusiinfoData": {
+          "type": "object",
+          "required": false,
+          "children": {
+            "typeStyle": {
+              "type": "integer",
+              "description": "1 industry, 2 product, 3 region"
+            }
+          }
+        },
+        "getF10GsjsData": {
+          "type": "boolean",
+          "required": false
+        },
+        "getF10Information": {
+          "type": "boolean",
+          "required": false
+        }
+      }
+    }
+  },
+  "offlineValidation": {
+    "implementation": "installed @deepseek-ai/dsh-tools validateJsonSchemaValue",
+    "schemaScope": "Reconstructed type/required subset from UI; not a complete wire schema capture",
+    "cases": [
+      {
+        "arguments": {
+          "param": true,
+          "stockCode": true
+        },
+        "valid": false
+      },
+      {
+        "arguments": {
+          "param": false,
+          "stockCode": false
+        },
+        "valid": false
+      },
+      {
+        "arguments": {
+          "param": {
+            "stockCode": "SH601519"
+          }
+        },
+        "valid": true
+      }
+    ]
+  },
+  "sourceInspection": {
+    "mcpClient": "createDefinition passes parameters through; callToolUncached forwards args as arguments without boolean conversion",
+    "limitation": "Static installed source inspection is not proof of the running process path or model-facing schema"
+  },
+  "businessCallsMadeDuringReview": 0,
+  "rootCause": "Origin of model-generated boolean parameters remains unresolved; no flattening observed in the tested bridge path",
+  "localMockRegression": {
+    "date": "2026-11-20",
+    "status": "PASS",
+    "hostToolsVersion": "0.1.2-rc.1",
+    "transport": "real Host ToolRuntime and MCP bridge to synthetic loopback Streamable HTTP server",
+    "schemaScope": "UI-derived synthetic subset; not a complete live schema capture",
+    "beforeFix": "Boolean param forwarded unchanged to mock server",
+    "afterFix": "Boolean param true/false denied before dispatch; zero additional tools/call requests",
+    "validNestedArguments": "Preserved exactly, including optional false and nested typeStyle object",
+    "governance": "Existing deny still blocks execution; guard disposal verified",
+    "realDzhBusinessCalls": 0,
+    "productionAcceptance": "Third separately authorized call PASS on 2026-11-20 12:42 Asia/Shanghai; previous failures retained",
+    "testFiles": [
+      "test/tool-input-guard.test.mjs",
+      "test/tool-input-guard-host.test.mjs"
+    ],
+    "fixPullRequest": "https://github.com/duhu2000/dsh-mcp-connector/pull/283",
+    "fixCommit": "d501dec",
+    "hostVersionsTested": [
+      "0.1.2-rc.1",
+      "0.2.2-rc.1 with native executor"
+    ],
+    "targetedTestsPerHost": {
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "confirmedGap": "Raw Host MCP definitions bypass defineTool input validation; plugin now checks explicit structural types before dispatch",
+  "fixDeployment": {
+    "mergeCommit": "61c05d85e0134f30a5988b8d36dafb1d5e3aa603",
+    "mergedAt": "2026-11-20T04:29:42Z",
+    "ciRun": "https://github.com/duhu2000/dsh-mcp-connector/actions/runs/44674056784",
+    "ciChecksPassed": 14,
+    "localInstalledVersion": "0.2.118-pr.283.qa.1795148801678+gd501dec",
+    "artifactSha256Verified": true,
+    "guardFileAndEntryVerified": true,
+    "runningProcessActivation": "CONFIRMED_IN_CHROME_DSH_VERSION_HEADER",
+    "additionalBusinessAcceptance": "SENT_ONCE_AND_PASS",
+    "additionalCallArguments": {
+      "param": {
+        "stockCode": "SH601519"
+      }
+    },
+    "automaticRetries": 0
+  }
+}
