@@ -1374,6 +1374,62 @@
     },
     {
       "schemaVersion": 1,
+      "id": "dzh-financial-data",
+      "name": "大智慧 · 金融数据",
+      "vendor": "大智慧",
+      "icon": "📈",
+      "category": "金融投资",
+      "summary": "股票 / 基金 / 期货行情与财务资讯",
+      "description": "连接大智慧官方 MCP，通过本人账号授权查询 A股、港股、美股、基金及期货数据，覆盖行情、财务报表、公告资讯、股东分红、资金流向、板块与技术指标。服务范围和调用额度以账号套餐为准；需核对交易所、币种、统计日期、行情时效及各子项错误。已确认连接和17个工具发现；大智慧（SH601519）单次公司简况业务查询运行验收通过，其余工具尚未验收。数据仅按服务协议及账号授权使用，不附带再分发权；查询结果不构成投资建议。",
+      "tags": [
+        "大智慧",
+        "证券数据",
+        "A股",
+        "港股",
+        "美股",
+        "基金",
+        "期货",
+        "OAuth",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://pay.dzh.com.cn/pay-mall/mcp",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://aiappgw.dzh.com.cn",
+        "scope": "",
+        "clientName": "DeepSeek Harness - DZH MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "dzh-mcp",
+          "serverName": "dzh-mcp",
+          "transport": "streamable-http",
+          "url": "https://mcpali.dzh.com.cn/pub/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "了解大智慧主营业务",
+          "server": "dzh-mcp",
+          "text": "查询大智慧（SH601519）的公司概况和主营业务，注明来源、数据日期以及未返回字段。先核对查询额度，只调用一次公司简况工具，不追加行情或其他查询。"
+        },
+        {
+          "title": "查看最近20个交易日走势",
+          "server": "dzh-mcp",
+          "text": "查看贵州茅台（SH600519）最近20个交易日的日K线，列出日期、开高低收及成交量，并注明复权方式、单位和缺失值。先核对工具参数及额度；不要将历史走势表述为未来收益保证。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "eastmoney-mcp",
       "name": "东方财富量化（社区）",
       "vendor": "社区连接器",

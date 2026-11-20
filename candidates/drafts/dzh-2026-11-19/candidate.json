@@ -35,11 +35,12 @@
     "evidenceUrl": "https://pay.dzh.com.cn/pay-mall/term"
   },
   "review": {
-    "decision": "pending",
+    "decision": "approved",
     "proposedConnectorId": "dzh-financial-data",
-    "reviewedAt": null,
-    "reviewedBy": null,
-    "notes": "Technical acceptance PASS; single-call spending approval does not substitute for named publication approval."
+    "reviewedAt": "2026-11-20T05:53:16.501006+00:00",
+    "reviewedBy": "DuHu",
+    "notes": "用户明确批准：批准大智慧上架，署名 DuHu。仅 SH601519 公司简况单次业务查询已验收，其余16工具未验收；用户知悉正式卡片 OAuth 流程尚未单独测试。此批准不扩展业务调用次数或数据使用权。",
+    "scope": "full-runtime"
   },
   "dedupe": {
     "level": "none",
@@ -50,7 +51,7 @@
     ],
     "notes": "No exact vendor/endpoint match found; financial-domain overlap only"
   },
-  "nextStep": "Review the concrete draft and record named listing approval before promotion. Keep published false until approved; no more business calls.",
+  "nextStep": "Publish through PR #93 after validation; no additional business call authorized. Monitor formal-card authorization feedback.",
   "registryName": "review/dzh-financial-data",
   "probe": {
     "status": "partial",

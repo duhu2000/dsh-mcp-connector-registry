@@ -94,7 +94,7 @@
 
 ## 金融投资
 
-共 15 个连接器。
+共 16 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -102,6 +102,7 @@
 | [BIS 全球银行与金融统计](../connectors/bis-global-statistics.json) | 信贷缺口 / 汇率利率 / 银行统计 / SDMX 数据流 | Pipeworx（独立第三方服务） | none | 公共目录 | pass |
 | [巨潮资讯上市公司报告](../connectors/cninfo-listed-company-reports.json) | 年报 / 半年报 / 季报 / 招股书 / 原始 PDF 链接 | DuHu / QCC（独立社区维护） | none | 公共目录 | pass |
 | [DataSinking](../connectors/datasinking.json) | 上市公司财报全文与章节检索 / Markdown / API Key | DataSinking | bearer | 公共目录 | unverified |
+| [大智慧 · 金融数据](../connectors/dzh-financial-data.json) | 股票 / 基金 / 期货行情与财务资讯 | 大智慧 | oauth2-pkce | 公共目录 | pass |
 | [东方财富量化（社区）](../connectors/eastmoney-mcp.json) | A 股行情 / K 线 / 技术指标 / 量化筛选 | 社区连接器 | none | 公共目录 | unverified |
 | [Excel 财务建模助手（社区）](../connectors/financial-modeling.json) | Excel 读取 / 写入 / 公式 / 表格建模 | 社区连接器 | none | 公共目录 | unverified |
 | [Gangtise](../connectors/gangtise.json) | 机构调研 / 专家纪要 / 行业与公司研究 | Gangtise | bearer | 公共目录 | unverified |
