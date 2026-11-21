@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "id": "drillr",
+  "name": "drillr 金融数据与研究",
+  "vendor": "drillr（Little Grebe Inc.）",
+  "icon": "https://raw.githubusercontent.com/Little-Grebe-Inc/dsh-drillr/v0.1.1/assets/icon.png",
+  "category": "金融投资",
+  "summary": "美股 / 日股 / A 股公告与财报检索 / 财务表 SQL / 公司发现 / 新闻与研究信号",
+  "description": "连接 drillr 托管的 MCP 服务，覆盖美股、日股和 A 股：把公司名解析成上市代码，按描述发现公司，列出并检索一家公司的公告（as-reported 原值与原文段落），对财务表和另类数据表执行只读 SQL，检索新闻，以及基于美股业绩电话会的行业拐点和企业 AI 应用研究。部分数据集范围更窄（电话会为美股和日股，分析师与持股数据仅美股），以 get_table_schema 的覆盖说明为准。10 个工具均为只读。使用 OAuth 浏览器登录 drillr 账号授权，用量与额度按 drillr 账号套餐计算；数据仅供研究参考，不构成投资建议。",
+  "tags": [
+    "drillr",
+    "美股",
+    "日股",
+    "A股",
+    "财报",
+    "公告检索",
+    "SQL",
+    "OAuth"
+  ],
+  "published": false,
+  "featured": false,
+  "homepage": "https://drillr.ai/docs/mcp",
+  "probeStatus": "unverified",
+  "promptVariables": [
+    {
+      "name": "company",
+      "label": "公司名称或代码",
+      "default": "苹果（AAPL）",
+      "placeholder": "例如：苹果（AAPL）、丰田（7203.T）、贵州茅台（600519.SH）",
+      "required": true
+    }
+  ],
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://gateway.drillr.ai",
+    "clientName": "DeepSeek Harness - drillr",
+    "tokenEndpointAuthMethod": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "data",
+      "url": "https://gateway.drillr.ai/mcp/data",
+      "serverName": "drillr",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "解析股票代码",
+      "text": "用 drillr 查一下 {{company}} 的上市代码和所属市场",
+      "server": "data"
+    },
+    {
+      "title": "最近的定期报告",
+      "text": "用 drillr 列出 {{company}} 最近一年的定期报告，并标出报告期和发布日期",
+      "server": "data"
+    },
+    {
+      "title": "财报原文检索",
+      "text": "用 drillr 检索 {{company}} 最新年报中关于营业收入的原文段落，引用原文并注明报告期和出处",
+      "server": "data"
+    },
+    {
+      "title": "近期新闻与事件",
+      "text": "用 drillr 检索 {{company}} 最近两周的重要新闻和事件，附来源链接",
+      "server": "data"
+    }
+  ]
+}
