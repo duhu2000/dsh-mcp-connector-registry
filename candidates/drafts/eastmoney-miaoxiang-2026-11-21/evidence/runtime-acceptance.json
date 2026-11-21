@@ -1,0 +1,36 @@
+{
+  "status": "pass",
+  "reviewedAt": "2026-11-21T13:03:03Z",
+  "executedAt": null,
+  "reviewedBy": "Codex",
+  "evidenceSource": "User-reported DSH single-call result in this conversation; raw tool trace not independently inspected",
+  "tool": "mx_ashare_finance_data",
+  "server": "mx-ds-mcp",
+  "arguments": null,
+  "queryIntent": "东方财富（300059.SZ）的证券简称和上市日期",
+  "calls": 1,
+  "callsByAssistant": 0,
+  "retries": 0,
+  "downloads": 0,
+  "otherToolsCalled": 0,
+  "schemaVerification": "User reported pre-call parameter suitability check; actual inputSchema and serialized arguments not supplied",
+  "result": {
+    "securityCode": "300059.SZ",
+    "securityName": "东方财富",
+    "firstListingDate": "2010-03-19",
+    "source": "东方财富数据库",
+    "sheetTitle": "东方财富(300059.SZ)的首发上市日、股票简称",
+    "requestedFieldsMissing": []
+  },
+  "billing": {
+    "authorization": "one call at actual account charge",
+    "actualDeduction": "unknown; not independently verified"
+  },
+  "scope": "Single A-share name and first-listing-date query; remaining 11 tools untested",
+  "limitations": [
+    "Exact execution time, HTTP and business status codes not provided",
+    "No original response or full input schema inspected",
+    "Listing date is not data freshness date",
+    "No credentials or EM deep links retained"
+  ]
+}
