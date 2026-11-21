@@ -40,7 +40,7 @@
 
 ## 调研分析
 
-共 48 个连接器。
+共 49 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -57,6 +57,7 @@
 | [FastMoss · TikTok电商数据](../connectors/fastmoss-tiktok-commerce.json) | TikTok 商品 / 达人 / 店铺 / 广告与类目研究 | FastMoss | oauth2-pkce | 公共目录 | pass |
 | [FRED 美国宏观经济数据](../connectors/fred-economic-data.json) | GDP / CPI / 就业 / 利率 / 经济时间序列 | Pipeworx（独立第三方服务） | none | 公共目录 | pass |
 | [GBIF 全球生物多样性](../connectors/gbif-global-biodiversity.json) | 物种分类 / 出现记录 / 数据集 / 全球生物多样性 | cyanheads（独立社区项目） | none | 公共目录 | pass |
+| [极鲸云 · SHEIN市场数据](../connectors/geekbi-shein-data.json) | SHEIN 商品 / 店铺 / 类目 / 关键词 / 评论与图搜同款 | 极鲸云 GeekBI / 青岛极鲸网络科技有限公司 | none | 公共目录 | pass |
 | [Google Analytics](../connectors/google-analytics.json) | GA4 属性 / 报表 / 实时数据 / 漏斗与转化分析 | Google Analytics | api-key | 公共目录 | partial |
 | [Google 地图（HasData）](../connectors/google-maps.json) | 地点搜索 / 评论 / 图片 / 商户与周边信息 | HasData 社区网关 | api-key | 公共目录 | unverified |
 | [IBGE 巴西公共统计](../connectors/ibge-br-public-data.json) | 人口普查 / 行政区划 / 经济社会指标 / 地理边界 | Sidney Bissoli（独立社区项目） | none | 公共目录 | pass |
