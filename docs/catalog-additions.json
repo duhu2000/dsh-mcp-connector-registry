@@ -1,5 +1,11 @@
 [
   {
+    "id": "xydc-amazon-data",
+    "publishedOn": "2026-11-21",
+    "pr": 99,
+    "acceptance": "DuHu 具名批准。DSH 已发现62个工具；依据用户回报，美国站单关键词 get_keyword_info 周快照查询通过，周期2026-11-08至2026-11-14，实际消耗1 Credit。原始轨迹未独立核对，其余61个工具未逐项验收。使用 Bearer MCP Token，公开开放平台协议已核实；组织内部使用，对外分发需另行授权。"
+  },
+  {
     "id": "eastmoney-miaoxiang",
     "publishedOn": "2026-11-21",
     "pr": 98,
