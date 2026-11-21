@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "ifind-financial-data",
+  "name": "同花顺 iFinD · 金融数据",
+  "vendor": "同花顺 iFinD",
+  "icon": "📈",
+  "category": "金融投资",
+  "summary": "证券指标 / 宏观经济 / 公告资讯 / 市场统计",
+  "description": "连接同花顺 iFinD 金融数据综合 MCP，在账号权益范围内查询股票、债券、基金、港美股、指数板块、期货期权、宏观行业指标及公告资讯。不包含快查企业数据或法智服务。使用 MCP 密钥，提供试用额度及付费套餐，查询消耗账号额度。日频指标、高频行情、证券筛选和全市场统计使用不同工具；高频行情仅支持交易日日内 Level1 数据，债券高频行情仅覆盖交易所市场。结果应保留来源、日期、频率、单位和缺失项。已发现 11 个工具，单只 A 股证券简称与上市日期查询验收通过，其余能力未逐项验收。账号仅限本人或约定主体使用，内部研究及数据使用须遵守 iFinD 协议与账号合同，不提供数据转售或再分发许可。",
+  "published": false,
+  "featured": false,
+  "probeStatus": "pass",
+  "homepage": "https://mcp.51ifind.com/",
+  "tags": [
+    "同花顺",
+    "iFinD",
+    "国内数据",
+    "金融数据",
+    "宏观经济",
+    "API Key",
+    "免费试用",
+    "付费服务"
+  ],
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "Authorization",
+    "credentialName": "iFinD MCP 密钥",
+    "credentialPlaceholder": "填写官方生成配置中的 Authorization 完整值",
+    "credentialDescription": "在 iFinD MCP 个人中心获取 MCP 密钥，原样填写，不自行添加 Bearer 前缀。凭据仅在本机输入。",
+    "credentialHelpLabel": "官方开通与密钥指南",
+    "credentialHelpUrl": "https://mcp.51ifind.com/#/documents/guide-prepare"
+  },
+  "servers": [
+    {
+      "serverKey": "hexin-ifind-ds-mcp",
+      "serverName": "hexin-ifind-ds-mcp",
+      "transport": "streamable-http",
+      "url": "https://api-mcp.51ifind.com:8643/ds-mcp-servers/hexin-ifind-ds-mcp"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询同花顺证券基础信息",
+      "server": "hexin-ifind-ds-mcp",
+      "text": "查询同花顺（300033.SZ）的证券简称和上市日期，使用 A 股证券指标查询工具；先确认调用额度，保留来源与缺失项，不追加行情、新闻或下载。"
+    },
+    {
+      "title": "比较两家公司的财务指标",
+      "server": "hexin-ifind-ds-mcp",
+      "text": "比较同花顺与恒生电子 2025 年年度营业收入和归母净利润。先确认调用额度，使用证券指标工具，核对报告期、单位和合并报表口径，注明 iFinD 来源；无可用数据时说明缺失，不推算。"
+    }
+  ]
+}
