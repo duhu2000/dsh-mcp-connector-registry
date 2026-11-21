@@ -1,5 +1,11 @@
 [
   {
+    "id": "ifind-financial-data",
+    "publishedOn": "2026-11-21",
+    "pr": 97,
+    "acceptance": "DuHu 具名批准。已发现11个工具；单次 A 股证券指标查询返回同花顺证券简称及上市日期，验收通过。其余10个工具未逐项验收，实际扣减额度未回传。Authorization 原样传入 MCP 密钥，不添加 Bearer 前缀；遵守官方会员协议及账号合同，不包含快查企业或法智服务。"
+  },
+  {
     "id": "finchina-financial-risk-data",
     "publishedOn": "2026-11-20",
     "pr": 96,
