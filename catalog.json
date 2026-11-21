@@ -1475,6 +1475,58 @@
     },
     {
       "schemaVersion": 1,
+      "id": "eastmoney-miaoxiang",
+      "name": "东方财富妙想 · 金融数据",
+      "vendor": "东方财富",
+      "icon": "📊",
+      "category": "金融投资",
+      "summary": "多市场金融指标 / 宏观数据 / 研报资讯 / 公告检索",
+      "description": "连接东方财富妙想官方金融数据 MCP，在账号权益范围内查询 A 股、港股、美股、基金、债券、指数板块及宏观行业数据，支持证券筛选、公告和研报资讯检索。使用 em_api_key 请求头鉴权，调用按账号实际规则消耗额度；具体费用以平台和账号套餐为准。结构化指标、公告与研报使用不同工具；K 线图工具不代替行情数值查询。结果应保留来源、统计日期、报告期、单位和缺失项。已发现 12 个工具；根据用户提供的 DSH 单次实测结果，单只 A 股证券简称与首发上市日期查询验收通过，其余工具未逐项验收。数据使用受东方财富及妙想适用协议、账号授权约束，不提供数据转售或再分发许可。",
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://ai.eastmoney.com/skills",
+      "tags": [
+        "东方财富",
+        "妙想",
+        "国内数据",
+        "金融数据",
+        "宏观经济",
+        "API Key",
+        "按量计费"
+      ],
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "em_api_key",
+        "credentialName": "妙想 EM API Key",
+        "credentialPlaceholder": "在本机填写妙想 API Key",
+        "credentialDescription": "从妙想平台获取 API Key，原样填写，不添加 Bearer 前缀。仅在本机密钥框输入。",
+        "credentialHelpLabel": "官方 MCP 接入指南",
+        "credentialHelpUrl": "https://mxapi.eastmoney.com/mxds/doc/mcp-install.md"
+      },
+      "servers": [
+        {
+          "serverKey": "mx-ds-mcp",
+          "serverName": "mx-ds-mcp",
+          "transport": "streamable-http",
+          "url": "https://mxapi.eastmoney.com/mxds/mcp"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询东方财富证券基础信息",
+          "server": "mx-ds-mcp",
+          "text": "查询东方财富（300059.SZ）的证券简称和上市日期。先确认账号调用额度，使用 A 股金融数据工具，保留来源与缺失项，不追加行情、新闻或下载。"
+        },
+        {
+          "title": "比较两家公司的年度财务数据",
+          "server": "mx-ds-mcp",
+          "text": "比较东方财富与同花顺 2025 年年度营业收入和归母净利润。先确认账号调用额度，核对报告期、单位和合并报表口径，注明数据来源；无可用数据时说明缺失，不推算。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "edgeone-pages",
       "name": "腾讯云 EdgeOne Pages",
       "vendor": "腾讯云 EdgeOne",
