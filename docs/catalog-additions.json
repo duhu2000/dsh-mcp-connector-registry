@@ -1,5 +1,11 @@
 [
   {
+    "id": "geekbi-shein-data",
+    "publishedOn": "2026-11-21",
+    "pr": 100,
+    "acceptance": "DuHu 具名批准。官方 stdio 程序通过厂商网页登录授权，连接阶段无需填 Key，非 DSH 标准 OAuth。截图及源码确认7个工具；依据用户报告，shein_site_list 返回 code 0、31个站点，站点元数据验收通过，其余6个工具未验收。原始轨迹及实际扣费未独立核对。公开服务协议已核实，数据使用及费用以账号权益和厂商规则为准。固定官方源码提交；用户实测 master 的确切版本未独立核对。"
+  },
+  {
     "id": "xydc-amazon-data",
     "publishedOn": "2026-11-21",
     "pr": 99,
