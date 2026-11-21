@@ -1,5 +1,11 @@
 [
   {
+    "id": "eastmoney-miaoxiang",
+    "publishedOn": "2026-11-21",
+    "pr": 98,
+    "acceptance": "DuHu 具名批准。已发现12个工具；按用户提供的 DSH 单次实测结果，东方财富证券简称与首发上市日期查询验收通过，原始调用轨迹未独立核对。其他11个工具未逐项验收，实际费用未知。API Key 通过 em_api_key 原样传入，按平台账号规则计费；公开妙想服务协议已核实。"
+  },
+  {
     "id": "ifind-financial-data",
     "publishedOn": "2026-11-21",
     "pr": 97,
