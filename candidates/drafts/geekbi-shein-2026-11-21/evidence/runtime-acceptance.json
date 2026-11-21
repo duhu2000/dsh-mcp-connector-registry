@@ -1,0 +1,30 @@
+{
+  "status": "pass",
+  "reviewedAt": "2026-11-21T14:11:37.741684+00:00",
+  "reviewedBy": "Codex",
+  "evidenceSource": "User-provided DSH screenshot and successful query summary in current conversation; raw trace not independently inspected",
+  "tool": "shein_site_list",
+  "arguments": null,
+  "executedAt": null,
+  "discoveryCacheAt": "2026-11-21T21:44:56+08:00",
+  "discoveredToolCount": 7,
+  "response": {
+    "code": 0,
+    "siteCount": 31,
+    "nonemptySiteDataReported": true,
+    "fullResultRetained": false
+  },
+  "scope": "Authenticated site-list metadata only; six remaining tools untested",
+  "callsByAssistant": 0,
+  "totalUserCalls": null,
+  "billing": {
+    "userReportedFree": true,
+    "actualDebitIndependentlyVerified": false,
+    "notes": "Public REST /api/v2/data/shein/site/list is labelled free, but MCP calls /api/v1/shein/site/ai-list. Do not infer a general MCP price from the distinct REST endpoint."
+  },
+  "limitations": [
+    "User installed mutable master; exact installed commit unknown. Draft pins publicly reviewed revision, not independently runtime-tested at that revision.",
+    "The pasted assistant answer mentions eight tools and 500 Credits; screenshot and reviewed official code confirm seven. Extra tool and price excluded.",
+    "No additional queries authorized or performed; no login links, session codes, tokens or commercial data retained."
+  ]
+}

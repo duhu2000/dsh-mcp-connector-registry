@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "id": "geekbi-shein-data",
+  "registryName": "review/geekbi-shein-data",
+  "title": "极鲸云 · SHEIN市场数据",
+  "provider": "极鲸云 GeekBI / 青岛极鲸网络科技有限公司",
+  "providerRegion": "国内",
+  "dataCoverage": "海外 SHEIN 市场",
+  "status": "PASS",
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://open.geekbi.com/mcp/geekbi-shein-research-mcp",
+    "status": "active"
+  },
+  "classification": {
+    "isDataService": true
+  },
+  "authentication": {
+    "mode": "server-managed-browser-login",
+    "standardOAuthVerified": false,
+    "hostAuthMode": "none",
+    "notes": "No host credential entry; provider-managed browser login and local token cache required for data access."
+  },
+  "connectionAcceptance": {
+    "status": "pass-user-reported",
+    "toolCount": 7,
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/geekbi-shein-2026-11-21/evidence/runtime-acceptance.json"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-21T14:11:37.741684+00:00",
+    "reviewedBy": "Codex",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/geekbi-shein-2026-11-21/evidence/runtime-acceptance.json",
+    "notes": "User-reported authenticated shein_site_list code 0, 31 sites; metadata only. Six other tools untested, raw trace and actual debit not independently inspected; installed master SHA unknown."
+  },
+  "license": {
+    "status": "service-terms",
+    "spdxId": null,
+    "evidenceUrl": "https://www.yuque.com/geekbi-com/geekbi/epgq1m57kd5el9qg",
+    "notes": "General vendor agreement reviewed together with explicit official MCP installation instructions. No claim of upstream code redistribution license."
+  },
+  "review": {
+    "decision": "approved",
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-21T14:19:18.727617+00:00",
+    "proposedConnectorId": "geekbi-shein-data",
+    "notes": "用户明确批准“极鲸云 · SHEIN市场数据”上架，署名 DuHu。采用官方 stdio 及厂商网页登录；站点清单查询按用户报告验收 PASS，其余6个工具未验收。公开服务协议已核实，费用按厂商账号规则；已披露固定源码版本与用户实测 master 的确切版本未独立核对。"
+  },
+  "probe": {
+    "status": "partial",
+    "reason": "Public source and seven-tool definitions reviewed; authenticated user-reported discovery/runtime. No fresh execution of upstream code by reviewer."
+  },
+  "score": {
+    "total": 82,
+    "band": "selected",
+    "dimensions": {
+      "authority": 23,
+      "accessibility": 17,
+      "maintenanceSecurity": 11,
+      "runtime": 12,
+      "marketGap": 10,
+      "documentation": 9
+    },
+    "reasons": [
+      "Official vendor MCP and public source corroborate seven tools and browser login.",
+      "User-reported authenticated metadata query succeeded; six remaining tools untested.",
+      "SHEIN coverage complements existing Amazon/TikTok cards; upstream has no explicit source-code license."
+    ]
+  },
+  "dedupe": {
+    "level": "none",
+    "notes": "No GeekBI/SHEIN connector in current connectors directory. Shares cross-border category with other vendors, not their endpoints."
+  },
+  "blockers": [],
+  "nextStep": "Merge approved listing after CI and verify public catalog distribution. No additional paid calls authorized.",
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://open.geekbi.com/mcp/geekbi-shein-research-mcp"
+    },
+    {
+      "type": "license",
+      "url": "https://www.yuque.com/geekbi-com/geekbi/epgq1m57kd5el9qg"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/geekbi-shein-2026-11-21/evidence/runtime-acceptance.json"
+    },
+    {
+      "type": "public-review",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/geekbi-shein-2026-11-21/evidence/public-review.json"
+    }
+  ]
+}
