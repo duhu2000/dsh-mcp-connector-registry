@@ -6,7 +6,7 @@
   "provider": "Agent Rynku / Krystian Gwizdała APPFRONT",
   "providerRegion": "海外（波兰）",
   "dataCoverage": "波兰 GPW 上市公司",
-  "status": "DEFERRED",
+  "status": "PASS",
   "source": {
     "kind": "official-vendor",
     "detailUrl": "https://agentrynku.pl/docs",
@@ -41,11 +41,11 @@
     "notes": "MCP use by user-owned agents documented. No resale, redistribution or systematic bulk copying. Config-only listing, no open-data license claimed."
   },
   "review": {
-    "decision": "pending",
-    "reviewedBy": null,
-    "reviewedAt": null,
+    "decision": "approved",
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-22T03:54:06.453225+00:00",
     "proposedConnectorId": "agentrynku-gpw-data",
-    "notes": "用户要求开始上架流程。已完成具体卡片与只读验收，待本候选具名正式上架确认。"
+    "notes": "用户明确批准 Agent Rynku 上架，署名 DuHu。采用免账号、免 Key 公共入口；6 个工具发现通过，单次 KGHM 公司检索 PASS，其余 5 个工具未逐项验收。公开服务条款已核实。"
   },
   "probe": {
     "status": "pass",
@@ -72,10 +72,8 @@
     "level": "none",
     "notes": "132-card main baseline has no same endpoint/provider; thematic overlap with financial connectors only."
   },
-  "blockers": [
-    "Named final listing approval pending."
-  ],
-  "nextStep": "After named approval promote to formal connectors and records, generate catalog/docs, validate, merge PR. No npm release needed for catalog-only change.",
+  "blockers": [],
+  "nextStep": "Merge approved listing after CI and verify public catalog distribution. No npm release required.",
   "evidence": [
     {
       "type": "official-vendor",

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "agentrynku-gpw-data",
+  "name": "Agent Rynku · 波兰证券数据",
+  "vendor": "Agent Rynku / Krystian Gwizdała APPFRONT",
+  "icon": "🇵🇱",
+  "category": "金融投资",
+  "summary": "波兰上市公司 / 季度财报 / 财务比率 / 历史行情与分红",
+  "description": "连接 Agent Rynku 提供的波兰华沙证券交易所（GPW）上市公司数据，支持公司检索、季度财务指标、财务比率、报告日历、历史价格与分红查询。本卡片使用免账号、免 Key 的公共入口，受服务限流约束；账号专属及付费功能不在本卡片范围内。提供方是波兰独立服务商，并非 GPW 官方产品。结果应保留来源、数据日期、单位和缺失项；数据可能延迟或不完整，不将缺失数据视为零。实际发现 6 个公共工具，单次公司名称检索验收通过，其余 5 个工具尚未逐项验收。服务条款禁止转售、再分发及系统性批量复制数据；本卡片仅提供直连接入配置，不授予数据再分发权。",
+  "tags": [
+    "波兰",
+    "GPW",
+    "海外数据",
+    "上市公司",
+    "季度财报",
+    "分红",
+    "免费公共入口"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://agentrynku.pl/docs",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1795317566091,
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "agentrynku",
+      "serverName": "agentrynku",
+      "transport": "streamable-http",
+      "url": "https://agentrynku.pl/api/mcp",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查找 KGHM 上市公司",
+      "server": "agentrynku",
+      "text": "在波兰 GPW 公共数据中查找 KGHM，最多返回 3 条匹配，列出公司名称、标准证券代码、ISIN 和来源链接；说明是否存在同名或截断结果，不追加行情或财报查询。"
+    },
+    {
+      "title": "查看 KGHM 最新季度财报",
+      "server": "agentrynku",
+      "text": "先用免费公司检索工具确认 KGHM 的标准证券代码，再查询最新可用季度财务指标。用中文说明报告期、币种、单位、来源和缺失项；只使用免账号公共工具，不调用预测、账户或付费功能，不批量下载。"
+    }
+  ]
+}
