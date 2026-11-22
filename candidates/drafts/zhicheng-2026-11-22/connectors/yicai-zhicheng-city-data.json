@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "yicai-zhicheng-city-data",
+  "name": "新一线城市数据库",
+  "vendor": "第一财经新一线城市研究所",
+  "icon": "🏙️",
+  "category": "调研分析",
+  "summary": "城市指标 / 城市魅力指数 / 跨城比较 / 产业研究与报告",
+  "description": "连接第一财经新一线城市研究所的城市数据库，查询城市经济、人口就业、公共服务、城市魅力指数、产业指标与研究报告，支持跨城市比较及产业研究。使用个人接入密钥，首次接入需在官方页面提交申请；权限、可用数据和费用以账号规则为准，单次价格尚未核实。结果应保留指标定义、单位、来源、实际统计期及榜单版本；受限数值与缺失值分开说明，不推算受限数据，不把局部企业样本视为全行业。已发现 25 个工具，杭州市城市画像单次运行验收通过，其余 24 个工具尚未逐项验收。服务条款未公开，尚未核验。",
+  "tags": [
+    "国内数据",
+    "第一财经",
+    "知城",
+    "zhicheng",
+    "城市研究",
+    "城市魅力指数",
+    "人口就业",
+    "产业数据"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://www.datayicai.com/city-data/mcp",
+  "probeStatus": "pass",
+  "auth": {
+    "mode": "bearer",
+    "credentialName": "新一线城市数据库接入密钥",
+    "credentialPlaceholder": "填写接入密钥，不加 Bearer 前缀",
+    "credentialDescription": "登录官方 MCP 接入指南申请个人密钥，仅在本机填写。费用与权限以账号规则为准。",
+    "credentialHelpUrl": "https://www.datayicai.com/city-data/mcp",
+    "credentialHelpLabel": "获取接入密钥与官方指南"
+  },
+  "servers": [
+    {
+      "serverKey": "zhicheng",
+      "serverName": "zhicheng",
+      "transport": "streamable-http",
+      "url": "https://www.datayicai.com/mcp/zhicheng"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看杭州市城市画像",
+      "server": "zhicheng",
+      "text": "使用新一线城市数据库查询杭州市的城市基础画像，先核对账号额度及计费规则；列出可用经济、人口与公共服务指标，逐项注明单位、实际统计期和来源。区分受限与缺失数据，不推算受限数值，不追加企业明细或下载。"
+    },
+    {
+      "title": "比较杭州与南京的城市指标",
+      "server": "zhicheng",
+      "text": "使用新一线城市数据库比较杭州市与南京市的经济和人口指标。先核对可用指标定义、共同统计期及账号额度，再进行比较；保留来源、单位和统计期，榜单版本与事实年份分开说明。没有同口径数据就注明不可比较，不用不同年份拼接排名。"
+    }
+  ]
+}

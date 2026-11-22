@@ -1,5 +1,11 @@
 [
   {
+    "id": "yicai-zhicheng-city-data",
+    "publishedOn": "2026-11-22",
+    "pr": 102,
+    "acceptance": "DuHu 具名批准上架及条款未知例外。已发现25个工具，单次 city_overview 查询杭州市画像通过，状态 pass；其余24个工具未逐项验收。基础指标统计期2025、产业数据日期2026-11-20；2026版城市魅力榜单不等于事实统计期。实际扣费未返回，服务条款未公开，尚未核验。"
+  },
+  {
     "id": "agentrynku-gpw-data",
     "publishedOn": "2026-11-22",
     "pr": 101,
