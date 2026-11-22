@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "connectorId": "agentrynku-gpw-data",
+  "checkedAt": "2026-11-22T03:19:26.090327+00:00",
+  "source": "reviewer-direct-anonymous-http",
+  "endpoint": "https://agentrynku.pl/api/mcp",
+  "authentication": "none",
+  "credentialUsed": false,
+  "initialize": {
+    "status": "pass",
+    "serverName": "agent-rynku",
+    "serverVersion": "1.2.0",
+    "protocolVersion": "2025-11-25"
+  },
+  "toolsList": {
+    "status": "pass",
+    "toolCount": 6,
+    "hasMore": false,
+    "names": [
+      "get_public_price_history",
+      "get_financial_ratios",
+      "get_public_dividends",
+      "search_gpw_companies",
+      "get_public_earnings_calendar",
+      "get_quarterly_kpis"
+    ]
+  },
+  "businessAcceptance": {
+    "status": "pass",
+    "tool": "search_gpw_companies",
+    "arguments": {
+      "query": "KGHM",
+      "limit": 1
+    },
+    "attempts": 1,
+    "automaticRetries": 0,
+    "httpStatus": 200,
+    "jsonRpcError": false,
+    "isError": false,
+    "returnedCount": 1,
+    "truncated": false,
+    "expectedCompanyMatched": true,
+    "returnedFields": [
+      "symbol",
+      "name",
+      "isin",
+      "companyUrl"
+    ],
+    "responseSha256": "b7289b272c67367bfb4a105df4a8f04ea87a18faa1d21a550cbeaedf61364d84"
+  },
+  "billing": {
+    "basis": "Official docs explicitly describe anonymous public tools as free; request included no account credential.",
+    "source": "https://agentrynku.pl/docs",
+    "actualDebitIndependentlyChecked": false
+  },
+  "scope": "Only public company search tested; remaining five public tools untested. DSH connection success independently user-reported; this runtime call used curl, not DSH.",
+  "probeObservations": [
+    "Python urllib initialize received HTTP 403. A separate curl initialize succeeded; root cause not established. No business call had been issued by the failed Python probe.",
+    "No automatic retries or pagination; no raw response, session headers, account credentials or market-data dataset included in repository."
+  ]
+}

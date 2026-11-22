@@ -1,5 +1,11 @@
 [
   {
+    "id": "agentrynku-gpw-data",
+    "publishedOn": "2026-11-22",
+    "pr": 101,
+    "acceptance": "DuHu 具名批准。免账号、免 Key 的公共 Streamable HTTP 入口，实际发现6个工具；单次 KGHM 公司检索运行验收通过，其余5个工具未逐项验收。公开服务条款已核实，使用限于条款允许范围，不包含付费或账号专属能力；不代表 GPW 官方产品。"
+  },
+  {
     "id": "geekbi-shein-data",
     "publishedOn": "2026-11-21",
     "pr": 100,

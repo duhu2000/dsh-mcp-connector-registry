@@ -96,10 +96,11 @@
 
 ## 金融投资
 
-共 20 个连接器。
+共 21 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
+| [Agent Rynku · 波兰证券数据](../connectors/agentrynku-gpw-data.json) | 波兰上市公司 / 季度财报 / 财务比率 / 历史行情与分红 | Agent Rynku / Krystian Gwizdała APPFRONT | none | 公共目录 | pass |
 | [AKShare](../connectors/akshare.json) | 股票 / 基金 / 期货 / 债券 / 宏观公开数据 | AKShare 社区 | none | 公共目录 | unverified |
 | [BIS 全球银行与金融统计](../connectors/bis-global-statistics.json) | 信贷缺口 / 汇率利率 / 银行统计 / SDMX 数据流 | Pipeworx（独立第三方服务） | none | 公共目录 | pass |
 | [巨潮资讯上市公司报告](../connectors/cninfo-listed-company-reports.json) | 年报 / 半年报 / 季报 / 招股书 / 原始 PDF 链接 | DuHu / QCC（独立社区维护） | none | 公共目录 | pass |

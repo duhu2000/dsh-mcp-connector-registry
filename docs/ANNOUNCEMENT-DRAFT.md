@@ -2,6 +2,14 @@
 
 供运营审核选用；不得将部分验证宣传为全部业务可用。未自动发布到任何平台。
 
+### 2026-11-22 · Agent Rynku · 波兰证券数据
+
+波兰上市公司 / 季度财报 / 财务比率 / 历史行情与分红。接入方式：none；探测状态：pass。
+
+DuHu 具名批准。免账号、免 Key 的公共 Streamable HTTP 入口，实际发现6个工具；单次 KGHM 公司检索运行验收通过，其余5个工具未逐项验收。公开服务条款已核实，使用限于条款允许范围，不包含付费或账号专属能力；不代表 GPW 官方产品。
+
+[上架 PR #101](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/101) · [卡片详情](../connectors/agentrynku-gpw-data.json)
+
 ### 2026-11-21 · 极鲸云 · SHEIN市场数据
 
 SHEIN 商品 / 店铺 / 类目 / 关键词 / 评论与图搜同款。接入方式：none；探测状态：pass。
