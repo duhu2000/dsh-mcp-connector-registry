@@ -40,7 +40,7 @@
 
 ## 调研分析
 
-共 49 个连接器。
+共 50 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -92,6 +92,7 @@
 | [Wolfram](../connectors/wolfram.json) | 可计算知识 / Wolfram&#124;Alpha / 符号与数值计算 | Wolfram Research | none | 公共目录 | unverified |
 | [世界银行 Data360](../connectors/world-bank-data360.json) | 发展指标 / 国家对比 / 时间序列 / 元数据与图表 | World Bank Group | none | 公共目录 | pass |
 | [西柚洞察 · 亚马逊运营数据](../connectors/xydc-amazon-data.json) | ASIN 商品 / 关键词 / 广告流量 / 类目研究 | 西柚洞察 | bearer | 公共目录 | pass |
+| [新一线城市数据库](../connectors/yicai-zhicheng-city-data.json) | 城市指标 / 城市魅力指数 / 跨城比较 / 产业研究与报告 | 第一财经新一线城市研究所 | bearer | 公共目录 | pass |
 | [ZooData · 电商市场数据](../connectors/zoodata-commerce-data.json) | Amazon 类目画像 / 市场趋势 / 价格与竞争分析 | ZooData | bearer | 公共目录 | pass |
 
 ## 金融投资

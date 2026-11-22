@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "reasonCode": "official-terms-unavailable",
+  "decision": "approved",
+  "connectorId": "yicai-zhicheng-city-data",
+  "reviewedBy": "DuHu",
+  "reviewedAt": "2026-11-22T09:19:38.985441+00:00",
+  "notes": "用户明确回复：批准条款例外并上架，署名 DuHu。仅官方接入指南已核实，尚未找到适用公开服务条款；保留未知状态及卡片披露，不视为厂商授权扩大或数据再分发许可。",
+  "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zhicheng-2026-11-22/evidence/service-terms-exception.json",
+  "userApproval": "批准条款例外并上架，署名 DuHu",
+  "scope": "city_overview 单次杭州市画像验收通过；其他24个工具未逐项验收；实际费用未知。",
+  "officialGuide": "https://www.datayicai.com/city-data/mcp",
+  "credentialsRecorded": false
+}
