@@ -1,0 +1,17 @@
+{
+  "checkedDate": "2026-11-22",
+  "officialGuide": "https://www.datayicai.com/city-data/mcp",
+  "officialProvider": "https://www.datayicai.com/about",
+  "officialProduct": "https://www.datayicai.com/city-data",
+  "transport": "streamable-http",
+  "authentication": "Authorization: Bearer <personal access key>",
+  "registration": "Login then apply for first-time access; existing key can be used.",
+  "termsStatus": "not-located-in-reviewed-public-pages",
+  "pricingStatus": "unknown; free web datasets do not establish free MCP calls",
+  "claimsNotVerified": [
+    "All 25 tools work",
+    "Full dataset coverage",
+    "MCP calls are free",
+    "Open-data redistribution license"
+  ]
+}

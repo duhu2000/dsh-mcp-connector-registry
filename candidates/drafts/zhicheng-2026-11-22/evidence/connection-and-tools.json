@@ -1,0 +1,112 @@
+{
+  "source": "user-provided DSH connection report and tool descriptions",
+  "observedBy": "user",
+  "reportedCacheTime": "2026-11-22T15:57:54+08:00",
+  "toolCount": 25,
+  "connectionStatus": "user-reported-pass",
+  "independentRuntimeObserved": false,
+  "schemaAvailable": false,
+  "tools": [
+    {
+      "name": "city_search_metrics",
+      "description": "【城市基础数据与魅力指数】发现指标或产品版本。指标搜索支持名称/别名及主题的轻量模糊匹配；search_match标识相关或主题候选，须按正式名称、单位和定义选择metric_id，不代表同一口径。默认返回定义、单位、频率、首末期、来源和产品归属；逐期覆盖与缺口须传 include_periods=true。catalog_scope 明确栏目：statistics 城市数据字典、charm 城市魅力指数、industry 产业产品、all 全库。availability 区分当前可查、需产品版本和仅有定义，目录命中不等于可查。介绍目录优先 view=summary，汇总全部匹配范围的分类与状态。catalog=products 返回产品版本、方法、地点组与事实覆盖，此模式不接受period；年份放query或用已发现的product_version_id。取得版次后，完整节点和城市数值直接query(places, product_version_id)。按product_version_id筛指标返回节点绑定批次、统计期和方法。tags使用标签码，tag_match=any/all。limit最多50，用next_offset翻页。默认完整保留记录并对重复元数据无损去重；metadata_help说明$ref共享字典和$table年度表的展开规则。原嵌套格式用response_format=full，分页不变。"
+    },
+    {
+      "name": "city_resolve_places",
+      "description": "【城市基础数据与魅力指数】解析地区名称、简称或代码，并返回上级名称parent_name与历史有效期。全名/编码优先；简称唯一匹配城市且其他候选为同简称区县时优先城市，caveats附选择说明及其他候选；同层级重名仍需消歧。browse=children 配 parent_place 浏览下级；browse=groups 列出正式地点组；place_group 展开指定地点组。scope_period 显式选择名单版本期，与 period 事实期分离；不传时沿用 period 选名单。目录和成员均可按 next_offset 翻页。"
+    },
+    {
+      "name": "city_query",
+      "description": "【城市基础数据与魅力指数】查询已存事实。受限数值的 value 直接返回“应数据来源方要求，暂不展示具体数值。”，status 保持正常，附 value_status=restricted 和 value_notice，保留指标、时间、来源；与数据缺失不同。省略 period 时，各地点/指标分别取最新值并标实际期；period=all 返回全部已存期间，或指定单期/{start,end}。limit 最大 500，沿用 next_offset 翻页。产品传 product_version_id，省略 period 按该版原选事实取值；省略 metrics 完整展开。普通查询 latest_mode=common 可恢复共同最近期。不要把产品年份当作事实期；来源批次由服务默认选择。默认完整保留记录并对重复元数据无损去重；metadata_help说明$ref共享字典和$table年度表的展开规则。原嵌套格式用response_format=full，分页不变。"
+    },
+    {
+      "name": "city_compare",
+      "description": "【城市基础数据与魅力指数】比较城市或起止期。跨城比较默认 calculation=spatial、mode=reference，reference_place 指定基准城市（默认第一个）。computed 同时返回其他城市减基准的 difference、其他城市除以基准的 ratio，不需要把 difference/ratio 作为参数。mode=matrix 返回两两比较。默认使用共同最近期；可明确指定 period。calculation=period_change 使用 {start,end}，只做算术变化。产品传 product_version_id，默认用版本原选事实；所有结果保留来源和实际期。默认完整保留记录并对重复元数据无损去重；metadata_help说明$ref共享字典和$table年度表的展开规则。原嵌套格式用response_format=full，分页不变。"
+    },
+    {
+      "name": "city_rank",
+      "description": "【城市基础数据与魅力指数】在正式 place_group 中按同一期事实排名。默认取有数的最新一期并明确覆盖/缺值；产品传 product_version_id 使用版本原选事实。名单年份与事实期不同时可传 scope_period。top_n最多50，top_n/offset翻页不改变全集分母，沿用next_offset继续。默认返回精简格式（无需新增参数）：row_defaults是本页每一行共享的完整元数据，data保留城市、数值、名次、披露状态与差异字段；完整行={...row_defaults,...data[i]}。来源、统计期及限制不可忽略；每页defaults独立。full保留原始逐行格式。"
+    },
+    {
+      "name": "city_overview",
+      "description": "【城市基础数据与魅力指数】城市属性短问与城市及产业画像入口：city_meta提供行政隶属、city_tier城市分级、peer_group名单版本、urban_agglomerations城市群。分级/归属只问一项时读取该字段及版本即可，不需找文章。直接传城市名称，无需预先检索指标或解析城市；服务端完成正式目录解析。一次返回基础指标包、同比/五年复合增速、全国/省内/同级名次、魅力总分及一二级维度、产业快照与本市已发布产业链。各指标保留实际统计期和来源。period明确指定时绝不换期；未指定榜单版本时不混入最新榜单。scope_period单独选择名单版本，受限值不推算。"
+    },
+    {
+      "name": "city_batch_rank",
+      "description": "【城市基础数据与魅力指数】对正式地区分组一次计算多个指标排名，SQL批量窗口计算；并列采用dense_rank，各指标分别返回实际期、覆盖人数及next_offset。focus追加关注城市。产品只排名绑定期；明确日期缺失不替换。默认按metadata_help对重复元数据无损去重，行数/名次/分页不变；response_format=full返回原嵌套结构。"
+    },
+    {
+      "name": "city_peer_benchmark",
+      "description": "【城市基础数据与魅力指数】关注城市与正式同级城市对标，返回同一期指标值、名次、分位和组均值。默认使用已登记最新城市等级名单，显式scope_period选名单年份；无名单不凭城市名推断。也可指定正式place_group。"
+    },
+    {
+      "name": "articles_search_articles",
+      "description": "【研究文章与数据报告】检索已上架城市研究文章或数据报告的标题、摘要、分类和原文链接。查询最近/最新发布文章时使用 sort_by='publish_date'；没有指定主题时 query 留空，不把‘最近发布’当关键词，不擅自添加主题。query 仅填写用户指定的主题；有时间范围时使用 publish_date_from/publish_date_to。industry 仅填写光通信、新能源等具体产业；泛指产业文章请使用 primary_topic='产业与企业'。首次查询无结果时服务会用精简后的通用实体或主题词重试。列出标题、日期与原文链接可直接使用检索结果；总结或分析正文时必须调用 get_article。"
+    },
+    {
+      "name": "articles_get_article",
+      "description": "【研究文章与数据报告】按来源和文章 ID 分段读取已上架文章正文。"
+    },
+    {
+      "name": "articles_search_article_chunks",
+      "description": "【研究文章与数据报告】在已上架数据报告正文切片中检索可引用证据。"
+    },
+    {
+      "name": "articles_list_article_facets",
+      "description": "【研究文章与数据报告】列出所有已上架数据报告可用的城市、具体产业、主题、实体和内容类型筛选项。"
+    },
+    {
+      "name": "industry_search_metrics",
+      "description": "【城市产业与企业下钻】发现已发布的城市产业魅力指数及上市成分企业市值结构指标，不包含GDP和城市魅力指数，返回定义、单位、主题标签、可用统计期、支持的全国、省、市、区县层级、来源及允许的计算。结果存在 next_offset 时，使用相同条件并传入 offset=next_offset 继续翻页，不得把单页结果当成完整目录。period_frequency 为 daily，使用YYYY-MM-DD。范围内可能有缺失。"
+    },
+    {
+      "name": "industry_query",
+      "description": "【城市产业与企业下钻】查询已发布城市的日度指数、行业构成，或全国000000的基准。period为YYYY-MM-DD、{start:YYYY-MM-DD,end:YYYY-MM-DD}或留空查最新。非交易日回溯到前一交易日并返回实际日期，交易日缺失不填补。仅支持市级，不做行政聚合。component_depth=1展开行业构成，每次最多10000单元。默认去重公共来源和指标元数据：按metadata_help展开引用，再合并row_defaults与data每行。事实、顺序和覆盖不变；response_format=full返回原结构。"
+    },
+    {
+      "name": "industry_compare",
+      "description": "【城市产业与企业下钻】同一交易日或日度区间比较多个已发布城市的点位、差值、比例；默认首城为基准。点位比例不能解读成超额收益。日期YYYY-MM-DD，区间用{start,end}。默认去重公共来源和指标元数据：按metadata_help展开引用，再合并row_defaults与data每行。事实、顺序和覆盖不变；response_format=full返回原结构。"
+    },
+    {
+      "name": "industry_rank",
+      "description": "【城市产业与企业下钻】在industry-index-city-v1已发布城市集合按指定交易日排名，period为YYYY-MM-DD或留空查最新；覆盖不足80%拒绝排名，不同日期不可混排。"
+    },
+    {
+      "name": "industry_list_cities",
+      "description": "【城市产业与企业下钻】发现有产业指数的城市、城市代码、覆盖日期与最新样本数量。按 next_offset 翻页；城市名称不能代替 region_id。"
+    },
+    {
+      "name": "industry_list_companies",
+      "description": "【城市产业与企业下钻】按城市代码分页查询最新成分企业、股票代码、行业、权重和市值。仅最新快照；历史 as_of_date 不匹配会明确拒绝，不能当历史名单。权重为0—1，市值亿元。"
+    },
+    {
+      "name": "industry_get_company",
+      "description": "【城市产业与企业下钻】按 list_companies 返回的 ts_code 读取上市成分企业的行业、城市归属、最新权重和市值。不是完整工商或财务画像，不含未接入的股权及产业链信息。"
+    },
+    {
+      "name": "industry_contributions",
+      "description": "【城市产业与企业下钻】查询城市产业魅力指数在日期区间内的企业贡献点数，区间至多366天。positive从贡献高到低，negative从低到高；不表示GDP贡献或企业利润。返回实际观测起止日期，按 next_offset 翻页。"
+    },
+    {
+      "name": "enterprise_list_tracks",
+      "description": "【产业链与企业画像】发现已发布的产业链，返回 track_id、范围说明、收录企业数与更新时间。"
+    },
+    {
+      "name": "enterprise_city_chains",
+      "description": "【产业链与企业画像】一次返回指定城市有收录企业的全部已发布产业链及去重数量。用完整城市名称，必要时指定省份。仅现状，不代表全行业；不返回内部规则或未开放企业明细。"
+    },
+    {
+      "name": "enterprise_get_track",
+      "description": "【产业链与企业画像】读取产业链最终层级和各节点去重企业数。node_id 只能使用本工具返回值。父节点包含所有后代。可按省、市或 city_tier 筛选节点数量；city_tier 固定为2025年口径，使用一线、新一线、二线、三线、四线、五线。"
+    },
+    {
+      "name": "enterprise_analyze_track",
+      "description": "【产业链与企业画像】分析产业链或指定节点的已收录企业数、城市分布及企业标签分布。省市用返回的完整名称；city_tier 为2025年城市级别，使用一线、新一线、二线、三线、四线、五线；企业标签仅包含上市公司、高新技术企业、科技型中小企业、国家级专精特新“小巨人”企业；按记录展示，不表示目前仍有效。"
+    },
+    {
+      "name": "enterprise_search",
+      "description": "【产业链与企业画像】查看产业链企业的固定部分名单：指定节点最多5家，产业链总览最多10家；搜索和标签仅过滤这批名单，不补充其他企业。不支持城市筛选和翻页。next_cursor始终为空，coverage=preview，不能把名单视为全部企业或据此推断规模；城市数量请使用analyze_track。更多数据请联系商务。"
+    }
+  ],
+  "credentialsRecorded": false
+}
