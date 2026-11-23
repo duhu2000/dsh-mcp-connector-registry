@@ -53,7 +53,7 @@
   "license": {
     "status": "not-applicable",
     "spdxId": null,
-    "evidenceUrl": "https://drillr.ai/terms"
+    "evidenceUrl": "https://drillr.ai/legal/terms"
   },
   "maintenance": {
     "registryStatus": "active",
@@ -88,8 +88,7 @@
       "候选材料由提交方准备，评分留待维护者审核；零分表示尚未评分。"
     ],
     "gates": [
-      "维护者评分与审批",
-      "经 dsh-mcp-connector 的 OAuth 运行验收"
+      "维护者评分与审批"
     ]
   },
   "review": {
@@ -100,11 +99,11 @@
     "notes": "申请 official-mcp-registry 来源审核（ai.drillr/drillr）。服务提供方 Little Grebe Inc.；问题反馈 https://github.com/Little-Grebe-Inc/drillr-mcp-server/issues 。在线服务适用 drillr 服务条款与隐私政策。"
   },
   "runtimeAcceptance": {
-    "status": "not-run",
-    "checkedAt": null,
+    "status": "pass",
+    "checkedAt": "2026-11-23T15:40:37Z",
     "reviewedBy": "Little Grebe Inc. (submitter)",
     "reportUrl": "https://github.com/Little-Grebe-Inc/dsh-mcp-connector-registry/blob/add-drillr/docs/runtime-acceptance/drillr.md",
-    "notes": "经 dsh-mcp-connector 的 OAuth 路径尚未验收。补充证据：DSH Desktop 0.2.2-rc.2 经官方 dsh-mcp-client 以 API key 连同一端点，2026-11-18 两个会话共 28 次只读调用，22 次成功，6 次为模型自写 SQL 列名错误并由服务端返回表结构提示。"
+    "notes": "DSH Desktop 0.2.2-rc.5 + dsh-mcp-connector 0.2.119，从卡片 URL 安装后走 OAuth：授权回调成功、发现 10 个工具、ticker_lookup 只读调用 HTTP 200、停用再启用后再次调用 HTTP 200、在 drillr 撤销授权后调用均为 HTTP 401 且未生成新凭据。首次安装有一次资源发现回退地址 404，重试成功，见报告第 4 节。提交方自测，维护者复核待定。"
   },
   "evidence": [
     {
