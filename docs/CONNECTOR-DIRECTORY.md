@@ -98,7 +98,7 @@
 
 ## 金融投资
 
-共 21 个连接器。
+共 22 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -121,6 +121,7 @@
 | [通达信行情（社区）](../connectors/tongdaxin-mcp.json) | A 股行情 / 分时 / K 线 / 市场数据 | 社区连接器 | none | 公共目录 | unverified |
 | [TuShare](../connectors/tushare.json) | A 股 / 指数 / 基金 / 财务 / 宏观数据 | TuShare 社区 | api-key | 公共目录 | unverified |
 | [Wind·股票数据](../connectors/wind-stock-data.json) | 全球股票档案 / 行情 / 技术指标 / 财务与公司事件 | Wind 万得 | bearer | 公共目录 | unverified |
+| [享科 · 期货数据](../connectors/xiangke-futures.json) | 期货行情 / 基差仓单 / 持仓席位 / 研报资讯 | 享科 | oauth2-pkce | 公共目录 | pass |
 | [盈米·基金投顾](../connectors/yingmi-wealth-management.json) | 基金检索 / 组合诊断 / 资产配置 / 投资风险分析 | 盈米基金 / 且慢 | api-key | 公共目录 | unverified |
 | [执中](../connectors/zerone-private-equity.json) | 私募股权、并购、产业链、REITs | 执中 ZERONE | api-key | 公共目录 | pass |
 

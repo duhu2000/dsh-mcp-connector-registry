@@ -7473,6 +7473,63 @@
     },
     {
       "schemaVersion": 1,
+      "id": "xiangke-futures",
+      "name": "享科 · 期货数据",
+      "vendor": "享科",
+      "icon": "📊",
+      "category": "金融投资",
+      "summary": "期货行情 / 基差仓单 / 持仓席位 / 研报资讯",
+      "description": "连接享科官方 MCP，通过超7汇微信扫码授权查询期货与期权行情、基差仓单、持仓席位、研报资讯、财经日历及交易所公告，并获取行情技术、资金持仓、研报观点和资讯事件四类结构化数据包。使用本人账号，权限及费用以账号规则为准。建议使用 MCP连接器 v0.2.120 或更新版本完成 OAuth 授权。已发现21个工具；依据用户回传结果，螺纹钢行情技术单次业务查询运行验收通过，其余20个工具尚未验收。需保留交易所、实际合约、数据日期、窗口和缺失项，快照不等于实时行情。数据使用遵守超7汇服务协议，不附带再分发权，结果不构成投资建议。",
+      "tags": [
+        "享科",
+        "超7汇",
+        "国内数据",
+        "期货",
+        "期权",
+        "基差",
+        "持仓",
+        "研报",
+        "OAuth",
+        "金融数据"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://xkesoft.com/agent/",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://jysda.cn",
+        "scope": "mcp:ai-interpret",
+        "clientName": "DeepSeek Harness - Xiangke MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "xiangke-futures",
+          "serverName": "xiangke-futures",
+          "transport": "streamable-http",
+          "url": "https://xkesoft.com/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看螺纹钢行情与技术面",
+          "server": "xiangke-futures",
+          "text": "查询螺纹钢最新可用的行情与技术面，仅调用一次 futures_ai_interpret_get_market。列明交易所、实际主力合约、数据截止日、K线与基差窗口，并概括MACD和BOLL返回值；快照日期未提供时说明缺失，不推断实时价格。执行前确认账号额度，不追加其他查询。"
+        },
+        {
+          "title": "了解螺纹钢机构研报观点",
+          "server": "xiangke-futures",
+          "text": "查询螺纹钢最新可用的机构研报观点，仅调用一次 futures_ai_interpret_get_reports。按返回内容整理观点、多空分布、样本范围与日期；区分机构观点和事实，保留来源及缺失项，不给出买卖指令。执行前确认账号额度，不追加行情或其他查询。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "xydc-amazon-data",
       "name": "西柚洞察 · 亚马逊运营数据",
       "vendor": "西柚洞察",
