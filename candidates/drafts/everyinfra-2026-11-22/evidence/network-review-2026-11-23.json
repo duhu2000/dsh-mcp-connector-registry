@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-11-23T02:11:27.526636+00:00",
+  "credentialUsed": false,
+  "method": "initialize",
+  "toolCalls": 0,
+  "results": [
+    {
+      "endpoint": "https://api.everyinfra.com/mcp",
+      "httpStatus": 200,
+      "initializeResultObserved": true,
+      "error": null
+    },
+    {
+      "endpoint": "https://api-cn.everyinfra.com/mcp",
+      "httpStatus": 200,
+      "initializeResultObserved": true,
+      "error": null
+    }
+  ]
+}
