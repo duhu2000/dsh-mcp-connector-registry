@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-11-19T10:24:22.689752+00:00",
+  "status": "unknown",
+  "sources": [
+    "https://www.iyiou.com/news/202609041139916",
+    "https://data.iyiou.com/ai"
+  ],
+  "observations": [
+    "官方公告支持 Client ID/Client Secret 接入和首批投融资数据范围，不是服务协议。",
+    "本轮官网公开页面返回浏览器校验脚本或读取超时；公开搜索未取得适用于该 MCP 的服务条款。",
+    "未知不等于不存在；未将注册成功或单次运行成功等同于条款许可。"
+  ],
+  "nextStep": "补充适用服务条款，或由 DuHu 明确批准本候选专属条款例外后再正式上架。",
+  "credentialsRecorded": false
+}

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "geekbi-shein-data",
+  "name": "极鲸云 · SHEIN市场数据",
+  "vendor": "极鲸云 GeekBI / 青岛极鲸网络科技有限公司",
+  "icon": "🐳",
+  "category": "调研分析",
+  "summary": "SHEIN 商品 / 店铺 / 类目 / 关键词 / 评论与图搜同款",
+  "description": "通过极鲸云官方 MCP 查询 SHEIN 站点、商品、店铺、类目、关键词与评论，支持选品、竞品分析和市场研究。需在 DSH 主机安装 uv/uvx，首次启动会获取官方 Python 程序。无需在连接器中填写 Key；首次查询如返回登录链接，请在浏览器完成极鲸云登录，再返回对话继续，登录状态由厂商程序保存在本机。这是厂商登录流程，并非 DSH 一键 OAuth。数据访问及费用以账号套餐和平台规则为准。已依据用户实测完成站点清单查询验收，返回 31 个站点；商品、店铺等其余工具尚未逐项验收。结果须保留站点、币种、时间与样本范围；数据转载或商业使用需遵守厂商授权要求。本服务由极鲸云提供，并非 SHEIN 官方产品。",
+  "tags": [
+    "极鲸云",
+    "GeekBI",
+    "SHEIN",
+    "跨境电商",
+    "选品",
+    "市场研究",
+    "国内服务商",
+    "厂商网页登录",
+    "stdio"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://open.geekbi.com/mcp/geekbi-shein-research-mcp",
+  "probeStatus": "pass",
+  "probeCheckedAt": 1795270297745,
+  "auth": {
+    "mode": "none",
+    "credentialDescription": "连接阶段无需填写 Key；首次工具调用按返回链接完成极鲸云网页登录，厂商程序在本机保存登录状态。",
+    "credentialHelpLabel": "极鲸云官方接入说明",
+    "credentialHelpUrl": "https://open.geekbi.com/mcp/geekbi-shein-research-mcp"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "geekbi-shein-research",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/geekbi/geekbi-shein-research-mcp@ce026a3d4684812d5431ce6fceebe49159be474d",
+        "geekbi-shein-mcp"
+      ],
+      "transport": "stdio"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查看可用站点与币种",
+      "text": "查询极鲸云 SHEIN 当前可用站点，列出站点名称、站点 ID 和币种。如果返回登录链接，先提示我完成厂商登录并停止，待我确认后继续；不要猜测站点 ID，不追加商品或店铺查询。",
+      "server": "main"
+    },
+    {
+      "title": "查看美国站连衣裙商品",
+      "text": "使用极鲸云 SHEIN 商品搜索，查看美国站关键词 dress 的前 3 件商品，仅查询第 1 页。执行前确认账号费用与我的额度授权，不明确则先询问。列出返回的名称、价格、币种、销量口径与原始商品链接，缺失项标明未返回；这是单页样本，不代表全市场，不追加查询或下载。如需厂商登录，先提示并停止。",
+      "server": "main"
+    }
+  ],
+  "toolsSnapshot": [
+    {
+      "serverKey": "main",
+      "serverName": "geekbi-shein-research",
+      "tools": [
+        {
+          "name": "shein_site_list",
+          "description": "实时查询 SHEIN 可用站点、站点 ID 和币种。用户指定非默认市场时先调用；不猜测站点 ID。"
+        },
+        {
+          "name": "shein_goods_search",
+          "description": "搜索和筛选 SHEIN 商品，分析价格、销量、销售额、评分、上架时间及当前接口提供的竞争指标。只生成用户所需的最小条件，未覆盖全部分页时明确为样本。"
+        },
+        {
+          "name": "shein_image_search",
+          "description": "用本地图片、URL、Data URI 或 Base64 图片搜索 SHEIN 视觉同款，并在视觉候选池内叠加商品条件。视觉相似不等于规格、材质或供应链完全相同。"
+        },
+        {
+          "name": "shein_mall_search",
+          "description": "搜索和筛选 SHEIN 店铺，分析经营规模、增长、供给结构和竞争表现。未覆盖全部分页时明确为样本。"
+        },
+        {
+          "name": "shein_category_search",
+          "description": "搜索 SHEIN 类目及市场指标，取得可信类目 ID，研究规模、需求、供给与竞争；类目 ID 不可猜测。"
+        },
+        {
+          "name": "shein_keyword_search",
+          "description": "搜索 SHEIN 关键词及需求供给指标，研究热度、增长和竞争；不能把局部样本表述为全市场。"
+        },
+        {
+          "name": "shein_review_search",
+          "description": "按明确商品 ID 查询 SHEIN 评论，分析卖点、痛点和规格风险；不能用于全站找商品，也不以单条评论外推。"
+        }
+      ]
+    }
+  ]
+}

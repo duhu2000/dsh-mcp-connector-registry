@@ -1,0 +1,48 @@
+{
+  "reportedOn": "2026-11-23",
+  "executionTime": "not-provided",
+  "evidenceSource": "user-reported DSH result",
+  "tool": "everyinfra_list_capabilities",
+  "arguments": {},
+  "attempts": 1,
+  "automaticRetries": 0,
+  "status": "pass",
+  "scope": "free capability directory only; paid data queries untested",
+  "platformCount": 110,
+  "amazonPresent": true,
+  "amazonSamples": [
+    {
+      "platform": "amazon",
+      "action": "search",
+      "requiredParameters": [
+        "keyword"
+      ],
+      "priceUsdPerCall": 0.002236,
+      "displayPriceUsdPer1k": 2.24
+    },
+    {
+      "platform": "amazon",
+      "action": "profile",
+      "requiredParameters": [
+        "url"
+      ],
+      "priceUsdPerCall": 0.001389,
+      "displayPriceUsdPer1k": 1.39
+    },
+    {
+      "platform": "amazon",
+      "action": "reviews",
+      "requiredParameters": [
+        "url"
+      ],
+      "priceUsdPerCall": 0.001389,
+      "displayPriceUsdPer1k": 1.39
+    }
+  ],
+  "paidToolCalls": 0,
+  "notes": [
+    "User reports no account queries, searches, support tickets or downloads.",
+    "Prices are a reported directory snapshot, not independently measured charges or fixed future prices.",
+    "Success with empty arguments does not establish the cause of the previous platform=amazon failure."
+  ]
+}

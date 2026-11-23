@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "id": "finchina-financial-risk-data",
+  "registryName": "review/finchina-financial-risk-data",
+  "title": "财汇 · 金融与风险数据",
+  "provider": "财汇（上海大智慧财汇数据科技有限公司）",
+  "providerRegion": "国内",
+  "status": "PASS",
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://mcp.finchina.com/",
+    "status": "active"
+  },
+  "classification": {
+    "isDataService": true
+  },
+  "authentication": {
+    "mode": "api-key",
+    "header": "x-api-key",
+    "standardOAuthVerified": false
+  },
+  "probe": {
+    "status": "partial",
+    "reason": "Authenticated connection and tool use verified; no fresh anonymous protocol probe performed."
+  },
+  "connectionAcceptance": {
+    "status": "pass",
+    "toolCount": 42,
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/finchina-2026-11-20/evidence/connection-tools.json"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-20T22:09:00+08:00",
+    "reviewedBy": "Codex",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/finchina-2026-11-20/evidence/runtime-acceptance.json",
+    "notes": "Two calls only. Official FAQ confirms code=1 succeeds with compatibility handling. Returned fund fields passed; original five-field completeness partial, two indicators unmatched and one null. Other capabilities untested."
+  },
+  "license": {
+    "status": "service-terms",
+    "spdxId": null,
+    "evidenceUrl": "https://mcp.finchina.com/agreement/user",
+    "notes": "MCP site links general user agreement; official guide supports third-party MCP clients. Account contract and deployment/data-use restrictions apply; not an open-data license."
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "finchina-financial-risk-data",
+    "reviewedAt": "2026-11-20T14:31:13.279762+00:00",
+    "reviewedBy": "DuHu",
+    "notes": "依据用户本轮“请推进上架处理”的明确上架指令，沿用会话既定审核人署名 DuHu。该指令不扩展收费调用授权。以实际返回字段的代表性查询链路 PASS 上架，保留原五字段目标不完整、空值及其他能力未验收披露；不作服务条款例外或数据再分发许可。"
+  },
+  "score": {
+    "total": 82,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 18,
+      "maintenanceSecurity": 11,
+      "runtime": 13,
+      "marketGap": 5,
+      "documentation": 10
+    },
+    "reasons": [
+      "Official vendor and current public third-party integration documentation.",
+      "Authenticated 42-tool discovery and representative query with usable fund records.",
+      "Two unsupported indicators and one null reduce runtime score; account/contract and geography limitations remain.",
+      "Overlap with Gildata/DZH but adds bond, fund and regional credit coverage."
+    ]
+  },
+  "dedupe": {
+    "level": "none",
+    "notes": "Distinct FinChina endpoint; overlaps in financial domain with Gildata and DZH but no identical provider endpoint in current catalog."
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://mcp.finchina.com/"
+    },
+    {
+      "type": "license",
+      "url": "https://mcp.finchina.com/agreement/user"
+    },
+    {
+      "type": "integration-guide",
+      "url": "https://mcp.finchina.com/guide/mcp/tools/usage"
+    },
+    {
+      "type": "response-semantics",
+      "url": "https://mcp.finchina.com/guide/mcp/tools/faq"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/finchina-2026-11-20/evidence/runtime-acceptance.json"
+    },
+    {
+      "type": "public-review",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/finchina-2026-11-20/evidence/public-review.json"
+    }
+  ],
+  "blockers": [],
+  "nextStep": "Merge reviewed listing and verify public catalog; no further paid calls authorized."
+}

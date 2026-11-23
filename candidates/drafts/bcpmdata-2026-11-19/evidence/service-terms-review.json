@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-11-19T02:47:04.509088+00:00",
+  "agreementUrl": "https://uzone.bcpmdata.com/agreement",
+  "publicAgreementAsset": "https://uzone.bcpmdata.com/assets/UserAgreement-c270913c-1794476310.js",
+  "assetSha256": "414d8ed413260edbbc7dc1af24b52281e2eaf32d2792ae3414d97bb6f6059ae2",
+  "mcpGuidanceUrl": "https://open.bcpmdata.com/mcp",
+  "status": "declared",
+  "spdxId": null,
+  "assessment": "Official MCP guidance explicitly documents third-party SSE client configuration with the user API Key. General account terms restrict account sharing, redistribution and unauthorized commercial reuse. Listing is a client connection configuration only, not a data resale or redistribution license. Specific API subscription rights and charges remain governed by each account agreement.",
+  "sectionsReviewed": [
+    "2.3-2.4",
+    "3.3-3.4",
+    "5.3",
+    "6.1",
+    "8.1-8.2"
+  ],
+  "branding": "Generic emoji icon; no vendor logo copied.",
+  "softwareLicense": "mcp-remote MIT applies to adapter software only, not vendor data."
+}

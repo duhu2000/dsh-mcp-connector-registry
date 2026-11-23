@@ -52,6 +52,56 @@
     },
     {
       "schemaVersion": 1,
+      "id": "agentrynku-gpw-data",
+      "name": "Agent Rynku · 波兰证券数据",
+      "vendor": "Agent Rynku / Krystian Gwizdała APPFRONT",
+      "icon": "🇵🇱",
+      "category": "金融投资",
+      "summary": "波兰上市公司 / 季度财报 / 财务比率 / 历史行情与分红",
+      "description": "连接 Agent Rynku 提供的波兰华沙证券交易所（GPW）上市公司数据，支持公司检索、季度财务指标、财务比率、报告日历、历史价格与分红查询。本卡片使用免账号、免 Key 的公共入口，受服务限流约束；账号专属及付费功能不在本卡片范围内。提供方是波兰独立服务商，并非 GPW 官方产品。结果应保留来源、数据日期、单位和缺失项；数据可能延迟或不完整，不将缺失数据视为零。实际发现 6 个公共工具，单次公司名称检索验收通过，其余 5 个工具尚未逐项验收。服务条款禁止转售、再分发及系统性批量复制数据；本卡片仅提供直连接入配置，不授予数据再分发权。",
+      "tags": [
+        "波兰",
+        "GPW",
+        "海外数据",
+        "上市公司",
+        "季度财报",
+        "分红",
+        "免费公共入口"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://agentrynku.pl/docs",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1795317566091,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "agentrynku",
+          "serverName": "agentrynku",
+          "transport": "streamable-http",
+          "url": "https://agentrynku.pl/api/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查找 KGHM 上市公司",
+          "server": "agentrynku",
+          "text": "在波兰 GPW 公共数据中查找 KGHM，最多返回 3 条匹配，列出公司名称、标准证券代码、ISIN 和来源链接；说明是否存在同名或截断结果，不追加行情或财报查询。"
+        },
+        {
+          "title": "查看 KGHM 最新季度财报",
+          "server": "agentrynku",
+          "text": "先用免费公司检索工具确认 KGHM 的标准证券代码，再查询最新可用季度财务指标。用中文说明报告期、币种、单位、来源和缺失项；只使用免账号公共工具，不调用预测、账户或付费功能，不批量下载。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "akshare",
       "name": "AKShare",
       "vendor": "AKShare 社区",
@@ -327,6 +377,79 @@
               "description": "查看电商采集数据集的可用字段及稳定 itemIds 字段映射。"
             }
           ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "bcpmdata-pharma-research",
+      "name": "摩熵 · 医药研发数据",
+      "vendor": "摩熵数科",
+      "icon": "🧬",
+      "category": "调研分析",
+      "summary": "药物研发 / 临床试验 / 医药专利 / 医药监管",
+      "description": "通过摩熵数科官方 MCP 查询账号授权范围内的药物研发、临床试验、医药监管、文献与专利数据，适用于医药研发情报和行业研究。采用本机 SSE 兼容程序连接官方服务，需自行提供摩熵 API Key。具体工具、数据覆盖、额度、费用和使用许可以账号订阅及服务规则为准，仅限本人授权使用，不共享账号或转售、再分发数据。DSH 连接与 114 个工具发现已确认，已完成一次中国临床试验列表查询验收，其余工具未逐项验收；不用于个人诊断、处方或治疗建议。本卡片由 DSH 社区维护。",
+      "tags": [
+        "摩熵",
+        "摩熵数科",
+        "BCPM",
+        "国内数据服务商",
+        "医药研发",
+        "专利",
+        "API Key",
+        "SSE"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://open.bcpmdata.com/mcp",
+      "auth": {
+        "mode": "api-key",
+        "credentialName": "摩熵 API Key",
+        "credentialDescription": "在摩熵开放平台申请，实际权益和费用以账号为准。由本机兼容程序将 Key 注入官方服务的 apiKey Header，不需 Bearer 前缀。",
+        "credentialHelpLabel": "查看摩熵 MCP 接入指南",
+        "credentialFields": [
+          {
+            "key": "apiKey",
+            "label": "摩熵 API Key",
+            "placeholder": "请输入摩熵 API Key",
+            "required": true,
+            "secret": true
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "bcpmdata-server",
+          "serverName": "bcpmdata_pharma_research",
+          "transport": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "--registry=https://registry.npmjs.org",
+            "mcp-remote@0.16.7",
+            "https://openmcp.bcpmdata.com/general/sse",
+            "--transport",
+            "sse-only",
+            "--header",
+            "apiKey:${BCPMDATA_API_KEY}",
+            "--silent"
+          ],
+          "credentialBindings": {
+            "BCPMDATA_API_KEY": "apiKey"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询司美格鲁肽临床试验",
+          "server": "bcpmdata-server",
+          "text": "使用 GeneralV1_CnClinicalTrialList 查询司美格鲁肽在中国的临床试验，参数为 page=1、search.drug_name=司美格鲁肽。先确认账号权限和费用；收费或费用不明确时先取得本次调用授权。只请求第一页，默认最多10条，仅展示前3条登记号、药品名称和分期。药品名称不当作试验名称；试验名称、状态等未返回的字段及 NA 如实标为缺失。不重试、不翻页、不调用详情或下载。"
+        },
+        {
+          "title": "检索司美格鲁肽相关专利",
+          "server": "bcpmdata-server",
+          "text": "检索司美格鲁肽相关的医药专利，最多返回 3 条，列出标题、公开号、申请人、法律状态和数据时间。先核对工具能力、账号权限和费用；收费或费用不明确时先确认。不下载全文、不自动追加查询，不将检索结果表述为侵权或自由实施结论。"
         }
       ]
     },
@@ -1301,6 +1424,62 @@
     },
     {
       "schemaVersion": 1,
+      "id": "dzh-financial-data",
+      "name": "大智慧 · 金融数据",
+      "vendor": "大智慧",
+      "icon": "📈",
+      "category": "金融投资",
+      "summary": "股票 / 基金 / 期货行情与财务资讯",
+      "description": "连接大智慧官方 MCP，通过本人账号授权查询 A股、港股、美股、基金及期货数据，覆盖行情、财务报表、公告资讯、股东分红、资金流向、板块与技术指标。服务范围和调用额度以账号套餐为准；需核对交易所、币种、统计日期、行情时效及各子项错误。已确认连接和17个工具发现；大智慧（SH601519）单次公司简况业务查询运行验收通过，其余工具尚未验收。数据仅按服务协议及账号授权使用，不附带再分发权；查询结果不构成投资建议。",
+      "tags": [
+        "大智慧",
+        "证券数据",
+        "A股",
+        "港股",
+        "美股",
+        "基金",
+        "期货",
+        "OAuth",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://pay.dzh.com.cn/pay-mall/mcp",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://aiappgw.dzh.com.cn",
+        "scope": "",
+        "clientName": "DeepSeek Harness - DZH MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "dzh-mcp",
+          "serverName": "dzh-mcp",
+          "transport": "streamable-http",
+          "url": "https://mcpali.dzh.com.cn/pub/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "了解大智慧主营业务",
+          "server": "dzh-mcp",
+          "text": "查询大智慧（SH601519）的公司概况和主营业务，注明来源、数据日期以及未返回字段。先核对查询额度，只调用一次公司简况工具，不追加行情或其他查询。"
+        },
+        {
+          "title": "查看最近20个交易日走势",
+          "server": "dzh-mcp",
+          "text": "查看贵州茅台（SH600519）最近20个交易日的日K线，列出日期、开高低收及成交量，并注明复权方式、单位和缺失值。先核对工具参数及额度；不要将历史走势表述为未来收益保证。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "eastmoney-mcp",
       "name": "东方财富量化（社区）",
       "vendor": "社区连接器",
@@ -1341,6 +1520,58 @@
           "title": "查看股票行情",
           "text": "查询目标 A 股的最新可用行情和近期 K 线，明确标注数据时间与不确定性，不提供投资建议",
           "server": "eastmoney"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "eastmoney-miaoxiang",
+      "name": "东方财富妙想 · 金融数据",
+      "vendor": "东方财富",
+      "icon": "📊",
+      "category": "金融投资",
+      "summary": "多市场金融指标 / 宏观数据 / 研报资讯 / 公告检索",
+      "description": "连接东方财富妙想官方金融数据 MCP，在账号权益范围内查询 A 股、港股、美股、基金、债券、指数板块及宏观行业数据，支持证券筛选、公告和研报资讯检索。使用 em_api_key 请求头鉴权，调用按账号实际规则消耗额度；具体费用以平台和账号套餐为准。结构化指标、公告与研报使用不同工具；K 线图工具不代替行情数值查询。结果应保留来源、统计日期、报告期、单位和缺失项。已发现 12 个工具；根据用户提供的 DSH 单次实测结果，单只 A 股证券简称与首发上市日期查询验收通过，其余工具未逐项验收。数据使用受东方财富及妙想适用协议、账号授权约束，不提供数据转售或再分发许可。",
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://ai.eastmoney.com/skills",
+      "tags": [
+        "东方财富",
+        "妙想",
+        "国内数据",
+        "金融数据",
+        "宏观经济",
+        "API Key",
+        "按量计费"
+      ],
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "em_api_key",
+        "credentialName": "妙想 EM API Key",
+        "credentialPlaceholder": "在本机填写妙想 API Key",
+        "credentialDescription": "从妙想平台获取 API Key，原样填写，不添加 Bearer 前缀。仅在本机密钥框输入。",
+        "credentialHelpLabel": "官方 MCP 接入指南",
+        "credentialHelpUrl": "https://mxapi.eastmoney.com/mxds/doc/mcp-install.md"
+      },
+      "servers": [
+        {
+          "serverKey": "mx-ds-mcp",
+          "serverName": "mx-ds-mcp",
+          "transport": "streamable-http",
+          "url": "https://mxapi.eastmoney.com/mxds/mcp"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询东方财富证券基础信息",
+          "server": "mx-ds-mcp",
+          "text": "查询东方财富（300059.SZ）的证券简称和上市日期。先确认账号调用额度，使用 A 股金融数据工具，保留来源与缺失项，不追加行情、新闻或下载。"
+        },
+        {
+          "title": "比较两家公司的年度财务数据",
+          "server": "mx-ds-mcp",
+          "text": "比较东方财富与同花顺 2025 年年度营业收入和归母净利润。先确认账号调用额度，核对报告期、单位和合并报表口径，注明数据来源；无可用数据时说明缺失，不推算。"
         }
       ]
     },
@@ -1498,6 +1729,56 @@
     },
     {
       "schemaVersion": 1,
+      "id": "everyinfra-public-data",
+      "name": "EveryInfra 万有引擎 · 公开数据与搜索",
+      "vendor": "EveryInfra 万有引擎",
+      "icon": "🌐",
+      "category": "调研分析",
+      "summary": "电商与社媒公开数据 / 网页搜索 / 内容提取",
+      "description": "通过 EveryInfra 聚合电商、社媒与网页公开数据，支持商品、评论、内容检索及市场研究。采用 Bearer API Key，通过免费能力目录确认平台、参数、返回条数和价格后再查询；数据和搜索按厂商规则扣费，批量目标、分页或部分能力可能单独计量。EveryInfra 为第三方聚合服务，并非所覆盖平台的官方数据接口；数据使用须遵守来源平台条款与适用权限。默认端点还提供验证码识别、AI 文本处理、账户及客服工单工具，不能将全部工具视为只读数据查询。已发现12个工具；根据用户提供的结果，免费能力目录运行验收通过，返回110个平台并包含Amazon。验收仅覆盖目录查询，其余工具及收费数据查询尚未验收；平台数量与价格以实际返回为准。",
+      "tags": [
+        "EveryInfra",
+        "万有引擎",
+        "电商数据",
+        "社媒数据",
+        "网页搜索",
+        "海外服务"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://everyinfra.com/mcp-server",
+      "probeStatus": "pass",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "EveryInfra API Key",
+        "credentialPlaceholder": "填写 API Key，不加 Bearer 前缀",
+        "credentialDescription": "在 EveryInfra 控制台创建 API Key，仅在本机填写。按能力及账号规则计费。",
+        "credentialHelpUrl": "https://everyinfra.com/docs",
+        "credentialHelpLabel": "官方接入与密钥指南"
+      },
+      "servers": [
+        {
+          "serverKey": "everyinfra",
+          "serverName": "everyinfra",
+          "transport": "streamable-http",
+          "url": "https://api.everyinfra.com/mcp"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看 Amazon 数据能力与价格",
+          "server": "everyinfra",
+          "text": "仅调用一次 EveryInfra 免费能力目录工具 everyinfra_list_capabilities，使用空参数 {}，从返回内容中筛选 Amazon，列出 action、必填参数、单次条数上限和计费规则。缺失字段写未提供，不追加查询，不发起收费数据查询。"
+        },
+        {
+          "title": "规划猫咪饮水机商品调研",
+          "server": "everyinfra",
+          "text": "我想研究美国 Amazon 的猫咪饮水机商品。先以空参数 {} 查询一次 EveryInfra 免费能力目录，从返回内容筛选 Amazon，说明商品与评论能力、必要参数、样本范围和预计费用，等待我确认预算后再取数。报告保留来源和获取时间，不将样本视为全市场，不读取联系人或创建工单。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "exa-search",
       "name": "Exa·网络搜索",
       "vendor": "Exa",
@@ -1624,6 +1905,60 @@
     },
     {
       "schemaVersion": 1,
+      "id": "fastmoss-tiktok-commerce",
+      "name": "FastMoss · TikTok电商数据",
+      "vendor": "FastMoss",
+      "icon": "🛍️",
+      "category": "调研分析",
+      "summary": "TikTok 商品 / 达人 / 店铺 / 广告与类目研究",
+      "description": "连接 FastMoss 官方 MCP，通过 OAuth 查询 TikTok Shop 商品、达人、店铺、MCN、短视频、直播、广告及类目数据，支持选品、竞品分析和市场研究。需使用本人 FastMoss 账号授权，工具权限与积分消耗取决于套餐；发现工具不代表全部可用。数据口径、币种和统计期以返回值为准。平台数据仅限协议允许的商业分析，未经书面同意不得转售、共享、公开展示或批量下载。已确认连接与79个工具发现；运行验收通过的范围仅为美国市场单日热销商品榜单，其他工具及市场尚未验收。",
+      "tags": [
+        "FastMoss",
+        "TikTok Shop",
+        "跨境电商",
+        "选品",
+        "达人分析",
+        "OAuth",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://developers.fastmoss.com/zh/docs/mcp/setup.html",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://mcp.fastmoss.com",
+        "scope": "",
+        "clientName": "DeepSeek Harness - FastMoss MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "fastmoss",
+          "serverName": "fastmoss",
+          "transport": "streamable-http",
+          "url": "https://mcp.fastmoss.com/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "看看美国市场热销商品",
+          "server": "fastmoss",
+          "text": "查看 TikTok Shop 美国市场最近可用日销量排名前3的商品，列出商品名、价格、销量和销售额，并说明统计日期、币种和缺失字段。先说明本次查询的积分消耗并取得授权；只取第一页，不追加详情、联系人或下载。结果仅供本次内部研究。"
+        },
+        {
+          "title": "了解美妆类目的机会",
+          "server": "fastmoss",
+          "text": "分析 TikTok Shop 美国市场美妆类目最近一个完整月的规模、增长和竞争集中度。先核对支持的类目与时间范围，说明需要的调用次数和积分预算，经确认后执行；返回中未提供的指标如实注明，不补猜、不导出明细。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "feishu",
       "name": "飞书开放平台",
       "vendor": "飞书",
@@ -1742,6 +2077,59 @@
           "title": "检查财务工作簿",
           "text": "只读取指定 Excel 工作簿并梳理工作表、关键公式和缺失项；未经我确认不要写入或覆盖文件",
           "server": "financial-modeling"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "finchina-financial-risk-data",
+      "name": "财汇 · 金融与风险数据",
+      "vendor": "财汇",
+      "icon": "📊",
+      "category": "金融投资",
+      "summary": "债券与基金 / 宏观区域经济 / 企业财务与风险",
+      "description": "连接财汇 MCP，在账号授权范围内查询债券、基金、股票、企业财务与风险、宏观与区域经济、新闻公告等数据。使用 API Key（x-api-key），属于按账号权益和数据查询量计费的服务，部分模块需要额外权限。采用先获取子工具定义、再执行查询的两步流程。已发现 42 个顶层工具；代表性基金档案查询链路运行验收通过，返回代码、全称与管理人，但本次请求的基金类型和成立日期未匹配，部分记录存在空值，其余能力尚未验收。保留参数处理警告、日期、单位、覆盖范围和缺失值，注明来源：财汇MCP。使用范围以用户协议及账号合同为准，须遵守境内访问和数据使用要求；连接器不授予数据转售、公开再分发或境外传输许可。",
+      "tags": [
+        "财汇",
+        "FinChina",
+        "国内数据",
+        "债券",
+        "基金",
+        "宏观经济",
+        "企业数据",
+        "风险数据",
+        "API Key",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://mcp.finchina.com/",
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "x-api-key",
+        "credentialName": "财汇 API Key",
+        "credentialPlaceholder": "填写财汇 API Key，不加 Bearer 前缀",
+        "credentialDescription": "使用财汇发放的 API Key，原样填写；仅在本机保存。"
+      },
+      "servers": [
+        {
+          "serverKey": "caihui-mcp",
+          "serverName": "caihui-mcp",
+          "transport": "streamable-http",
+          "url": "https://mcp.finchina.com/finchina-data-mcp-server/mcp"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询沪深300ETF基础档案",
+          "server": "caihui-mcp",
+          "text": "查询沪深300ETF（510300）的基金代码、全称和基金管理人。先确认调用次数与费用，再读取基金档案子工具定义并查询；保留代码后缀、参数处理警告及缺失字段，不将不同代码记录直接计为不同基金。数据日期未返回时注明未知，标注数据来源：财汇MCP，不自动追加净值、持仓或下载。"
+        },
+        {
+          "title": "比较长三角三省市经济指标",
+          "server": "caihui-mcp",
+          "text": "比较上海、江苏、浙江 2025 年地区生产总值和一般公共预算收入。先核对可用指标、统计期间、单位及调用费用，经确认后查询；区分数据缺失与零值，不混用不同报告期，注明数据来源：财汇MCP。"
         }
       ]
     },
@@ -2024,6 +2412,162 @@
           "title": "查找珊瑚礁数据集",
           "text": "检索与印度洋珊瑚礁相关的 GBIF 数据集，列出发布机构、时间覆盖、地理范围、记录数量和许可，并给出规范引用方式。",
           "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "geekbi-shein-data",
+      "name": "极鲸云 · SHEIN市场数据",
+      "vendor": "极鲸云 GeekBI / 青岛极鲸网络科技有限公司",
+      "icon": "🐳",
+      "category": "调研分析",
+      "summary": "SHEIN 商品 / 店铺 / 类目 / 关键词 / 评论与图搜同款",
+      "description": "通过极鲸云官方 MCP 查询 SHEIN 站点、商品、店铺、类目、关键词与评论，支持选品、竞品分析和市场研究。需在 DSH 主机安装 uv/uvx，首次启动会获取官方 Python 程序。无需在连接器中填写 Key；首次查询如返回登录链接，请在浏览器完成极鲸云登录，再返回对话继续，登录状态由厂商程序保存在本机。这是厂商登录流程，并非 DSH 一键 OAuth。数据访问及费用以账号套餐和平台规则为准。已依据用户实测完成站点清单查询验收，返回 31 个站点；商品、店铺等其余工具尚未逐项验收。结果须保留站点、币种、时间与样本范围；数据转载或商业使用需遵守厂商授权要求。本服务由极鲸云提供，并非 SHEIN 官方产品。",
+      "tags": [
+        "极鲸云",
+        "GeekBI",
+        "SHEIN",
+        "跨境电商",
+        "选品",
+        "市场研究",
+        "国内服务商",
+        "厂商网页登录",
+        "stdio"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://open.geekbi.com/mcp/geekbi-shein-research-mcp",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1795270297745,
+      "auth": {
+        "mode": "none",
+        "credentialDescription": "连接阶段无需填写 Key；首次工具调用按返回链接完成极鲸云网页登录，厂商程序在本机保存登录状态。",
+        "credentialHelpLabel": "极鲸云官方接入说明",
+        "credentialHelpUrl": "https://open.geekbi.com/mcp/geekbi-shein-research-mcp"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "geekbi-shein-research",
+          "command": "uvx",
+          "args": [
+            "--from",
+            "git+https://github.com/geekbi/geekbi-shein-research-mcp@ce026a3d4684812d5431ce6fceebe49159be474d",
+            "geekbi-shein-mcp"
+          ],
+          "transport": "stdio"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看可用站点与币种",
+          "text": "查询极鲸云 SHEIN 当前可用站点，列出站点名称、站点 ID 和币种。如果返回登录链接，先提示我完成厂商登录并停止，待我确认后继续；不要猜测站点 ID，不追加商品或店铺查询。",
+          "server": "main"
+        },
+        {
+          "title": "查看美国站连衣裙商品",
+          "text": "使用极鲸云 SHEIN 商品搜索，查看美国站关键词 dress 的前 3 件商品，仅查询第 1 页。执行前确认账号费用与我的额度授权，不明确则先询问。列出返回的名称、价格、币种、销量口径与原始商品链接，缺失项标明未返回；这是单页样本，不代表全市场，不追加查询或下载。如需厂商登录，先提示并停止。",
+          "server": "main"
+        }
+      ],
+      "toolsSnapshot": [
+        {
+          "serverKey": "main",
+          "serverName": "geekbi-shein-research",
+          "tools": [
+            {
+              "name": "shein_site_list",
+              "description": "实时查询 SHEIN 可用站点、站点 ID 和币种。用户指定非默认市场时先调用；不猜测站点 ID。"
+            },
+            {
+              "name": "shein_goods_search",
+              "description": "搜索和筛选 SHEIN 商品，分析价格、销量、销售额、评分、上架时间及当前接口提供的竞争指标。只生成用户所需的最小条件，未覆盖全部分页时明确为样本。"
+            },
+            {
+              "name": "shein_image_search",
+              "description": "用本地图片、URL、Data URI 或 Base64 图片搜索 SHEIN 视觉同款，并在视觉候选池内叠加商品条件。视觉相似不等于规格、材质或供应链完全相同。"
+            },
+            {
+              "name": "shein_mall_search",
+              "description": "搜索和筛选 SHEIN 店铺，分析经营规模、增长、供给结构和竞争表现。未覆盖全部分页时明确为样本。"
+            },
+            {
+              "name": "shein_category_search",
+              "description": "搜索 SHEIN 类目及市场指标，取得可信类目 ID，研究规模、需求、供给与竞争；类目 ID 不可猜测。"
+            },
+            {
+              "name": "shein_keyword_search",
+              "description": "搜索 SHEIN 关键词及需求供给指标，研究热度、增长和竞争；不能把局部样本表述为全市场。"
+            },
+            {
+              "name": "shein_review_search",
+              "description": "按明确商品 ID 查询 SHEIN 评论，分析卖点、痛点和规格风险；不能用于全站找商品，也不以单条评论外推。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gildata-financial-query",
+      "name": "聚源金融综合问数",
+      "vendor": "恒生聚源",
+      "icon": "📊",
+      "category": "金融投资",
+      "summary": "金融产品 / 财务报表 / 宏观行业数据问数",
+      "description": "连接恒生聚源金融数据，通过自然语言查询股票、基金、债券、指数等金融产品数据、财务报表、宏观与行业指标和公告，并支持股票、基金及基金经理条件筛选。已发现9个工具，单次公司年度财务指标查询验收通过；其余工具尚未验收。数据范围、时效与费用以账号授权和套餐为准；结果应保留报告期、单位和缺失项，未返回来源链接或更新时间时明确说明。 通过本地适配连接官方服务，需自行提供聚源 Token。服务条款未公开，尚未核验；数据使用范围以本人账号合同为准，不附带再分发权。",
+      "tags": [
+        "聚源",
+        "恒生聚源",
+        "金融数据",
+        "财务报表",
+        "宏观经济",
+        "API Key",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://website.gildata.com/",
+      "auth": {
+        "mode": "api-key",
+        "credentialFields": [
+          {
+            "key": "apiKey",
+            "label": "聚源 Token / API Key",
+            "required": true,
+            "secret": true,
+            "description": "仅在本机填写本人聚源 Token，不加 Bearer 前缀。"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "gildata-finquery",
+          "serverName": "gildata-finquery",
+          "transport": "stdio",
+          "command": "npx",
+          "args": [
+            "--yes",
+            "--package=dsh-mcp-connector@0.2.118",
+            "dsh-gildata-mcp-bridge"
+          ],
+          "credentialBindings": {
+            "GILDATA_API_KEY": "apiKey"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询恒生电子年度财务指标",
+          "text": "查询恒生电子（600570）2025年年度营业收入和归母净利润，注明单位与报告期。先核对账户额度，仅调用一次 FinQuery；缺失数据直接说明，不自动追加查询。",
+          "server": "gildata-finquery"
+        },
+        {
+          "title": "查看宏观经济年度变化",
+          "text": "查询中国2023—2025年国内生产总值及同比增速，列出年份、单位、统计口径、来源与可得更新时间。先核对账户额度与工具支持范围，不补造缺失值。",
+          "server": "gildata-finquery"
         }
       ]
     },
@@ -2476,6 +3020,59 @@
     },
     {
       "schemaVersion": 1,
+      "id": "ifind-financial-data",
+      "name": "同花顺 iFinD · 金融数据",
+      "vendor": "同花顺 iFinD",
+      "icon": "📈",
+      "category": "金融投资",
+      "summary": "证券指标 / 宏观经济 / 公告资讯 / 市场统计",
+      "description": "连接同花顺 iFinD 金融数据综合 MCP，在账号权益范围内查询股票、债券、基金、港美股、指数板块、期货期权、宏观行业指标及公告资讯。不包含快查企业数据或法智服务。使用 MCP 密钥，提供试用额度及付费套餐，查询消耗账号额度。日频指标、高频行情、证券筛选和全市场统计使用不同工具；高频行情仅支持交易日日内 Level1 数据，债券高频行情仅覆盖交易所市场。结果应保留来源、日期、频率、单位和缺失项。已发现 11 个工具，单只 A 股证券简称与上市日期查询验收通过，其余能力未逐项验收。账号仅限本人或约定主体使用，内部研究及数据使用须遵守 iFinD 协议与账号合同，不提供数据转售或再分发许可。",
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://mcp.51ifind.com/",
+      "tags": [
+        "同花顺",
+        "iFinD",
+        "国内数据",
+        "金融数据",
+        "宏观经济",
+        "API Key",
+        "免费试用",
+        "付费服务"
+      ],
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "Authorization",
+        "credentialName": "iFinD MCP 密钥",
+        "credentialPlaceholder": "填写官方生成配置中的 Authorization 完整值",
+        "credentialDescription": "在 iFinD MCP 个人中心获取 MCP 密钥，原样填写，不自行添加 Bearer 前缀。凭据仅在本机输入。",
+        "credentialHelpLabel": "官方开通与密钥指南",
+        "credentialHelpUrl": "https://mcp.51ifind.com/#/documents/guide-prepare"
+      },
+      "servers": [
+        {
+          "serverKey": "hexin-ifind-ds-mcp",
+          "serverName": "hexin-ifind-ds-mcp",
+          "transport": "streamable-http",
+          "url": "https://api-mcp.51ifind.com:8643/ds-mcp-servers/hexin-ifind-ds-mcp"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询同花顺证券基础信息",
+          "server": "hexin-ifind-ds-mcp",
+          "text": "查询同花顺（300033.SZ）的证券简称和上市日期，使用 A 股证券指标查询工具；先确认调用额度，保留来源与缺失项，不追加行情、新闻或下载。"
+        },
+        {
+          "title": "比较两家公司的财务指标",
+          "server": "hexin-ifind-ds-mcp",
+          "text": "比较同花顺与恒生电子 2025 年年度营业收入和归母净利润。先确认调用额度，使用证券指标工具，核对报告期、单位和合并报表口径，注明 iFinD 来源；无可用数据时说明缺失，不推算。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "ilostat-labour-statistics",
       "name": "ILOSTAT 全球劳工统计",
       "vendor": "Sidney Bissoli（独立社区项目）",
@@ -2629,6 +3226,78 @@
           "server": "itjuzi-venture-capital-data"
         }
       ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "iyiou-financing-data",
+      "name": "亿欧数据 · 产业投融资",
+      "vendor": "亿欧",
+      "icon": "📊",
+      "category": "金融投资",
+      "summary": "企业融资历史 / 投资方 / 投融资事件筛选",
+      "description": "连接亿欧官方投融资 MCP，支持企业名称匹配、企业融资历史、批量融资事件查询，以及按融资时间和投资方筛选事件。需在亿欧申请 Client ID 与 Client Secret，调用按账号权益及服务方规则计费。市场卡片双凭据配置需 MCP连接器 v0.2.116 或更高版本；已有 JSON 导入连接可继续使用。已通过连接、4 个工具发现及单次投融资事件查询验收，其余 3 个工具尚未逐项验收。结果中的来源、采集时间和费用可能不返回，应如实注明，不推断缺失值。本卡片由 DSH 社区维护；服务条款未公开，尚未核验，数据使用范围以用户与亿欧的约定为准，不授予额外转售或再分发许可。",
+      "tags": [
+        "亿欧",
+        "国内数据",
+        "企业数据",
+        "投融资",
+        "投资机构",
+        "产业研究",
+        "API Key",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://data.iyiou.com/ai",
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "X-Client-Secret",
+        "credentialName": "Client ID 与 Client Secret（需 v0.2.116+）",
+        "credentialDescription": "如只显示一个输入框，请升级 MCP连接器至 v0.2.116 或更高版本。两个凭据分别填写，均不加 Bearer 前缀。",
+        "credentialHelpUrl": "https://data.iyiou.com/ai",
+        "credentialHelpLabel": "前往亿欧申请 MCP 凭据",
+        "headerCredentialFields": [
+          {
+            "key": "clientId",
+            "label": "Client ID",
+            "required": true,
+            "placeholder": "请输入亿欧 Client ID"
+          },
+          {
+            "key": "clientSecret",
+            "label": "Client Secret",
+            "required": true,
+            "placeholder": "请输入亿欧 Client Secret",
+            "description": "原样填写，仅保存在本机连接中，不写入市场目录或对话。"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "serverKey": "iyiou-invest",
+          "serverName": "iyiou-invest",
+          "transport": "streamable-http",
+          "url": "https://mcp.iyiou.com/invest",
+          "headerCredentialBindings": {
+            "X-Client-Id": "clientId",
+            "X-Client-Secret": "clientSecret"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看一个月的融资事件",
+          "server": "iyiou-invest",
+          "text": "查询 2026 年 10 月的投融资事件。先核对本次费用并取得额度授权，仅调用 filter_invest_events 一次，arguments 为 {page:1,page_size:3,invest_time_start:\"2026-10-01\",invest_time_end:\"2026-10-31\"}。列出返回的企业、融资日期、轮次、金额及投资方，缺失字段注明未返回；说明仅展示第一页3条，不推断完整市场规模。不重试、不翻页、不下载。"
+        },
+        {
+          "title": "查询企业融资历史",
+          "server": "iyiou-invest",
+          "text": "查询北京智谱华章科技有限公司的融资历史。先确认所需调用次数及费用并取得授权，再匹配企业并查询第一页最多5条；如名称不唯一先让我确认。整理日期、轮次、金额和投资方，来源或采集时间未返回时如实注明，不补猜、不自动翻页或下载。"
+        }
+      ],
+      "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/workbuddy-data-2026-11-14/evidence/iyiou-runtime-2026-11-19.json"
     },
     {
       "schemaVersion": 1,
@@ -4028,6 +4697,60 @@
     },
     {
       "schemaVersion": 1,
+      "id": "patentics-patent-research",
+      "name": "Patentics 专利检索与分析",
+      "vendor": "Patentics",
+      "icon": "🔬",
+      "category": "调研分析",
+      "summary": "专利检索 / 权利要求 / 法律状态 / 技术分析",
+      "description": "连接 Patentics 官方 MCP，查询专利著录项、摘要、权利要求和法律状态，支持语义检索、布尔检索及专利分析。需自行注册并提供 API Key，按工具与账号额度计费；数据使用范围以服务协议及账号权益为准，不授予额外数据转售或再分发许可。已完成连接、21 个工具发现及单次专利摘要查询验收，其余工具未逐项实测；专利地图等高级分析需配套 Skill。结果供研究参考，正式使用时应核对权威专利公报和登记信息。本卡片由 DSH 社区维护。",
+      "tags": [
+        "Patentics",
+        "专利",
+        "知识产权",
+        "研发情报",
+        "API Key",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://www.patentics.com/mcph/",
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "apikey",
+        "credentialName": "Patentics API Key",
+        "credentialPlaceholder": "请输入 Patentics API Key",
+        "credentialDescription": "在 Patentics 我的账户生成，原样填写，不加 Bearer 前缀。仅在本机填写，查询按账号额度计费。",
+        "credentialHelpUrl": "https://www.patentics.com/mcph/",
+        "credentialHelpLabel": "查看 Patentics 接入指南"
+      },
+      "servers": [
+        {
+          "serverKey": "patentics",
+          "serverName": "patentics",
+          "transport": "streamable-http",
+          "url": "https://www.patentics.com/mcps/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查找固态电池相关专利",
+          "server": "patentics",
+          "text": "检索固态电池电解质相关专利。先确认本次工具与费用并取得额度授权，再执行一次语义检索；仅整理前3条标题、公开号和摘要，保留来源及缺失字段。不重试、不翻页、不追加详情或下载，不将结果视为新颖性或侵权结论。"
+        },
+        {
+          "title": "查看一件专利的摘要",
+          "server": "patentics",
+          "text": "查询专利 CN106257978A 的摘要。先核对工具参数及费用并取得本次调用授权，仅调用 get_patent_abstract 一次；列出公开号、返回的标题和摘要，未返回字段如实注明。不追加其他查询或全文下载。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "patsnap",
       "name": "智慧芽专利与文献",
       "vendor": "PatSnap / 智慧芽",
@@ -4718,6 +5441,59 @@
           "title": "整理未读邮件",
           "text": "只读取并汇总最近的未读邮件，按发件人和主题分组；未经我确认不要发送、移动或删除邮件",
           "server": "qq-mail"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "quandashi-trademark",
+      "name": "权大师商标查询",
+      "vendor": "权大师",
+      "icon": "🔎",
+      "category": "法律合规",
+      "summary": "商标检索 / 公告查询 / 全球商标数据",
+      "description": "通过权大师 MCP 查询账号授权范围内的中国及全球商标、公告、尼斯商品与服务分类，支持品牌检索和知识产权研究。需开通权大师 AppKey，费用及数据使用范围以账号权益和服务协议为准，不授予额外转售或再分发许可。已确认23个工具发现及一次尼斯分类查询运行验收通过，其余工具尚未逐项验收。档案和案件工具可能涉及客户数据或写入，须按用户授权使用。结果供研究与人工复核，不保证商标注册结果。本卡片由 DSH 社区维护。",
+      "tags": [
+        "权大师",
+        "Quandashi",
+        "商标",
+        "知识产权",
+        "国内数据服务",
+        "Bearer Token"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://www.quandashi.com/data-ai/index.html",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "权大师 AppKey",
+        "credentialPlaceholder": "请输入权大师发放的 AppKey",
+        "credentialDescription": "仅在本机填写原始 AppKey，不加 Bearer 前缀；DSH 自动使用 Authorization: Bearer。权限和计费以已开通服务为准。",
+        "credentialHelpUrl": "https://www.quandashi.com/data-ai/index.html",
+        "credentialHelpLabel": "查看权大师数据与AI服务"
+      },
+      "servers": [
+        {
+          "serverKey": "ipmaster_platform",
+          "serverName": "ipmaster_platform",
+          "transport": "streamable-http",
+          "url": "https://ai.quandashi.com/mcp/ipmaster_platform",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询计算机软件相关商品与服务分类",
+          "server": "ipmaster_platform",
+          "text": "查询“计算机软件”相关的尼斯商品／服务分类，按实际返回列出项目名称、类别、类似群和编码，区分商品与软件服务。未返回的数据版本注明缺失，不把响应 schema_version 当作尼斯分类版次。先核对工具费用并按我的授权额度执行，不追加查询、不下载、不读取或修改客户档案。"
+        },
+        {
+          "title": "检索华为在中国的商标",
+          "server": "ipmaster_platform",
+          "text": "检索中国商标中名称包含“华为”的记录，仅查看首页前3条，列出商标名称、申请号、类别、公开法律状态及数据时间；没有返回的字段注明缺失。先核对工具和费用，按我授权的额度执行，不翻页、下载或修改档案，不将检索结果视为可注册结论。"
         }
       ]
     },
@@ -6697,6 +7473,165 @@
     },
     {
       "schemaVersion": 1,
+      "id": "xiangke-futures",
+      "name": "享科 · 期货数据",
+      "vendor": "享科",
+      "icon": "📊",
+      "category": "金融投资",
+      "summary": "期货行情 / 基差仓单 / 持仓席位 / 研报资讯",
+      "description": "连接享科官方 MCP，通过超7汇微信扫码授权查询期货与期权行情、基差仓单、持仓席位、研报资讯、财经日历及交易所公告，并获取行情技术、资金持仓、研报观点和资讯事件四类结构化数据包。使用本人账号，权限及费用以账号规则为准。建议使用 MCP连接器 v0.2.120 或更新版本完成 OAuth 授权。已发现21个工具；依据用户回传结果，螺纹钢行情技术单次业务查询运行验收通过，其余20个工具尚未验收。需保留交易所、实际合约、数据日期、窗口和缺失项，快照不等于实时行情。数据使用遵守超7汇服务协议，不附带再分发权，结果不构成投资建议。",
+      "tags": [
+        "享科",
+        "超7汇",
+        "国内数据",
+        "期货",
+        "期权",
+        "基差",
+        "持仓",
+        "研报",
+        "OAuth",
+        "金融数据"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://xkesoft.com/agent/",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://jysda.cn",
+        "scope": "mcp:ai-interpret",
+        "clientName": "DeepSeek Harness - Xiangke MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "xiangke-futures",
+          "serverName": "xiangke-futures",
+          "transport": "streamable-http",
+          "url": "https://xkesoft.com/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看螺纹钢行情与技术面",
+          "server": "xiangke-futures",
+          "text": "查询螺纹钢最新可用的行情与技术面，仅调用一次 futures_ai_interpret_get_market。列明交易所、实际主力合约、数据截止日、K线与基差窗口，并概括MACD和BOLL返回值；快照日期未提供时说明缺失，不推断实时价格。执行前确认账号额度，不追加其他查询。"
+        },
+        {
+          "title": "了解螺纹钢机构研报观点",
+          "server": "xiangke-futures",
+          "text": "查询螺纹钢最新可用的机构研报观点，仅调用一次 futures_ai_interpret_get_reports。按返回内容整理观点、多空分布、样本范围与日期；区分机构观点和事实，保留来源及缺失项，不给出买卖指令。执行前确认账号额度，不追加行情或其他查询。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "xydc-amazon-data",
+      "name": "西柚洞察 · 亚马逊运营数据",
+      "vendor": "西柚洞察",
+      "icon": "🔎",
+      "category": "调研分析",
+      "summary": "ASIN 商品 / 关键词 / 广告流量 / 类目研究",
+      "description": "连接西柚洞察官方 MCP，查询 Amazon 商品、关键词、广告流量、销量趋势和类目竞争数据，辅助选品、Listing 优化及广告研究。使用本人账号的 MCP Token，按 Credit 和账号权益调用；公测赠送额度及收费以控制台为准。保留站点、统计周期、指标口径和缺失值，不将估算指标当作官方成交数据。服务协议限定组织内部业务分析，对外报告、转售或再分发需另行取得授权。已确认连接及 62 个工具发现；业务验收仅覆盖美国站单个关键词的一次周快照查询，其余工具尚未逐项验收。",
+      "tags": [
+        "西柚洞察",
+        "Amazon",
+        "跨境电商",
+        "关键词",
+        "Bearer Token",
+        "按量计费"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://platform.xydc.com/",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "西柚洞察 MCP Token",
+        "credentialPlaceholder": "填写 MCP Token，不加 Bearer 前缀",
+        "credentialDescription": "在西柚洞察数据开放平台控制台创建 MCP Token，与 OpenAPI Key 区分；凭据仅在本机填写。",
+        "credentialHelpUrl": "https://platform.xydc.com/docs/mcp-access",
+        "credentialHelpLabel": "官方 MCP 接入指南"
+      },
+      "servers": [
+        {
+          "serverKey": "xydc-mcp",
+          "serverName": "xydc-mcp",
+          "transport": "streamable-http",
+          "url": "https://mcp.xydc.com/mcp"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "了解猫咪饮水机关键词需求",
+          "server": "xydc-mcp",
+          "text": "查询美国 Amazon 关键词 cat water fountain 最新可用周的搜索需求、竞争度与 CPC。先核对该工具参数和费用并确认预算，再执行一次关键词基础查询；注明统计周期、指标口径和缺失值，不追加其他查询。"
+        },
+        {
+          "title": "查看一款猫咪饮水机的商品资料",
+          "server": "xydc-mcp",
+          "text": "查看美国 Amazon 商品 B0FPFZ7XFJ 的基础资料，说明实际返回的商品名称、价格和可用指标。先核对单次费用并确认预算，再执行一次查询；注明站点、币种、数据日期和缺失项，不自动生成类目洞察资源或追加详情。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "yicai-zhicheng-city-data",
+      "name": "新一线城市数据库",
+      "vendor": "第一财经新一线城市研究所",
+      "icon": "🏙️",
+      "category": "调研分析",
+      "summary": "城市指标 / 城市魅力指数 / 跨城比较 / 产业研究与报告",
+      "description": "连接第一财经新一线城市研究所的城市数据库，查询城市经济、人口就业、公共服务、城市魅力指数、产业指标与研究报告，支持跨城市比较及产业研究。使用个人接入密钥，首次接入需在官方页面提交申请；权限、可用数据和费用以账号规则为准，单次价格尚未核实。结果应保留指标定义、单位、来源、实际统计期及榜单版本；受限数值与缺失值分开说明，不推算受限数据，不把局部企业样本视为全行业。已发现 25 个工具，杭州市城市画像单次运行验收通过，其余 24 个工具尚未逐项验收。服务条款未公开，尚未核验。",
+      "tags": [
+        "国内数据",
+        "第一财经",
+        "知城",
+        "zhicheng",
+        "城市研究",
+        "城市魅力指数",
+        "人口就业",
+        "产业数据"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://www.datayicai.com/city-data/mcp",
+      "probeStatus": "pass",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "新一线城市数据库接入密钥",
+        "credentialPlaceholder": "填写接入密钥，不加 Bearer 前缀",
+        "credentialDescription": "登录官方 MCP 接入指南申请个人密钥，仅在本机填写。费用与权限以账号规则为准。",
+        "credentialHelpUrl": "https://www.datayicai.com/city-data/mcp",
+        "credentialHelpLabel": "获取接入密钥与官方指南"
+      },
+      "servers": [
+        {
+          "serverKey": "zhicheng",
+          "serverName": "zhicheng",
+          "transport": "streamable-http",
+          "url": "https://www.datayicai.com/mcp/zhicheng"
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看杭州市城市画像",
+          "server": "zhicheng",
+          "text": "使用新一线城市数据库查询杭州市的城市基础画像，先核对账号额度及计费规则；列出可用经济、人口与公共服务指标，逐项注明单位、实际统计期和来源。区分受限与缺失数据，不推算受限数值，不追加企业明细或下载。"
+        },
+        {
+          "title": "比较杭州与南京的城市指标",
+          "server": "zhicheng",
+          "text": "使用新一线城市数据库比较杭州市与南京市的经济和人口指标。先核对可用指标定义、共同统计期及账号额度，再进行比较；保留来源、单位和统计期，榜单版本与事实年份分开说明。没有同口径数据就注明不可比较，不用不同年份拼接排名。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "yingmi-wealth-management",
       "name": "盈米·基金投顾",
       "vendor": "盈米基金 / 且慢",
@@ -7225,6 +8160,59 @@
               "description": "查询企业专利信息。\n\n    【使用场景】用户想了解某家企业的专利数量、专利名称、申请号、公告号、专利类型与法律状态。\n    【前置条件】建议先用 entity_search 确认企业工商全称，再用全称调用本工具，避免同名误配。\n    【返回口径】最多返回 100 条，按公开（公告）日期倒序；总数超过 100 时返回「提示」说明已截断。\n    工具成功执行但无记录时，视为该企业暂无专利记录，是有效结论。\n\n    Args:\n        searchKey: 企业名称，建议使用工商全称"
             }
           ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "zoodata-commerce-data",
+      "name": "ZooData · 电商市场数据",
+      "vendor": "ZooData",
+      "icon": "📊",
+      "category": "调研分析",
+      "summary": "Amazon 类目画像 / 市场趋势 / 价格与竞争分析",
+      "description": "连接 ZooData 官方 MCP，使用 API Key 查询电商市场数据。当前未标记弃用的市场分析工具覆盖美国 Amazon 类目画像、历史趋势、价格与评分分布、品牌及卖家集中度等，适合选品和竞品研究。全市场规模与最多100个商品的领先样本指标需分别解读，并保留统计日期、币种、覆盖范围及缺失值。调用按账号套餐和平台规则计费；发现工具不代表全部工具可用。第三方内容使用受来源平台及 ZooData 服务条款约束。 已确认连接与47个工具发现；业务验收仅覆盖美国单个类目的一次市场画像查询，其余工具尚未验收。",
+      "tags": [
+        "ZooData",
+        "Amazon",
+        "跨境电商",
+        "市场分析",
+        "API Key",
+        "付费服务"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://zoodata.ai/en",
+      "auth": {
+        "mode": "bearer",
+        "credentialName": "ZooData API Key",
+        "credentialPlaceholder": "填写 API Key，不加 Bearer 前缀",
+        "credentialDescription": "在 ZooData 账号中获取 API Key；仅保存在本机。",
+        "credentialHelpUrl": "https://zoodata.ai/en",
+        "credentialHelpLabel": "ZooData 官网"
+      },
+      "servers": [
+        {
+          "serverKey": "zoodata",
+          "serverName": "zoodata",
+          "transport": "streamable-http",
+          "url": "https://api.zoodata.ai/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看女士平底鞋市场画像",
+          "server": "zoodata",
+          "text": "查看 ZooData 美国 Amazon 女士平底鞋类目（679399011） 的最新市场画像，先返回实际类目名称，再解释规模、价格及竞争集中度。使用单类目查询，区分全市场与领先样本口径，注明日期和缺失值；先确认费用预算，再执行一次查询，不追加详情。"
+        },
+        {
+          "title": "观察耳机市场的价格和竞争",
+          "server": "zoodata",
+          "text": "研究美国 Amazon 耳机类目的价格分布、品牌集中度和市场趋势。先确认可用类目、数据日期和调用预算，经确认后查询；区分样本与全市场指标，不猜测缺失值。"
         }
       ]
     },

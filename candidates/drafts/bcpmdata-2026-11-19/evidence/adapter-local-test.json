@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-11-19T01:42:03.790Z",
+  "adapter": "mcp-remote@0.16.7",
+  "scope": "local SSE fixture only; NOT provider runtime acceptance",
+  "status": "pass",
+  "credentialEnvironmentSubstitution": true,
+  "headerOnGetAndPost": true,
+  "credentialAbsentFromProcessOutput": true,
+  "businessCalls": 0,
+  "rpcMethods": [
+    "initialize",
+    "notifications/initialized",
+    "tools/list"
+  ]
+}

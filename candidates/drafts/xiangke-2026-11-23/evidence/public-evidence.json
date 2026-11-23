@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-11-23T09:06:19.678415+00:00",
+  "officialPage": "https://xkesoft.com/agent/",
+  "provider": "河南享科软件开发有限公司",
+  "publicToolCount": 21,
+  "thirdPartyClientSupport": "Official page documents standard Streamable HTTP MCP compatible with mainstream AI clients, WeChat authorization in 超7汇 and tokens delivered to clients.",
+  "protectedResource": {
+    "url": "https://xkesoft.com/.well-known/oauth-protected-resource/mcp",
+    "resource": "https://xkesoft.com/mcp",
+    "authorization_servers": [
+      "https://jysda.cn"
+    ],
+    "scopes_supported": [
+      "mcp:ai-interpret"
+    ]
+  },
+  "authorizationServer": {
+    "url": "https://jysda.cn/.well-known/oauth-authorization-server",
+    "issuer": "https://jysda.cn",
+    "authorization_endpoint": "https://jysda.cn/oauth/authorize",
+    "token_endpoint": "https://jysda.cn/oauth/token",
+    "registration_endpoint": "https://jysda.cn/oauth/register",
+    "grant_types_supported": [
+      "authorization_code",
+      "refresh_token"
+    ],
+    "code_challenge_methods_supported": [
+      "S256"
+    ],
+    "token_endpoint_auth_methods_supported": [
+      "none"
+    ]
+  },
+  "terms": {
+    "url": "https://jysda.cn/protocol/user-agreement.html",
+    "title": "超7汇用户协议",
+    "operator": "河南燊达网络科技有限公司",
+    "scope": "Section 2.1 includes third-party SDK/API service forms; official Xiangke page identifies 超7汇 as its OAuth authorization app. This is a general service agreement, not an MCP-specific license.",
+    "restrictions": "Personal account only. No implied commercial redistribution rights. Unauthorized third-party access and copying are restricted; use documented MCP/OAuth access within account entitlements. No investment advice guarantee.",
+    "disclaimerUrl": "https://jysda.cn/protocol/disclaimer.html",
+    "privacyUrl": "https://jysda.cn/protocol/privacy-policy.html"
+  },
+  "billing": "Single-call price and actual charge unverified; account rules apply.",
+  "pluginCompatibility": "DSH MCP Connector v0.2.120 fixes this providers loopback OAuth redirect registration compatibility."
+}

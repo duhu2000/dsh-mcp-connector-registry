@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "id": "zoodata-commerce-data",
+  "title": "ZooData · 电商市场数据",
+  "provider": "ZooData",
+  "providerRegion": "海外（官网联系地址美国；签约主体待核实）",
+  "status": "PASS",
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://zoodata.ai/en",
+    "status": "active"
+  },
+  "transports": [
+    {
+      "serverKey": "zoodata",
+      "serverName": "zoodata",
+      "transport": "streamable-http",
+      "url": "https://api.zoodata.ai/mcp",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "authentication": {
+    "mode": "bearer",
+    "userConnection": "pass",
+    "note": "Official configuration uses API Key in Authorization Bearer; OAuth not established."
+  },
+  "license": {
+    "status": "service-terms",
+    "evidenceUrl": "https://zoodata.ai/en/terms",
+    "spdxId": null
+  },
+  "connectionAcceptance": {
+    "status": "pass",
+    "toolCount": 47,
+    "reportPath": "evidence/connection-tools.json",
+    "checkedAt": "2026-11-19T22:06:31+08:00",
+    "reviewedBy": "Codex",
+    "source": "User screenshot and descriptions",
+    "notes": "Discovery only; does not imply all-tool runtime acceptance.",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/connection-tools.json"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-19T22:18:00+08:00",
+    "reviewedBy": "Codex",
+    "reportPath": "evidence/runtime-acceptance.json",
+    "notes": "Single US category profile only; remaining 46 tools untested.",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/runtime-acceptance.json"
+  },
+  "review": {
+    "connectorId": "zoodata-commerce-data",
+    "decision": "approved",
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-19T14:25:15.359219+00:00",
+    "scope": "full-runtime",
+    "notes": "User explicitly approved ZooData listing using Bearer API Key as a paid service; only one US category profile is runtime-tested. Public service terms reviewed; no terms exception.",
+    "proposedConnectorId": "zoodata-commerce-data"
+  },
+  "dedupe": {
+    "level": "none",
+    "overlap": [
+      "openboost-cross-border-data",
+      "fastmoss-tiktok-commerce"
+    ],
+    "notes": "No ZooData name or endpoint match in local formal connectors; subject overlap only."
+  },
+  "maintenance": {
+    "checkedAt": "2026-11-19",
+    "note": "Official hosted endpoint and public docs verified; audited release history unavailable."
+  },
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "ecommerce",
+      "market-research"
+    ],
+    "matchedKeywords": [
+      "Amazon",
+      "类目画像",
+      "市场数据"
+    ]
+  },
+  "registryName": "ai.zoodata/mcp",
+  "probe": {
+    "targetUrl": "https://api.zoodata.ai/mcp",
+    "checkedAt": "2026-11-19T14:24:14.925296+00:00",
+    "credentialsUsed": false,
+    "businessCalls": 0,
+    "httpStatus": 403,
+    "status": "partial",
+    "notes": "Anonymous request rejected; authorized connection and runtime separately recorded."
+  },
+  "score": {
+    "total": 85,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 22,
+      "maintenanceSecurity": 13,
+      "runtime": 15,
+      "marketGap": 5,
+      "documentation": 5
+    },
+    "gates": [],
+    "reasons": [
+      "Official hosted configuration and public service terms.",
+      "User credential connection and 47 tools discovered; 33 UI deprecation labels limit usable scope.",
+      "Live service observed; audited release history and all-tool security review unavailable.",
+      "One real US market-profile call passed; other 46 tools untested.",
+      "Complements cross-border vendors with subject overlap."
+    ]
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://zoodata.ai/en",
+      "collectedAt": "2026-11-19T14:25:15.359219+00:00",
+      "summary": "Official MCP URL and Bearer API Key example."
+    },
+    {
+      "type": "license",
+      "url": "https://zoodata.ai/en/terms",
+      "collectedAt": "2026-11-19T14:25:15.359219+00:00",
+      "summary": "Public API service terms; third-party content rights not granted."
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/runtime-acceptance.json",
+      "collectedAt": "2026-11-19T14:25:15.359219+00:00",
+      "summary": "Single US category profile only; remaining 46 tools untested."
+    },
+    {
+      "type": "connection-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/connection-tools.json",
+      "collectedAt": "2026-11-19T14:25:15.359219+00:00",
+      "summary": "Discovery only; does not imply all-tool runtime acceptance."
+    },
+    {
+      "type": "human-approval",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/human-approval.json",
+      "collectedAt": "2026-11-19T14:25:15.359219+00:00",
+      "summary": "human-approval"
+    },
+    {
+      "type": "public-probe",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/public-probe.json",
+      "collectedAt": "2026-11-19T14:25:15.359219+00:00",
+      "summary": "public-probe"
+    },
+    {
+      "type": "service-terms-review",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/0f4253d64eaef802cc52a90c92a5a8ed33efa1e4/candidates/drafts/zoodata-2026-11-19/evidence/official-review.json",
+      "collectedAt": "2026-11-19T14:25:15.359219+00:00",
+      "summary": "service-terms-review"
+    }
+  ]
+}

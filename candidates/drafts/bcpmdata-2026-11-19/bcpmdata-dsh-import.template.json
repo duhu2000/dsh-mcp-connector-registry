@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "bcpmdata-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "--registry=https://registry.npmjs.org",
+        "mcp-remote@0.16.7",
+        "https://openmcp.bcpmdata.com/general/sse",
+        "--transport",
+        "sse-only",
+        "--header",
+        "apiKey:${BCPMDATA_API_KEY}",
+        "--silent"
+      ],
+      "env": {
+        "BCPMDATA_API_KEY": "YOUR_API_KEY"
+      }
+    }
+  }
+}

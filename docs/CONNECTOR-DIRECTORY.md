@@ -13,7 +13,7 @@
 
 ## 法律合规
 
-共 5 个连接器。
+共 6 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -21,6 +21,7 @@
 | [巴西参议院开放数据](../connectors/brazil-senate-open-data.json) | 法案进程 / 表决与委员会 / 议员活动 / 采购预算 | Sidney Bissoli（独立社区项目） | none | 公共目录 | pass |
 | [元典法律数据](../connectors/huayu-legal.json) | 法规 / 案例 / 企业 / 证券法律数据 | 华宇元典 | bearer | 公共目录 | unverified |
 | [北大法宝·法律检索](../connectors/pkulaw-legal.json) | 法规 / 法条 / 司法案例检索与引用核验 | 北大法宝 PKULaw | bearer | 公共目录 | unverified |
+| [权大师商标查询](../connectors/quandashi-trademark.json) | 商标检索 / 公告查询 / 全球商标数据 | 权大师 | bearer | 公共目录 | pass |
 | [威科先行](../connectors/wolterskluwer.json) | 法规 / 案例 / 法律检索 / 专业内容 | Wolters Kluwer | bearer | 公共目录 | unverified |
 
 ## 效率工具
@@ -39,21 +40,25 @@
 
 ## 调研分析
 
-共 43 个连接器。
+共 51 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
 | [AgentNative 政府公共数据](../connectors/agentnative-government-open-data.json) | 政府数据目录 / 联邦公报 / 官方来源 / 样例与聚合 | CaziMedia AgentNative（独立服务） | none | 公共目录 | pass |
+| [摩熵 · 医药研发数据](../connectors/bcpmdata-pharma-research.json) | 药物研发 / 临床试验 / 医药专利 / 医药监管 | 摩熵数科 | api-key | 公共目录 | pass |
 | [BLS 美国劳工统计](../connectors/bls-us-labour-statistics.json) | CPI / 就业失业 / 工资工时 / JOLTS | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [博查搜索](../connectors/bocha-search.json) | 网页搜索 / AI 搜索 / 内容检索 | 社区连接器 | api-key | 公共目录 | unverified |
 | [Consensus](../connectors/consensus.json) | 同行评审论文检索 / 证据梳理 / 引用来源 | Consensus | oauth2-pkce | 公共目录 | unverified |
 | [克而瑞·深度智联地产数据](../connectors/cric-deeplink-real-estate.json) | 地产问数 / 城市对比 / 行业知识 | 克而瑞 / 深度智联 | bearer | 公共目录 | pass |
 | [EIA 美国能源数据](../connectors/eia-us-energy-data.json) | 电力 / 石油 / 天然气 / 煤炭 / 能源预测 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [EUR-Lex 欧盟法律开放数据](../connectors/eur-lex-eu-law.json) | 欧盟立法 / CJEU 判例 / 条约 / CELEX 与 EuroVoc | cyanheads（独立社区项目） | none | 公共目录 | pass |
+| [EveryInfra 万有引擎 · 公开数据与搜索](../connectors/everyinfra-public-data.json) | 电商与社媒公开数据 / 网页搜索 / 内容提取 | EveryInfra 万有引擎 | bearer | 公共目录 | pass |
 | [Exa·网络搜索](../connectors/exa-search.json) | 匿名语义网页搜索 / 网页抓取 / 高级检索 | Exa | none | 公共目录 | unverified |
 | [FAOSTAT 全球粮农统计](../connectors/faostat-food-agriculture.json) | 农产品产量 / 单产贸易 / 食品农业 / FAOSTAT | cyanheads（独立社区项目） | none | 公共目录 | pass |
+| [FastMoss · TikTok电商数据](../connectors/fastmoss-tiktok-commerce.json) | TikTok 商品 / 达人 / 店铺 / 广告与类目研究 | FastMoss | oauth2-pkce | 公共目录 | pass |
 | [FRED 美国宏观经济数据](../connectors/fred-economic-data.json) | GDP / CPI / 就业 / 利率 / 经济时间序列 | Pipeworx（独立第三方服务） | none | 公共目录 | pass |
 | [GBIF 全球生物多样性](../connectors/gbif-global-biodiversity.json) | 物种分类 / 出现记录 / 数据集 / 全球生物多样性 | cyanheads（独立社区项目） | none | 公共目录 | pass |
+| [极鲸云 · SHEIN市场数据](../connectors/geekbi-shein-data.json) | SHEIN 商品 / 店铺 / 类目 / 关键词 / 评论与图搜同款 | 极鲸云 GeekBI / 青岛极鲸网络科技有限公司 | none | 公共目录 | pass |
 | [Google Analytics](../connectors/google-analytics.json) | GA4 属性 / 报表 / 实时数据 / 漏斗与转化分析 | Google Analytics | api-key | 公共目录 | partial |
 | [Google 地图（HasData）](../connectors/google-maps.json) | 地点搜索 / 评论 / 图片 / 商户与周边信息 | HasData 社区网关 | api-key | 公共目录 | unverified |
 | [IBGE 巴西公共统计](../connectors/ibge-br-public-data.json) | 人口普查 / 行政区划 / 经济社会指标 / 地理边界 | Sidney Bissoli（独立社区项目） | none | 公共目录 | pass |
@@ -68,6 +73,7 @@
 | [OpenBoost 跨境数据](../connectors/openboost-cross-border-data.json) | Amazon / TikTok / 跨境选品与竞品研究 | OpenBoost | api-key | 公共目录 | partial |
 | [OpenFEC 美国竞选资金](../connectors/openfec-campaign-finance.json) | 候选人委员会 / 收支申报 / 独立支出 / 选举日历 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [OpenStreetMap 全球地理数据](../connectors/openstreetmap-geospatial-data.json) | 地点搜索 / 反向地理编码 / POI / Overpass 空间查询 | cyanheads（独立社区项目） | none | 公共目录 | pass |
+| [Patentics 专利检索与分析](../connectors/patentics-patent-research.json) | 专利检索 / 权利要求 / 法律状态 / 技术分析 | Patentics | api-key | 公共目录 | pass |
 | [智慧芽专利与文献](../connectors/patsnap.json) | 全球专利 / 科学文献 / 研发情报检索 | PatSnap / 智慧芽 | bearer | 公共目录 | unverified |
 | [Product Hunt](../connectors/producthunt.json) | 产品发现 / 搜索 / 榜单 / GraphQL 数据分析 | 社区连接器 | bearer | 公共目录 | unverified |
 | [PubMed 生物医学文献](../connectors/pubmed-biomedical-literature.json) | PubMed / Europe PMC / MeSH / 引用与开放全文 | cyanheads（独立社区项目） | none | 公共目录 | pass |
@@ -86,25 +92,36 @@
 | [万方学术文献](../connectors/wanfang-literature-data.json) | 中文文献检索 / 学术资料 / 引文研究 | 万方数据 | oauth2-pkce | 公共目录 | pass |
 | [Wolfram](../connectors/wolfram.json) | 可计算知识 / Wolfram&#124;Alpha / 符号与数值计算 | Wolfram Research | none | 公共目录 | unverified |
 | [世界银行 Data360](../connectors/world-bank-data360.json) | 发展指标 / 国家对比 / 时间序列 / 元数据与图表 | World Bank Group | none | 公共目录 | pass |
+| [西柚洞察 · 亚马逊运营数据](../connectors/xydc-amazon-data.json) | ASIN 商品 / 关键词 / 广告流量 / 类目研究 | 西柚洞察 | bearer | 公共目录 | pass |
+| [新一线城市数据库](../connectors/yicai-zhicheng-city-data.json) | 城市指标 / 城市魅力指数 / 跨城比较 / 产业研究与报告 | 第一财经新一线城市研究所 | bearer | 公共目录 | pass |
+| [ZooData · 电商市场数据](../connectors/zoodata-commerce-data.json) | Amazon 类目画像 / 市场趋势 / 价格与竞争分析 | ZooData | bearer | 公共目录 | pass |
 
 ## 金融投资
 
-共 14 个连接器。
+共 22 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
+| [Agent Rynku · 波兰证券数据](../connectors/agentrynku-gpw-data.json) | 波兰上市公司 / 季度财报 / 财务比率 / 历史行情与分红 | Agent Rynku / Krystian Gwizdała APPFRONT | none | 公共目录 | pass |
 | [AKShare](../connectors/akshare.json) | 股票 / 基金 / 期货 / 债券 / 宏观公开数据 | AKShare 社区 | none | 公共目录 | unverified |
 | [BIS 全球银行与金融统计](../connectors/bis-global-statistics.json) | 信贷缺口 / 汇率利率 / 银行统计 / SDMX 数据流 | Pipeworx（独立第三方服务） | none | 公共目录 | pass |
 | [巨潮资讯上市公司报告](../connectors/cninfo-listed-company-reports.json) | 年报 / 半年报 / 季报 / 招股书 / 原始 PDF 链接 | DuHu / QCC（独立社区维护） | none | 公共目录 | pass |
 | [DataSinking](../connectors/datasinking.json) | 上市公司财报全文与章节检索 / Markdown / API Key | DataSinking | bearer | 公共目录 | unverified |
+| [大智慧 · 金融数据](../connectors/dzh-financial-data.json) | 股票 / 基金 / 期货行情与财务资讯 | 大智慧 | oauth2-pkce | 公共目录 | pass |
 | [东方财富量化（社区）](../connectors/eastmoney-mcp.json) | A 股行情 / K 线 / 技术指标 / 量化筛选 | 社区连接器 | none | 公共目录 | unverified |
+| [东方财富妙想 · 金融数据](../connectors/eastmoney-miaoxiang.json) | 多市场金融指标 / 宏观数据 / 研报资讯 / 公告检索 | 东方财富 | api-key | 公共目录 | pass |
 | [Excel 财务建模助手（社区）](../connectors/financial-modeling.json) | Excel 读取 / 写入 / 公式 / 表格建模 | 社区连接器 | none | 公共目录 | unverified |
+| [财汇 · 金融与风险数据](../connectors/finchina-financial-risk-data.json) | 债券与基金 / 宏观区域经济 / 企业财务与风险 | 财汇 | api-key | 公共目录 | pass |
 | [Gangtise](../connectors/gangtise.json) | 机构调研 / 专家纪要 / 行业与公司研究 | Gangtise | bearer | 公共目录 | unverified |
+| [聚源金融综合问数](../connectors/gildata-financial-query.json) | 金融产品 / 财务报表 / 宏观行业数据问数 | 恒生聚源 | api-key | 公共目录 | pass |
+| [同花顺 iFinD · 金融数据](../connectors/ifind-financial-data.json) | 证券指标 / 宏观经济 / 公告资讯 / 市场统计 | 同花顺 iFinD | api-key | 公共目录 | pass |
 | [IT桔子创投数据](../connectors/itjuzi-venture-capital-data.json) | 一级市场公司 / 融资事件 / 投资机构与人物 | IT桔子 | bearer | 公共目录 | partial |
+| [亿欧数据 · 产业投融资](../connectors/iyiou-financing-data.json) | 企业融资历史 / 投资方 / 投融资事件筛选 | 亿欧 | api-key | 公共目录 | pass |
 | [Stock SDK 股票分析](../connectors/stock-analysis.json) | A 股 / 港股 / 美股 / 基金综合分析 | Stock SDK 社区 | none | 公共目录 | unverified |
 | [通达信行情（社区）](../connectors/tongdaxin-mcp.json) | A 股行情 / 分时 / K 线 / 市场数据 | 社区连接器 | none | 公共目录 | unverified |
 | [TuShare](../connectors/tushare.json) | A 股 / 指数 / 基金 / 财务 / 宏观数据 | TuShare 社区 | api-key | 公共目录 | unverified |
 | [Wind·股票数据](../connectors/wind-stock-data.json) | 全球股票档案 / 行情 / 技术指标 / 财务与公司事件 | Wind 万得 | bearer | 公共目录 | unverified |
+| [享科 · 期货数据](../connectors/xiangke-futures.json) | 期货行情 / 基差仓单 / 持仓席位 / 研报资讯 | 享科 | oauth2-pkce | 公共目录 | pass |
 | [盈米·基金投顾](../connectors/yingmi-wealth-management.json) | 基金检索 / 组合诊断 / 资产配置 / 投资风险分析 | 盈米基金 / 且慢 | api-key | 公共目录 | unverified |
 | [执中](../connectors/zerone-private-equity.json) | 私募股权、并购、产业链、REITs | 执中 ZERONE | api-key | 公共目录 | pass |
 

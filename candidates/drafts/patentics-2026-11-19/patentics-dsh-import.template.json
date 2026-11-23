@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "patentics": {
+      "type": "streamable-http",
+      "url": "https://www.patentics.com/mcps/mcp",
+      "headers": {
+        "apikey": "YOUR_PATENTICS_API_KEY"
+      }
+    }
+  }
+}

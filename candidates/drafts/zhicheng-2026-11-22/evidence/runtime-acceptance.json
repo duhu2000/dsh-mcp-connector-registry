@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "connectorId": "yicai-zhicheng-city-data",
+  "status": "pass",
+  "checkedAt": "2026-11-22T16:37:00+08:00",
+  "timestampPrecision": "minute (DSH conversation UI)",
+  "evidenceSource": "Codex observed DSH Chrome conversation and expanded tool-call input/output",
+  "tool": "city_overview",
+  "hostToolName": "mcp__zhicheng__city_overview",
+  "arguments": {
+    "place": "杭州市"
+  },
+  "schemaVerification": {
+    "required": [
+      "place"
+    ],
+    "optional": [
+      "profile",
+      "period",
+      "scope_period",
+      "charm_version"
+    ],
+    "defaultProfile": "standard"
+  },
+  "businessCallAttempts": 1,
+  "automaticRetries": 0,
+  "additionalBusinessCalls": 0,
+  "downloads": 0,
+  "scope": "Hangzhou standard city profile only; remaining 24 tools not individually tested",
+  "result": {
+    "responsePlace": "杭州市",
+    "responseProfile": "standard",
+    "sectionStatus": {
+      "basic": "ok",
+      "charm": "ok",
+      "industry": "ok"
+    },
+    "truncated": false,
+    "missingMetrics": [],
+    "basicPeriod": "2025",
+    "basicSource": "各地统计年鉴及相关统计公报整理",
+    "industryPeriod": "2026-11-20",
+    "industrySource": "知城城市产业魅力指数",
+    "charmEdition": "2026",
+    "charmPeriodRole": "product_edition",
+    "charmSourcePeriodStatus": "unverified"
+  },
+  "limitations": [
+    "Technical representative runtime PASS is not independent data-accuracy certification.",
+    "Charm edition must not be treated as a fact statistical period.",
+    "Ranking denominators differ across metrics; missing values are excluded rather than ranked last.",
+    "Enterprise chain coverage is a selected enterprise sample, not all enterprises or proof of supply relationships.",
+    "Industry index reflects listed constituent companies, not GDP or whole-industry competitiveness.",
+    "SOURCE_NOT_RECOMPUTED: indices were not independently recomputed."
+  ],
+  "billing": {
+    "authorization": "One actual-account-charge city_overview call approved by user.",
+    "chargeReturned": false,
+    "actualCharge": "unknown"
+  },
+  "credentialsRecorded": false,
+  "fullResponseStored": false,
+  "workspaceNote": "Initial workspace could not see this connector and made zero business calls; the single authorized call succeeded in Downloads."
+}

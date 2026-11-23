@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-11-20T11:10:26.398069+00:00",
+  "package": "dsh-mcp-connector",
+  "version": "0.2.118",
+  "metadataUrl": "https://registry.npmjs.org/dsh-mcp-connector/0.2.118",
+  "tarballUrl": "https://registry.npmjs.org/dsh-mcp-connector/-/dsh-mcp-connector-0.2.118.tgz",
+  "shasum": "5bf033a3d4cd8155e21205b8ffefbb6c69e10021",
+  "bin": "dsh-gildata-mcp-bridge",
+  "verifiedFileSha256": {
+    "scripts/gildata-bridge.mjs": "1098e335e702939266f7eef899c5654be4f5808aeaa91db375d7cfb605af13a6",
+    "lib/query-auth-bridge.js": "0d1fa4bfd3181014bc5eb058b479235e4784263132ce043e2968025a481a5cc8"
+  },
+  "releaseUrl": "https://github.com/duhu2000/dsh-mcp-connector/releases/tag/v0.2.118",
+  "releaseRunUrl": "https://github.com/duhu2000/dsh-mcp-connector/actions/runs/44723998413",
+  "notes": "Published package integrity and bridge hashes match authenticated local connection acceptance; no business query repeated."
+}

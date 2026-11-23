@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "ifind-financial-data",
+  "registryName": "review/ifind-financial-data",
+  "title": "同花顺 iFinD · 金融数据",
+  "provider": "同花顺 iFinD（杭州同花顺数据开发有限公司）",
+  "providerRegion": "国内",
+  "status": "PASS",
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://mcp.51ifind.com/",
+    "status": "active"
+  },
+  "classification": {
+    "isDataService": true
+  },
+  "authentication": {
+    "mode": "api-key",
+    "header": "Authorization",
+    "standardOAuthVerified": false
+  },
+  "probe": {
+    "status": "partial",
+    "reason": "Authenticated connection and tool use verified; no fresh anonymous protocol probe performed."
+  },
+  "connectionAcceptance": {
+    "status": "pass",
+    "toolCount": 11,
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/ifind-2026-11-21/evidence/discovery.json"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-21T10:42:00+08:00",
+    "reviewedBy": "Codex",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/ifind-2026-11-21/evidence/runtime-acceptance.json",
+    "notes": "One call, code=1/msg=success; security name and listing date returned. Other tools untested; actual quota deduction not independently verified."
+  },
+  "license": {
+    "status": "service-terms",
+    "spdxId": null,
+    "evidenceUrl": "https://mcp.51ifind.com/#/terms/member-service",
+    "notes": "Public MCP member agreement reviewed; third-party client integration documented. Own-account/internal-use and no reselling/sublicensing limitations; not an open-data license."
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "ifind-financial-data",
+    "reviewedAt": "2026-11-21T02:53:37.891853+00:00",
+    "reviewedBy": "DuHu",
+    "notes": "用户明确批准 iFinD 上架，署名 DuHu。仅 get_security_indicators 单次证券简称与上市日期查询验收通过；其他工具未逐项验收，实际额度扣减未核实。已核对公开会员协议，按自有账号及合同权益使用，不授予数据转售或再分发权限。"
+  },
+  "score": {
+    "total": 84,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 18,
+      "maintenanceSecurity": 11,
+      "runtime": 15,
+      "marketGap": 5,
+      "documentation": 10
+    },
+    "reasons": [
+      "Official provider documentation and key configuration.",
+      "11 tools discovered; one small real query passed.",
+      "Financial-domain overlap, other capabilities not individually tested; account quota and contract limits."
+    ]
+  },
+  "dedupe": {
+    "level": "none",
+    "notes": "No identical endpoint/card found in current connectors; financial overlap with DZH, Gildata and FinChina. Excludes separate Kuaicha/Fazhi services."
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://mcp.51ifind.com/"
+    },
+    {
+      "type": "license",
+      "url": "https://mcp.51ifind.com/#/terms/member-service"
+    },
+    {
+      "type": "integration-guide",
+      "url": "https://mcp.51ifind.com/#/documents/guide-prepare"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/ifind-2026-11-21/evidence/runtime-acceptance.json"
+    }
+  ],
+  "blockers": [],
+  "nextStep": "Merge approved listing and verify public catalog distribution; no additional paid calls authorized."
+}

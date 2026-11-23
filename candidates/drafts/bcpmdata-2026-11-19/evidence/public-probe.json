@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-11-19T01:40:02.006984+00:00",
+  "endpoint": "https://openmcp.bcpmdata.com/general/sse",
+  "credentialUsed": false,
+  "businessCalls": 0,
+  "requests": [
+    {
+      "method": "GET",
+      "status": 200,
+      "contentType": "text/event-stream",
+      "allow": null
+    },
+    {
+      "method": "POST",
+      "status": 405,
+      "contentType": "text/plain",
+      "allow": null
+    }
+  ]
+}

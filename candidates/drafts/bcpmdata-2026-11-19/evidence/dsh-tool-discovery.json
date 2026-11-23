@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "candidateId": "bcpmdata-pharma-research",
+  "checkedAt": "2026-11-19T01:54:35.458013+00:00",
+  "source": "DSH persisted successful tool_catalog metadata; user also confirmed successful compatible-template import",
+  "observedAt": "2026-11-19T01:50:11.947000+00:00",
+  "serverName": "bcpmdata-server",
+  "toolCount": 114,
+  "truncated": false,
+  "transport": "stdio via mcp-remote@0.16.7 sse-only",
+  "status": "connection-and-tool-discovery-confirmed",
+  "businessAcceptance": "not-run",
+  "newRequestsInThisVerification": 0,
+  "credentialsExported": false,
+  "toolExamples": [
+    "GeneralV1_CnClinicalTrialList",
+    "GeneralV1_GlobalDrugDevList",
+    "GeneralV1_GlobalPharmaceuticalPatentList"
+  ],
+  "limitations": [
+    "Cache evidence of a prior successful discovery, not a new live probe.",
+    "No business tool executed, no billing or account entitlement verification.",
+    "114 tools discovered does not establish successful execution of all 114."
+  ]
+}

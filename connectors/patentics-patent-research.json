@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "patentics-patent-research",
+  "name": "Patentics 专利检索与分析",
+  "vendor": "Patentics",
+  "icon": "🔬",
+  "category": "调研分析",
+  "summary": "专利检索 / 权利要求 / 法律状态 / 技术分析",
+  "description": "连接 Patentics 官方 MCP，查询专利著录项、摘要、权利要求和法律状态，支持语义检索、布尔检索及专利分析。需自行注册并提供 API Key，按工具与账号额度计费；数据使用范围以服务协议及账号权益为准，不授予额外数据转售或再分发许可。已完成连接、21 个工具发现及单次专利摘要查询验收，其余工具未逐项实测；专利地图等高级分析需配套 Skill。结果供研究参考，正式使用时应核对权威专利公报和登记信息。本卡片由 DSH 社区维护。",
+  "tags": [
+    "Patentics",
+    "专利",
+    "知识产权",
+    "研发情报",
+    "API Key",
+    "付费服务"
+  ],
+  "published": true,
+  "featured": false,
+  "probeStatus": "pass",
+  "homepage": "https://www.patentics.com/mcph/",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "apikey",
+    "credentialName": "Patentics API Key",
+    "credentialPlaceholder": "请输入 Patentics API Key",
+    "credentialDescription": "在 Patentics 我的账户生成，原样填写，不加 Bearer 前缀。仅在本机填写，查询按账号额度计费。",
+    "credentialHelpUrl": "https://www.patentics.com/mcph/",
+    "credentialHelpLabel": "查看 Patentics 接入指南"
+  },
+  "servers": [
+    {
+      "serverKey": "patentics",
+      "serverName": "patentics",
+      "transport": "streamable-http",
+      "url": "https://www.patentics.com/mcps/mcp",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查找固态电池相关专利",
+      "server": "patentics",
+      "text": "检索固态电池电解质相关专利。先确认本次工具与费用并取得额度授权，再执行一次语义检索；仅整理前3条标题、公开号和摘要，保留来源及缺失字段。不重试、不翻页、不追加详情或下载，不将结果视为新颖性或侵权结论。"
+    },
+    {
+      "title": "查看一件专利的摘要",
+      "server": "patentics",
+      "text": "查询专利 CN106257978A 的摘要。先核对工具参数及费用并取得本次调用授权，仅调用 get_patent_abstract 一次；列出公开号、返回的标题和摘要，未返回字段如实注明。不追加其他查询或全文下载。"
+    }
+  ]
+}

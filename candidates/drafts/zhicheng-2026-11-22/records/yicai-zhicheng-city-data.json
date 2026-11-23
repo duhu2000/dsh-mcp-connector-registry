@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "yicai-zhicheng-city-data",
+  "registryName": "review/yicai-zhicheng-city-data",
+  "title": "新一线城市数据库",
+  "provider": "第一财经新一线城市研究所",
+  "providerRegion": "国内（中国）",
+  "dataCoverage": "中国城市数据、城市指数及产业研究",
+  "status": "PASS",
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://www.datayicai.com/city-data/mcp",
+    "status": "active"
+  },
+  "classification": {
+    "isDataService": true
+  },
+  "authentication": {
+    "mode": "bearer",
+    "notes": "Official guide confirms Bearer personal access key; not OAuth."
+  },
+  "connectionAcceptance": {
+    "status": "pass",
+    "toolCount": 25,
+    "evidenceSource": "user-reported",
+    "checkedAt": "2026-11-22T15:57:54+08:00",
+    "notes": "User reports DSH connected; 25 supplied tool descriptions, not independent runtime evidence."
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-22T16:37:00+08:00",
+    "reviewedBy": "Codex",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zhicheng-2026-11-22/evidence/runtime-acceptance.json",
+    "notes": "Observed one city_overview call with place=杭州市 through DSH Chrome UI. Structured profile returned; other 24 tools untested. Actual charge unknown; charm edition is not a statistical period."
+  },
+  "license": {
+    "status": "unknown",
+    "spdxId": null,
+    "evidenceUrl": null,
+    "notes": "Official MCP usage guide found, applicable service agreement not yet located."
+  },
+  "review": {
+    "decision": "approved",
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-22T09:19:38.985441+00:00",
+    "proposedConnectorId": "yicai-zhicheng-city-data",
+    "notes": "DuHu 明确批准本候选条款例外及上架。保留“服务条款未公开，尚未核验”披露；仅杭州市城市画像一次代表性调用 PASS，其余24个工具未逐项验收。",
+    "serviceTermsException": {
+      "reasonCode": "official-terms-unavailable",
+      "decision": "approved",
+      "connectorId": "yicai-zhicheng-city-data",
+      "reviewedBy": "DuHu",
+      "reviewedAt": "2026-11-22T09:19:38.985441+00:00",
+      "notes": "用户明确回复：批准条款例外并上架，署名 DuHu。仅官方接入指南已核实，尚未找到适用公开服务条款；保留未知状态及卡片披露，不视为厂商授权扩大或数据再分发许可。",
+      "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zhicheng-2026-11-22/evidence/service-terms-exception.json"
+    }
+  },
+  "probe": {
+    "status": "pass",
+    "reason": "User-reported 25-tool discovery and independently observed representative DSH business call succeeded."
+  },
+  "dedupe": {
+    "level": "none",
+    "notes": "No same provider or endpoint found in local connectors; related macro datasets are not identical."
+  },
+  "blockers": [],
+  "nextStep": "Merge after CI and verify published catalog distribution; no npm release required.",
+  "score": {
+    "total": 85,
+    "band": "selected",
+    "dimensions": {
+      "authority": 24,
+      "accessibility": 16,
+      "maintenanceSecurity": 12,
+      "runtime": 12,
+      "marketGap": 12,
+      "documentation": 9
+    },
+    "reasons": [
+      "Official provider and documented personal access-key integration using the bearer scheme.",
+      "Representative DSH city profile call succeeded with period/source metadata.",
+      "Account application required; applicable service terms and single-call pricing not located."
+    ]
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://www.datayicai.com/city-data/mcp"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zhicheng-2026-11-22/evidence/runtime-acceptance.json"
+    },
+    {
+      "type": "public-review",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zhicheng-2026-11-22/evidence/public-review.json"
+    },
+    {
+      "type": "service-terms-exception",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/zhicheng-2026-11-22/evidence/service-terms-exception.json"
+    }
+  ]
+}

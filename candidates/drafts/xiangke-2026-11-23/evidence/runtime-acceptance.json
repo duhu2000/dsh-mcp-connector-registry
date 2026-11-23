@@ -1,0 +1,87 @@
+{
+  "candidate": "xiangke-futures",
+  "evidenceSource": "user-reported OAuth success and supplied DSH tool descriptions",
+  "observedCacheTime": "2026-11-23 16:44:55 Asia/Shanghai",
+  "connection": "PASS (user-reported)",
+  "toolDiscovery": "PASS (user-supplied list)",
+  "toolCount": 21,
+  "tools": [
+    "search_product",
+    "get_main_contract",
+    "get_contract_quote",
+    "get_product_quote",
+    "get_basis",
+    "get_warrant",
+    "get_contract_seats",
+    "get_institution_seats",
+    "search_option",
+    "get_option_chain",
+    "get_option_quote",
+    "get_finance_calendar",
+    "get_futures_news",
+    "get_research_report",
+    "get_flash_news",
+    "search_announcement",
+    "get_announcement_detail",
+    "futures_ai_interpret_get_market",
+    "futures_ai_interpret_get_capital",
+    "futures_ai_interpret_get_reports",
+    "futures_ai_interpret_get_news"
+  ],
+  "businessAcceptance": "PASS (user-reported single read-only query)",
+  "billing": "unknown",
+  "limitations": [
+    "Only futures_ai_interpret_get_market for 螺纹钢 has business acceptance; other 20 tools untested.",
+    "Evidence is a user-provided execution summary, not an independent raw response audit.",
+    "Server reports complete blocks; conversation display was truncated.",
+    "MACD/BOLL individual snapshot dates were not supplied.",
+    "Four futures_ai_interpret tools describe OAuth-only access; several render=true options describe API-Key-only access."
+  ],
+  "businessEvidence": {
+    "source": "user-provided DSH execution summary; raw response not independently inspected",
+    "tool": "futures_ai_interpret_get_market",
+    "arguments": {
+      "keyword": "螺纹钢"
+    },
+    "callCount": 1,
+    "retries": 0,
+    "downloads": 0,
+    "product": "螺纹钢",
+    "productCode": "RB",
+    "exchange": "SHFE",
+    "mainContract": "rb2701",
+    "latestAvailableDate": "2026-11-23",
+    "tradeDate": "2026-11-23",
+    "timezone": "Asia/Shanghai",
+    "blocks": {
+      "kline": {
+        "status": "AVAILABLE",
+        "returnedCount": 60,
+        "originalCount": 60,
+        "start": "2026-08-24",
+        "endInclusive": "2026-11-23"
+      },
+      "spot_basis": {
+        "status": "AVAILABLE",
+        "returnedCount": 60,
+        "originalCount": 60,
+        "start": "2026-08-24",
+        "endInclusive": "2026-11-23"
+      },
+      "macd": {
+        "status": "AVAILABLE",
+        "individualDataDate": null
+      },
+      "boll": {
+        "status": "AVAILABLE",
+        "individualDataDate": null
+      }
+    },
+    "serverTruncated": false,
+    "serverTruncatedBlocks": [],
+    "displayTruncated": true,
+    "billing": "Actual charge not returned or independently verified"
+  },
+  "recordedAt": "2026-11-23T09:06:19.678415+00:00",
+  "executionTimePrecision": "User reported execution on 2026-11-23; exact business call timestamp unavailable."
+}

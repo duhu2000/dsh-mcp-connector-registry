@@ -1,0 +1,77 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-11-20T12:42:00+08:00",
+  "reviewedBy": "Codex",
+  "tool": "ai-mcp-open_tools_getCompanyProfile",
+  "arguments": {
+    "param": {
+      "stockCode": "SH601519"
+    }
+  },
+  "businessCallAttempts": 3,
+  "automaticRetries": 0,
+  "source": "Assistant inspected expanded DSH tool call",
+  "error": null,
+  "classification": "single-company-profile-runtime-pass-after-guard-deployment",
+  "businessDataReturned": true,
+  "billing": "unknown",
+  "nextStep": "Named listing approval pending; no additional business call authorized.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "uiTime": "2026-11-19 22:49 Asia/Shanghai",
+      "arguments": {
+        "param": true,
+        "stockCode": true
+      },
+      "status": "fail",
+      "error": "CompanyParam cannot deserialize boolean true",
+      "authorization": "Initial one-call approval"
+    },
+    {
+      "attempt": 2,
+      "uiTime": "2026-11-19 23:06 Asia/Shanghai",
+      "arguments": {
+        "param": false,
+        "stockCode": false
+      },
+      "status": "fail",
+      "error": "CompanyParam cannot deserialize boolean false",
+      "authorization": "User explicitly approved one additional corrected call"
+    },
+    {
+      "attempt": 3,
+      "uiTime": "2026-11-20 12:42 Asia/Shanghai",
+      "arguments": {
+        "param": {
+          "stockCode": "SH601519"
+        }
+      },
+      "status": "pass",
+      "authorization": "User explicitly approved one additional call after fixed-version deployment, actual single-call billing, no retry",
+      "observedSource": "Assistant inspected expanded Chrome DSH tool-call input and output",
+      "companyNameObserved": "上海大智慧股份有限公司",
+      "stockCodeObserved": "SH601519",
+      "runningPluginVersion": "0.2.118-pr.283.qa.1795148801678+gd501dec",
+      "toolCallCountThisRound": 1
+    }
+  ],
+  "expectedArguments": {
+    "param": {
+      "stockCode": "SH601519"
+    }
+  },
+  "limitations": [
+    "Only getCompanyProfile for SH601519 was tested; other 16 tools untested.",
+    "Exact billing was not returned and was not independently verified.",
+    "No raw response, personal details, credentials or account information persisted.",
+    "The cause of the previous model-generated boolean arguments remains unresolved; the mock bridge preserved arguments."
+  ],
+  "resultEvidence": {
+    "rawToolOutputInspected": true,
+    "companyProfileObjectObserved": true,
+    "additionalSubItems": "DSH summary reports getF10BusiinfoData and getF10Information succeeded; raw inline preview was truncated",
+    "providerSourceField": "not returned according to DSH summary",
+    "dataDates": "DSH summary reports business breakdown period 2026-06-30; not a universal freshness guarantee"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "xydc-amazon-data",
+  "title": "西柚洞察 · 亚马逊运营数据",
+  "provider": "西柚洞察 / 深圳市与析科技有限公司",
+  "providerRegion": "国内",
+  "status": "PASS",
+  "authentication": {
+    "mode": "bearer",
+    "standardOAuthVerified": false
+  },
+  "connectionAcceptance": {
+    "status": "pass-user-reported",
+    "toolCount": 62,
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/xydc-2026-11-21/evidence/discovery.json"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-21T13:40:39.776876+00:00",
+    "reviewedBy": "Codex",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/xydc-2026-11-21/evidence/runtime-acceptance.json",
+    "notes": "User-reported HTTP 200, exactly one get_keyword_info call, one keyword, US report week 2026-11-08 through 2026-11-14; cost_credits=1. Raw trace not independently inspected; remaining tools untested."
+  },
+  "license": {
+    "status": "service-terms",
+    "evidenceUrl": "https://open-resource.xydc.com/西柚洞察数据开放平台用户协议.pdf"
+  },
+  "review": {
+    "decision": "approved",
+    "reviewedBy": "DuHu",
+    "proposedConnectorId": "xydc-amazon-data",
+    "notes": "用户明确批准“西柚洞察 · 亚马逊运营数据”按 Bearer MCP Token、按量计费上架，署名 DuHu。仅依据用户提供的美国单关键词周快照实测报告验收；消耗1 Credit，其余61个工具未逐项验收。公开服务协议已核实，数据限组织内部分析，对外使用需另行授权。",
+    "reviewedAt": "2026-11-21T13:43:03.085634+00:00"
+  },
+  "blockers": [],
+  "nextStep": "Merge approved listing and verify public catalog distribution; no further paid calls authorized.",
+  "registryName": "review/xydc-amazon-data",
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://platform.xydc.com/docs/mcp-access",
+    "status": "active"
+  },
+  "classification": {
+    "isDataService": true
+  },
+  "probe": {
+    "status": "partial",
+    "reason": "Authenticated discovery and representative runtime query user-confirmed; no fresh anonymous protocol probe performed."
+  },
+  "score": {
+    "total": 82,
+    "band": "selected",
+    "dimensions": {
+      "authority": 23,
+      "accessibility": 18,
+      "maintenanceSecurity": 11,
+      "runtime": 13,
+      "marketGap": 7,
+      "documentation": 10
+    },
+    "reasons": [
+      "Official MCP guide, billing and applicable agreement reviewed.",
+      "Representative query passed per user report; direct raw trace not inspected.",
+      "Some Amazon overlap with existing providers; tool count and ASIN billing documentation discrepancies retained."
+    ]
+  },
+  "dedupe": {
+    "level": "none",
+    "notes": "Distinct official XYDC endpoint and provider; functional overlap with ZooData/OpenBoost does not replace existing cards."
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://platform.xydc.com/docs/mcp-access"
+    },
+    {
+      "type": "license",
+      "url": "https://open-resource.xydc.com/西柚洞察数据开放平台用户协议.pdf"
+    },
+    {
+      "type": "public-review",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/xydc-2026-11-21/evidence/public-review.json"
+    },
+    {
+      "type": "connection-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/xydc-2026-11-21/evidence/discovery.json"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/xydc-2026-11-21/evidence/runtime-acceptance.json"
+    }
+  ]
+}
