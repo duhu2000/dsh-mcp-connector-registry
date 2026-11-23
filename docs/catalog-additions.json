@@ -1,5 +1,11 @@
 [
   {
+    "id": "xiangke-futures",
+    "publishedOn": "2026-11-23",
+    "pr": 106,
+    "acceptance": "DuHu 批准上架。用户报告 OAuth 连接及21工具发现成功；一次螺纹钢行情技术查询通过，K线与基差各60/60条、MACD/BOLL可用，数据日期2026-11-23。原始响应及实际扣费未独立核对，其余20工具未验收。公开超7汇服务协议已核实，按账号权益使用；建议插件 v0.2.120+。"
+  },
+  {
     "id": "everyinfra-public-data",
     "publishedOn": "2026-11-23",
     "pr": 104,
