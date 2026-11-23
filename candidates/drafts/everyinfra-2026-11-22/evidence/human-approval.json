@@ -1,0 +1,9 @@
+{
+  "connectorId": "everyinfra-public-data",
+  "decision": "approved",
+  "reviewedBy": "DuHu",
+  "recordedAt": "2026-11-23T06:18:25.145023+00:00",
+  "userStatement": "批准 EveryInfra 上架，署名 DuHu",
+  "scope": "Representative free capability-directory query only; paid data queries and other tools untested",
+  "serviceTermsException": false
+}

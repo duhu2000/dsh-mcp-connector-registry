@@ -40,7 +40,7 @@
 
 ## 调研分析
 
-共 50 个连接器。
+共 51 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -52,6 +52,7 @@
 | [克而瑞·深度智联地产数据](../connectors/cric-deeplink-real-estate.json) | 地产问数 / 城市对比 / 行业知识 | 克而瑞 / 深度智联 | bearer | 公共目录 | pass |
 | [EIA 美国能源数据](../connectors/eia-us-energy-data.json) | 电力 / 石油 / 天然气 / 煤炭 / 能源预测 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [EUR-Lex 欧盟法律开放数据](../connectors/eur-lex-eu-law.json) | 欧盟立法 / CJEU 判例 / 条约 / CELEX 与 EuroVoc | cyanheads（独立社区项目） | none | 公共目录 | pass |
+| [EveryInfra 万有引擎 · 公开数据与搜索](../connectors/everyinfra-public-data.json) | 电商与社媒公开数据 / 网页搜索 / 内容提取 | EveryInfra 万有引擎 | bearer | 公共目录 | pass |
 | [Exa·网络搜索](../connectors/exa-search.json) | 匿名语义网页搜索 / 网页抓取 / 高级检索 | Exa | none | 公共目录 | unverified |
 | [FAOSTAT 全球粮农统计](../connectors/faostat-food-agriculture.json) | 农产品产量 / 单产贸易 / 食品农业 / FAOSTAT | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [FastMoss · TikTok电商数据](../connectors/fastmoss-tiktok-commerce.json) | TikTok 商品 / 达人 / 店铺 / 广告与类目研究 | FastMoss | oauth2-pkce | 公共目录 | pass |

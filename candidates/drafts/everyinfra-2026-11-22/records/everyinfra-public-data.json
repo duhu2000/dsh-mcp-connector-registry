@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "id": "everyinfra-public-data",
+  "registryName": "review/everyinfra-public-data",
+  "title": "EveryInfra 万有引擎 · 公开数据与搜索",
+  "provider": "EveryInfra 万有引擎",
+  "providerRegion": "海外（新加坡/美国，官方自述）",
+  "dataCoverage": "全球电商、社媒和网页公开数据",
+  "status": "PASS",
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://everyinfra.com/mcp-server",
+    "status": "active"
+  },
+  "classification": {
+    "isDataService": true
+  },
+  "authentication": {
+    "mode": "bearer",
+    "notes": "Bearer API Key configured by user; successful directory invocation reported in DSH."
+  },
+  "connectionAcceptance": {
+    "status": "pass",
+    "toolCount": 12,
+    "evidenceSource": "user-reported",
+    "checkedAt": "2026-11-22T17:42:52+08:00",
+    "notes": "Default tools/list is public; credential validity not yet demonstrated by tool invocation."
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-23T06:18:25.145023+00:00",
+    "reviewedBy": "Codex",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/everyinfra-2026-11-22/evidence/runtime-success-2026-11-23.json",
+    "notes": "User-reported free everyinfra_list_capabilities({}) succeeded: 110 platforms including Amazon. Scope: directory metadata only; paid data, search and all other tools untested. Exact execution timestamp not supplied. checkedAt records evidence review time, not the unavailable exact execution timestamp.",
+    "reportedOn": "2026-11-23"
+  },
+  "license": {
+    "status": "service-terms",
+    "spdxId": null,
+    "evidenceUrl": "https://everyinfra.com/terms",
+    "notes": "Commercial terms reviewed, not an open-data license or reseller permission."
+  },
+  "review": {
+    "decision": "approved",
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-23T06:18:25.145023+00:00",
+    "proposedConnectorId": "everyinfra-public-data",
+    "notes": "DuHu 明确回复：批准 EveryInfra 上架，署名 DuHu。批准范围明确为免费能力目录代表性调用 PASS；其余工具及收费数据查询未验收，不构成来源平台授权或数据再分发许可。",
+    "scope": "full-runtime"
+  },
+  "probe": {
+    "status": "pass",
+    "checkedAt": "2026-11-22T09:46:17.013814+00:00",
+    "reason": "Unauthenticated initialize and tools/list returned HTTP 200; 12 tools observed. No tools/call performed; this does not validate credentials or business queries.",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/everyinfra-2026-11-22/evidence/public-probe.json"
+  },
+  "dedupe": {
+    "level": "none",
+    "notes": "No identical endpoint/provider in local official directory; overlapping aggregation use cases exist."
+  },
+  "score": {
+    "total": 83,
+    "band": "selected",
+    "dimensions": {
+      "authority": 18,
+      "accessibility": 18,
+      "maintenanceSecurity": 13,
+      "runtime": 10,
+      "marketGap": 12,
+      "documentation": 12
+    },
+    "reasons": [
+      "Official documented MCP and commercial terms",
+      "12 public tools observed; user-reported free directory call passed, paid data tools untested.",
+      "Broader aggregation with data-source usage constraints"
+    ]
+  },
+  "blockers": [],
+  "nextStep": "Merge after CI and verify catalog distribution. No npm release needed.",
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://everyinfra.com/mcp-server"
+    },
+    {
+      "type": "license",
+      "url": "https://everyinfra.com/terms"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/everyinfra-2026-11-22/evidence/runtime-success-2026-11-23.json"
+    },
+    {
+      "type": "human-approval",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/everyinfra-2026-11-22/evidence/human-approval.json"
+    }
+  ],
+  "dispositionHistory": [
+    {
+      "decision": "ignore",
+      "recordedOn": "2026-11-23",
+      "reason": "用户明确要求：忽略这个候选",
+      "resumeOnlyOnExplicitUserRequest": true
+    },
+    {
+      "decision": "resume",
+      "recordedOn": "2026-11-23",
+      "reason": "User requested revised test and supplied successful free directory result."
+    }
+  ]
+}

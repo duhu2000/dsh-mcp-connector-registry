@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-11-22T09:46:17.013814+00:00",
+  "endpoint": "https://api.everyinfra.com/mcp",
+  "credentialUsed": false,
+  "businessCalls": 0,
+  "results": [
+    {
+      "method": "initialize",
+      "httpStatus": 200,
+      "error": null,
+      "serverInfo": {
+        "name": "EveryInfra",
+        "version": "1.0.0"
+      },
+      "toolCount": null,
+      "toolNames": [],
+      "capabilityToolSchema": null
+    },
+    {
+      "method": "tools/list",
+      "httpStatus": 200,
+      "error": null,
+      "serverInfo": null,
+      "toolCount": 12,
+      "toolNames": [
+        "everyinfra_list_capabilities",
+        "everyinfra_call_api",
+        "everyinfra_get_job",
+        "everyinfra_chat",
+        "everyinfra_list_captcha_types",
+        "everyinfra_solve_captcha",
+        "everyinfra_search",
+        "everyinfra_get_account",
+        "everyinfra_list_requests",
+        "everyinfra_get_topup_link",
+        "everyinfra_create_ticket",
+        "everyinfra_get_ticket"
+      ],
+      "capabilityToolSchema": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string",
+            "description": "Optional; only this platform's capabilities, e.g. xiaohongshu / twitter / tiktok"
+          }
+        }
+      }
+    }
+  ]
+}
