@@ -2,6 +2,14 @@
 
 供运营审核选用；不得将部分验证宣传为全部业务可用。未自动发布到任何平台。
 
+### 2026-11-23 · EveryInfra 万有引擎 · 公开数据与搜索
+
+电商与社媒公开数据 / 网页搜索 / 内容提取。接入方式：bearer；探测状态：pass。
+
+DuHu 具名批准；免费能力目录单次调用按用户报告验收 PASS，返回110个平台并包含Amazon。其他工具及收费数据查询尚未验收；公开服务条款已核实。
+
+[上架 PR #104](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/104) · [卡片详情](../connectors/everyinfra-public-data.json)
+
 ### 2026-11-22 · 新一线城市数据库
 
 城市指标 / 城市魅力指数 / 跨城比较 / 产业研究与报告。接入方式：bearer；探测状态：pass。

@@ -1,5 +1,11 @@
 [
   {
+    "id": "everyinfra-public-data",
+    "publishedOn": "2026-11-23",
+    "pr": 104,
+    "acceptance": "DuHu 具名批准；免费能力目录单次调用按用户报告验收 PASS，返回110个平台并包含Amazon。其他工具及收费数据查询尚未验收；公开服务条款已核实。"
+  },
+  {
     "id": "yicai-zhicheng-city-data",
     "publishedOn": "2026-11-22",
     "pr": 102,
