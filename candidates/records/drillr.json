@@ -103,7 +103,7 @@
     "checkedAt": "2026-11-23T15:40:37Z",
     "reviewedBy": "Little Grebe Inc. (submitter)",
     "reportUrl": "https://github.com/Little-Grebe-Inc/dsh-mcp-connector-registry/blob/add-drillr/docs/runtime-acceptance/drillr.md",
-    "notes": "DSH Desktop 0.2.2-rc.5 + dsh-mcp-connector 0.2.119，从卡片 URL 安装后走 OAuth：授权回调成功、发现 10 个工具、ticker_lookup 只读调用 HTTP 200、停用再启用后再次调用 HTTP 200、在 drillr 撤销授权后调用均为 HTTP 401 且未生成新凭据。首次安装有一次资源发现回退地址 404，重试成功，见报告第 4 节。提交方自测，维护者复核待定。"
+    "notes": "DSH Desktop 0.2.2-rc.5 + dsh-mcp-connector 0.2.119，从卡片 URL 安装后走 OAuth：授权回调成功、发现 10 个工具、ticker_lookup 只读调用 HTTP 200、停用再启用后再次调用 HTTP 200、在 drillr 撤销授权后调用均为 HTTP 401 且未生成新凭据。首次安装有一次资源发现回退地址 404，重试成功；该回退地址 2026-11-23 已在网关上线，11-24 复查 HTTP 200。未覆盖：access token（有效期 7 天）过期后的自动刷新，停用再启用不能证明这一点。见报告第 4 节。提交方自测，维护者复核待定。"
   },
   "evidence": [
     {
@@ -125,6 +125,12 @@
       "summary": "官方 MCP 仓库，MIT，工具索引与各客户端接入说明。"
     },
     {
+      "type": "license",
+      "url": "https://drillr.ai/legal/terms",
+      "collectedAt": "2026-11-24T03:00:48Z",
+      "summary": "drillr 服务条款（公开页面，无需登录）：在线服务按条款使用，不附带再分发权；隐私政策 https://drillr.ai/legal/privacy 。"
+    },
+    {
       "type": "probe",
       "url": "https://gateway.drillr.ai/.well-known/oauth-authorization-server",
       "collectedAt": "2026-11-18T12:50:09Z",
@@ -133,8 +139,8 @@
     {
       "type": "runtime-acceptance",
       "url": "https://github.com/Little-Grebe-Inc/dsh-mcp-connector-registry/blob/add-drillr/docs/runtime-acceptance/drillr.md",
-      "collectedAt": "2026-11-18T12:50:09Z",
-      "summary": "提交方自测记录：公开协议检查与 DSH Desktop 真实调用（API key 路径）；OAuth 连接器路径待验收。"
+      "collectedAt": "2026-11-24T03:00:48Z",
+      "summary": "提交方自测记录：公开协议检查；DSH Desktop 真实调用（API key 路径，第 3 节）；经 dsh-mcp-connector 的 OAuth 运行验收（授权回调、工具发现、只读调用、重连、撤销均通过，过期刷新未覆盖，第 4 节）；filing_search Facts 公开来源回归样例（第 5 节）。"
     }
   ]
 }

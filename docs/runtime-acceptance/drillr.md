@@ -1,4 +1,4 @@
-# drillr — 提交方验收记录（2026-11-18，2026-11-23 补充 OAuth 验收）
+# drillr — 提交方验收记录（2026-11-18；2026-11-23 补充 OAuth 验收；2026-11-24 补充刷新边界、回退发现上线、Facts 回归样例）
 
 记录人：drillr 团队（Little Grebe Inc.，提交方）。本文件是服务商自测记录，不是维护者审核结论；维护者审批与评分仍待完成。不含 Token、API Key、Cookie、授权码或个人数据。
 
@@ -58,7 +58,11 @@ OAuth 没有自定义 scope，卡片因此不填 `scope`。
 
 验收完成后在连接器里「断开」了这条连接。
 
-首次点「验证并安装」时报过一次「受保护资源发现失败（HTTP 404）」，重试即成功。按 `lib/oauth.js`：连接器先发 `initialize`，从 401 的 `WWW-Authenticate` 读 `resource_metadata`；如果这一步没拿到，就回退到 `https://gateway.drillr.ai/mcp/.well-known/oauth-protected-resource/data`，而 drillr 没有提供这个地址，所以返回 404。同一段发现逻辑在本机终端里直接运行，走代理和不走代理都成功，首次失败应是 DSH 刚启动时的偶发情况。drillr 计划在网关补上这个回退地址，让偶发失败时也能连上。
+**未覆盖：access token 过期后的自动刷新。** 上表的「重连」是停用再启用连接，用的仍是同一枚未过期的 access token，不能证明 token 过期后连接器会用 refresh token 换到新凭据并继续工作。drillr 签发的 access token 有效期为 7 天，本次验收窗口内没有发生过期，也没有在 DSH 里观察到任何一次刷新请求。所以「过期驱动的刷新」这一项本次没有验证，状态是未测。已经覆盖的只有反方向：撤销授权后，refresh token 换不出新凭据（见「撤销授权」一行）。
+
+首次点「验证并安装」时报过一次「受保护资源发现失败（HTTP 404）」，重试即成功。按 `lib/oauth.js`：连接器先发 `initialize`，从 401 的 `WWW-Authenticate` 读 `resource_metadata`；如果这一步没拿到，就回退到 `https://gateway.drillr.ai/mcp/.well-known/oauth-protected-resource/data`，而当时 drillr 没有提供这个地址，所以返回 404。同一段发现逻辑在本机终端里直接运行，走代理和不走代理都成功，首次失败应是 DSH 刚启动时的偶发情况。
+
+**回退地址已上线（2026-11-23）。** drillr 网关已提供这个回退地址，返回的文档和 401 挑战指向的文档相同（`resource` 为 `https://gateway.drillr.ai`，`authorization_servers` 为 `https://gateway.drillr.ai`），所以连接器无论从哪条路发现，拿到的都是同一份元数据。2026-11-24T03:00Z 无凭据复查：`GET /mcp/.well-known/oauth-protected-resource/data` 返回 HTTP 200。上线之后没有在 DSH 里重做一次「挑战读取失败、走回退」的安装，因为这条路径无法稳定触发；上面的复查只证明回退地址可用。
 
 ## 5. 数据正确性：filing_search 金额倍率（回应审核意见）
 
@@ -68,6 +72,27 @@ OAuth 没有自定义 scope，卡片因此不填 `scope`。
 
 - 888 条的打印值和全额不同，即报表按千、百万或十亿列示，全额都按倍率换算过。例如 NVDA 2026 年委托书「total target pay」：打印 `35.5`，全额 `35,500,000` USD，期末 2026-12-31。
 - 全额小于 1,000 的货币类 Fact 共 13 条，逐条核对都正确：每股股息（7203.T，90 日元）、股东总回报指数（BR，基期 100）、报表上的「—」（记为 0）。没有发现「十亿美元显示成 100.0」这类倍率丢失。
+
+### 公开来源回归样例（2026-11-24）
+
+下表每一行都是生产 `fact_as_reported` 里的真实记录，按 Fact ID 列出。原文都可以在 SEC EDGAR 公开打开核对，我们已逐条对照原件表格确认。「filing_search 输出」一列是把同一条记录交给生产版网关格式化代码得到的那一行。
+
+| # | 公司 · 原文位置 | 原文打印值 | 倍率（原文表头） | 换算后 `value` | 币种 | 报告期 | filing_search 输出 |
+|---|---|---|---|---|---|---|---|
+| 1 | AAPL 10-K，[0000320193-25-000079](https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm)（2025-10-31），合并利润表「Total net sales」2024 列 | `391,035` | ×1,000,000（in millions） | 391,035,000,000 | USD | 2023-10-01 → 2024-09-28 | `value: **391,035,000,000 USD** (printed: 391,035 ×1,000,000)` |
+| 2 | DOCU 10-K，[0001261333-26-000021](https://www.sec.gov/Archives/edgar/data/1261333/000126133326000021/docu-20260131.htm)（2026-03-18），合并利润表「Total revenue」 | `3,219,500` | ×1,000（in thousands） | 3,219,500,000 | USD | 2025-02-01 → 2026-01-31 | `value: **3,219,500,000 USD** (printed: 3,219,500 ×1,000)` |
+| 3 | AAPL 10-K，[0000320193-24-000123](https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm)（2024-11-01），现金及有价证券表 2023-09-30「Money market funds」行「Unrealized Losses」列 | `—`（横杠） | ×1,000,000（in millions） | 0 | USD | 时点 2023-09-30 | `value: **0 USD** (printed: —)` |
+| 4 | MSFT 10-K，[0000950170-24-087843](https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm)（2024-07-30），投资表 2023-06-30「Certificates of deposit」行「Equity and Other Investments」列 | `0` | ×1,000,000（in millions） | 0 | USD | 时点 2023-06-30 | `value: **0 USD**` |
+
+Fact ID：1 `1ef9fcfda657e027f6b88770b017a36a`，2 `39a07613b46666dd7715fe75dd3ef0e6`，3 `55625b52b69047b5ea1eb5683e793206`，4 `6002f3695ba40c183e7fc075b4eaa05a`。
+
+**横杠、缺失与真正的 0 怎么区分：**
+
+- **横杠（样例 3）**：SEC 报表里的「—」表示无 / 零，所以 `value` 记为 0，但 `printed_value` 原样保留 `—`，输出里写成 `(printed: —)`。
+- **原文就是 0（样例 4）**：打印值本身就是 `0`，和换算值相同，输出里不再附打印值。
+- 所以调用方看 `printed_value` 就能分清这两种情况。之前的摘要写的「『—』记为 0」，指的就是样例 3 这种写法。
+- **原文空白**：空白单元格不生成 Fact，不会被当成 0。
+- **非数值**：比如区间「3.8% – 5.6%」这类打印值，`value` 为空，区间放在 `value_low` / `value_high`。输出里直接给打印值，并注明 `(as printed; no normalized value)`，不会把它当成 0。
 
 因此卡片不再引导用户避开 Facts，卡片描述里写明了数值同时给出打印值和换算后的全额，并标注币种和报告期。
 
