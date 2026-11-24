@@ -12,7 +12,8 @@ const [workflow, discoveryWorkflow, readme, contributing, onboarding] = await Pr
 
 test('pull requests include the rebuilt catalog before it is published from main', () => {
   assert.match(workflow, /permissions:\s*\n\s+contents: read/);
-  assert.match(workflow, /validate:\s*[\s\S]*?- run: npm run test:public[\s\S]*?- run: npm run validate[\s\S]*?- run: npm run assets:check/);
+  const validate = workflow.split(/  validate:\r?\n/)[1].split(/  rebuild-catalog:\r?\n/)[0];
+  assert.match(validate, /- run: npm test\s+- run: npm run validate\s+- run: npm run assets:check/);
   const rebuild = workflow.split(/  rebuild-catalog:\r?\n/)[1].split(/  purge-cdn:\r?\n/)[0];
   assert.match(rebuild, /- run: npm run build/);
   assert.match(rebuild, /git diff --binary --no-ext-diff HEAD/);

@@ -13,26 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
-      - run: npm run test:public
-      - name: Run historical regression tests on main and tooling changes
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-        shell: bash
-        run: |
-          exclude=(':(exclude)connectors/**' ':(exclude)assets/**')
-          while IFS= read -r path; do
-            exclude+=(":(exclude)$path")
-          done < .github/catalog-products.txt
-          if [[ -z "$BASE_SHA" ]] || git diff --quiet "$BASE_SHA"...HEAD -- connectors assets || ! git diff --quiet "$BASE_SHA"...HEAD -- . "${exclude[@]}"; then
-            npm test
-          fi
+      - run: npm test
       - run: npm run validate
       - run: npm run assets:check
 

@@ -129,7 +129,7 @@ test('runtime acceptance gate rejects mismatched IDs, non-HTTPS evidence, and cr
 test('public PR validation accepts descriptor-only submissions without review dossiers', async () => {
   const workflow = await readFile(new URL('../.github/workflows/ci.yml', import.meta.url), 'utf8');
   const template = await readFile(new URL('../.github/PULL_REQUEST_TEMPLATE.md', import.meta.url), 'utf8');
-  assert.match(workflow, /npm run test:public/);
+  assert.match(workflow, /- run: npm test/);
   assert.doesNotMatch(workflow, /check-new-connectors\.mjs/);
   assert.doesNotMatch(template, /candidates\/records/);
 });

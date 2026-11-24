@@ -73,6 +73,7 @@ npm run test:public && npm run validate && npm run assets:check
 ```
 
 - `npm run test:public` 检查构建逻辑、分类和连接器约束。
+- GitHub 在 PR 和 `main` 上执行相同的全量回归测试（`npm test`）。测试使用仓库已有的夹具。提交新卡片只需提供公开资料，若某项历史断言与卡片变更冲突，请在 PR 说明变更依据。
 - `npm run validate` 确定性重建 `catalog.json`、`catalog-stats.json` 和 README 数量区块，并执行 Schema、重复 ID/ServerName、URL 与潜在密钥审计。
 - `npm run assets:check` 检查远程 Logo 的图片类型和浏览器跨域兼容性。
 
