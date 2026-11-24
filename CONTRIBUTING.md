@@ -9,7 +9,7 @@
 2. 复制 `connectors/example.sample.json` 为 `connectors/<connector-id>.json`。
 3. 文件名必须与描述中的 `id` 完全一致；一个文件只包含一个 ConnectorDescriptor。
 4. 只提交公开元数据和公开 URL，不提交任何真实凭据。
-5. 运行 `npm ci --legacy-peer-deps`，再依次执行 `npm test && npm run validate && npm run assets:check`。
+5. 运行 `npm ci --legacy-peer-deps`，再依次执行 `npm run test:public && npm run validate && npm run assets:check`。
 6. 提交 PR，并完整填写自动生成的 Connector PR checklist。
 
 完整字段说明、示例和常见问题见 [`docs/ONBOARDING.md`](docs/ONBOARDING.md)。请只提交连接器源文件和相关公开资源，不要手动修改或提交 `catalog.json`、`catalog-stats.json` 或 README 数量区块；PR 合并到 `main` 后，CI 会自动重建目录与产品统计。
@@ -42,8 +42,8 @@ Metadata。DCR 如果签发 Client Secret，可声明 `client_secret_post` 或
 - `featured` 保持 `false`；精选状态由维护者根据稳定性和用户反馈管理。
 - Prompt 使用通用示例，不包含真实客户、个人信息或受限数据。
 - 使用第三方名称和 Logo 时，在 PR 中提供官网来源。
-- 已在本地运行 `npm ci --legacy-peer-deps` 和 `npm test && npm run validate && npm run assets:check`。
-- 新增 Connector 必须同时提交 `candidates/records/<connector-id>.json`；维护者在核验官方资料、许可证/服务条款和鉴权后填写人工批准，并链接不含凭据或个人数据的真实运行验收报告。未完成该记录时 CI 会阻断描述符 PR。
+- 已在本地运行 `npm ci --legacy-peer-deps` 和 `npm run test:public && npm run validate && npm run assets:check`。
+- 请在 PR 提供可公开的厂商接入文档、鉴权和服务条款链接，说明费用和已验证的能力。维护者在私有仓库核验同一版卡片的来源、条款、鉴权和验收证据，再在本 PR 批准或指出需要修改的字段和判据。卡片发生变化后，维护者复核新的提交。
 - 无鉴权候选可用 `npm run candidates:accept -- --url <HTTPS MCP URL> --tool <只读工具> --args '<JSON>' --output <报告.md>` 生成最小化验收摘要。该命令只允许公网 HTTPS 和明确声明为只读、非破坏性的工具，不保存原始响应，并会在落盘前扫描工具结果中的疑似凭据。需要鉴权的候选必须使用独立、最小权限测试账号人工验收，不得把凭据放入命令行或报告。
 
 CI 使用已发布的 `dsh-mcp-connector` 校验器检查 Schema、重复 Connector ID、重复

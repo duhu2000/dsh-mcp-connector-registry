@@ -66,7 +66,7 @@ flowchart LR
 
 1. 复制 `connectors/example.sample.json` 为 `connectors/<connector-id>.json`，文件名必须与 `id` 完全一致。
 2. 只提交公开元数据；禁止 Token、API Key、密码、Cookie 和 Client Secret。
-3. 运行 `npm ci --legacy-peer-deps`，再执行 `npm test && npm run validate && npm run assets:check`。
+3. 运行 `npm ci --legacy-peer-deps`，再执行 `npm run test:public && npm run validate && npm run assets:check`。
 4. 提交 PR，通过 Schema、重复 ID/ServerName、URL 和密钥审计后合并。
 5. 不要手动修改或提交 `catalog.json`、`catalog-stats.json` 或 README 数量区块；合并到 `main` 后，CI 会自动重建并提交这些公开产物，再自动清理并校验 jsDelivr 缓存。每周健康巡检会生成探针报告 artifact。
 

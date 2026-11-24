@@ -69,10 +69,10 @@ cp connectors/example.sample.json connectors/<connector-id>.json
 
 ```bash
 npm ci --legacy-peer-deps
-npm test && npm run validate && npm run assets:check
+npm run test:public && npm run validate && npm run assets:check
 ```
 
-- `npm test` 检查构建逻辑、分类和连接器约束。
+- `npm run test:public` 检查构建逻辑、分类和连接器约束。
 - `npm run validate` 确定性重建 `catalog.json`、`catalog-stats.json` 和 README 数量区块，并执行 Schema、重复 ID/ServerName、URL 与潜在密钥审计。
 - `npm run assets:check` 检查远程 Logo 的图片类型和浏览器跨域兼容性。
 
@@ -101,11 +101,11 @@ git commit -m "Add <connector-id>"
 git push origin add-my-connector
 ```
 
-向 `duhu2000/dsh-mcp-connector-registry:main` 发起 Pull Request，并完整填写 PR checklist。新增 Connector 还需要维护者补充 `candidates/records/<connector-id>.json`：核验 Official Registry/厂商资料、鉴权、许可证或服务条款，记录人工批准，并链接不含凭据、个人数据或客户数据的真实运行验收报告。未进入 Official MCP Registry 的项目，仅在厂商自己的 HTTPS 文档明确发布 MCP 启动配置，且包或端点归属可独立核验时，才可按 `official-vendor` 人工审核通道处理；插件市场文案或第三方目录不能单独作为权威来源。确需仓库托管图标时，再提交 `assets/<connector-id>.*`。
+向 `duhu2000/dsh-mcp-connector-registry:main` 发起 Pull Request，并完整填写 PR checklist。请在 PR 提供可公开的厂商接入文档、鉴权和服务条款链接，说明费用和已验证的能力。维护者在私有仓库核验同一版卡片的来源、条款、鉴权和验收证据，再在本 PR 批准或指出需要修改的字段和判据。卡片发生变化后，维护者复核新的提交。未进入 Official MCP Registry 的项目，仅在厂商自己的 HTTPS 文档明确发布 MCP 启动配置，且包或端点归属可独立核验时，才可按 `official-vendor` 人工审核通道处理；插件市场文案或第三方目录不能单独作为权威来源。确需仓库托管图标时，再提交 `assets/<connector-id>.*`。
 
 ### 第 6 步：等待 CI、审核与自动发布
 
-CI 先验证新增描述符已具备上述人工审核与真实运行验收记录。全部检查通过后，由维护者复核官网、MCP 文档、鉴权、品牌来源、公开可达性和交互安全性。PR 合并到 `main` 后：
+CI 验证公开描述符、目录构建和图标。维护者在 GitHub PR 中反馈需补充的公开资料，并对当前提交作出审核决定。全部检查通过后，由维护者复核官网、MCP 文档、鉴权、品牌来源、公开可达性和交互安全性。PR 合并到 `main` 后：
 
 1. `validate` job 再次执行测试、Descriptor 校验和图片检查；
 2. `rebuild-catalog` job 运行确定性构建；
@@ -343,8 +343,8 @@ OAuth 卡片必须发布可验证的 Protected Resource Metadata 与 Authorizati
 - [ ] 服务说明写明重要权限、费用、数据范围和副作用。
 - [ ] 第三方名称和 Logo 已获得使用权，并在 PR 提供官方来源。
 - [ ] stdio 命令来自官方公开包，且不要求 Registry 探针执行本地命令。
-- [ ] 维护者已提交同 ID 候选记录，完成官方证据、许可证/服务条款、人工批准和真实运行验收；记录不含凭据或个人数据。
-- [ ] 已运行 `npm ci --legacy-peer-deps` 和 `npm test && npm run validate && npm run assets:check`。
+- [ ] 已提供官方来源、使用条款和脱敏的验证范围，便于维护者核验。
+- [ ] 已运行 `npm ci --legacy-peer-deps` 和 `npm run test:public && npm run validate && npm run assets:check`。
 - [ ] 只提交 Connector 源文件和必要图片，不手动提交 `catalog.json`、`catalog-stats.json`、README 数量区块、`node_modules`、日志或本机配置。
 
 ## 10. 常见问题（FAQ）

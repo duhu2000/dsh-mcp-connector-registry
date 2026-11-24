@@ -12,7 +12,7 @@ const [workflow, discoveryWorkflow, readme, contributing, onboarding] = await Pr
 
 test('CI 分离校验与 main 合并后的 catalog 自动重建', () => {
   assert.match(workflow, /permissions:\s*\n\s+contents: write/);
-  assert.match(workflow, /validate:\s*[\s\S]*?- run: npm test[\s\S]*?- run: npm run validate[\s\S]*?- run: npm run assets:check/);
+  assert.match(workflow, /validate:\s*[\s\S]*?- run: npm run test:public[\s\S]*?- run: npm run validate[\s\S]*?- run: npm run assets:check/);
   assert.match(workflow, /rebuild-catalog:/);
   assert.match(workflow, /if: github\.event_name == 'push' && github\.ref == 'refs\/heads\/main'/);
   assert.match(workflow, /needs: validate/);
@@ -48,7 +48,7 @@ test('main 每次合并后都自动清理并验证 jsDelivr 缓存', () => {
 
 test('贡献文档使用独立校验命令并说明 catalog 由 CI 生成', () => {
   for (const document of [readme, contributing, onboarding]) {
-    assert.match(document, /npm test && npm run validate && npm run assets:check/);
+    assert.match(document, /npm run test:public && npm run validate && npm run assets:check/);
     assert.match(document, /不要手动修改或提交.*`catalog\.json`/s);
   }
   assert.match(readme, /docs\/ONBOARDING\.md/);

@@ -6,7 +6,7 @@ on:
   pull_request:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   validate:
@@ -20,16 +20,23 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
-      - run: npm test
-      - name: Require human review and scoped acceptance evidence for new connectors
-        if: github.event_name == 'pull_request'
-        run: node scripts/check-new-connectors.mjs --base '${{ github.event.pull_request.base.sha }}'
+      - run: npm run test:public
+      - name: Run historical regression tests on main and tooling changes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        shell: bash
+        run: |
+          if [[ -z "$BASE_SHA" ]] || ! git diff --quiet "$BASE_SHA"...HEAD -- . ':(exclude)connectors/**' ':(exclude)assets/**'; then
+            npm test
+          fi
       - run: npm run validate
       - run: npm run assets:check
 
   rebuild-catalog:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: validate
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
