@@ -36,7 +36,7 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 截至 2026-11-23，公共 Registry 已发布 136 条连接器描述；与随包的 4 张企查查卡片合并去重后，市场页可浏览 140 张卡片，覆盖企业数据、金融投资、法律合规、开发工具、办公协作、调研分析、设计创意、效率工具、其他 9 类。首页推荐由插件版本的推荐规则决定，不以 Registry 的 featured 字段数量代表首页推荐数量。Registry 可独立持续更新，实际数量以客户端刷新后的市场页签徽标和 [catalog-stats.json](catalog-stats.json) 为准。
 <!-- catalog-stats:end -->
 
-`connectors/*.json` 是 Connector 源文件，根目录 `catalog.json` 是 CI 在每次合并后自动重建的公开清单和数量权威来源。请直接查看 [`catalog.json`](catalog.json)，或在仓库根目录运行以下只读命令获取实时数量及分类分布，避免 README 手写列表随批量上架而失效：
+`connectors/*.json` 是 Connector 源文件，根目录 [`catalog.json`](catalog.json) 是从源文件生成的公开清单，也是数量的权威来源。CI 在 PR 中重建并比对清单。可在仓库根目录运行以下命令查看数量和分类：
 
 ```bash
 node -e "const {connectors}=require('./catalog.json'); console.log('总数:', connectors.length); console.table(connectors.reduce((n,x)=>(n[x.category]=(n[x.category]||0)+1,n),{}))"
@@ -56,19 +56,18 @@ flowchart LR
   B -->|能| C[Fork 并提交 Connector PR]
   B -->|不能| D[提交 Connector request issue]
   D --> E[维护者评估并代建]
-  C --> F[CI 校验与维护者审核]
+  C --> F[CI 重建目录并校验，维护者审核]
   E --> F
-  F --> G[合并到 main]
-  G --> H[CI 自动重建目录与产品统计]
-  H --> J[CI 自动清理并校验 jsDelivr]
+  F --> G[卡片与生成目录一起合并到 main]
+  G --> J[CI 自动清理并校验 jsDelivr]
   J --> I[用户刷新市场]
 ```
 
 1. 复制 `connectors/example.sample.json` 为 `connectors/<connector-id>.json`，文件名必须与 `id` 完全一致。
 2. 只提交公开元数据；禁止 Token、API Key、密码、Cookie 和 Client Secret。
 3. 运行 `npm ci --legacy-peer-deps`，再执行 `npm run test:public && npm run validate && npm run assets:check`。
-4. 提交 PR，通过 Schema、重复 ID/ServerName、URL 和密钥审计后合并。
-5. 不要手动修改或提交 `catalog.json`、`catalog-stats.json` 或 README 数量区块；合并到 `main` 后，CI 会自动重建并提交这些公开产物，再自动清理并校验 jsDelivr 缓存。每周健康巡检会生成探针报告 artifact。
+4. 将连接器和生成目录提交到同一份 PR。`npm run build` 可重新生成目录。若缺少生成文件，`rebuild-catalog` 检查会提供补丁。
+5. 维护者审核当前提交。合并到 `main` 后，CI 自动清理并校验 jsDelivr 缓存，用户可从原地址刷新卡片。
 
 `featured` 由维护者管理。第三方收录不代表服务商官方背书，实际权限、费用和可用性以服务商为准。
 
