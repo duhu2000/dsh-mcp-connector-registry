@@ -22,7 +22,7 @@ jobs:
           set -euo pipefail
           checkout=$(mktemp -d)
           git archive HEAD -- .github README.md CONTRIBUTING.md package.json package-lock.json \
-            product-metadata.json catalog.json catalog-stats.json assets connectors schema scripts test \
+            product-metadata.json catalog.json catalog-stats.json assets connectors fixtures/stdio-server.mjs schema scripts test \
             docs/ONBOARDING.md docs/verification | tar -x -C "$checkout"
           cd "$checkout"
           npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
