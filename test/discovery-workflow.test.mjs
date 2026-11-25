@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile, mkdtemp, writeFile, rm } from 'node:fs/promises';
+import { readFile, readdir, mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -69,16 +69,6 @@ test('monthly recovery refuses incomplete, unknown, incremental or malformed sna
   assert.throws(() => buildMonthlyBatch({ ...report, candidates: null }), /candidates array/);
 });
 
-test('incomplete monthly CI preserves artifacts and fails rather than silently skipping publication', async () => {
-  const workflow = await readFile(new URL('../.github/workflows/discovery.yml', import.meta.url), 'utf8');
-  const artifact = workflow.indexOf('name: monthly-data-mcp-review-batch');
-  const failure = workflow.indexOf('name: Fail visibly when the monthly source is incomplete');
-  const publication = workflow.indexOf('name: Create or update the single monthly review issue');
-  assert.ok(artifact < failure && failure < publication);
-  assert.match(workflow.slice(failure, publication), /always\(\).*steps\.discover\.outcome == 'success'.*outputs\.complete == 'false'/);
-  assert.match(workflow.slice(failure, publication), /core\.setFailed/);
-});
-
 test('monthly CLI preserves last-good output when recovery input is incomplete', async (t) => {
   const directory = await mkdtemp(join(tmpdir(), 'registry-monthly-test-'));
   t.after(() => rm(directory, { recursive: true, force: true }));
@@ -127,17 +117,14 @@ test('discovery issue upsert is idempotent and never creates a daily duplicate',
   assert.equal(updateGithub.calls.update[0].state, 'open');
 });
 
-test('discovery workflow only emits artifacts and idempotent issues', async () => {
-  const workflow = await readFile(new URL('../.github/workflows/discovery.yml', import.meta.url), 'utf8');
-  assert.match(workflow, /contents: read/);
-  assert.match(workflow, /issues: write/);
-  assert.match(workflow, /--updated-since/);
-  assert.match(workflow, /--probe --max-probes 25/);
-  assert.match(workflow, /--allow-partial/);
-  assert.match(workflow, /source\.complete/);
-  assert.equal((workflow.match(/if: steps\.completeness\.outputs\.complete == 'true'/g) ?? []).length, 3);
-  assert.match(workflow, /--size 10/);
-  assert.match(workflow, /dsh-data-mcp-discovery-daily/);
-  assert.match(workflow, /dsh-data-mcp-discovery-monthly/);
-  assert.doesNotMatch(workflow, /git push|pulls\.create|connectors\//);
+test('public workflows do not run discovery or consume candidate reports', async () => {
+  const workflows = new URL('../.github/workflows/', import.meta.url);
+  const files = (await readdir(workflows)).filter(name => /\.ya?ml$/.test(name));
+  assert.ok(files.includes('ci.yml'));
+  assert.ok(!files.some(name => /^discovery\.ya?ml$/i.test(name)), 'retired discovery workflow');
+  for (const name of files) {
+    const workflow = await readFile(new URL(name, workflows), 'utf8');
+    assert.doesNotMatch(workflow, /candidates:(?:discover|monthly|curated-sources)\b|(?:discover-candidates|build-monthly-batch|audit-curated-sources)\.mjs/, name);
+    assert.doesNotMatch(workflow, /candidate-output|candidate-report\.(?:json|md)|monthly-batch\.md|source-audit\.(?:json|md)|dsh-data-mcp-(?:discovery|curated-sources)/, name);
+  }
 });
