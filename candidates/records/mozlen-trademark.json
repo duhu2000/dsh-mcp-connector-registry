@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "id": "mozlen-trademark",
+  "registryName": "review/mozlen-trademark",
+  "title": "摩知轮商标检索",
+  "provider": "摩知轮（北京摩知轮科技有限公司）",
+  "providerRegion": "国内",
+  "status": "PASS",
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://www.mozlen.com/",
+    "status": "active"
+  },
+  "connectionAcceptance": {
+    "status": "pass",
+    "toolCount": 8,
+    "checkedAt": "2026-11-25T15:02:25+08:00",
+    "reportPath": "candidates/drafts/mozlen-2026-11-25/evidence/connection-acceptance.json",
+    "notes": "Assistant observed DSH connected state, 8 tools and trademark_search schema."
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-25T15:21:00+08:00",
+    "reviewedBy": "Codex (DSH UI observation)",
+    "reportPath": "candidates/drafts/mozlen-2026-11-25/evidence/runtime-acceptance.json",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/mozlen-2026-11-25/evidence/runtime-acceptance.json",
+    "notes": "DSH observed one exact-name China search: total69, returned3; no retries, pagination or downloads. Other7 tools untested; actual fee unknown."
+  },
+  "license": {
+    "status": "service-terms",
+    "evidenceUrl": "https://www.mozlen.com/yhxy",
+    "notes": "General service terms reviewed; personal account use only, no redistribution rights implied."
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "mozlen-trademark",
+    "notes": "用户明确批准“批准摩知轮上架，署名 DuHu”。仅中国商标文字检索已验收，其余7个工具未逐项验收；公开服务条款已核实。",
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-25T15:37:10.374850+08:00",
+    "scope": "full-runtime"
+  },
+  "dedupe": {
+    "level": "none",
+    "overlap": [
+      "quandashi-trademark"
+    ],
+    "notes": "Same category; distinct vendor and MCP endpoint. No existing formal Mozlen card found."
+  },
+  "probe": {
+    "status": "pass",
+    "reason": "Public OAuth metadata verified; authenticated DSH discovery and representative trademark search succeeded."
+  },
+  "nextStep": "Merge PR #115 after CI, verify published catalog and generated documentation. No additional business query required.",
+  "authentication": {
+    "mode": "oauth2",
+    "metadata": "verified",
+    "connection": "DSH OAuth connection and eight tools observed",
+    "limitation": "Formal market card OAuth flow not separately retested."
+  },
+  "score": {
+    "total": 85,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 20,
+      "maintenanceSecurity": 12,
+      "runtime": 15,
+      "marketGap": 5,
+      "documentation": 8
+    },
+    "reasons": [
+      "Official vendor endpoint and OAuth metadata.",
+      "Eight tools discovered; one representative business query passed.",
+      "General service terms reviewed; actual account price not independently verified."
+    ]
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://www.mozlen.com/"
+    },
+    {
+      "type": "license",
+      "url": "https://www.mozlen.com/yhxy"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/mozlen-2026-11-25/evidence/runtime-acceptance.json"
+    }
+  ]
+}

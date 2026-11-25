@@ -32,9 +32,12 @@
     "notes": "General service terms reviewed; personal account use only, no redistribution rights implied."
   },
   "review": {
-    "decision": "pending",
+    "decision": "approved",
     "proposedConnectorId": "mozlen-trademark",
-    "notes": "User requested onboarding; candidate-specific final listing approval not yet recorded."
+    "notes": "用户明确批准“批准摩知轮上架，署名 DuHu”。仅中国商标文字检索已验收，其余7个工具未逐项验收；公开服务条款已核实。",
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-25T15:37:10.374850+08:00",
+    "scope": "full-runtime"
   },
   "dedupe": {
     "level": "none",
@@ -47,7 +50,7 @@
     "status": "pass",
     "reason": "Public OAuth metadata verified; authenticated DSH discovery and representative trademark search succeeded."
   },
-  "nextStep": "Candidate-specific signed listing approval, then promote official card after CI. No additional business calls needed.",
+  "nextStep": "Merge PR #115 after CI, verify published catalog and generated documentation. No additional business query required.",
   "authentication": {
     "mode": "oauth2",
     "metadata": "verified",
