@@ -13,13 +13,14 @@
 
 ## 法律合规
 
-共 6 个连接器。
+共 7 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
 | [企查查·法律数据](https://github.com/duhu2000/dsh-mcp-connector/blob/main/catalog/catalog.json) | 法规条文 / 司法案例检索与核验 | 企查查 Qichacha | oauth2-pkce | 插件内置 | 未提供独立探测记录 |
 | [巴西参议院开放数据](../connectors/brazil-senate-open-data.json) | 法案进程 / 表决与委员会 / 议员活动 / 采购预算 | Sidney Bissoli（独立社区项目） | none | 公共目录 | pass |
 | [元典法律数据](../connectors/huayu-legal.json) | 法规 / 案例 / 企业 / 证券法律数据 | 华宇元典 | bearer | 公共目录 | unverified |
+| [摩知轮商标检索](../connectors/mozlen-trademark.json) | 国内外商标 / 图形近似 / 公告 / 商标裁文 | 摩知轮（北京摩知轮科技有限公司） | oauth2-pkce | 公共目录 | pass |
 | [北大法宝·法律检索](../connectors/pkulaw-legal.json) | 法规 / 法条 / 司法案例检索与引用核验 | 北大法宝 PKULaw | bearer | 公共目录 | unverified |
 | [权大师商标查询](../connectors/quandashi-trademark.json) | 商标检索 / 公告查询 / 全球商标数据 | 权大师 | bearer | 公共目录 | pass |
 | [威科先行](../connectors/wolterskluwer.json) | 法规 / 案例 / 法律检索 / 专业内容 | Wolters Kluwer | bearer | 公共目录 | unverified |
