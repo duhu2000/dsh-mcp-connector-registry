@@ -2,6 +2,22 @@
 
 仅收录有合并证据的正式上架；不将修改日期当作上架日期。历史条目尚未全部回溯。
 
+### 2026-11-25 · Open Targets · 疾病与靶点数据
+
+疾病关联靶点 / 基因与药物检索 / 研究证据与关联评分。接入方式：none；探测状态：pass。
+
+DuHu 批准上架。官方免密入口发现 5 个工具；乳腺癌直接关联查询经疾病标识修正后返回 3 个靶点，状态 pass。实际 4 次 tools/call：Schema、首次空结果、名称检索、修正关联查询；未自动重试。其他业务能力未逐项验收；关联评分不代表治疗效果。
+
+[上架 PR #117](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/117) · [卡片详情](../connectors/open-targets-platform.json)
+
+### 2026-11-25 · NASA Earthdata · 地球科学数据目录
+
+遥感数据集发现 / 地区与时间筛选 / 数据文件目录与引用。接入方式：none；探测状态：pass。
+
+DuHu 批准上架。官方免密入口发现 7 个工具；一次指定长三角局部矩形区域和 2025 年 7 月的 MODIS 数据集目录检索返回 3 个候选，状态 pass。尚未核验具体观测文件、下载或转换；各数据集的许可和访问条件分别适用。
+
+[上架 PR #117](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/117) · [卡片详情](../connectors/nasa-earthdata-cmr.json)
+
 ### 2026-11-25 · 摩知轮商标检索
 
 国内外商标 / 图形近似 / 公告 / 商标裁文。接入方式：oauth2-pkce；探测状态：pass。
