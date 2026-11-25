@@ -10,9 +10,9 @@
 3. 文件名必须与描述中的 `id` 完全一致；一个文件只包含一个 ConnectorDescriptor。
 4. 只提交公开元数据和公开 URL，不提交任何真实凭据。
 5. 运行 `npm ci --legacy-peer-deps`，再依次执行 `npm test && npm run validate && npm run assets:check`。
-6. 提交 PR，并完整填写自动生成的 Connector PR checklist。
+6. 将连接器和生成目录提交到同一份 PR，并填写 Connector PR checklist。
 
-完整字段说明、示例和常见问题见 [`docs/ONBOARDING.md`](docs/ONBOARDING.md)。请只提交连接器源文件和相关公开资源，不要手动修改或提交 `catalog.json`、`catalog-stats.json` 或 README 数量区块；PR 合并到 `main` 后，CI 会自动重建目录与产品统计。
+完整字段说明、示例和常见问题见 [`docs/ONBOARDING.md`](docs/ONBOARDING.md)。`npm run build` 会生成目录、统计和分类文档。若 PR 遗漏生成文件，可在 Actions 运行页下载 `catalog-products`，解压并在 PR 分支运行 `git apply catalog-products.patch`，检查差异后提交。若补丁已过期，请先同步 `main` 并重新构建。
 
 如果暂时不熟悉 Descriptor，也可以使用
 [Connector request](https://github.com/duhu2000/dsh-mcp-connector-registry/issues/new?template=connector-request.yml)
@@ -47,8 +47,8 @@ Metadata。DCR 如果签发 Client Secret，可声明 `client_secret_post` 或
 - 无鉴权候选可用 `npm run candidates:accept -- --url <HTTPS MCP URL> --tool <只读工具> --args '<JSON>' --output <报告.md>` 生成最小化验收摘要。该命令只允许公网 HTTPS 和明确声明为只读、非破坏性的工具，不保存原始响应，并会在落盘前扫描工具结果中的疑似凭据。需要鉴权的候选必须使用独立、最小权限测试账号人工验收，不得把凭据放入命令行或报告。
 
 CI 使用已发布的 `dsh-mcp-connector` 校验器检查 Schema、重复 Connector ID、重复
-ServerName、URL 与潜在密钥。合并到 `main` 后，独立 CI job 会重建 `catalog.json`、
-`catalog-stats.json` 和 README 数量区块，仅在产物发生变化时由 `github-actions[bot]` 自动提交；随后 `purge-cdn` job 清理 jsDelivr 分支缓存，
+ServerName、URL 与潜在密钥。`rebuild-catalog` 在 PR 中独立重建并比对提交的目录。
+合并到 `main` 后，`purge-cdn` 清理 jsDelivr 分支缓存，
 并以完整 SHA-256 校验 CDN 内容与 `main` 产物一致。需要凭据的服务不会
 在公共 CI 中获得真实 Key，因此健康探针可能保持 `unverified`；这不会降低凭据安全要求。
 
