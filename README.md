@@ -11,8 +11,8 @@
 |---|---:|---|
 | [企业数据](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/CONNECTOR-DIRECTORY.md#%E4%BC%81%E4%B8%9A%E6%95%B0%E6%8D%AE) | 2 | [企查查·企业工商](https://github.com/duhu2000/dsh-mcp-connector/blob/main/catalog/catalog.json)、[企查查·招投标](https://github.com/duhu2000/dsh-mcp-connector/blob/main/catalog/catalog.json) |
 | [金融投资](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/CONNECTOR-DIRECTORY.md#%E9%87%91%E8%9E%8D%E6%8A%95%E8%B5%84) | 22 | [Wind·股票数据](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/wind-stock-data.json)、[TuShare](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/tushare.json)、[AKShare](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/akshare.json) 等 |
-| [法律合规](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/CONNECTOR-DIRECTORY.md#%E6%B3%95%E5%BE%8B%E5%90%88%E8%A7%84) | 6 | [企查查·法律数据](https://github.com/duhu2000/dsh-mcp-connector/blob/main/catalog/catalog.json)、[北大法宝·法律检索](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/pkulaw-legal.json)、[巴西参议院开放数据](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/brazil-senate-open-data.json) 等 |
-| [调研分析](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/CONNECTOR-DIRECTORY.md#%E8%B0%83%E7%A0%94%E5%88%86%E6%9E%90) | 51 | [飞常准航空数据](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/variflight-aviation-data.json)、[智慧芽专利与文献](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/patsnap.json)、[OpenAlex 全球学术研究](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/openalex-research-catalog.json) 等 |
+| [法律合规](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/CONNECTOR-DIRECTORY.md#%E6%B3%95%E5%BE%8B%E5%90%88%E8%A7%84) | 7 | [企查查·法律数据](https://github.com/duhu2000/dsh-mcp-connector/blob/main/catalog/catalog.json)、[北大法宝·法律检索](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/pkulaw-legal.json)、[巴西参议院开放数据](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/brazil-senate-open-data.json) 等 |
+| [调研分析](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/CONNECTOR-DIRECTORY.md#%E8%B0%83%E7%A0%94%E5%88%86%E6%9E%90) | 53 | [飞常准航空数据](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/variflight-aviation-data.json)、[智慧芽专利与文献](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/patsnap.json)、[OpenAlex 全球学术研究](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/openalex-research-catalog.json) 等 |
 | [办公协作](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/CONNECTOR-DIRECTORY.md#%E5%8A%9E%E5%85%AC%E5%8D%8F%E4%BD%9C) | 17 | [腾讯文档](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/tencent-docs.json)、[飞书开放平台](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/feishu.json)、[Notion](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/notion.json) 等 |
 | [开发工具](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/CONNECTOR-DIRECTORY.md#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7) | 23 | [GitHub](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/github.json)、[Playwright](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/playwright.json)、[Chrome DevTools](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/chrome-devtools.json) 等 |
 | [设计创意](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/CONNECTOR-DIRECTORY.md#%E8%AE%BE%E8%AE%A1%E5%88%9B%E6%84%8F) | 10 | [Canva 可画](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/canva.json)、[draw.io](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/drawio.json)、[可灵 AI（AceDataCloud）](https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/connectors/kling.json) 等 |
@@ -33,10 +33,10 @@ https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/main/catal
 ## 当前公共连接器
 
 <!-- catalog-stats:start -->
-截至 2026-11-23，公共 Registry 已发布 136 条连接器描述；与随包的 4 张企查查卡片合并去重后，市场页可浏览 140 张卡片，覆盖企业数据、金融投资、法律合规、开发工具、办公协作、调研分析、设计创意、效率工具、其他 9 类。首页推荐由插件版本的推荐规则决定，不以 Registry 的 featured 字段数量代表首页推荐数量。Registry 可独立持续更新，实际数量以客户端刷新后的市场页签徽标和 [catalog-stats.json](catalog-stats.json) 为准。
+截至 2026-11-25，公共 Registry 已发布 139 条连接器描述；与随包的 4 张企查查卡片合并去重后，市场页可浏览 143 张卡片，覆盖企业数据、金融投资、法律合规、开发工具、办公协作、调研分析、设计创意、效率工具、其他 9 类。首页推荐由插件版本的推荐规则决定，不以 Registry 的 featured 字段数量代表首页推荐数量。Registry 可独立持续更新，实际数量以客户端刷新后的市场页签徽标和 [catalog-stats.json](catalog-stats.json) 为准。
 <!-- catalog-stats:end -->
 
-`connectors/*.json` 是 Connector 源文件，根目录 `catalog.json` 是 CI 在每次合并后自动重建的公开清单和数量权威来源。请直接查看 [`catalog.json`](catalog.json)，或在仓库根目录运行以下只读命令获取实时数量及分类分布，避免 README 手写列表随批量上架而失效：
+`connectors/*.json` 是 Connector 源文件，根目录 [`catalog.json`](catalog.json) 是从源文件生成的公开清单，也是数量的权威来源。CI 在 PR 中重建并比对清单。可在仓库根目录运行以下命令查看数量和分类：
 
 ```bash
 node -e "const {connectors}=require('./catalog.json'); console.log('总数:', connectors.length); console.table(connectors.reduce((n,x)=>(n[x.category]=(n[x.category]||0)+1,n),{}))"
@@ -58,19 +58,18 @@ flowchart LR
   B -->|能| C[Fork 并提交 Connector PR]
   B -->|不能| D[提交 Connector request issue]
   D --> E[维护者评估并代建]
-  C --> F[CI 校验与维护者审核]
+  C --> F[CI 重建目录并校验，维护者审核]
   E --> F
-  F --> G[合并到 main]
-  G --> H[CI 自动重建目录与产品统计]
-  H --> J[CI 自动清理并校验 jsDelivr]
+  F --> G[卡片与生成目录一起合并到 main]
+  G --> J[CI 自动清理并校验 jsDelivr]
   J --> I[用户刷新市场]
 ```
 
 1. 复制 `connectors/example.sample.json` 为 `connectors/<connector-id>.json`，文件名必须与 `id` 完全一致。
 2. 只提交公开元数据；禁止 Token、API Key、密码、Cookie 和 Client Secret。
 3. 运行 `npm ci --legacy-peer-deps`，再执行 `npm test && npm run validate && npm run assets:check`。
-4. 提交 PR，通过 Schema、重复 ID/ServerName、URL 和密钥审计后合并。
-5. 不要手动修改或提交 `catalog.json`、`catalog-stats.json` 或 README 数量区块；合并到 `main` 后，CI 会自动重建并提交这些公开产物，再自动清理并校验 jsDelivr 缓存。每周健康巡检会生成探针报告 artifact。
+4. 将连接器和生成目录提交到同一份 PR。`npm run build` 可重新生成目录。若缺少生成文件，`rebuild-catalog` 检查会提供补丁。
+5. 新增或修改连接器时，维护者按当前提交核验卡片并在原 PR 反馈；CODEOWNER 批准且两项必过检查通过后可合并。合并到 `main` 后，CI 自动清理并校验 jsDelivr 缓存，用户可从原地址刷新卡片。
 
 `featured` 由维护者管理。第三方收录不代表服务商官方背书，实际权限、费用和可用性以服务商为准。
 

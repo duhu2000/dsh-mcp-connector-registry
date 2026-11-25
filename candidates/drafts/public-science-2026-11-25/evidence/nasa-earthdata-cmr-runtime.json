@@ -1,0 +1,77 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-11-25T07:56:11.047Z",
+  "toolsCallCount": 1,
+  "automaticRetries": 0,
+  "request": {
+    "checkedAt": "2026-11-25T07:56:11.047Z",
+    "tool": "get_collections",
+    "args": {
+      "keyword": "MODIS temperature",
+      "temporal_start_date": "2025-07-01T00:00:00Z",
+      "temporal_end_date": "2025-07-31T23:59:59Z",
+      "spatial_wkt_geometry": "POLYGON((119 30,122 30,122 32,119 32,119 30))",
+      "has_granules": true,
+      "limit": 3
+    },
+    "attempts": 1,
+    "responseSha256": "4e2e63e59748af05e3097b1946a0ee171453666594982c34838440cd8851827e"
+  },
+  "totalHits": 353,
+  "returnedCount": 3,
+  "scope": "Public collection metadata search only; not granule availability, pixel data, download or transformations.",
+  "collections": [
+    {
+      "concept_id": "C1748058432-LPCLOUD",
+      "entry_title": "MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid V061",
+      "short_name": "MOD11A1",
+      "version": "061",
+      "doi": "10.5067/MODIS/MOD11A1.061",
+      "bounding_box": [
+        -180,
+        -90,
+        180,
+        90
+      ],
+      "time_start": "2000-02-24T00:00:00Z",
+      "time_end": null,
+      "spatial_resolution": "1000x1000 Meters",
+      "temporal_resolution": "1 Day"
+    },
+    {
+      "concept_id": "C1748046084-LPCLOUD",
+      "entry_title": "MODIS/Aqua Land Surface Temperature/Emissivity Daily L3 Global 1km SIN Grid V061",
+      "short_name": "MYD11A1",
+      "version": "061",
+      "doi": "10.5067/MODIS/MYD11A1.061",
+      "bounding_box": [
+        -180,
+        -90,
+        180,
+        90
+      ],
+      "time_start": "2002-07-04T00:00:00Z",
+      "time_end": null,
+      "spatial_resolution": "1000x1000 Meters",
+      "temporal_resolution": "1 Day"
+    },
+    {
+      "concept_id": "C2269056084-LPCLOUD",
+      "entry_title": "MODIS/Terra Land Surface Temperature/Emissivity 8-Day L3 Global 1km SIN Grid V061",
+      "short_name": "MOD11A2",
+      "version": "061",
+      "doi": "10.5067/MODIS/MOD11A2.061",
+      "bounding_box": [
+        -180,
+        -90,
+        180,
+        90
+      ],
+      "time_start": "2000-02-18T00:00:00Z",
+      "time_end": null,
+      "spatial_resolution": "1000x1000 Meters",
+      "temporal_resolution": "8 Day"
+    }
+  ],
+  "limitation": "The 119–122E, 30–32N rectangle is only part of Yangtze Delta. Collections intersect filters; has_granules does not establish files within requested region/time. 353 matches do not imply all are equally suitable."
+}

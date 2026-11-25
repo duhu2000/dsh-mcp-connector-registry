@@ -1,0 +1,165 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-11-25T07:54:36.615Z",
+  "endpoint": "https://mcp.platform.opentargets.org/mcp",
+  "transport": "streamable-http",
+  "authentication": "none",
+  "execution": "Direct public MCP over repository publicMcpPost; not DSH market-card UI acceptance.",
+  "serverInfo": {
+    "name": "Model Context Protocol server for Open Targets Platform version 2026.7.1",
+    "version": "2026.7.1"
+  },
+  "toolCount": 5,
+  "tools": [
+    {
+      "name": "get_open_targets_graphql_schema",
+      "inputSchema": {
+        "properties": {
+          "categories": {
+            "description": "List of category names to filter the schema. Returns only types relevant to the specified categories.",
+            "examples": [
+              [
+                "drug-mechanisms"
+              ],
+              [
+                "target-safety",
+                "drug-safety"
+              ]
+            ],
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "categories"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "get_type_dependencies",
+      "inputSchema": {
+        "properties": {
+          "type_names": {
+            "description": "List of GraphQL type names to start exploration from.",
+            "examples": [
+              [
+                "Target",
+                "Drug"
+              ]
+            ],
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "type_names"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "search_entities",
+      "inputSchema": {
+        "properties": {
+          "query_strings": {
+            "description": "List of search queries.",
+            "examples": [
+              [
+                "BRCA1",
+                "aspirin"
+              ]
+            ],
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "query_strings"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "query_open_targets_graphql",
+      "inputSchema": {
+        "properties": {
+          "query_string": {
+            "description": "GraphQL query string starting with 'query' keyword.",
+            "type": "string"
+          },
+          "variables": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional dict or JSON string with query variables."
+          }
+        },
+        "required": [
+          "query_string"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "batch_query_open_targets_graphql",
+      "inputSchema": {
+        "properties": {
+          "query_string": {
+            "description": "The GraphQL query string to execute for all variable sets.",
+            "type": "string"
+          },
+          "variables_list": {
+            "description": "List of variable dictionaries, one per query execution.",
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "key_field": {
+            "description": "Variable field name to use as key in results mapping.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query_string",
+          "variables_list",
+          "key_field"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    }
+  ]
+}

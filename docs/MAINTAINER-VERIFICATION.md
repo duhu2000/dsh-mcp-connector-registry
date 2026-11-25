@@ -17,4 +17,4 @@ gh api --method POST "repos/$REPO/statuses/$SHA" \
 
 只有核验通过时登记 `success`。需要修正或撤回结论时，以相同 PR、SHA 和 context 登记 `failure`，在原 PR 说明原因。上游仓库同一提交的最新结果生效；每次推送都需要核验新的完整 SHA。
 
-4. 在 GitHub Actions 重新运行原 PR 当前提交的 Registry CI。若 `validate` 在等待审核时已失败，可选 **Re-run failed jobs**；若是在改正先前的通过结论，选 **Re-run all jobs**。确认 `public-checks` 和 `validate` 的最终结果。正式的 CODEOWNER 评审与合并按仓库规则单独进行。
+4. 在 GitHub Actions 重新运行原 PR 当前提交的 Registry CI。若 `validate` 在等待审核时已失败，可选 **Re-run failed jobs**；若是在改正先前的通过结论，选 **Re-run all jobs**。确认同一份 PR 的 `public-checks`、`validate` 和 `rebuild-catalog` 均通过；如更新生成目录产生了新提交，按新的 SHA 再核验。正式的 CODEOWNER 评审与合并按仓库规则单独进行。

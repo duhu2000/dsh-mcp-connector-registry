@@ -73,6 +73,7 @@ npm test && npm run validate && npm run assets:check
 ```
 
 - `npm test` 检查构建逻辑、分类和连接器约束。
+- PR 和 `main` 运行同一套全量回归。新增连接器的 PR 还会执行验收记录检查。
 - `npm run validate` 确定性重建 `catalog.json`、`catalog-stats.json` 和 README 数量区块，并执行 Schema、重复 ID/ServerName、URL 与潜在密钥审计。
 - `npm run assets:check` 检查远程 Logo 的图片类型和浏览器跨域兼容性。
 
@@ -91,12 +92,14 @@ npm run candidates:accept -- \
 若工具结果出现疑似 Token/API Key，验收失败且报告只记录风险类型。需要鉴权的服务使用独立、
 最小权限测试账号人工验收，凭据不得作为 CLI 参数或写入报告。
 
-本地验证可能产生 `catalog.json`、`catalog-stats.json` 或 README 数量区块差异，这是正常现象；不要手动修改或提交 `catalog.json`、`catalog-stats.json` 或 README 数量区块。合并后 CI 会自动重建。
+将连接器和生成目录提交到同一份 PR。`npm run validate` 会运行 `npm run build`，更新目录、统计、README 和分类文档。检查生成差异后暂存这些文件。
 
 ### 第 5 步：提交 Connector PR
 
 ```bash
 git add connectors/<connector-id>.json
+git add --pathspec-from-file=.github/catalog-products.txt
+git diff --cached --stat
 git commit -m "Add <connector-id>"
 git push origin add-my-connector
 ```
@@ -105,13 +108,9 @@ git push origin add-my-connector
 
 ### 第 6 步：等待 CI、审核与自动发布
 
-先看 `public-checks` 的测试、Schema 和素材检查。通过后，维护者用本次提交的完整 SHA 核验，在原 PR 指出具体修正或确认验收范围。推送新提交后按新的 SHA 复核。PR 合并到 `main` 后：
-
-1. `public-checks` job 再次执行测试、Descriptor 校验和图片检查；
-2. `rebuild-catalog` job 运行确定性构建；
-3. 如果目录或产品统计有变化，`github-actions[bot]` 自动提交 `chore: rebuild catalog products [skip ci]` 并推送 `catalog.json`、`catalog-stats.json` 与 README 数量区块；
-4. `purge-cdn` job 在每次合并到 `main` 后都自动清理 jsDelivr 的 `@main/catalog.json` 缓存，即使 PR 已提交最新目录、重建阶段没有额外差异也不跳过；随后重试验证 CDN 内容与 `main` 产物的完整 SHA-256 一致；
-5. 用户在 MCP连接器市场点击“刷新”即可看到新卡片，无需人工清理 CDN、重装插件或重启 DSH。
+1. `public-checks` 运行回归测试、描述符校验和素材检查。`rebuild-catalog` 从同一份 PR 的源文件重建目录并比对。如果检查提示生成文件过期，在本地运行 `npm run build`，或从该运行下载 `catalog-products`、解压并执行 `git apply catalog-products.patch`。检查差异并提交到原分支。
+2. 维护者按 PR 编号和最新完整提交核对官方来源、鉴权、使用条款与实际验收范围，在原 PR 说明结论或需要补充的材料。`validate` 检查这版提交的核验结果。推送新提交后需要重新核验。
+3. CODEOWNER 审核当前的卡片与生成目录。合并到 `main` 后，`purge-cdn` 清理 jsDelivr 的 `@main/catalog.json` 缓存并校验完整 SHA-256。用户在连接器市场点击“刷新”即可取得已上架的卡片。
 
 ## 4. 完整 Descriptor 模板
 
@@ -345,7 +344,7 @@ OAuth 卡片必须发布可验证的 Protected Resource Metadata 与 Authorizati
 - [ ] stdio 命令来自官方公开包，且不要求 Registry 探针执行本地命令。
 - [ ] PR 已提供官方配置和使用范围，并注明需要维护者确认的限制。
 - [ ] 已运行 `npm ci --legacy-peer-deps` 和 `npm test && npm run validate && npm run assets:check`。
-- [ ] 只提交 Connector 源文件和必要图片，不手动提交 `catalog.json`、`catalog-stats.json`、README 数量区块、`node_modules`、日志或本机配置。
+- [ ] 已检查暂存的连接器、公开图片和生成目录，确认其中只有本次上架的公开内容。
 
 ## 10. 常见问题（FAQ）
 
@@ -359,7 +358,7 @@ Registry 不收上架费。服务本身的订阅、调用费用和权限以服�
 
 ### 3. 合并后多久出现在市场？
 
-合并到 `main` 后 CI 会自动重建并提交目录、权威数量统计和 Registry 产品介绍，随后自动清理和校验 jsDelivr 缓存，通常为分钟级。插件仓库每小时读取权威统计并同步 GitHub/npm 产品介绍所用的数量区块与实时徽标；用户只需在 MCP连接器市场点击“刷新”。
+PR 合并时，目录和连接器已同时进入 `main`。待 `purge-cdn` 校验通过，用户即可在市场点击“刷新”。插件仓库每小时读取公开统计并同步产品介绍中的数量。
 
 ### 4. 服务地址、鉴权方式或品牌信息变化怎么办？
 
@@ -375,7 +374,7 @@ Registry 不收上架费。服务本身的订阅、调用费用和权限以服�
 
 ### 7. 本地 `validate` 后出现 `catalog.json` 差异怎么办？
 
-这是确定性构建的正常结果。不要提交该差异；PR 合并后 `rebuild-catalog` job 会自动生成和提交公开产物。
+查看差异，确认与卡片变更相符，并按第 5 步把生成文件提交到同一份 PR。若合并前有其他卡片上架，先同步最新 `main`，重新构建，再提交更新的目录。
 
 ### 8. 同一厂商的多个 MCP Server 能放在一张卡片吗？
 
