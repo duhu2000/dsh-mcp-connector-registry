@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "exclusions": [
+    {
+      "id": "example-withheld",
+      "decision": "do-not-list",
+      "decidedBy": "test-reviewer",
+      "decidedAt": "2026-01-01",
+      "reason": "Synthetic exclusion for identity matching.",
+      "match": {
+        "registryNames": [
+          "com.example/withheld"
+        ],
+        "packages": [],
+        "repositories": [
+          "https://github.com/example/withheld"
+        ],
+        "remoteUrls": [
+          "https://excluded.example.com/mcp"
+        ]
+      }
+    }
+  ]
+}

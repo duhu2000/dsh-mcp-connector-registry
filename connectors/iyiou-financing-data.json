@@ -68,5 +68,5 @@
       "text": "查询北京智谱华章科技有限公司的融资历史。先确认所需调用次数及费用并取得授权，再匹配企业并查询第一页最多5条；如名称不唯一先让我确认。整理日期、轮次、金额和投资方，来源或采集时间未返回时如实注明，不补猜、不自动翻页或下载。"
     }
   ],
-  "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/workbuddy-data-2026-11-14/evidence/iyiou-runtime-2026-11-19.json"
+  "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/401c6bc8c6cfbc4da7aa96d5a00236af39548bf0/docs/verification/iyiou-financing-data.md"
 }

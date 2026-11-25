@@ -13,7 +13,7 @@
   "homepage": "https://mcp.itjuzi.com/",
   "probeStatus": "partial",
   "probeCheckedAt": 1791282042000,
-  "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/itjuzi-2026-10-06/itjuzi-venture-capital-data.md",
+  "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/401c6bc8c6cfbc4da7aa96d5a00236af39548bf0/docs/verification/itjuzi-venture-capital-data.md",
   "auth": {
     "mode": "bearer",
     "credentialName": "IT桔子 MCP API Key",

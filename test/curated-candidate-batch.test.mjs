@@ -5,41 +5,29 @@ import { normalizeOfficialServer, scoreCandidate } from '../scripts/discovery/ca
 import { prepareCuratedCandidate, renderBatchSummary } from '../scripts/prepare-curated-candidate-batch.mjs';
 import { buildConnectorDescriptor } from '../scripts/promote-curated-candidate-batch.mjs';
 
-const BATCH_TWO_IDS = [
+const PUBLIC_DATA_CARDS = [
+  'agentnative-government-open-data',
+  'bis-global-statistics',
   'bls-us-labour-statistics',
+  'eia-us-energy-data',
   'eur-lex-eu-law',
   'faostat-food-agriculture',
+  'fred-economic-data',
+  'gbif-global-biodiversity',
   'imf-macroeconomic-statistics',
   'noaa-climate-data',
+  'noodle-biomedical-literature',
   'nws-us-weather',
   'oecd-public-statistics',
-  'openstreetmap-geospatial-data',
-  'uniprot-protein-data',
-];
-
-const BATCH_THREE_IDS = [
-  'gbif-global-biodiversity',
   'openalex-research-catalog',
   'openfec-campaign-finance',
+  'openstreetmap-geospatial-data',
+  'pubmed-biomedical-literature',
   'sec-edgar-company-filings',
+  'starwell-world-statistics',
+  'uniprot-protein-data',
   'us-treasury-fiscaldata',
   'usaspending-federal-awards',
-];
-
-const BATCH_FOUR_IDS = [
-  'agentnative-government-open-data',
-  'california-proposition-65',
-  'noodle-biomedical-literature',
-  'starwell-world-statistics',
-];
-
-const DELISTED_BATCH_FOUR_IDS = new Set(['california-proposition-65']);
-
-const BATCH_FIVE_IDS = [
-  'bis-global-statistics',
-  'eia-us-energy-data',
-  'fred-economic-data',
-  'pubmed-biomedical-literature',
   'usgs-earthquake-catalog',
 ];
 
@@ -139,115 +127,18 @@ test('curated batch summary requires two ready-to-use prompts', async () => {
   assert.throws(() => renderBatchSummary({ ...manifest, candidates: [{ ...item, starterPromptsZh: ['only one'] }] }, [candidate]), /exactly two/);
 });
 
-test('approved batch two records match ready-to-use Connector cards', async () => {
-  for (const id of BATCH_TWO_IDS) {
-    const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
-    const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
-    assert.equal(record.review.decision, 'approved');
-    assert.equal(record.review.reviewedBy, 'DuHu');
-    assert.equal(record.runtimeAcceptance.status, 'pass');
-    assert.equal(descriptor.id, id);
-    assert.equal(descriptor.auth.mode, 'none');
-    assert.equal(descriptor.prompts.length, 2);
-    assert.equal('promptVariables' in descriptor, false);
-    assert.equal(descriptor.prompts.some((prompt) => /\{\{[^}]+\}\}/.test(prompt.text)), false);
-    assert.match(descriptor.description, /独立社区/);
-    assert.match(descriptor.description, /(?:并非|非).{0,40}官方/);
+test('published data cards retain direct prompts and third-party disclosures', async () => {
+  for (const id of PUBLIC_DATA_CARDS) {
+    const card = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
+    assert.equal(card.id, id);
+    assert.equal(card.auth.mode, 'none');
+    assert.equal(card.probeStatus, 'pass');
+    assert.equal(card.prompts.length, 2);
+    assert.equal('promptVariables' in card, false);
+    for (const prompt of card.prompts) assert.doesNotMatch(prompt.text, /\{\{|研究问题|请填写/);
+    assert.match(card.description, /独立社区|社区独立|独立项目|独立服务|第三方/);
+    assert.match(card.description, /(?:并非|不是|非).{0,40}官方/);
   }
-});
-
-test('approved batch three records match ready-to-use Connector cards', async () => {
-  const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-3.manifest.json', import.meta.url), 'utf8'));
-  assert.equal(manifest.approval.decision, 'approved');
-  assert.equal(manifest.approval.reviewedBy, 'DuHu');
-  assert.equal(manifest.candidates.length, BATCH_THREE_IDS.length);
-  for (const id of BATCH_THREE_IDS) {
-    const item = manifest.candidates.find((candidate) => candidate.id === id);
-    const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
-    const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
-    assert.ok(item, `${id} is present in the review manifest`);
-    assert.equal(record.review.decision, 'approved');
-    assert.equal(record.review.reviewedBy, 'DuHu');
-    assert.equal(record.probe.status, 'pass');
-    assert.equal(record.runtimeAcceptance.status, 'pass');
-    assert.equal(record.score.band, 'selected');
-    assert.equal(descriptor.id, id);
-    assert.equal(descriptor.auth.mode, 'none');
-    assert.equal(descriptor.prompts.length, 2);
-    assert.equal('promptVariables' in descriptor, false);
-    assert.equal(item.starterPromptsZh.length, 2);
-    assert.equal(item.starterPromptsZh.some((prompt) => /\{\{|研究问题|请填写/.test(prompt)), false);
-    assert.equal(descriptor.prompts.some((prompt) => /\{\{|研究问题|请填写/.test(prompt.text)), false);
-    assert.match(descriptor.description, /独立社区/);
-    assert.match(descriptor.description, /(?:并非|非).{0,40}官方/);
-  }
-});
-
-test('batch four preserves historical approval while current cards follow delisting decisions', async () => {
-  const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-4.manifest.json', import.meta.url), 'utf8'));
-  assert.equal(manifest.approval.decision, 'approved');
-  assert.equal(manifest.approval.reviewedBy, 'DuHu');
-  assert.equal(manifest.candidates.length, 4);
-  for (const id of BATCH_FOUR_IDS) {
-    const item = manifest.candidates.find((candidate) => candidate.id === id);
-    const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
-    if (DELISTED_BATCH_FOUR_IDS.has(id)) {
-      assert.ok(item, `${id} remains in the historical review manifest`);
-      assert.equal(record.review.decision, 'approved');
-      assert.equal(record.runtimeAcceptance.status, 'pass');
-      await assert.rejects(readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'), { code: 'ENOENT' });
-      continue;
-    }
-    const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
-    assert.ok(item, `${id} is present in the review manifest`);
-    assert.equal(record.review.decision, 'approved');
-    assert.equal(record.review.reviewedBy, 'DuHu');
-    assert.equal(record.probe.status, 'pass');
-    assert.equal(record.runtimeAcceptance.status, 'pass');
-    assert.equal(record.score.band, 'selected');
-    assert.equal(descriptor.id, id);
-    assert.equal(descriptor.category, item.categoryZh);
-    assert.equal(descriptor.auth.mode, 'none');
-    assert.equal(descriptor.prompts.length, 2);
-    assert.equal('promptVariables' in descriptor, false);
-    assert.equal(item.starterPromptsZh.some((prompt) => /\{\{|研究问题|请填写/.test(prompt)), false);
-    assert.equal(descriptor.prompts.some((prompt) => /\{\{|研究问题|请填写/.test(prompt.text)), false);
-    assert.match(descriptor.description, /(?:独立社区|社区独立|独立项目|独立服务|第三方)/);
-    assert.match(descriptor.description, /(?:并非|不是|非).{0,40}官方/);
-  }
-  const agentnative = JSON.parse(await readFile(new URL('../candidates/records/agentnative-government-open-data.json', import.meta.url), 'utf8'));
-  assert.equal(agentnative.license.status, 'not-applicable');
-  assert.equal(agentnative.license.spdxId, null);
-  assert.match(agentnative.license.evidenceUrl, /terms/);
-});
-
-test('approved batch five records preserve upstream terms and direct starter prompts', async () => {
-  const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-5.manifest.json', import.meta.url), 'utf8'));
-  assert.equal(manifest.approval.decision, 'approved');
-  assert.equal(manifest.approval.reviewedBy, 'DuHu');
-  assert.equal(manifest.candidates.length, BATCH_FIVE_IDS.length);
-  for (const id of BATCH_FIVE_IDS) {
-    const item = manifest.candidates.find((candidate) => candidate.id === id);
-    const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
-    const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
-    assert.ok(item, `${id} is present in the review manifest`);
-    assert.equal(record.review.decision, 'approved');
-    assert.equal(record.review.reviewedBy, 'DuHu');
-    assert.equal(record.probe.status, 'pass');
-    assert.equal(record.runtimeAcceptance.status, 'pass');
-    assert.equal(record.score.band, 'selected');
-    assert.equal(record.license.status, 'declared');
-    assert.equal(descriptor.id, id);
-    assert.equal(descriptor.auth.mode, 'none');
-    assert.equal(descriptor.probeStatus, 'pass');
-    assert.equal(descriptor.prompts.length, 2);
-    assert.equal('promptVariables' in descriptor, false);
-    assert.equal(item.starterPromptsZh.some((prompt) => /\{\{|研究问题|请填写/.test(prompt)), false);
-    assert.equal(descriptor.prompts.some((prompt) => /\{\{|研究问题|请填写/.test(prompt.text)), false);
-    assert.match(descriptor.description, /(?:独立社区|社区独立|独立项目|独立服务|第三方)/);
-    assert.match(descriptor.description, /(?:并非|不是|非).{0,40}官方/);
-  }
-
   const fred = JSON.parse(await readFile(new URL('../connectors/fred-economic-data.json', import.meta.url), 'utf8'));
   const pubmed = JSON.parse(await readFile(new URL('../connectors/pubmed-biomedical-literature.json', import.meta.url), 'utf8'));
   assert.match(fred.description, /API Key/);
@@ -256,22 +147,33 @@ test('approved batch five records preserve upstream terms and direct starter pro
   assert.match(pubmed.description, /不构成医疗诊断或治疗建议/);
 });
 
-test('Connector generation refuses a placeholder prompt', async () => {
-  const record = JSON.parse(await readFile(new URL('../candidates/records/oecd-public-statistics.json', import.meta.url), 'utf8'));
-  const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-2.manifest.json', import.meta.url), 'utf8'));
-  const item = manifest.candidates.find((candidate) => candidate.id === record.id);
+function cardFixture() {
+  const item = {
+    ...manifestItem(),
+    icon: '📊',
+    promptTitlesZh: ['查询', '比较'],
+    cardSummaryZh: '查询示例数据。',
+    cardDescriptionZh: '由独立社区维护，并非官方产品。',
+    tagsZh: ['示例', '市场', '公开', '数据'],
+  };
+  const record = {
+    id: item.id,
+    probe: { targetUrl: item.endpoint, checkedAt: item.probeCheckedAt },
+    officialLinks: { websiteUrl: 'https://data.example.com' },
+  };
+  return { item, record };
+}
+
+test('Connector generation refuses a placeholder prompt', () => {
+  const { record, item } = cardFixture();
   assert.throws(() => buildConnectorDescriptor(record, {
     ...item,
     starterPromptsZh: ['查询 {{researchQuestion}}', item.starterPromptsZh[1]],
   }), /without template placeholders/);
 });
 
-test('Connector generation accepts a reviewed website-only third-party service and category', async () => {
-  const record = JSON.parse(await readFile(new URL('../candidates/records/oecd-public-statistics.json', import.meta.url), 'utf8'));
-  record.officialLinks.repository = null;
-  record.officialLinks.websiteUrl = 'https://data.example.com';
-  const manifest = JSON.parse(await readFile(new URL('../docs/review-batches/data-mcp-batch-2.manifest.json', import.meta.url), 'utf8'));
-  const item = manifest.candidates.find((candidate) => candidate.id === record.id);
+test('Connector generation accepts a reviewed website-only third-party service and category', () => {
+  const { record, item } = cardFixture();
   const descriptor = buildConnectorDescriptor(record, {
     ...item,
     categoryZh: '法律合规',

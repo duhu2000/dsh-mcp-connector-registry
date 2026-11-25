@@ -1,0 +1,29 @@
+name: Public registry inputs
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  public-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test the files available to contributors
+        shell: bash
+        run: |
+          set -euo pipefail
+          checkout=$(mktemp -d)
+          git archive HEAD -- .github README.md CONTRIBUTING.md package.json package-lock.json \
+            product-metadata.json catalog.json catalog-stats.json assets connectors schema scripts test \
+            docs/ONBOARDING.md docs/verification | tar -x -C "$checkout"
+          cd "$checkout"
+          npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+          npm test
