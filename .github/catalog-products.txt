@@ -3,5 +3,4 @@ catalog-stats.json
 README.md
 docs/CONNECTOR-DIRECTORY.md
 docs/RECENT-ADDITIONS.md
-docs/ANNOUNCEMENT-DRAFT.md
 docs/CATEGORY-OVERVIEW.md

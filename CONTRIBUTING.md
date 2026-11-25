@@ -59,11 +59,11 @@ ServerName、URL 与潜在密钥。`rebuild-catalog` 在 PR 中独立重建并�
 - 每周健康巡检仅使用无凭据探测；连续失败不会自动删除卡片，由维护者复核后处理。
 - 安全问题和疑似凭据泄漏请按 [`SECURITY.md`](SECURITY.md) 私密报告。
 
-### 目录与上新宣传同步
+### 目录与近期上架记录
 
 `npm run build` 会从正式 `catalog.json` 自动生成分类目录和 README 分类数量。
 新卡片合并后，在 `docs/catalog-additions.json` 记录正式上架日期、对应 PR 编号及准确验收边界；日期不得使用文案修改日期替代。不补写无法核实的历史上架日期。
-构建同时生成 `docs/RECENT-ADDITIONS.md` 和 `docs/ANNOUNCEMENT-DRAFT.md`，后者仅供运营审核，不自动发帖。卡片更新不要求发布插件 npm。
+构建会同步更新[近期新增](docs/RECENT-ADDITIONS.md)和[分类概览](docs/CATEGORY-OVERVIEW.md)。卡片更新不要求发布插件 npm。
 
 ## 具名批准的有限连接验收
 
