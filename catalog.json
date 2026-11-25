@@ -1837,7 +1837,7 @@
       ],
       "prompts": [
         {
-          "title": "调研最新动态",
+          "title": "按主题调研最新动态",
           "text": "用 Exa MCP 搜索「{{topic}}」的最新动态，优先采用官方网站和一手资料，并列出来源链接",
           "server": "exa-search"
         },
