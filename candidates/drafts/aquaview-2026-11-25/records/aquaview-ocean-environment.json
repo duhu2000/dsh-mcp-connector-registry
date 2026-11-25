@@ -33,12 +33,12 @@
     "notes": "Official public MCP client integration documented; commercial use requires authorization. Upstream licenses apply separately. Repository MIT is not a blanket data license."
   },
   "review": {
-    "decision": "pending",
+    "decision": "approved",
     "proposedConnectorId": "aquaview-ocean-environment",
     "scope": "full-runtime",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "notes": "用户要求推进上架；本候选最终具名批准尚待确认。仅一次指定时空目录检索通过，其余工具未验收。"
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-25T23:36:00.820042+00:00",
+    "notes": "用户明确批准 AQUAVIEW 上架，署名 DuHu。仅一次指定区域与时间的目录检索已通过；其余 5 个工具未验收。商业用途需厂商授权，数据遵循各来源许可。"
   },
   "dedupe": {
     "level": "none",
@@ -67,7 +67,7 @@
     },
     "notes": "人工评估；官方托管与当天可用已核验。站点和仓库文档数量不一致，条款存在占位文字；不推断长期 SLA。"
   },
-  "nextStep": "取得本候选具名批准后迁入正式目录，完成维护者私有 registry_review 核验及 PR 检查再合并。",
+  "nextStep": "完成当前 PR head 的维护者私有 registry_review 和 CI 核验后合并；上线后刷新连接器目录。",
   "evidence": [
     {
       "type": "official-vendor",
