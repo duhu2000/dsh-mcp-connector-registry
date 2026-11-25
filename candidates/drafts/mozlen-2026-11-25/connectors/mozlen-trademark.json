@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "mozlen-trademark",
+  "name": "摩知轮商标检索",
+  "vendor": "摩知轮（北京摩知轮科技有限公司）",
+  "icon": "🔎",
+  "category": "法律合规",
+  "summary": "国内外商标 / 图形近似 / 公告 / 商标裁文",
+  "description": "通过摩知轮官方 MCP 和本人账号 OAuth 授权，检索国内外商标、图形近似、国内公告、驳回通知、异议决定、评审裁文、诉讼判决与域名仲裁。文字检索使用国家名称，图形检索使用服务端支持的国家代码，范围以实际工具参数为准。按账号积分及服务规则计费，免费体验与图形检索权益不同。已确认 OAuth 连接及发现8个工具；中国“摩知轮”商标名称检索已通过单次验收，其余7个工具未逐项验收。遵守摩知轮用户协议与账号使用限制，不附带数据转售或再分发权；检索结果需核对来源、法律状态及日期，不据此直接认定商标可注册或不存在侵权风险。",
+  "tags": [
+    "摩知轮",
+    "国内数据",
+    "商标",
+    "知识产权",
+    "图形检索",
+    "OAuth"
+  ],
+  "published": false,
+  "featured": false,
+  "probeStatus": "pass",
+  "homepage": "https://www.mozlen.com/",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://www.mozlen.com",
+    "clientName": "DeepSeek Harness - Mozlen MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "mozlen-trademark",
+      "serverName": "mozlen-trademark",
+      "transport": "streamable-http",
+      "url": "https://www.mozlen.com/mcp",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询中国“摩知轮”商标",
+      "server": "mozlen-trademark",
+      "text": "查询中国范围内名称为“摩知轮”的商标，仅取第一页最多3条。先核对实际参数和账号费用，使用 trademark_search，country 为 [\"中国\"]；支持精确匹配时使用精确匹配。列明商标名称、申请或注册号、尼斯类别、法律状态及返回日期，缺失项标明未提供。不翻页、不下载、不追加图形或其他查询，不据此直接判断可注册性。"
+    },
+    {
+      "title": "查询美国“MOZLEN”商标",
+      "server": "mozlen-trademark",
+      "text": "查询美国范围内名称为“MOZLEN”的商标，仅取第一页最多3条。先核对 trademark_search 的国家枚举、匹配参数及账号费用，不猜测国家值；列明名称、申请或注册号、尼斯类别和法律状态。无结果时说明检索范围及限制，不将无结果解释为可注册，不追加查询或下载。"
+    }
+  ]
+}

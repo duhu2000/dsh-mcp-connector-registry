@@ -1,0 +1,30 @@
+{
+  "candidateId": "mozlen-trademark",
+  "checkedAt": "2026-11-25T15:14:00+08:00",
+  "status": "not-executed",
+  "evidenceType": "assistant-observed DSH acceptance conversation",
+  "authorization": {
+    "tool": "trademark_search",
+    "maximumCalls": 1,
+    "maximumCredits": 1,
+    "retryAllowed": false
+  },
+  "schemaVerified": true,
+  "proposedArguments": {
+    "markname": "摩知轮",
+    "searchConfigs": [
+      "same"
+    ],
+    "country": [
+      "中国"
+    ],
+    "pageNum": 1,
+    "pageSize": 3
+  },
+  "businessCallAttempts": 0,
+  "otherToolCalls": 0,
+  "reason": "Loaded MCP instructions and schema contain no account-specific unit price; public frontend fallback is insufficient to confirm the spending cap.",
+  "nextStep": "Confirm current account domestic-text-query price is at most 1 credit before executing the still-unused single-call authorization.",
+  "supersededBy": "runtime-acceptance.json",
+  "resolution": "User superseded the cost cap; one business query subsequently passed. This file preserves the earlier zero-call preflight."
+}
