@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "id": "kuaicha-enterprise-data",
+  "registryName": "com.51ifind/kuaicha-enterprise-mcp",
+  "title": "同花顺快查企业数据",
+  "description": "同花顺 iFinD 平台的独立企业数据 MCP，提供工商登记、股权投资、知识产权及经营风险等查询。已核对官方文档和公开端点，DSH 已发现两个工具并通过一次单家企业只读工商登记查询。",
+  "version": "unknown",
+  "classification": {
+    "isDataService": true,
+    "domains": [
+      "enterprise-data",
+      "corporate-registration",
+      "corporate-ownership"
+    ],
+    "matchedKeywords": [
+      "同花顺快查",
+      "工商",
+      "股权",
+      "投资",
+      "经营风险"
+    ]
+  },
+  "source": {
+    "kind": "official-vendor",
+    "apiUrl": null,
+    "detailUrl": "https://mcp.51ifind.com/#/documents/mcp/kuaicha",
+    "status": "active",
+    "publishedAt": null,
+    "updatedAt": null,
+    "retrievedAt": "2026-11-25T04:01:27.141Z"
+  },
+  "officialLinks": {
+    "websiteUrl": "https://mcp.51ifind.com/",
+    "repository": null
+  },
+  "transports": [
+    {
+      "kind": "remote",
+      "type": "streamable-http",
+      "url": "https://api-mcp.51ifind.com:8643/ds-mcp-servers/kuaicha-enterprise-mcp",
+      "package": null
+    }
+  ],
+  "authentication": {
+    "mode": "api-key",
+    "requiredHeaders": [
+      {
+        "name": "Authorization",
+        "required": true,
+        "secret": true
+      }
+    ],
+    "reason": "注册后在 iFinD 个人中心获取快查 MCP 配置。官方配置将 MCP 密钥写入 Authorization，DSH 使用 api-key 模式按原值传递。使用用户在 DSH 配置的凭据完成授权工具发现和业务验收。"
+  },
+  "license": {
+    "status": "declared",
+    "spdxId": null,
+    "evidenceUrl": "https://mcp.51ifind.com/#/terms/member-service"
+  },
+  "maintenance": {
+    "registryStatus": "unknown",
+    "registryUpdatedAt": null,
+    "ageDays": null,
+    "repositoryActivity": "unknown"
+  },
+  "probe": {
+    "status": "partial",
+    "checkedAt": "2026-11-25T03:55:43Z",
+    "targetUrl": "https://api-mcp.51ifind.com:8643/ds-mcp-servers/kuaicha-enterprise-mcp",
+    "httpStatus": 401,
+    "reason": "一次匿名 MCP initialize 返回 HTTP 401 和 JSON-RPC 错误 -32001，确认鉴权网关可达。"
+  },
+  "dedupe": {
+    "level": "none",
+    "strong": [],
+    "weak": []
+  },
+  "review": {
+    "decision": "approved",
+    "scope": "full-runtime",
+    "proposedConnectorId": "kuaicha-enterprise-data",
+    "reviewedAt": "2026-11-25T04:29:57.704Z",
+    "reviewedBy": "DuHu",
+    "notes": "维护者要求在快查授权验收通过后单独提交上架 PR。按此前确认的 iFinD 独立免费试用验收账号范围记录。官方快查与 iFinD 金融数据分别提供不同服务入口。卡片提供官方连接元数据，用户使用本人账号直连且须遵守适用条款。已完成能力检索及一次只读工商登记查询。"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-25T04:08:52.661Z",
+    "reviewedBy": "Codex",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/99abcd1d387598fa0213445184ea18fcd90b1c98/docs/runtime-acceptance/kuaicha-2026-11-25/kuaicha-enterprise-data.json",
+    "notes": "DSH Web v0.2.119 发现 2 个工具、1 个服务入口。一次能力检索返回企业工商基本信息接口，随后执行一次企业全称查询，成功返回公司名称、成立日期和登记状态。验收只覆盖这一工商查询，实际扣次及其他数据能力未逐项核实。"
+  },
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://mcp.51ifind.com/#/documents/mcp/kuaicha",
+      "collectedAt": "2026-11-25T04:01:27.141Z",
+      "summary": "官方快查文档列出企业数据能力检索 kuaicha_tool_discover 与企业信息查询 kuaicha_tool_call，覆盖工商、股权、经营、知识产权和风险方向。授权后实际工具以 DSH 发现为准。"
+    },
+    {
+      "type": "official-website",
+      "url": "https://mcp.51ifind.com/#/documents/guide-prepare",
+      "collectedAt": "2026-11-25T04:01:27.141Z",
+      "summary": "官方文档说明从 iFinD 个人中心获取 MCP 密钥及对应服务配置。"
+    },
+    {
+      "type": "license",
+      "url": "https://mcp.51ifind.com/#/terms/member-service",
+      "collectedAt": "2026-11-25T04:01:27.141Z",
+      "summary": "iFinD 官方会员协议列明账号使用和数据使用边界。卡片提供公开连接配置，账号具体适用的协议和权益待审核。"
+    },
+    {
+      "type": "probe",
+      "url": "https://api-mcp.51ifind.com:8643/ds-mcp-servers/kuaicha-enterprise-mcp",
+      "collectedAt": "2026-11-25T03:55:43Z",
+      "summary": "无凭据的初始化请求收到鉴权拒绝，未调用任何业务工具。"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/99abcd1d387598fa0213445184ea18fcd90b1c98/docs/runtime-acceptance/kuaicha-2026-11-25/kuaicha-enterprise-data.json",
+      "collectedAt": "2026-11-25T04:08:52.661Z",
+      "summary": "DSH 会话轨迹证实一次能力检索和一次代表性工商登记查询，结果非空且字段匹配。"
+    }
+  ],
+  "score": {
+    "total": 83,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 20,
+      "maintenanceSecurity": 12,
+      "runtime": 14,
+      "marketGap": 7,
+      "documentation": 5
+    },
+    "reasons": [
+      "同花顺公开快查产品页面、MCP 工具文档和开通指南。",
+      "匿名探测可达鉴权网关，授权后 DSH 发现两个工具。",
+      "iFinD 会员协议及免费试用权益已复核，按实际账号条款使用。",
+      "单家企业只读工商登记查询通过，证据涵盖两次工具调用和需要核对的登记字段。",
+      "补充同花顺官方工商企业数据入口，与现有企业数据服务部分重合。",
+      "官方说明工具分工并提供企业查询示例。"
+    ],
+    "gates": []
+  }
+}
