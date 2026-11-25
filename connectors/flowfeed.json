@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "flowfeed",
+  "name": "FlowFeed 宏观财经快讯",
+  "vendor": "FlowFeed",
+  "icon": "📈",
+  "category": "金融投资",
+  "summary": "宏观 / 外汇 / 加密快讯、经济日历、央行公告",
+  "description": "接入 FlowFeed 官方远程 MCP Server，获取实时宏观、外汇与加密市场新闻（Bloomberg、FT、8 家央行、BLS/BEA/SEC 等来源）、含预期值/前值/公布值的经济日历和央行官方公告。通过 OAuth 2.1 + PKCE 授权；需付费订阅（9 美元/月或 99 美元/年），无免费额度。内容仅供参考，不构成投资建议。",
+  "tags": [
+    "FlowFeed",
+    "宏观经济",
+    "外汇",
+    "加密货币",
+    "经济日历",
+    "央行",
+    "OAuth",
+    "官方 MCP"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://flowfeed.cc/financial-news-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://mcp.flowfeed.cc",
+    "scope": "mcp",
+    "clientName": "DeepSeek Harness - FlowFeed MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "flowfeed",
+      "serverName": "flowfeed",
+      "url": "https://mcp.flowfeed.cc/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "今日宏观日历",
+      "text": "使用 FlowFeed MCP 列出今天和明天的高影响经济数据与央行事件，给出预期值、前值和公布时间（北京时间），并说明每项可能影响的货币和资产",
+      "server": "flowfeed"
+    },
+    {
+      "title": "最新央行动态",
+      "text": "使用 FlowFeed MCP 获取过去 24 小时美联储、欧洲央行等央行的官方公告和相关新闻，按机构归纳要点并附原文链接",
+      "server": "flowfeed"
+    }
+  ]
+}
