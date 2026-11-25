@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "aquaview": {
+      "type": "streamableHttp",
+      "url": "https://mcp.aquaview.org/mcp"
+    }
+  }
+}

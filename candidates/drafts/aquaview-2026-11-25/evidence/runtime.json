@@ -1,0 +1,73 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-11-25T14:39:14.319Z",
+  "tool": "search_datasets",
+  "arguments": {
+    "bbox": "-161,18,-154,23",
+    "datetime": "2025-01-01T00:00:00Z/2025-12-31T23:59:59Z",
+    "limit": 3,
+    "include_assets": false,
+    "output_format": "json"
+  },
+  "toolsCallCount": 1,
+  "automaticRetries": 0,
+  "downloads": 0,
+  "isError": false,
+  "totalMatched": 4957,
+  "returnedCount": 3,
+  "items": [
+    {
+      "id": "4625140",
+      "collection": "CERULEAN_ARCHIVE",
+      "bbox": [
+        -155.159967,
+        20.683768,
+        -155.137994,
+        20.705054
+      ],
+      "title": "Oil slick 4625140",
+      "datetime": "2025-12-30T16:15:05Z",
+      "source": "SkyTruth Cerulean",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "SkyTruth Cerulean (cerulean.skytruth.org). CC BY-SA 4.0."
+    },
+    {
+      "id": "4623007",
+      "collection": "CERULEAN_ARCHIVE",
+      "bbox": [
+        -156.680859,
+        20.634357,
+        -156.586789,
+        20.685168
+      ],
+      "title": "Oil slick 4623007",
+      "datetime": "2025-12-29T16:24:30Z",
+      "source": "SkyTruth Cerulean",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "SkyTruth Cerulean (cerulean.skytruth.org). CC BY-SA 4.0."
+    },
+    {
+      "id": "4620944",
+      "collection": "CERULEAN_ARCHIVE",
+      "bbox": [
+        -159.670514,
+        20.832111,
+        -159.618329,
+        20.858203
+      ],
+      "title": "Oil slick 4620944",
+      "datetime": "2025-12-28T16:31:10Z",
+      "source": "SkyTruth Cerulean",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "SkyTruth Cerulean (cerulean.skytruth.org). CC BY-SA 4.0."
+    }
+  ],
+  "responseSha256": "261831631ce728ece77d1c2e9c841c43d5c69dc06d74a426ba66d46a1c756e69",
+  "hashBasis": "Python JSON serialization of complete JSON-RPC message, UTF-8, ensure_ascii=false, compact separators",
+  "scope": "Single anonymous spatial/temporal STAC metadata search. No observation get_data, pagination, file download or other tools/call.",
+  "limitations": [
+    "Results are metadata, not measured observations or verified oil spills. SkyTruth detection is probabilistic and does not identify a responsible vessel or structure.",
+    "Total matches are catalog items intersecting the filters; this is not a count of independent datasets or confirmed incidents.",
+    "Runtime performed directly over public MCP; user separately reported DSH connectivity."
+  ]
+}

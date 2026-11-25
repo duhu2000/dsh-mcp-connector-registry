@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-11-25T14:39:14.319Z",
+  "mcpOverview": "https://aquaview.org/mcp-overview",
+  "repository": "https://github.com/AQUAVIEW-DAH/mcp",
+  "codeLicense": "https://github.com/AQUAVIEW-DAH/mcp/blob/main/LICENSE",
+  "serviceTerms": "https://aquaview.org/terms-of-service",
+  "privacy": "https://aquaview.org/privacy-policy",
+  "termsUpdated": "2025-10-23",
+  "findings": [
+    "Official MCP page and repository explicitly document third-party clients and the public no-key endpoint.",
+    "MIT applies to repository software/documentation, not all hosted third-party data.",
+    "Service terms section 5 requires authorization for commercial use and automated use; official MCP documentation expressly offers agent integration. No blanket commercial redistribution authorization inferred.",
+    "Section 6.2 assigns compliance with upstream data licenses to users; returned sample metadata names CC-BY-SA-4.0 and SkyTruth attribution.",
+    "Terms describe account plans and credit charges for some actions. Anonymous access success is not evidence that every operation is forever free.",
+    "Terms include unfilled jurisdiction placeholders; recorded as a documentation limitation, not a legal assurance.",
+    "Official README tool counts differ from current service; use live discovery count of six."
+  ]
+}

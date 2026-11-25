@@ -1,0 +1,473 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-11-25T14:39:14.319Z",
+  "checkedAtNote": "Timestamp of following acceptance query; discovery completed shortly before it in the same review session.",
+  "endpoint": "https://mcp.aquaview.org/mcp",
+  "transport": "streamable-http",
+  "authentication": "none",
+  "serverInfo": {
+    "name": "AQUAVIEW MCP Server",
+    "version": "2.14.2"
+  },
+  "protocolVersion": "2025-06-18",
+  "toolCount": 6,
+  "tools": [
+    {
+      "name": "search_datasets",
+      "inputSchema": {
+        "properties": {
+          "q": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "datetime": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "collections": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "exclude_collections": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "filter": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "sortby": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "limit": {
+            "default": 10,
+            "type": "integer"
+          },
+          "token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "fields": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "include_assets": {
+            "default": false,
+            "type": "boolean"
+          },
+          "output_format": {
+            "default": "csv",
+            "enum": [
+              "csv",
+              "json",
+              "toon"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_item",
+      "inputSchema": {
+        "properties": {
+          "collection": {
+            "type": "string"
+          },
+          "item_id": {
+            "type": "string"
+          },
+          "output_format": {
+            "default": "toon",
+            "enum": [
+              "json",
+              "toon"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "collection",
+          "item_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "name": "list_collections",
+      "inputSchema": {
+        "properties": {
+          "tag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "output_format": {
+            "default": "csv",
+            "enum": [
+              "csv",
+              "json",
+              "toon"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "aggregate",
+      "inputSchema": {
+        "properties": {
+          "aggregations": {
+            "type": "string"
+          },
+          "collections": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "exclude_collections": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "datetime": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "q": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "filter": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "precision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "datetime_frequency_interval": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "output_format": {
+            "default": "csv",
+            "enum": [
+              "csv",
+              "json",
+              "toon"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "aggregations"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "name": "list_data_sources",
+      "inputSchema": {
+        "properties": {
+          "source_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "output_format": {
+            "default": "csv",
+            "enum": [
+              "csv",
+              "json",
+              "toon"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_data",
+      "inputSchema": {
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "variables": {
+            "type": "string"
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "datetime": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "depth": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "filters": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "qc": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "limit": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "format": {
+            "default": "parquet",
+            "enum": [
+              "parquet",
+              "csv"
+            ],
+            "type": "string"
+          },
+          "include_sample": {
+            "default": true,
+            "type": "boolean"
+          },
+          "output_format": {
+            "default": "csv",
+            "enum": [
+              "csv",
+              "json",
+              "toon"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "source",
+          "variables"
+        ],
+        "type": "object"
+      }
+    }
+  ],
+  "notes": "initialize and tools/list succeeded without credentials. No session identifiers retained."
+}
