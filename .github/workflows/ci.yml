@@ -1,15 +1,10 @@
 name: Registry CI
+run-name: Registry CI / ${{ github.event.pull_request.number && format('PR #{0}', github.event.pull_request.number) || github.ref_name }}
 
 on:
   push:
     branches: [main]
   pull_request:
-  pull_request_review:
-    types: [submitted, edited, dismissed]
-
-concurrency:
-  group: registry-ci-${{ github.event.pull_request.number || github.ref }}-${{ github.event.pull_request.head.sha || github.sha }}
-  cancel-in-progress: ${{ github.event.pull_request != null }}
 
 permissions:
   contents: read
@@ -26,6 +21,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - run: python3 -B test/maintainer-review-command.test.py
       - run: npm test
       - run: npm run validate
       - run: npm run assets:check

@@ -2,4 +2,5 @@
 /schema/ @duhu2000
 /.github/workflows/ @duhu2000
 /scripts/check-maintainer-review.cjs @duhu2000
+/scripts/record-maintainer-review.py @duhu2000
 /.github/CODEOWNERS @duhu2000
