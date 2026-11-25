@@ -134,8 +134,11 @@ test('public checks run independently and validate requires a PR-specific upstre
   assert.ok(gate.includes('needs: public-checks'));
   assert.ok(gate.includes("--no-renames --name-only --diff-filter=AMT"));
   assert.ok(gate.includes("github.event.pull_request.head.sha"));
-  assert.ok(gate.includes('git show "$BASE_SHA:scripts/check-maintainer-status.cjs"'));
-  assert.ok(gate.includes('statuses: read'));
+  assert.ok(gate.includes('git show "$BASE_SHA:scripts/check-maintainer-review.cjs"'));
+  assert.ok(gate.includes('pull-requests: read'));
+  assert.match(workflow, /pull_request_review:\s+types: \[submitted, edited, dismissed\]/);
+  assert.ok(workflow.includes('cancel-in-progress: ${{ github.event.pull_request != null }}'));
+  assert.match(gate, /if: github.event.pull_request != null/);
 });
 
 async function limitedListing(id = 'openboost-cross-border-data') {

@@ -54,7 +54,7 @@ ServerName、URL 与潜在密钥。`rebuild-catalog` 在 PR 中独立重建并�
 
 ## 审核与维护
 
-公开技术检查名为 `public-checks`。卡片有变更时，`validate` 还会检查维护者为当前 PR 和完整提交登记的结果。[维护者操作说明](docs/MAINTAINER-VERIFICATION.md)。
+公开技术检查名为 `public-checks`。卡片有变更时，`validate` 还会检查维护者在当前 PR 为完整提交发布的核验 Review；撤回或更新结论会自动重验。[维护者操作说明](docs/MAINTAINER-VERIFICATION.md)。
 
 - 维护者会核验官网、MCP 配置文档、鉴权方式、Logo 来源和公开可达性。
 - 服务地址、鉴权方式或品牌信息变化时，请提交更新 PR。

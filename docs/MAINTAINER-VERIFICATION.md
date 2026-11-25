@@ -1,20 +1,25 @@
 # 维护者核验连接器 PR
 
-贡献者在原 PR 提供服务的公开资料。`public-checks` 在 GitHub 上运行测试、描述符和素材检查；如 GitHub 提示首次贡献者的工作流待批准，请维护者先检查工作流变更。新增或修改正式卡片还需要维护者完成以下核验。
+贡献者在原 PR 提供服务的公开资料。GitHub 的 `public-checks` 和 `rebuild-catalog` 使用只读权限。首次贡献者的工作流需要放行时，维护者先检查工作流变更。
 
-1. 核对原 PR 编号、最新完整 head SHA 和本次变更涉及的所有卡片。私下审阅官方来源、适用条款、鉴权及实际验收范围。将具名记录与每张卡片的 SHA-256 绑定，在私有默认分支运行 `registry_review`，传入 `REGISTRY_PR` 和 `REGISTRY_HEAD`。
-2. 打开正式任务日志，核对 PR 编号、完整 SHA、卡片数量及结果。缺材料时，在原 PR 指出字段、原因和可接受的修正，例如“请补充官方鉴权文档，并注明试用账号能访问的数据范围”。私有系统地址、账号、原始响应和凭据留在私有仓库。
-3. 在原 PR 留下可公开的结论。例如“此次覆盖工具发现和一次只读查询；批量查询尚未验收”。维护者用自己的上游仓库写入权限登记结果。下例变量分别取自正式核验日志和本次反馈，`FEEDBACK_URL` 使用原 GitHub PR 的评论链接。
+1. 核对 PR 编号、最新完整 head SHA 和本次涉及的所有卡片。私下核对官方来源、适用条款、鉴权和实际验收范围，将具名记录与卡片 SHA-256 绑定。在私有默认分支运行 `registry_review`，传入 `REGISTRY_PR` 和 `REGISTRY_HEAD`。
+2. 核对正式任务的 PR、完整 SHA、卡片数量及结果。核验通过后，在原 PR 提交一条 **Comment** 类型的 Review。第一行写 `Registry verification: pass`，随后写贡献者可读的验收范围和限制。需要补材料或撤回时，提交一条新的 Comment Review，第一行写 `Registry verification: withdraw`，随后说明原因和下一步。原始记录和凭据留在私有仓库。
+3. 使用下例将 Review 绑定到实际核验的提交。将第一行与后续正文写入 UTF-8 文件 `review.txt`，例如：
 
-```bash
-REPO=duhu2000/dsh-mcp-connector-registry
-# PR、SHA 取自实际核验的任务，避免将旧结果登记到新提交。
-test "$(gh pr view "$PR" --repo "$REPO" --json headRefOid --jq .headRefOid)" = "$SHA" || exit 1
-gh api --method POST "repos/$REPO/statuses/$SHA" \
-  -f state=success -f context="registry/private-review/pr-$PR" \
-  -f description="Maintainer verified the reviewed scope" -f target_url="$FEEDBACK_URL"
-```
+   ```text
+   Registry verification: pass
 
-只有核验通过时登记 `success`。需要修正或撤回结论时，以相同 PR、SHA 和 context 登记 `failure`，在原 PR 说明原因。上游仓库同一提交的最新结果生效；每次推送都需要核验新的完整 SHA。
+   此次覆盖工具发现和一次只读查询。批量查询尚待验证，当前无需补充材料。
+   ```
 
-4. 在 GitHub Actions 重新运行原 PR 当前提交的 Registry CI。若 `validate` 在等待审核时已失败，可选 **Re-run failed jobs**；若是在改正先前的通过结论，选 **Re-run all jobs**。确认同一份 PR 的 `public-checks`、`validate` 和 `rebuild-catalog` 均通过；如更新生成目录产生了新提交，按新的 SHA 再核验。正式的 CODEOWNER 评审与合并按仓库规则单独进行。
+   ```bash
+   REPO=duhu2000/dsh-mcp-connector-registry
+   # PR 与 SHA 取自本次正式核验。撤回前同样核对目标提交。
+   test "$(gh pr view "$PR" --repo "$REPO" --json headRefOid --jq .headRefOid)" = "$SHA" || exit 1
+   gh api --method POST "repos/$REPO/pulls/$PR/reviews" \
+     -f event=COMMENT -f commit_id="$SHA" -F body=@review.txt --jq .html_url
+   ```
+
+4. 打开 GitHub 返回的原 PR Review 链接，确认贡献者能看到正文。提交、编辑或撤销 Review 会自动重新运行检查。`validate` 从上游读取当前 SHA 的最新维护者核验决定，核对权限、正文和 GitHub 生成的原 PR 链接。同一 PR 和 SHA 的检查共享并发组。撤回时等 `validate` 报告阻断；重新核验通过后，提交新的通过 Review 并核对绿色结果。编辑已发布的核验说明也需要重新提交决定。普通讨论可在 Conversation 进行。
+
+新提交需要新的私有核验与公开反馈。每次都使用新提交的 Comment Review 登记结论。CODEOWNER 的正式 Approve 和最终合并按仓库规则另行处理。
