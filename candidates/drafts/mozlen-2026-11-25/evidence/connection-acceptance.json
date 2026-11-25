@@ -1,0 +1,26 @@
+{
+  "candidateId": "mozlen-trademark",
+  "status": "pass",
+  "evidenceType": "user-reported OAuth plus assistant-observed DSH connection, tools and schema",
+  "checkedAt": "2026-11-25T15:02:25+08:00",
+  "endpoint": "https://www.mozlen.com/mcp",
+  "auth": "OAuth",
+  "toolCount": 8,
+  "tools": [
+    "trademark_search",
+    "trademark_image_search",
+    "trademark_announcement_search",
+    "trademark_refusal_search",
+    "trademark_opposition_search",
+    "trademark_review_search",
+    "trademark_judgement_search",
+    "trademark_domain_search"
+  ],
+  "schemaObserved": true,
+  "businessCallsObserved": 0,
+  "limitations": [
+    "No business query executed: account-specific price could not be confirmed within approved 1-credit cap.",
+    "Imported endpoint connection only; formal card authorization not separately tested."
+  ],
+  "schemaScope": "trademark_search only"
+}

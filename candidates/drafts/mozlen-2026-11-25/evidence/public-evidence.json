@@ -1,0 +1,65 @@
+{
+  "checkedOn": "2026-11-25",
+  "oauth": {
+    "authorizationServerUrl": "https://www.mozlen.com/.well-known/oauth-authorization-server",
+    "metadata": {
+      "issuer": "https://www.mozlen.com",
+      "authorization_endpoint": "https://www.mozlen.com/oauth/authorize",
+      "token_endpoint": "https://www.mozlen.com/oauth/token",
+      "registration_endpoint": "https://www.mozlen.com/oauth/register",
+      "response_types_supported": [
+        "code"
+      ],
+      "grant_types_supported": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "code_challenge_methods_supported": [
+        "S256"
+      ],
+      "token_endpoint_auth_methods_supported": [
+        "none"
+      ]
+    },
+    "protectedResourceUrl": "https://www.mozlen.com/.well-known/oauth-protected-resource",
+    "resource": "https://www.mozlen.com/mcp",
+    "authorizationServers": [
+      "https://www.mozlen.com"
+    ],
+    "dcrTested": false
+  },
+  "pricing": {
+    "url": "https://www.mozlen.com/ai-mcp",
+    "publicFrontendDefaults": {
+      "domesticTextCredits": 1,
+      "internationalTextCredits": 2,
+      "domesticImageCredits": 3,
+      "internationalImageCredits": 5
+    },
+    "basis": "Public ai-mcp JavaScript FAQ fallback values; authenticated account cost can override these defaults.",
+    "trial": "Public copy advertises one-time 500-credit trial; image search excluded. User eligibility and balance not checked.",
+    "publicProductsRequest": "GET public products returned HTTP 401; no credentials supplied, no retry.",
+    "accountPriceVerified": false
+  },
+  "terms": {
+    "url": "https://www.mozlen.com/yhxy",
+    "privacyUrl": "https://www.mozlen.com/ysqzc",
+    "status": "public-general-service-terms-reviewed",
+    "notes": [
+      "Account use is personal to the registered user; transfer and resale restricted.",
+      "Unauthorized automated extraction, copying, commercial reuse and redistribution restricted.",
+      "Official MCP endpoint, OAuth metadata and MCP credit product provide the integration context; no blanket redistribution license inferred.",
+      "No separate MCP-specific agreement found in reviewed pages."
+    ]
+  },
+  "assetsReviewed": [
+    {
+      "url": "https://www.mozlen.com/js/app.489a30d5.js",
+      "sha256": "e8c31ddc6b23970c35cb75d6cb5e07fcf46e8b591a84733e41286222df799592"
+    },
+    {
+      "url": "https://www.mozlen.com/js/ai-mcp.0da78120.js",
+      "sha256": "96c15cb25a24b789ad4e6555e85cc7b78049df7c286043e5bb18bf2c1a779d4c"
+    }
+  ]
+}

@@ -3468,6 +3468,62 @@
     },
     {
       "schemaVersion": 1,
+      "id": "kuaicha-enterprise-data",
+      "name": "同花顺快查企业数据",
+      "vendor": "同花顺 iFinD",
+      "icon": "🏢",
+      "category": "企业数据",
+      "summary": "工商登记 / 股权投资 / 知识产权 / 经营风险",
+      "description": "通过同花顺快查官方 MCP 查询上市或非上市企业的工商登记、股东股权、对外投资、知识产权及经营风险等信息，可用于企业研究及尽调资料核对。可用数据和调用额度以 iFinD 账号权益为准，数据使用遵循适用协议。已在 DSH 发现两个工具，单家企业工商登记查询通过。股权、投资、知识产权及风险等场景尚未逐项验收。",
+      "tags": [
+        "同花顺",
+        "快查",
+        "工商登记",
+        "股权投资",
+        "知识产权",
+        "企业研究"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "probeCheckedAt": 1795579732661,
+      "homepage": "https://mcp.51ifind.com/#/documents/mcp/kuaicha",
+      "auth": {
+        "mode": "api-key",
+        "apiKeyHeader": "Authorization",
+        "credentialName": "iFinD MCP 密钥",
+        "credentialPlaceholder": "填写快查官方配置中的 Authorization 原值",
+        "credentialDescription": "在 iFinD MCP 个人中心生成快查配置，将 Authorization 字段的完整值原样填入 DSH 本机。查询消耗账号额度。",
+        "credentialHelpLabel": "官方开通与密钥指南",
+        "credentialHelpUrl": "https://mcp.51ifind.com/#/documents/guide-prepare"
+      },
+      "servers": [
+        {
+          "serverKey": "kuaicha-enterprise-mcp",
+          "serverName": "kuaicha-enterprise-mcp",
+          "transport": "streamable-http",
+          "url": "https://api-mcp.51ifind.com:8643/ds-mcp-servers/kuaicha-enterprise-mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "核对一家企业的工商登记",
+          "server": "kuaicha-enterprise-mcp",
+          "text": "查询杭州同花顺数据开发有限公司的工商登记信息，按公司全称匹配。列出企业名称、成立日期、登记状态和数据来源，注明未返回的字段。先确认可用的只读查询及调用额度。"
+        },
+        {
+          "title": "梳理一家企业的对外投资",
+          "server": "kuaicha-enterprise-mcp",
+          "text": "查询杭州同花顺数据开发有限公司的公开对外投资记录，最多整理五条。列出被投企业、持股比例和记录日期，区分未披露字段。先确认可用的只读查询及调用额度，并标明快查来源。"
+        }
+      ],
+      "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/99abcd1d387598fa0213445184ea18fcd90b1c98/docs/runtime-acceptance/kuaicha-2026-11-25/kuaicha-enterprise-data.json"
+    },
+    {
+      "schemaVersion": 1,
       "id": "langfuse",
       "name": "Langfuse",
       "vendor": "社区连接器",
@@ -4055,6 +4111,109 @@
     },
     {
       "schemaVersion": 1,
+      "id": "mozlen-trademark",
+      "name": "摩知轮商标检索",
+      "vendor": "摩知轮（北京摩知轮科技有限公司）",
+      "icon": "🔎",
+      "category": "法律合规",
+      "summary": "国内外商标 / 图形近似 / 公告 / 商标裁文",
+      "description": "通过摩知轮官方 MCP 和本人账号 OAuth 授权，检索国内外商标、图形近似、国内公告、驳回通知、异议决定、评审裁文、诉讼判决与域名仲裁。文字检索使用国家名称，图形检索使用服务端支持的国家代码，范围以实际工具参数为准。按账号积分及服务规则计费，免费体验与图形检索权益不同。已确认 OAuth 连接及发现8个工具；中国“摩知轮”商标名称检索已通过单次验收，其余7个工具未逐项验收。遵守摩知轮用户协议与账号使用限制，不附带数据转售或再分发权；检索结果需核对来源、法律状态及日期，不据此直接认定商标可注册或不存在侵权风险。",
+      "tags": [
+        "摩知轮",
+        "国内数据",
+        "商标",
+        "知识产权",
+        "图形检索",
+        "OAuth"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://www.mozlen.com/",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://www.mozlen.com",
+        "clientName": "DeepSeek Harness - Mozlen MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "mozlen-trademark",
+          "serverName": "mozlen-trademark",
+          "transport": "streamable-http",
+          "url": "https://www.mozlen.com/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询中国“摩知轮”商标",
+          "server": "mozlen-trademark",
+          "text": "查询中国范围内名称为“摩知轮”的商标，仅取第一页最多3条。先核对实际参数和账号费用，使用 trademark_search，country 为 [\"中国\"]；支持精确匹配时使用精确匹配。列明商标名称、申请或注册号、尼斯类别、法律状态及返回日期，缺失项标明未提供。不翻页、不下载、不追加图形或其他查询，不据此直接判断可注册性。"
+        },
+        {
+          "title": "查询美国“MOZLEN”商标",
+          "server": "mozlen-trademark",
+          "text": "查询美国范围内名称为“MOZLEN”的商标，仅取第一页最多3条。先核对 trademark_search 的国家枚举、匹配参数及账号费用，不猜测国家值；列明名称、申请或注册号、尼斯类别和法律状态。无结果时说明检索范围及限制，不将无结果解释为可注册，不追加查询或下载。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "nasa-earthdata-cmr",
+      "name": "NASA Earthdata · 地球科学数据目录",
+      "vendor": "NASA Earthdata",
+      "icon": "🌍",
+      "category": "调研分析",
+      "summary": "遥感数据集发现 / 地区与时间筛选 / 数据文件目录与引用",
+      "description": "连接 NASA 官方 Earthdata MCP，检索 Common Metadata Repository（CMR）中的地球科学数据集、数据文件目录、变量、服务及引用信息，适用于遥感和环境研究。公共目录查询免账号、免 Key；部分数据访问、下载或转换服务可能需要 Earthdata Login 和对应权限。本次实际发现 7 个工具，并通过指定地区与时间的数据集目录检索验收；具体数据文件、下载和转换尚未验收。数据集覆盖范围相交不代表区域内一定有可用文件，应继续核对 granules 后再作判断。保留数据集标识、版本、DOI、覆盖范围与查询时间；数据使用及再分发遵循各数据集的 Use Constraints 和许可证。",
+      "tags": [
+        "NASA",
+        "Earthdata",
+        "海外数据",
+        "遥感",
+        "地球科学",
+        "气象",
+        "数据目录",
+        "免费公共入口"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://nasa.github.io/earthdata-mcp/consumers/earthdata-mcp-server-user-guide/",
+      "probeStatus": "pass",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "nasa-earthdata-cmr",
+          "transport": "streamable-http",
+          "url": "https://cmr.earthdata.nasa.gov/mcp/v1",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "寻找长三角地表温度数据集",
+          "text": "检索 2025 年 7 月、东经 119—122 度和北纬 30—32 度矩形区域内的 MODIS 地表温度候选数据集，最多返回 3 个，列出名称、版本、DOI 和时空覆盖。说明这是长三角局部矩形示例；仅检索目录，不下载文件，不能把目录匹配视为实际观测文件已核验。",
+          "server": "main"
+        },
+        {
+          "title": "寻找北京降水数据集",
+          "text": "检索 2025 年 8 月、东经 115.5—117.5 度和北纬 39.5—41.1 度矩形区域内的降水候选数据集，最多返回 3 个，说明空间分辨率、时间分辨率、数据来源和缺失信息；只检索公共目录，不提交转换任务或下载数据。",
+          "server": "main"
+        }
+      ],
+      "probeCheckedAt": 1795593371047
+    },
+    {
+      "schemaVersion": 1,
       "id": "neon",
       "name": "Neon",
       "vendor": "Neon",
@@ -4491,6 +4650,56 @@
           "server": "main"
         }
       ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "open-targets-platform",
+      "name": "Open Targets · 疾病与靶点数据",
+      "vendor": "Open Targets",
+      "icon": "🧬",
+      "category": "调研分析",
+      "summary": "疾病关联靶点 / 基因与药物检索 / 研究证据与关联评分",
+      "description": "连接 Open Targets 官方公共 MCP，检索疾病、靶点、药物等实体，并查询疾病与靶点的关联证据和评分。免账号、免 Key，服务仍处于实验和持续开发阶段。使用前应从实体检索结果取得当前标识，再按实际 GraphQL Schema 查询。结果用于科研信息检索，关联分数不等于致病概率或治疗效果。实际发现 5 个工具；乳腺癌关联靶点查询已验收，其他能力未逐项验收。平台数据采用 CC0 1.0，代码采用 Apache 2.0；引用结果时保留平台版本、疾病标识、查询时间和来源。",
+      "tags": [
+        "Open Targets",
+        "海外数据",
+        "生命科学",
+        "疾病",
+        "靶点",
+        "科研",
+        "免费公共入口"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://platform-docs.opentargets.org/data-access/model-context-protocol",
+      "probeStatus": "pass",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "open-targets-platform",
+          "transport": "streamable-http",
+          "url": "https://mcp.platform.opentargets.org/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看乳腺癌关联靶点",
+          "text": "先检索 breast carcinoma 的当前疾病标识并核对名称，再查询直接关联分数最高的 3 个靶点。列出基因符号、靶点标识和关联评分，保留 Open Targets 来源与查询时间；不要将关联评分解释为致病概率或治疗效果。",
+          "server": "main"
+        },
+        {
+          "title": "确认 BRCA1 靶点",
+          "text": "在 Open Targets 中检索 BRCA1，核对实体类型并列出返回的标准标识与来源；只做实体检索，不追加药物或疾病查询。",
+          "server": "main"
+        }
+      ],
+      "probeCheckedAt": 1795593593521
     },
     {
       "schemaVersion": 1,

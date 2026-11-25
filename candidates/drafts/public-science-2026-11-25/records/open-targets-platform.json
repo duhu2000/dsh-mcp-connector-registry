@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "id": "open-targets-platform",
+  "registryName": "review/open-targets-platform",
+  "title": "Open Targets · 疾病与靶点数据",
+  "provider": "Open Targets",
+  "providerRegion": "海外",
+  "status": "PASS",
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://platform-docs.opentargets.org/data-access/model-context-protocol",
+    "status": "active"
+  },
+  "connectionAcceptance": {
+    "status": "pass",
+    "toolCount": 5,
+    "checkedAt": "2026-11-25T07:54:36.615Z",
+    "reportPath": "candidates/drafts/public-science-2026-11-25/evidence/open-targets-platform-discovery.json",
+    "notes": "Direct public MCP over repository publicMcpPost; not DSH market-card UI acceptance.",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/public-science-2026-11-25/evidence/open-targets-platform-discovery.json"
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-25T07:59:53.521Z",
+    "reviewedBy": "Codex (direct MCP response)",
+    "reportPath": "candidates/drafts/public-science-2026-11-25/evidence/open-targets-platform-runtime.json",
+    "notes": "One confirmed breast carcinoma direct association result, top 3 targets; no clinical validation.",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/public-science-2026-11-25/evidence/open-targets-platform-runtime.json"
+  },
+  "license": {
+    "status": "verified",
+    "evidenceUrl": "https://platform-docs.opentargets.org/licence",
+    "notes": "Official Platform data licence is CC0 1.0; code Apache-2.0. Publication citation requested. No claim that association scores are clinical evidence of efficacy."
+  },
+  "review": {
+    "decision": "approved",
+    "proposedConnectorId": "open-targets-platform",
+    "scope": "full-runtime",
+    "notes": "用户在查看两项最小验收结果、调用次数及范围后明确回复“批准上架”；沿用本会话审核人署名 DuHu。仅代表性查询范围通过，其余能力与 DSH 市场卡片交互未逐项验收。",
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-25T08:11:30.772331+00:00"
+  },
+  "dedupe": {
+    "level": "none",
+    "overlap": [],
+    "notes": "Checked current local formal connectors and candidate records by vendor, names and endpoints; no same provider/endpoint record found. Category-level overlap is not a duplicate."
+  },
+  "probe": {
+    "status": "pass",
+    "reason": "Anonymous initialize, tools/list and representative tools/call returned successfully."
+  },
+  "authentication": {
+    "mode": "none"
+  },
+  "score": {
+    "total": 90,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 20,
+      "maintenanceSecurity": 10,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 10
+    },
+    "notes": "人工初评；维护项按官方托管且当日可用计分，不代表长期 SLA。"
+  },
+  "nextStep": "合并后由 CI 重建公共目录并验证 CDN；具体下载与其他业务工具不在本次验收范围内。",
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://platform-docs.opentargets.org/data-access/model-context-protocol"
+    },
+    {
+      "type": "license",
+      "url": "https://platform-docs.opentargets.org/licence"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/public-science-2026-11-25/evidence/open-targets-platform-runtime.json"
+    },
+    {
+      "type": "connection-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/public-science-2026-11-25/evidence/open-targets-platform-discovery.json"
+    }
+  ]
+}
