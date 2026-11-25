@@ -1,5 +1,6 @@
 name: Registry CI
-run-name: Registry CI / ${{ github.event.pull_request.number && format('PR #{0}', github.event.pull_request.number) || github.ref_name }}
+run-name: >-
+  Registry CI / ${{ github.event.pull_request.number && format('PR #{0}', github.event.pull_request.number) || github.ref_name }}
 
 on:
   push:
