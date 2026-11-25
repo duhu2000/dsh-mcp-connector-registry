@@ -65,9 +65,9 @@ flowchart LR
 
 1. 复制 `connectors/example.sample.json` 为 `connectors/<connector-id>.json`，文件名必须与 `id` 完全一致。
 2. 只提交公开元数据；禁止 Token、API Key、密码、Cookie 和 Client Secret。
-3. 运行 `npm ci --legacy-peer-deps`，再执行 `npm run test:public && npm run validate && npm run assets:check`。
+3. 运行 `npm ci --legacy-peer-deps`，再执行 `npm test && npm run validate && npm run assets:check`。
 4. 将连接器和生成目录提交到同一份 PR。`npm run build` 可重新生成目录。若缺少生成文件，`rebuild-catalog` 检查会提供补丁。
-5. 维护者审核当前提交。合并到 `main` 后，CI 自动清理并校验 jsDelivr 缓存，用户可从原地址刷新卡片。
+5. 新增连接器须通过人工审核记录与验收证据检查。维护者复核后合并。合并到 `main` 后，CI 自动清理并校验 jsDelivr 缓存，用户可从原地址刷新卡片。
 
 `featured` 由维护者管理。第三方收录不代表服务商官方背书，实际权限、费用和可用性以服务商为准。
 

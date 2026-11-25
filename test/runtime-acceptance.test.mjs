@@ -126,12 +126,13 @@ test('runtime acceptance gate rejects mismatched IDs, non-HTTPS evidence, and cr
   assert.ok(errors.some((error) => /credential value/.test(error)));
 });
 
-test('public PR validation accepts descriptor-only submissions without review dossiers', async () => {
+test('CI runs the acceptance gate only for newly added Connector descriptors', async () => {
   const workflow = await readFile(new URL('../.github/workflows/ci.yml', import.meta.url), 'utf8');
   const template = await readFile(new URL('../.github/PULL_REQUEST_TEMPLATE.md', import.meta.url), 'utf8');
-  assert.match(workflow, /- run: npm test/);
-  assert.doesNotMatch(workflow, /check-new-connectors\.mjs/);
-  assert.doesNotMatch(template, /candidates\/records/);
+  assert.match(workflow, /fetch-depth: 0/);
+  assert.match(workflow, /check-new-connectors\.mjs --base/);
+  assert.match(workflow, /github\.event_name == 'pull_request'/);
+  assert.match(template, /real runtime acceptance report/);
 });
 
 async function limitedListing(id = 'openboost-cross-border-data') {

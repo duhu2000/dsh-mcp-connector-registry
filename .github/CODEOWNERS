@@ -1,8 +1,3 @@
 /connectors/ @duhu2000
 /schema/ @duhu2000
 /.github/workflows/ @duhu2000
-/.github/CODEOWNERS @duhu2000
-/.github/catalog-products.txt @duhu2000
-/scripts/build-registry.mjs @duhu2000
-/package.json @duhu2000
-/scripts/build-catalog-*.mjs @duhu2000

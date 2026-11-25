@@ -13,7 +13,9 @@ const [workflow, discoveryWorkflow, readme, contributing, onboarding] = await Pr
 test('pull requests include the rebuilt catalog before it is published from main', () => {
   assert.match(workflow, /permissions:\s*\n\s+contents: read/);
   const validate = workflow.split(/  validate:\r?\n/)[1].split(/  rebuild-catalog:\r?\n/)[0];
-  assert.match(validate, /- run: npm test\s+- run: npm run validate\s+- run: npm run assets:check/);
+  assert.match(validate, /^      - run: npm test\r?$/m);
+  assert.ok(validate.includes("run: node scripts/check-new-connectors.mjs --base '${{ github.event.pull_request.base.sha }}'"));
+  assert.match(validate, /- run: npm run validate\s+- run: npm run assets:check/);
   const rebuild = workflow.split(/  rebuild-catalog:\r?\n/)[1].split(/  purge-cdn:\r?\n/)[0];
   assert.match(rebuild, /- run: npm run build/);
   assert.match(rebuild, /git diff --binary --no-ext-diff HEAD/);
@@ -45,7 +47,7 @@ test('main 每次合并后都自动清理并验证 jsDelivr 缓存', () => {
 
 test('贡献文档使用独立校验命令并说明 catalog 由 CI 生成', () => {
   for (const document of [readme, contributing, onboarding]) {
-    assert.match(document, /npm run test:public && npm run validate && npm run assets:check/);
+    assert.match(document, /npm test && npm run validate && npm run assets:check/);
     assert.match(document, /连接器和生成目录提交到同一份 PR/);
   }
   assert.match(readme, /docs\/ONBOARDING\.md/);
