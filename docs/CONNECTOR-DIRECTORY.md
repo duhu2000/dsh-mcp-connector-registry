@@ -41,7 +41,7 @@
 
 ## 调研分析
 
-共 51 个连接器。
+共 53 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -66,10 +66,12 @@
 | [ILOSTAT 全球劳工统计](../connectors/ilostat-labour-statistics.json) | 就业 / 失业 / 工资工时 / 劳动参与率 / 跨国比较 | Sidney Bissoli（独立社区项目） | none | 公共目录 | pass |
 | [IMF 全球宏观经济统计](../connectors/imf-macroeconomic-statistics.json) | WEO / 国际收支 / CPI / 汇率 / 190 国宏观数据 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [Mixpanel](../connectors/mixpanel.json) | 产品分析 / 事件数据 / 留存 / 用户行为查询 | 社区连接器 | api-key | 公共目录 | unverified |
+| [NASA Earthdata · 地球科学数据目录](../connectors/nasa-earthdata-cmr.json) | 遥感数据集发现 / 地区与时间筛选 / 数据文件目录与引用 | NASA Earthdata | none | 公共目录 | pass |
 | [NOAA 历史气候与灾害数据](../connectors/noaa-climate-data.json) | 气候站点 / 历史观测 / 风暴事件 / 灾害损失 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [Noodle 生物医学文献发现](../connectors/noodle-biomedical-literature.json) | 生物医学论文 / PMID DOI / 引用网络 / 语义关联 | Helena Bioinformatics（独立项目） | none | 公共目录 | pass |
 | [NWS 美国实时天气](../connectors/nws-us-weather.json) | 美国天气预报 / 实时警报 / 观测站 / 预报讨论 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [OECD 全球公共统计](../connectors/oecd-public-statistics.json) | 跨国经济 / 教育就业 / 环境社会 / OECD SDMX | cyanheads（独立社区项目） | none | 公共目录 | pass |
+| [Open Targets · 疾病与靶点数据](../connectors/open-targets-platform.json) | 疾病关联靶点 / 基因与药物检索 / 研究证据与关联评分 | Open Targets | none | 公共目录 | pass |
 | [OpenAlex 全球学术研究](../connectors/openalex-research-catalog.json) | 论文 / 作者机构 / 主题趋势 / 引用网络 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [OpenBoost 跨境数据](../connectors/openboost-cross-border-data.json) | Amazon / TikTok / 跨境选品与竞品研究 | OpenBoost | api-key | 公共目录 | partial |
 | [OpenFEC 美国竞选资金](../connectors/openfec-campaign-finance.json) | 候选人委员会 / 收支申报 / 独立支出 / 选举日历 | cyanheads（独立社区项目） | none | 公共目录 | pass |
