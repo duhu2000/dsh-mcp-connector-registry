@@ -1842,7 +1842,7 @@
           "server": "exa-search"
         },
         {
-          "title": "提取网页要点",
+          "title": "提取指定网页的要点",
           "text": "用 Exa MCP 读取这个网页的正文与关键事实，区分原文信息与推断：{{url}}",
           "server": "exa-search"
         },
