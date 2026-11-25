@@ -1,3 +1,5 @@
 /connectors/ @duhu2000
 /schema/ @duhu2000
 /.github/workflows/ @duhu2000
+/scripts/check-maintainer-status.cjs @duhu2000
+/.github/CODEOWNERS @duhu2000

@@ -126,13 +126,16 @@ test('runtime acceptance gate rejects mismatched IDs, non-HTTPS evidence, and cr
   assert.ok(errors.some((error) => /credential value/.test(error)));
 });
 
-test('CI runs the acceptance gate only for newly added Connector descriptors', async () => {
+test('public checks run independently and validate requires a PR-specific upstream result', async () => {
   const workflow = await readFile(new URL('../.github/workflows/ci.yml', import.meta.url), 'utf8');
-  const template = await readFile(new URL('../.github/PULL_REQUEST_TEMPLATE.md', import.meta.url), 'utf8');
-  assert.match(workflow, /fetch-depth: 0/);
-  assert.match(workflow, /check-new-connectors\.mjs --base/);
-  assert.match(workflow, /github\.event_name == 'pull_request'/);
-  assert.match(template, /real runtime acceptance report/);
+  const [publicJob, gate] = workflow.split(/  validate:\r?\n/);
+  assert.ok(publicJob.includes('public-checks:'));
+  assert.ok(publicJob.includes('npm run validate'));
+  assert.ok(gate.includes('needs: public-checks'));
+  assert.ok(gate.includes("--no-renames --name-only --diff-filter=AMT"));
+  assert.ok(gate.includes("github.event.pull_request.head.sha"));
+  assert.ok(gate.includes('git show "$BASE_SHA:scripts/check-maintainer-status.cjs"'));
+  assert.ok(gate.includes('statuses: read'));
 });
 
 async function limitedListing(id = 'openboost-cross-border-data') {

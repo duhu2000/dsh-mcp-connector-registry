@@ -11,8 +11,8 @@ const [workflow, discoveryWorkflow, readme, contributing, onboarding] = await Pr
 ]);
 
 test('CI 分离校验与 main 合并后的 catalog 自动重建', () => {
-  assert.match(workflow, /permissions:\s*\n\s+contents: write/);
-  assert.match(workflow, /validate:\s*[\s\S]*?- run: npm test[\s\S]*?- run: npm run validate[\s\S]*?- run: npm run assets:check/);
+  assert.match(workflow, /rebuild-catalog:\s+permissions:\s+contents: write/);
+  assert.match(workflow, /public-checks:\s*[\s\S]*?- run: npm test[\s\S]*?- run: npm run validate[\s\S]*?- run: npm run assets:check/);
   assert.match(workflow, /rebuild-catalog:/);
   assert.match(workflow, /if: github\.event_name == 'push' && github\.ref == 'refs\/heads\/main'/);
   assert.match(workflow, /needs: validate/);

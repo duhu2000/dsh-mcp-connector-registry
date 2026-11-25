@@ -46,6 +46,8 @@ node -e "const {connectors}=require('./catalog.json'); console.log('总数:', co
 
 ## 上架流程
 
+外部贡献者可使用 GitHub 账号提交 Issue 或 fork PR。技术检查完成后，维护者在原 PR 反馈当前提交的核验范围与所需修正。
+
 如果您是服务商或社区贡献者，可以直接[发起连接器收录请求](https://github.com/duhu2000/dsh-mcp-connector-registry/issues/new?template=connector-request.yml)，也可以 fork 本仓库并提交 Connector PR。
 
 首次上架请先阅读完整的[第三方连接器上架指南](docs/ONBOARDING.md)，其中包含上架前准备、两条路径、6 步操作、完整 Descriptor 模板、字段表、9 分类、4 种鉴权、Checklist 和 10 条 FAQ。

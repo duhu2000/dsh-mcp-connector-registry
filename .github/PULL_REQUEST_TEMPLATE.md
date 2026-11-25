@@ -16,8 +16,10 @@
 - [ ] `featured` is `false`; I understand featured placement is maintained separately.
 - [ ] Prompts contain no personal information, customer data, or restricted content.
 - [ ] I provided official sources for the MCP endpoint, authentication method, and logo.
-- [ ] A maintainer added `candidates/records/<connector-id>.json` with approved human review and a redacted real runtime acceptance report, or an explicitly approved `connection-only` review with connection evidence and a `partial` card (business runtime stays `not-run`).
+- [ ] I included public links for the service and its configuration, and described the authentication and usage limits a reviewer should check.
 - [ ] I ran `npm ci --legacy-peer-deps && npm run check` locally.
+
+Maintainers verify this revision privately and post the result and any requested changes here.
 
 ## Notes for reviewers
 

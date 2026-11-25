@@ -101,13 +101,13 @@ git commit -m "Add <connector-id>"
 git push origin add-my-connector
 ```
 
-向 `duhu2000/dsh-mcp-connector-registry:main` 发起 Pull Request，并完整填写 PR checklist。新增 Connector 还需要维护者补充 `candidates/records/<connector-id>.json`：核验 Official Registry/厂商资料、鉴权、许可证或服务条款，记录人工批准，并链接不含凭据、个人数据或客户数据的真实运行验收报告。未进入 Official MCP Registry 的项目，仅在厂商自己的 HTTPS 文档明确发布 MCP 启动配置，且包或端点归属可独立核验时，才可按 `official-vendor` 人工审核通道处理；插件市场文案或第三方目录不能单独作为权威来源。确需仓库托管图标时，再提交 `assets/<connector-id>.*`。
+向 `duhu2000/dsh-mcp-connector-registry:main` 发起 Pull Request，并完整填写 PR checklist。贡献者只需 GitHub 账号，附上可公开的官网、配置文档、鉴权方式和使用限制。原始验收材料由维护者私下保存。未进入 Official MCP Registry 的项目，仅在厂商自己的 HTTPS 文档明确发布 MCP 启动配置，且包或端点归属可独立核验时，才可按 `official-vendor` 人工审核通道处理；插件市场文案或第三方目录不能单独作为权威来源。确需仓库托管图标时，再提交 `assets/<connector-id>.*`。
 
 ### 第 6 步：等待 CI、审核与自动发布
 
-CI 先验证新增描述符已具备上述人工审核与真实运行验收记录。全部检查通过后，由维护者复核官网、MCP 文档、鉴权、品牌来源、公开可达性和交互安全性。PR 合并到 `main` 后：
+先看 `public-checks` 的测试、Schema 和素材检查。通过后，维护者用本次提交的完整 SHA 核验，在原 PR 指出具体修正或确认验收范围。推送新提交后按新的 SHA 复核。PR 合并到 `main` 后：
 
-1. `validate` job 再次执行测试、Descriptor 校验和图片检查；
+1. `public-checks` job 再次执行测试、Descriptor 校验和图片检查；
 2. `rebuild-catalog` job 运行确定性构建；
 3. 如果目录或产品统计有变化，`github-actions[bot]` 自动提交 `chore: rebuild catalog products [skip ci]` 并推送 `catalog.json`、`catalog-stats.json` 与 README 数量区块；
 4. `purge-cdn` job 在每次合并到 `main` 后都自动清理 jsDelivr 的 `@main/catalog.json` 缓存，即使 PR 已提交最新目录、重建阶段没有额外差异也不跳过；随后重试验证 CDN 内容与 `main` 产物的完整 SHA-256 一致；
@@ -343,7 +343,7 @@ OAuth 卡片必须发布可验证的 Protected Resource Metadata 与 Authorizati
 - [ ] 服务说明写明重要权限、费用、数据范围和副作用。
 - [ ] 第三方名称和 Logo 已获得使用权，并在 PR 提供官方来源。
 - [ ] stdio 命令来自官方公开包，且不要求 Registry 探针执行本地命令。
-- [ ] 维护者已提交同 ID 候选记录，完成官方证据、许可证/服务条款、人工批准和真实运行验收；记录不含凭据或个人数据。
+- [ ] PR 已提供官方配置和使用范围，并注明需要维护者确认的限制。
 - [ ] 已运行 `npm ci --legacy-peer-deps` 和 `npm test && npm run validate && npm run assets:check`。
 - [ ] 只提交 Connector 源文件和必要图片，不手动提交 `catalog.json`、`catalog-stats.json`、README 数量区块、`node_modules`、日志或本机配置。
 
