@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "kuaicha-enterprise-data",
+  "name": "同花顺快查企业数据",
+  "vendor": "同花顺 iFinD",
+  "icon": "🏢",
+  "category": "企业数据",
+  "summary": "工商登记 / 股权投资 / 知识产权 / 经营风险",
+  "description": "通过同花顺快查官方 MCP 查询上市或非上市企业的工商登记、股东股权、对外投资、知识产权及经营风险等信息，可用于企业研究及尽调资料核对。可用数据和调用额度以 iFinD 账号权益为准，数据使用遵循适用协议。已在 DSH 发现两个工具，单家企业工商登记查询通过。股权、投资、知识产权及风险等场景尚未逐项验收。",
+  "tags": [
+    "同花顺",
+    "快查",
+    "工商登记",
+    "股权投资",
+    "知识产权",
+    "企业研究"
+  ],
+  "published": true,
+  "featured": false,
+  "probeStatus": "pass",
+  "probeCheckedAt": 1795579732661,
+  "homepage": "https://mcp.51ifind.com/#/documents/mcp/kuaicha",
+  "auth": {
+    "mode": "api-key",
+    "apiKeyHeader": "Authorization",
+    "credentialName": "iFinD MCP 密钥",
+    "credentialPlaceholder": "填写快查官方配置中的 Authorization 原值",
+    "credentialDescription": "在 iFinD MCP 个人中心生成快查配置，将 Authorization 字段的完整值原样填入 DSH 本机。查询消耗账号额度。",
+    "credentialHelpLabel": "官方开通与密钥指南",
+    "credentialHelpUrl": "https://mcp.51ifind.com/#/documents/guide-prepare"
+  },
+  "servers": [
+    {
+      "serverKey": "kuaicha-enterprise-mcp",
+      "serverName": "kuaicha-enterprise-mcp",
+      "transport": "streamable-http",
+      "url": "https://api-mcp.51ifind.com:8643/ds-mcp-servers/kuaicha-enterprise-mcp",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "核对一家企业的工商登记",
+      "server": "kuaicha-enterprise-mcp",
+      "text": "查询杭州同花顺数据开发有限公司的工商登记信息，按公司全称匹配。列出企业名称、成立日期、登记状态和数据来源，注明未返回的字段。先确认可用的只读查询及调用额度。"
+    },
+    {
+      "title": "梳理一家企业的对外投资",
+      "server": "kuaicha-enterprise-mcp",
+      "text": "查询杭州同花顺数据开发有限公司的公开对外投资记录，最多整理五条。列出被投企业、持股比例和记录日期，区分未披露字段。先确认可用的只读查询及调用额度，并标明快查来源。"
+    }
+  ],
+  "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/99abcd1d387598fa0213445184ea18fcd90b1c98/docs/runtime-acceptance/kuaicha-2026-11-25/kuaicha-enterprise-data.json"
+}

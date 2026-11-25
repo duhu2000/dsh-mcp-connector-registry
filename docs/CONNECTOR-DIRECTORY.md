@@ -4,12 +4,13 @@
 
 ## 企业数据
 
-共 2 个连接器。
+共 3 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
 | [企查查·企业工商](https://github.com/duhu2000/dsh-mcp-connector/blob/main/catalog/catalog.json) | 一站式企业工商 / 股权 / 经营信息查询 | 企查查 Qichacha | oauth2-pkce | 插件内置 | 未提供独立探测记录 |
 | [企查查·招投标](https://github.com/duhu2000/dsh-mcp-connector/blob/main/catalog/catalog.json) | 招投标公告 / 中标结果 / 采购信息 | 企查查 Qichacha | oauth2-pkce | 插件内置 | 未提供独立探测记录 |
+| [同花顺快查企业数据](../connectors/kuaicha-enterprise-data.json) | 工商登记 / 股权投资 / 知识产权 / 经营风险 | 同花顺 iFinD | api-key | 公共目录 | pass |
 
 ## 法律合规
 
