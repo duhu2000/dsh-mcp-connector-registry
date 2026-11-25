@@ -104,13 +104,13 @@ git commit -m "Add <connector-id>"
 git push origin add-my-connector
 ```
 
-向 `duhu2000/dsh-mcp-connector-registry:main` 发起 Pull Request，并完整填写 PR checklist。新增 Connector 还需要维护者补充 `candidates/records/<connector-id>.json`：核验 Official Registry/厂商资料、鉴权、许可证或服务条款，记录人工批准，并链接不含凭据、个人数据或客户数据的真实运行验收报告。未进入 Official MCP Registry 的项目，仅在厂商自己的 HTTPS 文档明确发布 MCP 启动配置，且包或端点归属可独立核验时，才可按 `official-vendor` 人工审核通道处理；插件市场文案或第三方目录不能单独作为权威来源。确需仓库托管图标时，再提交 `assets/<connector-id>.*`。
+向 `duhu2000/dsh-mcp-connector-registry:main` 发起 Pull Request，并完整填写 PR checklist。贡献者只需 GitHub 账号，附上可公开的官网、配置文档、鉴权方式和使用限制。原始验收材料由维护者私下保存。未进入 Official MCP Registry 的项目，仅在厂商自己的 HTTPS 文档明确发布 MCP 启动配置，且包或端点归属可独立核验时，才可按 `official-vendor` 人工审核通道处理；插件市场文案或第三方目录不能单独作为权威来源。确需仓库托管图标时，再提交 `assets/<connector-id>.*`。
 
 ### 第 6 步：等待 CI、审核与自动发布
 
-1. `validate` 运行全量回归，检查新增连接器的审核记录、验收证据、描述符和图片。`rebuild-catalog` 从 PR 的源文件重建目录并比对已提交的产物。有差异时，在 Actions 运行页下载 `catalog-products`，解压后运行 `git apply catalog-products.patch`，或在自己的分支重新运行 `npm run build`。查看并提交生成差异，推送到同一份 PR。
-2. 维护者在 GitHub 反馈需补充的资料，核对官网、鉴权、品牌来源、公开可达性和交互安全性，并审核包含生成目录的当前提交。
-3. 卡片与生成目录一同合并到 `main`。`purge-cdn` 清理 jsDelivr 的 `@main/catalog.json` 缓存，以完整 SHA-256 核对发布内容。用户在 MCP连接器市场点击“刷新”即可看到新卡片。
+1. `public-checks` 运行回归测试、描述符校验和素材检查。`rebuild-catalog` 从同一份 PR 的源文件重建目录并比对。如果检查提示生成文件过期，在本地运行 `npm run build`，或从该运行下载 `catalog-products`、解压并执行 `git apply catalog-products.patch`。检查差异并提交到原分支。
+2. 维护者按 PR 编号和最新完整提交核对官方来源、鉴权、使用条款与实际验收范围，在原 PR 说明结论或需要补充的材料。`validate` 检查这版提交的核验结果。推送新提交后需要重新核验。
+3. CODEOWNER 审核当前的卡片与生成目录。合并到 `main` 后，`purge-cdn` 清理 jsDelivr 的 `@main/catalog.json` 缓存并校验完整 SHA-256。用户在连接器市场点击“刷新”即可取得已上架的卡片。
 
 ## 4. 完整 Descriptor 模板
 
@@ -342,7 +342,7 @@ OAuth 卡片必须发布可验证的 Protected Resource Metadata 与 Authorizati
 - [ ] 服务说明写明重要权限、费用、数据范围和副作用。
 - [ ] 第三方名称和 Logo 已获得使用权，并在 PR 提供官方来源。
 - [ ] stdio 命令来自官方公开包，且不要求 Registry 探针执行本地命令。
-- [ ] 维护者已提交同 ID 候选记录，完成官方证据、许可证/服务条款、人工批准和真实运行验收；记录不含凭据或个人数据。
+- [ ] PR 已提供官方配置和使用范围，并注明需要维护者确认的限制。
 - [ ] 已运行 `npm ci --legacy-peer-deps` 和 `npm test && npm run validate && npm run assets:check`。
 - [ ] 已检查暂存的连接器、公开图片和生成目录，确认其中只有本次上架的公开内容。
 

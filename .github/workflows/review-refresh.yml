@@ -1,0 +1,36 @@
+name: Refresh Registry PR verification
+on:
+  workflow_run:
+    workflows: [Registry review notification]
+    types: [completed]
+
+permissions:
+  contents: read
+  pull-requests: read
+  actions: write
+
+concurrency:
+  group: registry-review-refresh-${{ github.event.workflow_run.display_title }}-${{ github.event.workflow_run.head_sha }}
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: >-
+      github.event.workflow_run.event == 'pull_request_review' &&
+      github.event.workflow_run.path == '.github/workflows/review-notification.yml' &&
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+      - name: Refresh the original PR check from the trusted default branch
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: ${{ github.event.workflow_run.display_title }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          [[ "$TITLE" =~ ^Registry\ review\ /\ PR\ ([1-9][0-9]*)$ ]] || exit 1
+          python3 scripts/record-maintainer-review.py refresh "${BASH_REMATCH[1]}" "$SHA"

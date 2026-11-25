@@ -12,10 +12,9 @@ const [workflow, discoveryWorkflow, readme, contributing, onboarding] = await Pr
 
 test('pull requests include the rebuilt catalog before it is published from main', () => {
   assert.match(workflow, /permissions:\s*\n\s+contents: read/);
-  const validate = workflow.split(/  validate:\r?\n/)[1].split(/  rebuild-catalog:\r?\n/)[0];
-  assert.match(validate, /^      - run: npm test\r?$/m);
-  assert.ok(validate.includes("run: node scripts/check-new-connectors.mjs --base '${{ github.event.pull_request.base.sha }}'"));
-  assert.match(validate, /- run: npm run validate\s+- run: npm run assets:check/);
+  const publicChecks = workflow.split(/  public-checks:\r?\n/)[1].split(/  validate:\r?\n/)[0];
+  assert.match(publicChecks, /^      - run: npm test\r?$/m);
+  assert.match(publicChecks, /- run: npm run validate\s+- run: npm run assets:check/);
   const rebuild = workflow.split(/  rebuild-catalog:\r?\n/)[1].split(/  purge-cdn:\r?\n/)[0];
   assert.match(rebuild, /- run: npm run build/);
   assert.match(rebuild, /git diff --binary --no-ext-diff HEAD/);

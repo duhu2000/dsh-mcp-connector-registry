@@ -46,6 +46,8 @@ node -e "const {connectors}=require('./catalog.json'); console.log('总数:', co
 
 ## 上架流程
 
+外部贡献者可使用 GitHub 账号提交 Issue 或 fork PR。技术检查完成后，维护者在原 PR 反馈当前提交的核验范围与所需修正。
+
 如果您是服务商或社区贡献者，可以直接[发起连接器收录请求](https://github.com/duhu2000/dsh-mcp-connector-registry/issues/new?template=connector-request.yml)，也可以 fork 本仓库并提交 Connector PR。
 
 首次上架请先阅读完整的[第三方连接器上架指南](docs/ONBOARDING.md)，其中包含上架前准备、两条路径、6 步操作、完整 Descriptor 模板、字段表、9 分类、4 种鉴权、Checklist 和 10 条 FAQ。
@@ -67,7 +69,7 @@ flowchart LR
 2. 只提交公开元数据；禁止 Token、API Key、密码、Cookie 和 Client Secret。
 3. 运行 `npm ci --legacy-peer-deps`，再执行 `npm test && npm run validate && npm run assets:check`。
 4. 将连接器和生成目录提交到同一份 PR。`npm run build` 可重新生成目录。若缺少生成文件，`rebuild-catalog` 检查会提供补丁。
-5. 新增连接器须通过人工审核记录与验收证据检查。维护者复核后合并。合并到 `main` 后，CI 自动清理并校验 jsDelivr 缓存，用户可从原地址刷新卡片。
+5. 新增或修改连接器时，维护者按当前提交核验卡片并在原 PR 反馈；CODEOWNER 批准且两项必过检查通过后可合并。合并到 `main` 后，CI 自动清理并校验 jsDelivr 缓存，用户可从原地址刷新卡片。
 
 `featured` 由维护者管理。第三方收录不代表服务商官方背书，实际权限、费用和可用性以服务商为准。
 
