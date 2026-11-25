@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "mode": "validate-only",
+  "checkedAt": 1795593928136,
+  "connectors": [
+    {
+      "id": "open-targets-platform",
+      "servers": 1,
+      "authMode": "none"
+    },
+    {
+      "id": "nasa-earthdata-cmr",
+      "servers": 1,
+      "authMode": "none"
+    }
+  ]
+}
