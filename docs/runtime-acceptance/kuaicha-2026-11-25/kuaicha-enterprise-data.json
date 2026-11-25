@@ -1,0 +1,60 @@
+{
+  "candidateId": "kuaicha-enterprise-data",
+  "checkedAt": "2026-11-25T04:08:52.661Z",
+  "timeSource": "DSH 会话轨迹中工商查询工具的开始时间（北京时间 12:08:52.661）。",
+  "reviewedBy": "Codex",
+  "status": "pass",
+  "scope": "已授权连接、MCP 工具发现及一次代表性只读工商登记查询。",
+  "evidenceSource": "通过内置浏览器核对 DSH 已安装连接、工具参数和会话轨迹中的实际输入与业务结果。",
+  "connectorVersion": "0.2.119",
+  "connection": {
+    "serviceCount": 1,
+    "toolCount": 2,
+    "toolNames": [
+      "kuaicha_tool_discover",
+      "kuaicha_tool_call"
+    ],
+    "serverName": "kuaicha-enterprise-mcp",
+    "authMode": "api-key",
+    "state": "connected",
+    "discoveryCheckedAt": "2026-11-25T04:07:21Z"
+  },
+  "testAccount": {
+    "configuration": "用户在 DSH 本机自行配置 iFinD 个人中心发放的密钥。",
+    "scope": "按用户此前确认的 iFinD 独立免费试用验收账号范围记录。本次未再次核对账号身份或读取密钥。"
+  },
+  "capabilityLookup": {
+    "tool": "mcp__kuaicha-enterprise-mcp__kuaicha_tool_discover",
+    "query": "企业工商登记基本信息",
+    "attempts": 1,
+    "matchedToolId": "basic_get_enterprise_basic_info"
+  },
+  "businessCall": {
+    "tool": "mcp__kuaicha-enterprise-mcp__kuaicha_tool_call",
+    "toolId": "basic_get_enterprise_basic_info",
+    "parameters": {
+      "corp_name": "杭州同花顺数据开发有限公司"
+    },
+    "attempts": 1,
+    "success": true,
+    "fieldsVerified": [
+      "企业名称",
+      "成立日期",
+      "登记状态"
+    ],
+    "source": "同花顺旗下快查企业数据引擎"
+  },
+  "otherToolCalls": 0,
+  "retries": 0,
+  "limitations": [
+    "工商登记是唯一实际取数场景，股权、投资、知识产权和风险等数据能力未逐项验收。",
+    "实际额度增减未核实。"
+  ],
+  "maintainerApproval": {
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-25T04:29:57.704Z",
+    "scope": "用户以维护者身份要求在授权验收通过后单独提交快查上架 PR。"
+  },
+  "credentialsRecorded": false,
+  "rawResponseRecorded": false
+}
