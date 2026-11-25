@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "connectorId": "ipinfo-ip-data",
+  "status": "pass",
+  "checkedAt": "2026-11-25T13:39:00Z",
+  "timestampPrecision": "minute; DSH displayed 21:39 Asia/Shanghai",
+  "evidenceSource": "Codex observed expanded actual tool invocation and response through Chrome DSH UI",
+  "serverName": "ipinfo-ip",
+  "connectionEvidence": {
+    "source": "user-supplied DSH tool list",
+    "checkedAt": "2026-11-25T13:35:19Z",
+    "toolCount": 6,
+    "tools": [
+      "ipinfo_lookup",
+      "ipinfo_check_privacy",
+      "ipinfo_check_residential_proxy",
+      "ipinfo_geolocate",
+      "ipinfo_asn",
+      "ipinfo_quota"
+    ]
+  },
+  "tool": "ipinfo_lookup",
+  "arguments": {
+    "ips": [
+      "8.8.8.8"
+    ],
+    "detailed": false
+  },
+  "businessCallAttempts": 1,
+  "automaticRetries": 0,
+  "resultSummary": {
+    "returnedIpCount": 1,
+    "requestedFieldsPresent": [
+      "country",
+      "country_code",
+      "continent",
+      "continent_code",
+      "asn",
+      "as_name",
+      "as_domain"
+    ],
+    "errorsEmpty": true,
+    "api_calls_made": 1,
+    "from_cache": 0,
+    "total_pages": 1
+  },
+  "dataRetention": "No credentials, account quota, customer IPs or full vendor response retained. Only public test input and acceptance metadata.",
+  "scope": "One Lite lookup only; other five tools and detailed=true untested.",
+  "billing": "One underlying API call reported; actual account charge not checked.",
+  "authLimit": "Existing DSH connection succeeded; its credential type was not independently inspected. New market-card OAuth flow has not been separately exercised."
+}

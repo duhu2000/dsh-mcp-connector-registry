@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-11-25T13:50:22.740810+00:00",
+  "officialDocumentation": "https://ipinfo.io/developers/mcp-server",
+  "endpoint": "https://mcp.ipinfo.io/",
+  "authentication": {
+    "oauthDocumented": true,
+    "bearerApiTokenDocumented": true,
+    "separateMcpKeyRequired": false,
+    "protectedResourceUrl": "https://mcp.ipinfo.io/.well-known/oauth-protected-resource",
+    "protectedResourceStatus": 200,
+    "resource": "https://mcp.ipinfo.io/",
+    "authorizationServers": [
+      "https://ipinfo.io"
+    ],
+    "scopes": [
+      "ipinfo:read"
+    ],
+    "authorizationMetadataUrl": "https://ipinfo.io/.well-known/oauth-authorization-server",
+    "authorizationMetadataStatus": 200,
+    "issuer": "https://ipinfo.io",
+    "authorizationEndpoint": "https://ipinfo.io/oauth/authorize",
+    "tokenEndpoint": "https://ipinfo.io/oauth/token",
+    "registrationEndpoint": "https://ipinfo.io/oauth/register",
+    "pkce": [
+      "S256"
+    ],
+    "tokenEndpointAuthMethods": [
+      "none"
+    ],
+    "dynamicRegistrationExecuted": false,
+    "note": "The MCP host AS-metadata path returned 404; followed the advertised issuer, whose metadata returned 200."
+  },
+  "terms": {
+    "url": "https://ipinfo.io/terms-of-service",
+    "updatedAt": "2026-11-23",
+    "aupUrl": "https://ipinfo.io/acceptable-use-policy",
+    "finding": "Official terms include IPinfo Data License for self-service API plans; separate written data-service agreement controls when present. Commercial/OEM/reseller/redistribution rights require the corresponding separate licence. Official MCP docs expressly support user-account access via third-party clients. Registry distributes connection metadata only, no shared vendor account or dataset.",
+    "logo": "Generic globe icon; no vendor logo copied."
+  },
+  "maintenance": "Official hosted documentation and OAuth metadata reachable on review date; no inference of long-term SLA."
+}

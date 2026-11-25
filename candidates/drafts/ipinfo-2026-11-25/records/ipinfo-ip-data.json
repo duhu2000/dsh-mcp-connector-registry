@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "ipinfo-ip-data",
+  "registryName": "review/ipinfo-ip-data",
+  "title": "IPinfo · IP地理与网络数据",
+  "provider": "IPinfo",
+  "providerRegion": "海外",
+  "status": "PASS",
+  "source": {
+    "kind": "official-vendor",
+    "detailUrl": "https://ipinfo.io/developers/mcp-server",
+    "status": "active"
+  },
+  "connectionAcceptance": {
+    "status": "pass",
+    "toolCount": 6,
+    "checkedAt": "2026-11-25T13:35:19Z",
+    "reviewedBy": "Codex (user tool discovery and observed DSH runtime)",
+    "reportPath": "candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/ipinfo-acceptance-20261125/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json",
+    "notes": "User reported successful connection and six tools; actual ipinfo_lookup response later observed. Market-card OAuth flow untested."
+  },
+  "runtimeAcceptance": {
+    "status": "pass",
+    "checkedAt": "2026-11-25T13:39:00Z",
+    "reviewedBy": "Codex (expanded DSH actual tool response)",
+    "reportPath": "candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/ipinfo-acceptance-20261125/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json",
+    "notes": "One public IP Lite lookup returned all requested basic fields, errors={}, api_calls_made=1 and from_cache=0; no retry, quota lookup or download."
+  },
+  "license": {
+    "status": "verified",
+    "evidenceUrl": "https://ipinfo.io/terms-of-service",
+    "notes": "Public self-service data-license scope and separate-agreement precedence reviewed. User uses own account; card grants no redistribution/commercial licence. See official-review.json."
+  },
+  "review": {
+    "decision": "pending",
+    "proposedConnectorId": "ipinfo-ip-data",
+    "scope": "full-runtime",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "notes": "Prepared for candidate-specific named listing approval after representative acceptance; not yet promoted."
+  },
+  "dedupe": {
+    "level": "none",
+    "overlap": [],
+    "notes": "No IPinfo provider, endpoint or name match found in formal connectors and records on origin/main 3edf50a."
+  },
+  "probe": {
+    "status": "partial",
+    "reason": "Unauthenticated official OAuth metadata verified; authenticated representative DSH lookup PASS. Anonymous tools/list was not claimed."
+  },
+  "authentication": {
+    "mode": "oauth2",
+    "alternative": "Bearer API Token documented; market card uses OAuth with S256 and public client none."
+  },
+  "score": {
+    "total": 88,
+    "band": "selected",
+    "dimensions": {
+      "authority": 25,
+      "accessibility": 18,
+      "maintenanceSecurity": 10,
+      "runtime": 15,
+      "marketGap": 10,
+      "documentation": 10
+    },
+    "notes": "Official hosted service; representative basic lookup only; paid feature and market-card OAuth UI coverage excluded."
+  },
+  "nextStep": "Obtain named final listing approval, promote descriptor/record, merge and update catalog additions. No npm release required for a catalog-only change.",
+  "evidence": [
+    {
+      "type": "official-vendor",
+      "url": "https://ipinfo.io/developers/mcp-server"
+    },
+    {
+      "type": "license",
+      "url": "https://ipinfo.io/terms-of-service"
+    },
+    {
+      "type": "runtime-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/ipinfo-acceptance-20261125/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json"
+    },
+    {
+      "type": "connection-acceptance",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/ipinfo-acceptance-20261125/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json"
+    },
+    {
+      "type": "authentication",
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/ipinfo-acceptance-20261125/candidates/drafts/ipinfo-2026-11-25/evidence/official-review.json"
+    }
+  ]
+}
