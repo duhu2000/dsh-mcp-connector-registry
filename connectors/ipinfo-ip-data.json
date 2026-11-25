@@ -17,7 +17,7 @@
     "免费基础数据",
     "付费扩展"
   ],
-  "published": false,
+  "published": true,
   "featured": false,
   "homepage": "https://ipinfo.io/developers/mcp-server",
   "probeStatus": "pass",

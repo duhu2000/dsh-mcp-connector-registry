@@ -17,7 +17,7 @@
     "checkedAt": "2026-11-25T13:35:19Z",
     "reviewedBy": "Codex (user tool discovery and observed DSH runtime)",
     "reportPath": "candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json",
-    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/ipinfo-acceptance-20261125/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json",
     "notes": "User reported successful connection and six tools; actual ipinfo_lookup response later observed. Market-card OAuth flow untested."
   },
   "runtimeAcceptance": {
@@ -25,7 +25,7 @@
     "checkedAt": "2026-11-25T13:39:00Z",
     "reviewedBy": "Codex (expanded DSH actual tool response)",
     "reportPath": "candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json",
-    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/ipinfo-acceptance-20261125/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json",
+    "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json",
     "notes": "One public IP Lite lookup returned all requested basic fields, errors={}, api_calls_made=1 and from_cache=0; no retry, quota lookup or download."
   },
   "license": {
@@ -34,12 +34,12 @@
     "notes": "Public self-service data-license scope and separate-agreement precedence reviewed. User uses own account; card grants no redistribution/commercial licence. See official-review.json."
   },
   "review": {
-    "decision": "pending",
+    "decision": "approved",
     "proposedConnectorId": "ipinfo-ip-data",
     "scope": "full-runtime",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "notes": "Prepared for candidate-specific named listing approval after representative acceptance; not yet promoted."
+    "reviewedBy": "DuHu",
+    "reviewedAt": "2026-11-25T14:06:29.356405+00:00",
+    "notes": "DuHu explicitly approved IPinfo listing in this conversation. Scope: one public-IP Lite lookup PASS; remaining five tools and detailed mode untested; public service terms verified. Market-card OAuth flow not separately tested."
   },
   "dedupe": {
     "level": "none",
@@ -67,7 +67,7 @@
     },
     "notes": "Official hosted service; representative basic lookup only; paid feature and market-card OAuth UI coverage excluded."
   },
-  "nextStep": "Obtain named final listing approval, promote descriptor/record, merge and update catalog additions. No npm release required for a catalog-only change.",
+  "nextStep": "Publish approved card after CI and maintainer verification; retain limited runtime scope and user account entitlements.",
   "evidence": [
     {
       "type": "official-vendor",
@@ -79,15 +79,15 @@
     },
     {
       "type": "runtime-acceptance",
-      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/ipinfo-acceptance-20261125/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json"
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json"
     },
     {
       "type": "connection-acceptance",
-      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/ipinfo-acceptance-20261125/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json"
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/ipinfo-2026-11-25/evidence/runtime-acceptance.json"
     },
     {
       "type": "authentication",
-      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/feat/ipinfo-acceptance-20261125/candidates/drafts/ipinfo-2026-11-25/evidence/official-review.json"
+      "url": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/ipinfo-2026-11-25/evidence/official-review.json"
     }
   ]
 }
