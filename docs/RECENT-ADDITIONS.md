@@ -2,6 +2,22 @@
 
 仅收录有合并证据的正式上架；不将修改日期当作上架日期。历史条目尚未全部回溯。
 
+### 2026-11-26 · Arca · 生命科学与监管数据
+
+FDA监管记录 / 临床试验 / 生物医学文献。接入方式：none；探测状态：pass。
+
+DuHu 批准上架。官方免账号公共 MCP 发现 4 个工具；一次 FDA 警告信检索返回 3 条记录及官方来源链接，验收通过。其余 3 个工具及 DSH 界面未逐项验收；记录日期与发布日期分别保留，数据使用和再分发遵循来源许可及 Arca 条款。
+
+[上架 PR #126](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/126) · [卡片详情](../connectors/arca-life-sciences.json)
+
+### 2026-11-26 · GeneBe · 基因与变异研究
+
+公开基因与变异注释 / 坐标转换 / 非商业科研。接入方式：none；探测状态：pass。
+
+DuHu 批准上架。官方免账号公共 MCP 发现 6 个工具；一次 TP53 基因查询返回基因标识及 MANE 转录本，验收通过。疾病关联列表返回 10/11 条并标记截断，其余 5 个工具未逐项验收。限非商业研究和教育，非临床用途；服务与数据限制不因服务器代码 MIT 许可而免除。
+
+[上架 PR #126](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/126) · [卡片详情](../connectors/genebe-public-genetics.json)
+
 ### 2026-11-26 · AQUAVIEW · 海洋与环境数据
 
 海洋环境数据目录 / 时空检索 / 数据来源与观测数据发现。接入方式：none；探测状态：pass。
