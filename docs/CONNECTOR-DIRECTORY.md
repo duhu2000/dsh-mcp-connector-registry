@@ -148,7 +148,7 @@
 
 ## 开发工具
 
-共 23 个连接器。
+共 24 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
@@ -162,6 +162,7 @@
 | [Gitee](../connectors/gitee.json) | 代码仓库 / Issue / Pull Request / 通知协作 | Gitee | bearer | 公共目录 | unverified |
 | [GitHub](../connectors/github.json) | 代码仓库 / Issue / Pull Request / Actions 协作 | GitHub | bearer | 公共目录 | unverified |
 | [GitLab](../connectors/gitlab.json) | 代码仓库 / Merge Request / Issue / CI/CD | GitLab | oauth2-pkce | 公共目录 | unverified |
+| [IPinfo · IP地理与网络数据](../connectors/ipinfo-ip-data.json) | IP国家与洲 / ASN网络归属 / 地理与代理检测 | IPinfo | oauth2-pkce | 公共目录 | pass |
 | [Jenkins](../connectors/jenkins.json) | 任务状态 / 构建日志 / 流水线与作业管理 | 社区连接器 | api-key | 公共目录 | unverified |
 | [Langfuse](../connectors/langfuse.json) | LLM 追踪 / 会话 / Prompt / 可观测性分析 | 社区连接器 | api-key | 公共目录 | unverified |
 | [MongoDB](../connectors/mongodb.json) | 数据库查询 / Atlas 资源 / Schema 分析 / 只读模式 | MongoDB | api-key | 公共目录 | unverified |
