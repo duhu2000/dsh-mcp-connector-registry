@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "genebe-public-genetics",
+  "name": "GeneBe · 基因与变异研究",
+  "vendor": "GeneBe",
+  "icon": "🧬",
+  "category": "调研分析",
+  "summary": "公开基因与变异注释 / 坐标转换 / 非商业科研",
+  "description": "连接 GeneBe 官方公共 MCP，查询基因标识、公开变异注释、ACMG 解释、转录本影响及基因组坐标转换。免账号、免 Key，只读入口按 IP 共享限流，不接入个人样本。仅限非商业研究与教育用途，不用于临床诊断；官网另有限制数据用于 AI 建模的条款，不应将服务端代码的 MIT 许可视为数据许可。实际发现 6 个工具，一次 TP53 基因资料查询已验收，其余 5 个工具未逐项验收；该次疾病关联列表标记 truncated=true，不能当作完整列表。输出应保留基因组版本、来源和截断信息，不推断个人患病风险。",
+  "tags": [
+    "GeneBe",
+    "海外数据",
+    "基因",
+    "变异",
+    "非商业科研",
+    "教育",
+    "免费公共入口"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://docs.genebe.net/docs/mcp/",
+  "probeStatus": "pass",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "genebe-public-genetics",
+      "transport": "streamable-http",
+      "url": "https://mcp.genebe.net/v1/mcp",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询 TP53 基因资料",
+      "text": "仅调用 GeneBe 的 get_gene 一次，gene 为 TP53，include_transcripts 为 false。用中文列出基因标准名称、HGNC/Ensembl 标识、MANE Select 转录本及来源链接；说明基因组版本与 truncated 标记，不把疾病关联解释为个人患病风险。仅用于非商业研究与教育。",
+      "server": "main"
+    },
+    {
+      "title": "研究基因组坐标转换",
+      "text": "将公开示例 chr17:7674220 从 hg38 转换至 hg19。先核对 GeneBe liftover_coordinate 的实际参数，仅执行一次坐标转换，列出输入与输出版本、坐标口径及失败或歧义信息，不输入个人样本。仅用于非商业研究与教育。",
+      "server": "main"
+    }
+  ],
+  "probeCheckedAt": 1795677486459
+}

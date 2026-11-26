@@ -41,12 +41,13 @@
 
 ## 调研分析
 
-共 54 个连接器。
+共 56 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
 | [AgentNative 政府公共数据](../connectors/agentnative-government-open-data.json) | 政府数据目录 / 联邦公报 / 官方来源 / 样例与聚合 | CaziMedia AgentNative（独立服务） | none | 公共目录 | pass |
 | [AQUAVIEW · 海洋与环境数据](../connectors/aquaview-ocean-environment.json) | 海洋环境数据目录 / 时空检索 / 数据来源与观测数据发现 | AQUAVIEW | none | 公共目录 | pass |
+| [Arca · 生命科学与监管数据](../connectors/arca-life-sciences.json) | FDA监管记录 / 临床试验 / 生物医学文献 | Arca Technologies, Inc. | none | 公共目录 | pass |
 | [摩熵 · 医药研发数据](../connectors/bcpmdata-pharma-research.json) | 药物研发 / 临床试验 / 医药专利 / 医药监管 | 摩熵数科 | api-key | 公共目录 | pass |
 | [BLS 美国劳工统计](../connectors/bls-us-labour-statistics.json) | CPI / 就业失业 / 工资工时 / JOLTS | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [博查搜索](../connectors/bocha-search.json) | 网页搜索 / AI 搜索 / 内容检索 | 社区连接器 | api-key | 公共目录 | unverified |
@@ -61,6 +62,7 @@
 | [FRED 美国宏观经济数据](../connectors/fred-economic-data.json) | GDP / CPI / 就业 / 利率 / 经济时间序列 | Pipeworx（独立第三方服务） | none | 公共目录 | pass |
 | [GBIF 全球生物多样性](../connectors/gbif-global-biodiversity.json) | 物种分类 / 出现记录 / 数据集 / 全球生物多样性 | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [极鲸云 · SHEIN市场数据](../connectors/geekbi-shein-data.json) | SHEIN 商品 / 店铺 / 类目 / 关键词 / 评论与图搜同款 | 极鲸云 GeekBI / 青岛极鲸网络科技有限公司 | none | 公共目录 | pass |
+| [GeneBe · 基因与变异研究](../connectors/genebe-public-genetics.json) | 公开基因与变异注释 / 坐标转换 / 非商业科研 | GeneBe | none | 公共目录 | pass |
 | [Google Analytics](../connectors/google-analytics.json) | GA4 属性 / 报表 / 实时数据 / 漏斗与转化分析 | Google Analytics | api-key | 公共目录 | partial |
 | [Google 地图（HasData）](../connectors/google-maps.json) | 地点搜索 / 评论 / 图片 / 商户与周边信息 | HasData 社区网关 | api-key | 公共目录 | unverified |
 | [IBGE 巴西公共统计](../connectors/ibge-br-public-data.json) | 人口普查 / 行政区划 / 经济社会指标 / 地理边界 | Sidney Bissoli（独立社区项目） | none | 公共目录 | pass |

@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-11-26T07:18:06.459756+00:00",
+  "endpoint": "https://mcp.genebe.net/v1/mcp",
+  "tool": "get_gene",
+  "arguments": {
+    "gene": "TP53",
+    "include_transcripts": false
+  },
+  "businessCallAttempts": 1,
+  "automaticRetries": 0,
+  "transport": "direct Streamable HTTP; not DSH UI acceptance",
+  "responseSha256": "6d63018fb8844b4e11cca74ccdc695cd6ec8c63b811110e3fb4e878b841a03ef",
+  "status": "pass",
+  "isError": false,
+  "notes": "One get_gene(TP53, include_transcripts=false) call returned identifiers and MANE Select. truncated=true; gene disease list contains 10 of 11 entries. No patient input, clinical interpretation or full-list completeness claim; other 5 tools and DSH UI untested.",
+  "resultSummary": {
+    "symbol": "TP53",
+    "name": "tumor protein p53",
+    "hgnc_id": 11998,
+    "ensembl_id": "ENSG00000141510",
+    "mane_select_refseq": "NM_000546.6",
+    "mane_select_ensembl": "ENST00000269305.9",
+    "total_gene_disease_entries": 11,
+    "truncated": true,
+    "link": "https://genebe.net/gene/hg38/TP53",
+    "returnedGeneDiseaseEntries": 10
+  }
+}

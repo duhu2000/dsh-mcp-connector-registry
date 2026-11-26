@@ -1,0 +1,411 @@
+{
+  "checkedAt": "2026-11-26T07:18:05.553533+00:00",
+  "endpoint": "https://app.arca.inc/api/public/mcp",
+  "serverInfo": {
+    "name": "arca-life-sciences",
+    "version": "0.1.0"
+  },
+  "toolCount": 4,
+  "transport": "direct Streamable HTTP; not DSH UI acceptance",
+  "tools": [
+    {
+      "name": "search_medical",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 400,
+            "description": "Medical, pharma, clinical, regulatory, device, or safety research query."
+          },
+          "publicSourceFilters": {
+            "description": "Exact metadata filters for FDA enforcement, 510(k)/PMA device decisions, drug labels, FDA guidance, ClinicalTrials.gov studies, Health Canada drug records, EudraGMDP, BfArM/PMDA device notices, FDA complete response letters, EU MDR/IVDR expert-panel opinions and FDA food, supplement, cosmetic and animal drug adverse event and tobacco problem reports (filter by reactions, eventOutcomes). Device record date is the decision date, not receipt. Label record date is SPL effective date. Trial record date is first submission, postedDate is first posting; study milestones and lastUpdateDate are separate. Unknown or partial dates do not match ranges.",
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "trialStatuses": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "trialPhases": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "studyTypes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "feiNumbers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "applicationNumbers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "description": "Exact drug application, device K or PMA numbers, such as NDA209637, K070051 or P900052."
+                  },
+                  "productCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "recallNumbers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "recordTypes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "description": "483, EIR, RESPONSE, WARNING LETTER, INSPECTION, IMPORT REFUSAL, RECALL, ADVERSE EVENT, DRUG LABEL, 510(K) or PMA. Other upstream record types retain their names."
+                  },
+                  "recallClasses": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "description": "Recall classes I, II or III."
+                  },
+                  "inspectionOutcomes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "description": "FDA inspection classification codes NAI, VAI or OAI."
+                  },
+                  "productTypes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "description": "Upstream product type or category, including FDA import-refusal ProductCategory values such as Foods and CAERS industry names such as COSMETICS or VIT/MIN/PROT/UNCONV DIET(HUMAN/ANIMAL)."
+                  },
+                  "countries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "states": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "recordIds": {
+                    "description": "Exact upstream record identifiers, including SPL set/document IDs, trial NCT IDs, device K numbers, PMA supplements such as P900052-S016, PMIDs and substance UNIIs. A trial also lists the PMIDs of its result publications and its EudraCT, CTIS and other registry IDs; a GSRS substance also lists its CAS, DrugBank, ChEMBL and other codes, with numeric ones prefixed by their system, such as RXCUI:1191 or PUBCHEM:2244.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "ndcCodes": {
+                    "description": "Exact NDC product codes, preserving leading zeroes and hyphens.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "decisionCodes": {
+                    "description": "FDA device decision codes, such as SESE or APPR.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "deviceClasses": {
+                    "description": "FDA device classes as upstream strings, such as 1, 2 or 3.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "dins": {
+                    "description": "Exact Health Canada eight-digit Drug Identification Numbers, preserving leading zeroes.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "reactions": {
+                    "description": "Exact reported reactions on FDA food, dietary supplement and cosmetic adverse event reports (MedDRA terms such as NAUSEA or ANAPHYLACTIC REACTION), FDA animal drug adverse event reports (VeDDRA terms such as VOMITING) and FDA tobacco product problem reports (health problems such as COUGHING).",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "eventOutcomes": {
+                    "description": "Exact outcomes on FDA food, dietary supplement and cosmetic adverse event reports, such as DEATH, HOSPITALIZATION, LIFE THREATENING or VISITED EMERGENCY ROOM, and on FDA animal drug adverse event reports, such as DIED or EUTHANIZED.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    }
+                  },
+                  "dateField": {
+                    "description": "recordDate uses the source's record date: FDA device decision date, label SPL effective date or trial first submission. postedDate stays separate. Choose a trial milestone, lastUpdateDate or inspectionDate explicitly. Partial dates are excluded, never rounded to a day.",
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "recordDate",
+                          "postedDate",
+                          "studyStartDate",
+                          "primaryCompletionDate",
+                          "completionDate",
+                          "lastUpdateDate",
+                          "inspectionDate"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "startDate": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "endDate": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "description": "Exact metadata facets share a total budget of 50 values across all arrays. Split larger searches into separate requests."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sourceTypes": {
+            "description": "Optional source lanes to focus the search (see list_datasets). Omit to search the whole corpus.",
+            "maxItems": 12,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "fda_records",
+                "regulatory_guidance",
+                "biomedical_literature",
+                "clinical_trials",
+                "public_health",
+                "clinical_guidelines",
+                "standards_quality",
+                "global_regulatory",
+                "device_vigilance",
+                "press_releases",
+                "company_filings",
+                "patents"
+              ]
+            }
+          },
+          "numResults": {
+            "description": "Results to return (1-25, default 10).",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 25
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "search_papers",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 400,
+            "description": "Natural-language research question or topic to find papers on."
+          },
+          "numResults": {
+            "description": "Papers to return (1-25, default 10).",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 25
+          },
+          "minYear": {
+            "description": "Only papers published in or after this year.",
+            "type": "integer",
+            "minimum": 1800,
+            "maximum": 2100
+          },
+          "maxYear": {
+            "description": "Only papers published in or before this year.",
+            "type": "integer",
+            "minimum": 1800,
+            "maximum": 2100
+          },
+          "publicationTypes": {
+            "description": "Only these PubMed publication types (e.g. Randomized Controlled Trial, Meta-Analysis, Systematic Review).",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Randomized Controlled Trial",
+                "Clinical Trial",
+                "Meta-Analysis",
+                "Systematic Review",
+                "Review",
+                "Observational Study",
+                "Comparative Study",
+                "Multicenter Study",
+                "Case Reports",
+                "Practice Guideline"
+              ]
+            }
+          },
+          "openAccessOnly": {
+            "description": "Only papers OpenAlex marks open access.",
+            "type": "boolean"
+          },
+          "pmcOnly": {
+            "description": "Only papers with free full text in PubMed Central.",
+            "type": "boolean"
+          },
+          "minCitedByCount": {
+            "description": "Only papers OpenAlex counts at least this many citations for.",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "fetch_source_record",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "recordId from a search_medical result."
+          },
+          "startIndex": {
+            "description": "Character offset from the previous result's nextInput; omit or null to start reading.",
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "contentHash": {
+            "description": "The contentHash from nextInput, to refuse a page from a changed record. Omit or null to begin a new read.",
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "recordId"
+        ]
+      }
+    },
+    {
+      "name": "list_datasets",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {}
+      }
+    }
+  ],
+  "status": "pass",
+  "credentialUsed": false
+}

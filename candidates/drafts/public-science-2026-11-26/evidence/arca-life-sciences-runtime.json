@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-11-26T07:18:05.553533+00:00",
+  "endpoint": "https://app.arca.inc/api/public/mcp",
+  "tool": "search_medical",
+  "arguments": {
+    "query": "FDA warning letters data integrity",
+    "sourceTypes": [
+      "fda_records"
+    ],
+    "numResults": 3,
+    "publicSourceFilters": {
+      "recordTypes": [
+        "WARNING LETTER"
+      ]
+    }
+  },
+  "businessCallAttempts": 1,
+  "automaticRetries": 0,
+  "transport": "direct Streamable HTTP; not DSH UI acceptance",
+  "responseSha256": "58aff77fbb8d55e48aaa01e6b03a77ae1c3a1c257c0dc2da494dd004fb918896",
+  "status": "pass",
+  "isError": false,
+  "notes": "One search_medical call returned 3 FDA WARNING LETTER records with official fda.gov URLs and distinct record/posted dates; other 3 tools and DSH UI not tested.",
+  "resultSummary": {
+    "returnedCount": 3,
+    "records": [
+      {
+        "title": "FDA warning letter: Huons Co., Ltd. (724650)",
+        "sourceKey": "fda.warning_letters",
+        "url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/warning-letters/huons-co-ltd-724650-06152026",
+        "recordDate": "2026-06-15",
+        "postedDate": "2026-06-23"
+      },
+      {
+        "title": "FDA warning letter: Samm Solutions, Inc., d.b.a. BTS Research (663898)",
+        "sourceKey": "fda.warning_letters",
+        "url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/warning-letters/samm-solutions-inc-dba-bts-research-663898-10202023",
+        "recordDate": "2023-10-20",
+        "postedDate": "2023-10-31"
+      },
+      {
+        "title": "FDA warning letter: Lico Industries, LLC., d.b.a. American Towelette Company (729921)",
+        "sourceKey": "fda.warning_letters",
+        "url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/warning-letters/lico-industries-llc-dba-american-towelette-company-729921-07302026",
+        "recordDate": "2026-07-30",
+        "postedDate": "2026-08-11"
+      }
+    ]
+  }
+}
