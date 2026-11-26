@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -23,7 +25,17 @@ jobs:
           checkout=$(mktemp -d)
           git archive HEAD -- .github README.md CONTRIBUTING.md package.json package-lock.json \
             product-metadata.json catalog.json catalog-stats.json assets connectors fixtures/stdio-server.mjs schema scripts test \
-            docs/ONBOARDING.md docs/verification | tar -x -C "$checkout"
+            docs/ONBOARDING.md docs/MAINTAINER-VERIFICATION.md docs/verification \
+            docs/bundled-overview.json docs/catalog-additions.json | tar -x -C "$checkout"
           cd "$checkout"
           npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+          # Submit the public sample as a new card in the disposable checkout.
+          card=connectors/ci-example-connector.json
+          test ! -e "$card"
+          jq '.id = "ci-example-connector" | .servers[0].serverName = .id | .icon = "🔎"' \
+            connectors/example.sample.json > "$card"
+          npm run build
           npm test
+          npm run validate
+          npm run assets:check
+          jq -e 'any(.connectors[]; .id == "ci-example-connector" and .published == true)' catalog.json

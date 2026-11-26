@@ -15,7 +15,6 @@ function parseArgs(argv) {
   const options = {
     output: 'candidate-output', limit: 100, maxPages: 1000, requestTimeoutMs: 45_000,
     maxAttempts: 4, maxProbes: 25, minProbeScore: 65,
-    exclusions: 'discovery-sources/exclusions.json',
   };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -103,6 +102,10 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   const generatedAt = new Date().toISOString();
   const apiBase = options.apiBase ?? OFFICIAL_REGISTRY_API;
+  const [connectors, exclusionPolicy] = await Promise.all([
+    loadConnectorCatalog(resolve('catalog.json')),
+    loadExclusionPolicy(options.exclusions),
+  ]);
   let entries;
   let pages;
   let complete = true;
@@ -133,10 +136,6 @@ async function main() {
     complete = result.complete;
     incompleteReason = result.incompleteReason;
   }
-  const [connectors, exclusionPolicy] = await Promise.all([
-    loadConnectorCatalog(resolve('catalog.json')),
-    loadExclusionPolicy(options.exclusions),
-  ]);
   const discovery = await discoverOfficialCandidates({ entries, connectors, exclusionPolicy, retrievedAt: generatedAt, apiBase });
   if (options.probe) {
     await probeCandidates(discovery.candidates, {
