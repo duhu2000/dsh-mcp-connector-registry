@@ -1,0 +1,142 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-11-25T07:59:53.521Z",
+  "toolsCallCount": 4,
+  "businessAssociationQueryAttempts": 2,
+  "successfulAssociationQueries": 1,
+  "automaticRetries": 0,
+  "scope": "One confirmed breast carcinoma direct association result, top 3 targets; no clinical validation.",
+  "history": [
+    {
+      "checkedAt": "2026-11-25T07:55:35.242Z",
+      "tool": "get_open_targets_graphql_schema",
+      "args": {
+        "categories": [
+          "disease-associations"
+        ]
+      },
+      "attempts": 1,
+      "responseSha256": "ba59d1dba1ea1283dc6e0a2dd99864af491801cc32aeeea07a4c9dbad30c8bb5",
+      "outcome": "GraphQL disease-associations schema retrieved"
+    },
+    {
+      "checkedAt": "2026-11-25T07:56:34.426Z",
+      "tool": "query_open_targets_graphql",
+      "args": {
+        "query_string": "query { disease(efoId: \"EFO_0000305\") { id name associatedTargets(page: {index: 0, size: 3}, orderByScore: \"score desc\", enableIndirect: false) { count rows { target { id approvedSymbol } score } } } }"
+      },
+      "attempts": 1,
+      "responseSha256": "9a22a68bc9189f5ce8c2574348c0d8aa8cc462e5be4091e6b712942d871e741c",
+      "outcome": "Transport success but disease=null for EFO_0000305; NOT accepted as business PASS"
+    },
+    {
+      "checkedAt": "2026-11-25T07:59:18.093Z",
+      "tool": "search_entities",
+      "args": {
+        "query_strings": [
+          "breast carcinoma"
+        ]
+      },
+      "attempts": 1,
+      "responseSha256": "26b0e5374907ff1c7d854cff3973b84a81258cbcfb9cbefd1b15a33ca11ef99c",
+      "outcome": {
+        "breast carcinoma": [
+          {
+            "id": "MONDO_0004989",
+            "type": "disease"
+          },
+          {
+            "id": "MONDO_0016419",
+            "type": "disease"
+          },
+          {
+            "id": "MONDO_0006256",
+            "type": "disease"
+          }
+        ]
+      }
+    },
+    {
+      "checkedAt": "2026-11-25T07:59:53.521Z",
+      "tool": "query_open_targets_graphql",
+      "args": {
+        "query_string": "query { disease(efoId: \"MONDO_0004989\") { id name associatedTargets(page: {index: 0, size: 3}, orderByScore: \"score desc\", enableIndirect: false) { count rows { target { id approvedSymbol } score } } } }"
+      },
+      "attempts": 1,
+      "responseSha256": "9b46c40d280dc101efe1d2bca00ff099babd092bd103a4ec352a961ae208911a",
+      "outcome": {
+        "status": "success",
+        "data": {
+          "disease": {
+            "id": "MONDO_0004989",
+            "name": "breast carcinoma",
+            "associatedTargets": {
+              "count": 15620,
+              "rows": [
+                {
+                  "target": {
+                    "id": "ENSG00000139618",
+                    "approvedSymbol": "BRCA2"
+                  },
+                  "score": 0.8221747745930893
+                },
+                {
+                  "target": {
+                    "id": "ENSG00000183765",
+                    "approvedSymbol": "CHEK2"
+                  },
+                  "score": 0.7996398654863863
+                },
+                {
+                  "target": {
+                    "id": "ENSG00000083093",
+                    "approvedSymbol": "PALB2"
+                  },
+                  "score": 0.7950099215143577
+                }
+              ]
+            }
+          }
+        },
+        "message": null
+      }
+    }
+  ],
+  "result": {
+    "status": "success",
+    "data": {
+      "disease": {
+        "id": "MONDO_0004989",
+        "name": "breast carcinoma",
+        "associatedTargets": {
+          "count": 15620,
+          "rows": [
+            {
+              "target": {
+                "id": "ENSG00000139618",
+                "approvedSymbol": "BRCA2"
+              },
+              "score": 0.8221747745930893
+            },
+            {
+              "target": {
+                "id": "ENSG00000183765",
+                "approvedSymbol": "CHEK2"
+              },
+              "score": 0.7996398654863863
+            },
+            {
+              "target": {
+                "id": "ENSG00000083093",
+                "approvedSymbol": "PALB2"
+              },
+              "score": 0.7950099215143577
+            }
+          ]
+        }
+      }
+    },
+    "message": null
+  },
+  "limitation": "Initial EFO identifier returned null. Corrected using search_entities result MONDO_0004989; do not describe as first-attempt success. Server version is not proof of dataset release date."
+}

@@ -34,7 +34,6 @@ export async function build(){
  const bundled=JSON.parse(await readFile('docs/bundled-overview.json','utf8')).connectors;
  await mkdir('docs',{recursive:true});await writeFile('docs/CONNECTOR-DIRECTORY.md',renderDirectory(cards,bundled));
  await writeFile('docs/RECENT-ADDITIONS.md','# 近期新增数据源\n\n仅收录有合并证据的正式上架；不将修改日期当作上架日期。历史条目尚未全部回溯。\n\n'+lines.join('\n'));
- await writeFile('docs/ANNOUNCEMENT-DRAFT.md','# 新数据源宣传素材草稿（未发布）\n\n供运营审核选用；不得将部分验证宣传为全部业务可用。未自动发布到任何平台。\n\n'+lines.join('\n'));
  const block=renderOverview(cards,bundled);
  await writeFile('docs/CATEGORY-OVERVIEW.md',block+'\n');
  let readme=await readFile('README.md','utf8');
