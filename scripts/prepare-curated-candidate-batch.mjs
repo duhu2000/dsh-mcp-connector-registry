@@ -9,6 +9,15 @@ function requiredString(value, label) {
   return value.trim();
 }
 
+function reportPathFor(item) {
+  const path = requiredString(item.runtimeReportPath, 'runtimeReportPath');
+  if (!path.endsWith('.md') || path.split('/').some((part) => !part || part === '.' || part === '..') ||
+      /[\\:%?#]/.test(path)) {
+    throw new Error('runtimeReportPath must be a relative Markdown path within the evidence repository');
+  }
+  return path;
+}
+
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
 }
@@ -23,13 +32,10 @@ export function prepareCuratedCandidate(sourceCandidate, item, { repositoryBaseU
   const id = requiredString(item.id, 'candidate id');
   const probeCheckedAt = requiredString(item.probeCheckedAt, `${id} probeCheckedAt`);
   const runtimeCheckedAt = requiredString(item.runtimeCheckedAt, `${id} runtimeCheckedAt`);
-  const runtimeReportPath = requiredString(item.runtimeReportPath, `${id} runtimeReportPath`);
+  const runtimeReportPath = reportPathFor(item);
   const endpoint = requiredString(item.endpoint, `${id} endpoint`);
   if (item.probeStatus !== 'pass') throw new Error(`${id} probeStatus must be pass`);
   if (item.runtimeStatus !== 'pass') throw new Error(`${id} runtimeStatus must be pass`);
-  if (!runtimeReportPath.startsWith('docs/runtime-acceptance/')) {
-    throw new Error(`${id} runtimeReportPath must be under docs/runtime-acceptance/`);
-  }
   if (!candidate.transports.some((transport) => transport.kind === 'remote' && transport.url === endpoint)) {
     throw new Error(`${id} endpoint must match a remote transport in the discovery snapshot`);
   }
@@ -151,7 +157,7 @@ export function renderBatchSummary(manifest, candidates) {
     `- 本批 ${candidates.length} 个 MCP 涉及 ${maintainers.length} 个维护主体（${maintainers.join('、')}）；仍需逐项评估维护者集中度、官方或社区身份与长期可用性。`,
     '- 开源许可证仅证明相应 MCP 代码的授权；闭源服务以公开服务条款为准。每个上游数据集的授权、署名、使用政策、频率限制与商用边界必须分别复核。',
     '- 卡片必须明确“社区独立维护、非数据机构官方产品”，不得把 Official MCP Registry 收录误写成数据机构官方背书。',
-    '- 维护者完成来源和条款审核后，才能填写 `approved`、迁入 `candidates/records/` 并另行准备 Connector 描述符 PR。',
+    '- 维护者完成来源和条款审核后，才能填写 `approved`、存入维护者指定的记录目录 并另行准备 Connector 描述符 PR。',
     '',
   );
   return lines.join('\n');
@@ -161,10 +167,10 @@ function parseArgs(argv) {
   const options = {};
   for (let index = 0; index < argv.length; index += 1) {
     const key = argv[index];
-    if (!['--input', '--manifest', '--output'].includes(key)) throw new Error(`Unknown argument: ${key}`);
+    if (!['--input', '--manifest', '--output', '--evidence-root'].includes(key)) throw new Error(`Unknown argument: ${key}`);
     options[key.slice(2)] = argv[++index];
   }
-  for (const key of ['input', 'manifest', 'output']) requiredString(options[key], `--${key}`);
+  for (const key of ['input', 'manifest', 'output', 'evidence-root']) requiredString(options[key], `--${key}`);
   return options;
 }
 
@@ -180,8 +186,8 @@ async function main() {
   const repositoryBaseUrl = requiredString(manifest.repositoryBaseUrl, 'repositoryBaseUrl');
   const generatedAt = requiredString(manifest.generatedAt, 'generatedAt');
   for (const item of manifest.candidates) {
-    const reportPath = requiredString(item.runtimeReportPath, `${item.registryName} runtimeReportPath`);
-    const runtimeReport = await readFile(resolve(reportPath), 'utf8');
+    const reportPath = reportPathFor(item);
+    const runtimeReport = await readFile(resolve(options['evidence-root'], reportPath), 'utf8');
     const expected = [
       '- Decision: **pass**',
       `- Checked at: ${item.runtimeCheckedAt}`,

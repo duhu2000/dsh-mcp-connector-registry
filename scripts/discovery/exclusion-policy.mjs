@@ -44,7 +44,8 @@ export function validateExclusionPolicy(policy) {
   return policy;
 }
 
-export async function loadExclusionPolicy(path = 'discovery-sources/exclusions.json') {
+export async function loadExclusionPolicy(path) {
+  if (!path) throw new Error('Supply --exclusions <file> with the exclusion policy');
   return validateExclusionPolicy(JSON.parse(await readFile(resolve(path), 'utf8')));
 }
 

@@ -473,3 +473,14 @@ test('a failed public probe defers a candidate but never changes catalog state',
   assert.ok(candidate.score.gates.some((gate) => /never delists/.test(gate)));
   assert.ok(candidate.evidence.some((item) => item.type === 'probe'));
 });
+
+test('discovery and source audits require maintainer inputs before reading a snapshot', () => {
+  for (const [script, args, message] of [
+    ['discover-candidates.mjs', ['--input', 'no-such-snapshot.json'], /--exclusions/],
+    ['audit-curated-sources.mjs', ['--offline'], /--config.*--exclusions/],
+  ]) {
+    const run = spawnSync(process.execPath, [resolve('scripts', script), ...args], { encoding: 'utf8' });
+    assert.equal(run.status, 1);
+    assert.match(run.stderr, message);
+  }
+});

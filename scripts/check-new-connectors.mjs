@@ -2,6 +2,7 @@
 import { execFileSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { parseArgs } from 'node:util';
 import { pathToFileURL } from 'node:url';
 
 function isHttps(value) {
@@ -152,19 +153,25 @@ function addedConnectorPaths(base) {
 }
 
 async function main() {
-  const args = process.argv.slice(2);
-  const baseIndex = args.indexOf('--base');
-  if (baseIndex === -1 || !args[baseIndex + 1]) throw new Error('Usage: check-new-connectors.mjs --base <git-sha>');
-  const paths = addedConnectorPaths(args[baseIndex + 1]);
+  const { values } = parseArgs({ options: { base: { type: 'string' }, 'records-dir': { type: 'string' } } });
+  if (!values.base || !values['records-dir']) {
+    throw new Error('Usage: check-new-connectors.mjs --base <git-sha> --records-dir <directory>');
+  }
+  const paths = addedConnectorPaths(values.base);
   const failures = [];
   for (const path of paths) {
     const descriptor = JSON.parse(await readFile(resolve(path), 'utf8'));
-    const recordPath = resolve('candidates', 'records', `${descriptor.id}.json`);
+    if (!/^[a-z0-9][a-z0-9_-]*$/.test(descriptor.id) || path !== `connectors/${descriptor.id}.json`) {
+      failures.push(`${path}: connector id must match its filename`);
+      continue;
+    }
+    const recordPath = resolve(values['records-dir'], `${descriptor.id}.json`);
     let record;
     try {
       record = JSON.parse(await readFile(recordPath, 'utf8'));
-    } catch {
-      failures.push(`${path}: missing candidates/records/${descriptor.id}.json`);
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+      failures.push(`${path}: missing review record ${descriptor.id}.json`);
       continue;
     }
     for (const error of verifyRuntimeAcceptance(descriptor, record)) failures.push(`${path}: ${error}`);
