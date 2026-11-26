@@ -189,6 +189,57 @@
     },
     {
       "schemaVersion": 1,
+      "id": "aquaview-ocean-environment",
+      "name": "AQUAVIEW · 海洋与环境数据",
+      "vendor": "AQUAVIEW",
+      "icon": "🌊",
+      "category": "调研分析",
+      "summary": "海洋环境数据目录 / 时空检索 / 数据来源与观测数据发现",
+      "description": "连接 AQUAVIEW 官方托管 MCP，检索海洋、大气与环境数据目录，按地区、时间和来源筛选数据集，查看元数据、许可及可用数据源，辅助科研与环境研究。公共目录入口免账号、免 Key；部分数据访问和账号功能可能需要权限或消耗额度，以厂商规则为准。实际发现 6 个工具，指定区域与时间的目录检索已通过运行验收，其余 5 个工具、观测值获取及文件下载尚未验收。目录匹配不等于实测数据完整覆盖；保留来源、时间、单位和数据许可，模型检测结果不作为已证实事件或责任认定。商业用途需厂商授权，第三方数据使用与再分发遵循各来源许可证。",
+      "tags": [
+        "AQUAVIEW",
+        "海外数据",
+        "海洋",
+        "环境",
+        "大气",
+        "STAC",
+        "数据目录",
+        "免Key公共入口"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://aquaview.org/mcp-overview",
+      "probeStatus": "pass",
+      "probeCheckedAt": 1795617554319,
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "aquaview",
+          "transport": "streamable-http",
+          "url": "https://mcp.aquaview.org/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "寻找夏威夷周边环境数据",
+          "text": "检索 2025 年、夏威夷周边西经 161—154 度和北纬 18—23 度矩形范围的数据目录，最多返回 3 条。列出名称、来源、日期、空间范围和许可证；仅查询元数据，不翻页或下载，不把目录条目或模型检测当作已证实的环境事件。",
+          "server": "main"
+        },
+        {
+          "title": "寻找加州近海观测数据源",
+          "text": "查找 2025 年 7 月、加州近海西经 125—120 度和北纬 34—38 度范围的海洋观测候选数据集，最多列出 3 条目录记录，并说明数据来源、时间覆盖、许可及缺失信息。只检索目录，不获取观测数据或下载文件，不推断目录外的数据覆盖。",
+          "server": "main"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "baidu-maps",
       "name": "百度地图",
       "vendor": "百度地图开放平台",
@@ -3174,6 +3225,61 @@
     },
     {
       "schemaVersion": 1,
+      "id": "ipinfo-ip-data",
+      "name": "IPinfo · IP地理与网络数据",
+      "vendor": "IPinfo",
+      "icon": "🌐",
+      "category": "开发工具",
+      "summary": "IP国家与洲 / ASN网络归属 / 地理与代理检测",
+      "description": "连接 IPinfo 官方 MCP，查询公共 IP 的国家、洲和 ASN 网络归属，适合网络排障、流量地域分析与网络研究。OAuth 登录本人 IPinfo 账号；也可手动使用控制台现有 API Token 作为 Bearer 凭据，无需另领 MCP Key。Lite 提供基础数据，城市级地理、隐私及住宅代理检测受付费套餐权限限制，额度与费用以账号规则为准。已发现6个工具；单次公共 IP Lite 查询运行验收通过，其余5个工具和详细模式尚未验收。空结果或权限错误不代表没有代理风险。IP 地理信息不代表个人精确位置；数据使用遵守 IPinfo 服务条款及账号许可，卡片不提供数据再分发或商业转售授权。",
+      "tags": [
+        "IPinfo",
+        "海外数据",
+        "IP地理",
+        "ASN",
+        "网络数据",
+        "OAuth",
+        "免费基础数据",
+        "付费扩展"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://ipinfo.io/developers/mcp-server",
+      "probeStatus": "pass",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://ipinfo.io",
+        "scope": "ipinfo:read",
+        "clientName": "DeepSeek Harness - IPinfo MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "ipinfo",
+          "serverName": "ipinfo-ip",
+          "transport": "streamable-http",
+          "url": "https://mcp.ipinfo.io/",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询公共 IP 的国家和网络归属",
+          "server": "ipinfo",
+          "text": "用 IPinfo 查询公共 IP 8.8.8.8 的国家、洲、ASN、网络组织和域名，使用 ipinfo_lookup 且 detailed=false。列出错误与缓存命中信息；不追加隐私检测或付费详细查询，不把 IP 地理信息解释为个人位置。"
+        },
+        {
+          "title": "比较两个公共 DNS 的网络归属",
+          "server": "ipinfo",
+          "text": "用 IPinfo 的 ipinfo_lookup 一次查询 8.8.8.8 和 1.1.1.1，detailed=false，以表格比较国家、洲、ASN、组织和域名。按真实返回说明分页、错误和 API 调用次数；不推测未返回字段，不追加查询。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
       "id": "itjuzi-venture-capital-data",
       "name": "IT桔子创投数据",
       "vendor": "IT桔子",
@@ -4055,6 +4161,109 @@
     },
     {
       "schemaVersion": 1,
+      "id": "mozlen-trademark",
+      "name": "摩知轮商标检索",
+      "vendor": "摩知轮（北京摩知轮科技有限公司）",
+      "icon": "🔎",
+      "category": "法律合规",
+      "summary": "国内外商标 / 图形近似 / 公告 / 商标裁文",
+      "description": "通过摩知轮官方 MCP 和本人账号 OAuth 授权，检索国内外商标、图形近似、国内公告、驳回通知、异议决定、评审裁文、诉讼判决与域名仲裁。文字检索使用国家名称，图形检索使用服务端支持的国家代码，范围以实际工具参数为准。按账号积分及服务规则计费，免费体验与图形检索权益不同。已确认 OAuth 连接及发现8个工具；中国“摩知轮”商标名称检索已通过单次验收，其余7个工具未逐项验收。遵守摩知轮用户协议与账号使用限制，不附带数据转售或再分发权；检索结果需核对来源、法律状态及日期，不据此直接认定商标可注册或不存在侵权风险。",
+      "tags": [
+        "摩知轮",
+        "国内数据",
+        "商标",
+        "知识产权",
+        "图形检索",
+        "OAuth"
+      ],
+      "published": true,
+      "featured": false,
+      "probeStatus": "pass",
+      "homepage": "https://www.mozlen.com/",
+      "auth": {
+        "mode": "oauth2-pkce",
+        "issuer": "https://www.mozlen.com",
+        "clientName": "DeepSeek Harness - Mozlen MCP",
+        "tokenEndpointAuthMethod": "none",
+        "grantSharing": "connector"
+      },
+      "servers": [
+        {
+          "serverKey": "mozlen-trademark",
+          "serverName": "mozlen-trademark",
+          "transport": "streamable-http",
+          "url": "https://www.mozlen.com/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询中国“摩知轮”商标",
+          "server": "mozlen-trademark",
+          "text": "查询中国范围内名称为“摩知轮”的商标，仅取第一页最多3条。先核对实际参数和账号费用，使用 trademark_search，country 为 [\"中国\"]；支持精确匹配时使用精确匹配。列明商标名称、申请或注册号、尼斯类别、法律状态及返回日期，缺失项标明未提供。不翻页、不下载、不追加图形或其他查询，不据此直接判断可注册性。"
+        },
+        {
+          "title": "查询美国“MOZLEN”商标",
+          "server": "mozlen-trademark",
+          "text": "查询美国范围内名称为“MOZLEN”的商标，仅取第一页最多3条。先核对 trademark_search 的国家枚举、匹配参数及账号费用，不猜测国家值；列明名称、申请或注册号、尼斯类别和法律状态。无结果时说明检索范围及限制，不将无结果解释为可注册，不追加查询或下载。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "nasa-earthdata-cmr",
+      "name": "NASA Earthdata · 地球科学数据目录",
+      "vendor": "NASA Earthdata",
+      "icon": "🌍",
+      "category": "调研分析",
+      "summary": "遥感数据集发现 / 地区与时间筛选 / 数据文件目录与引用",
+      "description": "连接 NASA 官方 Earthdata MCP，检索 Common Metadata Repository（CMR）中的地球科学数据集、数据文件目录、变量、服务及引用信息，适用于遥感和环境研究。公共目录查询免账号、免 Key；部分数据访问、下载或转换服务可能需要 Earthdata Login 和对应权限。本次实际发现 7 个工具，并通过指定地区与时间的数据集目录检索验收；具体数据文件、下载和转换尚未验收。数据集覆盖范围相交不代表区域内一定有可用文件，应继续核对 granules 后再作判断。保留数据集标识、版本、DOI、覆盖范围与查询时间；数据使用及再分发遵循各数据集的 Use Constraints 和许可证。",
+      "tags": [
+        "NASA",
+        "Earthdata",
+        "海外数据",
+        "遥感",
+        "地球科学",
+        "气象",
+        "数据目录",
+        "免费公共入口"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://nasa.github.io/earthdata-mcp/consumers/earthdata-mcp-server-user-guide/",
+      "probeStatus": "pass",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "nasa-earthdata-cmr",
+          "transport": "streamable-http",
+          "url": "https://cmr.earthdata.nasa.gov/mcp/v1",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "寻找长三角地表温度数据集",
+          "text": "检索 2025 年 7 月、东经 119—122 度和北纬 30—32 度矩形区域内的 MODIS 地表温度候选数据集，最多返回 3 个，列出名称、版本、DOI 和时空覆盖。说明这是长三角局部矩形示例；仅检索目录，不下载文件，不能把目录匹配视为实际观测文件已核验。",
+          "server": "main"
+        },
+        {
+          "title": "寻找北京降水数据集",
+          "text": "检索 2025 年 8 月、东经 115.5—117.5 度和北纬 39.5—41.1 度矩形区域内的降水候选数据集，最多返回 3 个，说明空间分辨率、时间分辨率、数据来源和缺失信息；只检索公共目录，不提交转换任务或下载数据。",
+          "server": "main"
+        }
+      ],
+      "probeCheckedAt": 1795593371047
+    },
+    {
+      "schemaVersion": 1,
       "id": "neon",
       "name": "Neon",
       "vendor": "Neon",
@@ -4491,6 +4700,56 @@
           "server": "main"
         }
       ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "open-targets-platform",
+      "name": "Open Targets · 疾病与靶点数据",
+      "vendor": "Open Targets",
+      "icon": "🧬",
+      "category": "调研分析",
+      "summary": "疾病关联靶点 / 基因与药物检索 / 研究证据与关联评分",
+      "description": "连接 Open Targets 官方公共 MCP，检索疾病、靶点、药物等实体，并查询疾病与靶点的关联证据和评分。免账号、免 Key，服务仍处于实验和持续开发阶段。使用前应从实体检索结果取得当前标识，再按实际 GraphQL Schema 查询。结果用于科研信息检索，关联分数不等于致病概率或治疗效果。实际发现 5 个工具；乳腺癌关联靶点查询已验收，其他能力未逐项验收。平台数据采用 CC0 1.0，代码采用 Apache 2.0；引用结果时保留平台版本、疾病标识、查询时间和来源。",
+      "tags": [
+        "Open Targets",
+        "海外数据",
+        "生命科学",
+        "疾病",
+        "靶点",
+        "科研",
+        "免费公共入口"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://platform-docs.opentargets.org/data-access/model-context-protocol",
+      "probeStatus": "pass",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "open-targets-platform",
+          "transport": "streamable-http",
+          "url": "https://mcp.platform.opentargets.org/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查看乳腺癌关联靶点",
+          "text": "先检索 breast carcinoma 的当前疾病标识并核对名称，再查询直接关联分数最高的 3 个靶点。列出基因符号、靶点标识和关联评分，保留 Open Targets 来源与查询时间；不要将关联评分解释为致病概率或治疗效果。",
+          "server": "main"
+        },
+        {
+          "title": "确认 BRCA1 靶点",
+          "text": "在 Open Targets 中检索 BRCA1，核对实体类型并列出返回的标准标识与来源；只做实体检索，不追加药物或疾病查询。",
+          "server": "main"
+        }
+      ],
+      "probeCheckedAt": 1795593593521
     },
     {
       "schemaVersion": 1,

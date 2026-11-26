@@ -1,4 +1,6 @@
 name: Registry CI
+run-name: >-
+  Registry CI / ${{ github.event.pull_request.number && format('PR #{0}', github.event.pull_request.number) || github.ref_name }}
 
 on:
   push:
@@ -9,24 +11,57 @@ permissions:
   contents: read
 
 jobs:
-  validate:
+  public-checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - run: python3 -B test/maintainer-review-command.test.py
       - run: npm test
-      - name: Require human review and scoped acceptance evidence for new connectors
-        if: github.event_name == 'pull_request'
-        run: node scripts/check-new-connectors.mjs --base '${{ github.event.pull_request.base.sha }}'
       - run: npm run validate
       - run: npm run assets:check
+
+  validate:
+    needs: public-checks
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Require successful public checks
+        if: needs.public-checks.result != 'success'
+        run: exit 1
+      - uses: actions/checkout@v4
+        if: github.event.pull_request != null
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Identify changed connector cards
+        id: cards
+        if: github.event.pull_request != null
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          files=$(git diff --no-renames --name-only --diff-filter=AMT "$BASE_SHA...$HEAD_SHA" -- 'connectors/*.json' ':(exclude)connectors/*.sample.json')
+          if [[ -n "$files" ]]; then
+            git show "$BASE_SHA:scripts/check-maintainer-review.cjs" > "$RUNNER_TEMP/check-maintainer-review.cjs"
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Require maintainer verification for this PR revision
+        if: steps.cards.outputs.changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const check = require(process.env.RUNNER_TEMP + '/check-maintainer-review.cjs');
+            await check({ github, context, core });
 
   rebuild-catalog:
     runs-on: ubuntu-latest

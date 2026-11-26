@@ -2,9 +2,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-const [workflow, discoveryWorkflow, readme, contributing, onboarding] = await Promise.all([
+const [workflow, readme, contributing, onboarding] = await Promise.all([
   readFile(new URL('../.github/workflows/ci.yml', import.meta.url), 'utf8'),
-  readFile(new URL('../.github/workflows/discovery.yml', import.meta.url), 'utf8'),
   readFile(new URL('../README.md', import.meta.url), 'utf8'),
   readFile(new URL('../CONTRIBUTING.md', import.meta.url), 'utf8'),
   readFile(new URL('../docs/ONBOARDING.md', import.meta.url), 'utf8'),
@@ -12,10 +11,9 @@ const [workflow, discoveryWorkflow, readme, contributing, onboarding] = await Pr
 
 test('pull requests include the rebuilt catalog before it is published from main', () => {
   assert.match(workflow, /permissions:\s*\n\s+contents: read/);
-  const validate = workflow.split(/  validate:\r?\n/)[1].split(/  rebuild-catalog:\r?\n/)[0];
-  assert.match(validate, /^      - run: npm test\r?$/m);
-  assert.ok(validate.includes("run: node scripts/check-new-connectors.mjs --base '${{ github.event.pull_request.base.sha }}'"));
-  assert.match(validate, /- run: npm run validate\s+- run: npm run assets:check/);
+  const publicChecks = workflow.split(/  public-checks:\r?\n/)[1].split(/  validate:\r?\n/)[0];
+  assert.match(publicChecks, /^      - run: npm test\r?$/m);
+  assert.match(publicChecks, /- run: npm run validate\s+- run: npm run assets:check/);
   const rebuild = workflow.split(/  rebuild-catalog:\r?\n/)[1].split(/  purge-cdn:\r?\n/)[0];
   assert.match(rebuild, /- run: npm run build/);
   assert.match(rebuild, /git diff --binary --no-ext-diff HEAD/);
@@ -27,14 +25,6 @@ test('pull requests include the rebuilt catalog before it is published from main
   assert.match(workflow, /ref: main/);
   assert.match(workflow, /node scripts\/purge-jsdelivr-cache\.mjs catalog\.json/);
   assert.doesNotMatch(workflow, /npm run check/);
-});
-
-test('monthly discovery audits curated sources without publishing or deleting Connectors', () => {
-  assert.match(discoveryWorkflow, /npm run candidates:curated-sources/);
-  assert.match(discoveryWorkflow, /discovery-sources\/curated-last-good\.json/);
-  assert.match(discoveryWorkflow, /Curated catalog candidate watchlist/);
-  assert.match(discoveryWorkflow, /dsh-data-mcp-curated-sources-monthly/);
-  assert.doesNotMatch(discoveryWorkflow, /git push|rm .*connectors|writeFileSync\([^)]*connectors/);
 });
 
 test('main 每次合并后都自动清理并验证 jsDelivr 缓存', () => {

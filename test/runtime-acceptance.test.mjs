@@ -126,13 +126,25 @@ test('runtime acceptance gate rejects mismatched IDs, non-HTTPS evidence, and cr
   assert.ok(errors.some((error) => /credential value/.test(error)));
 });
 
-test('CI runs the acceptance gate only for newly added Connector descriptors', async () => {
+test('public checks run independently and validate requires a PR-specific upstream result', async () => {
   const workflow = await readFile(new URL('../.github/workflows/ci.yml', import.meta.url), 'utf8');
-  const template = await readFile(new URL('../.github/PULL_REQUEST_TEMPLATE.md', import.meta.url), 'utf8');
-  assert.match(workflow, /fetch-depth: 0/);
-  assert.match(workflow, /check-new-connectors\.mjs --base/);
-  assert.match(workflow, /github\.event_name == 'pull_request'/);
-  assert.match(template, /real runtime acceptance report/);
+  const [publicJob, gate] = workflow.split(/  validate:\r?\n/);
+  assert.ok(publicJob.includes('public-checks:'));
+  assert.ok(publicJob.includes('npm run validate'));
+  assert.ok(gate.includes('needs: public-checks'));
+  assert.ok(gate.includes("--no-renames --name-only --diff-filter=AMT"));
+  assert.ok(gate.includes("github.event.pull_request.head.sha"));
+  assert.ok(gate.includes('git show "$BASE_SHA:scripts/check-maintainer-review.cjs"'));
+  assert.ok(gate.includes('pull-requests: read'));
+  assert.ok(workflow.includes("format('PR #{0}', github.event.pull_request.number)"));
+  assert.ok(!workflow.includes('  pull_request_review:'));
+  const notification = await readFile(new URL('../.github/workflows/review-notification.yml', import.meta.url), 'utf8');
+  const refresh = await readFile(new URL('../.github/workflows/review-refresh.yml', import.meta.url), 'utf8');
+  assert.ok(notification.includes('types: [submitted, edited, dismissed]'));
+  assert.ok(notification.includes('permissions: {}'));
+  assert.ok(refresh.includes('ref: ${{ github.workflow_sha }}'));
+  assert.ok(refresh.includes('record-maintainer-review.py refresh'));
+  assert.match(gate, /if: github.event.pull_request != null/);
 });
 
 async function limitedListing(id = 'openboost-cross-border-data') {
