@@ -6,6 +6,12 @@
     "acceptance": "已验证匿名目录检索。观测值读取和文件下载尚未验证；使用数据时请核对来源和许可。"
   },
   {
+    "id": "ipinfo-ip-data",
+    "publishedOn": "2026-11-26",
+    "pr": 121,
+    "acceptance": "DuHu 具名批准。官方 MCP 已发现6个工具，单次公共 IP Lite 查询验收通过，状态 pass；其余5个工具和详细模式尚未验收。支持 OAuth，亦可使用现有 API Token 作为 Bearer 凭据。公开服务条款已核实，详细数据及隐私检测按账号套餐权限使用。"
+  },
+  {
     "id": "open-targets-platform",
     "publishedOn": "2026-11-25",
     "pr": 117,

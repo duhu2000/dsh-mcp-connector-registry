@@ -10,6 +10,14 @@
 
 [上架 PR #122](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/122) · [卡片详情](../connectors/aquaview-ocean-environment.json)
 
+### 2026-11-26 · IPinfo · IP地理与网络数据
+
+IP国家与洲 / ASN网络归属 / 地理与代理检测。接入方式：oauth2-pkce；探测状态：pass。
+
+DuHu 具名批准。官方 MCP 已发现6个工具，单次公共 IP Lite 查询验收通过，状态 pass；其余5个工具和详细模式尚未验收。支持 OAuth，亦可使用现有 API Token 作为 Bearer 凭据。公开服务条款已核实，详细数据及隐私检测按账号套餐权限使用。
+
+[上架 PR #121](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/121) · [卡片详情](../connectors/ipinfo-ip-data.json)
+
 ### 2026-11-25 · Open Targets · 疾病与靶点数据
 
 疾病关联靶点 / 基因与药物检索 / 研究证据与关联评分。接入方式：none；探测状态：pass。
