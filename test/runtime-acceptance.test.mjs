@@ -91,21 +91,11 @@ test('new Connector acceptance supports a reviewed official-vendor non-data MCP'
   assert.ok(errors.some((error) => /official vendor evidence/.test(error)));
 });
 
-test('approved SHOPLINE official-vendor candidate matches its published safe stdio card', async () => {
-  const record = JSON.parse(await readFile(new URL(
-    '../candidates/records/shopline-developer-mcp.json',
-    import.meta.url,
-  ), 'utf8'));
+test('SHOPLINE publishes a pinned stdio command and consent guidance', async () => {
   const descriptor = JSON.parse(await readFile(new URL(
     '../connectors/shopline-developer-mcp.json',
     import.meta.url,
   ), 'utf8'));
-  assert.equal(record.source.kind, 'official-vendor');
-  assert.equal(record.classification.isDataService, false);
-  assert.equal(record.runtimeAcceptance.status, 'pass');
-  assert.equal(record.review.decision, 'approved');
-  assert.equal(record.review.reviewedBy, 'DuHu');
-  assert.deepEqual(verifyRuntimeAcceptance(descriptor, record), []);
   assert.equal(descriptor.auth.mode, 'none');
   assert.equal(descriptor.servers[0].transport, 'stdio');
   assert.deepEqual(descriptor.servers[0].args, ['-y', '@shoplineos/shopline-developer-mcp@1.1.0']);
@@ -147,22 +137,34 @@ test('public checks run independently and validate requires a PR-specific upstre
   assert.match(gate, /if: github.event.pull_request != null/);
 });
 
-async function limitedListing(id = 'openboost-cross-border-data') {
-  const fixture = {
-    descriptor: JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8')),
-    record: JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8')),
+function limitedListing() {
+  const record = acceptedOfficialVendorRecord();
+  record.review.scope = 'connection-only';
+  record.dedupe = { level: 'none' };
+  record.score.total -= record.score.dimensions.runtime;
+  record.score.dimensions.runtime = 0;
+  record.score.band = 'watchlist';
+  record.connectionAcceptance = {
+    status: 'pass', toolCount: 2, checkedAt: record.review.reviewedAt,
+    reviewedBy: 'connection-reviewer', reportUrl: 'https://example.com/reports/connection',
+    notes: 'Connection and tool discovery succeeded.',
   };
-  // Model the original approval snapshot independently of later live observations.
-  fixture.descriptor.probeStatus = 'partial';
-  fixture.descriptor.description = '已验证连接及工具发现，业务查询尚未验收。';
-  fixture.record.runtimeAcceptance = { status: 'not-run', checkedAt: null, reviewedBy: null, reportUrl: null, notes: '初次连接验收，未调用业务工具。' };
-  return fixture;
+  record.runtimeAcceptance = {
+    status: 'not-run', checkedAt: null, reviewedBy: null, reportUrl: null, notes: 'No business tool was called.',
+  };
+  record.evidence = record.evidence.filter(e => e.type !== 'runtime-acceptance');
+  record.evidence.push({ type: 'connection-acceptance', url: record.connectionAcceptance.reportUrl });
+  const descriptor = { id: 'approved-data', featured: false, published: true, probeStatus: 'partial', description: '业务查询尚未验收。' };
+  return { descriptor, record };
 }
 
-test('limited listings retain approval scope while recording later pass/fail evidence', async () => {
-  for (const [id, status] of [['cric-deeplink-real-estate', 'pass'], ['openboost-cross-border-data', 'fail']]) {
-    const descriptor = JSON.parse(await readFile(new URL(`../connectors/${id}.json`, import.meta.url), 'utf8'));
-    const record = JSON.parse(await readFile(new URL(`../candidates/records/${id}.json`, import.meta.url), 'utf8'));
+test('limited listings retain approval scope while recording later pass/fail evidence', () => {
+  for (const status of ['pass', 'fail']) {
+    const { record, descriptor } = limitedListing();
+    record.runtimeAcceptance = { ...acceptedRecord().runtimeAcceptance, status };
+    record.evidence.push({ type: 'runtime-acceptance', url: record.runtimeAcceptance.reportUrl });
+    descriptor.probeStatus = status === 'pass' ? 'pass' : 'partial';
+    descriptor.description = status === 'pass' ? '运行验收通过，业务查询通过，其他范围尚未验收。' : '有限验收，业务查询未通过，其他范围尚未验收。';
     assert.equal(record.runtimeAcceptance.status, status);
     assert.equal(descriptor.probeStatus, status === 'pass' ? 'pass' : 'partial');
     assert.deepEqual(verifyRuntimeAcceptance(descriptor, record), []);
@@ -187,22 +189,19 @@ test('limited listings retain approval scope while recording later pass/fail evi
   }
 });
 
-test('named connection-only approval publishes partial cards without inventing business acceptance', async () => {
-  for (const id of ['openboost-cross-border-data', 'cric-deeplink-real-estate']) {
-    const { descriptor, record } = await limitedListing(id);
-    assert.deepEqual(verifyRuntimeAcceptance(descriptor, record), []);
-    assert.equal(record.review.reviewedBy, 'DuHu');
-    assert.equal(record.runtimeAcceptance.status, 'not-run');
-    assert.equal(record.score.dimensions.runtime, 0);
-    assert.equal(record.score.band, 'watchlist');
-    assert.equal(descriptor.probeStatus, 'partial');
-    assert.equal(descriptor.prompts.some(p => /\{\{|研究问题/.test(p.text)), false);
-  }
+test('named connection-only approval publishes partial cards without inventing business acceptance', () => {
+  const { descriptor, record } = limitedListing();
+  assert.deepEqual(verifyRuntimeAcceptance(descriptor, record), []);
+  assert.equal(record.review.reviewedBy, 'registry-maintainer');
+  assert.equal(record.runtimeAcceptance.status, 'not-run');
+  assert.equal(record.score.dimensions.runtime, 0);
+  assert.equal(record.score.band, 'watchlist');
+  assert.equal(descriptor.probeStatus, 'partial');
 });
 
-test('connection-only path cannot silently replace full runtime approval', async () => {
+test('connection-only path cannot silently replace full runtime approval', () => {
   for (const scope of [undefined, 'full-runtime', 'typo']) {
-    const { descriptor, record } = await limitedListing();
+    const { descriptor, record } = limitedListing();
     record.review.scope = scope;
     const errors = verifyRuntimeAcceptance(descriptor, record);
     assert.ok(errors.includes('real runtime acceptance must pass'));
@@ -210,7 +209,7 @@ test('connection-only path cannot silently replace full runtime approval', async
   }
 });
 
-test('connection-only path rejects missing approval, missing evidence, or disguised runtime success', async () => {
+test('connection-only path rejects missing approval, missing evidence, or disguised runtime success', () => {
   const mutations = [
     r => { r.review.decision = 'pending'; },
     r => { r.review.reviewedBy = ' '; },
@@ -230,20 +229,20 @@ test('connection-only path rejects missing approval, missing evidence, or disgui
     r => { r.evidence = r.evidence.filter(e => e.type !== 'license'); },
   ];
   for (const mutate of mutations) {
-    const { descriptor, record } = await limitedListing();
+    const { descriptor, record } = limitedListing();
     mutate(record);
     assert.ok(verifyRuntimeAcceptance(descriptor, record).length > 0, String(mutate));
   }
 });
 
-test('connection-only cards cannot hide limitations or claim recommended/full validation', async () => {
+test('connection-only cards cannot hide limitations or claim recommended/full validation', () => {
   for (const mutate of [
     d => { d.featured = true; },
     d => { d.probeStatus = 'pass'; },
     d => { d.description = '业务查询已验收'; },
     d => { d.published = false; },
   ]) {
-    const { descriptor, record } = await limitedListing();
+    const { descriptor, record } = limitedListing();
     mutate(descriptor);
     assert.ok(verifyRuntimeAcceptance(descriptor, record).length > 0);
   }
@@ -278,9 +277,17 @@ test('moving a draft into connectors cannot skip the new-connector gate via Git 
   }
 });
 
-test('unpublished service terms require a scoped named exception and preserve unknown facts', async () => {
-  const descriptor = JSON.parse(await readFile(new URL('../connectors/shangqi-industry-data.json', import.meta.url), 'utf8'));
-  const record = JSON.parse(await readFile(new URL('../candidates/records/shangqi-industry-data.json', import.meta.url), 'utf8'));
+test('unpublished service terms require a scoped named exception and preserve unknown facts', () => {
+  const descriptor = { id: 'approved-data', published: true, featured: false, probeStatus: 'pass', description: '服务条款未公开，尚未核验。' };
+  const record = acceptedOfficialVendorRecord();
+  record.license = { status: 'unknown', spdxId: null, evidenceUrl: null };
+  record.review.serviceTermsException = {
+    reasonCode: 'official-terms-unavailable', decision: 'approved', connectorId: descriptor.id,
+    reviewedAt: record.review.reviewedAt, reviewedBy: record.review.reviewedBy,
+    notes: 'Public terms could not be verified.', reportUrl: 'https://example.com/reports/terms-review',
+  };
+  record.evidence = record.evidence.filter(e => e.type !== 'license');
+  record.evidence.push({ type: 'service-terms-exception', url: record.review.serviceTermsException.reportUrl });
   assert.equal(record.license.status, 'unknown');
   assert.equal(record.license.evidenceUrl, null);
   assert.deepEqual(verifyRuntimeAcceptance(descriptor, record), []);

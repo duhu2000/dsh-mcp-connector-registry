@@ -272,19 +272,19 @@ test('explainable score is the exact sum of bounded dimensions and gates duplica
 test('explicit do-not-list identities are retained as policy evidence but never enter candidate output', async () => {
   const { candidates, excluded, rejected } = await discoverOfficialCandidates({
     entries: [officialEntry({
-      name: 'icen-ai/mcp-cnbs',
-      title: 'CNBS Statistics',
+      name: 'example/withheld-example',
+      title: 'Example Statistics',
       description: 'Public statistics and economic data.',
-      repository: { url: 'https://github.com/icen-ai/mcp-cnbs', source: 'github', id: 'cnbs' },
+      repository: { url: 'https://github.com/example/withheld-example', source: 'github', id: 'example' },
     })],
     connectors: [],
     exclusionPolicy: {
       schemaVersion: 1,
       exclusions: [{
-        id: 'mcp-cnbs', decision: 'do-not-list', decidedBy: 'DuHu', decidedAt: '2026-09-29', reason: 'Explicit user decision.',
+        id: 'withheld-example', decision: 'do-not-list', decidedBy: 'test-reviewer', decidedAt: '2026-09-29', reason: 'Explicit user decision.',
         match: {
-          registryNames: ['icen-ai/mcp-cnbs'], packages: ['mcp-cnbs'],
-          repositories: ['https://github.com/icen-ai/mcp-cnbs'], remoteUrls: [],
+          registryNames: ['example/withheld-example'], packages: ['withheld-example'],
+          repositories: ['https://github.com/example/withheld-example'], remoteUrls: [],
         },
       }],
     },
@@ -293,15 +293,20 @@ test('explicit do-not-list identities are retained as policy evidence but never 
   assert.equal(candidates.length, 0);
   assert.equal(rejected.length, 0);
   assert.equal(excluded.length, 1);
-  assert.equal(excluded[0].id, 'mcp-cnbs');
+  assert.equal(excluded[0].id, 'withheld-example');
   assert.deepEqual(excluded[0].matchedBy, ['registry-name', 'repository']);
 });
 
-test('checked-in exclusion policy persists all three explicit user decisions by stable identity', async () => {
-  const policy = await loadExclusionPolicy();
-  assert.equal(matchExclusion({ registryName: 'icen-ai/mcp-cnbs' }, policy)?.id, 'mcp-cnbs');
-  assert.equal(matchExclusion({ transports: [{ url: 'https://data.shuidi.cn/mcp/' }] }, policy)?.id, 'shuidi-enterprise-data');
-  assert.equal(matchExclusion({ officialLinks: { repository: { url: 'https://github.com/lttxzmj/chinese-law-mcp' } } }, policy)?.id, 'chinese-law-mcp');
+test('exclusion policy matches each stable identity and allows unrelated entries', async () => {
+  const policy = await loadExclusionPolicy(resolve('test/fixtures/exclusions.json'));
+  for (const identity of [
+    { registryName: 'com.example/withheld' },
+    { url: 'https://excluded.example.com/mcp/' },
+    { repository: { url: 'https://github.com/example/withheld' } },
+  ]) {
+    assert.equal(matchExclusion(identity, policy)?.id, 'example-withheld');
+  }
+  assert.ok(!matchExclusion({ registryName: 'com.example/published' }, policy));
 });
 
 test('app deployment platforms are not classified as data services from an incidental database keyword', () => {
@@ -358,6 +363,7 @@ test('offline discovery CLI writes review-only report and candidate records dete
     resolve('scripts/discover-candidates.mjs'),
     '--input', input,
     '--output', output,
+    '--exclusions', resolve('test/fixtures/exclusions.json'),
   ], { encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   const report = JSON.parse(await readFile(resolve(output, 'candidate-report.json'), 'utf8'));

@@ -6,7 +6,7 @@
   "id": "tradesparq-trade-data",
   "name": "外贸公社 · 贸易数据",
   "vendor": "外贸公社 Tradesparq",
-  "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/88cd338a1d291a7647e36b168090a445e685e4d2/candidates/drafts/workbuddy-data-2026-11-14/assets/tradesparq-trade-data.png",
+  "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/401c6bc8c6cfbc4da7aa96d5a00236af39548bf0/assets/tradesparq-trade-data.png",
   "category": "调研分析",
   "summary": "海关贸易 / 进出口趋势 / 供应链研究",
   "description": "有限验收：OAuth 连接、19 个工具发现及一次会话初始化已确认，业务查询尚未验收。Tradesparq 全球海关与进出口提单贸易数据查询：按产品、HS编码、国家、港口、提单号等条件智能检索，支持交易记录、贸易趋势与公司贸易画像，适合市场研究、竞品与供应链分析。实际数据覆盖、查询权限、费用及数据使用范围以账号订阅和服务协议为准；不代表可免费查询或转售数据。",

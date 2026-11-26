@@ -3301,7 +3301,7 @@
       "homepage": "https://mcp.itjuzi.com/",
       "probeStatus": "partial",
       "probeCheckedAt": 1791282042000,
-      "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/docs/runtime-acceptance/itjuzi-2026-10-06/itjuzi-venture-capital-data.md",
+      "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/401c6bc8c6cfbc4da7aa96d5a00236af39548bf0/docs/verification/itjuzi-venture-capital-data.md",
       "auth": {
         "mode": "bearer",
         "credentialName": "IT桔子 MCP API Key",
@@ -3403,7 +3403,7 @@
           "text": "查询北京智谱华章科技有限公司的融资历史。先确认所需调用次数及费用并取得授权，再匹配企业并查询第一页最多5条；如名称不唯一先让我确认。整理日期、轮次、金额和投资方，来源或采集时间未返回时如实注明，不补猜、不自动翻页或下载。"
         }
       ],
-      "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/workbuddy-data-2026-11-14/evidence/iyiou-runtime-2026-11-19.json"
+      "probeReportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/401c6bc8c6cfbc4da7aa96d5a00236af39548bf0/docs/verification/iyiou-financing-data.md"
     },
     {
       "schemaVersion": 1,
@@ -6926,7 +6926,7 @@
       "id": "tradesparq-trade-data",
       "name": "外贸公社 · 贸易数据",
       "vendor": "外贸公社 Tradesparq",
-      "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/88cd338a1d291a7647e36b168090a445e685e4d2/candidates/drafts/workbuddy-data-2026-11-14/assets/tradesparq-trade-data.png",
+      "icon": "https://raw.githubusercontent.com/duhu2000/dsh-mcp-connector-registry/401c6bc8c6cfbc4da7aa96d5a00236af39548bf0/assets/tradesparq-trade-data.png",
       "category": "调研分析",
       "summary": "海关贸易 / 进出口趋势 / 供应链研究",
       "description": "有限验收：OAuth 连接、19 个工具发现及一次会话初始化已确认，业务查询尚未验收。Tradesparq 全球海关与进出口提单贸易数据查询：按产品、HS编码、国家、港口、提单号等条件智能检索，支持交易记录、贸易趋势与公司贸易画像，适合市场研究、竞品与供应链分析。实际数据覆盖、查询权限、费用及数据使用范围以账号订阅和服务协议为准；不代表可免费查询或转售数据。",
