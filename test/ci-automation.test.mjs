@@ -9,24 +9,22 @@ const [workflow, readme, contributing, onboarding] = await Promise.all([
   readFile(new URL('../docs/ONBOARDING.md', import.meta.url), 'utf8'),
 ]);
 
-test('CI 分离校验与 main 合并后的 catalog 自动重建', () => {
-  assert.match(workflow, /permissions:\s*\n\s+contents: write/);
-  assert.match(workflow, /validate:\s*[\s\S]*?- run: npm test[\s\S]*?- run: npm run validate[\s\S]*?- run: npm run assets:check/);
-  assert.match(workflow, /rebuild-catalog:/);
-  assert.match(workflow, /if: github\.event_name == 'push' && github\.ref == 'refs\/heads\/main'/);
-  assert.match(workflow, /needs: validate/);
-  assert.match(workflow, /git diff --quiet -- catalog\.json catalog-stats\.json README\.md/);
-  assert.match(workflow, /chore: rebuild catalog products \[skip ci\]/);
-  assert.match(workflow, /git add catalog\.json catalog-stats\.json README\.md/);
-  assert.match(workflow, /git push/);
-  assert.match(workflow, /purge-cdn:/);
-  assert.match(workflow, /needs: rebuild-catalog/);
-  assert.doesNotMatch(workflow, /catalog_changed/);
+test('pull requests include the rebuilt catalog before it is published from main', () => {
+  assert.match(workflow, /permissions:\s*\n\s+contents: read/);
+  const publicChecks = workflow.split(/  public-checks:\r?\n/)[1].split(/  validate:\r?\n/)[0];
+  assert.match(publicChecks, /^      - run: npm test\r?$/m);
+  assert.match(publicChecks, /- run: npm run validate\s+- run: npm run assets:check/);
+  const rebuild = workflow.split(/  rebuild-catalog:\r?\n/)[1].split(/  purge-cdn:\r?\n/)[0];
+  assert.match(rebuild, /- run: npm run build/);
+  assert.match(rebuild, /git diff --binary --no-ext-diff HEAD/);
+  assert.match(rebuild, /exit 1/);
+  assert.match(rebuild, /actions\/upload-artifact@/);
+  assert.doesNotMatch(workflow, /contents: write|git push|git commit/);
+  assert.match(workflow, /needs: \[validate, rebuild-catalog\]/);
   assert.match(workflow, /purge-cdn:\s*[\s\S]*?if: >-\s*[\s\S]*?github\.event_name == 'push'[\s\S]*?github\.ref == 'refs\/heads\/main'/);
   assert.match(workflow, /ref: main/);
   assert.match(workflow, /node scripts\/purge-jsdelivr-cache\.mjs catalog\.json/);
   assert.doesNotMatch(workflow, /npm run check/);
-  assert.doesNotMatch(workflow, /git diff --exit-code/);
 });
 
 test('main 每次合并后都自动清理并验证 jsDelivr 缓存', () => {
@@ -40,7 +38,7 @@ test('main 每次合并后都自动清理并验证 jsDelivr 缓存', () => {
 test('贡献文档使用独立校验命令并说明 catalog 由 CI 生成', () => {
   for (const document of [readme, contributing, onboarding]) {
     assert.match(document, /npm test && npm run validate && npm run assets:check/);
-    assert.match(document, /不要手动修改或提交.*`catalog\.json`/s);
+    assert.match(document, /连接器和生成目录提交到同一份 PR/);
   }
   assert.match(readme, /docs\/ONBOARDING\.md/);
   assert.match(contributing, /docs\/ONBOARDING\.md/);

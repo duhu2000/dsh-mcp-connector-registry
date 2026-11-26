@@ -1,4 +1,6 @@
 name: Registry CI
+run-name: >-
+  Registry CI / ${{ github.event.pull_request.number && format('PR #{0}', github.event.pull_request.number) || github.ref_name }}
 
 on:
   push:
@@ -6,61 +8,102 @@ on:
   pull_request:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  validate:
+  public-checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+      - run: python3 -B test/maintainer-review-command.test.py
       - run: npm test
-      - name: Require human review and scoped acceptance evidence for new connectors
-        if: github.event_name == 'pull_request'
-        run: node scripts/check-new-connectors.mjs --base '${{ github.event.pull_request.base.sha }}'
       - run: npm run validate
       - run: npm run assets:check
 
+  validate:
+    needs: public-checks
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Require successful public checks
+        if: needs.public-checks.result != 'success'
+        run: exit 1
+      - uses: actions/checkout@v4
+        if: github.event.pull_request != null
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Identify changed connector cards
+        id: cards
+        if: github.event.pull_request != null
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          files=$(git diff --no-renames --name-only --diff-filter=AMT "$BASE_SHA...$HEAD_SHA" -- 'connectors/*.json' ':(exclude)connectors/*.sample.json')
+          if [[ -n "$files" ]]; then
+            git show "$BASE_SHA:scripts/check-maintainer-review.cjs" > "$RUNNER_TEMP/check-maintainer-review.cjs"
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Require maintainer verification for this PR revision
+        if: steps.cards.outputs.changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const check = require(process.env.RUNNER_TEMP + '/check-maintainer-review.cjs');
+            await check({ github, context, core });
+
   rebuild-catalog:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: validate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
-      - run: npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund
       - run: npm run build
-      - name: Commit rebuilt catalog
+      - name: Check the committed catalog against the build
+        id: compare
+        shell: bash
         run: |
-          if git diff --quiet -- catalog.json catalog-stats.json README.md docs/CONNECTOR-DIRECTORY.md docs/RECENT-ADDITIONS.md docs/ANNOUNCEMENT-DRAFT.md docs/CATEGORY-OVERVIEW.md; then
-            echo "catalog products are already current"
-            exit 0
+          mapfile -t products < .github/catalog-products.txt
+          git add --intent-to-add -- "${products[@]}"
+          git diff --binary --no-ext-diff HEAD -- "${products[@]}" > "$RUNNER_TEMP/catalog-products.patch"
+          if [[ -s "$RUNNER_TEMP/catalog-products.patch" ]]; then
+            git diff --stat HEAD -- "${products[@]}"
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+            echo "::error::Run npm run build and commit the generated changes to this PR, or download the catalog-products artifact and apply catalog-products.patch."
+            exit 1
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add catalog.json catalog-stats.json README.md docs/CONNECTOR-DIRECTORY.md docs/RECENT-ADDITIONS.md docs/ANNOUNCEMENT-DRAFT.md docs/CATEGORY-OVERVIEW.md
-          git commit -m "QMCP-2014 chore: rebuild catalog products [skip ci]"
-          git push
+      - uses: actions/upload-artifact@v4
+        if: failure() && github.event_name == 'pull_request' && steps.compare.outputs.stale == 'true'
+        with:
+          name: catalog-products
+          path: ${{ runner.temp }}/catalog-products.patch
+          retention-days: 7
 
   purge-cdn:
     if: >-
       github.event_name == 'push' &&
       github.ref == 'refs/heads/main'
-    needs: rebuild-catalog
+    needs: [validate, rebuild-catalog]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24

@@ -2,6 +2,46 @@
 
 仅收录有合并证据的正式上架；不将修改日期当作上架日期。历史条目尚未全部回溯。
 
+### 2026-11-26 · AQUAVIEW · 海洋与环境数据
+
+海洋环境数据目录 / 时空检索 / 数据来源与观测数据发现。接入方式：none；探测状态：pass。
+
+已验证匿名目录检索。观测值读取和文件下载尚未验证；使用数据时请核对来源和许可。
+
+[上架 PR #122](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/122) · [卡片详情](../connectors/aquaview-ocean-environment.json)
+
+### 2026-11-26 · IPinfo · IP地理与网络数据
+
+IP国家与洲 / ASN网络归属 / 地理与代理检测。接入方式：oauth2-pkce；探测状态：pass。
+
+DuHu 具名批准。官方 MCP 已发现6个工具，单次公共 IP Lite 查询验收通过，状态 pass；其余5个工具和详细模式尚未验收。支持 OAuth，亦可使用现有 API Token 作为 Bearer 凭据。公开服务条款已核实，详细数据及隐私检测按账号套餐权限使用。
+
+[上架 PR #121](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/121) · [卡片详情](../connectors/ipinfo-ip-data.json)
+
+### 2026-11-25 · Open Targets · 疾病与靶点数据
+
+疾病关联靶点 / 基因与药物检索 / 研究证据与关联评分。接入方式：none；探测状态：pass。
+
+DuHu 批准上架。官方免密入口发现 5 个工具；乳腺癌直接关联查询经疾病标识修正后返回 3 个靶点，状态 pass。实际 4 次 tools/call：Schema、首次空结果、名称检索、修正关联查询；未自动重试。其他业务能力未逐项验收；关联评分不代表治疗效果。
+
+[上架 PR #117](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/117) · [卡片详情](../connectors/open-targets-platform.json)
+
+### 2026-11-25 · NASA Earthdata · 地球科学数据目录
+
+遥感数据集发现 / 地区与时间筛选 / 数据文件目录与引用。接入方式：none；探测状态：pass。
+
+DuHu 批准上架。官方免密入口发现 7 个工具；一次指定长三角局部矩形区域和 2025 年 7 月的 MODIS 数据集目录检索返回 3 个候选，状态 pass。尚未核验具体观测文件、下载或转换；各数据集的许可和访问条件分别适用。
+
+[上架 PR #117](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/117) · [卡片详情](../connectors/nasa-earthdata-cmr.json)
+
+### 2026-11-25 · 摩知轮商标检索
+
+国内外商标 / 图形近似 / 公告 / 商标裁文。接入方式：oauth2-pkce；探测状态：pass。
+
+DuHu 具名批准。DSH OAuth 连接及8个工具发现通过；一次中国“摩知轮”精确商标检索通过，总命中69条、第一页3条。其余7个工具未逐项验收，实际扣费未返回。公开用户协议已核实，按账号权益与积分规则使用；检索结果不等同于可注册性或侵权判断。
+
+[上架 PR #115](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/115) · [卡片详情](../connectors/mozlen-trademark.json)
+
 ### 2026-11-23 · 享科 · 期货数据
 
 期货行情 / 基差仓单 / 持仓席位 / 研报资讯。接入方式：oauth2-pkce；探测状态：pass。

@@ -1,0 +1,13 @@
+name: Registry review notification
+run-name: Registry review / PR ${{ github.event.pull_request.number }}
+on:
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+
+permissions: {}
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify the trusted review handler
+        run: echo "Review changed"

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "ipinfo-ip-data",
+  "name": "IPinfo · IP地理与网络数据",
+  "vendor": "IPinfo",
+  "icon": "🌐",
+  "category": "开发工具",
+  "summary": "IP国家与洲 / ASN网络归属 / 地理与代理检测",
+  "description": "连接 IPinfo 官方 MCP，查询公共 IP 的国家、洲和 ASN 网络归属，适合网络排障、流量地域分析与网络研究。OAuth 登录本人 IPinfo 账号；也可手动使用控制台现有 API Token 作为 Bearer 凭据，无需另领 MCP Key。Lite 提供基础数据，城市级地理、隐私及住宅代理检测受付费套餐权限限制，额度与费用以账号规则为准。已发现6个工具；单次公共 IP Lite 查询运行验收通过，其余5个工具和详细模式尚未验收。空结果或权限错误不代表没有代理风险。IP 地理信息不代表个人精确位置；数据使用遵守 IPinfo 服务条款及账号许可，卡片不提供数据再分发或商业转售授权。",
+  "tags": [
+    "IPinfo",
+    "海外数据",
+    "IP地理",
+    "ASN",
+    "网络数据",
+    "OAuth",
+    "免费基础数据",
+    "付费扩展"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://ipinfo.io/developers/mcp-server",
+  "probeStatus": "pass",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://ipinfo.io",
+    "scope": "ipinfo:read",
+    "clientName": "DeepSeek Harness - IPinfo MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "ipinfo",
+      "serverName": "ipinfo-ip",
+      "transport": "streamable-http",
+      "url": "https://mcp.ipinfo.io/",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询公共 IP 的国家和网络归属",
+      "server": "ipinfo",
+      "text": "用 IPinfo 查询公共 IP 8.8.8.8 的国家、洲、ASN、网络组织和域名，使用 ipinfo_lookup 且 detailed=false。列出错误与缓存命中信息；不追加隐私检测或付费详细查询，不把 IP 地理信息解释为个人位置。"
+    },
+    {
+      "title": "比较两个公共 DNS 的网络归属",
+      "server": "ipinfo",
+      "text": "用 IPinfo 的 ipinfo_lookup 一次查询 8.8.8.8 和 1.1.1.1，detailed=false，以表格比较国家、洲、ASN、组织和域名。按真实返回说明分页、错误和 API 调用次数；不推测未返回字段，不追加查询。"
+    }
+  ]
+}
