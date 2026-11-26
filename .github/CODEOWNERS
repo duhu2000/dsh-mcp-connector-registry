@@ -4,3 +4,8 @@
 /scripts/check-maintainer-review.cjs @duhu2000
 /scripts/record-maintainer-review.py @duhu2000
 /.github/CODEOWNERS @duhu2000
+/.github/catalog-products.txt @duhu2000
+/package.json @duhu2000
+/scripts/build-*.mjs @duhu2000
+/scripts/check-public-paths.mjs @duhu2000
+/scripts/check-new-connectors.mjs @duhu2000
