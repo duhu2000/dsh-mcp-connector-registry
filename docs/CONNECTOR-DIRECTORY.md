@@ -41,11 +41,12 @@
 
 ## 调研分析
 
-共 53 个连接器。
+共 54 个连接器。
 
 | 数据源 / 连接器 | 用途 | 提供方 | 接入方式 | 来源 | 探测状态 |
 |---|---|---|---|---|---|
 | [AgentNative 政府公共数据](../connectors/agentnative-government-open-data.json) | 政府数据目录 / 联邦公报 / 官方来源 / 样例与聚合 | CaziMedia AgentNative（独立服务） | none | 公共目录 | pass |
+| [AQUAVIEW · 海洋与环境数据](../connectors/aquaview-ocean-environment.json) | 海洋环境数据目录 / 时空检索 / 数据来源与观测数据发现 | AQUAVIEW | none | 公共目录 | pass |
 | [摩熵 · 医药研发数据](../connectors/bcpmdata-pharma-research.json) | 药物研发 / 临床试验 / 医药专利 / 医药监管 | 摩熵数科 | api-key | 公共目录 | pass |
 | [BLS 美国劳工统计](../connectors/bls-us-labour-statistics.json) | CPI / 就业失业 / 工资工时 / JOLTS | cyanheads（独立社区项目） | none | 公共目录 | pass |
 | [博查搜索](../connectors/bocha-search.json) | 网页搜索 / AI 搜索 / 内容检索 | 社区连接器 | api-key | 公共目录 | unverified |

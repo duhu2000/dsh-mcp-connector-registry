@@ -1,5 +1,11 @@
 [
   {
+    "id": "aquaview-ocean-environment",
+    "publishedOn": "2026-11-26",
+    "pr": 122,
+    "acceptance": "已验证匿名目录检索。观测值读取和文件下载尚未验证；使用数据时请核对来源和许可。"
+  },
+  {
     "id": "open-targets-platform",
     "publishedOn": "2026-11-25",
     "pr": 117,

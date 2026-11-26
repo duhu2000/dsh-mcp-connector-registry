@@ -2,6 +2,14 @@
 
 供运营审核选用；不得将部分验证宣传为全部业务可用。未自动发布到任何平台。
 
+### 2026-11-26 · AQUAVIEW · 海洋与环境数据
+
+海洋环境数据目录 / 时空检索 / 数据来源与观测数据发现。接入方式：none；探测状态：pass。
+
+已验证匿名目录检索。观测值读取和文件下载尚未验证；使用数据时请核对来源和许可。
+
+[上架 PR #122](https://github.com/duhu2000/dsh-mcp-connector-registry/pull/122) · [卡片详情](../connectors/aquaview-ocean-environment.json)
+
 ### 2026-11-25 · Open Targets · 疾病与靶点数据
 
 疾病关联靶点 / 基因与药物检索 / 研究证据与关联评分。接入方式：none；探测状态：pass。
