@@ -110,7 +110,7 @@ git push origin add-my-connector
 
 1. `public-checks` 运行回归测试、描述符校验和素材检查。`rebuild-catalog` 从同一份 PR 的源文件重建目录并比对。如果检查提示生成文件过期，在本地运行 `npm run build`，或从该运行下载 `catalog-products`、解压并执行 `git apply catalog-products.patch`。检查差异并提交到原分支。
 2. 维护者按 PR 编号和最新完整提交核对官方来源、鉴权、使用条款与实际验收范围，在原 PR 说明结论或需要补充的材料。`validate` 检查这版提交的核验结果。推送新提交后需要重新核验。
-3. CODEOWNER 审核当前的卡片与生成目录。合并到 `main` 后，`purge-cdn` 清理 jsDelivr 的 `@main/catalog.json` 缓存并校验完整 SHA-256。用户在连接器市场点击“刷新”即可取得已上架的卡片。
+3. 维护者核验当前提交后，在原 PR 登记结果。公开检查通过并满足仓库合并规则后，有合并权限的维护者可合并卡片和生成目录。合并到 `main` 后，`purge-cdn` 清理 jsDelivr 的 `@main/catalog.json` 缓存并校验完整 SHA-256。用户在连接器市场点击“刷新”即可取得已上架的卡片。
 
 ## 4. 完整 Descriptor 模板
 

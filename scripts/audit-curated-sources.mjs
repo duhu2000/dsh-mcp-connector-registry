@@ -14,9 +14,6 @@ import { loadConnectorCatalog } from './discovery/official-registry.mjs';
 
 function parseArgs(argv) {
   const options = {
-    config: 'discovery-sources/curated-sources.json',
-    exclusions: 'discovery-sources/exclusions.json',
-    lastGood: 'discovery-sources/curated-last-good.json',
     output: 'candidate-output/curated-sources',
     requestTimeoutMs: 20_000,
   };
@@ -31,20 +28,17 @@ function parseArgs(argv) {
     else if (arg === '--offline') options.offline = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
-  if (!options.config || !options.lastGood || !options.output) throw new Error('config, last-good, and output paths must not be empty');
+  if (!options.config || !options.exclusions) throw new Error('Supply --config <file> and --exclusions <file>');
+  if (!options.output) throw new Error('--output must not be empty');
+  if (argv.includes('--last-good') && !options.lastGood) throw new Error('--last-good requires a file');
   if (!Number.isInteger(options.requestTimeoutMs) || options.requestTimeoutMs < 1_000 || options.requestTimeoutMs > 120_000) {
     throw new Error('--request-timeout-ms must be an integer from 1000 to 120000');
   }
   return options;
 }
 
-async function readJson(path, fallback) {
-  try {
-    return JSON.parse(await readFile(resolve(path), 'utf8'));
-  } catch (error) {
-    if (error?.code === 'ENOENT') return fallback;
-    throw error;
-  }
+async function readJson(path) {
+  return JSON.parse(await readFile(resolve(path), 'utf8'));
 }
 
 async function main() {
@@ -52,7 +46,7 @@ async function main() {
   const generatedAt = new Date().toISOString();
   const [config, lastGood, connectors, exclusionPolicy] = await Promise.all([
     readJson(options.config),
-    readJson(options.lastGood, { schemaVersion: 1, sources: [], packages: [] }),
+    options.lastGood ? readJson(options.lastGood) : { schemaVersion: 1, sources: [], packages: [] },
     loadConnectorCatalog(resolve('catalog.json')),
     loadExclusionPolicy(options.exclusions),
   ]);

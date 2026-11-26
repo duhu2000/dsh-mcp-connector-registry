@@ -69,7 +69,7 @@ flowchart LR
 2. 只提交公开元数据；禁止 Token、API Key、密码、Cookie 和 Client Secret。
 3. 运行 `npm ci --legacy-peer-deps`，再执行 `npm test && npm run validate && npm run assets:check`。
 4. 将连接器和生成目录提交到同一份 PR。`npm run build` 可重新生成目录。若缺少生成文件，`rebuild-catalog` 检查会提供补丁。
-5. 新增或修改连接器时，维护者按当前提交核验卡片并在原 PR 反馈；CODEOWNER 批准且两项必过检查通过后可合并。合并到 `main` 后，CI 自动清理并校验 jsDelivr 缓存，用户可从原地址刷新卡片。
+5. 新增或修改连接器时，维护者按当前提交核验卡片并在原 PR 反馈；两项必过检查通过并满足仓库合并规则后，有合并权限的维护者即可合并。合并到 `main` 后，CI 自动清理并校验 jsDelivr 缓存，用户可从原地址刷新卡片。
 
 `featured` 由维护者管理。第三方收录不代表服务商官方背书，实际权限、费用和可用性以服务商为准。
 
@@ -87,7 +87,6 @@ flowchart LR
 npm run build
 npm run validate
 npm run probe
-npm run candidates:curated-sources
 npm run assets:check
 npm run cdn:purge
 ```
@@ -96,7 +95,9 @@ npm run cdn:purge
 `Cross-Origin-Resource-Policy`，避免 URL 可访问但在 DSH Desktop 中被浏览器拦截。
 `cdn:purge` 会清理公共 `@main/catalog.json` 缓存并按完整 SHA-256 验证 CDN 内容，供维护者应急重跑；正常发布由 CI 自动执行，不需要贡献者或用户手工调用。
 
-`candidates:curated-sources` 只读审计 `dsh-mcp-panel`、`dsh-mcp-market` 和 `dsh-mcp-bridge` 的精选目录，将其与当前公共 Registry 去重，并检查 npm/PyPI 包存在性、精确名称、废弃状态、包与仓库归属、GitHub 仓库存在性及归档状态、配置成本、最近运行证据和工具数量。持久化报告会清除 URL userinfo、query、fragment，stdio 仅保留不含参数值的安全摘要；在线源临时失败时使用[已审核的 last-good 快照](discovery-sources/curated-last-good.json)保留候选，同时明确标记回退来源。该流程只输出候选报告，绝不自动新增、发布或删除 Connector。初次审计结论见[竞品精选目录候选源只读审计](docs/audits/CURATED-CANDIDATE-SOURCE-AUDIT-2026-09-03.md)。
+贡献者按[第三方连接器上架指南](docs/ONBOARDING.md)从 fork 提交卡片和生成目录，在原 PR 查看检查结果和维护者反馈。[维护者核验说明](docs/MAINTAINER-VERIFICATION.md)说明如何登记与当前提交对应的结论。
+
+候选发现是维护者的独立操作。运行 `candidates:discover` 时使用 `--exclusions <策略文件>`；运行 `candidates:curated-sources` 时提供 `--config <来源文件> --exclusions <策略文件>`，可用 `--last-good <快照文件>` 指定回退快照。两者都可用 `--output <输出目录>` 将报告写到维护者工作目录。准备候选批次时用 `--evidence-root <证据仓库目录>` 指定报告根目录；独立核查新增卡片记录时给 `check-new-connectors.mjs` 传入 `--base <提交> --records-dir <记录目录>`。
 
 完整描述格式见 [`schema/connector.schema.json`](schema/connector.schema.json)，贡献和安全规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md) 与 [`SECURITY.md`](SECURITY.md)。PR 模板会要求提供服务官网、MCP 配置文档、鉴权方式和 Logo 来源，便于维护者核验。
 

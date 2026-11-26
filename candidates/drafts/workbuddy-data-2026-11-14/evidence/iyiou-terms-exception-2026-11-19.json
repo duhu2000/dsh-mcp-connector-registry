@@ -1,9 +1,0 @@
-{
-  "connectorId": "iyiou-financing-data",
-  "reasonCode": "official-terms-unavailable",
-  "decision": "approved",
-  "reviewedBy": "DuHu",
-  "reviewedAt": "2026-11-19T11:09:28.494059+00:00",
-  "notes": "用户明确批准：批准亿欧条款例外并上架，署名 DuHu。卡片披露服务条款未公开，尚未核验；不将例外视为厂商授权、不授予数据再分发许可。仅适用于本候选，不改变其他门禁。",
-  "reportUrl": "https://github.com/duhu2000/dsh-mcp-connector-registry/blob/main/candidates/drafts/workbuddy-data-2026-11-14/evidence/iyiou-terms-exception-2026-11-19.json"
-}

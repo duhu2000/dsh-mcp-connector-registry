@@ -269,9 +269,9 @@ test('moving a draft into connectors cannot skip the new-connector gate via Git 
     await rename(join(cwd, 'drafts/example.json'), join(cwd, 'connectors/example.json'));
     git('add', '-A');
     git('-c', 'commit.gpgsign=false', 'commit', '-m', 'QMCP-2014 test promotion fixture');
-    const result = spawnSync(process.execPath, [fileURLToPath(new URL('../scripts/check-new-connectors.mjs', import.meta.url)), '--base', base], { cwd, encoding: 'utf8' });
+    const result = spawnSync(process.execPath, [fileURLToPath(new URL('../scripts/check-new-connectors.mjs', import.meta.url)), '--base', base, '--records-dir', join(cwd, 'review-input')], { cwd, encoding: 'utf8' });
     assert.equal(result.status, 1);
-    assert.match(result.stderr, /missing candidates\/records\/example.json/);
+    assert.match(result.stderr, /missing review record example\.json/);
   } finally {
     await rm(cwd, { recursive: true, force: true });
   }

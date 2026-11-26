@@ -52,7 +52,7 @@ function manifestItem() {
     probeStatus: 'pass',
     runtimeCheckedAt: '2026-08-31T01:05:00.000Z',
     runtimeStatus: 'pass',
-    runtimeReportPath: 'docs/runtime-acceptance/example.md',
+    runtimeReportPath: 'reviews/example.md',
     safeTool: 'list_markets',
     reviewNotes: 'Human source review remains pending.',
     proposedTitleZh: '示例市场数据',
@@ -80,6 +80,10 @@ test('curated candidate rejects unpassed evidence and endpoint drift', async () 
     repositoryBaseUrl: 'https://github.com/example/registry',
     generatedAt: '2026-08-31T02:00:00.000Z',
   }), /runtimeStatus must be pass/);
+  assert.throws(() => prepareCuratedCandidate(source, { ...manifestItem(), runtimeReportPath: '../outside.md' }, {
+    repositoryBaseUrl: 'https://github.com/example/registry',
+    generatedAt: '2026-08-31T02:00:00.000Z',
+  }), /relative Markdown path/);
   assert.throws(() => prepareCuratedCandidate(source, { ...manifestItem(), endpoint: 'https://other.example.com/mcp' }, {
     repositoryBaseUrl: 'https://github.com/example/registry',
     generatedAt: '2026-08-31T02:00:00.000Z',
