@@ -240,6 +240,56 @@
     },
     {
       "schemaVersion": 1,
+      "id": "arca-life-sciences",
+      "name": "Arca · 生命科学与监管数据",
+      "vendor": "Arca Technologies, Inc.",
+      "icon": "🔬",
+      "category": "调研分析",
+      "summary": "FDA监管记录 / 临床试验 / 生物医学文献",
+      "description": "连接 Arca 官方免费公共 MCP，检索 FDA 监管记录、临床试验、安全信息与生物医学文献，并返回原始来源链接。免账号、免 Key，只读访问；每 IP 每分钟最多 120 次请求。实际发现 4 个工具，一次 FDA 数据完整性警告信检索已验收并返回 3 条记录，其余工具未逐项验收。检索结果为研究资料，需核对原始来源，不代表完整覆盖或医疗建议。使用遵循 Arca 服务条款及各原始来源许可；本卡片仅提供官方公共入口的客户端连接配置，不授予转售、再分发或品牌使用许可。",
+      "tags": [
+        "Arca",
+        "海外数据",
+        "生命科学",
+        "FDA",
+        "临床试验",
+        "文献",
+        "免费公共入口"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://www.arca.inc/mcp",
+      "probeStatus": "pass",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "arca-life-sciences",
+          "transport": "streamable-http",
+          "url": "https://app.arca.inc/api/public/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查找 FDA 数据完整性警告信",
+          "text": "使用 Arca 的 search_medical 检索 FDA warning letters data integrity，限定 fda_records 和 WARNING LETTER，最多返回 3 条。用中文列出标题、文件日期、发布日期与官方来源链接，不读取全文、不追加查询；结果仅作研究线索。",
+          "server": "main"
+        },
+        {
+          "title": "查看公开数据覆盖",
+          "text": "仅调用 Arca 的 list_datasets 一次，列出可检索的数据来源与记录类别，用中文说明覆盖范围及工具返回的限制；未提供更新时间时明确标注未知。",
+          "server": "main"
+        }
+      ],
+      "probeCheckedAt": 1795677485553
+    },
+    {
+      "schemaVersion": 1,
       "id": "baidu-maps",
       "name": "百度地图",
       "vendor": "百度地图开放平台",
@@ -2558,6 +2608,56 @@
           ]
         }
       ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "genebe-public-genetics",
+      "name": "GeneBe · 基因与变异研究",
+      "vendor": "GeneBe",
+      "icon": "🧬",
+      "category": "调研分析",
+      "summary": "公开基因与变异注释 / 坐标转换 / 非商业科研",
+      "description": "连接 GeneBe 官方公共 MCP，查询基因标识、公开变异注释、ACMG 解释、转录本影响及基因组坐标转换。免账号、免 Key，只读入口按 IP 共享限流，不接入个人样本。仅限非商业研究与教育用途，不用于临床诊断；官网另有限制数据用于 AI 建模的条款，不应将服务端代码的 MIT 许可视为数据许可。实际发现 6 个工具，一次 TP53 基因资料查询已验收，其余 5 个工具未逐项验收；该次疾病关联列表标记 truncated=true，不能当作完整列表。输出应保留基因组版本、来源和截断信息，不推断个人患病风险。",
+      "tags": [
+        "GeneBe",
+        "海外数据",
+        "基因",
+        "变异",
+        "非商业科研",
+        "教育",
+        "免费公共入口"
+      ],
+      "published": true,
+      "featured": false,
+      "homepage": "https://docs.genebe.net/docs/mcp/",
+      "probeStatus": "pass",
+      "auth": {
+        "mode": "none"
+      },
+      "servers": [
+        {
+          "serverKey": "main",
+          "serverName": "genebe-public-genetics",
+          "transport": "streamable-http",
+          "url": "https://mcp.genebe.net/v1/mcp",
+          "headers": {
+            "Accept": "application/json, text/event-stream"
+          }
+        }
+      ],
+      "prompts": [
+        {
+          "title": "查询 TP53 基因资料",
+          "text": "仅调用 GeneBe 的 get_gene 一次，gene 为 TP53，include_transcripts 为 false。用中文列出基因标准名称、HGNC/Ensembl 标识、MANE Select 转录本及来源链接；说明基因组版本与 truncated 标记，不把疾病关联解释为个人患病风险。仅用于非商业研究与教育。",
+          "server": "main"
+        },
+        {
+          "title": "研究基因组坐标转换",
+          "text": "将公开示例 chr17:7674220 从 hg38 转换至 hg19。先核对 GeneBe liftover_coordinate 的实际参数，仅执行一次坐标转换，列出输入与输出版本、坐标口径及失败或歧义信息，不输入个人样本。仅用于非商业研究与教育。",
+          "server": "main"
+        }
+      ],
+      "probeCheckedAt": 1795677486459
     },
     {
       "schemaVersion": 1,
