@@ -15,6 +15,8 @@
 - [ ] This change contains no Token, API Key, password, Cookie, Client Secret, or private endpoint.
 - [ ] `featured` is `false`; I understand featured placement is maintained separately.
 - [ ] Prompts contain no personal information, customer data, or restricted content.
+- [ ] I checked the outgoing commits with `npm run public:check -- --range upstream/main HEAD` (using my target remote).
+- [ ] I reviewed the text, screenshots and attachments for public use. Internal plans, competitive analysis and original acceptance evidence stay private.
 - [ ] I provided official sources for the MCP endpoint, authentication method, and logo.
 - [ ] I included public links for the service and its configuration, and described the authentication and usage limits a reviewer should check.
 - [ ] I ran `npm ci --legacy-peer-deps && npm run check` locally.

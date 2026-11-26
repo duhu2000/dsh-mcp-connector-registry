@@ -3,6 +3,18 @@
 本仓库接受 MCP 服务商和社区贡献者提交的公开连接器描述。连接器收录只代表目录兼容，
 不代表 `dsh-mcp-connector` 或企查查对第三方服务的官方背书。
 
+## 公开材料自查 / Before pushing
+
+公开仓库用于使用、集成和贡献指南、公开接口及可分享的示例。设计原稿、内部排期、竞品策略、候选处置和原始验收证据请保存到团队的私有工作区。混合文档先保留私有原件，公开版只写已交付的行为、适用范围和复现步骤。外部贡献者可以直接提交公开版，无需访问维护者的私有系统。
+
+1. 暂存准备公开的文件，运行 `npm run public:check`，再用 `git diff --cached` 阅读正文，打开每张截图和附件核对内容。
+2. 首次推送或更新公开分支前，先取得目标分支最新引用，再运行 `npm run public:check -- --range upstream/main HEAD`。将 `upstream/main` 换成指向目标仓库的远端引用。此命令逐个检查待推送提交；先加入、后删除的草稿仍会出现在先前提交中。
+3. 若检查报错，先将内部原件存妥，整理尚未推送的提交，再次检查后推送。公开分支在推送时即可阅读。路径检查无法判断普通文件名下的正文、图片像素、PR 正文或附件，请逐份确认适合公开。
+
+Stage the files and run `npm run public:check` before committing. Before pushing, check the full outgoing range as shown above. Review text and images yourself, including the PR description and attachments. Keep internal drafts and raw evidence private; share the public guide or a sanitized summary.
+
+连接器 PR 提交公开卡片、官方来源和重建的目录。请在公开核验摘要中说明实际使用范围，由维护者私下保存原始证据。变更流程或生成清单时，请连同脚本和产物差异一起审阅。
+
 ## 提交方式
 
 1. Fork 本仓库并从 `main` 创建分支。
