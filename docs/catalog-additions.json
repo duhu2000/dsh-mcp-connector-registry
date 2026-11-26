@@ -1,5 +1,17 @@
 [
   {
+    "id": "arca-life-sciences",
+    "publishedOn": "2026-11-26",
+    "pr": 126,
+    "acceptance": "DuHu 批准上架。官方免账号公共 MCP 发现 4 个工具；一次 FDA 警告信检索返回 3 条记录及官方来源链接，验收通过。其余 3 个工具及 DSH 界面未逐项验收；记录日期与发布日期分别保留，数据使用和再分发遵循来源许可及 Arca 条款。"
+  },
+  {
+    "id": "genebe-public-genetics",
+    "publishedOn": "2026-11-26",
+    "pr": 126,
+    "acceptance": "DuHu 批准上架。官方免账号公共 MCP 发现 6 个工具；一次 TP53 基因查询返回基因标识及 MANE 转录本，验收通过。疾病关联列表返回 10/11 条并标记截断，其余 5 个工具未逐项验收。限非商业研究和教育，非临床用途；服务与数据限制不因服务器代码 MIT 许可而免除。"
+  },
+  {
     "id": "aquaview-ocean-environment",
     "publishedOn": "2026-11-26",
     "pr": 122,
