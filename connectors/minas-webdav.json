@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "minas-webdav",
+  "name": "小米智能存储 · WebDAV 文件",
+  "vendor": "LUgABeEEE",
+  "icon": "🗄️",
+  "category": "效率工具",
+  "summary": "不挂盘直接操作小米智能存储（MINAS）中的文件：列目录、上传下载、移动复制删除。",
+  "description": "minas-webdav 通过小米智能存储（MINAS）的 HTTPS WebDAV 端点（默认 :5000）直接操作 /pool0/data，不需要 Samba 或盘符映射。14 个 MCP 工具：nas_ls / nas_stat / nas_tree / nas_find / nas_du / nas_df / nas_cat（只读），nas_get / nas_put / nas_mkdir / nas_rm / nas_mv / nas_cp（写），以及 nas_probe（写入唯一临时路径后清理的能力探测）。使用前需要一次性地在本机放好官方客户端导出的 mTLS 证书（默认 ~/.dsh/minasCert）和 MINAS_USER / MINAS_PASS 凭据文件（默认 ~/.dsh/minasCred/credentials.env），路径可用 MINAS_CERT_HOME / MINAS_CRED_FILE 覆盖；连接器本身不保存任何凭据。写工具会修改或覆盖 NAS 上的文件，删除不可撤销。",
+  "tags": [
+    "小米",
+    "NAS",
+    "WebDAV",
+    "MINAS",
+    "文件管理"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://github.com/LUgABeEEE/minas-webdav",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "command": "minas-webdav-mcp",
+      "serverName": "minas-webdav",
+      "transport": "stdio"
+    }
+  ]
+}
