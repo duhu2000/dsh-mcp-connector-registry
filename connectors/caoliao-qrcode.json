@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "caoliao-qrcode",
+  "name": "草料二维码",
+  "vendor": "草料二维码",
+  "icon": "https://raw.githubusercontent.com/caoliao/dsh-caoliao-qrcode/v2026.11.1/plugin/logo.png",
+  "category": "办公协作",
+  "summary": "连接草料二维码，在 AI 对话中生成二维码、搭建应用、查询和分析数据。",
+  "description": "在 AI 对话中直接使用草料二维码。说出要做的事，助手会帮你生成二维码、批量建立设备或人员档案、搭建填写表单和周期任务，也能查询已有的填写记录、任务完成情况和扫码数据。适合需要展示信息、收集数据和管理现场业务的个人与团队。使用前需连接草料二维码账号并授权。可用功能和使用额度与账号权限、所在组织的版本有关。创建和修改会保存到你的草料账号，执行前请确认方案；修改模板可能影响已有子码。",
+  "tags": [
+    "二维码",
+    "巡检",
+    "设备台账",
+    "表单",
+    "数据分析"
+  ],
+  "published": false,
+  "featured": false,
+  "homepage": "https://cli.im/open-api/agent/open-platform-mcp.html",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://oauth.cli.im",
+    "scope": "mcp:tools records.read templates.read templates.write qrcodes.write assets.write",
+    "clientName": "DeepSeek Harness - 草料二维码",
+    "tokenEndpointAuthMethod": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "caoliao-qrcode",
+      "url": "https://open.cli.im/mcp",
+      "transport": "streamable-http"
+    }
+  ],
+  "prompts": [
+    {
+      "title": "选模板",
+      "text": "帮我找一个适合设备点检的模板。",
+      "server": "main"
+    },
+    {
+      "title": "生成二维码",
+      "text": "帮我做一个产品介绍二维码，包含特点、规格和官网链接。先展示方案，确认后再创建。",
+      "server": "main"
+    },
+    {
+      "title": "查进度",
+      "text": "今天哪些设备还没有完成日检？",
+      "server": "main"
+    },
+    {
+      "title": "看数据",
+      "text": "最近 30 天哪些二维码扫描次数最多？",
+      "server": "main"
+    }
+  ]
+}
