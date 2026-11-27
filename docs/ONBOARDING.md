@@ -108,6 +108,16 @@ git push origin add-my-connector
 
 ### 第 6 步：等待 CI、审核与自动发布
 
+#### Fork CI approval
+
+**贡献者**　外部 fork 的 PR 显示 `action_required` 或 **Awaiting approval** 时，公开 CI 正在等待运行许可。你可以先运行第 4 步的本地检查，并在原 PR 留下最新提交的 Actions 运行链接，请维护者放行。
+
+**维护者**　有上游仓库 Write 权限的维护者先在 **Files changed** 审查当前提交，特别是工作流及其调用的脚本。确认可以执行后，打开 PR 的 **Awaiting approval** 面板，点击 **Approve workflows to run**。此操作仅启动 CI；连接器上架仍须完成下方的检查和审核。
+
+**Contributors** — If your fork PR shows `action_required` or **Awaiting approval**, CI is waiting for permission to run. You can run the local checks in step 4 and post the Actions run link for your latest commit in the original PR to request approval.
+
+**Maintainers** — With Write access to the upstream repository, review the current commit under **Files changed**, especially workflows and the scripts they call. When ready, open **Awaiting approval** on the PR and select **Approve workflows to run**. This starts CI. Listing the connector still requires the checks and review below.
+
 1. `public-checks` 运行回归测试、描述符校验和素材检查。`rebuild-catalog` 从同一份 PR 的源文件重建目录并比对。如果检查提示生成文件过期，在本地运行 `npm run build`，或从该运行下载 `catalog-products`、解压并执行 `git apply catalog-products.patch`。检查差异并提交到原分支。
 2. 维护者按 PR 编号和最新完整提交核对官方来源、鉴权、使用条款与实际验收范围，在原 PR 说明结论或需要补充的材料。`validate` 检查这版提交的核验结果。推送新提交后需要重新核验。
 3. 维护者核验当前提交后，在原 PR 登记结果。公开检查通过并满足仓库合并规则后，有合并权限的维护者可合并卡片和生成目录。合并到 `main` 后，`purge-cdn` 清理 jsDelivr 的 `@main/catalog.json` 缓存并校验完整 SHA-256。用户在连接器市场点击“刷新”即可取得已上架的卡片。
