@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "qinglian-coupon",
+  "name": "轻链查券｜多平台商品优惠查询",
+  "vendor": "轻链工具",
+  "icon": "🏷️",
+  "category": "效率工具",
+  "summary": "查询主流电商商品优惠、参考价格及领券购买入口",
+  "description": "免费查询淘宝／天猫、京东、拼多多和抖音等平台的商品优惠、参考价格及推广购买入口。用户需主动提供商品分享文案、链接或淘口令；服务不会自动下单或支付。购买入口可能包含开发者推广归因，符合平台结算条件的成交可能产生推广佣金；价格、优惠、库存与入口有效性以商品平台当次结算为准。",
+  "tags": ["电商", "优惠券", "商品查询", "购物", "MCP"],
+  "published": true,
+  "featured": false,
+  "homepage": "https://modelscope.cn/mcp/servers/qlnode/qinglian-coupon-mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "none"
+  },
+  "servers": [
+    {
+      "serverKey": "main",
+      "serverName": "qinglian-coupon",
+      "url": "https://api.qlnode.com/mcp/promotion",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "content",
+      "label": "商品分享内容",
+      "placeholder": "粘贴完整商品分享文案、链接或淘口令",
+      "description": "请原样提供内容，不要删除口令、链接参数或分享文本。",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "查询商品优惠",
+      "text": "请查询以下商品是否有优惠，并原样返回实际存在的购买口令或推广链接：{{content}}。价格和优惠以商品平台当次结算为准，不要自动下单或支付。",
+      "server": "main"
+    }
+  ]
+}
+
