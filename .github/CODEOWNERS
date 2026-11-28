@@ -8,4 +8,5 @@
 /package.json @duhu2000
 /scripts/build-*.mjs @duhu2000
 /scripts/check-public-paths.mjs @duhu2000
+/scripts/install-public-pre-push.mjs @duhu2000
 /scripts/check-new-connectors.mjs @duhu2000

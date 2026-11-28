@@ -6,6 +6,7 @@
   "description": "Public connector catalog for dsh-mcp-connector",
   "scripts": {
     "public:check": "node scripts/check-public-paths.mjs",
+    "public:hooks:install": "node scripts/install-public-pre-push.mjs",
     "test": "node --test",
     "build": "node scripts/build-registry.mjs && node scripts/build-catalog-stats.mjs && node scripts/build-catalog-docs.mjs",
     "validate": "npm run build && dsh-mcp-connector-probe catalog.json --validate-only",
