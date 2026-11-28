@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "id": "specstream",
+  "name": "SpecStream",
+  "vendor": "SpecStream",
+  "icon": "https://specstream.ai/icons/icon-512.png",
+  "category": "调研分析",
+  "summary": "按需构建的公司与联系人数据 / 定时更新的数据源 / 实时网页搜索与正文提取",
+  "description": "SpecStream 是实时网络数据供应商：用户用自然语言描述需要的公司、人员或事件，SpecStream 从实时网络构建结构化数据行，每个字段附带来源 URL，并可按计划定时重新运行，作为持续更新的数据源交付。数据行按交付计费：每行 5 美分、15 美分或 1 美元（视所需字段而定），个人邮箱另加 5 美分，电话另加 15 美分；重复行、用户已拥有的行以及与网页内容矛盾的行不收费。接入 SpecStream 官方远程 MCP Server (https://api.specstream.ai/mcp)，提供实时网页搜索 (search_web)、网页与文档正文提取 (read_pages)、结构化深度检索 (compile、quote_capacity_work、authorize_capacity_work)、研究报告及列表监控能力，每项结果附带来源 URL 与读取时间。支持 OAuth 2.1 + PKCE（支持动态客户端注册）登录授权，也支持使用 SpecStream API Key 作为 Bearer Token 接入；凭据保存在 DSH 本机，不写入公共目录，但每次请求都会发送给 SpecStream 服务用于身份验证。授权范围说明：search_web 与 read_pages 需要 finds:spend（会产生费用）；specs:write 与 finds:write 用于保存解析后的需求 (compile、edit_spec) 并启动用户已确认的工作 (authorize_capacity_work)；openid 与 email 用于识别登录的账户。SpecStream 支持只读 API Key（不指定 scopes 创建的 Key 只有 account:read、specs:read、finds:read、projects:read，只能读取、不能花费），但只读凭据无法调用 search_web 或 read_pages；本卡片目前不提供只读配置。账户所有者可为 API Key 设置花费上限。新账户在浏览器首次登录工作区可获一次性 $10 体验额度；搜索、提取、研究报告与深度检索按账户余额或搜索包计费（Search API 标准档 $5 / 1,000 次、快速档 $1 / 1,000 次，Extract API $0.80 / 1,000 页，研究报告按深度 $0.10 至 $1.00，深度检索先报价并按匹配行计费）。调用 search_web、read_pages 前须由用户确认本次预算上限；深度检索 (authorize_capacity_work) 或研究报告 (start_research) 须先报价并由用户确认最高额度 (confirm_max_cents)。请勿提交内部未公开信息或个人敏感数据，使用受 SpecStream 服务条款与隐私政策约束。",
+  "tags": [
+    "SpecStream",
+    "数据源",
+    "联系人数据",
+    "公司数据",
+    "网页搜索",
+    "网页提取",
+    "深度检索",
+    "研究报告",
+    "OAuth",
+    "官方 MCP"
+  ],
+  "published": true,
+  "featured": false,
+  "homepage": "https://specstream.ai/docs/mcp",
+  "probeStatus": "unverified",
+  "auth": {
+    "mode": "oauth2-pkce",
+    "issuer": "https://specstream.ai",
+    "scope": "specs:read specs:write finds:read finds:write finds:spend projects:read account:read openid email",
+    "clientName": "DeepSeek Harness - SpecStream MCP",
+    "tokenEndpointAuthMethod": "none",
+    "grantSharing": "connector"
+  },
+  "servers": [
+    {
+      "serverKey": "specstream",
+      "serverName": "specstream",
+      "url": "https://api.specstream.ai/mcp",
+      "oauthResource": "https://api.specstream.ai/mcp",
+      "transport": "streamable-http",
+      "headers": {
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  ],
+  "promptVariables": [
+    {
+      "name": "topic",
+      "label": "检索主题",
+      "default": "SpecStream MCP server",
+      "placeholder": "例如：SpecStream MCP server",
+      "required": true
+    },
+    {
+      "name": "url",
+      "label": "网页地址",
+      "default": "https://specstream.ai/docs/mcp",
+      "placeholder": "例如：https://specstream.ai/docs/mcp",
+      "required": true
+    }
+  ],
+  "prompts": [
+    {
+      "title": "按需构建公司与联系人数据（先报价）",
+      "text": "针对「{{topic}}」，先使用 SpecStream compile 把需求解析为数据规格（每行必须满足的条件与要返回的字段），列出将返回的数据列，再用 quote_capacity_work 获取报价与费用上限，等待我明确确认预算；未经我确认不要调用 authorize_capacity_work，且 confirm_max_cents 不超过我确认的金额。完成后用 list_find_rows 读取数据行，每个值附来源 URL。",
+      "server": "specstream"
+    },
+    {
+      "title": "实时网页搜索",
+      "text": "计划使用 SpecStream search_web 搜索「{{topic}}」的公开信息。调用前先告诉我计划搜索的次数和按公开价格估算的费用上限，等我明确确认该预算后再调用，且不超过确认的次数；结果中列出每条结论的来源 URL 与原文依据，区分事实与推断；不要启动付费深度检索或研究报告。",
+      "server": "specstream"
+    },
+    {
+      "title": "提取网页正文要点",
+      "text": "计划使用 SpecStream read_pages 读取 {{url}} 的正文内容。调用前先告诉我要读取的页数和按公开价格估算的费用上限，等我明确确认该预算后再调用；整理核心要点，注明来源 URL 与读取时间；不要访问未提供的新链接。",
+      "server": "specstream"
+    }
+  ]
+}
