@@ -15,6 +15,27 @@ Stage the files and run `npm run public:check` before committing. Before pushing
 
 连接器 PR 提交公开卡片、官方来源和重建的目录。请在公开核验摘要中说明实际使用范围，由维护者私下保存原始证据。变更流程或生成清单时，请连同脚本和产物差异一起审阅。
 
+### 安装本地推送检查 / Install the local pre-push check
+
+从确认过的公开 `main` 安装。每个独立克隆各安装一次，关联 worktree 共用同一套检查。
+
+```sh
+git fetch origin main
+npm run public:hooks:install
+```
+
+如果 `origin` 是自己的 fork，先执行 `git fetch upstream main`，再运行 `npm run public:hooks:install -- upstream/main`。已有 `pre-push` 或自定义 hooks 目录时，安装器会保留原配置，需要将公开路径检查接入现有 hook。更新检查脚本后，可从可信版本重新安装。
+
+检查逐个扫描待推送提交。公开 `main` 已有的路径可继续更新，常规连接器 JSON 卡片和现有生成目录按原路径规则检查。新增 `docs/` 文件，或任意目录中的常见文档、图片、日志及压缩包，在确认可公开后，登记它的精确 Git 路径。
+
+```sh
+git config --local --add dshPublic.documentPath 'docs/verification/example-service.md'
+```
+
+登记路径仍须通过 Registry 的私有路径规则。提交人继续核对正文、图片、PR 文案和附件。
+
+Install the hook once per independent clone with `npm run public:hooks:install`. In a fork, fetch the public upstream and pass `upstream/main`. Review new public documents and attachments before registering their exact paths. The same Registry path rules apply to all outgoing commits.
+
 ## 提交方式
 
 1. Fork 本仓库并从 `main` 创建分支。
